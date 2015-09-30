@@ -18,4 +18,4 @@ We recommend you to finish the reading list and the given assignments in 1 week 
 
 
 ## [Assignments](https://github.com/JavaSummer/JavaMainRepo/tree/master/Content/Chapter%203%20-%20Inheritance%20and%20Polymorphism/Assignments)
-- 3.1 - [Zoo (part 1)](https://github.com/JavaSummer/JavaMainRepo/blob/master/Content/Chapter%203%20-%20Inheritance%20and%20Polymorphism/Assignments/Zoo%20(part%201).pdf)
+- 3.1 - [Zoo (part 1)](https://github.com/OOP-2015-Sem1/OOP-2015/blob/master/Java/Content/Chapter%203%20-%20Inheritance%20and%20Polymorphism/Assignments/Zoo%20(part%201).pdf)

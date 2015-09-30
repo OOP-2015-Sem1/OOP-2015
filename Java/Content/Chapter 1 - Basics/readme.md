@@ -22,7 +22,7 @@ We recommend you to finish the reading list and the given exercies in 2 weeks (`
 2. [More cute Java exercises](http://www.ntu.edu.sg/home/ehchua/programming/java/J2a_BasicsExercises.html#zz-2.)
 
 ## [Assignments](https://github.com/JavaSummer/JavaMainRepo/tree/master/Content/Chapter%201%20-%20Basics/Assignments)
-- 1.1 - [Sum of multiples](https://github.com/JavaSummer/JavaMainRepo/blob/master/Content/Chapter%201%20-%20Basics/Assignments/Assignment%201.1%20-%20Sum%20of%20multiples.pdf)
-- 1.2 - [Fibonacci even sum](https://github.com/JavaSummer/JavaMainRepo/blob/master/Content/Chapter%201%20-%20Basics/Assignments/Assignment%201.2%20-%20Fibonacci%20even%20sum.pdf)
-- 1.3 - [Largest palindrome](https://github.com/JavaSummer/JavaMainRepo/blob/master/Content/Chapter%201%20-%20Basics/Assignments/Assignment%201.3%20-%20Largest%20palindrome.pdf)
-- 1.4 - [Prime spiral](https://github.com/JavaSummer/JavaMainRepo/blob/master/Content/Chapter%201%20-%20Basics/Assignments/Assignment%201.4%20(optional)%20-%20Prime%20spiral.pdf) (optional)
+- 1.1 - [Sum of multiples](https://github.com/OOP-2015-Sem1/OOP-2015/blob/master/Java/Content/Chapter%201%20-%20Basics/Assignments/Assignment%201.1%20-%20Sum%20of%20multiples.pdf)
+- 1.2 - [Fibonacci even sum](https://github.com/OOP-2015-Sem1/OOP-2015/blob/master/Java/Content/Chapter%201%20-%20Basics/Assignments/Assignment%201.2%20-%20Fibonacci%20even%20sum.pdf)
+- 1.3 - [Largest palindrome](https://github.com/OOP-2015-Sem1/OOP-2015/blob/master/Java/Content/Chapter%201%20-%20Basics/Assignments/Assignment%201.3%20-%20Largest%20palindrome.pdf)
+- 1.4 - [Prime spiral](https://github.com/OOP-2015-Sem1/OOP-2015/blob/master/Java/Content/Chapter%201%20-%20Basics/Assignments/Assignment%201.4%20(optional)%20-%20Prime%20spiral.pdf) (optional)

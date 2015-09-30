@@ -16,4 +16,4 @@ We recommend you to finish the reading list and the given assignments in 1 week 
 
 
 ## [Assignments](https://github.com/JavaSummer/JavaMainRepo/tree/master/Content/Chapter%208%20-%20Multithreading/Assignments)
-- 8.1 - [Zoo (part 6)](https://github.com/JavaSummer/JavaMainRepo/blob/master/Content/Chapter%208%20-%20Multithreading/Assignments/Zoo%20(part%206).pdf)
+- 8.1 - [Zoo (part 6)](https://github.com/OOP-2015-Sem1/OOP-2015/blob/master/Java/Content/Chapter%208%20-%20Multithreading/Assignments/Zoo%20(part%206).pdf)

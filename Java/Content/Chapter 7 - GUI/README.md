@@ -23,4 +23,4 @@ We recommend you to finish the reading list and the given assignments in 2 weeks
 
 
 ## [Assignments](https://github.com/JavaSummer/JavaMainRepo/tree/master/Content/Chapter%207%20-%20GUI/Assignments)
-- 7.1 - [Zoo (part 5)](https://github.com/JavaSummer/JavaMainRepo/blob/master/Content/Chapter%207%20-%20GUI/Assignments/Zoo%20(part%205).pdf)
+- 7.1 - [Zoo (part 5)](https://github.com/OOP-2015-Sem1/OOP-2015/blob/master/Java/Content/Chapter%207%20-%20GUI/Assignments/Zoo%20(part%205).pdf)
