@@ -1,4 +1,4 @@
-# Java Summer course(ish)
+# Java
 
 ##
 
@@ -37,37 +37,34 @@
 
 ### Structure
  <pre>
-[Chapter 1: Java syntax basics](https://github.com/JavaSummer/JavaMainRepo/tree/master/Content/Chapter%201%20-%20Basics) (`06/07 - 19/07`)
+[Chapter 1: Java syntax basics](https://github.com/OOP-2015-Sem1/OOP-2015/tree/master/Java/Content/Chapter%201%20-%20Basics)
 </pre>
  <pre>
-[Chapter 2: Classes and Objects](https://github.com/JavaSummer/JavaMainRepo/tree/master/Content/Chapter%202%20-%20Classes%20and%20Objects) (`20/07 - 26/07`)
-</pre>
-
- <pre>
-[Chapter 3: Inheritance and Polymorphism](https://github.com/JavaSummer/JavaMainRepo/tree/master/Content/Chapter%203%20-%20Inheritance%20and%20Polymorphism) (`27/07 - 02/08`)
+[Chapter 2: Classes and Objects](https://github.com/OOP-2015-Sem1/OOP-2015/tree/master/Java/Content/Chapter%202%20-%20Classes%20and%20Objects)
 </pre>
 
  <pre>
-[Chapter 4: Inheritance and Interfaces](https://github.com/JavaSummer/JavaMainRepo/tree/master/Content/Chapter%204%20-%20Inheritance%20and%20Interfaces) (`03/08 - 09/08`)
+[Chapter 3: Inheritance and Polymorphism](https://github.com/OOP-2015-Sem1/OOP-2015/tree/master/Java/Content/Chapter%203%20-%20Inheritance%20and%20Polymorphism) 
 </pre>
 
  <pre>
-[Chapter 5: Exceptions](https://github.com/JavaSummer/JavaMainRepo/tree/master/Content/Chapter%205%20-%20Exceptions) (`10/08 - 16/08`)
+[Chapter 4: Inheritance and Interfaces](https://github.com/OOP-2015-Sem1/OOP-2015/tree/master/Java/Content/Chapter%204%20-%20Inheritance%20and%20Interfaces)
 </pre>
 
  <pre>
-[Chapter 6: Collections and Generics](https://github.com/JavaSummer/JavaMainRepo/tree/master/Content/Chapter%206%20-%20Collections%20and%20Generics) (`17/08 - 30/08`)
+[Chapter 5: Exceptions](https://github.com/OOP-2015-Sem1/OOP-2015/tree/master/Java/Content/Chapter%205%20-%20Exceptions) 
 </pre>
 
  <pre>
-[Chapter 7: GUI (Graphical User Interfaces)](https://github.com/JavaSummer/JavaMainRepo/tree/master/Content/Chapter%207%20-%20GUI) (`31/08 - 13/09`)
+[Chapter 6: Collections and Generics](https://github.com/OOP-2015-Sem1/OOP-2015/tree/master/Java/Content/Chapter%206%20-%20Collections%20and%20Generics)
 </pre>
 
  <pre>
-[Chapter 8: Multithreading](https://github.com/JavaSummer/JavaMainRepo/tree/master/Content/Chapter%208%20-%20Multithreading) (`14/09 - 27/09`)
+[Chapter 7: GUI (Graphical User Interfaces)](https://github.com/OOP-2015-Sem1/OOP-2015/tree/master/Java/Content/Chapter%207%20-%20GUI)
+</pre>
+
+ <pre>
+[Chapter 8: Multithreading](https://github.com/OOP-2015-Sem1/OOP-2015/tree/master/Java/Content/Chapter%208%20-%20Multithreading)
 </pre>
 
 ##
-
-### 'Admins'
-[Alex](https://github.com/Alex-Cosma) & [George](https://github.com/georgebejan)
