@@ -22,7 +22,7 @@ For now, visual aid is better than reading anything. I will maybe post reading m
 
 ## [Assignments](https://github.com/OOP-2015-Sem1/OOP-2015/tree/master/Android/Chapter%201%20-%20Basics%20%2B%20setup/Assignments)
 - 1.1 - [Basic Actions](https://github.com/OOP-2015-Sem1/OOP-2015/blob/master/Android/Chapter%201%20-%20Basics%20%2B%20setup/Assignments/1.1%20-%20Basic%20actions.pdf)
-- 1.2 - Feel free to create any sort of example projects which you might think of just to test and show-off what you've learned so far.
+- 1.2 - Feel free to create any sort of example projects which you might think of just to test and show off what you've learned so far.
 
 
 ## Things to know at the end of this phase
