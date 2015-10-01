@@ -19,8 +19,5 @@ Up until the third laboratory (week 3).
 For now, visual aid is better than reading anything. I will maybe post reading material for later chapters.
 
 
-## [Assignments](https://github.com/JavaSummer/JavaMainRepo/tree/master/Content/Chapter%201%20-%20Basics/Assignments)
-- 1.1 - [Sum of multiples](https://github.com/OOP-2015-Sem1/OOP-2015/blob/master/Java/Content/Chapter%201%20-%20Basics/Assignments/Assignment%201.1%20-%20Sum%20of%20multiples.pdf)
-- 1.2 - [Fibonacci even sum](https://github.com/OOP-2015-Sem1/OOP-2015/blob/master/Java/Content/Chapter%201%20-%20Basics/Assignments/Assignment%201.2%20-%20Fibonacci%20even%20sum.pdf)
-- 1.3 - [Largest palindrome](https://github.com/OOP-2015-Sem1/OOP-2015/blob/master/Java/Content/Chapter%201%20-%20Basics/Assignments/Assignment%201.3%20-%20Largest%20palindrome.pdf)
-- 1.4 - [Prime spiral](https://github.com/OOP-2015-Sem1/OOP-2015/blob/master/Java/Content/Chapter%201%20-%20Basics/Assignments/Assignment%201.4%20(optional)%20-%20Prime%20spiral.pdf) (optional)
+## [Assignments](https://github.com/OOP-2015-Sem1/OOP-2015/tree/master/Android/Chapter%201%20-%20Basics%20%2B%20setup/Assignments)
+- 1.1 - [Basic Actions](https://github.com/OOP-2015-Sem1/OOP-2015/blob/master/Android/Chapter%201%20-%20Basics%20%2B%20setup/Assignments/1.1%20-%20Basic%20actions.pdf)
