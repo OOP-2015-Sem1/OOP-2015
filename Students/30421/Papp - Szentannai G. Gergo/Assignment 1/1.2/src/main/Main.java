@@ -3,7 +3,7 @@ package main;
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 		int a,b;
 		a=0;
 		b=1;
@@ -15,10 +15,9 @@ public class Main {
 			c=a+b;
 			a=b;
 			b=c;
-			System.out.println(c);
-			
+			if (c%2==0)
+				sum=+c;	
 		}
-
+		System.out.println(sum);
 	}
-
 }
