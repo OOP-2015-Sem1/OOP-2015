@@ -1,0 +1,29 @@
+import java.util.*;
+
+public class MainPalyndrome {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+generate();
+	}
+
+	public static boolean isPalyndrome(int number) {
+		String numberToString = Integer.toString(number);
+		String reverse = new StringBuffer(numberToString).reverse().toString();
+		if (numberToString.equals(reverse))
+			return true;
+		else
+			return false;
+	}
+
+	public static void generate() {
+		for (int i = 999 * 999; i >= 100 * 100; i--)
+
+		{
+			if (isPalyndrome(i) == true) {
+				System.out.println(i);
+				break;
+			}
+		}
+	}
+}

@@ -1,0 +1,58 @@
+import java.util.*;
+
+/**
+ * 
+ * @author nagyhanna007 Implementing Fibonacci series with O(n) Complexity
+ * 
+ */
+
+public class FibonacciSeries2 {
+
+	public static void main(String[] args) {
+
+		Scanner input = new Scanner(System.in);
+		System.out.println("Please, Give a positive nutural number!");
+		int number = input.nextInt();
+		System.out.println("The first " + number + " Fibonacci term is: ");
+		//display(number);
+
+		System.out.println("From these terms the sum of the even-valued is " + getSumOfEvens(number));
+
+		int ff[] = new int[number];
+		ff=getNFibonacci(number);
+		
+		for(int i=0;i<=number;i++){
+			System.out.println(ff[i]);
+		}
+	}
+
+	public static int getSumOfEvens(int number) {
+		int sum = 0;
+		int fibonacci[] = getNFibonacci(number);
+
+		for (int i = 1; i <= number; i++) {
+			if (fibonacci[i] % 2 == 0)
+				sum += fibonacci[i];
+		}
+		return sum;
+	}
+
+	/*public static void display(int n) {
+		int fibonacci[] = getNFibonacci(n);
+		for (int i = 1; i <= n; i++)
+			System.out.print("  " + fibonacci[i]);
+	}*/
+
+	public static int[] getNFibonacci(int n) {
+
+		int fib[] = new int[n];
+		fib[0] = 1;
+		fib[1] = 1;
+
+		for (int i = 2; i <= n; i++) {
+			fib[i] = fib[i - 2] + fib[i - 1];
+		}
+		return fib;
+
+	}
+}
