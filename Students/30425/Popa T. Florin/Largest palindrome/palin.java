@@ -10,7 +10,7 @@ public class palin {
 		return j;
 	}
 	
-	public static int isPalin(int x){
+	public static boolean isPalin(int x){
 		
 		int n=x,rev=0,rmd=0;
 		while(x>0){
@@ -19,9 +19,9 @@ public class palin {
 			x=x/10;
 		}
 		if(rev==n){
-			return 1;
+			return true;
 		}else{
-			return 0;
+			return false;
 		}
 		
 	}
@@ -36,7 +36,7 @@ public class palin {
 		else if(x==4) n=9999;
 		for(int i=1;i<=n;i++){
 			for(int j=1;j<=n;j++){
-				if(isPalin(i*j)==1 && dCount(i)==x && dCount(j)==x && i*j>max){
+				if(isPalin(i*j) && dCount(i)==x && dCount(j)==x && i*j>max){
 					a=i;
 					b=j;
 					max=i*j;
