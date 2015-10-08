@@ -1,0 +1,65 @@
+import java.util.*;
+
+public class FibonacciSeries {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner input = new Scanner(System.in);
+		System.out.println("Give a positive natural number: ");
+
+		int number = input.nextInt();
+		if (number < 0) {
+			System.out.println("You did not give a positive number! "); }
+		
+			System.out.print("The sum of the first " + number + "th fibonacci number is ");
+		//	System.out.println("whats happenin'");
+	//		System.out.println("what the f*** "+ getSum(number));
+			int sum = 13;
+			for (int i = 1; i < 10; i++) {
+				sum += getNthFibonacci(i);
+			}
+			System.out.print("blabala"+sum);
+		
+int ab=1087;
+System.out.println(ab);
+	}
+
+/*	public static int getSum(int number) {
+		int sum = 0;
+		for (int i = 0; i < number; i++) {
+			sum += getNthFibonacci(i);
+		}
+		return sum;
+	}*/
+
+	public static int getNthFibonacci(int n) {
+
+		int[][] iMatrix = { { 1, 0 }, { 0, 1 } }; // Identity matrix;
+		int[][] fMatrix = { { 1, 1 }, { 1, 0 } };
+		if(n <=1 ) return n;
+		while (n > 0) {
+			if (n % 2 == 1) {
+				multiplyMatrix(iMatrix, fMatrix);
+			} 
+				multiplyMatrix(fMatrix, fMatrix);
+			
+		}
+      n  /= 2;
+		return fMatrix[1][0];
+
+	}
+
+	public static void multiplyMatrix(int[][] m, int[][] n) {
+
+		int a = m[0][0] * n[0][0] + m[0][1] * n[1][0];
+		int b = m[0][0] * n[0][1] + m[0][1] * n[1][1];
+		int c = m[1][0] * n[0][0] + m[1][1] * n[1][0];
+		int d = m[1][0] * n[0][1] + m[1][1] * n[1][1];
+
+		m[0][0] = a;
+		m[0][1] = b;
+		m[1][0] = c;
+		m[1][1] = d;
+	}
+
+}

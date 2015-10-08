@@ -1,0 +1,37 @@
+import java.util.*;
+
+public class MainPalyndrome {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println(generate());
+	}
+
+	public static boolean isPalyndrome(int number) {
+		String numberToString = Integer.toString(number);
+		String reverse = new StringBuffer(numberToString).reverse().toString();
+		if (numberToString.equals(reverse))
+			return true;
+		else
+			return false;
+	}
+
+	public static int generate() {
+		int max = 0;
+
+	    // not using i >= 100 since 100*100 is not palindrome! :)
+	    for (int i = 999; i > 100; i--) {
+	        // because i * j === j * i, no need of both i and j
+	        // to count down from 999
+	        for (int j = i; j > 100; j--) {
+	            int mul = j * i;
+	            if (isPalyndrome(mul) && mul > max) {
+	                max = i * j;
+	            }
+	        }
+	    }
+
+	    return max;
+	
+	}
+}
