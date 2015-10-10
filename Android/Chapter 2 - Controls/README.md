@@ -6,11 +6,6 @@ Experiment different controls.
 ## Deadline
 Fifth OOP Lab (week 5 of school year) 
 
-## Important notes:
-- Before everything, download and install [Genymotion](https://www.genymotion.com/#!/download) and make sure that you will run every application on a virtual machine created in Genymotion. You can find a simple installing and usage guide [here](https://www.youtube.com/watch?v=eU75HgTwtJY)
-- Do not use Eclipse for Android development! Always prefer Android Studio (as you'll see in the tutorials)
-- Research your own reading/viewing material. [Learn 2 Google](http://lmgtfy.com/?q=Googling+is+easy.+See%3F).
-
 ## Video list
 1. [Checkbox](https://www.youtube.com/watch?v=nPbkW6Us98w)
 2. [Radio Button](https://www.youtube.com/watch?v=cTlWwuAvRpE)
@@ -24,9 +19,9 @@ Fifth OOP Lab (week 5 of school year)
 For now, visual aid is better than reading anything. I will maybe post reading material for later chapters.
 
 
-## [Assignments](https://github.com/OOP-2015-Sem1/OOP-2015/tree/master/Android/Chapter%201%20-%20Basics%20%2B%20setup/Assignments)
-- 2.1 - [Tic-Tac-Toe](https://github.com/OOP-2015-Sem1/OOP-2015/blob/master/Android/Chapter%201%20-%20Basics%20%2B%20setup/Assignments/1.1%20-%20Basic%20actions.pdf)
-- 2.2 - [Zoowsome Android 1]()
+## [Assignments](https://github.com/OOP-2015-Sem1/OOP-2015/tree/master/Android/Chapter%202%20-%20Controls/Assignments)
+- 2.1 - [Tic-Tac-Toe](https://github.com/OOP-2015-Sem1/OOP-2015/blob/master/Android/Chapter%202%20-%20Controls/Assignments/2.1%20-%20Tic%20Tac%20Toe.pdf)
+- 2.2 - [Zoowsome Android 1](https://github.com/OOP-2015-Sem1/OOP-2015/blob/master/Android/Chapter%202%20-%20Controls/Assignments/2.2%20-%20Zoowsome%20Android%201.pdf)
 
 
 
