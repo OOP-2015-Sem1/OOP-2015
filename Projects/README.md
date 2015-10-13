@@ -47,7 +47,7 @@
 
 ####Others:
 - [Poket Tanks (rather difficult, not impossible)](https://en.wikipedia.org/wiki/Pocket_Tanks)
-
+##
 ####Simulations: (mostly taken from prof. Joldos's site)
 
 -  [Simulation of operations of a 2-3 tree](http://users.utcluj.ro/~jim/OOPE/Resources/Laboratory/mini-details/2-3%20Tree%20Simulation.html) 
@@ -69,7 +69,7 @@
 -  [Simulation of algorithm for finding an Eulerian cycle in a graph](http://users.utcluj.ro/~jim/OOPE/Resources/Laboratory/mini-details/Euler.html)
 -  [Simulation of operation of LCS algorithm](http://users.utcluj.ro/~jim/OOPE/Resources/Laboratory/mini-details/LCS.html)
 -  [Visual simulation of any sorting algorithm](https://www.youtube.com/watch?v=kPRA0W1kECg)
-
+##
 
 ####Others:
 -  [An application to scale images and place text explanations on them](http://users.utcluj.ro/~jim/OOPE/Resources/Laboratory/mini-details/annotate.html)
@@ -78,8 +78,11 @@
 -  [Hospital Management Application]()
 -  [Internet Banking Management Application]()
 -  [Complex Calculator]()
-
+##
 
 
 ### Android:
+
 - More or less all of the above, implemented on Android
+
+##
