@@ -3,6 +3,9 @@ package chapter2.assignment1;
 public class Functions {
 	private static final double EPSILON = 0.00001;
 
+	/*
+	 * A function that initialize our vector.
+	 */
 	private double[] fillWithZero(double[] a) {
 		for (int i = a.length - 1; i >= 0; i--) {
 			a[i] = 0;
@@ -13,7 +16,8 @@ public class Functions {
 	/**
 	 * 
 	 * @param a
-	 * @return a clone of the coefficients of the polynomial.
+	 * @return a clone of the coefficients of the polynomial so that we will not
+	 *         modify the polynomial in our operations.
 	 */
 	private double[] getClone(Polynomial a) {
 
@@ -37,6 +41,7 @@ public class Functions {
 			newCoeffs[i] += p1[i];
 		}
 		for (int i = 0; i <= degB; i++) {
+
 			newCoeffs[i] += p2[i];
 		}
 		return new Polynomial(newCoeffs);

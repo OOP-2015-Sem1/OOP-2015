@@ -2,6 +2,7 @@ package chapter2.assignment1;
 
 import javax.swing.JOptionPane;
 
+//Class that deals with commands
 public class Tasks {
 	private InputOutput inOut;
 

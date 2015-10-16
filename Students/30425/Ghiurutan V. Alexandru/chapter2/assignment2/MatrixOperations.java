@@ -7,6 +7,7 @@ public class MatrixOperations {
 	/*
 	 * The main advantage of the Singleton Pattern is that it allows only a
 	 * single creation of object from that specific class.
+	 * 
 	 */
 	private static MatrixOperations instance = null;
 

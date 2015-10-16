@@ -75,6 +75,5 @@ public class Operations {
 				"Matrix A has the fill degree of " + new DecimalFormat().format(MatrixOperations.fillDegree(A)) + "%.");
 		out.println(
 				"Matrix B has the fill degree of " + new DecimalFormat().format(MatrixOperations.fillDegree(B)) + "%.");
-
 	}
 }

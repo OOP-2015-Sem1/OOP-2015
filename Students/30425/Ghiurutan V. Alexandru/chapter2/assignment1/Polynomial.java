@@ -2,9 +2,13 @@ package chapter2.assignment1;
 
 import java.text.DecimalFormat;
 
+/*
+ *The Polynomial class with its methods.
+ */
 public class Polynomial {
 	private double[] coeffs;
 
+	// A constructor with varargs.
 	public Polynomial(double... coeffs) {
 		this.coeffs = coeffs;
 	}

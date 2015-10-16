@@ -9,6 +9,7 @@ import java.io.IOException;
 import static java.lang.System.out;
 import java.text.DecimalFormat;
 
+//The input/output class
 public class InputOutput {
 	private static FileReader fileReader;
 	private static BufferedReader bufferedReader;
@@ -17,6 +18,9 @@ public class InputOutput {
 	private String p1;
 	private String p2;
 
+	/**
+	 * Multiple constructors to deal with our choice.
+	 */
 	public InputOutput(String inputFileName, String outputFileName) {
 		this(inputFileName, outputFileName, "Normal");
 	}

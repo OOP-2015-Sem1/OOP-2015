@@ -7,7 +7,6 @@ package chapter2.assignment1;
  */
 public class TestPolynomial {
 	public static void main(String[] args) {
-
 		Functions f = new Functions();
 		Tasks solveTasks = new Tasks();
 		solveTasks.action(f);
