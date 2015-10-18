@@ -2,6 +2,8 @@ package chapter2.assignment1;
 
 public class Functions {
 	private static final double EPSILON = 0.00001;
+	private static final int INFINITY = Integer.MAX_VALUE;
+	private static final int ITERATIONS = 888;
 
 	/*
 	 * A function that initialize our vector.
@@ -141,21 +143,44 @@ public class Functions {
 	private boolean diffSign(Polynomial p1, double a, double b) {
 		double rez1 = evaluate(p1, a);
 		double rez2 = evaluate(p1, b);
-		if ((rez1 > 0 && rez2 < 0) || (rez1 < 0 && rez2 > 0)) {
-			return true;
-		} else {
-			return false;
-		}
+		return ((rez1 > 0 && rez2 < 0) || (rez1 < 0 && rez2 > 0));
+
 	}
 
-	private double[] getLimits(Polynomial p) {
-		double a = 0.0;
-		double b = 1.0;
-		if (!diffSign(p, a, b)) {
-			a--;
-			b++;
+	private double[] getLimits(Polynomial a) {
+		double[] end = new double[2];
+		end[0] = Math.random() * 100;
+		int n = 0;
+		// if the first randomly generated number gives positive result in
+		// polynomial
+		if (evaluate(a, end[0]) > 0) {
+			end[1] = Math.random() * 100;
+			while (evaluate(a, end[1]) > 0 && n < ITERATIONS) {
+				if (n % 2 == 0) {
+					end[1] = Math.random() * ((-0 * Math.random()) * 100);
+				} else {
+					end[1] = Math.random() * ((100 * Math.random()) * 100);
+				}
+				n++;
+			}
+		} else {
+			end[1] = Math.random() * 100;
+			while (evaluate(a, end[1]) < 0 && n < ITERATIONS) {
+				if (n % 2 == 0) {
+					end[1] = Math.random() * ((-100 * Math.random()) * 100);
+				} else {
+					end[1] = Math.random() * ((100 * Math.random()) * 100);
+				}
+				n++;
+			}
 		}
-		return new double[] { a, b };
+		// if the maximum number of operations were to be reached
+		if (n == ITERATIONS - 1) {
+			end[0] = INFINITY;
+			end[1] = INFINITY;
+		}
+		return end;
+
 	}
 
 	/**

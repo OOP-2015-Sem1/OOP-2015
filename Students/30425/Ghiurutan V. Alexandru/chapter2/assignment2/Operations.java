@@ -51,29 +51,25 @@ public class Operations {
 		BigDecimal[][] A = readMatrix("first");
 		BigDecimal[][] B = readMatrix("second");
 		out.println("A+B=");
-		f.printMatrix(MatrixOperations.add(A, B));
+		f.printMatrix(op.add(A, B));
 		out.println("A-B=");
-		f.printMatrix(MatrixOperations.subtract(A, B));
+		f.printMatrix(op.subtract(A, B));
 		out.println("A*B=");
-		f.printMatrix(MatrixOperations.multiply(A, B));
+		f.printMatrix(op.multiply(A, B));
 		out.println("Please enter the scalar to multiply our matrices:");
 		BigDecimal x = new BigDecimal(in.nextLine());
 		out.println(x + "*A=");
-		f.printMatrix(MatrixOperations.multiplyScalar(A, x));
+		f.printMatrix(op.multiplyScalar(A, x));
 		out.println(x + "*B=");
-		f.printMatrix(MatrixOperations.multiplyScalar(B, x));
-		out.println("The determinant of the first matrix A=" + MatrixOperations.determinant(A));
-		out.println("The determinant of the second matrix B=" + MatrixOperations.determinant(B));
-		out.println(MatrixOperations.areEqual(A, B) ? "Matrix A is equal with B." : "Matrix A is not equal with B.");
-		out.println(MatrixOperations.isZeroMatrix(A) ? "Matrix A is a zero matrix." : "Matrix A is not a zero matrix.");
-		out.println(MatrixOperations.isZeroMatrix(B) ? "Matrix B is a zero matrix." : "Matrix B is not a zero matrix.");
-		out.println(MatrixOperations.isIdentityMatrix(A) ? "Matrix A is an identity matrix."
-				: "Matrix A is not an identity matrix.");
-		out.println(MatrixOperations.isIdentityMatrix(B) ? "Matrix B is an identity matrix."
-				: "Matrix B is not an identity matrix.");
-		out.println(
-				"Matrix A has the fill degree of " + new DecimalFormat().format(MatrixOperations.fillDegree(A)) + "%.");
-		out.println(
-				"Matrix B has the fill degree of " + new DecimalFormat().format(MatrixOperations.fillDegree(B)) + "%.");
+		f.printMatrix(op.multiplyScalar(B, x));
+		out.println("The determinant of the first matrix A=" + op.determinant(A) + ".");
+		out.println("The determinant of the second matrix B=" + op.determinant(B) + ".");
+		out.println(op.areEqual(A, B) ? "Matrix A is equal with B." : "Matrix A is not equal with B.");
+		out.println(op.isZeroMatrix(A) ? "Matrix A is a zero matrix." : "Matrix A is not a zero matrix.");
+		out.println(op.isZeroMatrix(B) ? "Matrix B is a zero matrix." : "Matrix B is not a zero matrix.");
+		out.println(op.isIdentityMatrix(A) ? "Matrix A is an identity matrix." : "Matrix A is not an identity matrix.");
+		out.println(op.isIdentityMatrix(B) ? "Matrix B is an identity matrix." : "Matrix B is not an identity matrix.");
+		out.println("Matrix A has the fill degree of " + new DecimalFormat().format(op.fillDegree(A)) + "%.");
+		out.println("Matrix B has the fill degree of " + new DecimalFormat().format(op.fillDegree(B)) + "%.");
 	}
 }

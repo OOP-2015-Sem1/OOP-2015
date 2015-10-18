@@ -22,7 +22,7 @@ public class MatrixOperations {
 		return instance;
 	}
 
-	private static void fillWithZero(BigDecimal[][] a) {
+	private void fillWithZero(BigDecimal[][] a) {
 		for (int i = 0; i < a.length; i++) {
 			for (int j = 0; j < a[0].length; j++) {
 				a[i][j] = BigDecimal.ZERO;
@@ -30,7 +30,7 @@ public class MatrixOperations {
 		}
 	}
 
-	public static BigDecimal[][] add(BigDecimal[][] a, BigDecimal[][] b) {
+	public  BigDecimal[][] add(BigDecimal[][] a, BigDecimal[][] b) {
 		if ((a.length != b.length) || a[0].length != b[0].length) {
 			throw new IllegalArgumentException("Different number of rows and columns.");
 		}
@@ -46,7 +46,7 @@ public class MatrixOperations {
 		return c;
 	}
 
-	public static BigDecimal[][] subtract(BigDecimal[][] a, BigDecimal[][] b) {
+	public BigDecimal[][] subtract(BigDecimal[][] a, BigDecimal[][] b) {
 		if ((a.length != b.length) || a[0].length != b[0].length) {
 			throw new IllegalArgumentException("Different number of rows and columns.");
 		}
@@ -62,7 +62,7 @@ public class MatrixOperations {
 		return c;
 	}
 
-	public static BigDecimal[][] multiply(BigDecimal[][] a, BigDecimal[][] b) {
+	public BigDecimal[][] multiply(BigDecimal[][] a, BigDecimal[][] b) {
 		int mA = a.length;
 		int nA = a[0].length;
 		int mB = b.length;
@@ -82,7 +82,7 @@ public class MatrixOperations {
 		return c;
 	}
 
-	private static BigDecimal[][] cloneMatrix(BigDecimal[][] a) {
+	private BigDecimal[][] cloneMatrix(BigDecimal[][] a) {
 		BigDecimal[][] c = new BigDecimal[a.length][a[0].length];
 		fillWithZero(c);
 		for (int i = 0; i < a.length; i++) {
@@ -93,7 +93,7 @@ public class MatrixOperations {
 		return c;
 	}
 
-	public static BigDecimal[][] multiplyScalar(BigDecimal[][] a, BigDecimal x) {
+	public BigDecimal[][] multiplyScalar(BigDecimal[][] a, BigDecimal x) {
 		int mA = a.length;
 		int nA = a[0].length;
 		BigDecimal[][] c = new BigDecimal[mA][nA];
@@ -106,7 +106,7 @@ public class MatrixOperations {
 		return c;
 	}
 
-	public static BigDecimal determinant(BigDecimal[][] m) {
+	public BigDecimal determinant(BigDecimal[][] m) {
 		BigDecimal sum = BigDecimal.ZERO, s;
 
 		if (m.length == 1) {
@@ -133,7 +133,7 @@ public class MatrixOperations {
 		return sum;
 	}
 
-	public static boolean isZeroMatrix(BigDecimal[][] a) {
+	public boolean isZeroMatrix(BigDecimal[][] a) {
 		for (int i = 0; i < a.length; i++) {
 			for (int j = 0; j < a[0].length; j++) {
 				if (!a[i][j].equals(BigDecimal.ZERO)) {
@@ -144,7 +144,7 @@ public class MatrixOperations {
 		return true;
 	}
 
-	public static boolean isIdentityMatrix(BigDecimal[][] a) {
+	public boolean isIdentityMatrix(BigDecimal[][] a) {
 		for (int i = 0; i < a.length; i++) {
 			for (int j = 0; j < a[0].length; j++) {
 				if ((i == j) && !(a[i][j].equals(BigDecimal.ONE))) {
@@ -157,7 +157,7 @@ public class MatrixOperations {
 		return true;
 	}
 
-	public static boolean areEqual(BigDecimal[][] a, BigDecimal[][] b) {
+	public boolean areEqual(BigDecimal[][] a, BigDecimal[][] b) {
 		if ((a.length != b.length) || (a[0].length != b[0].length)) {
 			return false;
 		}
@@ -171,7 +171,7 @@ public class MatrixOperations {
 		return true;
 	}
 
-	public static BigDecimal fillDegree(BigDecimal[][] a) {
+	public BigDecimal fillDegree(BigDecimal[][] a) {
 		BigDecimal nrOfNonZeroElements = BigDecimal.ZERO;
 		String nr = Integer.toString(a.length * a[0].length);
 		BigDecimal nrOfElements = new BigDecimal(nr);
