@@ -14,6 +14,11 @@ public class Polynomial {
 	public Polynomial(int n) {
 		// TODO Auto-generated constructor stub
 		setDegree(n);
+		initArray();
+	}
+
+	public Polynomial() {
+		setPol(new int[0]);
 	}
 
 	public int getDegree() {
