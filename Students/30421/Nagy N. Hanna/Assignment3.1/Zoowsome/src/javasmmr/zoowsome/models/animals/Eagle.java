@@ -1,0 +1,13 @@
+package javasmmr.zoowsome.models.animals;
+
+public class Eagle extends Bird {
+
+	public Eagle() {
+		setName("Eagle");
+		setNrOfLegs(2);
+		migrates = false;
+		avgFlightAltitude = 234;
+
+	}
+
+}
