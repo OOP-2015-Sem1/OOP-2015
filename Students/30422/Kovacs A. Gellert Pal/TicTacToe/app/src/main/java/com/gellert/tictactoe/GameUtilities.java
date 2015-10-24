@@ -17,13 +17,13 @@ public class GameUtilities {
     private static final int O_WINS = 2;
     private static final int NO_WINNER = 0;
 
-    public static int checkWin() {
+    public static int checkWin(TicTacToeButton[][] buttonMatrix) {
 
         //check rows
         for (int i = 0; i<3; i++) {
             int rowSum = 0;
             for (int j = 0; j<3; j++) {
-                rowSum += TicTacToeMainActivity.boardMatrix[i][j];
+                rowSum += buttonMatrix[i][j].getValue();
             }
             switch (rowSum) {
                 case 3*CHAR_X: return X_WINS;
@@ -35,7 +35,7 @@ public class GameUtilities {
         for (int i = 0; i<3; i++) {
             int colSum = 0;
             for (int j = 0; j<3; j++) {
-                colSum += TicTacToeMainActivity.boardMatrix[j][i];
+                colSum += buttonMatrix[j][i].getValue();
             }
             switch (colSum) {
                 case 3*CHAR_X: return X_WINS;
@@ -46,7 +46,7 @@ public class GameUtilities {
         //check main diagonal
         int mainDiagSum = 0;
         for (int i = 0; i<3; i++) {
-            mainDiagSum += TicTacToeMainActivity.boardMatrix[i][i];
+            mainDiagSum += buttonMatrix[i][i].getValue();
         }
         switch (mainDiagSum) {
             case 3*CHAR_X: return X_WINS;
@@ -56,7 +56,7 @@ public class GameUtilities {
         //check secondary diagonal
         int secondaryDiagSum = 0;
         for (int i = 0; i<3; i++) {
-            secondaryDiagSum += TicTacToeMainActivity.boardMatrix[i][2 - i];
+            secondaryDiagSum += buttonMatrix[i][2 - i].getValue();
         }
         switch (secondaryDiagSum) {
             case 3*CHAR_X: return X_WINS;
@@ -67,30 +67,13 @@ public class GameUtilities {
         return NO_WINNER;
     }
 
-    public static void setButtonText(Button btn, int i, int j) {
-        switch (TicTacToeMainActivity.boardMatrix[i][j]) {
-            case CHAR_O:
-                btn.setText("O");
-                btn.setClickable(false);
-                break;
-            case CHAR_X:
-                btn.setText("X");
-                btn.setClickable(false);
-                break;
+    public static int[][] getValueMatrix(TicTacToeButton[][] buttonMatrix) {
+        int[][] boardMatrix = new int[3][3];
+        for (int i =0; i< 3; i++) {
+            for (int j = 0; j<3;j++) {
+                boardMatrix[i][j] = buttonMatrix[i][j].getValue();
+            }
         }
-    }
-
-    public static void saveScore(Context context) {
-        SharedPreferences sP = context.getSharedPreferences("scoreInfo", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sP.edit();
-        editor.putInt("scoreX", TicTacToeMainActivity.scoreX);
-        editor.putInt("scoreO", TicTacToeMainActivity.scoreO);
-        editor.apply();
-    }
-
-    public static void loadScore(Context context) {
-        SharedPreferences sP = context.getSharedPreferences("scoreInfo", Context.MODE_PRIVATE);
-        TicTacToeMainActivity.scoreX = sP.getInt("scoreX", 0);
-        TicTacToeMainActivity.scoreO = sP.getInt("scoreO", 0);
+        return boardMatrix;
     }
 }
