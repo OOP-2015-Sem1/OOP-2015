@@ -27,11 +27,6 @@
     * [Installing Java JDK + Eclipse IDE](https://www.youtube.com/watch?v=CPGKMDvCUN4)
     * [Eclipse + Checkstyle Plug-in](https://www.youtube.com/watch?v=xPYOwSmmRrQ)
 
-- #### Forum
-    * Visit [this page](http://summerjava.boards.net/) and create an account on this forum.
-    * The purpose of the forum is to create a nice environment where people can ask question and have them answered by either another student and/or the tutors. 
-    * Feel free to ask any question but put them in the correct category/folder so everything stays nice and tidy.
-
 
 ##
 
