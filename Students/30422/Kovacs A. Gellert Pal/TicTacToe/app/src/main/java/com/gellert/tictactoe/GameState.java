@@ -14,10 +14,19 @@ public class GameState {
     private int scoreX;
     private int scoreO;
 
-    public GameState() {
+    private static GameState instance;
+
+    private GameState() {
         this.state = 0;
         this.scoreX = 0;
         this.scoreO = 0;
+    }
+
+    public static GameState getInstance() {
+        if (instance == null) {
+            instance = new GameState();
+        }
+        return instance;
     }
 
     public int getState() {
