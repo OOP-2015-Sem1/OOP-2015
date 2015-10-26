@@ -7,7 +7,7 @@ import javasmmr.zoowsome.services.factories.SpeciesFactory;
 
 public class MainController {
 
-		public static void main(String[] args) {
+		public static void main(String[] args) throws Exception {
 			AnimalFactory abstractFactory = new AnimalFactory();
 			SpeciesFactory speciesFactory1 = abstractFactory.getSpeciesFactory(Constants.Species.Mammals);
 			SpeciesFactory speciesFactory2 = abstractFactory.getSpeciesFactory(Constants.Species.Aquatics);

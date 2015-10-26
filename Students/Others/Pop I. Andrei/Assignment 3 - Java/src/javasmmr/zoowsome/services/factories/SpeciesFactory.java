@@ -3,7 +3,7 @@ package javasmmr.zoowsome.services.factories;
 import javasmmr.zoowsome.models.animals.Animal;
 
 public abstract class SpeciesFactory extends Animal{ 
-		public abstract Animal getAnimal(String type); 
+		public abstract Animal getAnimal(String type) throws Exception; 
 		
 		protected int getRandomLegs(){
 			return (int) (Math.random() * 14);
