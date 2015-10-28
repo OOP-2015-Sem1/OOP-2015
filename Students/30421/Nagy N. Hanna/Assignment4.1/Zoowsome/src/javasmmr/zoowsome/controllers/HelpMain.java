@@ -7,9 +7,20 @@ import javasmmr.zoowsome.services.factoryForAnimals.SpeciesFactory;
 
 public class HelpMain {
 
-	public void getAnAnimal(AnimalFactory abstractFactory, Animal a1, SpeciesFactory speciesFactory1,
-			int randomSpecies, int randomType) {
+	AnimalFactory abstractFactory = new AnimalFactory();
+	Animal a1 = null;
+	SpeciesFactory speciesFactory1 = null;
 
+
+	public  HelpMain(AnimalFactory abstractFactory, Animal a1, SpeciesFactory speciesFactory1) {
+
+		this.abstractFactory = abstractFactory;
+		this.a1 = a1;
+		this.speciesFactory1 = speciesFactory1;
+
+	}
+
+	public Animal getAnAnimal(int randomSpecies, int randomType) {
 		switch (randomSpecies) {
 
 		case 1:
@@ -19,20 +30,20 @@ public class HelpMain {
 			switch (randomType) {
 			case 1:
 				a1 = speciesFactory1.getAnimal(Constants.Animals.Mammals.Tiger);
-				System.out.println(" Mammal " + a1.getNrOfLegs() + " with  legs! its name is  " + a1.getName());
+				//System.out.println(" Mammal " + a1.getNrOfLegs() + " with  legs! its name is  " + a1.getName());
 				break;
 			case 2:
 				a1 = speciesFactory1.getAnimal(Constants.Animals.Mammals.Monkey);
-				System.out.println(" Mammal " + a1.getNrOfLegs() + " with  legs! its name is " + a1.getName());
+				//System.out.println(" Mammal " + a1.getNrOfLegs() + " with  legs! its name is " + a1.getName());
 				break;
 			case 3:
 				a1 = speciesFactory1.getAnimal(Constants.Animals.Mammals.Tiger);
-				System.out.println(" Mammal " + a1.getNrOfLegs() + " with  legs! its name is  " + a1.getName());
+				//System.out.println(" Mammal " + a1.getNrOfLegs() + " with  legs! its name is  " + a1.getName());
 				break;
 			default:
 				System.out.println("no");
 			}
-break;
+			break;
 		case 2:
 			speciesFactory1 = abstractFactory.getSpeciesFactory(Constants.Species.Reptiles);
 
@@ -40,21 +51,21 @@ break;
 			switch (randomType) {
 			case 1:
 				a1 = speciesFactory1.getAnimal(Constants.Animals.Reptiles.Crocodile);
-				System.out.println("Reptiles with " + a1.getNrOfLegs() + " legs! its name is " + a1.getName());
+				//System.out.println("Reptiles with " + a1.getNrOfLegs() + " legs! its name is " + a1.getName());
 				break;
 			case 2:
 				a1 = speciesFactory1.getAnimal(Constants.Animals.Reptiles.Alligator);
-				System.out.println("Reptiles with " + a1.getNrOfLegs() + " legs! its name is " + a1.getName());
+				//System.out.println("Reptiles with " + a1.getNrOfLegs() + " legs! its name is " + a1.getName());
 				break;
 			case 3:
 				a1 = speciesFactory1.getAnimal(Constants.Animals.Reptiles.Snake);
-				System.out.println("Reptiles with " + a1.getNrOfLegs() + " legs! its name is " + a1.getName());
+				//System.out.println("Reptiles with " + a1.getNrOfLegs() + " legs! its name is " + a1.getName());
 				break;
 			default:
 				System.out.println("no");
 
 			}
-break;
+			break;
 		case 3:
 			speciesFactory1 = abstractFactory.getSpeciesFactory(Constants.Species.Insects);
 
@@ -62,20 +73,20 @@ break;
 			switch (randomType) {
 			case 1:
 				a1 = speciesFactory1.getAnimal(Constants.Animals.Insects.Butterfly);
-				System.out.println(" Insects with " + a1.getNrOfLegs() + " legs! its name is " + a1.getName());
+				//System.out.println(" Insects with " + a1.getNrOfLegs() + " legs! its name is " + a1.getName());
 				break;
 			case 2:
 				a1 = speciesFactory1.getAnimal(Constants.Animals.Insects.Cockroach);
-				System.out.println(" Insects with " + a1.getNrOfLegs() + " legs! its name is " + a1.getName());
+				//System.out.println(" Insects with " + a1.getNrOfLegs() + " legs! its name is " + a1.getName());
 				break;
 			case 3:
 				a1 = speciesFactory1.getAnimal(Constants.Animals.Insects.Spider);
-				System.out.println(" Insects with " + a1.getNrOfLegs() + " legs! its name is " + a1.getName());
+				//System.out.println(" Insects with " + a1.getNrOfLegs() + " legs! its name is " + a1.getName());
 				break;
 			default:
 				System.out.println("no");
 			}
-break;
+			break;
 		case 4:
 			speciesFactory1 = abstractFactory.getSpeciesFactory(Constants.Species.Aquatics);
 
@@ -83,20 +94,20 @@ break;
 			switch (randomType) {
 			case 1:
 				a1 = speciesFactory1.getAnimal(Constants.Animals.Aquatics.Frog);
-				System.out.println("Aquatics with " + a1.getNrOfLegs() + " legs! its name is " + a1.getName());
+				//System.out.println("Aquatics with " + a1.getNrOfLegs() + " legs! its name is " + a1.getName());
 				break;
 			case 2:
 				a1 = speciesFactory1.getAnimal(Constants.Animals.Aquatics.Newt);
-				System.out.println("Aquatics with " + a1.getNrOfLegs() + " legs! its name is " + a1.getName());
+				//System.out.println("Aquatics with " + a1.getNrOfLegs() + " legs! its name is " + a1.getName());
 				break;
 			case 3:
 				a1 = speciesFactory1.getAnimal(Constants.Animals.Aquatics.Salamander);
-				System.out.println("Aquatics with " + a1.getNrOfLegs() + " legs! its name is " + a1.getName());
+				//System.out.println("Aquatics with " + a1.getNrOfLegs() + " legs! its name is " + a1.getName());
 				break;
 			default:
 				System.out.println("no");
 			}
-break;
+			break;
 		case 5:
 			speciesFactory1 = abstractFactory.getSpeciesFactory(Constants.Species.Birds);
 
@@ -104,22 +115,22 @@ break;
 			switch (randomType) {
 			case 1:
 				a1 = speciesFactory1.getAnimal(Constants.Animals.Birds.Stork);
-				System.out.println("  Birds with " + a1.getNrOfLegs() + " legs! its name is " + a1.getName());
+			//	System.out.println("  Birds with " + a1.getNrOfLegs() + " legs! its name is " + a1.getName());
 				break;
 			case 2:
 				a1 = speciesFactory1.getAnimal(Constants.Animals.Birds.Pigeon);
-				System.out.println(" Birds with " + a1.getNrOfLegs() + " legs! its name is " + a1.getName());
+			//	System.out.println(" Birds with " + a1.getNrOfLegs() + " legs! its name is " + a1.getName());
 				break;
 			case 3:
 				a1 = speciesFactory1.getAnimal(Constants.Animals.Birds.Eagle);
-				System.out.println(" Birds with " + a1.getNrOfLegs() + " legs! its name is " + a1.getName());
+			//	System.out.println(" Birds with " + a1.getNrOfLegs() + " legs! its name is " + a1.getName());
 				break;
 			default:
 				System.out.println("no");
 
 			}
-break;
+			break;
 		}
-
+		return a1;
 	}
 }

@@ -12,12 +12,12 @@ public class ReptileFactory extends SpeciesFactory{
          @Override
          public Animal getAnimal(String type) {
                  if (Constants.Animals.Reptiles.Alligator.equals(type)) {
-                        return new Alligator(2.0,0.9); // leave empty constructor, for now!
+                        return new Alligator(2.0,0.5); // leave empty constructor, for now!
                 } else if (Constants.Animals.Reptiles.Snake.equals(type)) {
-                     return new Snake(1.3,0.9);
+                     return new Snake(1.3,0.4);
                               } 
                 else if (Constants.Animals.Reptiles.Crocodile.equals(type)){
-                	return new Crocodile(1.1,0.99);
+                	return new Crocodile(1.1,0.5);
                 	
                 }
 				return null;

@@ -27,11 +27,11 @@ public class Caretaker extends Employee implements Caretaker_I {
 		}
 		// Set the animal takenCareOf flag to true
 
-		animal.setTakenCareOf(true);
+		else animal.setTakenCareOf(true);
 		// Subtract the maintenance cost from the caretakers working hours
 		this.workingHours = this.workingHours - animal.getMaintenanceCost();
 		return Constants.Employees.Caretakers.TCO_SUCCESS;
-	
+	}
 	}
 
-}
+
