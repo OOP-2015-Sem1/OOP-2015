@@ -9,6 +9,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
+
+import java.util.LinkedList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,14 +25,14 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         initializeGridButtons();
-        gbp.save();
+        board.save();
     }
 
 
     @Override
     protected void onDestroy() {
         Log.d("P", "onDestroy");
-        gbp.save();
+        board.save();
         super.onDestroy();
     }
 
@@ -91,16 +94,16 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.new_round) {
-            gbp.resetBoard();
+            board.gameBoard.resetButtons();
             return true;
         } else if (id == R.id.reset_score) {
-            gbp.resetScore();
+            board.gameBoard.resetScore();
             return true;
         } else if (id == R.id.game_mode) {
-            gbp.aiChangeAlertDialog();
+            board.gameBoard.changeAi();
         } else if (id == R.id.exit) {
             //System.exit(0); // too brutal apparently
-            gbp.save();
+            board.save();
             finish();
             return true;
         }
@@ -108,14 +111,22 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private GridButtonPanel gbp;
+    private Board board;
 
     private void initializeGridButtons() {
-        Button[] buttons = {(Button) findViewById(R.id.button1_1), (Button) findViewById(R.id.button1_2), (Button) findViewById(R.id.button1_3),
-                (Button) findViewById(R.id.button2_1), (Button) findViewById(R.id.button2_2), (Button) findViewById(R.id.button2_3),
-                (Button) findViewById(R.id.button3_1), (Button) findViewById(R.id.button3_2), (Button) findViewById(R.id.button3_3)};
 
-        gbp = new GridButtonPanel(getApplicationContext(), this, buttons);
+        LinkedList<Button> buttonLinkedList = new LinkedList<>();
+        buttonLinkedList.add((Button) findViewById(R.id.button1_1));
+        buttonLinkedList.add((Button) findViewById(R.id.button1_2));
+        buttonLinkedList.add((Button) findViewById(R.id.button1_3));
+        buttonLinkedList.add((Button) findViewById(R.id.button2_1));
+        buttonLinkedList.add((Button) findViewById(R.id.button2_2));
+        buttonLinkedList.add((Button) findViewById(R.id.button2_3));
+        buttonLinkedList.add((Button) findViewById(R.id.button3_1));
+        buttonLinkedList.add((Button) findViewById(R.id.button3_2));
+        buttonLinkedList.add((Button) findViewById(R.id.button3_3));
+
+        board = new Board(this, buttonLinkedList, (TextView) findViewById(R.id.scoreTextView), (TextView) findViewById(R.id.aiStatus));
 
         // Resize buttons according to the screen size and orientation
         Point point = new Point();
@@ -125,16 +136,20 @@ public class MainActivity extends AppCompatActivity {
 
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            for (int i = 0; i < 9; i++) {
-                gbp.getGridButtons()[i].getBut().setWidth(width / 3 - 30);
-                gbp.getGridButtons()[i].getBut().setHeight(height / 4 - 20);
-                gbp.getGridButtons()[i].getBut().setTextSize(85);
+            for (int row = 0; row < 3; row++) {
+                for (int col = 0; col < 3; col++) {
+                    board.gameBoard.gridButtonPanel.getButtonAt(row, col).setWidth(width / 3 - 30);
+                    board.gameBoard.gridButtonPanel.getButtonAt(row, col).setHeight(height / 4 - 20);
+                    board.gameBoard.gridButtonPanel.getButtonAt(row, col).setTextSize(85);
+                }
             }
         } else {
-            for (int i = 0; i < 9; i++) {
-                gbp.getGridButtons()[i].getBut().setWidth(width / 3 - 30);
-                gbp.getGridButtons()[i].getBut().setHeight(height / 5 - 50);
-                gbp.getGridButtons()[i].getBut().setTextSize(26);
+            for (int row = 0; row < 3; row++) {
+                for (int col = 0; col < 3; col++) {
+                    board.gameBoard.gridButtonPanel.getButtonAt(row, col).setWidth(width / 3 - 30);
+                    board.gameBoard.gridButtonPanel.getButtonAt(row, col).setHeight(height / 5 - 50);
+                    board.gameBoard.gridButtonPanel.getButtonAt(row, col).setTextSize(26);
+                }
             }
         }
     }
