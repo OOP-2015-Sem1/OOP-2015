@@ -1,75 +1,61 @@
 package com.example.alexh.tictactoe;
 
-import android.app.Activity;
-import android.content.Context;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 /**
- * Created by alexh on 20.10.2015.
+ * The holder for the button, contains the event listener which calls methods up (gridButtonPanel.GameBoard...)
  */
 public class GridButton {
 
     private GridButtonPanel gridButtonPanel;
-    private Button but;
+
+    private Button button;
+    private GridButtonState gridButtonState;
+
     private int row;
     private int col;
 
-    public GridButton(GridButtonPanel gridButtonPanel, Button but, int row, int col) {
-
+    public GridButton(GridButtonPanel gridButtonPanel, Button button, int row, int col) {
+        // Reference to holder
         this.gridButtonPanel = gridButtonPanel;
 
-        this.but = but;
-        this.but.setOnClickListener(new GridButtonOnClickListener());
+        // Button init
+        this.button = button;
+        this.reset();
+        this.button.setOnClickListener(new GridButtonOnClickListener());
+
+        // Location
         this.row = row;
         this.col = col;
-
-        this.but.setText(this.gridButtonPanel.getContext().getString(R.string.blankButton));
     }
 
-    public void resetButton() {
-        this.but.setText(this.gridButtonPanel.getContext().getString(R.string.blankButton));
+    public GridButtonState getGridButtonState() {
+        return gridButtonState;
     }
 
-    public String getButtonText() {
-        return but.getText().toString();
+    public void setGridButtonState(GridButtonState gridButtonState) {
+        this.gridButtonState = gridButtonState;
+        this.updateLabel();
     }
 
-    public void setClickListener(View.OnClickListener l) {
-        this.but.setOnClickListener(l);
+    public Button getButton() {
+        return button;
     }
 
-    public Button getBut() {
-        return but;
+    public void reset() {
+        this.setGridButtonState(GridButtonState.BLANK_STATE);
     }
 
-    public void setBut(Button but) {
-        this.but = but;
-    }
-
-    public int getRow() {
-        return row;
-    }
-
-    public void setRow(int row) {
-        this.row = row;
-    }
-
-    public int getCol() {
-        return col;
-    }
-
-    public void setCol(int col) {
-        this.col = col;
+    public void updateLabel() {
+        this.button.setText(this.gridButtonState.toString());
     }
 
     private class GridButtonOnClickListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
-            gridButtonPanel.move(but, row, col);
+            GridButton.this.gridButtonPanel.gameBoard.move(GridButton.this.row, GridButton.this.col);
         }
     }
 }
