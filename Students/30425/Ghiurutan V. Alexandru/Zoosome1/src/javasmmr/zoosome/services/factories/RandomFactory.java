@@ -36,7 +36,8 @@ public class RandomFactory extends SpeciesFactory {
 	 * @param name
 	 *            is defined in the previous function getSpecies
 	 * @param type
-	 *            must be between 1 and 3
+	 *            must be between 1 and 3, representing the number of animals
+	 *            from each species class.
 	 * @return a new animal of a specific species.
 	 */
 	private Animal getAnim(String name, int type) throws Exception {
@@ -118,8 +119,10 @@ public class RandomFactory extends SpeciesFactory {
 	// The method that will coordinate all the other methods in this class.
 	@Override
 	public Animal getAnimal(String type) throws Exception {
-		int species = (int) (Math.random() * 5) + 1;
-		int number = (int) (Math.random() * 3) + 1;
+		int species = (int) (Math.random() * 5) + 1;// We get a number between 1
+													// and 5.
+		int number = (int) (Math.random() * 3) + 1;// We get a number between 1
+													// and 3
 		return getAnim(getSpecies(species), number);
 	}
 }

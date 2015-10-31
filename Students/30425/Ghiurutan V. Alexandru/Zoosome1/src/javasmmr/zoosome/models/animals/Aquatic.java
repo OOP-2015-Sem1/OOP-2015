@@ -4,8 +4,14 @@ abstract public class Aquatic extends Animal {
 	private int avgSwimDepth;
 	private WaterType waterType;
 
-	public Aquatic(int nrOfLegs, String name, int avgSwimDepth, WaterType waterType) {
-		super(nrOfLegs, name);
+	public Aquatic(int nrOfLegs, String name, double maintenanceCost, double dangerPerc, boolean takenCareOf,
+			int avgSwimDepth, WaterType waterType) {
+		super(nrOfLegs, name, maintenanceCost, dangerPerc, takenCareOf);// Implicit
+																		// call
+																		// to
+		// the super class
+		// Animal parameter
+		// constructor.
 		this.setAvgSwimDepth(avgSwimDepth);
 		this.setWaterType(waterType);
 	}
