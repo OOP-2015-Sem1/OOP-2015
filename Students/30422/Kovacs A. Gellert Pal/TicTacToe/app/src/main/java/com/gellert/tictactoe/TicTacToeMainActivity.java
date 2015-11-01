@@ -8,18 +8,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class TicTacToeMainActivity extends AppCompatActivity {
 
     private static final int CHAR_X = 1;
     private static final int CHAR_O = 4;
-
-    private static final int X_WINS = 1;
-    private static final int O_WINS = 2;
-    private static final int NO_WINNER = 0;
 
     private TextView scoreText;
 
@@ -32,7 +26,7 @@ public class TicTacToeMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        gameStateInstance = new GameState(); //state and scores are initialized with value 0
+        gameStateInstance = GameState.getInstance(); //state and scores are initialized with value 0
         loadScore();
         scoreText = (TextView) findViewById(R.id.scoreText);
         gameStateInstance.displayScore(scoreText);
@@ -51,36 +45,7 @@ public class TicTacToeMainActivity extends AppCompatActivity {
         for (int i =0; i< 3; i++) {
             for (int j = 0; j<3;j++) {
                 buttonMatrix[i][j].resetContent();
-                buttonMatrix[i][j].setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View btn) {
-
-                        ((TicTacToeButton)btn).updateContent(gameStateInstance.currentCharacter());
-                        gameStateInstance.nextState();
-
-                        switch (GameUtilities.checkWin(buttonMatrix)) {
-                            case X_WINS:
-                                Toast.makeText(getApplicationContext(), "X wins!", Toast.LENGTH_SHORT).show();
-                                gameStateInstance.incScore(CHAR_X);
-                                gameStateInstance.displayScore(scoreText);
-                                resetMatch();
-                                break;
-                            case O_WINS:
-                                Toast.makeText(getApplicationContext(), "O wins!", Toast.LENGTH_SHORT).show();
-                                gameStateInstance.incScore(CHAR_O);
-                                gameStateInstance.displayScore(scoreText);
-                                resetMatch();
-                                break;
-                            case NO_WINNER:
-                                if (gameStateInstance.getState() >= 9) {
-                                    Toast.makeText(getApplicationContext(), "Draw match!", Toast.LENGTH_SHORT).show();
-                                    resetMatch();
-                                }
-                                break;
-                        }
-                        saveScore();
-                    }
-                });
+                buttonMatrix[i][j].setOnClickListener(buttonMatrix[i][j]);
             }
         }
     }
@@ -149,7 +114,7 @@ public class TicTacToeMainActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
     }
 
-    private void resetMatch() {
+    public void resetMatch() {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 buttonMatrix[i][j].resetContent();
@@ -176,5 +141,13 @@ public class TicTacToeMainActivity extends AppCompatActivity {
         SharedPreferences sP = this.getSharedPreferences("scoreInfo", Context.MODE_PRIVATE);
         gameStateInstance.setScore(CHAR_X, sP.getInt("scoreX", 0));
         gameStateInstance.setScore(CHAR_O, sP.getInt("scoreO", 0));
+    }
+
+    public TicTacToeButton[][] getButtonMatrix() {
+        return buttonMatrix;
+    }
+
+    public TextView getScoreText() {
+        return scoreText;
     }
 }
