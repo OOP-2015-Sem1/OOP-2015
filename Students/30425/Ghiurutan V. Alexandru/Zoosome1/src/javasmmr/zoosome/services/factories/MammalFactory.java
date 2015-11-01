@@ -5,6 +5,7 @@ import javasmmr.zoosome.models.animals.Tiger;
 import javasmmr.zoosome.models.animals.Cow;
 import javasmmr.zoosome.models.animals.Monkey;
 
+//This class will implement the super class method getAnimal and it will return a new animal described in the String parameter type.
 public class MammalFactory extends SpeciesFactory {
 	@Override
 	public Animal getAnimal(String type) throws Exception {

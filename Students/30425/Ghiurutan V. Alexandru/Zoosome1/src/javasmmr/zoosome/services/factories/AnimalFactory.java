@@ -7,7 +7,10 @@ package javasmmr.zoosome.services.factories;
  *         species that the String describes.
  */
 public class AnimalFactory {
-	// The class have just one method
+	/*
+	 * This method will return a specific factory related to the species that
+	 * the String argument type describes.
+	 */
 	public SpeciesFactory getSpeciesFactory(String type) throws Exception {
 		if (Constants.Species.Mammals.equals(type)) {
 			return new MammalFactory();
