@@ -25,16 +25,19 @@ public class TicTacToeButton extends Button implements View.OnClickListener{
     public TicTacToeButton(Context context) {
         super(context);
         this.context = context;
+        setOnClickListener(this);
     }
 
     public TicTacToeButton(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
+        setOnClickListener(this);
     }
 
     public TicTacToeButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
+        setOnClickListener(this);
     }
 
     public void resetContent() {

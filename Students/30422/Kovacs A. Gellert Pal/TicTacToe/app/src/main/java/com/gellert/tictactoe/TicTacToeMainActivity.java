@@ -45,7 +45,6 @@ public class TicTacToeMainActivity extends AppCompatActivity {
         for (int i =0; i< 3; i++) {
             for (int j = 0; j<3;j++) {
                 buttonMatrix[i][j].resetContent();
-                buttonMatrix[i][j].setOnClickListener(buttonMatrix[i][j]);
             }
         }
     }
