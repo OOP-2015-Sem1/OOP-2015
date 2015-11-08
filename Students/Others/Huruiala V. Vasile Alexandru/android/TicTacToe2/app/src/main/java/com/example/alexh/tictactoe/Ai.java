@@ -147,8 +147,7 @@ public class Ai {
         LinkedList<Move> moves = new LinkedList<>();
 
         for (Move move : game.getAvailableMoves()) {
-            Game newGame = new Game(game.getGrid());
-            newGame.move(move, symbol);
+            game.move(move, symbol);
 
             GridButtonState newSymbol;
             if (symbol.equals(GridButtonState.X_STATE)) {
@@ -157,8 +156,10 @@ public class Ai {
                 newSymbol = GridButtonState.X_STATE;
             }
 
-            scores.addLast(miniMax(newGame, depth, newSymbol).getScore());
+            scores.addLast(miniMax(game, depth, newSymbol).getScore());
             moves.addLast(move);
+            // un-move
+            game.move(move, GridButtonState.BLANK_STATE);
         }
 
         if (symbol.equals(GridButtonState.X_STATE)) {
