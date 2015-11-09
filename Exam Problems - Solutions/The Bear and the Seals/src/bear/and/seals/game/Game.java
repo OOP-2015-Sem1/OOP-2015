@@ -90,7 +90,7 @@ public class Game {
 						// "killing" the seal
 						i.remove();
 						bear.eat();
-						System.out.println("Seal got eaen by bear");
+						System.out.println("The seal got eaten by the bear.");
 						entities.remove(s);
 					} else if (holeOccupied(randomHoleLocation) && s.isDying()) {
 						i.remove();
@@ -130,7 +130,7 @@ public class Game {
 	}
 
 	private void fillArrays() {
-		// initial bear position also marks a whole!!!
+		// initial bear position also marks a hole!!!
 		// create hole from initial bear position
 		Hole initialBearHole = new Hole(new Point(bear.getPosition()));
 		holes.add(initialBearHole);
