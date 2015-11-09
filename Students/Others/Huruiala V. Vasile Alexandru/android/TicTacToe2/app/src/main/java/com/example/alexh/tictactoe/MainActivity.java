@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("P", "onCreate");
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -57,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         Log.d("P", "onPause");
+        board.save();
         super.onPause();
     }
 

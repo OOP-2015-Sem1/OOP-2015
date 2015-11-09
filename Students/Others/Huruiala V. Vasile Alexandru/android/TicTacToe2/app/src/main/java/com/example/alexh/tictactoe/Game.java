@@ -14,16 +14,6 @@ public class Game {
         this.grid = grid;
     }
 
-    public GridButtonState[][] getGrid() {
-       GridButtonState[][] newGrid = new GridButtonState[3][3];
-
-        for (int row = 0; row < 3; row++) {
-            System.arraycopy(grid[row], 0, newGrid[row], 0, 3);
-        }
-
-        return newGrid;
-    }
-
     private boolean gameOver(GridButtonState symbol) {
         if (symbol.equals(GridButtonState.BLANK_STATE)) {
             for (int row = 0; row < 3; row++) {
