@@ -15,11 +15,13 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Random;
+//TO DO: Disable buttons after a game is finished
+
 public class MainActivity extends AppCompatActivity {
 
     private boolean noughtsTurn = false; // false=X, true=O
     private char board[][] = new char[3][3];
-    private boolean aisTurn = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +34,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void newGame(View view) {
-
         setNoughtsTurn(false);
         setBoard(new char[3][3]);
-        setAisTurn(false);
         resetButtons();
     }
 
@@ -68,14 +68,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (winner == '\0') {
-            return false; // nobody won
+            return false;
         } else {
-            // display winner
-            Toast toastXor0 = Toast.makeText(getApplicationContext(), winner + " wins", Toast.LENGTH_SHORT);
-            toastXor0.show();
+            Toast.makeText(getApplicationContext(), winner + " wins", Toast.LENGTH_SHORT).show();
             //resetButtons();
-            //TextView T = (TextView) findViewById(R.id.titleText);
-            //  T.setText(winner + "  wins");
             return true;
         }
     }
@@ -132,8 +128,22 @@ public class MainActivity extends AppCompatActivity {
         if (total >= size) {
             return true; // they win
         }
-
         return false; // everybody lost
+    }
+
+    private void disableButtons() {
+        TableLayout table = (TableLayout) findViewById(R.id.tableLayout);
+        for (int y = 0; y < table.getChildCount(); y++) {
+            if (table.getChildAt(y) instanceof TableRow) {
+                TableRow row = (TableRow) table.getChildAt(y);
+                for (int x = 0; x < row.getChildCount(); x++) {
+                    if (row.getChildAt(x) instanceof Button) {
+                        Button B = (Button) row.getChildAt(x);
+                        B.setEnabled(false);
+                    }
+                }
+            }
+        }
     }
 
     private void setupOnClickListeners() {
@@ -163,13 +173,13 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View view) {
             if (view instanceof Button) {
                 Button B = (Button) view;
-                board[y][x] = noughtsTurn ? 'O' : 'X';
-                B.setText(noughtsTurn ? "O" : "X");
+                board[y][x] = isNoughtsTurn() ? 'O' : 'X';
+                B.setText(isNoughtsTurn() ? "O" : "X");
                 B.setEnabled(false);
                 noughtsTurn = !noughtsTurn;
 
                 if (checkWin()) {
-                    //  Toast.makeText(MainActivity.this, winner  "wins", Toast.LENGTH_SHORT).show();
+                    disableButtons();
                 }
             }
         }
@@ -179,7 +189,16 @@ public class MainActivity extends AppCompatActivity {
     //AI
 /*
     private void setUpOnClickListenerAi() {
-
+        TableLayout table = (TableLayout) findViewById(R.id.tableLayout);
+        for (int y = 0; y < table.getChildCount(); y++) {
+            if (table.getChildAt(y) instanceof TableLayout) {
+                TableRow row = (TableRow) table.getChildAt(y);
+                for (int x = 0; x < row.getChildCount(); x++) {
+                    View V = row.getChildAt(x); // <=> each button
+                    V.setOnClickListener(new AiPlaysOnClick(x, y));
+                }
+            }
+        }
     }
 
     private class AiPlaysOnClick implements View.OnClickListener {
@@ -192,27 +211,36 @@ public class MainActivity extends AppCompatActivity {
             this.y = y;
         }
 
+
         @Override
         public void onClick(View view) {
             if (view instanceof Button) {
                 Button B = (Button) view;
 
-                board[y][x] = noughtsTurn ? 'O' : 'X';
-                B.setText(noughtsTurn ? "O" : "X");
-                B.setEnabled(false);
-                noughtsTurn = !noughtsTurn;
+                if ((!noughtsTurn)) {
+                    board[y][x] = 'X';
+                    B.setEnabled(false);
+                } else { //else get randomly unocuppied position
+                    Random r = new Random();
 
-                if (checkWin()) {
-                    //  Toast.makeText(MainActivity.this, winner  "wins", Toast.LENGTH_SHORT).show();
+                    TableLayout table = (TableLayout) findViewById(R.id.tableLayout);
+                    TableRow row = (TableRow) table.getChildAt(y);
+
+                    int x = r.nextInt(row.getChildCount());
+                    int y = r.nextInt(table.getChildCount());
+                    board[y][x] = 'O';
+                    B.setEnabled(false);
                 }
+                noughtsTurn = !noughtsTurn;
             }
 
+            if (checkWin()) {
+                //  Toast.makeText(MainActivity.this, winner  "wins", Toast.LENGTH_SHORT).show();
+                disableButtons();
+            }
         }
     }
-    public static String aiPlays(){
-       return "0";
-    }*/
-
+*/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -230,12 +258,12 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return true;
         } else if (id == R.id.action_you_vs_computer) {
-            return true;
-        } else if (id == R.id.action_player_vs_player) {
             setupOnClickListeners();
             return true;
+        } else if (id == R.id.action_player_vs_player) {
+            //setUpOnClickListenerAi();
+            return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -254,15 +282,5 @@ public class MainActivity extends AppCompatActivity {
 
     public void setNoughtsTurn(boolean noughtsTurn) {
         this.noughtsTurn = noughtsTurn;
-    }
-
-    public boolean isAisTurn() {
-        return aisTurn;
-
-    }
-
-    public void setAisTurn(boolean aisTurn) {
-        this.aisTurn = aisTurn;
-
     }
 }
