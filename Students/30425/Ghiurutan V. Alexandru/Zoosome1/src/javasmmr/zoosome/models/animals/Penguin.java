@@ -1,5 +1,11 @@
 package javasmmr.zoosome.models.animals;
 
+import javax.xml.stream.XMLEventWriter;
+import javax.xml.stream.XMLStreamException;
+
+import javasmmr.zoosome.repositories.AnimalRepository;
+import javasmmr.zoosome.services.factories.Constants;
+
 public class Penguin extends Bird {
 	public Penguin() {
 		this(2, "Penguin", 0.4, 0.2, false, false, 0);
@@ -16,7 +22,12 @@ public class Penguin extends Bird {
 	public boolean kill() {
 		double percent = Math.random();
 		return (percent < this.getDangerPerc());
+	}
 
+	@Override
+	public void encodeToXml(XMLEventWriter eventWriter) throws XMLStreamException {
+		super.encodeToXml(eventWriter);
+		AnimalRepository.createNode(eventWriter, Constants.XML_TAGS.DISCRIMINANT, Constants.Animals.Birds.Penguin);
 	}
 
 }

@@ -1,8 +1,16 @@
 package javasmmr.zoosome.models.employees;
 
+import javasmmr.zoosome.models.interfaces.XML_Parsable;
+import javasmmr.zoosome.repositories.EmployeeRepository;
+
 import java.math.BigDecimal;
 
-public abstract class Employee {
+import javax.xml.stream.XMLEventWriter;
+import javax.xml.stream.XMLStreamException;
+
+import org.w3c.dom.Element;
+
+public abstract class Employee implements XML_Parsable {
 	private String name;
 	private long id;// has to be unique
 	private BigDecimal salary;
@@ -61,5 +69,22 @@ public abstract class Employee {
 	 */
 	private static long uniqueId() {
 		return (long) (Math.random() * 1000000000000L);
+	}
+
+	public void encodeToXml(XMLEventWriter eventWriter) throws XMLStreamException {
+		EmployeeRepository.createNode(eventWriter, "name", String.valueOf(this.getName()));
+		EmployeeRepository.createNode(eventWriter, "id", String.valueOf(this.getId()));
+		EmployeeRepository.createNode(eventWriter, "salary", String.valueOf(this.getSalary()));
+		EmployeeRepository.createNode(eventWriter, "isDead", String.valueOf(this.isDead()));
+
+	}
+
+	public void decodeFromXml(Element element) {
+		this.setName(String.valueOf(element.getElementsByTagName("name").item(0).getTextContent()));
+		this.setId(Long.valueOf(element.getElementsByTagName("id").item(0).getTextContent()));
+		this.setSalary(
+				BigDecimal.valueOf(Double.valueOf(element.getElementsByTagName("salary").item(0).getTextContent())));
+		this.setIsDead(Boolean.valueOf(element.getElementsByTagName("isDead").item(0).getTextContent()));
+
 	}
 }

@@ -4,6 +4,12 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.xml.stream.XMLEventWriter;
+import javax.xml.stream.XMLStreamException;
+
+import javasmmr.zoosome.repositories.AnimalRepository;
+import javasmmr.zoosome.services.factories.Constants;
+
 public class Tiger extends Mammal {
 	private String[] timeComp;
 	private String[] dateComp;
@@ -97,5 +103,11 @@ public class Tiger extends Mammal {
 		} else {
 			return 0.0;
 		}
+	}
+
+	@Override
+	public void encodeToXml(XMLEventWriter eventWriter) throws XMLStreamException {
+		super.encodeToXml(eventWriter);
+		AnimalRepository.createNode(eventWriter, Constants.XML_TAGS.DISCRIMINANT, Constants.Animals.Mammals.Tiger);
 	}
 }
