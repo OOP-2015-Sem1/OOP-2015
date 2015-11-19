@@ -1,5 +1,10 @@
 package javasmmr.zoosome.models.animals;
 
+import javasmmr.zoosome.services.factories.Constants;
+import javasmmr.zoosome.repositories.AnimalRepository;
+import javax.xml.stream.XMLEventWriter;
+import javax.xml.stream.XMLStreamException;
+
 public class Dolphin extends Aquatic {
 	// In this classes the construction of an object is done through a single
 	// constructor.
@@ -18,6 +23,11 @@ public class Dolphin extends Aquatic {
 	public boolean kill() {
 		double percent = Math.random();
 		return (percent < this.getDangerPerc());
+	}
 
+	@Override
+	public void encodeToXml(XMLEventWriter eventWriter) throws XMLStreamException {
+		super.encodeToXml(eventWriter);
+		AnimalRepository.createNode(eventWriter, Constants.XML_TAGS.DISCRIMINANT, Constants.Animals.Aquatics.Dolphin);
 	}
 }

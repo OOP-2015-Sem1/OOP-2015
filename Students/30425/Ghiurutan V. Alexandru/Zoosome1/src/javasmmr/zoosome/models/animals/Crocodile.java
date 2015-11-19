@@ -2,6 +2,10 @@ package javasmmr.zoosome.models.animals;
 
 import java.util.Date;
 import java.util.Locale;
+import javax.xml.stream.XMLEventWriter;
+import javax.xml.stream.XMLStreamException;
+import javasmmr.zoosome.services.factories.Constants;
+import javasmmr.zoosome.repositories.AnimalRepository;
 import java.text.DateFormat;
 
 public class Crocodile extends Reptile implements Runnable {
@@ -97,5 +101,11 @@ public class Crocodile extends Reptile implements Runnable {
 		} else {
 			return 0.0;
 		}
+	}
+
+	@Override
+	public void encodeToXml(XMLEventWriter eventWriter) throws XMLStreamException {
+		super.encodeToXml(eventWriter);
+		AnimalRepository.createNode(eventWriter, Constants.XML_TAGS.DISCRIMINANT, Constants.Animals.Reptiles.Crocodile);
 	}
 }

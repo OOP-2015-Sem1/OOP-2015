@@ -66,7 +66,13 @@ public final class Constants {
 
 		// For the EmployeeFactory and EmployeeAbstractFactory
 		public static final String Caretaker = "CARETAKER";
-		public static final String Ivestor = "INVESTOR";
+		public static final String Investor = "INVESTOR";
 		public static final String Manager = "MANAGER";
+	}
+
+	public static final class XML_TAGS {
+		public static final String DISCRIMINANT = "DISCRIMINANT";
+		public static final String ANIMAL = "ANIMAL";
+		public static final String EMPLOYEE = "EMPLOYEE";
 	}
 }
