@@ -126,4 +126,16 @@ public class GameBoard {
             this.resetButtons();
         }
     }
+
+    public Score getScore() {
+        return score;
+    }
+
+    public GridButtonPanel getGridButtonPanel() {
+        return gridButtonPanel;
+    }
+
+    public Ai getAi() {
+        return ai;
+    }
 }

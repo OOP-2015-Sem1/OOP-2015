@@ -53,6 +53,13 @@ public class GridButtonPanel {
         this.gridButtons[row][col].setGridButtonState(gridButtonState);
     }
 
+    public void setValue(String value) {
+        String[] buttonValues = value.split("");
+        for (int i = 0; i < 9; i++) {
+            this.setValueAt(GridButtonState.getValueOf(buttonValues[i + 1]), i / 3, i % 3);
+        }
+    }
+
     public void reset() {
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
