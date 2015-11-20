@@ -23,13 +23,10 @@ public class GamePanel extends JPanel {
 	private int rows;
 	private int cols;
 
-	private CellContent[][] oldState;
-
 	public GamePanel(GameState gameState, int width, int height) {
 		this.rows = gameState.getRows();
 		this.cols = gameState.getCols();
 
-		this.oldState = clone(gameState.getCellContents());
 
 		int cellWidth = width / cols;
 		int cellHeight = height / rows;
@@ -49,38 +46,25 @@ public class GamePanel extends JPanel {
 	}
 
 	public void printSight(GameState gameState) {
-		CellContent[][] newState = clone(gameState.getCellContents());
 		Fluffeh fluffeh = gameState.getFluffeh();
-
-		newState[fluffeh.getPosition().x][fluffeh.getPosition().y] = CellContent.FLUFFEH;
 
 		for (int row = 0; row < this.rows; row++) {
 			for (int col = 0; col < this.cols; col++) {
 				double distance = fluffeh.getPosition().distance(row, col);
-				if (distance >= fluffeh.getViewDistance()) {
-					newState[row][col] = CellContent.FOG;
-				}
-				
-				if (!this.oldState[row][col].equals(newState[row][col])) {
-					this.oldState[row][col] = newState[row][col];
-					this.setCellContent(row, col, this.oldState[row][col]);
-					this.grid[row][col].repaint();
+				if (distance < fluffeh.getViewDistance()) {
+					this.setCellContent(row, col, gameState.getCellContents()[row][col]);
+				} else {
+					this.setCellContent(row, col, CellContent.FOG);
 				}
 			}
 		}
+		
+		this.setCellContent(fluffeh.getPosition().x, fluffeh.getPosition().y, CellContent.FLUFFEH);
+		
+		this.repaint();
 	}
 
 	public void setCellContent(int row, int col, CellContent content) {
 		this.grid[row][col].setContent(content);
-	}
-
-	public static CellContent[][] clone(CellContent[][] content) {
-		CellContent[][] result = new CellContent[content.length][content[0].length];
-		for (int row = 0; row < content.length; row++) {
-			for (int col = 0; col < content[0].length; col++) {
-				result[row][col] = content[row][col];
-			}
-		}
-		return result;
 	}
 }
