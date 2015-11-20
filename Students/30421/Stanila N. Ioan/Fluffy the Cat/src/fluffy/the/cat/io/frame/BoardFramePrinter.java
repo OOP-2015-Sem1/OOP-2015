@@ -3,8 +3,6 @@ package fluffy.the.cat.io.frame;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
-
 import javax.swing.JFrame;
 import fluffly.the.cat.game.BoardConfiguration;
 import fluffly.the.cat.game.Game;
@@ -17,13 +15,11 @@ public class BoardFramePrinter extends AbstractBoardPrinter implements KeyListen
 	private boolean boardSetUp;
 	private int width;
 	private int height;
-	private ArrayList<BoardEntity> gameEntities;
 	private Game game;
 	
 	public BoardFramePrinter(Game game) {
 		boardFrame = new JFrame();
 		boardSetUp = false;
-		gameEntities = new ArrayList<BoardEntity>();
 		this.game = game;
 		boardFrame.addKeyListener(this);
 	}
@@ -44,38 +40,34 @@ public class BoardFramePrinter extends AbstractBoardPrinter implements KeyListen
 		}
 		
 		boardFrame.getContentPane().removeAll();
-		gameEntities.clear();
 		
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				if (withinRangeOfFluffy(i, j, boardConfiguration)) {
 					switch(board[i][j]) {
 					case 'F':
-						gameEntities.add(new Fluffy());
+						boardFrame.add(new Fluffy());
 						break;
 					case ' ':
-						gameEntities.add(new Floor());
+						boardFrame.add(new Floor());
 						break;
 					case '*':
-						gameEntities.add(new Wall());
+						boardFrame.add(new Wall());
 						break;
 					case 'H':
-						gameEntities.add(new Mouse());
+						boardFrame.add(new Mouse());
 						break;
 					case 'W':
-						gameEntities.add(new Hat());
+						boardFrame.add(new Hat());
 						break;
 					default:
-						gameEntities.add(new Wall());
+						boardFrame.add(new Wall());
 						break;
 					}
 				} else {
-					gameEntities.add(new UnknownTeritory());
+					boardFrame.add(new UnknownTeritory());
 				}
 			}
-		}
-		for(BoardEntity ent : gameEntities) {
-			boardFrame.getContentPane().add(ent);
 		}
 		boardFrame.pack();
 		boardFrame.setVisible(true);
