@@ -4,7 +4,10 @@ import java.awt.Point;
 import java.io.IOException;
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+
 import fluffy.the.cat.io.BoardConsolePrinter;
+import fluffy.the.cat.io.BoardFrame;
 import fluffy.the.cat.io.FluffySavegameManager;
 import fluffy.the.cat.io.FluffyTheCatFileReader;
 import fluffy.the.cat.models.Fluffy;
@@ -42,61 +45,76 @@ public class Game {
 
 		this.savegameManager = new FluffySavegameManager(FLUFFY_HAT_DAT);
 	}
+	
+	public void executeCommand(String command) {
+//		boardConfiguration.printBoard(new BoardConsolePrinter());
+		if (command.equals(UP) || command.equals(DOWN) || command.equals(LEFT)
+				|| command.equals(RIGHT)) {
+			Point newFluffyPosition = getNewFluffyPosition(command);
+			if (boardConfiguration.isValidNewPosition(newFluffyPosition)) {
+				if (boardConfiguration
+						.fluffyReachedTheHat(newFluffyPosition)) {
+					System.out.println("Miao, I bet I got my hat.");
+					endGame();
+				}
+//				boardConfiguration.updateFluffyOnBoard(
+//						fluffy.getPosition(), newFluffyPosition);
+				fluffy.setPosition(newFluffyPosition);
+			}
+		} else if (command.equals(SAVE)) {
+			saveGame();
+		} else if (command.equals(RESTORE)) {
+			restoreGame();
+		} else if (command.equals(QUIT)) {
+			endGame();
+		} else {
+			System.out.println("Invalid command.");
+		}
+		
+	}
 
-	public void run() {
+	public void runConsole() {
 		System.out
 				.println("Keys: u - UP \t j - DOWN \t h - LEFT \t k - RIGHT\n\n\n Good luck! \n\n\n");
 
 		Scanner s = new Scanner(System.in);
 		boolean run = true;
 		while (run) {
-			boardConfiguration.printBoard(new BoardConsolePrinter());
-			String str = s.nextLine();
-			if (str.equals(UP) || str.equals(DOWN) || str.equals(LEFT)
-					|| str.equals(RIGHT)) {
-				Point newFluffyPosition = getNewFluffyPosition(str);
-				if (boardConfiguration.isValidNewPosition(newFluffyPosition)) {
-					if (boardConfiguration
-							.fluffyReachedTheHat(newFluffyPosition)) {
-						System.out.println("Miao, I bet I got my hat.");
-						endGame();
-					}
-					boardConfiguration.updateFluffyOnBoard(
-							fluffy.getPosition(), newFluffyPosition);
-					fluffy.setPosition(newFluffyPosition);
-				}
-			} else if (str.equals(SAVE)) {
-				saveGame();
-			} else if (str.equals(RESTORE)) {
-				restoreGame();
-			} else if (str.equals(QUIT)) {
-				s.close();
-				endGame();
-			} else {
-				System.out.println("Invalid command.");
-			}
+			String command = s.nextLine();
+			executeCommand(command);
 		}
 
 	}
-
-	private Point getNewFluffyPosition(String str) {
+	
+	public void runFrame() {
+		BoardFrame frame = new BoardFrame(this);// it is the first time when the board is printed so we want to see the content
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(1600, 800);
+	}
+	
+	
+	private static final int[] DISTX = {-1, 1, 0, 0};
+	private static final int[] DISTY = {0, 0, -1, 1};
+	
+	private Point getNewFluffyPosition(String command) {
 		Point newFluffyPosition = new Point();
-		switch (str) {
+		switch (command) {
 		case UP:
-			newFluffyPosition.setLocation(fluffy.getPosition().x - 1,
-					fluffy.getPosition().y);
+			newFluffyPosition.setLocation(fluffy.getPosition().x + DISTX[0],
+					fluffy.getPosition().y + DISTY[0]);
 			break;
 		case DOWN:
-			newFluffyPosition.setLocation(fluffy.getPosition().x + 1,
-					fluffy.getPosition().y);
+			newFluffyPosition.setLocation(fluffy.getPosition().x + DISTX[1],
+					fluffy.getPosition().y + DISTY[1]);
 			break;
 		case LEFT:
-			newFluffyPosition.setLocation(fluffy.getPosition().x,
-					fluffy.getPosition().y - 1);
+			newFluffyPosition.setLocation(fluffy.getPosition().x + DISTX[2],
+					fluffy.getPosition().y + DISTY[2]);
 			break;
 		case RIGHT:
-			newFluffyPosition.setLocation(fluffy.getPosition().x,
-					fluffy.getPosition().y + 1);
+			newFluffyPosition.setLocation(fluffy.getPosition().x + DISTX[3],
+					fluffy.getPosition().y + DISTY[3]);
 			break;
 		}
 		return newFluffyPosition;
@@ -128,5 +146,13 @@ public class Game {
 	private void endGame() {
 		System.out.println("Ending game...");
 		System.exit(0);
+	}
+
+	public BoardConfiguration getBoardConfiguration() {
+		return boardConfiguration;
+	}
+
+	public Fluffy getFluffy() {
+		return fluffy;
 	}
 }
