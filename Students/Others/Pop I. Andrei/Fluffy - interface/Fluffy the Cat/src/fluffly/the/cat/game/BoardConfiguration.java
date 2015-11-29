@@ -6,7 +6,7 @@ import fluffy.the.cat.io.BoardPrinter;
 import fluffy.the.cat.models.Fluffy;
 
 public class BoardConfiguration {
-	public static final int MAX_VIEW_DISTANCE = 2;
+	public static final int MAX_VIEW_DISTANCE = 10;
 
 	private static final int ROWS = 20;
 	private static final int COLS = 40;
@@ -21,6 +21,7 @@ public class BoardConfiguration {
 		for (int i = 0; i < ROWS; i++) {
 			for (int j = 0; j < COLS; j++) {
 				if (board[i][j] == 'F') {
+					board[i][j] = ' '; 
 					return new Point(i, j);
 				}
 			}
@@ -48,7 +49,7 @@ public class BoardConfiguration {
 	}
 
 	public void printBoard(BoardPrinter printer) {
-		printer.print(this);
+		printer.printConsole(this);
 	}
 
 	public char[][] getBoard() {
