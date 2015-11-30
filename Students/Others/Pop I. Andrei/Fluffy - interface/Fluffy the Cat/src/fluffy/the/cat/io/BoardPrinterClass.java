@@ -1,10 +1,12 @@
 package fluffy.the.cat.io;
 
+import javax.swing.*;
+
 import static fluffly.the.cat.game.BoardConfiguration.MAX_VIEW_DISTANCE;
 
 import fluffly.the.cat.game.BoardConfiguration;
 
-public abstract class BoardPrinterClass implements BoardPrinter{
+public abstract class BoardPrinterClass extends JFrame implements BoardPrinter{
 	
 	protected boolean withinRangeOfFluffy(int i, int j,
 			BoardConfiguration boardConfiguration) {
