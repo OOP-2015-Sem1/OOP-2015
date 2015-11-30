@@ -9,7 +9,7 @@ public class LoginDialog {
 	public void Input() {
 		JTextField account = new JTextField(10);
 		JPasswordField password = new JPasswordField(10);
-		AccountRepository accounts = new AccountRepository();
+		AccountRepository accounts=SingletonAccount.getInstance();
 		accounts.readData();
 		JPanel p = new JPanel();
 		p.add(new JLabel("Id :"));

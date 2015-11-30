@@ -69,7 +69,6 @@ public class AccountRepository {
 		this.accountNr = accountNr;
 	}
 	public int getAccountScore() {
-		System.out.println(getAccountNr());
 		return players[getAccountNr()].getScore();
 	}
 }

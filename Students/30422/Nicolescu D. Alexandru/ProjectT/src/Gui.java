@@ -1,5 +1,6 @@
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,8 +28,7 @@ public class Gui extends JFrame {
 	AI c = new AI();
 	Sound s = new Sound();
 	LoginDialog input = new LoginDialog();
-	AccountRepository accounts=new AccountRepository();
-
+	AccountRepository accounts=SingletonAccount.getInstance();
 	boolean pvp = false;
 
 	Icon X = new ImageIcon("C:/Users/Andi/workspace/ProjectT/src/Icons/X0.png");
@@ -54,13 +54,11 @@ public class Gui extends JFrame {
 		
 		add(b);
 		JButton score=new JButton();
-		b.setLayout(new GridLayout(1,1));
+		b.setLayout(new FlowLayout());
 		b.add(score);
 		System.out.println(accounts.getAccountNr());
 		score.setText(Integer.toString(accounts.getAccountScore()));
 		
-		
-
 		btnVec = new JButton[9];
 
 		for (int i = 0; i < 9; i++) {
