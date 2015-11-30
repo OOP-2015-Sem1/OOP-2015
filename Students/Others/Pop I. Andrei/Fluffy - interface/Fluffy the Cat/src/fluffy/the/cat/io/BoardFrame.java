@@ -19,14 +19,16 @@ public class BoardFrame extends BoardPrinterClass{
 	private static final int CAT= 2;
 	private static final int HAT = 3;
 	private Game theGame;
+	public JFrame myFrame;
 	
 	public BoardFrame(Game theGame) {
-		super.setTitle("The game");
-		setLayout(new GridLayout(20, 40));
+		myFrame = new JFrame();
+		myFrame.setTitle("The game");
+		myFrame.setLayout(new GridLayout(20, 40));
 		panel = new MyPanel[25][50];
 		this.theGame = theGame;
 		FluffyCommandKeyListener listener = new FluffyCommandKeyListener();
-		addKeyListener(listener);
+		myFrame.addKeyListener(listener);
 		
 		createInitialBoard(theGame.getBoardConfiguration());
 	}
@@ -76,7 +78,7 @@ public class BoardFrame extends BoardPrinterClass{
 		}
 		Point p = theGame.getFluffy().getPosition();
 		panel[p.x][p.y].setCareImagine(CAT);
-		this.repaint();
+		myFrame.repaint();
 	}
 
 	private int getPanelType(char x) {
@@ -124,11 +126,11 @@ public class BoardFrame extends BoardPrinterClass{
 					panelType = 0;
 				}
 				panel[i][j].setCareImagine(panelType);
-				add(panel[i][j]);
+				myFrame.add(panel[i][j]);
 		}
 		Point p = theGame.getFluffy().getPosition();
 		panel[p.x][p.y].setCareImagine(CAT);
-		this.repaint();
+		myFrame.repaint();
 	}
 
 	@Override
