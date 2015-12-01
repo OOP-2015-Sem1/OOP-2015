@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.KeyEventDispatcher;
@@ -6,25 +7,31 @@ import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
 import java.net.URL;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 public class GameUI extends JFrame implements KeyEventDispatcher {
 	private static JLabel[][] gameMatrix;
 	private static Fluffy fluffy;
 	private static final int MAX_VIEW = 1;
 	private static JPanel myPanel = new JPanel();
+	private static int steps=0;
 
 	public GameUI() {
 		super("The game frame");
+		this.setLayout(new BorderLayout());
 		fluffy = new Fluffy(0, 0);
 		createMatrixLabel();
 		int rows = FluffyFileReader.getRows();
 		int colums = FluffyFileReader.getCols();
 		System.out.println("Rows: "+rows+" Cols:"+colums);
+
 		myPanel.setLayout(new GridLayout(FluffyFileReader.getRows(),FluffyFileReader.getCols()));
 		for (int i = 0; i < rows; i++)
 			for (int j = 0; j < colums; j++) {
@@ -59,7 +66,6 @@ public class GameUI extends JFrame implements KeyEventDispatcher {
 		this.add(myPanel, BorderLayout.CENTER);
 		KeyboardFocusManager.getCurrentKeyboardFocusManager()
 		.addKeyEventDispatcher(this);
-		// myPanel.setVisible(false);
 		this.setVisible(true);
 		this.setSize(1024, 768);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -112,6 +118,7 @@ public class GameUI extends JFrame implements KeyEventDispatcher {
 		revalidate();
 		return false;
 	}
+	
 	
 	public void keepYellowClues()
 	{
@@ -197,17 +204,24 @@ public class GameUI extends JFrame implements KeyEventDispatcher {
 	}
 
 	public static void gameOver() {
-		JOptionPane.showMessageDialog(null, "You won!");
+		JOptionPane.showMessageDialog(null, "You won! Number of Steps:"+steps);
 		System.exit(0);
 	}
 
-	public static void move(Fluffy fluffy, int xOffset, int yOffset) {
+	public void incrementSteps()
+	{
+		
+		this.steps++;
+	}
+	
+	public void move(Fluffy fluffy, int xOffset, int yOffset) {
 		int maxRows = FluffyFileReader.getRows();
 		int maxCols = FluffyFileReader.getCols();
 		int x = fluffy.getFluffyX();
 		int y = fluffy.getFluffyY();
 		switch (gameMatrix[x + xOffset][y + yOffset].getText()) {
 		case " ":
+			this.incrementSteps();
 			gameMatrix[x][y].setText(" ");
 			gameMatrix[x][y].setIcon(new ImageIcon("lane.png"));
 			x += xOffset;
@@ -226,6 +240,7 @@ public class GameUI extends JFrame implements KeyEventDispatcher {
 
 			break;
 		case "H":
+			this.incrementSteps();
 			gameMatrix[x][y].setText(" ");
 			gameMatrix[x][y].setIcon(new ImageIcon("lane.png"));
 			x += xOffset;
@@ -243,6 +258,7 @@ public class GameUI extends JFrame implements KeyEventDispatcher {
 				}
 			break;
 		case "W":
+			this.incrementSteps();
 			gameMatrix[x][y].setText(" ");
 			gameMatrix[x][y].setIcon(new ImageIcon("lane.png"));
 			x += xOffset;
