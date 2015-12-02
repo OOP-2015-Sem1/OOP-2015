@@ -4,13 +4,15 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class FluffyFileReader {
-	private static char[][] board;
+	private static char[][] gameBoard;
+	private static char[][] cluesBoard;
 	private static final int maxRows = 10;
 	private static final int maxCols = 40;
 
 	public static void readBoard() {
 		char[][] temporary = new char[maxRows][maxCols];
-		board = new char[maxRows][maxCols];
+		gameBoard = new char[maxRows][maxCols];
+		cluesBoard = new char[maxRows][maxCols];
 		try {
 			String line;
 			FileReader fileReader = new FileReader("FluffyWorld.txt");
@@ -26,7 +28,15 @@ public class FluffyFileReader {
 			bufferedReader.close();
 			for (int i = 0; i < maxRows; i++)
 				for (int j = 0; j < maxCols; j++) {
-					board[i][j] = temporary[i][j];
+					gameBoard[i][j] = temporary[i][j];
+					if(temporary[i][j] == 'H')
+					{
+						cluesBoard[i][j] = temporary[i][j];
+					}
+					else
+					{
+						cluesBoard[i][j] = ' ';
+					}
 				}
 		} catch (FileNotFoundException ex) {
 			System.out.println("Unable to open file '" + "FluffyWorld" + "'");
@@ -35,8 +45,14 @@ public class FluffyFileReader {
 		}
 	}
 
-	public static char[][] getBoard() {
-		return board;
+	public static char[][] getGameBoard() 
+	{
+		return gameBoard;
+	}
+	
+	public static char[][] getCluesBoard()
+	{
+		return cluesBoard;
 	}
 
 	public static int getCols() {
@@ -49,7 +65,7 @@ public class FluffyFileReader {
 
 	public static void main(String[] args) {
 		readBoard();
-		char[][] temporary = getBoard();
+		char[][] temporary = getGameBoard();
 		for (int i = 0; i < maxRows; i++)
 			for (int j = 0; j < maxCols; j++) {
 				System.out.println(temporary[i][j]);
