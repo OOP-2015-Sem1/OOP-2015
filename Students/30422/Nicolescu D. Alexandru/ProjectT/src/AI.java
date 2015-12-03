@@ -10,6 +10,7 @@ public class AI {
 	boolean pvp = false;
 	boolean FirstEntry = false;
 	String playerName = null;
+	AccountRepository accounts = SingletonAccount.getInstance();
 	int m[][] = new int[3][3];
 	private static final int HUMAN_MOVE = 1;
 	private static final int PC_MOVE = 2;
@@ -515,10 +516,6 @@ public class AI {
 		return full;
 	}
 
-	public void setName(String name) {
-		playerName = name;
-	}
-
 	public void CheckWin() {
 		if (Winner() == HUMAN) {
 			if (pvp) {
@@ -526,6 +523,8 @@ public class AI {
 				System.exit(0);
 			} else {
 				s.SoundIt(HUMAN);
+				EditFile.Replace(Integer.toString(accounts.getAccountScore()),
+						Integer.toString(accounts.getAccountScore() + 20));
 				JOptionPane.showMessageDialog(null, "Player Wins");
 				System.exit(0);
 			}
@@ -537,6 +536,9 @@ public class AI {
 				System.exit(0);
 			} else {
 				s.SoundIt(PC);
+				if (accounts.getAccountNr() != 0)
+					EditFile.Replace(Integer.toString(accounts.getAccountScore()),
+							Integer.toString(accounts.getAccountScore() - 5));
 				JOptionPane.showMessageDialog(null, "I WIN!!");
 				System.exit(0);
 			}
@@ -545,6 +547,9 @@ public class AI {
 		if (TableFull(m)) {
 
 			if (Winner() == 0) {
+				if (accounts.getAccountNr() != 0)
+					EditFile.Replace(Integer.toString(accounts.getAccountScore()),
+							Integer.toString(accounts.getAccountScore() + 5));
 				JOptionPane.showMessageDialog(null, "It's a Tie");
 				System.exit(0);
 			}

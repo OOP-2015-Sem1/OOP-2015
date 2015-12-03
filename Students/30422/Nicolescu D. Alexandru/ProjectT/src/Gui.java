@@ -1,6 +1,8 @@
 
 import java.awt.Color;
-import java.awt.FlowLayout;
+import java.awt.Font;
+//import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +17,6 @@ import javax.swing.JPanel;
 
 public class Gui extends JFrame {
 
-	
 	private static final long serialVersionUID = 1L;
 	private JButton[] btnVec;
 	private static final int DIFFICULTY = 0;
@@ -28,7 +29,7 @@ public class Gui extends JFrame {
 	AI c = new AI();
 	Sound s = new Sound();
 	LoginDialog input = new LoginDialog();
-	AccountRepository accounts=SingletonAccount.getInstance();
+	AccountRepository accounts = SingletonAccount.getInstance();
 	boolean pvp = false;
 
 	Icon X = new ImageIcon("C:/Users/Andi/workspace/ProjectT/src/Icons/X0.png");
@@ -45,20 +46,25 @@ public class Gui extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("TicTacToe");
 		setSize(800, 400);
-		setLayout(new GridLayout(1,2));
+		setLayout(new GridLayout(1, 2));
 		add(a);
 		a.setSize(400, 400);
 		a.setLayout(new GridLayout(3, 3));
-		
+
 		input.Input();
-		
+
 		add(b);
-		JButton score=new JButton();
-		b.setLayout(new FlowLayout());
+		JButton score = new JButton();
+		b.setLayout(new GridBagLayout());
+		//GridBagConstraints c = new GridBagConstraints();
 		b.add(score);
 		System.out.println(accounts.getAccountNr());
-		score.setText(Integer.toString(accounts.getAccountScore()));
-		
+		score.setEnabled(false);
+		Font font = new Font("Arial", Font.BOLD, 32);
+		score.setFont(font);
+		score.setBorder(null);
+		score.setText("Your score: " + Integer.toString(accounts.getAccountScore()));
+
 		btnVec = new JButton[9];
 
 		for (int i = 0; i < 9; i++) {
@@ -80,10 +86,8 @@ public class Gui extends JFrame {
 		int playerTurn = 0;
 		final int gameType = PlayerChoose(GAME_TYPE);
 		final int Difficulty = PlayerChoose(DIFFICULTY);
-		if (Difficulty == HARD) {
-			// playerTurn = PC;
+		if (Difficulty == HARD)
 			s.SoundIt(3);
-		}
 		playerTurn = PlayerChoose(WHO_STARTS);
 		a.setVisible(true);
 		b.setVisible(true);

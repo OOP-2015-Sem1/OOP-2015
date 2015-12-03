@@ -37,20 +37,17 @@ class Board {
 	}
 
 	public boolean isGameOver() {
-		// Game is over is someone has won, or board is full (draw)
 		return (hasXWon() || hasOWon() || getAvailableStates().isEmpty());
 	}
 
 	public boolean hasXWon() {
 		if ((board[0][0] == board[1][1] && board[0][0] == board[2][2] && board[0][0] == 1)
 				|| (board[0][2] == board[1][1] && board[0][2] == board[2][0] && board[0][2] == 1)) {
-			// System.out.println("X Diagonal Win");
 			return true;
 		}
 		for (int i = 0; i < 3; ++i) {
 			if (((board[i][0] == board[i][1] && board[i][0] == board[i][2] && board[i][0] == 1)
 					|| (board[0][i] == board[1][i] && board[0][i] == board[2][i] && board[0][i] == 1))) {
-				// System.out.println("X Row or Column win");
 				return true;
 			}
 		}
@@ -60,13 +57,11 @@ class Board {
 	public boolean hasOWon() {
 		if ((board[0][0] == board[1][1] && board[0][0] == board[2][2] && board[0][0] == 2)
 				|| (board[0][2] == board[1][1] && board[0][2] == board[2][0] && board[0][2] == 2)) {
-			// System.out.println("O Diagonal Win");
 			return true;
 		}
 		for (int i = 0; i < 3; ++i) {
 			if ((board[i][0] == board[i][1] && board[i][0] == board[i][2] && board[i][0] == 2)
 					|| (board[0][i] == board[1][i] && board[0][i] == board[2][i] && board[0][i] == 2)) {
-				// System.out.println("O Row or Column win");
 				return true;
 			}
 		}
@@ -87,7 +82,7 @@ class Board {
 	}
 
 	public void placeAMove(Point point, int player) {
-		board[point.x][point.y] = player; // player = 1 for X, 2 for O
+		board[point.x][point.y] = player;
 	}
 
 	public boolean isBoardEmpty() {
@@ -156,7 +151,7 @@ class Board {
 					break;
 				}
 			}
-			board[point.x][point.y] = 0; // Reset this point
+			board[point.x][point.y] = 0;
 		}
 		return turn == 1 ? max : min;
 	}
@@ -183,7 +178,7 @@ public class MinMax {
 		int y = playerMove % 3;
 		Point userMove = new Point(x, y);
 
-		b.placeAMove(userMove, 2); // 2 for O and O is the user
+		b.placeAMove(userMove, 2);
 		b.displayBoard();
 
 		b.minimax(0, 1);
