@@ -18,7 +18,6 @@ import javax.swing.JPanel;
 
 import account.AccountRepository;
 import account.LoginDialog;
-import account.SingletonAccount;
 import tictactoe.GameManagement;
 
 public class GUI extends JFrame {
@@ -32,18 +31,13 @@ public class GUI extends JFrame {
 	private static final int PVPC = 0;
 	private static final int PVP = 1;
 
-	private GameManagement c = new GameManagement();
-	private Sound s = new Sound();
-	private LoginDialog input = new LoginDialog();
-	private AccountRepository accounts = SingletonAccount.getInstance();
-	private boolean pvp = false;
-
+	private GameManagement c = null;
+	private AccountRepository accounts = AccountRepository.getInstance();
 	private Icon X = new ImageIcon("C:/Users/Andi/workspace/ProjectT/src/Icons/X0.png");
-	private Icon O = new ImageIcon("C:/Users/Andi/workspace/ProjectT/src/Icons/O0.png");
-	private Icon BACKGROUND = new ImageIcon("C:/Users/Andi/workspace/ProjectT/src/Icons/background0.png");
 	private Icon X1 = new ImageIcon("C:/Users/Andi/workspace/ProjectT/src/Icons/Xbefore0.png");
-	private Icon O1 = new ImageIcon("C:/Users/Andi/workspace/ProjectT/src/Icons/Obefore0.png");
+	private Icon O = new ImageIcon("C:/Users/Andi/workspace/ProjectT/src/Icons/O0.png");
 	private Icon aux;
+
 	private JPanel a = new JPanel();
 	private JPanel b = new JPanel();
 
@@ -56,15 +50,14 @@ public class GUI extends JFrame {
 		add(a);
 		a.setSize(400, 400);
 		a.setLayout(new GridLayout(3, 3));
-
-		input.Input();
+		LoginDialog input = new LoginDialog();
+		input.inputAccountInformation();
 
 		add(b);
 		JButton score = new JButton();
 		b.setLayout(new GridBagLayout());
-		//GridBagConstraints c = new GridBagConstraints();
+		// GridBagConstraints c = new GridBagConstraints();
 		b.add(score);
-		System.out.println(accounts.getAccountNr());
 		score.setEnabled(false);
 		Font font = new Font("Arial", Font.BOLD, 32);
 		score.setFont(font);
@@ -72,7 +65,7 @@ public class GUI extends JFrame {
 		score.setText("Your score: " + Integer.toString(accounts.getAccountScore()));
 
 		btnVec = new JButton[9];
-
+		Icon BACKGROUND = new ImageIcon("C:/Users/Andi/workspace/ProjectT/src/Icons/background0.png");
 		for (int i = 0; i < 9; i++) {
 
 			btnVec[i] = new JButton();
@@ -92,22 +85,25 @@ public class GUI extends JFrame {
 		int playerTurn = 0;
 		final int gameType = playerChoose(GAME_TYPE);
 		final int difficulty = playerChoose(DIFFICULTY);
-		if (difficulty == HARD)
+		c = new GameManagement(difficulty);
+		if (difficulty == HARD) {
+			Sound s = new Sound();
 			s.SoundIt(3);
+		}
 		playerTurn = playerChoose(WHO_STARTS);
 		a.setVisible(true);
 		b.setVisible(true);
 		setVisible(true);
 		if ((playerTurn == 1) && (gameType == PVPC))
 			PcTime(10, difficulty);
-
 		aux = X;
 		for (int i = 0; i < 9; i++) {
 
 			btnVec[i].addActionListener(new ActionListener() {
 
 				public void actionPerformed(ActionEvent e) {
-
+					Icon X1 = new ImageIcon("C:/Users/Andi/workspace/ProjectT/src/Icons/Xbefore0.png");
+					Icon O1 = new ImageIcon("C:/Users/Andi/workspace/ProjectT/src/Icons/Obefore0.png");
 					JButton source = (JButton) e.getSource();
 					source.setIcon(aux);
 					source.setEnabled(false);
@@ -140,6 +136,7 @@ public class GUI extends JFrame {
 
 	public int playerChoose(int choice) {
 
+		boolean pvp = false;
 		if (choice == GAME_TYPE) {
 			Object[] gameType = { "Play vs computer", "Play vs friend" };
 			final int type = JOptionPane.showOptionDialog(null, "Choose the game type", "TicTacToe",

@@ -1,43 +1,67 @@
 package account;
-import java.io.BufferedReader;
-import java.io.FileReader;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.Scanner;
 
 public class AccountRepository {
 
-	private static final int NUMBER_OF_ACCOUNTS = 3;
-	private Player players[] = new Player[NUMBER_OF_ACCOUNTS];
+	public static final int NUMBER_OF_ACCOUNTS = 3;
+	private static final boolean SAVE_ACCOUNTS =  false;
+	private static volatile AccountRepository accounts = null;
+	private Player players[] = Player.getInstance();
 	private int accountNr;
 
 	public void readData() {
-		try (BufferedReader br = new BufferedReader(new FileReader("accounts.txt"))) {
-			StringBuilder sb = new StringBuilder();
-			String line = "start";
-			int nrOfPlayers = 0;
-			while (nrOfPlayers != NUMBER_OF_ACCOUNTS) {
-				players[nrOfPlayers] = new Player();
+		if (SAVE_ACCOUNTS) {
 
-				sb.append(line);
-				sb.append(System.lineSeparator());
-				line = br.readLine();
-				players[nrOfPlayers].setUser(line);
+				serialize();
+				Scanner keyboard = new Scanner(System.in);
+				System.out.println("Enter new account name:");
+				players[NUMBER_OF_ACCOUNTS].setUser(keyboard.nextLine());
+				System.out.println("Enter new account password:");
+				players[NUMBER_OF_ACCOUNTS].setPassword(keyboard.nextLine());
+				players[NUMBER_OF_ACCOUNTS].setScore(10);
+			
+		}else {
+			try
+	         {
+	            FileInputStream fileIn = new FileInputStream("accounts.ser");
+	            ObjectInputStream in = new ObjectInputStream(fileIn);
+	            players = (Player[]) in.readObject();
+	            in.close();
+	            fileIn.close();
+	            System.out.println(players[1].getScore());
+	            //the score starts as 1893
+	        }catch(IOException i)
+	        {
+	            i.printStackTrace();
+	            return;
+	        }catch(ClassNotFoundException c)
+	        {
+	            System.out.println("Error");
+	            c.printStackTrace();
+	            return;
+	        }
+		}
+	}
 
-				sb.append(line);
-				sb.append(System.lineSeparator());
-				line = br.readLine();
-				players[nrOfPlayers].setPassword(line);
-
-				sb.append(line);
-				sb.append(System.lineSeparator());
-				line = br.readLine();
-				players[nrOfPlayers].setScore(Integer.parseInt(line));
-
-				nrOfPlayers++;
-			}
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void serialize() {
+		try {
+			System.out.println(players[1].getScore());
+			//here the score is again 1893 even if it was modified before
+			FileOutputStream fileOut = new FileOutputStream("accounts.ser");
+			ObjectOutputStream out = new ObjectOutputStream(fileOut);
+			out.writeObject(players);
+			out.close();
+			fileOut.close();
+			
+		} catch (IOException i)
+		{
+			i.printStackTrace();
 		}
 	}
 
@@ -53,6 +77,13 @@ public class AccountRepository {
 		return logedIn;
 	}
 
+	public static synchronized AccountRepository getInstance() {
+		if (accounts == null) {
+			accounts = new AccountRepository();
+		}
+
+		return accounts;
+	}
 
 	public int getAccountNr() {
 		return accountNr;

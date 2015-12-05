@@ -7,10 +7,10 @@ import javax.swing.JTextField;
 
 public class LoginDialog {
 
-	public void Input() {
+	public void inputAccountInformation() {
 		JTextField account = new JTextField(10);
 		JPasswordField password = new JPasswordField(10);
-		AccountRepository accounts=SingletonAccount.getInstance();
+		AccountRepository accounts=AccountRepository.getInstance();
 		accounts.readData();
 		JPanel p = new JPanel();
 		p.add(new JLabel("Id :"));
