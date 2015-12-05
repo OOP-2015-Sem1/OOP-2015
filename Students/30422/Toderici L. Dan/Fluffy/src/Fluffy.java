@@ -24,7 +24,4 @@ public class Fluffy {
 		this.y = y;
 	}
 
-	public static void main(String[] args) {
-		new GameUI();
-	}
 }
