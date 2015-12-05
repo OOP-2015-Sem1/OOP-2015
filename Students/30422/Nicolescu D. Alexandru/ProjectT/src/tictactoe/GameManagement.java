@@ -3,7 +3,6 @@ package tictactoe;
 import javax.swing.JOptionPane;
 
 import account.AccountRepository;
-import account.UpdateScore;
 import userInterface.Sound;
 
 public class GameManagement {
@@ -175,14 +174,13 @@ public class GameManagement {
 	}
 
 	public void checkWin() {
-		UpdateScore update = new UpdateScore();
 		if (winner() == HUMAN) {
 			if (pvp) {
 				JOptionPane.showMessageDialog(null, "Player 2 wins!");
 				System.exit(0);
 			} else {
 				s.SoundIt(HUMAN);
-				update.replace(accounts.getAccountScore() + SCORE_IF_WIN);
+				accounts.replace(accounts.getAccountScore() + SCORE_IF_WIN);
 				JOptionPane.showMessageDialog(null, "Player Wins");
 				System.exit(0);
 			}
@@ -195,7 +193,7 @@ public class GameManagement {
 			} else {
 				s.SoundIt(PC);
 				if (accounts.getAccountNr() != 0)
-					update.replace(accounts.getAccountScore() + SCORE_IF_LOST);
+					accounts.replace(accounts.getAccountScore() + SCORE_IF_LOST);
 				JOptionPane.showMessageDialog(null, "I WIN!!");
 				System.exit(0);
 			}
@@ -205,7 +203,7 @@ public class GameManagement {
 
 			if (winner() == 0) {
 				if (accounts.getAccountNr() != 0)
-					update.replace(accounts.getAccountScore() + SCORE_IF_TIE);
+					accounts.replace(accounts.getAccountScore() + SCORE_IF_TIE);
 				JOptionPane.showMessageDialog(null, "It's a Tie");
 				System.exit(0);
 			}

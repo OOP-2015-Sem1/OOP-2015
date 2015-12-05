@@ -9,60 +9,61 @@ import java.util.Scanner;
 
 public class AccountRepository {
 
-	public static final int NUMBER_OF_ACCOUNTS = 3;
-	private static final boolean SAVE_ACCOUNTS =  false;
+	public static final int NUMBER_OF_ACCOUNTS = 4;
+	private static final boolean ADD_ACCOUNT = false;
 	private static volatile AccountRepository accounts = null;
 	private Player players[] = Player.getInstance();
 	private int accountNr;
 
 	public void readData() {
-		if (SAVE_ACCOUNTS) {
 
-				serialize();
+		try {
+			FileInputStream fileIn = new FileInputStream("accounts.ser");
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			players = (Player[]) in.readObject();
+			in.close();
+			fileIn.close();
+			if (ADD_ACCOUNT) {
+
 				Scanner keyboard = new Scanner(System.in);
 				System.out.println("Enter new account name:");
 				players[NUMBER_OF_ACCOUNTS].setUser(keyboard.nextLine());
 				System.out.println("Enter new account password:");
 				players[NUMBER_OF_ACCOUNTS].setPassword(keyboard.nextLine());
 				players[NUMBER_OF_ACCOUNTS].setScore(10);
-			
-		}else {
-			try
-	         {
-	            FileInputStream fileIn = new FileInputStream("accounts.ser");
-	            ObjectInputStream in = new ObjectInputStream(fileIn);
-	            players = (Player[]) in.readObject();
-	            in.close();
-	            fileIn.close();
-	            System.out.println(players[1].getScore());
-	            //the score starts as 1893
-	        }catch(IOException i)
-	        {
-	            i.printStackTrace();
-	            return;
-	        }catch(ClassNotFoundException c)
-	        {
-	            System.out.println("Error");
-	            c.printStackTrace();
-	            return;
-	        }
+				serialize();
+			}
+
+		} catch (IOException i) {
+			i.printStackTrace();
+			return;
+		} catch (ClassNotFoundException c)
+		{
+			System.out.println("Error");
+			c.printStackTrace();
+			return;
 		}
+
 	}
 
 	public void serialize() {
 		try {
-			System.out.println(players[1].getScore());
-			//here the score is again 1893 even if it was modified before
 			FileOutputStream fileOut = new FileOutputStream("accounts.ser");
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
 			out.writeObject(players);
 			out.close();
 			fileOut.close();
-			
-		} catch (IOException i)
-		{
+
+		} catch (IOException i) {
 			i.printStackTrace();
 		}
+	}
+
+	public void replace(int newscore) {
+
+		if (accounts.getAccountNr() != 0)
+			players[accounts.getAccountNr()].setScore(newscore);
+		accounts.serialize();
 	}
 
 	public boolean login(String user, String password) {

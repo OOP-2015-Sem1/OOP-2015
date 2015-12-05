@@ -32,6 +32,7 @@ public class GUI extends JFrame {
 	private static final int PVP = 1;
 
 	private GameManagement c = null;
+	private boolean pvp = false;
 	private AccountRepository accounts = AccountRepository.getInstance();
 	private Icon X = new ImageIcon("C:/Users/Andi/workspace/ProjectT/src/Icons/X0.png");
 	private Icon X1 = new ImageIcon("C:/Users/Andi/workspace/ProjectT/src/Icons/Xbefore0.png");
@@ -136,7 +137,6 @@ public class GUI extends JFrame {
 
 	public int playerChoose(int choice) {
 
-		boolean pvp = false;
 		if (choice == GAME_TYPE) {
 			Object[] gameType = { "Play vs computer", "Play vs friend" };
 			final int type = JOptionPane.showOptionDialog(null, "Choose the game type", "TicTacToe",
