@@ -1,16 +1,15 @@
 package tictactoe;
+
 import javax.swing.JOptionPane;
 
 import account.AccountRepository;
-import account.EditFile;
-import account.SingletonAccount;
 import userInterface.Sound;
 
 public class GameManagement {
 
 	private int nrOfMove = 0;
 	private boolean pvp = false;
-	private AccountRepository accounts = SingletonAccount.getInstance();
+	private AccountRepository accounts = AccountRepository.getInstance();
 	private int board[][] = new int[3][3];
 	private static final int HUMAN_MOVE = 1;
 	private static final int PC_MOVE = 2;
@@ -25,9 +24,21 @@ public class GameManagement {
 	private static final int SCORE_IF_LOST = -5;
 
 	private Sound s = new Sound();
-	private HardAI hard = new HardAI();
-	private NormalAI normal=new NormalAI();
-	private EasyAI easy=new EasyAI();
+	private AI computerPlayer = null;
+
+	public GameManagement(int difficulty) {
+		switch (difficulty) {
+		case HARD:
+			computerPlayer = new HardAI();
+			break;
+		case NORMAL:
+			computerPlayer = new NormalAI();
+			break;
+		case EASY:
+			computerPlayer = new EasyAI();
+			break;
+		}
+	}
 
 	public int makeMove(int playerLastMove, int difficulty) {
 
@@ -67,30 +78,15 @@ public class GameManagement {
 
 		// ------------------------------HARD---------------------------
 
-		if (difficulty == HARD) {
+		if (difficulty != PVP) {
 
-			int pcMove = hard.executeMove(playerLastMove);
+			int pcMove = computerPlayer.executeMove(playerLastMove);
 			int i = pcMove / 3;
 			int j = pcMove % 3;
 			board[i][j] = PC_MOVE;
 			return pcMove;
 
-			// -------------------------------------NORMAL-------------------------------
-
-		} else if (difficulty == NORMAL) {
-			int decidedMove=-1;
-			decidedMove=normal.executeMove(playerLastMove);
-			board[decidedMove/3][decidedMove%3]=PC_MOVE;
-			return decidedMove;
-
-			// --------------------------------EASY------------------------------------
-		} else if (difficulty == EASY) {
-			int decidedMove=-1;
-			decidedMove=easy.executeMove(playerLastMove);
-			board[decidedMove/3][decidedMove%3]=PC_MOVE;
-			return decidedMove;
-			// -----------------------------PVP-----------------------------
-		} else if (difficulty == PVP) {
+		} else {
 			pvp = true;
 			if (nrOfMove % 2 == 1)
 				switch (playerLastMove) {
@@ -125,9 +121,7 @@ public class GameManagement {
 
 			return -1;
 		}
-		return 8;
 	}
-
 
 	public int winner() {
 
@@ -186,8 +180,7 @@ public class GameManagement {
 				System.exit(0);
 			} else {
 				s.SoundIt(HUMAN);
-				EditFile.replace(Integer.toString(accounts.getAccountScore()),
-						Integer.toString(accounts.getAccountScore() + SCORE_IF_WIN));
+				accounts.replace(accounts.getAccountScore() + SCORE_IF_WIN);
 				JOptionPane.showMessageDialog(null, "Player Wins");
 				System.exit(0);
 			}
@@ -200,8 +193,7 @@ public class GameManagement {
 			} else {
 				s.SoundIt(PC);
 				if (accounts.getAccountNr() != 0)
-					EditFile.replace(Integer.toString(accounts.getAccountScore()),
-							Integer.toString(accounts.getAccountScore() + SCORE_IF_LOST));
+					accounts.replace(accounts.getAccountScore() + SCORE_IF_LOST);
 				JOptionPane.showMessageDialog(null, "I WIN!!");
 				System.exit(0);
 			}
@@ -211,8 +203,7 @@ public class GameManagement {
 
 			if (winner() == 0) {
 				if (accounts.getAccountNr() != 0)
-					EditFile.replace(Integer.toString(accounts.getAccountScore()),
-							Integer.toString(accounts.getAccountScore() + SCORE_IF_TIE));
+					accounts.replace(accounts.getAccountScore() + SCORE_IF_TIE);
 				JOptionPane.showMessageDialog(null, "It's a Tie");
 				System.exit(0);
 			}

@@ -1,44 +1,69 @@
 package account;
-import java.io.BufferedReader;
-import java.io.FileReader;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.Scanner;
 
 public class AccountRepository {
 
-	private static final int NUMBER_OF_ACCOUNTS = 3;
-	private Player players[] = new Player[NUMBER_OF_ACCOUNTS];
+	public static final int NUMBER_OF_ACCOUNTS = 4;
+	private static final boolean ADD_ACCOUNT = false;
+	private static volatile AccountRepository accounts = null;
+	private Player players[] = Player.getInstance();
 	private int accountNr;
 
 	public void readData() {
-		try (BufferedReader br = new BufferedReader(new FileReader("accounts.txt"))) {
-			StringBuilder sb = new StringBuilder();
-			String line = "start";
-			int nrOfPlayers = 0;
-			while (nrOfPlayers != NUMBER_OF_ACCOUNTS) {
-				players[nrOfPlayers] = new Player();
 
-				sb.append(line);
-				sb.append(System.lineSeparator());
-				line = br.readLine();
-				players[nrOfPlayers].setUser(line);
+		try {
+			FileInputStream fileIn = new FileInputStream("accounts.ser");
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			players = (Player[]) in.readObject();
+			in.close();
+			fileIn.close();
+			if (ADD_ACCOUNT) {
 
-				sb.append(line);
-				sb.append(System.lineSeparator());
-				line = br.readLine();
-				players[nrOfPlayers].setPassword(line);
-
-				sb.append(line);
-				sb.append(System.lineSeparator());
-				line = br.readLine();
-				players[nrOfPlayers].setScore(Integer.parseInt(line));
-
-				nrOfPlayers++;
+				Scanner keyboard = new Scanner(System.in);
+				System.out.println("Enter new account name:");
+				players[NUMBER_OF_ACCOUNTS].setUser(keyboard.nextLine());
+				System.out.println("Enter new account password:");
+				players[NUMBER_OF_ACCOUNTS].setPassword(keyboard.nextLine());
+				players[NUMBER_OF_ACCOUNTS].setScore(10);
+				serialize();
 			}
 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (IOException i) {
+			i.printStackTrace();
+			return;
+		} catch (ClassNotFoundException c)
+		{
+			System.out.println("Error");
+			c.printStackTrace();
+			return;
 		}
+
+	}
+
+	public void serialize() {
+		try {
+			FileOutputStream fileOut = new FileOutputStream("accounts.ser");
+			ObjectOutputStream out = new ObjectOutputStream(fileOut);
+			out.writeObject(players);
+			out.close();
+			fileOut.close();
+
+		} catch (IOException i) {
+			i.printStackTrace();
+		}
+	}
+
+	public void replace(int newscore) {
+
+		if (accounts.getAccountNr() != 0)
+			players[accounts.getAccountNr()].setScore(newscore);
+		accounts.serialize();
 	}
 
 	public boolean login(String user, String password) {
@@ -53,6 +78,13 @@ public class AccountRepository {
 		return logedIn;
 	}
 
+	public static synchronized AccountRepository getInstance() {
+		if (accounts == null) {
+			accounts = new AccountRepository();
+		}
+
+		return accounts;
+	}
 
 	public int getAccountNr() {
 		return accountNr;
