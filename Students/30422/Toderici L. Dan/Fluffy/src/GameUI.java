@@ -17,11 +17,12 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 public class GameUI extends JFrame implements KeyEventDispatcher {
-	private static JLabel[][] gameMatrix;
-	private static Fluffy fluffy;
-	private static final int MAX_VIEW = 1;
-	private static JPanel myPanel = new JPanel();
-	private static int steps=0;
+	private JLabel[][] gameMatrix;
+	private Fluffy fluffy;
+	private final int MAX_VIEW = 1;
+	private JPanel gamePanel = new JPanel();
+	private int steps=0;
+	private char[][] cluesMatrix; 
 
 	public GameUI() {
 		super("The game frame");
@@ -32,7 +33,7 @@ public class GameUI extends JFrame implements KeyEventDispatcher {
 		int colums = FluffyFileReader.getCols();
 		System.out.println("Rows: "+rows+" Cols:"+colums);
 
-		myPanel.setLayout(new GridLayout(FluffyFileReader.getRows(),FluffyFileReader.getCols()));
+		gamePanel.setLayout(new GridLayout(FluffyFileReader.getRows(),FluffyFileReader.getCols()));
 		for (int i = 0; i < rows; i++)
 			for (int j = 0; j < colums; j++) {
 
@@ -58,12 +59,12 @@ public class GameUI extends JFrame implements KeyEventDispatcher {
 				}
 
 
-				myPanel.add(new JLabel(gameMatrix[i][j].getText()));
+				gamePanel.add(new JLabel(gameMatrix[i][j].getText()));
 			}
 
 		// Responding to user events UP,DOWW,LEFT,RIGHT //
 		this.setLayout(new BorderLayout());
-		this.add(myPanel, BorderLayout.CENTER);
+		this.add(gamePanel, BorderLayout.CENTER);
 		KeyboardFocusManager.getCurrentKeyboardFocusManager()
 		.addKeyEventDispatcher(this);
 		this.setVisible(true);
@@ -74,21 +75,29 @@ public class GameUI extends JFrame implements KeyEventDispatcher {
 		move(fluffy, 0, -1);
 	}
 
-	private static void createMatrixLabel() {
+	private void createMatrixLabel() {
 		int maxRows = FluffyFileReader.getRows();
 		int maxCols = FluffyFileReader.getCols();
+
 		gameMatrix = new JLabel[maxRows][maxCols];
+		cluesMatrix = new char[maxRows][maxCols];
+
+
 		FluffyFileReader.readBoard();
-		char[][] temporary = FluffyFileReader.getBoard();
+		char[][] temporary = FluffyFileReader.getGameBoard();
 		for (int i = 0; i < maxRows; i++)
 			for (int j = 0; j < maxCols; j++) {
 				gameMatrix[i][j] = new JLabel();
 				gameMatrix[i][j].setText(String.valueOf(temporary[i][j]));
+					
 				if (temporary[i][j] == 'F') {
 					fluffy.setFluffyX(i);
 					fluffy.setFluffyY(j);
 				}
+			
 			}
+
+		cluesMatrix = FluffyFileReader.getCluesBoard();
 
 	}
 
@@ -118,74 +127,28 @@ public class GameUI extends JFrame implements KeyEventDispatcher {
 		revalidate();
 		return false;
 	}
-	
-	
+
+
 	public void keepYellowClues()
 	{
-		if (gameMatrix[4][17].getText() == " ")
-		{	
-			gameMatrix[4][17].setText("H");
-		    gameMatrix[4][17].setIcon(new ImageIcon("wall2.png"));
-		}
-		if (gameMatrix[5][17].getText() == " ")
+		int nbOfRows = FluffyFileReader.getRows();
+		int nbOfCols = FluffyFileReader.getCols();
+
+		for(int i = 0; i < nbOfRows; i++)
 		{
-			gameMatrix[5][17].setText("H");
-			gameMatrix[5][17].setIcon(new ImageIcon("wall2.png"));
+			for(int j = 0 ; j < nbOfCols; j++)
+			{
+				if((!gameMatrix[i][j].getText().equals(cluesMatrix[i][j]))&&(cluesMatrix[i][j]=='H')&&(!gameMatrix[i][j].getText().equals("F")))
+				{
+					gameMatrix[i][j].setText("H");
+					gameMatrix[i][j].setIcon(new ImageIcon("wall2.png"));
+				}
+			}
 		}
-		if (gameMatrix[6][17].getText() == " ")
-		{
-			gameMatrix[6][17].setText("H");
-			gameMatrix[6][17].setIcon(new ImageIcon("wall2.png"));
 		
-		}
-		if (gameMatrix[4][19].getText() == " ")
-		{
-			gameMatrix[4][19].setText("H");
-			gameMatrix[4][19].setIcon(new ImageIcon("wall2.png"));
-		}
-		if (gameMatrix[5][19].getText() == " ")
-		{
-			gameMatrix[5][19].setText("H");
-			gameMatrix[5][19].setIcon(new ImageIcon("wall2.png"));
-		}
-		if (gameMatrix[6][19].getText() == " ")
-		{
-			gameMatrix[6][19].setText("H");
-			gameMatrix[6][19].setIcon(new ImageIcon("wall2.png"));
-		}
-		if (gameMatrix[4][33].getText() == " ")
-		{
-			gameMatrix[4][33].setText("H");
-			gameMatrix[4][33].setIcon(new ImageIcon("wall2.png"));
-		}
-		if (gameMatrix[5][33].getText() == " ")
-		{
-			gameMatrix[5][33].setText("H");
-			gameMatrix[5][33].setIcon(new ImageIcon("wall2.png"));
-		}
-		if (gameMatrix[6][33].getText() == " ")
-		{
-			gameMatrix[6][33].setText("H");
-			gameMatrix[6][33].setIcon(new ImageIcon("wall2.png"));
-		}
-		if (gameMatrix[4][35].getText() == " ")
-		{
-			gameMatrix[4][35].setText("H");
-			gameMatrix[4][35].setIcon(new ImageIcon("wall2.png"));
-		}
-		if (gameMatrix[5][35].getText() == " ")
-		{
-			gameMatrix[5][35].setText("H");
-			gameMatrix[5][35].setIcon(new ImageIcon("wall2.png"));
-		}
-		if (gameMatrix[6][35].getText() == " ")
-		{
-			gameMatrix[6][35].setText("H");
-			gameMatrix[6][35].setIcon(new ImageIcon("wall2.png"));
-		}
 	}
 
-	public static void setFluffyVision() {
+	public void setFluffyVision() {
 		if (fluffy.getFluffyX() == 1 && fluffy.getFluffyY() == 0) {
 			for (int i = -MAX_VIEW; i <= MAX_VIEW; i++) {
 				for (int j = -MAX_VIEW + 1; j <= MAX_VIEW; j++) {
@@ -203,17 +166,17 @@ public class GameUI extends JFrame implements KeyEventDispatcher {
 		}
 	}
 
-	public static void gameOver() {
+	public void gameOver() {
 		JOptionPane.showMessageDialog(null, "You won! Number of Steps:"+steps);
 		System.exit(0);
 	}
 
 	public void incrementSteps()
 	{
-		
+
 		this.steps++;
 	}
-	
+
 	public void move(Fluffy fluffy, int xOffset, int yOffset) {
 		int maxRows = FluffyFileReader.getRows();
 		int maxCols = FluffyFileReader.getCols();
@@ -230,12 +193,12 @@ public class GameUI extends JFrame implements KeyEventDispatcher {
 			fluffy.setFluffyY(y);
 			gameMatrix[x][y].setText("F");
 			gameMatrix[x][y].setIcon(new ImageIcon("cat.png"));
-			myPanel.removeAll();
+			gamePanel.removeAll();
 
 			for (int i = 0; i < maxRows; i++)
 				for (int j = 0; j < maxCols; j++) {
 					gameMatrix[i][j].setVisible(false);
-					myPanel.add(gameMatrix[i][j]);
+					gamePanel.add(gameMatrix[i][j]);
 				}
 
 			break;
@@ -249,12 +212,12 @@ public class GameUI extends JFrame implements KeyEventDispatcher {
 			fluffy.setFluffyY(y);
 			gameMatrix[x][y].setText("F");
 			gameMatrix[x][y].setIcon(new ImageIcon("cat.png"));
-			myPanel.removeAll();
+			gamePanel.removeAll();
 
 			for (int i = 0; i < maxRows; i++)
 				for (int j = 0; j < maxCols; j++) {
 					gameMatrix[i][j].setVisible(false);
-					myPanel.add(gameMatrix[i][j]);
+					gamePanel.add(gameMatrix[i][j]);
 				}
 			break;
 		case "W":
@@ -267,12 +230,12 @@ public class GameUI extends JFrame implements KeyEventDispatcher {
 			fluffy.setFluffyY(y);
 			gameMatrix[x][y].setText("F");
 			gameMatrix[x][y].setIcon(new ImageIcon("cat.png"));
-			myPanel.removeAll();
+			gamePanel.removeAll();
 
 			for (int i = 0; i < maxRows; i++)
 				for (int j = 0; j < maxCols; j++) {
 					gameMatrix[i][j].setVisible(false);
-					myPanel.add(gameMatrix[i][j]);
+					gamePanel.add(gameMatrix[i][j]);
 				}
 			setFluffyVision();
 			gameOver();
