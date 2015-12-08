@@ -62,4 +62,10 @@
 [Chapter 8: Multithreading](https://github.com/OOP-2015-Sem1/OOP-2015/tree/master/Java/Content/Chapter%208%20-%20Multithreading)
 </pre>
 
+
+ <pre>
+[Bonus: SOLID](https://github.com/OOP-2015-Sem1/OOP-2015/tree/master/Java/Content/Bonus%20-%20SOLID)
+</pre>
+
+
 ##
