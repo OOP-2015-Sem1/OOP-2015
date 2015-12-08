@@ -1,7 +1,6 @@
 package cat.the.fluffeh.views;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
@@ -28,6 +27,7 @@ public class GamePanel extends JPanel {
 		this.rows = gameState.getRows();
 		this.cols = gameState.getCols();
 
+
 		int cellWidth = width / cols;
 		int cellHeight = height / rows;
 
@@ -52,27 +52,19 @@ public class GamePanel extends JPanel {
 			for (int col = 0; col < this.cols; col++) {
 				double distance = fluffeh.getPosition().distance(row, col);
 				if (distance < fluffeh.getViewDistance()) {
-					this.printCellContent(row, col, gameState.getCellContents()[row][col]);
+					this.setCellContent(row, col, gameState.getCellContents()[row][col]);
 				} else {
-					this.blackOutCell(row, col);
+					this.setCellContent(row, col, CellContent.FOG);
 				}
 			}
 		}
-		this.fluffOutCell(fluffeh.getPosition().x, fluffeh.getPosition().y);
+		
+		this.setCellContent(fluffeh.getPosition().x, fluffeh.getPosition().y, CellContent.FLUFFEH);
+		
+		this.repaint();
 	}
 
-	public void fluffOutCell(int row, int col) {
-		this.grid[row][col].setContent(CellContent.FLUFFEH);
-	}
-
-	public void blackOutCell(int row, int col) {
-		this.grid[row][col].setContent(CellContent.FOG);
-		this.grid[row][col].setBackground(Color.BLACK);
-		this.grid[row][col].repaint();
-	}
-
-	public void printCellContent(int row, int col, CellContent content) {
+	public void setCellContent(int row, int col, CellContent content) {
 		this.grid[row][col].setContent(content);
-		this.grid[row][col].repaint();
 	}
 }

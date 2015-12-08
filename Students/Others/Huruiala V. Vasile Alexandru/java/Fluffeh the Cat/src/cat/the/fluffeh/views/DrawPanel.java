@@ -1,5 +1,6 @@
 package cat.the.fluffeh.views;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -84,6 +85,8 @@ public class DrawPanel extends JPanel {
 			break;
 
 		case FOG:
+			this.setBackground(Color.BLACK);
+			break;
 		default:
 			break;
 		}
