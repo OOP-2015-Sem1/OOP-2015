@@ -1,5 +1,8 @@
+package models;
+import repositories.FluffyFileReader;
+
 /**
- * This is the back-end for our game :* from Tele :* from Calin :* from Tode
+ * This is the back-end for our game
  * @author TimbusBlanaToderici Crew
  *
  */
