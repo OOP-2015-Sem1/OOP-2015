@@ -1,3 +1,4 @@
+package models;
 
 public class Fluffy {
 	private int x;

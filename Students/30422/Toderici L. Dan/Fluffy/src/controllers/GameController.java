@@ -1,6 +1,11 @@
+package controllers;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
+
+import models.Fluffy;
+import models.Game;
+import views.GameView;
 
 public class GameController implements KeyEventDispatcher{
 	
