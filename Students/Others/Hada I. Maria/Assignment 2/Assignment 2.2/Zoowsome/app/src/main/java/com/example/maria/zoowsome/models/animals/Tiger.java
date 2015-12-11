@@ -1,9 +1,13 @@
 package com.example.maria.zoowsome.models.animals;
 
+import com.example.maria.zoowsome.R;
+
 import java.util.Calendar;
 import java.util.TimeZone;
 
 public class Tiger extends Mammal {
+
+    private int image = R.drawable.tiger;
 
     public Tiger(double cost, double danger) {
         super(cost, danger);
@@ -28,6 +32,10 @@ public class Tiger extends Mammal {
             return 0.30;
         }
         return 0;
+    }
+
+    public int getImage() {
+        return image;
     }
 
 //    public void encodeToXml(XMLEventWriter eventWriter) throws XMLStreamException {

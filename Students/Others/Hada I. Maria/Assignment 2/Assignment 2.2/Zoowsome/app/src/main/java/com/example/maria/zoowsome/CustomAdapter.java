@@ -30,101 +30,10 @@ class CustomAdapter extends ArrayAdapter<Animal> {
         TextView nameText = (TextView) customView.findViewById(R.id.nameText);
         ImageView myImage = (ImageView) customView.findViewById(R.id.rowImage);
 
-        String theAnimal = animal.getClass().getSimpleName();
-        switch (theAnimal) {
-            case "Butterfly":
-                myText.setText(theAnimal);
-                nameText.setText(animal.getName());
-                myImage.setImageResource(R.drawable.butterfly);
-                break;
+        myText.setText(animal.getClass().getSimpleName());
+        nameText.setText(animal.getName());
+        myImage.setImageResource(animal.getImage());
 
-            case "Bee":
-                myText.setText(theAnimal);
-                nameText.setText(animal.getName());
-                myImage.setImageResource(R.drawable.bee);
-                break;
-
-            case "Beetle":
-                myText.setText(theAnimal);
-                nameText.setText(animal.getName());
-                myImage.setImageResource(R.drawable.beetle);
-                break;
-
-            case "Dolphin":
-                myText.setText(theAnimal);
-                nameText.setText(animal.getName());
-                myImage.setImageResource(R.drawable.dolphin);
-                break;
-
-            case "Jellyfish":
-                myText.setText(theAnimal);
-                nameText.setText(animal.getName());
-                myImage.setImageResource(R.drawable.jellyfish);
-                break;
-
-            case "Swordfish":
-                myText.setText(theAnimal);
-                nameText.setText(animal.getName());
-                myImage.setImageResource(R.drawable.swordfish);
-                break;
-
-            case "Flamingo":
-                myText.setText(theAnimal);
-                nameText.setText(animal.getName());
-                myImage.setImageResource(R.drawable.flamingo);
-                break;
-
-            case "Hummingbird":
-                myText.setText(theAnimal);
-                nameText.setText(animal.getName());
-                myImage.setImageResource(R.drawable.hummingbird);
-                break;
-
-            case "Owl":
-                myText.setText(theAnimal);
-                nameText.setText(animal.getName());
-                myImage.setImageResource(R.drawable.owl);
-                break;
-
-            case "Cow":
-                myText.setText(theAnimal);
-                nameText.setText(animal.getName());
-                myImage.setImageResource(R.drawable.cow);
-                break;
-
-            case "Monkey":
-                myText.setText(theAnimal);
-                nameText.setText(animal.getName());
-                myImage.setImageResource(R.drawable.monkey);
-                break;
-
-            case "Tiger":
-                myText.setText(theAnimal);
-                nameText.setText(animal.getName());
-                myImage.setImageResource(R.drawable.tiger);
-                break;
-
-            case "Iguana":
-                myText.setText(theAnimal);
-                nameText.setText(animal.getName());
-                myImage.setImageResource(R.drawable.iguana);
-                break;
-
-            case "Turtle":
-                myText.setText(theAnimal);
-                nameText.setText(animal.getName());
-                myImage.setImageResource(R.drawable.turtle);
-                break;
-
-            case "Viper":
-                myText.setText(theAnimal);
-                nameText.setText(animal.getName());
-                myImage.setImageResource(R.drawable.viper);
-                break;
-
-            default:
-                break;
-        }
         return customView;
     }
 }

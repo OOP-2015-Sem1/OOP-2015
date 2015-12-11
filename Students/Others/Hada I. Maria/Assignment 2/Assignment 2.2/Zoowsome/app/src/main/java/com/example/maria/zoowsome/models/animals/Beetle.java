@@ -1,6 +1,10 @@
 package com.example.maria.zoowsome.models.animals;
 
+import com.example.maria.zoowsome.R;
+
 public class Beetle extends Insect {
+
+    private int image = R.drawable.beetle;
 
     public Beetle(double cost, double danger) {
         super(cost, danger);
@@ -18,6 +22,10 @@ public class Beetle extends Insect {
         setCanFly(fly);
         setIsDangerous(dangerous);
 
+    }
+
+    public int getImage() {
+        return image;
     }
 //    public void encodeToXml(XMLEventWriter eventWriter) throws XMLStreamException {
 //        super.encodeToXml(eventWriter);

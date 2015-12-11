@@ -14,6 +14,7 @@ public abstract class Animal implements XML_Parsable {
     private double dangerPerc;
     private boolean takenCareOf;
 
+
     public Animal(double cost, double danger) {
         maintenanceCost = cost;
         dangerPerc = danger;
@@ -76,14 +77,16 @@ public abstract class Animal implements XML_Parsable {
         return 0;
     }
 
-   /* public void encodeToXml(XMLEventWriter eventWriter) throws XMLStreamException {
-        createNode(eventWriter, "nrOfLegs", String.valueOf(this.nrOfLegs));
-        createNode(eventWriter, "name", String.valueOf(this.name));
-        createNode(eventWriter, "maintenanceCost", String.valueOf(this.maintenanceCost));
-        createNode(eventWriter, "dangerPerc", String.valueOf(this.dangerPerc));
-        createNode(eventWriter, "takenCareOf", String.valueOf(this.takenCareOf));
-    }
-*/
+    public abstract int getImage();
+
+    /* public void encodeToXml(XMLEventWriter eventWriter) throws XMLStreamException {
+         createNode(eventWriter, "nrOfLegs", String.valueOf(this.nrOfLegs));
+         createNode(eventWriter, "name", String.valueOf(this.name));
+         createNode(eventWriter, "maintenanceCost", String.valueOf(this.maintenanceCost));
+         createNode(eventWriter, "dangerPerc", String.valueOf(this.dangerPerc));
+         createNode(eventWriter, "takenCareOf", String.valueOf(this.takenCareOf));
+     }
+ */
     public void decodeFromXml(Element element) {
         setNrOfLegs(Integer.valueOf(element.getElementsByTagName("nrOfLegs").item(0).getTextContent()));
         setName(element.getElementsByTagName("name").item(0).getTextContent());

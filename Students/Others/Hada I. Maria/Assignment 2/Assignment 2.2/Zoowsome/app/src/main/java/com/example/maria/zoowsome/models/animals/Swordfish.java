@@ -1,6 +1,10 @@
 package com.example.maria.zoowsome.models.animals;
 
+import com.example.maria.zoowsome.R;
+
 public class Swordfish extends Aquatic {
+
+    private int image = R.drawable.swordfish;
 
     public Swordfish(double cost, double danger) {
         super(cost, danger);
@@ -16,6 +20,10 @@ public class Swordfish extends Aquatic {
         setName(name);
         setAvgSwimDepth(swimDepth);
         setIsDangerous(dangerous);
+    }
+
+    public int getImage() {
+        return image;
     }
 
 //    public void encodeToXml(XMLEventWriter eventWriter) throws XMLStreamException {
