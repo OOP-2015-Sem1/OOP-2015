@@ -85,13 +85,7 @@ public class FluffyFileReader {
 	}
 
 	public static void main(String[] args) {
-	//	readBoard();
-	//System.out.println(icons.get('F')+" "+icons.get("cat.png"));
-//		char[][] temporary = getGameBoard();
-//		for (int i = 0; i < maxRows; i++)
-//			for (int j = 0; j < maxCols; j++) {
-//				System.out.println(temporary[i][j]);
-//			}
+
 	}
 
 }
