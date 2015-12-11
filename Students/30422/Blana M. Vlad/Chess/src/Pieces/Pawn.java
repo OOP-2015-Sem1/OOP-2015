@@ -4,45 +4,48 @@ import Main.Board;
 import Main.MainChess;
 
 public class Pawn extends Piece {
-	public static Piece[][] chessBoard = Board.getBoard();
 
 	@Override
 	public String possibleMove(int r, int c) {
+		Piece[][] chessBoard = MainChess.board.getBoard();
 		String list = "";
 		Piece oldPiece = new Piece();
 		try {// move one up
-			if (" ".equals(chessBoard[r - 1][c])) {
+			if ((chessBoard[r - 1][c]).getType() == ListOfPieces.NOPIECE) {
 				oldPiece = chessBoard[r - 1][c];
-				Board.exchange(chessBoard[r][c], chessBoard[r - 1][c]);
+				chessBoard[r - 1][c] = chessBoard[r][c];
+				chessBoard[r][c] = MainChess.emptySpace;
+				// Board.exchange(chessBoard[r][c], chessBoard[r - 1][c]);
 				if (MainChess.kingSafety() == true) {
-					list = list + r + c + (r - 1) + c + oldPiece;
+					list = list + r + c + (r - 1) + c;
+				}
+				chessBoard[r][c] = chessBoard[r - 1][c];
+				chessBoard[r - 1][c] = oldPiece;
+
+			}
+		} catch (Exception e) {
+		}
+		try {// promote
+			if ((chessBoard[r - 1][c]).getType() == ListOfPieces.NOPIECE
+					&& r == 1) {
+				oldPiece = chessBoard[r - 1][c];
+				chessBoard[r - 1][c] = new Queen();
+				chessBoard[r][c] = MainChess.emptySpace;
+				if (MainChess.kingSafety() == true) {
+					list = list + r + c + (r - 1) + c;
 				}
 				chessBoard[r][c] = chessBoard[r - 1][c];
 				chessBoard[r - 1][c] = oldPiece;
 			}
 		} catch (Exception e) {
 		}
-		try {// promote
-			if (" ".equals(chessBoard[r - 1][c]) && r == 1) {
-				oldPiece = chessBoard[r - 1][c];
-				chessBoard[r - 1][c] = new Queen();
-				chessBoard[r][c] = new Piece();// look
-												// into
-												// it
-				if (MainChess.kingSafety() == true) {
-					list = list + r + c + (r - 1) + c + oldPiece;
-				}
-				chessBoard[r][c] = new Pawn();
-				chessBoard[r - 1][c] = oldPiece;
-			}
-		} catch (Exception e) {
-		}
 		try {// move two up
-			if (" ".equals(chessBoard[r - 2][c]) && r == 6) {
+			if ((chessBoard[r - 2][c]).getType() == ListOfPieces.NOPIECE
+					&& r == 6) {
 				oldPiece = chessBoard[r - 2][c];
 				Board.exchange(chessBoard[r][c], chessBoard[r - 2][c]);
 				if (MainChess.kingSafety() == true) {
-					list = list + r + c + (r - 2) + c + oldPiece;
+					list = list + r + c + (r - 2) + c;
 				}
 				chessBoard[r][c] = chessBoard[r - 2][c];
 				chessBoard[r - 2][c] = oldPiece;
@@ -81,7 +84,9 @@ public class Pawn extends Piece {
 		 * chessBoard[r][c] = new Pawn(); chessBoard[r - 1][c - 1] = oldPiece; }
 		 * } catch (Exception e) { }
 		 */
+
 		return list;
+
 	}
 
 	@Override

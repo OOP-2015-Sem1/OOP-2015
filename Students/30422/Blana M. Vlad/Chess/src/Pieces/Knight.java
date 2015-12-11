@@ -8,6 +8,6 @@ public class Knight extends Piece {
 
 	@Override
 	public String possibleMove(int r, int c) {
-		return "pula";
+		return "knight";
 	}
 }

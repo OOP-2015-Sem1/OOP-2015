@@ -2,23 +2,25 @@ package Main;
 
 import javax.swing.JFrame;
 
+import Pieces.Colors;
 import Pieces.ListOfPieces;
 import Pieces.Piece;
 
 public class MainChess {
-	static Board board;
-	public static Piece chessBoard[][] = new Piece[8][8];
+	public static Board board = new Board();
+	// public Piece chessBoard[][] = new Piece[8][8];
 	public static boolean whiteTurn = true;
+	public static Piece emptySpace = new Piece();
 
 	public static void main(String[] args) {
-		board = new Board(chessBoard);
+		// board = new Board();
+		emptySpace.setColor(Colors.WHITE);
+		Piece[][] chessBoard = board.getBoard();
 		if (chessBoard[0][0].getType() == ListOfPieces.ROOK) {
-			System.out.println("matai curva");
+			System.out.println("msg");
 		}
 		System.out.println(chessBoard[0][0].getType());
 		System.out.println(ListOfPieces.ROOK);
-		// chessBoard = Board.getBoard();
-
 		JFrame f = new JFrame("2 player Chess");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		UserInterface ui = new UserInterface();
@@ -29,16 +31,18 @@ public class MainChess {
 	}
 
 	public static void makeMove(String move) {
+		Piece[][] chessBoard = board.getBoard();
 		Board.exchange(
 				chessBoard[Character.getNumericValue(move.charAt(2))][Character
 						.getNumericValue(move.charAt(3))], chessBoard[Character
 						.getNumericValue(move.charAt(0))][Character
 						.getNumericValue(move.charAt(1))]);
 		chessBoard[Character.getNumericValue(move.charAt(0))][Character
-				.getNumericValue(move.charAt(1))] = new Piece();
+				.getNumericValue(move.charAt(1))] = emptySpace;
 	}
 
 	public static Boolean possibleMove(String move) {
+		Piece[][] chessBoard = board.getBoard();
 		String list = "";
 		// int r = Character.getNumericValue(move.charAt(0));
 		// int c = Character.getNumericValue(move.charAt(1));

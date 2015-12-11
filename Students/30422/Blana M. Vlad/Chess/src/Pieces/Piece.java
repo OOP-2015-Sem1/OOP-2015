@@ -16,6 +16,6 @@ public class Piece {
 	}
 
 	public String possibleMove(int r, int c) {
-		return "pula";
+		return "";
 	}
 }

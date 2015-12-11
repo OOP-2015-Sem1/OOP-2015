@@ -8,6 +8,6 @@ public class Queen extends Piece {
 
 	@Override
 	public String possibleMove(int r, int c) {
-		return "pula";
+		return "queen";
 	}
 }
