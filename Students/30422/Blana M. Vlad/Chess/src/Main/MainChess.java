@@ -3,24 +3,15 @@ package Main;
 import javax.swing.JFrame;
 
 import Pieces.Colors;
-import Pieces.ListOfPieces;
 import Pieces.Piece;
 
 public class MainChess {
 	public static Board board = new Board();
-	// public Piece chessBoard[][] = new Piece[8][8];
 	public static boolean whiteTurn = true;
 	public static Piece emptySpace = new Piece();
 
 	public static void main(String[] args) {
-		// board = new Board();
 		emptySpace.setColor(Colors.WHITE);
-		Piece[][] chessBoard = board.getBoard();
-		if (chessBoard[0][0].getType() == ListOfPieces.ROOK) {
-			System.out.println("msg");
-		}
-		System.out.println(chessBoard[0][0].getType());
-		System.out.println(ListOfPieces.ROOK);
 		JFrame f = new JFrame("2 player Chess");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		UserInterface ui = new UserInterface();
@@ -32,13 +23,30 @@ public class MainChess {
 
 	public static void makeMove(String move) {
 		Piece[][] chessBoard = board.getBoard();
-		Board.exchange(
-				chessBoard[Character.getNumericValue(move.charAt(2))][Character
-						.getNumericValue(move.charAt(3))], chessBoard[Character
-						.getNumericValue(move.charAt(0))][Character
-						.getNumericValue(move.charAt(1))]);
+
+		chessBoard[Character.getNumericValue(move.charAt(2))][Character
+				.getNumericValue(move.charAt(3))] = chessBoard[Character
+				.getNumericValue(move.charAt(0))][Character
+				.getNumericValue(move.charAt(1))];
+
+		/*
+		 * Board.exchange(
+		 * chessBoard[Character.getNumericValue(move.charAt(2))][Character
+		 * .getNumericValue(move.charAt(3))], chessBoard[Character
+		 * .getNumericValue(move.charAt(0))][Character
+		 * .getNumericValue(move.charAt(1))]);
+		 */
 		chessBoard[Character.getNumericValue(move.charAt(0))][Character
 				.getNumericValue(move.charAt(1))] = emptySpace;
+		for (int i = 0; i <= 7; i++) {
+			for (int j = 0; j <= 7; j++) {
+				System.out.print(chessBoard[i][j].getType() + " ");
+			}
+			System.out.println();
+		}
+		System.out.println();
+		MainChess.board.setBoard(chessBoard);
+
 	}
 
 	public static Boolean possibleMove(String move) {

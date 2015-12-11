@@ -8,6 +8,6 @@ public class Bishop extends Piece {
 
 	@Override
 	public String possibleMove(int r, int c) {
-		return "bishop";
+		return "";
 	}
 }

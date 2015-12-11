@@ -74,6 +74,10 @@ public class Board {
 		return chessBoard;
 	}
 
+	public void setBoard(Piece[][] chessB) {
+		chessBoard = chessB;
+	}
+
 	public void flipBoard(Piece[][] chessBoard) {
 
 		for (int i = 0; i < 8; i++) {

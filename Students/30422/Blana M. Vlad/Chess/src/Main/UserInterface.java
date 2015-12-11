@@ -156,10 +156,11 @@ public class UserInterface extends JPanel implements MouseListener,
 					MainChess.makeMove(dragMove);
 					MainChess.whiteTurn = !MainChess.whiteTurn;
 					// Board.flipBoard(MainChess.board);
+					repaint();
 				}
 
 			}
-			repaint();
+
 		}
 	}
 
