@@ -13,12 +13,6 @@ public class Board {
 	private Piece[][] chessBoard = new Piece[8][8];
 	public Piece[][] auxChessBoard = new Piece[8][8];
 
-	public static void exchange(Piece piece1, Piece piece2) {
-		Piece aux = piece1;
-		piece1 = piece2;
-		piece2 = aux;
-	}
-
 	public Board() {
 		int i, j;
 		for (j = 0; j < 8; j++) {

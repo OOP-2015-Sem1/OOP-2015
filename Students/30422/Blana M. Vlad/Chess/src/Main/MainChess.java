@@ -3,7 +3,9 @@ package Main;
 import javax.swing.JFrame;
 
 import Pieces.Colors;
+import Pieces.ListOfPieces;
 import Pieces.Piece;
+import Pieces.Queen;
 
 public class MainChess {
 	public static Board board = new Board();
@@ -23,21 +25,36 @@ public class MainChess {
 
 	public static void makeMove(String move) {
 		Piece[][] chessBoard = board.getBoard();
+		try {
+			if (move.charAt(4) == 'p') {
+				chessBoard[Character.getNumericValue(move.charAt(2))][Character
+						.getNumericValue(move.charAt(3))] = chessBoard[Character
+						.getNumericValue(move.charAt(0))][Character
+						.getNumericValue(move.charAt(1))];
 
-		chessBoard[Character.getNumericValue(move.charAt(2))][Character
-				.getNumericValue(move.charAt(3))] = chessBoard[Character
-				.getNumericValue(move.charAt(0))][Character
-				.getNumericValue(move.charAt(1))];
+				chessBoard[Character.getNumericValue(move.charAt(0))][Character
+						.getNumericValue(move.charAt(1))] = emptySpace;
+			}
+		} catch (Exception e) {
 
-		/*
-		 * Board.exchange(
-		 * chessBoard[Character.getNumericValue(move.charAt(2))][Character
-		 * .getNumericValue(move.charAt(3))], chessBoard[Character
-		 * .getNumericValue(move.charAt(0))][Character
-		 * .getNumericValue(move.charAt(1))]);
-		 */
-		chessBoard[Character.getNumericValue(move.charAt(0))][Character
-				.getNumericValue(move.charAt(1))] = emptySpace;
+			chessBoard[Character.getNumericValue(move.charAt(2))][Character
+					.getNumericValue(move.charAt(3))] = chessBoard[Character
+					.getNumericValue(move.charAt(0))][Character
+					.getNumericValue(move.charAt(1))];
+
+			chessBoard[Character.getNumericValue(move.charAt(0))][Character
+					.getNumericValue(move.charAt(1))] = emptySpace;
+		}
+		for (int j = 0; j <= 7; j++) {
+			if (chessBoard[0][j].getType() == ListOfPieces.PAWN) {
+				chessBoard[0][j] = new Queen();
+				if (whiteTurn == true) {
+					chessBoard[0][j].setColor(Colors.WHITE);
+				} else {
+					chessBoard[0][j].setColor(Colors.BLACK);
+				}
+			}
+		}
 		for (int i = 0; i <= 7; i++) {
 			for (int j = 0; j <= 7; j++) {
 				System.out.print(chessBoard[i][j].getType() + " ");
@@ -46,17 +63,15 @@ public class MainChess {
 		}
 		System.out.println();
 		MainChess.board.setBoard(chessBoard);
-
 	}
 
-	public static Boolean possibleMove(String move) {
+	public static Boolean checkValidMove(String move) {
 		Piece[][] chessBoard = board.getBoard();
 		String list = "";
-		// int r = Character.getNumericValue(move.charAt(0));
-		// int c = Character.getNumericValue(move.charAt(1));
-		for (int i = 0; i < 64; i++) {
-			list += chessBoard[i % 8][i / 8].possibleMove(i % 8, i / 8);
-		}
+		list += chessBoard[Character.getNumericValue(move.charAt(0))][Character
+				.getNumericValue(move.charAt(1))].possibleMove(
+				Character.getNumericValue(move.charAt(0)),
+				Character.getNumericValue(move.charAt(1)));
 		if (list.replaceAll(move, "").length() < list.length()) {
 			return true;// x1,y1,x2,y2,captured piece
 		} else
@@ -64,191 +79,13 @@ public class MainChess {
 	}
 
 	public static boolean kingSafety() {
+		Piece[][] chessBoard = board.getBoard();
+		for (int i = 0; i <= 7; i++) {
+			for (int j = 0; j <= 7; j++) {
+				// System.out.print(chessBoard[i][j].getType() + " ");
+			}
+			// System.out.println();
+		}
 		return true;
 	}
-
-	/*
-	 * public static String possibleT(int r, int c) { // TURA String list = "";
-	 * Piece oldPiece; for (int i = 0; i < 4; i++) { int ro = 0, co = 0;// row
-	 * offset, column offset switch (i) { case 0: ro = 0; co = 1;// move right
-	 * break; case 1: ro = 0; co = -1;// move left break; case 2: ro = -1; co =
-	 * 0;// move up break; case 3: ro = 1; co = 0;// move down break; } try {//
-	 * move while (" ".equals(chessBoard[r + ro][c + co])) { oldPiece =
-	 * chessBoard[r + ro][c + co]; chessBoard[r][c] = " "; chessBoard[r + ro][c
-	 * + co] = "T"; if (kingSafety() == true) { list = list + r + c + (r + ro) +
-	 * (c + co) + oldPiece; } chessBoard[r][c] = "T"; chessBoard[r + ro][c + co]
-	 * = oldPiece;
-	 * 
-	 * switch (i) { case 0: co++; break; case 1: co--; break; case 2: ro--;
-	 * break; case 3: ro++; break; } }
-	 * 
-	 * } catch (Exception e) { }
-	 * 
-	 * try {// move and capture while (" ".charAt(0) != chessBoard[r + ro][c +
-	 * co].charAt(0) && "PTCNQK".contains(chessBoard[r + ro][c + co]) == false)
-	 * { oldPiece = chessBoard[r + ro][c + co]; chessBoard[r][c] = " ";
-	 * chessBoard[r + ro][c + co] = "T"; if (kingSafety() == true) { list = list
-	 * + r + c + (r + ro) + (c + co) + oldPiece; } chessBoard[r][c] = "T";
-	 * chessBoard[r + ro][c + co] = oldPiece;
-	 * 
-	 * switch (i) { case 0: co++; break; case 1: co--; break; case 2: ro--;
-	 * break; case 3: ro++; break; } }
-	 * 
-	 * } catch (Exception e) { } } return list; }
-	 * 
-	 * public static String possibleC(int r, int c) { // CAL String list = "",
-	 * oldPiece; for (int i = 0; i < 8; i++) { int ro = 0, co = 0;// row offset,
-	 * column offset switch (i) { case 0: ro = -2; co = 1; break; case 1: ro =
-	 * -2; co = -1; break; case 2: ro = -1; co = 2; break; case 3: ro = -1; co =
-	 * -2; break; case 4: ro = 1; co = -2; break; case 5: ro = 1; co = 2; break;
-	 * case 6: ro = 2; co = -1; break; case 7: ro = 2; co = 1; break; } try {//
-	 * move if (" ".equals(chessBoard[r + ro][c + co])) { oldPiece =
-	 * chessBoard[r + ro][c + co]; chessBoard[r][c] = " "; chessBoard[r + ro][c
-	 * + co] = "C"; if (kingSafety() == true) { list = list + r + c + (r + ro) +
-	 * (c + co) + oldPiece; } chessBoard[r][c] = "C"; chessBoard[r + ro][c + co]
-	 * = oldPiece;
-	 * 
-	 * }
-	 * 
-	 * } catch (Exception e) { } try {// move and capture if (" ".charAt(0) !=
-	 * chessBoard[r + ro][c + co].charAt(0) && "PTCNQK".contains(chessBoard[r +
-	 * ro][c + co]) == false) { oldPiece = chessBoard[r + ro][c + co];
-	 * chessBoard[r][c] = " "; chessBoard[r + ro][c + co] = "C"; if
-	 * (kingSafety() == true) { list = list + r + c + (r + ro) + (c + co) +
-	 * oldPiece; } chessBoard[r][c] = "C"; chessBoard[r + ro][c + co] =
-	 * oldPiece; } } catch (Exception e) { } } return list; }
-	 * 
-	 * public static String possibleN(int r, int c) { // NEBUN String list = "",
-	 * oldPiece;
-	 * 
-	 * for (int i = 0; i < 4; i++) { int ro = 0, co = 0;// row offset, column
-	 * offset switch (i) { case 0: ro = -1; co = 1;// move NE break; case 1: ro
-	 * = -1; co = -1;// move NW break; case 2: ro = 1; co = 1;// move SE break;
-	 * case 3: ro = 1; co = -1;// move SW break; } try {// move while
-	 * (" ".equals(chessBoard[r + ro][c + co])) { oldPiece = chessBoard[r +
-	 * ro][c + co]; chessBoard[r][c] = " "; chessBoard[r + ro][c + co] = "N"; if
-	 * (kingSafety() == true) { list = list + r + c + (r + ro) + (c + co) +
-	 * oldPiece; } chessBoard[r][c] = "N"; chessBoard[r + ro][c + co] =
-	 * oldPiece;
-	 * 
-	 * switch (i) { case 0: ro--; co++; break; case 1: ro--; co--; break; case
-	 * 2: ro++; co++; break; case 3: ro++; co--; break; } }
-	 * 
-	 * } catch (Exception e) { }
-	 * 
-	 * try {// move and capture while (" ".charAt(0) != chessBoard[r + ro][c +
-	 * co].charAt(0) && "PTCNQK".contains(chessBoard[r + ro][c + co]) == false)
-	 * { oldPiece = chessBoard[r + ro][c + co]; chessBoard[r][c] = " ";
-	 * chessBoard[r + ro][c + co] = "N"; if (kingSafety() == true) { list = list
-	 * + r + c + (r + ro) + (c + co) + oldPiece; } chessBoard[r][c] = "N";
-	 * chessBoard[r + ro][c + co] = oldPiece;
-	 * 
-	 * switch (i) { case 0: ro--; co++; break; case 1: ro--; co--; break; case
-	 * 2: ro++; co++; break; case 3: ro++; co--; break; } }
-	 * 
-	 * } catch (Exception e) { } } return list; }
-	 * 
-	 * public static String possibleQ(int r, int c) { // QUEEN String list = "",
-	 * oldPiece; for (int i = 0; i < 4; i++) { int ro = 0, co = 0;// row offset,
-	 * column offset switch (i) { case 0: ro = -1; co = 1;// move NE break; case
-	 * 1: ro = -1; co = -1;// move NW break; case 2: ro = 1; co = 1;// move SE
-	 * break; case 3: ro = 1; co = -1;// move SW break; } try {// move
-	 * diagonally while (" ".equals(chessBoard[r + ro][c + co])) { oldPiece =
-	 * chessBoard[r + ro][c + co]; chessBoard[r][c] = " "; chessBoard[r + ro][c
-	 * + co] = "Q"; if (kingSafety() == true) { list = list + r + c + (r + ro) +
-	 * (c + co) + oldPiece; } chessBoard[r][c] = "Q"; chessBoard[r + ro][c + co]
-	 * = oldPiece;
-	 * 
-	 * switch (i) { case 0: ro--; co++; break; case 1: ro--; co--; break; case
-	 * 2: ro++; co++; break; case 3: ro++; co--; break; } }
-	 * 
-	 * } catch (Exception e) { }
-	 * 
-	 * try {// move and capture diagonally while (" ".charAt(0) != chessBoard[r
-	 * + ro][c + co].charAt(0) && "PTCNQK".contains(chessBoard[r + ro][c + co])
-	 * == false) { oldPiece = chessBoard[r + ro][c + co]; chessBoard[r][c] =
-	 * " "; chessBoard[r + ro][c + co] = "Q"; if (kingSafety() == true) { list =
-	 * list + r + c + (r + ro) + (c + co) + oldPiece; } chessBoard[r][c] = "Q";
-	 * chessBoard[r + ro][c + co] = oldPiece;
-	 * 
-	 * switch (i) { case 0: ro--; co++; break; case 1: ro--; co--; break; case
-	 * 2: ro++; co++; break; case 3: ro++; co--; break; } }
-	 * 
-	 * } catch (Exception e) { } } for (int i = 0; i < 4; i++) { int ro = 0, co
-	 * = 0;// row offset, column offset switch (i) { case 0: ro = 0; co = 1;//
-	 * move right break; case 1: ro = 0; co = -1;// move left break; case 2: ro
-	 * = -1; co = 0;// move up break; case 3: ro = 1; co = 0;// move down break;
-	 * } try {// move orthogonally while (" ".equals(chessBoard[r + ro][c +
-	 * co])) { oldPiece = chessBoard[r + ro][c + co]; chessBoard[r][c] = " ";
-	 * chessBoard[r + ro][c + co] = "Q"; if (kingSafety() == true) { list = list
-	 * + r + c + (r + ro) + (c + co) + oldPiece; } chessBoard[r][c] = "Q";
-	 * chessBoard[r + ro][c + co] = oldPiece;
-	 * 
-	 * switch (i) { case 0: co++; break; case 1: co--; break; case 2: ro--;
-	 * break; case 3: ro++; break; } }
-	 * 
-	 * } catch (Exception e) { }
-	 * 
-	 * try {// move orthogonally and capture while (" ".charAt(0) !=
-	 * chessBoard[r + ro][c + co].charAt(0) && "PTCNQK".contains(chessBoard[r +
-	 * ro][c + co]) == false) { oldPiece = chessBoard[r + ro][c + co];
-	 * chessBoard[r][c] = " "; chessBoard[r + ro][c + co] = "Q"; if
-	 * (kingSafety() == true) { list = list + r + c + (r + ro) + (c + co) +
-	 * oldPiece; } chessBoard[r][c] = "Q"; chessBoard[r + ro][c + co] =
-	 * oldPiece;
-	 * 
-	 * switch (i) { case 0: co++; break; case 1: co--; break; case 2: ro--;
-	 * break; case 3: ro++; break; } }
-	 * 
-	 * } catch (Exception e) { } } return list; }
-	 * 
-	 * public static String possibleK(int r, int c) { // KING String list = "",
-	 * oldPiece; for (int i = 0; i < 4; i++) { int ro = 0, co = 0;// row offset,
-	 * column offset switch (i) { case 0: ro = -1; co = 1;// move NE break; case
-	 * 1: ro = -1; co = -1;// move NW break; case 2: ro = 1; co = 1;// move SE
-	 * break; case 3: ro = 1; co = -1;// move SW break; } try {// move
-	 * diagonally if (" ".equals(chessBoard[r + ro][c + co])) { oldPiece =
-	 * chessBoard[r + ro][c + co]; chessBoard[r][c] = " "; chessBoard[r + ro][c
-	 * + co] = "K"; if (kingSafety() == true) { list = list + r + c + (r + ro) +
-	 * (c + co) + oldPiece; } chessBoard[r][c] = "K"; chessBoard[r + ro][c + co]
-	 * = oldPiece;
-	 * 
-	 * }
-	 * 
-	 * } catch (Exception e) { }
-	 * 
-	 * try {// move and capture diagonally if (" ".charAt(0) != chessBoard[r +
-	 * ro][c + co].charAt(0) && "PTCNQK".contains(chessBoard[r + ro][c + co]) ==
-	 * false) { oldPiece = chessBoard[r + ro][c + co]; chessBoard[r][c] = " ";
-	 * chessBoard[r + ro][c + co] = "K"; if (kingSafety() == true) { list = list
-	 * + r + c + (r + ro) + (c + co) + oldPiece; } chessBoard[r][c] = "K";
-	 * chessBoard[r + ro][c + co] = oldPiece;
-	 * 
-	 * }
-	 * 
-	 * } catch (Exception e) { } } for (int i = 0; i < 4; i++) { int ro = 0, co
-	 * = 0;// row offset, column offset switch (i) { case 0: ro = 0; co = 1;//
-	 * move right break; case 1: ro = 0; co = -1;// move left break; case 2: ro
-	 * = -1; co = 0;// move up break; case 3: ro = 1; co = 0;// move down break;
-	 * } try {// move orthogonally if (" ".equals(chessBoard[r + ro][c + co])) {
-	 * oldPiece = chessBoard[r + ro][c + co]; chessBoard[r][c] = " ";
-	 * chessBoard[r + ro][c + co] = "K"; if (kingSafety() == true) { list = list
-	 * + r + c + (r + ro) + (c + co) + oldPiece; } chessBoard[r][c] = "K";
-	 * chessBoard[r + ro][c + co] = oldPiece;
-	 * 
-	 * }
-	 * 
-	 * } catch (Exception e) { }
-	 * 
-	 * try {// move orthogonally and capture if (" ".charAt(0) != chessBoard[r +
-	 * ro][c + co].charAt(0) && "PTCNQK".contains(chessBoard[r + ro][c + co]) ==
-	 * false) { oldPiece = chessBoard[r + ro][c + co]; chessBoard[r][c] = " ";
-	 * chessBoard[r + ro][c + co] = "K"; if (kingSafety() == true) { list = list
-	 * + r + c + (r + ro) + (c + co) + oldPiece; } chessBoard[r][c] = "K";
-	 * chessBoard[r + ro][c + co] = oldPiece;
-	 * 
-	 * }
-	 * 
-	 * } catch (Exception e) { } } return list; }
-	 */
 }

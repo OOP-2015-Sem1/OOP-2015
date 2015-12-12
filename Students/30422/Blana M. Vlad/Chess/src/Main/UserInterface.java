@@ -110,14 +110,6 @@ public class UserInterface extends JPanel implements MouseListener,
 			}
 		}
 
-		/*
-		 * g.setColor(new Color(255, 255, 255)); g.fillRect(x - 20, y - 20, 40,
-		 * 40); g.drawString("PUla", x, y); Image chessPieceImage;
-		 * chessPieceImage = new ImageIcon("ChessPieces.png").getImage();
-		 * g.drawImage(chessPieceImage, x, y, x + 64, y + 64, 0, 0, 64, 64,
-		 * this);
-		 */
-
 	}
 
 	public void mouseMoved(MouseEvent e) {
@@ -148,14 +140,11 @@ public class UserInterface extends JPanel implements MouseListener,
 				;
 
 				System.out.println(dragMove);
-
-				// System.out.println(userPosibilities.replaceAll(dragMove,
-				// ""));
-				if (MainChess.possibleMove(dragMove) == true) {
+				if (MainChess.checkValidMove(dragMove) == true) {
 					// if valid move
 					MainChess.makeMove(dragMove);
 					MainChess.whiteTurn = !MainChess.whiteTurn;
-					// Board.flipBoard(MainChess.board);
+					MainChess.board.flipBoard(chessBoard);
 					repaint();
 				}
 
