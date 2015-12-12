@@ -1,4 +1,5 @@
 package board;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -7,29 +8,29 @@ import javax.swing.*;
 import cards.Card;
 import control.Controller;
 
-public class Board extends JFrame{
+public class Board extends JFrame {
 	private static final long serialVersionUID = 2195379760914381351L;
-	
+
 	private JPanel dealer = new JPanel();
 	private JPanel player = new JPanel();
 	private JPanel controls = new JPanel();
-	
+
 	private ArrayList<JPanel> players = new ArrayList<JPanel>();
 	private ArrayList<JLabel> playerInfos = new ArrayList<JLabel>();
-	
+
 	private JButton newButton = new JButton("New Game");
 	private JButton hitButton = new JButton("Hit");
 	private JButton standButton = new JButton("Stand");
 	public JMenuItem displayScore = new JMenuItem("Display score");
-	
+
 	private JLabel back = new JLabel(new ImageIcon("CardImages/back.png"));
-	
-	private Card hole = new Card("CardImages/back.png", 0);
-	
+
+	private Card hole;
+
 	private int nrPlayers;
 
-	public Board(Controller controller){
-		setLayout(new GridLayout(3,1));
+	public Board(Controller controller) {
+		setLayout(new GridLayout(3, 1));
 		setSize(1200, 700);
 		this.add(dealer);
 		this.add(player);
@@ -63,54 +64,53 @@ public class Board extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
-	
-	public void clear(){
+
+	public void clear() {
 		dealer.removeAll();
 		dealer.repaint();
 		adjustNrPlayers(nrPlayers);
 	}
-	
-	public void drawPlayer(Card pCard, int playerNr){
+
+	public void drawPlayer(Card pCard, int playerNr) {
 		JPanel playerPanel = players.get(playerNr);
 		playerPanel.add(new JLabel(pCard.getImg()));
 		playerPanel.repaint();
 		player.repaint();
 	}
-	
-	public void drawDealer(Card hole){
-		if (back.getParent() == dealer){
-		dealer.remove(back);
-		dealer.add(new JLabel(this.hole.getImg()));
-		dealer.add(back);
-		}
-		else{
+
+	public void drawDealer(Card hole) {
+		if (back.getParent() == dealer) {
+			dealer.remove(back);
+			dealer.add(new JLabel(this.hole.getImg()));
+			dealer.add(back);
+		} else {
 			dealer.add(back);
 		}
 		this.hole = hole;
 		dealer.repaint();
 	}
-	
-	public void showDealer(){
+
+	public void showDealer() {
 		dealer.remove(back);
 		dealer.add(new JLabel(hole.getImg()));
 		setButtons(false);
 	}
-	
-	public void setInfo(String text, int playerNr){
+
+	public void setInfo(String text, int playerNr) {
 		playerInfos.get(playerNr).setText(text);
 	}
-	
-	public void setButtons(boolean visible){
+
+	public void setButtons(boolean visible) {
 		hitButton.setVisible(visible);
 		standButton.setVisible(visible);
 	}
-	
-	public void adjustNrPlayers(int nr){
+
+	public void adjustNrPlayers(int nr) {
 		nrPlayers = nr;
 		controls.removeAll();
-		controls.setLayout(new GridLayout(1, nr+3));
+		controls.setLayout(new GridLayout(1, nr + 3));
 		playerInfos.clear();
-		if (nr == 2 || nr == 3){
+		if (nr == 2 || nr == 3) {
 			JLabel infoLabel = new JLabel();
 			playerInfos.add(infoLabel);
 			controls.add(infoLabel);
@@ -119,8 +119,8 @@ public class Board extends JFrame{
 		controls.add(hitButton);
 		controls.add(standButton);
 		playerInfos.add(new JLabel());
-		controls.add(playerInfos.get(playerInfos.size()-1));
-		if (nr == 3){
+		controls.add(playerInfos.get(playerInfos.size() - 1));
+		if (nr == 3) {
 			JLabel infoLabel = new JLabel();
 			playerInfos.add(infoLabel);
 			controls.add(infoLabel);
@@ -128,16 +128,15 @@ public class Board extends JFrame{
 		player.removeAll();
 		players.clear();
 		player.setLayout(new GridLayout(1, nr));
-		for (int i = 0; i<nr; i++){
+		for (int i = 0; i < nr; i++) {
 			JPanel pPanel = new JPanel();
 			players.add(pPanel);
 			player.add(pPanel);
 		}
 	}
-	
-	public void showStart(int nrPlayers){
+
+	public void showStart(int nrPlayers) {
 		adjustNrPlayers(nrPlayers);
 		newButton.setVisible(true);
 	}
-	
 }

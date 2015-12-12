@@ -16,14 +16,14 @@ public class Controller implements ActionListener {
 	private Board board;
 	private Deck deck;
 
-	private Account account;
+	private Account account = null;
 
 	private List<Card> dealerHand = new ArrayList<Card>();
 	private List<ArrayList<Card>> playerHands = new ArrayList<ArrayList<Card>>();
 
 	private boolean dealerDone;
 	private List<Boolean> playersDone = new ArrayList<Boolean>();
-	
+
 	private int nrPlayers = 1;
 	private int mPlayerNr;
 
@@ -40,10 +40,13 @@ public class Controller implements ActionListener {
 		} else if (button == "Stand") {
 			getResult();
 		} else if (button == "Log-in or create account") {
-			account = new Account((String) JOptionPane.showInputDialog(board, "Please enter in your username:",
-					"Account Login and Register", JOptionPane.PLAIN_MESSAGE));
-			board.showStart(nrPlayers);
-			board.displayScore.setEnabled(true);
+			String userName = JOptionPane.showInputDialog(board, "Please enter in your username:",
+					"Account Login and Register", JOptionPane.PLAIN_MESSAGE);
+			if (userName != null) {
+				account = new Account(userName);
+				board.showStart(nrPlayers);
+				board.displayScore.setEnabled(true);
+			}
 		} else if (button == "Play as guest") {
 			account = null;
 			board.showStart(nrPlayers);
@@ -52,7 +55,7 @@ public class Controller implements ActionListener {
 			nrPlayers = Integer.parseInt((String) JOptionPane.showInputDialog(board,
 					"Please enter in the number of players(1-3):", "Number of players", JOptionPane.PLAIN_MESSAGE));
 			adjustNrPlayers();
-		} else if (button == "Display score"){
+		} else if (button == "Display score") {
 			displayScore();
 		}
 	}
@@ -72,9 +75,9 @@ public class Controller implements ActionListener {
 		for (int i = 0; i < 2; i++) {
 			addNewCard();
 		}
-		if (checkScore(dealerHand) == 21){
+		if (checkScore(dealerHand) == 21) {
 			dealerDone = true;
-			for (int i = 0; i<nrPlayers; i++){
+			for (int i = 0; i < nrPlayers; i++) {
 				playersDone.set(i, true);
 			}
 			getResult();
@@ -93,12 +96,11 @@ public class Controller implements ActionListener {
 						board.setInfo("Your score: " + pScore, i);
 					}
 				} else {
-					if (pScore > 21){
+					if (pScore > 21) {
 						playersDone.set(i, true);
-					}
-					else if (pScore >= 17 && !isAce(playerHands.get(i)) || pScore>=20) {
+					} else if (pScore >= 17 && !isAce(playerHands.get(i)) || pScore >= 20) {
 						playersDone.set(i, true);
-						board.setInfo("Player" + (i + 1) +" Score: " + pScore, i);
+						board.setInfo("Player" + (i + 1) + " Score: " + pScore, i);
 					}
 				}
 				board.drawPlayer(playerHands.get(i).get(playerHands.get(i).size() - 1), i);
@@ -112,13 +114,11 @@ public class Controller implements ActionListener {
 				}
 				dealerDone = true;
 				getResult();
-			}
-			else if (dScore >= 17) {
+			} else if (dScore >= 17) {
 				dealerDone = true;
 				board.drawDealer(dealerHand.get(dealerHand.size() - 1));
-			}
-			else {
-			board.drawDealer(dealerHand.get(dealerHand.size() - 1));
+			} else {
+				board.drawDealer(dealerHand.get(dealerHand.size() - 1));
 			}
 		}
 	}
@@ -137,20 +137,18 @@ public class Controller implements ActionListener {
 		}
 		board.showDealer();
 		int dScore = checkScore(dealerHand);
-		if (dScore > 21){
+		if (dScore > 21) {
 			dScore = 0;
 		}
 		for (int i = 0; i < nrPlayers; i++) {
 			int pScore = checkScore(playerHands.get(i));
-			if (pScore>21){
-				if (i == mPlayerNr){
+			if (pScore > 21) {
+				if (i == mPlayerNr) {
 					board.setInfo("You busted.", i);
-				}
-				else {
+				} else {
 					board.setInfo("Player" + (i + 1) + " busted.", i);
 				}
-			}
-			else{
+			} else {
 				if (pScore > dScore) {
 					if (i == mPlayerNr) {
 						board.setInfo("You won!", i);
@@ -158,21 +156,21 @@ public class Controller implements ActionListener {
 					} else {
 						board.setInfo("Player" + (i + 1) + " won.", i);
 					}
-				}
-				else if (pScore == dScore) {
-				if (i == mPlayerNr) {
-					board.setInfo("You tied.", i);
+				} else if (pScore == dScore) {
+					if (i == mPlayerNr) {
+						board.setInfo("You tied.", i);
+					} else {
+						board.setInfo("Player" + (i + 1) + " tied.", i);
+					}
 				} else {
-					board.setInfo("Player" + (i + 1) + " tied.", i);
-				}
-			} else {
-				if (i == mPlayerNr) {
-					board.setInfo("You lost.", i);
-				} else {
-					board.setInfo("Player" + (i + 1) + " lost.", i);
+					if (i == mPlayerNr) {
+						board.setInfo("You lost.", i);
+					} else {
+						board.setInfo("Player" + (i + 1) + " lost.", i);
+					}
 				}
 			}
-		}}
+		}
 	}
 
 	private int checkScore(List<Card> hand) {
@@ -192,13 +190,13 @@ public class Controller implements ActionListener {
 		}
 		return score;
 	}
-	
-	private boolean isAce(List<Card> hand){
-		for (Card card : hand){
-			if (card.getValue() == 11){
+
+	private boolean isAce(List<Card> hand) {
+		for (Card card : hand) {
+			if (card.getValue() == 11) {
 				ArrayList<Card> tempHand = new ArrayList<Card>(hand);
 				tempHand.remove(card);
-				if (checkScore(tempHand) <= 10){
+				if (checkScore(tempHand) <= 10) {
 					return true;
 				}
 			}
@@ -231,8 +229,8 @@ public class Controller implements ActionListener {
 			account.saveScores();
 		}
 	}
-	
-	private void displayScore(){
-		board.setInfo("Your total score is: "+account.returnScore(), mPlayerNr);
+
+	private void displayScore() {
+		board.setInfo("Your total score is: " + account.returnScore(), mPlayerNr);
 	}
 }
