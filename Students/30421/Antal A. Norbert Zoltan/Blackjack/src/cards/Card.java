@@ -1,6 +1,7 @@
+package cards;
 import javax.swing.ImageIcon;
 
-public class Card implements Cloneable{
+public class Card{
 	private ImageIcon img;
 	private int value;
 	
@@ -15,9 +16,5 @@ public class Card implements Cloneable{
 	
 	public int getValue(){
 		return value;
-	}
-	
-	public Object clone() throws CloneNotSupportedException{
-		return super.clone();
 	}
 }
