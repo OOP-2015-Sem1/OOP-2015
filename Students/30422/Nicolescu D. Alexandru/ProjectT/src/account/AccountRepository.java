@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class AccountRepository {
 
-	public static final int NUMBER_OF_ACCOUNTS = 4;
+	public static final int NUMBER_OF_ACCOUNTS = 6;
 	private static final boolean ADD_ACCOUNT = false;
 	private static volatile AccountRepository accounts = null;
 	private Player players[] = Player.getInstance();
@@ -27,10 +27,10 @@ public class AccountRepository {
 
 				Scanner keyboard = new Scanner(System.in);
 				System.out.println("Enter new account name:");
-				players[NUMBER_OF_ACCOUNTS].setUser(keyboard.nextLine());
+				players[NUMBER_OF_ACCOUNTS-1].setUser(keyboard.nextLine());
 				System.out.println("Enter new account password:");
-				players[NUMBER_OF_ACCOUNTS].setPassword(keyboard.nextLine());
-				players[NUMBER_OF_ACCOUNTS].setScore(10);
+				players[NUMBER_OF_ACCOUNTS-1].setPassword(keyboard.nextLine());
+				players[NUMBER_OF_ACCOUNTS-1].setScore(10);
 				serialize();
 			}
 
@@ -94,11 +94,11 @@ public class AccountRepository {
 		this.accountNr = accountNr;
 	}
 
-	public int getAccountScore() {
-		return players[getAccountNr()].getScore();
+	public int getAccountScore(int accountNr) {
+		return players[accountNr].getScore();
 	}
 
-	public String getAccountName() {
-		return players[getAccountNr()].getUser();
+	public String getAccountName(int accountNr) {
+		return players[accountNr].getUser();
 	}
 }

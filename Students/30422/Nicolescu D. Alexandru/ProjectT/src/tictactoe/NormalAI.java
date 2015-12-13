@@ -76,9 +76,6 @@ public class NormalAI extends RuleBasedStrategy {
 			temp = winDiagonals(board);
 			if (temp != (-1))
 				return temp;
-			temp = winDiagonals(board);
-			if (temp != (-1))
-				return temp;
 			for (int k = 0; k < 3; k++)
 				for (int j = 0; j < 3; j++) {
 					if (board[k][j] == 0) {
