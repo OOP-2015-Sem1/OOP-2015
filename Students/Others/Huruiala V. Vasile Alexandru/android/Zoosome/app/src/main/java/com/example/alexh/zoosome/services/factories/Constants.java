@@ -461,7 +461,7 @@ public final class Constants {
 
         // SQLite Resources
         public static String getTableSpeciesName(int classIndex, int speciesIndex) {
-            return SPECIES_NAME[classIndex][speciesIndex].toLowerCase() + "_table";
+            return SPECIES_NAME[classIndex][speciesIndex].toLowerCase();
         }
     }
 

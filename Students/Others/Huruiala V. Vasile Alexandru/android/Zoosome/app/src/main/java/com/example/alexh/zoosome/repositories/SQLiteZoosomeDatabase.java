@@ -9,22 +9,47 @@ import android.util.Log;
 
 import com.example.alexh.zoosome.models.animals.Animal;
 import com.example.alexh.zoosome.services.factories.Constants;
-import com.example.alexh.zoosome.services.factories.animals.BigFactory;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 public class SQLiteZoosomeDatabase extends SQLiteOpenHelper {
 
+    public static final String INTEGER_MODIFIER = "INTEGER";
+    public static final String DOUBLE_MODIFIER = "DOUBLE";
+    public static final String BOOLEAN_MODIFIER = "VARCHAR(5)";
+    public static final String WATERTYPE_MODIFIER = "VARCHAR(10)";
+    public static final String STRING_MODIFIER = "TEXT";
+    public static final String PRIMARY_KEY_MODIFIER = "PRIMARY KEY";
+    public static final String AUTOINCREMENT_MODIFIER = "AUTOINCREMENT";
+    public static final String SPACER = " ";
+
     private static final String DATABASE_NAME = "Zoosome.db";
 
     public SQLiteZoosomeDatabase(Context context) {
         super(context, DATABASE_NAME, null, 1);
+
+        // Drop and rebuild the tables if any expected table is missing
+        try {
+            this.checkAllTables();
+        } catch (Exception e) {
+            try {
+                dropAllTables(getWritableDatabase());
+            } catch (Exception ignored) {
+            }
+            onCreate(getWritableDatabase());
+        }
+    }
+
+    private void checkAllTables() throws Exception {
+        if (this.getNumberOfAnimals() == this.readAllAnimals().size()) {
+            Log.d("SQL", "WUT?");
+        }
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.d("SQL", "onCreate");
         // Animal table
         StringBuilder animalTableQuery = new StringBuilder();
 
@@ -47,7 +72,6 @@ public class SQLiteZoosomeDatabase extends SQLiteOpenHelper {
         // Class tables
         for (int indexClassTable = 0; indexClassTable < Constants.Animals.TABLE_CLASS_NAMES.length; indexClassTable++) {
             StringBuilder classTableQuery = new StringBuilder();
-
             classTableQuery.append(String.format("CREATE TABLE %s (", Constants.Animals.TABLE_CLASS_NAMES[indexClassTable]));
 
             for (int indexClassTableColumn = 0; indexClassTableColumn < Constants.Animals.TABLE_CLASS_COLS[indexClassTable].length; indexClassTableColumn++) {
@@ -80,6 +104,11 @@ public class SQLiteZoosomeDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        this.dropAllTables(db);
+        onCreate(db);
+    }
+
+    private void dropAllTables(SQLiteDatabase db) {
         db.execSQL("DROP TABLE IF EXISTS " + Constants.Animals.TABLE_ANIMAL_NAME);
         for (int indexClass = 0; indexClass < Constants.Animals.CLASSES_NAME.length; indexClass++) {
             db.execSQL("DROP TABLE IF EXISTS " + Constants.Animals.TABLE_CLASS_NAMES[indexClass]);
@@ -89,8 +118,6 @@ public class SQLiteZoosomeDatabase extends SQLiteOpenHelper {
                 db.execSQL("DROP TABLE IF EXISTS " + Constants.Animals.getTableSpeciesName(indexClass, indexSpecies));
             }
         }
-
-        onCreate(db);
     }
 
     public void insertAnimal(Animal animal) {
@@ -99,23 +126,8 @@ public class SQLiteZoosomeDatabase extends SQLiteOpenHelper {
         int classIndex = Constants.Animals.indexOfClass(animal);
         int speciesIndex = Constants.Animals.indexOfSpecies(animal);
 
-        // Getting the next id
-        String nextID = String.valueOf(1);
-        Cursor cursor = db.rawQuery(String.format("SELECT MAX(%s) FROM %s",
-                Constants.Animals.TABLE_ANIMAL_COL_ID,
-                Constants.Animals.TABLE_ANIMAL_NAME), null);
-        if (cursor.getCount() != 0) {
-            cursor.moveToFirst();
-            int id = Integer.parseInt(cursor.getString(0));
-            nextID = String.valueOf(id + 1);
-        }
-
-        cursor.close();
-
-
         // Adding data to animal table
         ContentValues contentValuesAnimal = new ContentValues();
-        contentValuesAnimal.put(Constants.Animals.TABLE_ANIMAL_COL_ID, String.valueOf(nextID));
 
         ArrayList[] fieldAnimalColumnNamesAndValues = animal.getAnimalFieldInsertColumnNamesAndValues();
         for (int index = 0; index < fieldAnimalColumnNamesAndValues[0].size(); index++) {
@@ -124,10 +136,25 @@ public class SQLiteZoosomeDatabase extends SQLiteOpenHelper {
 
         db.insert(Constants.Animals.TABLE_ANIMAL_NAME, null, contentValuesAnimal);
 
+        // Getting the next id
+        String stringID = String.valueOf(1);
+        try {
+            Cursor cursor = db.rawQuery(String.format("SELECT MAX(%s) FROM %s",
+                    Constants.Animals.TABLE_ANIMAL_COL_ID,
+                    Constants.Animals.TABLE_ANIMAL_NAME), null);
+            if (cursor.getCount() != 0) {
+                cursor.moveToFirst();
+                stringID = String.valueOf(Integer.parseInt(cursor.getString(0)));
+            }
+            cursor.close();
+        } catch (Exception e) {
+            stringID = String.valueOf(1);
+        }
+
 
         // Adding data to a class table
         ContentValues contentValuesClass = new ContentValues();
-        contentValuesClass.put(Constants.Animals.TABLE_CLASS_COL_ID, String.valueOf(nextID));
+        contentValuesClass.put(Constants.Animals.TABLE_CLASS_COL_ID, String.valueOf(stringID));
 
         ArrayList[] fieldSpeciesColumnNamesAndValues = animal.getClassFieldInsertColumnNamesAndValues();
         for (int index = 0; index < fieldSpeciesColumnNamesAndValues[0].size(); index++) {
@@ -139,7 +166,7 @@ public class SQLiteZoosomeDatabase extends SQLiteOpenHelper {
 
         // Adding data to a species table
         ContentValues contentValuesSpecies = new ContentValues();
-        contentValuesSpecies.put(Constants.Animals.TABLE_SPECIES_COL_ID, String.valueOf(nextID));
+        contentValuesSpecies.put(Constants.Animals.TABLE_SPECIES_COL_ID, String.valueOf(stringID));
 
         db.insert(Constants.Animals.getTableSpeciesName(classIndex, speciesIndex), null, contentValuesSpecies);
     }
@@ -152,7 +179,7 @@ public class SQLiteZoosomeDatabase extends SQLiteOpenHelper {
 
     public int getNumberOfAnimals() {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT COUNT(id_animal) FROM animal_table", null);
+        Cursor cursor = db.rawQuery("SELECT COUNT(" + Constants.Animals.TABLE_ANIMAL_COL_ID + ") FROM " + Constants.Animals.TABLE_ANIMAL_NAME, null);
         int animalCount = 0;
 
         Log.d("SQL_na", "" + cursor.getCount());

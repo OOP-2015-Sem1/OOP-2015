@@ -9,6 +9,7 @@ import javax.xml.stream.XMLStreamException;
 import org.w3c.dom.Element;
 
 import com.example.alexh.zoosome.models.interfaces.XML_Parsable;
+import com.example.alexh.zoosome.repositories.SQLiteZoosomeDatabase;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,8 @@ public abstract class Animal implements Killer, XML_Parsable {
     private static final double DEFAULT_DANGER_PERCENTAGE_MAX = 1.0D;
     private static final boolean DEFAULT_TAKEN_CARE_OF = false;
 
+    public static final String NAME = "Animal";
+
     private static final String FIELD_NAME_NAME = "Name";
     private static final String FIELD_NAME_NUMBER_OF_LEGS = "Number of legs";
     private static final String FIELD_NAME_MAINTENANCE_COST = "Maintenance cost";
@@ -29,31 +32,35 @@ public abstract class Animal implements Killer, XML_Parsable {
 
     // SQLite resources
     // Animal table
-    public static final String TABLE_ANIMAL_NAME = "animal_table";
-    public static final String TABLE_ANIMAL_COL_ID = "id_animal";
+    public static final String TABLE_ANIMAL_NAME = NAME.toLowerCase();
+    public static final String TABLE_ANIMAL_COL_ID = "id";
     public static final String TABLE_ANIMAL_COL_NAME = "name";
     public static final String TABLE_ANIMAL_COL_NUMBER_OF_LEGS = "noOfLegs";
     public static final String TABLE_ANIMAL_COL_MAINTENANCE_COST = "maintenanceCost";
     public static final String TABLE_ANIMAL_COL_DANGER_PERCENTAGE = "dangerPercentage";
     public static final String TABLE_ANIMAL_COL_TAKEN_CARE_OF = "takenCareOf";
 
-    public static final String TABLE_ANIMAL_COL_ID_MODIFIERS = "INTEGER PRIMARY KEY";
-    public static final String TABLE_ANIMAL_COL_NAME_MODIFIERS = "TEXT";
-    public static final String TABLE_ANIMAL_COL_NUMBER_OF_LEGS_MODIFIERS = "INTEGER";
-    public static final String TABLE_ANIMAL_COL_MAINTENANCE_COST_MODIFIERS = "DOUBLE";
-    public static final String TABLE_ANIMAL_COL_DANGER_PERCENTAGE_MODIFIERS = "DOUBLE";
-    public static final String TABLE_ANIMAL_COL_TAKEN_CARE_OF_MODIFIERS = "VARCHAR(5)";
+    public static final String TABLE_ANIMAL_COL_ID_MODIFIERS = SQLiteZoosomeDatabase.INTEGER_MODIFIER +
+            SQLiteZoosomeDatabase.SPACER + SQLiteZoosomeDatabase.PRIMARY_KEY_MODIFIER +
+            SQLiteZoosomeDatabase.SPACER + SQLiteZoosomeDatabase.AUTOINCREMENT_MODIFIER;
+    public static final String TABLE_ANIMAL_COL_NAME_MODIFIERS = SQLiteZoosomeDatabase.STRING_MODIFIER;
+    public static final String TABLE_ANIMAL_COL_NUMBER_OF_LEGS_MODIFIERS = SQLiteZoosomeDatabase.INTEGER_MODIFIER;
+    public static final String TABLE_ANIMAL_COL_MAINTENANCE_COST_MODIFIERS = SQLiteZoosomeDatabase.DOUBLE_MODIFIER;
+    public static final String TABLE_ANIMAL_COL_DANGER_PERCENTAGE_MODIFIERS = SQLiteZoosomeDatabase.DOUBLE_MODIFIER;
+    public static final String TABLE_ANIMAL_COL_TAKEN_CARE_OF_MODIFIERS = SQLiteZoosomeDatabase.BOOLEAN_MODIFIER;
 
     // These are used to make sure every subclass table has the same name for common columns
     // Class table
-    public static final String TABLE_CLASS_COL_ID = "id_class";
+    public static final String TABLE_CLASS_COL_ID = "id";
 
-    public static final String TABLE_CLASS_COL_ID_MODIFIERS = "INTEGER PRIMARY KEY";
+    public static final String TABLE_CLASS_COL_ID_MODIFIERS = SQLiteZoosomeDatabase.INTEGER_MODIFIER +
+            SQLiteZoosomeDatabase.SPACER + SQLiteZoosomeDatabase.PRIMARY_KEY_MODIFIER;
 
     // Species table
-    public static final String TABLE_SPECIES_COL_ID = "id_species";
+    public static final String TABLE_SPECIES_COL_ID = "id";
 
-    public static final String TABLE_SPECIES_COL_ID_MODIFIERS = "INTEGER PRIMARY KEY";
+    public static final String TABLE_SPECIES_COL_ID_MODIFIERS = SQLiteZoosomeDatabase.INTEGER_MODIFIER +
+            SQLiteZoosomeDatabase.SPACER + SQLiteZoosomeDatabase.PRIMARY_KEY_MODIFIER;
 
     private String name;
     private int noOfLegs;
@@ -63,35 +70,20 @@ public abstract class Animal implements Killer, XML_Parsable {
     private boolean takenCareOf;
 
     protected Animal() {
-        this.name = DEFAULT_NAME;
-        this.noOfLegs = DEFAULT_NUMBER_OF_LEGS;
-        this.maintenanceCost = DEFAULT_MAINTENANCE_COST_MIN;
-        this.dangerPerc = DEFAULT_DANGER_PERCENTAGE_MIN;
-        this.takenCareOf = DEFAULT_TAKEN_CARE_OF;
+        this.setName(DEFAULT_NAME);
+        this.setNoOfLegs(DEFAULT_NUMBER_OF_LEGS);
+        this.setMaintenenceCost(DEFAULT_MAINTENANCE_COST_MIN);
+        this.setDangerPerc(DEFAULT_DANGER_PERCENTAGE_MIN);
+        this.setTakenCareOf(DEFAULT_TAKEN_CARE_OF);
     }
 
     protected Animal(final String animalName, final int numberOfLegs, final double maintenaceCosts,
                      final double dangerPercentage) {
-        this.name = animalName;
-        this.noOfLegs = numberOfLegs;
-
-        if (maintenaceCosts < DEFAULT_MAINTENANCE_COST_MIN) {
-            this.maintenanceCost = DEFAULT_MAINTENANCE_COST_MIN;
-        } else if (maintenaceCosts > DEFAULT_MAINTENANCE_COST_MAX) {
-            this.maintenanceCost = DEFAULT_MAINTENANCE_COST_MAX;
-        } else {
-            this.maintenanceCost = maintenaceCosts;
-        }
-
-        if (dangerPercentage < DEFAULT_DANGER_PERCENTAGE_MIN) {
-            this.dangerPerc = DEFAULT_DANGER_PERCENTAGE_MIN;
-        } else if (dangerPercentage > DEFAULT_DANGER_PERCENTAGE_MAX) {
-            this.dangerPerc = DEFAULT_DANGER_PERCENTAGE_MAX;
-        } else {
-            this.dangerPerc = dangerPercentage;
-        }
-
-        this.takenCareOf = DEFAULT_TAKEN_CARE_OF;
+        this.setName(animalName);
+        this.setNoOfLegs(numberOfLegs);
+        this.setMaintenenceCost(maintenaceCosts);
+        this.setDangerPerc(dangerPercentage);
+        this.setTakenCareOf(DEFAULT_TAKEN_CARE_OF);
     }
 
     public boolean kill() {
@@ -123,7 +115,13 @@ public abstract class Animal implements Killer, XML_Parsable {
     }
 
     public void setMaintenenceCost(double newMaintenanceCost) {
-        this.maintenanceCost = newMaintenanceCost;
+        if (newMaintenanceCost < DEFAULT_MAINTENANCE_COST_MIN) {
+            this.maintenanceCost = DEFAULT_MAINTENANCE_COST_MIN;
+        } else if (newMaintenanceCost > DEFAULT_MAINTENANCE_COST_MAX) {
+            this.maintenanceCost = DEFAULT_MAINTENANCE_COST_MAX;
+        } else {
+            this.maintenanceCost = newMaintenanceCost;
+        }
     }
 
     public double getDangerPerc() {

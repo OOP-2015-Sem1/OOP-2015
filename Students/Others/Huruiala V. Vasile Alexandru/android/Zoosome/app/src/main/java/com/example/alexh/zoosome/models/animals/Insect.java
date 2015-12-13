@@ -5,6 +5,8 @@ import static com.example.alexh.zoosome.repositories.EntityRepository.createNode
 import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLStreamException;
 */
+import com.example.alexh.zoosome.repositories.SQLiteZoosomeDatabase;
+
 import org.w3c.dom.Element;
 
 import java.util.ArrayList;
@@ -13,18 +15,20 @@ public abstract class Insect extends Animal {
 	private static final boolean DEFAULT_CAN_FLY = false;
 	private static final boolean DEFAULT_IS_DANGEROUS = false;
 
+	public static final String NAME = "Insect";
+
 	private static final String FIELD_NAME_CAN_FLY = "Can fly";
 	private static final String FIELD_NAME_IS_DANGEROUS = "Is Dangerous";
 
     // SQLite resources
-    public static final String TABLE_INSECT_NAME = "insect_table";
+    public static final String TABLE_INSECT_NAME = NAME.toLowerCase();
     public static final String TABLE_INSECT_COL_ID = TABLE_CLASS_COL_ID;
     public static final String TABLE_INSECT_COL_CAN_FLY = "canFly";
     public static final String TABLE_INSECT_COL_IS_DANGEROUS = "isDangerous";
 
     public static final String TABLE_INSECT_COL_ID_MODIFIERS = TABLE_CLASS_COL_ID_MODIFIERS;
-    public static final String TABLE_INSECT_COL_CAN_FLY_MODIFIERS = "VARCHAR(5)";
-    public static final String TABLE_INSECT_COL_IS_DANGEROUS_MODIFIERS = "VARCHAR(5)";
+    public static final String TABLE_INSECT_COL_CAN_FLY_MODIFIERS = SQLiteZoosomeDatabase.BOOLEAN_MODIFIER;
+    public static final String TABLE_INSECT_COL_IS_DANGEROUS_MODIFIERS = SQLiteZoosomeDatabase.BOOLEAN_MODIFIER;
 
     private boolean canFly;
 	private boolean isDangerous;

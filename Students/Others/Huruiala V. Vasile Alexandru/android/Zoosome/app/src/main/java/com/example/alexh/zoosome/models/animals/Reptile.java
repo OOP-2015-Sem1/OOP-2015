@@ -5,6 +5,8 @@ import static com.example.alexh.zoosome.repositories.EntityRepository.createNode
 import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLStreamException;
 */
+import com.example.alexh.zoosome.repositories.SQLiteZoosomeDatabase;
+
 import org.w3c.dom.Element;
 
 import java.util.ArrayList;
@@ -12,15 +14,17 @@ import java.util.ArrayList;
 public abstract class Reptile extends Animal {
 	private static final boolean DEFAULT_LAYS_EGGS = false;
 
+	public static final String NAME = "Reptile";
+
 	private static final String FIELD_NAME_LAYS_EGGS = "Lays eggs";
 
     // SQLite resources
-	public static final String TABLE_REPTILE_NAME = "reptile_table";
+	public static final String TABLE_REPTILE_NAME = NAME.toLowerCase();
 	public static final String TABLE_REPTILE_COL_ID = TABLE_CLASS_COL_ID;
 	public static final String TABLE_REPTILE_COL_LAYS_EGGS = "laysEggs";
 
     public static final String TABLE_REPTILE_COL_ID_MODIFIERS = TABLE_CLASS_COL_ID_MODIFIERS;
-	public static final String TABLE_REPTILE_COL_LAYS_EGGS_MODIFIERS = "VARCHAR(5)";
+	public static final String TABLE_REPTILE_COL_LAYS_EGGS_MODIFIERS = SQLiteZoosomeDatabase.BOOLEAN_MODIFIER;
 
 	private boolean laysEggs;
 

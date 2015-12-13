@@ -5,6 +5,8 @@ import static com.example.alexh.zoosome.repositories.EntityRepository.createNode
 import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLStreamException;
 */
+import com.example.alexh.zoosome.repositories.SQLiteZoosomeDatabase;
+
 import org.w3c.dom.Element;
 
 import java.util.ArrayList;
@@ -14,18 +16,20 @@ public abstract class Siege extends Animal {
 	private static final int DEFAULT_RANGE = 0;
 	private static final boolean DEFAULT_IS_MOBILE = false;
 
+	public static final String NAME = "Siege";
+
 	private static final String FIELD_NAME_RANGE = "Migrates";
 	private static final String FIELD_NAME_IS_MOBILE = "Average flight altitude";
 
     // SQLite resources
-    public static final String TABLE_SIEGE_NAME = "siege_table";
+    public static final String TABLE_SIEGE_NAME = NAME.toLowerCase();
     public static final String TABLE_SIEGE_COL_ID = TABLE_CLASS_COL_ID;
     public static final String TABLE_SIEGE_COL_RANGE = "range";
     public static final String TABLE_SIEGE_COL_IS_MOBILE = "isMobile";
 
     public static final String TABLE_SIEGE_COL_ID_MODIFIERS = TABLE_CLASS_COL_ID_MODIFIERS;
-    public static final String TABLE_SIEGE_COL_RANGE_MODIFIERS = "INTEGER";
-    public static final String TABLE_SIEGE_COL_IS_MOBILE_MODIFIERS = "VARCHAR(5)";
+    public static final String TABLE_SIEGE_COL_RANGE_MODIFIERS = SQLiteZoosomeDatabase.INTEGER_MODIFIER;
+    public static final String TABLE_SIEGE_COL_IS_MOBILE_MODIFIERS = SQLiteZoosomeDatabase.BOOLEAN_MODIFIER;
 
     private int range;
 	private boolean isMobile;

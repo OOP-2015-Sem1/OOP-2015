@@ -233,65 +233,77 @@ public class BigFactory {
         }
     }
 
-    public static void nicePrint(final String s) {
+    public static void nicePrint(final String str) {
         final int verticalEmptyCount = 1;
         final int verticalFillerCount = 1;
         final int horizontalFillerCount = 3;
 
-        nicePrint(s, verticalEmptyCount, verticalFillerCount, horizontalFillerCount);
+        nicePrint(str, verticalEmptyCount, verticalFillerCount, horizontalFillerCount);
     }
 
-    public static void printDetails(Employee e) {
-        if (e instanceof Caretaker) {
-            Caretaker em = (Caretaker) e;
+    public static void printDetails(Employee employee) {
+        if (employee instanceof Caretaker) {
+            Caretaker em = (Caretaker) employee;
             System.out.printf("%s, id: %d, paid %s, works for %f", em.getName(), em.getId(), em.getSalary(),
                     em.getWorkingHours());
             System.out.println(" Dead?: " + em.getIsDead() + ".");
         }
     }
 
-    public static void printArrayDetails(Employee[] e) {
-        for (int i = 0; i < e.length; i++) {
-            printDetails(e[i]);
+    public static void printArrayDetails(Employee[] employees) {
+        for (int i = 0; i < employees.length; i++) {
+            printDetails(employees[i]);
         }
     }
 
-    public static void printArrayListEmployeeDetails(ArrayList<Employee> el) {
-        Iterator<Employee> itr = el.iterator();
+    public static void printArrayListEmployeeDetails(ArrayList<Employee> employees) {
+        Iterator<Employee> itr = employees.iterator();
         while (itr.hasNext()) {
             printDetails(itr.next());
         }
     }
 
-    public static ArrayList<Animal> convertAnimalArrayToArrayList(Animal[] zooLine) {
+    public static Animal[] convertAnimalArrayListToArray(ArrayList<Animal> animals) {
+        int size = animals.size();
+        Object[] objectArray = animals.toArray();
+        Animal[] animalArray = new Animal[size];
+
+        for (int i = 0; i < size; i++) {
+            animalArray[i] = (Animal) objectArray[i];
+        }
+
+        return animalArray;
+    }
+
+    public static ArrayList<Animal> convertAnimalArrayToArrayList(Animal[] animals) {
         ArrayList<Animal> animalList = new ArrayList<Animal>();
 
-        for (int i = 0; i < zooLine.length; i++) {
-            animalList.add(zooLine[i]);
+        for (int i = 0; i < animals.length; i++) {
+            animalList.add(animals[i]);
         }
 
         return animalList;
     }
 
-    public static ArrayList<Animal> convertAnimalMatrixToArrayList(Animal[][] zooLine) {
+    public static ArrayList<Animal> convertAnimalMatrixToArrayList(Animal[][] animals) {
         ArrayList<Animal> animalList = new ArrayList<Animal>();
 
-        for (int i = 0; i < zooLine.length; i++) {
-            for (int j = 0; j < zooLine[i].length; j++) {
-                animalList.add(zooLine[i][j]);
+        for (int i = 0; i < animals.length; i++) {
+            for (int j = 0; j < animals[i].length; j++) {
+                animalList.add(animals[i][j]);
             }
         }
 
         return animalList;
     }
 
-    public static ArrayList<ArrayList<Animal>> convertAnimalMatrixToArrayListArrayList(Animal[][] zooLine) {
+    public static ArrayList<ArrayList<Animal>> convertAnimalMatrixToArrayListArrayList(Animal[][] animals) {
         ArrayList<ArrayList<Animal>> animalListList = new ArrayList<ArrayList<Animal>>();
 
-        for (int i = 0; i < zooLine.length; i++) {
+        for (int i = 0; i < animals.length; i++) {
             ArrayList<Animal> animalList = new ArrayList<Animal>();
-            for (int j = 0; j < zooLine[i].length; j++) {
-                animalList.add(zooLine[i][j]);
+            for (int j = 0; j < animals[i].length; j++) {
+                animalList.add(animals[i][j]);
             }
             animalListList.add(animalList);
         }
@@ -299,11 +311,11 @@ public class BigFactory {
         return animalListList;
     }
 
-    public static ArrayList<Employee> convertEmployeeArrayToArrayList(Employee[] employeeTeam) {
+    public static ArrayList<Employee> convertEmployeeArrayToArrayList(Employee[] employees) {
         ArrayList<Employee> employeeList = new ArrayList<Employee>();
 
-        for (int i = 0; i < employeeTeam.length; i++) {
-            employeeList.add(employeeTeam[i]);
+        for (int i = 0; i < employees.length; i++) {
+            employeeList.add(employees[i]);
         }
 
         return employeeList;

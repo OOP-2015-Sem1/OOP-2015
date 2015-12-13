@@ -30,41 +30,21 @@ public class ListActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        /*
-        AnimalRepository animalRepository = new AnimalRepository(getApplicationContext());
-        ArrayList<Animal> animalArrayList = null;
-        try {
-            animalArrayList = animalRepository.load();
-        } catch (ParserConfigurationException | SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.d("De ce nu merge?", "FILE NOT FOUND. PLEASE TRY AGAIN LATER.");
-        }
-
-        ZooData.setAnimalList(animalArrayList);
-        */
-
-        BigFactory bigFactory = new BigFactory();
-        Animal[] animals = bigFactory.generateRandomAnimalAmount(50);
-
         // db stuff
         this.sql = new SQLiteZoosomeDatabase(this.getApplicationContext());
         int animalCount = this.sql.getNumberOfAnimals();
         Log.d("SQL", "before: " + animalCount);
 
         if (animalCount == 0) {
-            for (Animal animal : animals) {
-                this.sql.insertAnimal(animal);
-            }
+            BigFactory bigFactory = new BigFactory();
+            this.sql.insertAnimals(BigFactory.convertAnimalArrayToArrayList(
+                    bigFactory.generateRandomAnimalAmount(50)));
         }
 
         animalCount = this.sql.getNumberOfAnimals();
         Log.d("SQL", "after: " + animalCount);
 
-        ZooData.setAnimalList(this.sql.readAllAnimals());
-
-        this.listAdapter = new AnimalAdapter(this, ZooData.getArrayAnimalList());
+        this.listAdapter = new AnimalAdapter(this, BigFactory.convertAnimalArrayListToArray(this.sql.readAllAnimals()));
         ListView listView = (ListView) findViewById(R.id.animalList);
         listView.setAdapter(listAdapter);
         listView.setOnItemClickListener(new ListOnItemClickListener());

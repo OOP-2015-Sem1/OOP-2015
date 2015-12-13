@@ -6,6 +6,8 @@ import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLStreamException;
 */
 
+import com.example.alexh.zoosome.repositories.SQLiteZoosomeDatabase;
+
 import org.w3c.dom.Element;
 
 import java.util.ArrayList;
@@ -14,18 +16,20 @@ public abstract class Aquatic extends Animal {
 	private static final int DEFAULT_AVG_SWIM_DEPTH = 0;
 	private static final WaterType DEFAULT_WATER_TYPE = WaterType.getWater(0);
 
+	public static final String NAME = "Aquatic";
+
 	private static final String FIELD_NAME_AVERAGE_SWIM_DEPTH = "Average swim depth";
 	private static final String FIELD_NAME_WATER_TYPE = "Water type";
 
 	// SQLite resources
-	public static final String TABLE_AQUATIC_NAME = "aquatic_table";
+	public static final String TABLE_AQUATIC_NAME = NAME.toLowerCase();
 	public static final String TABLE_AQUATIC_COL_ID = TABLE_CLASS_COL_ID;
 	public static final String TABLE_AQUATIC_COL_AVERAGE_SWIM_DEPTH = "averageSwimDepth";
 	public static final String TABLE_AQUATIC_COL_WATER_TYPE = "waterType";
 
 	public static final String TABLE_AQUATIC_COL_ID_MODIFIERS = TABLE_CLASS_COL_ID_MODIFIERS;
-	public static final String TABLE_AQUATIC_COL_AVERAGE_SWIM_DEPTH_MODIFIERS = "INTEGER";
-	public static final String TABLE_AQUATIC_COL_WATER_TYPE_MODIFIERS = "VARCHAR(10)";
+	public static final String TABLE_AQUATIC_COL_AVERAGE_SWIM_DEPTH_MODIFIERS = SQLiteZoosomeDatabase.INTEGER_MODIFIER;
+	public static final String TABLE_AQUATIC_COL_WATER_TYPE_MODIFIERS = SQLiteZoosomeDatabase.WATERTYPE_MODIFIER;
 
 	private int avgSwimDepth;
 	private WaterType waterType;
