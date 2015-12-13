@@ -11,23 +11,24 @@ public class Sound {
 	private static final int HUMAN_WON = 1;
 	private static final int PC_WON = 2;
 	private static final int PC_LOST=3;
+	private String dirName="C:/Users/Andi/workspace/ProjectT/Sounds";
 
 	public void SoundIt(int choice) {
 		try {
 			if (choice == HUMAN_WON) {
-				File soundFile = new File("C:/Users/Andi/workspace/ProjectT/src/Sounds/t1.wav");
+				File soundFile = new File(dirName+"/t1.wav");
 				AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
 				Clip clip = AudioSystem.getClip();
 				clip.open(audioIn);
 				clip.start();
 			} else if (choice == PC_WON) {
-				File soundFile = new File("C:/Users/Andi/workspace/ProjectT/src/Sounds/ouch.wav");
+				File soundFile = new File(dirName+"/ouch.wav");
 				AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
 				Clip clip = AudioSystem.getClip();
 				clip.open(audioIn);
 				clip.start();
 			} else if (choice == PC_LOST) {
-				File soundFile = new File("C:/Users/Andi/workspace/ProjectT/src/Sounds/t2.wav");
+				File soundFile = new File(dirName+"/t2.wav");
 				AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
 				Clip clip = AudioSystem.getClip();
 				clip.open(audioIn);

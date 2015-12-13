@@ -180,7 +180,7 @@ public class GameManagement {
 				System.exit(0);
 			} else {
 				s.SoundIt(HUMAN);
-				accounts.replace(accounts.getAccountScore() + SCORE_IF_WIN);
+				accounts.replace(accounts.getAccountScore(accounts.getAccountNr()) + SCORE_IF_WIN);
 				JOptionPane.showMessageDialog(null, "Player Wins");
 				System.exit(0);
 			}
@@ -193,7 +193,7 @@ public class GameManagement {
 			} else {
 				s.SoundIt(PC);
 				if (accounts.getAccountNr() != 0)
-					accounts.replace(accounts.getAccountScore() + SCORE_IF_LOST);
+					accounts.replace(accounts.getAccountScore(accounts.getAccountNr()) + SCORE_IF_LOST);
 				JOptionPane.showMessageDialog(null, "I WIN!!");
 				System.exit(0);
 			}
@@ -203,7 +203,7 @@ public class GameManagement {
 
 			if (winner() == 0) {
 				if (accounts.getAccountNr() != 0)
-					accounts.replace(accounts.getAccountScore() + SCORE_IF_TIE);
+					accounts.replace(accounts.getAccountScore(accounts.getAccountNr()) + SCORE_IF_TIE);
 				JOptionPane.showMessageDialog(null, "It's a Tie");
 				System.exit(0);
 			}
