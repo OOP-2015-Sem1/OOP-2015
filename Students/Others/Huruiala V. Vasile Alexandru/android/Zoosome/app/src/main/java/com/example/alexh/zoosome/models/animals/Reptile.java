@@ -7,8 +7,20 @@ import javax.xml.stream.XMLStreamException;
 */
 import org.w3c.dom.Element;
 
+import java.util.ArrayList;
+
 public abstract class Reptile extends Animal {
 	private static final boolean DEFAULT_LAYS_EGGS = false;
+
+	private static final String FIELD_NAME_LAYS_EGGS = "Lays eggs";
+
+    // SQLite resources
+	public static final String TABLE_REPTILE_NAME = "reptile_table";
+	public static final String TABLE_REPTILE_COL_ID = TABLE_CLASS_COL_ID;
+	public static final String TABLE_REPTILE_COL_LAYS_EGGS = "laysEggs";
+
+    public static final String TABLE_REPTILE_COL_ID_MODIFIERS = TABLE_CLASS_COL_ID_MODIFIERS;
+	public static final String TABLE_REPTILE_COL_LAYS_EGGS_MODIFIERS = "VARCHAR(5)";
 
 	private boolean laysEggs;
 
@@ -23,10 +35,16 @@ public abstract class Reptile extends Animal {
 		this.laysEggs = hasEggs;
 	}
 
-	public Reptile(String[] values) {
-		super(values[0], Integer.parseInt(values[1]), Double.parseDouble(values[2]), Double.parseDouble(values[3]));
-		this.laysEggs = Boolean.parseBoolean(values[4]);
-	}
+	public Reptile(ArrayList<String> parameters) {
+        this(
+                parameters.get(0),
+                Integer.parseInt(parameters.get(1)),
+                Double.parseDouble(parameters.get(2)),
+                Double.parseDouble(parameters.get(3)),
+                Boolean.parseBoolean(parameters.get(5))
+        );
+        super.setTakenCareOf(Boolean.parseBoolean(parameters.get(4)));
+    }
 
 	public boolean getLaysEggs() {
 		return this.laysEggs;
@@ -36,10 +54,53 @@ public abstract class Reptile extends Animal {
 		this.laysEggs = hasEggs;
 	}
 
-	public String[] getFields() {
-		return new String[] { super.getName(), "" + super.getNoOfLegs(), "" + super.getMaintenanceCost(),
-				"" + super.getDangerPerc(), "" + this.getLaysEggs() };
+	@Override
+	public ArrayList<String> getClassFieldValues() {
+		ArrayList<String> fieldValues = new ArrayList<>();
+
+		fieldValues.add(String.valueOf(this.getLaysEggs()));
+
+		return fieldValues;
 	}
+
+	@Override
+	public ArrayList<String> getClassFieldNames() {
+		ArrayList<String> fieldNames = new ArrayList<>();
+
+		fieldNames.add(FIELD_NAME_LAYS_EGGS);
+
+		return fieldNames;
+	}
+
+	@Override
+	public ArrayList[] getClassFieldNamesAndValues() {
+		ArrayList[] fieldNamesAndValues = new ArrayList[2];
+
+		fieldNamesAndValues[0] = this.getClassFieldNames();
+		fieldNamesAndValues[1] = this.getClassFieldValues();
+
+		return fieldNamesAndValues;
+	}
+
+	@Override
+	public ArrayList<String> getClassFieldInsertColumnNames() {
+		ArrayList<String> fieldInsertColumnNames = new ArrayList<>();
+
+		fieldInsertColumnNames.add(TABLE_REPTILE_COL_LAYS_EGGS);
+
+		return fieldInsertColumnNames;
+	}
+
+	@Override
+	public ArrayList[] getClassFieldInsertColumnNamesAndValues() {
+		ArrayList[] fieldInsertColumnNamesAndValues = new ArrayList[2];
+
+		fieldInsertColumnNamesAndValues[0] = this.getClassFieldInsertColumnNames();
+		fieldInsertColumnNamesAndValues[1] = this.getClassFieldValues();
+
+		return fieldInsertColumnNamesAndValues;
+	}
+
 /*
 	public void encodeToXML(XMLEventWriter eventWriter) throws XMLStreamException {
 		super.encodeToXML(eventWriter);

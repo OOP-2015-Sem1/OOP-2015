@@ -22,13 +22,13 @@ public class InsectFactory extends SpeciesFactory {
 
     @Override
     public Animal getAnimal(String type) throws Exception {
-        if (Constants.Animals.Insect.BEETLE.equals(type)) {
+        if (Constants.Animals.Insects.BEETLE.equals(type)) {
             return new Beetle();
-        } else if (Constants.Animals.Insect.SCORPION.equals(type)) {
+        } else if (Constants.Animals.Insects.SCORPION.equals(type)) {
             return new Scorpion();
-        } else if (Constants.Animals.Insect.MANTIS.equals(type)) {
+        } else if (Constants.Animals.Insects.MANTIS.equals(type)) {
             return new Mantis();
-        } else if (Constants.Animals.Insect.DRAGONFLY.equals(type)) {
+        } else if (Constants.Animals.Insects.DRAGONFLY.equals(type)) {
             return new Dragonfly();
         } else {
             throw new Exception("Invalid animal exception!");
@@ -39,7 +39,7 @@ public class InsectFactory extends SpeciesFactory {
     public Animal getRandomAnimalOfType(String type) throws Exception {
         String name = NameGenerator.getRandomName();
 
-        if (Constants.Animals.Insect.BEETLE.equals(type)) {
+        if (Constants.Animals.Insects.BEETLE.equals(type)) {
             final int index = 0;
 
             name += NAME_ENDING[index];
@@ -53,7 +53,7 @@ public class InsectFactory extends SpeciesFactory {
                     ? EXTRA_DANGEROS_BASE[index] + EXTRA_DANGEROS_VAR[index] * Math.random() : 0.0D;
 
             return new Beetle(name, noLegs, maintenanceCost, dangerPerc + extraDanger, flyer, dangerous);
-        } else if (Constants.Animals.Insect.SCORPION.equals(type)) {
+        } else if (Constants.Animals.Insects.SCORPION.equals(type)) {
             final int index = 1;
 
             name += NAME_ENDING[index];
@@ -67,7 +67,7 @@ public class InsectFactory extends SpeciesFactory {
                     ? EXTRA_DANGEROS_BASE[index] + EXTRA_DANGEROS_VAR[index] * Math.random() : 0.0D;
 
             return new Scorpion(name, noLegs, maintenanceCost, dangerPerc + extraDanger, flyer, dangerous);
-        } else if (Constants.Animals.Insect.MANTIS.equals(type)) {
+        } else if (Constants.Animals.Insects.MANTIS.equals(type)) {
             final int index = 2;
 
             name += NAME_ENDING[index];
@@ -81,7 +81,7 @@ public class InsectFactory extends SpeciesFactory {
                     ? EXTRA_DANGEROS_BASE[index] + EXTRA_DANGEROS_VAR[index] * Math.random() : 0.0D;
 
             return new Mantis(name, noLegs, maintenanceCost, dangerPerc + extraDanger, flyer, dangerous);
-        } else if (Constants.Animals.Insect.DRAGONFLY.equals(type)) {
+        } else if (Constants.Animals.Insects.DRAGONFLY.equals(type)) {
             final int index = 3;
 
             name += NAME_ENDING[index];

@@ -12,9 +12,6 @@ import com.example.alexh.zoosome.models.animals.Animal;
 import com.example.alexh.zoosome.services.factories.Constants;
 
 
-/**
- * Created by alexh on 07.11.2015.
- */
 public class AnimalAdapter extends ArrayAdapter<Animal> {
     public AnimalAdapter(Context context, Animal[] animals) {
         super(context, R.layout.animal_element, animals);
@@ -34,8 +31,8 @@ public class AnimalAdapter extends ArrayAdapter<Animal> {
 
         animalImage.setImageResource(R.drawable.siegeonager1);
         nameTextView.setText(animal.getName());
-        classTextView.setText(String.format("Class: %s", Constants.nameOfClass(animal)));
-        speciesTextView.setText(String.format("Species: %s", Constants.nameOfSpecies(animal)));
+        classTextView.setText(String.format("Class: %s", Constants.Animals.nameOfClass(animal)));
+        speciesTextView.setText(String.format("Species: %s", Constants.Animals.nameOfSpecies(animal)));
 
         return view;
     }

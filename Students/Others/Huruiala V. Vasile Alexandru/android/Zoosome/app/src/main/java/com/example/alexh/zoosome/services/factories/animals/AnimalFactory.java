@@ -4,17 +4,17 @@ import com.example.alexh.zoosome.services.factories.Constants;
 
 public class AnimalFactory {
     public SpeciesFactory getSpeciesFactory(final String type) throws Exception {
-        if (Constants.Species.MAMMAL.equals(type)) {
+        if (Constants.Animals.Mammals.NAME.equals(type)) {
             return new MammalFactory();
-        } else if (Constants.Species.REPTILE.equals(type)) {
+        } else if (Constants.Animals.Reptiles.NAME.equals(type)) {
             return new ReptileFactory();
-        } else if (Constants.Species.BIRD.equals(type)) {
+        } else if (Constants.Animals.Birds.NAME.equals(type)) {
             return new BirdFactory();
-        } else if (Constants.Species.AQUATIC.equals(type)) {
+        } else if (Constants.Animals.Aquatics.NAME.equals(type)) {
             return new AquaticFactory();
-        } else if (Constants.Species.INSECT.equals(type)) {
+        } else if (Constants.Animals.Insects.NAME.equals(type)) {
             return new InsectFactory();
-        } else if (Constants.Species.SIEGE.equals(type)) {
+        } else if (Constants.Animals.Sieges.NAME.equals(type)) {
             return new SiegeWorkshop();
         } else {
             System.out.println("af");

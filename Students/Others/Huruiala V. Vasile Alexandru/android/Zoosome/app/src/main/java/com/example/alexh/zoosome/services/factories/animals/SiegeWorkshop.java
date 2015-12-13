@@ -22,13 +22,13 @@ public class SiegeWorkshop extends SpeciesFactory {
 
     @Override
     public Animal getAnimal(String type) throws Exception {
-        if (Constants.Animals.Siege.RAM.equals(type)) {
+        if (Constants.Animals.Sieges.RAM.equals(type)) {
             return new Ram();
-        } else if (Constants.Animals.Siege.MANGONEL.equals(type)) {
+        } else if (Constants.Animals.Sieges.MANGONEL.equals(type)) {
             return new Mangonel();
-        } else if (Constants.Animals.Siege.BALLISTA.equals(type)) {
+        } else if (Constants.Animals.Sieges.BALLISTA.equals(type)) {
             return new Ballista();
-        } else if (Constants.Animals.Siege.TREBUCHET.equals(type)) {
+        } else if (Constants.Animals.Sieges.TREBUCHET.equals(type)) {
             return new Trebuchet();
         } else {
             throw new Exception("Invalid animal exception!");
@@ -39,7 +39,7 @@ public class SiegeWorkshop extends SpeciesFactory {
     public Animal getRandomAnimalOfType(String type) throws Exception {
         String name = NameGenerator.getRandomName();
 
-        if (Constants.Animals.Siege.RAM.equals(type)) {
+        if (Constants.Animals.Sieges.RAM.equals(type)) {
             final int index = 0;
 
             name += NAME_ENDING[index];
@@ -50,7 +50,7 @@ public class SiegeWorkshop extends SpeciesFactory {
             final boolean mobile = (Math.random() <= MOBLIE_CHACE[index]);
 
             return new Ram(name, noLegs, maintenanceCost, dangerPerc, range, mobile);
-        } else if (Constants.Animals.Siege.MANGONEL.equals(type)) {
+        } else if (Constants.Animals.Sieges.MANGONEL.equals(type)) {
             final int index = 1;
 
             name += NAME_ENDING[index];
@@ -61,7 +61,7 @@ public class SiegeWorkshop extends SpeciesFactory {
             final boolean mobile = (Math.random() <= MOBLIE_CHACE[index]);
 
             return new Mangonel(name, noLegs, maintenanceCost, dangerPerc, range, mobile);
-        } else if (Constants.Animals.Siege.BALLISTA.equals(type)) {
+        } else if (Constants.Animals.Sieges.BALLISTA.equals(type)) {
             final int index = 2;
 
             name += NAME_ENDING[index];
@@ -72,7 +72,7 @@ public class SiegeWorkshop extends SpeciesFactory {
             final boolean mobile = (Math.random() <= MOBLIE_CHACE[index]);
 
             return new Ballista(name, noLegs, maintenanceCost, dangerPerc, range, mobile);
-        } else if (Constants.Animals.Siege.TREBUCHET.equals(type)) {
+        } else if (Constants.Animals.Sieges.TREBUCHET.equals(type)) {
             final int index = 3;
 
             name += NAME_ENDING[index];
