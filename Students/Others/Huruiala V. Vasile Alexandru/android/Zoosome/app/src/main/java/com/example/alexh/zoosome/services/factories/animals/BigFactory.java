@@ -27,11 +27,11 @@ public class BigFactory {
     public BigFactory() {
         this.animalFactory = new AnimalFactory();
         Animal a = new Bear();
-        this.factories = new SpeciesFactory[Constants.Species.SPECIES.length];
+        this.factories = new SpeciesFactory[Constants.Animals.ANIMAL_CLASS_CLASSES.length];
 
         try {
-            for (int i = 0; i < Constants.Species.SPECIES.length; i++) {
-                this.factories[i] = this.animalFactory.getSpeciesFactory(Constants.Species.SPECIES[i]);
+            for (int i = 0; i < Constants.Animals.ANIMAL_CLASS_CLASSES.length; i++) {
+                this.factories[i] = this.animalFactory.getSpeciesFactory(Constants.Animals.CLASSES_NAME[i]);
             }
         } catch (Exception e) {
             System.out.println("Exception 1 at BigFactory Constructor: " + e.getMessage());
@@ -79,7 +79,7 @@ public class BigFactory {
      * type
      */
     public Animal generateRandomAnimal() {
-        int speciesCode = (int) (Math.random() * Constants.Species.SPECIES.length);
+        int speciesCode = (int) (Math.random() * Constants.Animals.ANIMAL_CLASS_CLASSES.length);
 
         return generateRandomAnimal(speciesCode);
     }
@@ -117,9 +117,9 @@ public class BigFactory {
      * all type evenly
      */
     public Animal[][] generateZooEvenAmount(int individuals) {
-        Animal[][] mat = new Animal[Constants.Species.SPECIES.length][individuals];
+        Animal[][] mat = new Animal[Constants.Animals.ANIMAL_CLASS_CLASSES.length][individuals];
 
-        for (int i = 0; i < Constants.Species.SPECIES.length; i++) {
+        for (int i = 0; i < Constants.Animals.ANIMAL_CLASS_CLASSES.length; i++) {
             mat[i] = generateSpeciesEvenAmount(i, individuals);
         }
 

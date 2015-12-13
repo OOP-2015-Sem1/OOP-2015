@@ -1,30 +1,27 @@
 package com.example.alexh.zoosome;
 
+import android.database.Cursor;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.alexh.zoosome.models.animals.Animal;
-import com.example.alexh.zoosome.models.animals.Bear;
-import com.example.alexh.zoosome.models.animals.Dove;
-import com.example.alexh.zoosome.repositories.AnimalRepository;
+import com.example.alexh.zoosome.repositories.SQLiteZoosomeDatabase;
 import com.example.alexh.zoosome.repositories.ZooData;
 import com.example.alexh.zoosome.services.factories.animals.BigFactory;
 
-import org.xml.sax.SAXException;
-
-import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.xml.parsers.ParserConfigurationException;
-
 public class ListActivity extends AppCompatActivity {
+
+    private ListAdapter listAdapter;
+    private SQLiteZoosomeDatabase sql;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,16 +30,12 @@ public class ListActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        BigFactory bigFactory = new BigFactory();
-        Animal[] a = bigFactory.generateRandomAnimalAmount(50);
-
+        /*
         AnimalRepository animalRepository = new AnimalRepository(getApplicationContext());
         ArrayList<Animal> animalArrayList = null;
         try {
             animalArrayList = animalRepository.load();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
+        } catch (ParserConfigurationException | SAXException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
@@ -50,10 +43,46 @@ public class ListActivity extends AppCompatActivity {
         }
 
         ZooData.setAnimalList(animalArrayList);
-        ZooData.setAnimalList(a); // Overrides the line above, both are functional separately
+        */
 
-        ListAdapter listAdapter = new AnimalAdapter(this, ZooData.getArrayAnimalList());
+        BigFactory bigFactory = new BigFactory();
+        Animal[] animals = bigFactory.generateRandomAnimalAmount(50);
+
+        // db stuff
+        this.sql = new SQLiteZoosomeDatabase(this.getApplicationContext());
+        int animalCount = this.sql.getNumberOfAnimals();
+        Log.d("SQL", "before: " + animalCount);
+
+        if (animalCount == 0) {
+            for (Animal animal : animals) {
+                this.sql.insertAnimal(animal);
+            }
+        }
+
+        animalCount = this.sql.getNumberOfAnimals();
+        Log.d("SQL", "after: " + animalCount);
+
+        ZooData.setAnimalList(this.sql.readAllAnimals());
+
+        this.listAdapter = new AnimalAdapter(this, ZooData.getArrayAnimalList());
         ListView listView = (ListView) findViewById(R.id.animalList);
         listView.setAdapter(listAdapter);
+        listView.setOnItemClickListener(new ListOnItemClickListener());
+    }
+
+    private class ListOnItemClickListener implements AdapterView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Animal clickedAnimal = (Animal) ListActivity.this.listAdapter.getItem(position);
+
+            ArrayList[] namesAndValues = clickedAnimal.getAllFieldNamesAndValues();
+            String fields = "";
+            for (int i = 0; i < namesAndValues[0].size(); i++) {
+                fields += namesAndValues[0].get(i) + "=" + namesAndValues[1].get(i) + "; ";
+            }
+
+            Toast.makeText(ListActivity.this.getApplicationContext(), fields, Toast.LENGTH_SHORT).show();
+        }
     }
 }

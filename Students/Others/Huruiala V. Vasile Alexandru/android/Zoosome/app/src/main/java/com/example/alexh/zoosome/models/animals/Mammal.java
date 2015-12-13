@@ -7,9 +7,25 @@ import javax.xml.stream.XMLStreamException;
 */
 import org.w3c.dom.Element;
 
+import java.util.ArrayList;
+
 public abstract class Mammal extends Animal {
 	private static final double DEFAULT_NORMAL_BODY_TEMPERATURE = 0.0D;
 	private static final double DEFAULT_PERCENTAGE_BODY_HAIR = 0.0D;
+
+	private static final String FIELD_NAME_NORMAL_BODY_TEMPERATURE = "Normal body temperature";
+	private static final String FIELD_NAME_PERCENTAGE_BODY_HAIR = "Percentage body hair";
+
+	// SQLite resources
+	public static final String TABLE_MAMMAL_NAME = "mammal_table";
+	public static final String TABLE_MAMMAL_COL_ID = TABLE_CLASS_COL_ID;
+	public static final String TABLE_MAMMAL_COL_NORMAL_BODY_TEMPERATURE = "normalBodyTemp";
+	public static final String TABLE_MAMMAL_COL_PERCENTAGE_BODY_HAIR = "percBodyHair";
+
+	public static final String TABLE_MAMMAL_COL_ID_MODIFIERS = TABLE_CLASS_COL_ID_MODIFIERS;
+	public static final String TABLE_MAMMAL_COL_NORMAL_BODY_TEMPERATURE_MODIFIERS = "DOUBLE";
+	public static final String TABLE_MAMMAL_COL_PERCENTAGE_BODY_HAIR_MODIFIERS = "DOUBLE";
+
 
 	private double normalBodyTemp;
 	private double percBodyHair;
@@ -27,10 +43,16 @@ public abstract class Mammal extends Animal {
 		this.percBodyHair = muchHair;
 	}
 
-	public Mammal(String[] values) {
-		super(values[0], Integer.parseInt(values[1]), Double.parseDouble(values[2]), Double.parseDouble(values[3]));
-		this.normalBodyTemp = Double.parseDouble(values[4]);
-		this.percBodyHair = Double.parseDouble(values[5]);
+	public Mammal(ArrayList<String> parameters) {
+		this(
+				parameters.get(0),
+				Integer.parseInt(parameters.get(1)),
+				Double.parseDouble(parameters.get(2)),
+				Double.parseDouble(parameters.get(3)),
+				Double.parseDouble(parameters.get(5)),
+				Double.parseDouble(parameters.get(6))
+		);
+		super.setTakenCareOf(Boolean.parseBoolean(parameters.get(4)));
 	}
 
 	public double getNormalBodyTemp() {
@@ -49,10 +71,56 @@ public abstract class Mammal extends Animal {
 		this.percBodyHair = muchHair;
 	}
 
-	public String[] getFields() {
-		return new String[] { super.getName(), "" + super.getNoOfLegs(), "" + super.getMaintenanceCost(),
-				"" + super.getDangerPerc(), "" + this.getNormalBodyTemp(), "" + this.getPercBodyHair() };
+	@Override
+	public ArrayList<String> getClassFieldValues() {
+		ArrayList<String> fieldValues = new ArrayList<>();
+
+		fieldValues.add(String.valueOf(this.getNormalBodyTemp()));
+		fieldValues.add(String.valueOf(this.getPercBodyHair()));
+
+		return fieldValues;
 	}
+
+	@Override
+	public ArrayList<String> getClassFieldNames() {
+		ArrayList<String> fieldNames = new ArrayList<>();
+
+		fieldNames.add(FIELD_NAME_NORMAL_BODY_TEMPERATURE);
+		fieldNames.add(FIELD_NAME_PERCENTAGE_BODY_HAIR);
+
+		return fieldNames;
+	}
+
+	@Override
+	public ArrayList[] getClassFieldNamesAndValues() {
+		ArrayList[] fieldNamesAndValues = new ArrayList[2];
+
+		fieldNamesAndValues[0] = this.getClassFieldNames();
+		fieldNamesAndValues[1] = this.getClassFieldValues();
+
+		return fieldNamesAndValues;
+	}
+
+	@Override
+	public ArrayList<String> getClassFieldInsertColumnNames() {
+		ArrayList<String> fieldInsertColumnNames = new ArrayList<>();
+
+		fieldInsertColumnNames.add(TABLE_MAMMAL_COL_NORMAL_BODY_TEMPERATURE);
+		fieldInsertColumnNames.add(TABLE_MAMMAL_COL_PERCENTAGE_BODY_HAIR);
+
+		return fieldInsertColumnNames;
+	}
+
+	@Override
+	public ArrayList[] getClassFieldInsertColumnNamesAndValues() {
+		ArrayList[] fieldInsertColumnNamesAndValues = new ArrayList[2];
+
+		fieldInsertColumnNamesAndValues[0] = this.getClassFieldInsertColumnNames();
+		fieldInsertColumnNamesAndValues[1] = this.getClassFieldValues();
+
+		return fieldInsertColumnNamesAndValues;
+	}
+
 /*
 	public void encodeToXML(XMLEventWriter eventWriter) throws XMLStreamException {
 		super.encodeToXML(eventWriter);
