@@ -1,13 +1,17 @@
+package repositories;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FluffyFileReader {
 	private static char[][] gameBoard;
 	private static char[][] cluesBoard;
 	private static final int maxRows = 10;
 	private static final int maxCols = 40;
+	private static Map<Character, String> icons = new HashMap<Character, String>();
 
 	public static void readBoard() {
 		char[][] temporary = new char[maxRows][maxCols];
@@ -43,7 +47,24 @@ public class FluffyFileReader {
 		} catch (IOException ex) {
 			System.out.println("Error reading file '" + "FluffyWorld" + "'");
 		}
+		
+		addIcons();
 	}
+	
+	public static Map<Character, String> getIcons()
+	{
+		return icons;
+	}
+	
+	public static void addIcons()
+	{
+			icons.put(' ',"lane.png");
+			icons.put('F',"cat.png");
+			icons.put('*',"wall.png");
+			icons.put('H',"wall2.png");
+			icons.put('W',"hat.png");
+	}
+
 
 	public static char[][] getGameBoard() 
 	{
@@ -64,12 +85,7 @@ public class FluffyFileReader {
 	}
 
 	public static void main(String[] args) {
-		readBoard();
-		char[][] temporary = getGameBoard();
-		for (int i = 0; i < maxRows; i++)
-			for (int j = 0; j < maxCols; j++) {
-				System.out.println(temporary[i][j]);
-			}
+
 	}
 
 }
