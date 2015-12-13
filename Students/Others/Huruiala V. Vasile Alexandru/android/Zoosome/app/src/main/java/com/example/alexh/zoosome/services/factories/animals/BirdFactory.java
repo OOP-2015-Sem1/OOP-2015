@@ -21,13 +21,13 @@ public class BirdFactory extends SpeciesFactory {
 
     @Override
     public Animal getAnimal(String type) throws Exception {
-        if (Constants.Animals.Bird.DOVE.equals(type)) {
+        if (Constants.Animals.Birds.DOVE.equals(type)) {
             return new Dove();
-        } else if (Constants.Animals.Bird.OSTRICH.equals(type)) {
+        } else if (Constants.Animals.Birds.OSTRICH.equals(type)) {
             return new Ostrich();
-        } else if (Constants.Animals.Bird.EAGLE.equals(type)) {
+        } else if (Constants.Animals.Birds.EAGLE.equals(type)) {
             return new Eagle();
-        } else if (Constants.Animals.Bird.HUMMINGBIRD.equals(type)) {
+        } else if (Constants.Animals.Birds.HUMMINGBIRD.equals(type)) {
             return new Hummingbird();
         } else {
             throw new Exception("Invalid animal exception!");
@@ -38,7 +38,7 @@ public class BirdFactory extends SpeciesFactory {
     public Animal getRandomAnimalOfType(String type) throws Exception {
         String name = NameGenerator.getRandomName();
 
-        if (Constants.Animals.Bird.DOVE.equals(type)) {
+        if (Constants.Animals.Birds.DOVE.equals(type)) {
             final int index = 0;
 
             name += NAME_ENDING[index];
@@ -50,7 +50,7 @@ public class BirdFactory extends SpeciesFactory {
                     + AVG_FLIGHT_ALTITUDE_VAR[index] * Math.random());
 
             return new Dove(name, noLegs, maintenanceCost, dangerPerc, migrates, flightAlt);
-        } else if (Constants.Animals.Bird.OSTRICH.equals(type)) {
+        } else if (Constants.Animals.Birds.OSTRICH.equals(type)) {
             final int index = 1;
 
             name += NAME_ENDING[index];
@@ -62,7 +62,7 @@ public class BirdFactory extends SpeciesFactory {
                     + AVG_FLIGHT_ALTITUDE_VAR[index] * Math.random());
 
             return new Ostrich(name, noLegs, maintenanceCost, dangerPerc, migrates, flightAlt);
-        } else if (Constants.Animals.Bird.EAGLE.equals(type)) {
+        } else if (Constants.Animals.Birds.EAGLE.equals(type)) {
             final int index = 2;
 
             name += NAME_ENDING[index];
@@ -74,7 +74,7 @@ public class BirdFactory extends SpeciesFactory {
                     + AVG_FLIGHT_ALTITUDE_VAR[index] * Math.random());
 
             return new Eagle(name, noLegs, maintenanceCost, dangerPerc, migrates, flightAlt);
-        } else if (Constants.Animals.Bird.HUMMINGBIRD.equals(type)) {
+        } else if (Constants.Animals.Birds.HUMMINGBIRD.equals(type)) {
             final int index = 3;
 
             name += NAME_ENDING[index];

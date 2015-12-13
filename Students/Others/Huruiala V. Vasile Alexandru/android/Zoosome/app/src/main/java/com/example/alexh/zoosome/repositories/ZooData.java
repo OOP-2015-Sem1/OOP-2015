@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 import com.example.alexh.zoosome.models.animals.Animal;
-import com.example.alexh.zoosome.models.animals.Dove;
 
 public class ZooData {
 

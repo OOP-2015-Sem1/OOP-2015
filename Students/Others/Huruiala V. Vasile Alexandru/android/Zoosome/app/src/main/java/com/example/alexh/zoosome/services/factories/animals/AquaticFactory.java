@@ -22,13 +22,13 @@ public class AquaticFactory extends SpeciesFactory {
 
     @Override
     public Animal getAnimal(String type) throws Exception {
-        if (Constants.Animals.Aquatic.BASS.equals(type)) {
+        if (Constants.Animals.Aquatics.BASS.equals(type)) {
             return new Bass();
-        } else if (Constants.Animals.Aquatic.CLOWNFISH.equals(type)) {
+        } else if (Constants.Animals.Aquatics.CLOWNFISH.equals(type)) {
             return new Clownfish();
-        } else if (Constants.Animals.Aquatic.SURGEONFISH.equals(type)) {
+        } else if (Constants.Animals.Aquatics.SURGEONFISH.equals(type)) {
             return new Surgeonfish();
-        } else if (Constants.Animals.Aquatic.LIONFISH.equals(type)) {
+        } else if (Constants.Animals.Aquatics.LIONFISH.equals(type)) {
             return new Lionfish();
         } else {
             throw new Exception("Invalid animal exception!");
@@ -39,7 +39,7 @@ public class AquaticFactory extends SpeciesFactory {
     public Animal getRandomAnimalOfType(String type) throws Exception {
         String name = NameGenerator.getRandomName();
 
-        if (Constants.Animals.Aquatic.BASS.equals(type)) {
+        if (Constants.Animals.Aquatics.BASS.equals(type)) {
             final int index = 0;
 
             name += NAME_ENDING[index];
@@ -50,7 +50,7 @@ public class AquaticFactory extends SpeciesFactory {
             final int wTypeCode = (Math.random() <= WATERTYPE_CHACE[index]) ? 1 : 0;
 
             return new Bass(name, noLegs, maintenanceCost, dangerPerc, swimDepth, WaterType.getWater(wTypeCode));
-        } else if (Constants.Animals.Aquatic.CLOWNFISH.equals(type)) {
+        } else if (Constants.Animals.Aquatics.CLOWNFISH.equals(type)) {
             final int index = 1;
 
             name += NAME_ENDING[index];
@@ -61,7 +61,7 @@ public class AquaticFactory extends SpeciesFactory {
             final int wTypeCode = (Math.random() <= WATERTYPE_CHACE[index]) ? 1 : 0;
 
             return new Clownfish(name, noLegs, maintenanceCost, dangerPerc, swimDepth, WaterType.getWater(wTypeCode));
-        } else if (Constants.Animals.Aquatic.SURGEONFISH.equals(type)) {
+        } else if (Constants.Animals.Aquatics.SURGEONFISH.equals(type)) {
             final int index = 2;
 
             name += NAME_ENDING[index];
@@ -72,7 +72,7 @@ public class AquaticFactory extends SpeciesFactory {
             final int wTypeCode = (Math.random() <= WATERTYPE_CHACE[index]) ? 1 : 0;
 
             return new Surgeonfish(name, noLegs, maintenanceCost, dangerPerc, swimDepth, WaterType.getWater(wTypeCode));
-        } else if (Constants.Animals.Aquatic.LIONFISH.equals(type)) {
+        } else if (Constants.Animals.Aquatics.LIONFISH.equals(type)) {
             final int index = 3;
 
             name += NAME_ENDING[index];

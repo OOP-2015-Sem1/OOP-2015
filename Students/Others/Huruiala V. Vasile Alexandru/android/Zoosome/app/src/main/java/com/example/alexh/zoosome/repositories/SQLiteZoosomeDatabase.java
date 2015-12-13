@@ -2,159 +2,293 @@ package com.example.alexh.zoosome.repositories;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.alexh.zoosome.models.animals.Animal;
-import com.example.alexh.zoosome.models.animals.Aquatic;
-import com.example.alexh.zoosome.models.animals.Bird;
-import com.example.alexh.zoosome.models.animals.Insect;
-import com.example.alexh.zoosome.models.animals.Mammal;
-import com.example.alexh.zoosome.models.animals.Reptile;
-import com.example.alexh.zoosome.models.animals.Siege;
 import com.example.alexh.zoosome.services.factories.Constants;
 
-/**
- * Created by alexh on 20.11.2015.
- */
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+
 public class SQLiteZoosomeDatabase extends SQLiteOpenHelper {
+
+    public static final String INTEGER_MODIFIER = "INTEGER";
+    public static final String DOUBLE_MODIFIER = "DOUBLE";
+    public static final String BOOLEAN_MODIFIER = "VARCHAR(5)";
+    public static final String WATERTYPE_MODIFIER = "VARCHAR(10)";
+    public static final String STRING_MODIFIER = "TEXT";
+    public static final String PRIMARY_KEY_MODIFIER = "PRIMARY KEY";
+    public static final String AUTOINCREMENT_MODIFIER = "AUTOINCREMENT";
+    public static final String SPACER = " ";
 
     private static final String DATABASE_NAME = "Zoosome.db";
 
     public SQLiteZoosomeDatabase(Context context) {
         super(context, DATABASE_NAME, null, 1);
+
+        // Drop and rebuild the tables if any expected table is missing
+        try {
+            this.checkAllTables();
+        } catch (Exception e) {
+            try {
+                dropAllTables(getWritableDatabase());
+            } catch (Exception ignored) {
+            }
+            onCreate(getWritableDatabase());
+        }
+    }
+
+    private void checkAllTables() throws Exception {
+        if (this.getNumberOfAnimals() == this.readAllAnimals().size()) {
+            Log.d("SQL", "WUT?");
+        }
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.d("SQL", "onCreate");
         // Animal table
-        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT, %s INTEGER, %s DOUBLE, %s DOUBLE, %s VARCHAR(5))",
-                Constants.Animals.TABLE_ANIMAL, Constants.Animals.TABLE_ANIMAL_COL_ID,
-                Constants.Animals.TABLE_ANIMAL_COL_NAME, Constants.Animals.TABLE_ANIMAL_COL_NO_OF_LEGS,
-                Constants.Animals.TABLE_ANIMAL_COL_MAINTENANCE_COST, Constants.Animals.TABLE_ANIMAL_COL_DANGER_PERCENTAGE,
-                Constants.Animals.TABLE_ANIMAL_COL_TAKEN_CARE_OF));
+        StringBuilder animalTableQuery = new StringBuilder();
 
-        // Mammal table
-        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT, %s DOUBLE, %s DOUBLE, FOREIGN KEY (%s) REFERENCES %s (%s))",
-                Constants.Animals.Mammal.TABLE_MAMMAL, Constants.Animals.Mammal.TABLE_MAMMAL_COL_ID, Constants.Animals.Mammal.TABLE_MAMMAL_COL_SPECIES,
-                Constants.Animals.Mammal.TABLE_MAMMAL_COL_NORMAL_BODY_TEMPERATURE, Constants.Animals.Mammal.TABLE_MAMMAL_COL_PERCENTAGE_BODY_HAIR,
-                Constants.Animals.Mammal.TABLE_MAMMAL_COL_ID, Constants.Animals.TABLE_ANIMAL, Constants.Animals.TABLE_ANIMAL_COL_ID));
+        animalTableQuery.append(String.format("CREATE TABLE %s (", Constants.Animals.TABLE_ANIMAL_NAME));
 
-        // Reptile table
-        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT, %s VARCHAR(5), FOREIGN KEY (%s) REFERENCES %s (%s))",
-                Constants.Animals.Reptile.TABLE_REPTILE, Constants.Animals.Reptile.TABLE_REPTILE_COL_ID, Constants.Animals.Reptile.TABLE_REPTILE_COL_SPECIES,
-                Constants.Animals.Reptile.TABLE_REPTILE_COL_LAYS_EGGS,
-                Constants.Animals.Reptile.TABLE_REPTILE_COL_ID, Constants.Animals.TABLE_ANIMAL, Constants.Animals.TABLE_ANIMAL_COL_ID));
+        for (int indexTableAnimalColumn = 0; indexTableAnimalColumn < Constants.Animals.TABLE_ANIMAL_COLS.length; indexTableAnimalColumn++) {
+            animalTableQuery.append(String.format("%s %s",
+                    Constants.Animals.TABLE_ANIMAL_COLS[indexTableAnimalColumn],
+                    Constants.Animals.TABLE_ANIMAL_COLS_MODIFIERS[indexTableAnimalColumn]));
 
-        // Bird table
-        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT, %s VARCHAR(5), %s INTEGER, FOREIGN KEY (%s) REFERENCES %s (%s))",
-                Constants.Animals.Bird.TABLE_BIRD, Constants.Animals.Bird.TABLE_BIRD_COL_ID, Constants.Animals.Bird.TABLE_BIRD_COL_SPECIES,
-                Constants.Animals.Bird.TABLE_BIRD_COL_MIGRATES, Constants.Animals.Bird.TABLE_BIRD_COL_AVERAGE_FLIGHT_ALTITUDE,
-                Constants.Animals.Bird.TABLE_BIRD_COL_ID, Constants.Animals.TABLE_ANIMAL, Constants.Animals.TABLE_ANIMAL_COL_ID));
+            if (indexTableAnimalColumn < Constants.Animals.TABLE_CLASS_COLS.length - 1) {
+                animalTableQuery.append(", ");
+            } else {
+                animalTableQuery.append(")");
+            }
+        }
 
-        // Aquatic table
-        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT, %s INTEGER, %s VARCHAR(10), FOREIGN KEY (%s) REFERENCES %s (%s))",
-                Constants.Animals.Aquatic.TABLE_AQUATIC, Constants.Animals.Aquatic.TABLE_AQUATIC_COL_ID, Constants.Animals.Aquatic.TABLE_AQUATIC_COL_SPECIES,
-                Constants.Animals.Aquatic.TABLE_AQUATIC_COL_AVERAGE_SWIM_DEPTH, Constants.Animals.Aquatic.TABLE_AQUATIC_COL_WATER_TYPE,
-                Constants.Animals.Aquatic.TABLE_AQUATIC_COL_ID, Constants.Animals.TABLE_ANIMAL, Constants.Animals.TABLE_ANIMAL_COL_ID));
+        db.execSQL(animalTableQuery.toString());
 
-        // Insect table
-        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT, %s VARCHAR(5), %s VARCHAR(5), FOREIGN KEY (%s) REFERENCES %s (%s))",
-                Constants.Animals.Insect.TABLE_INSECT, Constants.Animals.Insect.TABLE_INSECT_COL_ID, Constants.Animals.Insect.TABLE_INSECT_COL_SPECIES,
-                Constants.Animals.Insect.TABLE_INSECT_COL_CAN_FLY, Constants.Animals.Insect.TABLE_INSECT_COL_IS_DANGEROUS,
-                Constants.Animals.Insect.TABLE_INSECT_COL_ID, Constants.Animals.TABLE_ANIMAL, Constants.Animals.TABLE_ANIMAL_COL_ID));
+        // Class tables
+        for (int indexClassTable = 0; indexClassTable < Constants.Animals.TABLE_CLASS_NAMES.length; indexClassTable++) {
+            StringBuilder classTableQuery = new StringBuilder();
+            classTableQuery.append(String.format("CREATE TABLE %s (", Constants.Animals.TABLE_CLASS_NAMES[indexClassTable]));
 
-        // Siege table
-        db.execSQL(String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT, %s INTEGER, %s VARCHAR(5), FOREIGN KEY (%s) REFERENCES %s (%s))",
-                Constants.Animals.Siege.TABLE_SIEGE, Constants.Animals.Siege.TABLE_SIEGE_COL_ID, Constants.Animals.Siege.TABLE_SIEGE_COL_SPECIES,
-                Constants.Animals.Siege.TABLE_SIEGE_COL_RANGE, Constants.Animals.Siege.TABLE_SIEGE_COL_IS_MOBILE,
-                Constants.Animals.Siege.TABLE_SIEGE_COL_ID, Constants.Animals.TABLE_ANIMAL, Constants.Animals.TABLE_ANIMAL_COL_ID));
+            for (int indexClassTableColumn = 0; indexClassTableColumn < Constants.Animals.TABLE_CLASS_COLS[indexClassTable].length; indexClassTableColumn++) {
+                classTableQuery.append(String.format("%s %s, ",
+                        Constants.Animals.TABLE_CLASS_COLS[indexClassTable][indexClassTableColumn],
+                        Constants.Animals.TABLE_CLASS_COLS_MODIFIERS[indexClassTable][indexClassTableColumn]));
+            }
 
+            classTableQuery.append(String.format("FOREIGN KEY (%s) REFERENCES %s (%s))",
+                    Constants.Animals.TABLE_CLASS_COL_ID,
+                    Constants.Animals.TABLE_ANIMAL_NAME,
+                    Constants.Animals.TABLE_ANIMAL_COL_ID));
+
+            db.execSQL(classTableQuery.toString());
+        }
+
+        // Species tables
+        for (int indexClass = 0; indexClass < Constants.Animals.CLASSES_NAME.length; indexClass++) {
+            for (int indexSpecies = 0; indexSpecies < Constants.Animals.SPECIES_NAME[indexClass].length; indexSpecies++) {
+                db.execSQL(String.format("CREATE TABLE %s (%s %s, FOREIGN KEY (%s) REFERENCES %s (%s))",
+                        Constants.Animals.getTableSpeciesName(indexClass, indexSpecies),
+                        Constants.Animals.TABLE_SPECIES_COL_ID,
+                        Constants.Animals.TABLE_SPECIES_COL_ID_MODIFIERS,
+                        Constants.Animals.TABLE_SPECIES_COL_ID,
+                        Constants.Animals.TABLE_CLASS_NAMES[indexClass],
+                        Constants.Animals.TABLE_CLASS_COL_ID));
+            }
+        }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + Constants.Animals.TABLE_ANIMAL);
-        db.execSQL("DROP TABLE IF EXISTS " + Constants.Animals.Mammal.TABLE_MAMMAL);
-        db.execSQL("DROP TABLE IF EXISTS " + Constants.Animals.Reptile.TABLE_REPTILE);
-        db.execSQL("DROP TABLE IF EXISTS " + Constants.Animals.Bird.TABLE_BIRD);
-        db.execSQL("DROP TABLE IF EXISTS " + Constants.Animals.Aquatic.TABLE_AQUATIC);
-        db.execSQL("DROP TABLE IF EXISTS " + Constants.Animals.Insect.TABLE_INSECT);
-        db.execSQL("DROP TABLE IF EXISTS " + Constants.Animals.Siege.TABLE_SIEGE);
+        this.dropAllTables(db);
         onCreate(db);
     }
 
-    public boolean insertData(Animal animal) {
+    private void dropAllTables(SQLiteDatabase db) {
+        db.execSQL("DROP TABLE IF EXISTS " + Constants.Animals.TABLE_ANIMAL_NAME);
+        for (int indexClass = 0; indexClass < Constants.Animals.CLASSES_NAME.length; indexClass++) {
+            db.execSQL("DROP TABLE IF EXISTS " + Constants.Animals.TABLE_CLASS_NAMES[indexClass]);
+        }
+        for (int indexClass = 0; indexClass < Constants.Animals.CLASSES_NAME.length; indexClass++) {
+            for (int indexSpecies = 0; indexSpecies < Constants.Animals.SPECIES_NAME[indexClass].length; indexSpecies++) {
+                db.execSQL("DROP TABLE IF EXISTS " + Constants.Animals.getTableSpeciesName(indexClass, indexSpecies));
+            }
+        }
+    }
+
+    public void insertAnimal(Animal animal) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        int classIndex = Constants.indexOfClass(animal);
-        int speciesIndex = Constants.indexOfSpecies(animal);
+        int classIndex = Constants.Animals.indexOfClass(animal);
+        int speciesIndex = Constants.Animals.indexOfSpecies(animal);
 
-        // Adding data to animal_table
+        // Adding data to animal table
         ContentValues contentValuesAnimal = new ContentValues();
-        contentValuesAnimal.put(Constants.Animals.TABLE_ANIMAL_COL_NAME, animal.getName());
-        contentValuesAnimal.put(Constants.Animals.TABLE_ANIMAL_COL_NO_OF_LEGS, animal.getNoOfLegs());
-        contentValuesAnimal.put(Constants.Animals.TABLE_ANIMAL_COL_MAINTENANCE_COST, animal.getMaintenanceCost());
-        contentValuesAnimal.put(Constants.Animals.TABLE_ANIMAL_COL_DANGER_PERCENTAGE, animal.getDangerPerc());
-        contentValuesAnimal.put(Constants.Animals.TABLE_ANIMAL_COL_TAKEN_CARE_OF, animal.getTakenCareOf());
-        db.insert(Constants.Animals.TABLE_ANIMAL, null, contentValuesAnimal);
+
+        ArrayList[] fieldAnimalColumnNamesAndValues = animal.getAnimalFieldInsertColumnNamesAndValues();
+        for (int index = 0; index < fieldAnimalColumnNamesAndValues[0].size(); index++) {
+            contentValuesAnimal.put((String) fieldAnimalColumnNamesAndValues[0].get(index), (String) fieldAnimalColumnNamesAndValues[1].get(index));
+        }
+
+        db.insert(Constants.Animals.TABLE_ANIMAL_NAME, null, contentValuesAnimal);
+
+        // Getting the next id
+        String stringID = String.valueOf(1);
+        try {
+            Cursor cursor = db.rawQuery(String.format("SELECT MAX(%s) FROM %s",
+                    Constants.Animals.TABLE_ANIMAL_COL_ID,
+                    Constants.Animals.TABLE_ANIMAL_NAME), null);
+            if (cursor.getCount() != 0) {
+                cursor.moveToFirst();
+                stringID = String.valueOf(Integer.parseInt(cursor.getString(0)));
+            }
+            cursor.close();
+        } catch (Exception e) {
+            stringID = String.valueOf(1);
+        }
+
 
         // Adding data to a class table
         ContentValues contentValuesClass = new ContentValues();
-        // Select the table name
-        String tableName = Constants.Animals.TABLE_NAMES[classIndex];
-        // Select the class table key
-        contentValuesClass.put(Constants.Animals.TABLE_COLS[classIndex][1], Constants.nameOfSpecies(animal));
-        // Select the first field key
-        switch (classIndex) {
-            case 0:
-                contentValuesClass.put(Constants.Animals.TABLE_COLS[classIndex][2], ((Mammal) animal).getNormalBodyTemp());
-                contentValuesClass.put(Constants.Animals.TABLE_COLS[classIndex][3], ((Mammal) animal).getPercBodyHair());
-                break;
-            case 1:
-                contentValuesClass.put(Constants.Animals.TABLE_COLS[classIndex][2], ((Reptile) animal).getLaysEggs());
-                break;
-            case 2:
-                contentValuesClass.put(Constants.Animals.TABLE_COLS[classIndex][2], ((Bird) animal).getMigrates());
-                contentValuesClass.put(Constants.Animals.TABLE_COLS[classIndex][3], ((Bird) animal).getAvgFlightAltitude());
-                break;
-            case 3:
-                contentValuesClass.put(Constants.Animals.TABLE_COLS[classIndex][2], ((Aquatic) animal).getAvgSwimDepth());
-                contentValuesClass.put(Constants.Animals.TABLE_COLS[classIndex][3], ((Aquatic) animal).getWaterType().toString());
-                break;
-            case 4:
-                contentValuesClass.put(Constants.Animals.TABLE_COLS[classIndex][2], ((Insect) animal).getCanFly());
-                contentValuesClass.put(Constants.Animals.TABLE_COLS[classIndex][3], ((Insect) animal).getIsDangerous());
-                break;
-            case 5:
-                contentValuesClass.put(Constants.Animals.TABLE_COLS[classIndex][2], ((Siege) animal).getRange());
-                contentValuesClass.put(Constants.Animals.TABLE_COLS[classIndex][3], ((Siege) animal).getIsMobile());
-                break;
+        contentValuesClass.put(Constants.Animals.TABLE_CLASS_COL_ID, String.valueOf(stringID));
+
+        ArrayList[] fieldSpeciesColumnNamesAndValues = animal.getClassFieldInsertColumnNamesAndValues();
+        for (int index = 0; index < fieldSpeciesColumnNamesAndValues[0].size(); index++) {
+            contentValuesClass.put((String) fieldSpeciesColumnNamesAndValues[0].get(index), (String) fieldSpeciesColumnNamesAndValues[1].get(index));
         }
-        // Add the data to the table
-        db.insert(tableName, null, contentValuesClass);
+
+        db.insert(Constants.Animals.TABLE_CLASS_NAMES[classIndex], null, contentValuesClass);
 
 
+        // Adding data to a species table
+        ContentValues contentValuesSpecies = new ContentValues();
+        contentValuesSpecies.put(Constants.Animals.TABLE_SPECIES_COL_ID, String.valueOf(stringID));
 
+        db.insert(Constants.Animals.getTableSpeciesName(classIndex, speciesIndex), null, contentValuesSpecies);
+    }
 
-        long result = db.insert(TABLE_NAME, null, contentValuesAnimal);
-        if (result == -1) {
-            return false;
-        } else {
-            return true;
+    public void insertAnimals(ArrayList<Animal> animals) {
+        for (Animal animal : animals) {
+            insertAnimal(animal);
         }
+    }
+
+    public int getNumberOfAnimals() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT COUNT(" + Constants.Animals.TABLE_ANIMAL_COL_ID + ") FROM " + Constants.Animals.TABLE_ANIMAL_NAME, null);
+        int animalCount = 0;
+
+        Log.d("SQL_na", "" + cursor.getCount());
+        if (cursor.getCount() != 0) {
+            cursor.moveToFirst();
+            animalCount = Integer.parseInt(cursor.getString(0));
+        }
+        cursor.close();
+
+        return animalCount;
+    }
+
+    /**
+     * Returns a Cursor with all of the animals of the specified species
+     */
+    public Cursor getSpecies(int indexClass, int indexSpecies) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        StringBuilder speciesQuery = new StringBuilder();
+        // Select part
+        speciesQuery.append("SELECT ");
+        // Animal columns
+        for (int indexAnimalColumn = 0; indexAnimalColumn < Constants.Animals.TABLE_ANIMAL_COLS.length; indexAnimalColumn++) {
+            speciesQuery.append(String.format("%s.%s, ", Constants.Animals.TABLE_ANIMAL_NAME, Constants.Animals.TABLE_ANIMAL_COLS[indexAnimalColumn]));
+        }
+        // Class columns
+        for (int indexClassColumn = 0; indexClassColumn < Constants.Animals.TABLE_CLASS_COLS[indexClass].length; indexClassColumn++) {
+            speciesQuery.append(String.format("%s.%s", Constants.Animals.TABLE_CLASS_NAMES[indexClass], Constants.Animals.TABLE_CLASS_COLS[indexClass][indexClassColumn]));
+            if (indexClassColumn < Constants.Animals.TABLE_CLASS_COLS[indexClass].length - 1) {
+                speciesQuery.append(", ");
+            } else {
+                speciesQuery.append(" ");
+            }
+        }
+        // From part
+        speciesQuery.append(String.format("FROM %s JOIN %s ON %s.%s = %s.%s JOIN %s ON %s.%s = %s.%s",
+                Constants.Animals.TABLE_ANIMAL_NAME,
+                Constants.Animals.TABLE_CLASS_NAMES[indexClass],
+                Constants.Animals.TABLE_ANIMAL_NAME,
+                Constants.Animals.TABLE_ANIMAL_COL_ID,
+                Constants.Animals.TABLE_CLASS_NAMES[indexClass],
+                Constants.Animals.TABLE_CLASS_COL_ID,
+                Constants.Animals.getTableSpeciesName(indexClass, indexSpecies),
+                Constants.Animals.TABLE_ANIMAL_NAME,
+                Constants.Animals.TABLE_ANIMAL_COL_ID,
+                Constants.Animals.getTableSpeciesName(indexClass, indexSpecies),
+                Constants.Animals.TABLE_SPECIES_COL_ID));
+
+        return db.rawQuery(speciesQuery.toString(), null);
+    }
+
+    public ArrayList<Animal> readAllAnimals() {
+        ArrayList<Animal> readAnimals = new ArrayList<>();
+
+        for (int indexClass = 0; indexClass < Constants.Animals.CLASSES_NAME.length; indexClass++) {
+            for (int indexSpecies = 0; indexSpecies < Constants.Animals.SPECIES_NAME[indexClass].length; indexSpecies++) {
+                Cursor species = this.getSpecies(indexClass, indexSpecies);
+
+                while (species.moveToNext()) {
+                    ArrayList<String> constructorParameters = new ArrayList<>();
+                    // Starts at 1 to omit the id (which is 0)
+                    for (int indexAnimalColumn = 1; indexAnimalColumn < Constants.Animals.TABLE_ANIMAL_COLS.length; indexAnimalColumn++) {
+                        constructorParameters.add(species.getString(indexAnimalColumn));
+                        //Log.d("SQL_an", indexAnimalColumn + ": " + species.getString(indexAnimalColumn));
+                    }
+                    // Same as the loop above
+                    for (int indexClassColumn = 1; indexClassColumn < Constants.Animals.TABLE_CLASS_COLS[indexClass].length; indexClassColumn++) {
+                        constructorParameters.add(species.getString(indexClassColumn + Constants.Animals.TABLE_CLASS_COLS.length));
+                        //Log.d("SQL_an", (indexClassColumn + Constants.Animals.TABLE_CLASS_COLS.length) +  ": " + species.getString(indexClassColumn + Constants.Animals.TABLE_CLASS_COLS.length));
+                    }
+
+                    try {
+                        readAnimals.add((Animal) Constants.Animals.ANIMAL_SPECIES_CLASSES[indexClass][indexSpecies].getConstructor(ArrayList.class).newInstance(constructorParameters));
+                    } catch (NoSuchMethodException e) {
+                        e.printStackTrace();
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    } catch (InstantiationException e) {
+                        e.printStackTrace();
+                    } catch (InvocationTargetException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+                species.close();
+            }
+        }
+
+        return readAnimals;
     }
 
     public void deleteData(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] s = {id};
 
-        db.delete(Constants.Animals.TABLE_ANIMAL, "ID = ?", s);
-        db.delete(Constants.Animals.Mammal.TABLE_MAMMAL, "ID = ?", s);
-        db.delete(Constants.Animals.Reptile.TABLE_REPTILE, "ID = ?", s);
-        db.delete(Constants.Animals.Bird.TABLE_BIRD, "ID = ?", s);
-        db.delete(Constants.Animals.Aquatic.TABLE_AQUATIC, "ID = ?", s);
-        db.delete(Constants.Animals.Insect.TABLE_INSECT, "ID = ?", s);
-        db.delete(Constants.Animals.Siege.TABLE_SIEGE, "ID = ?", s);
+        // Animal table
+        db.delete(Animal.TABLE_ANIMAL_NAME, "ID = ?", s);
+
+        // Class tables
+        for (int indexClass = 0; indexClass < Constants.Animals.CLASSES_NAME.length; indexClass++) {
+            db.delete(Constants.Animals.TABLE_CLASS_NAMES[indexClass], "ID = ?", s);
+        }
+
+        // Species tables
+        for (int indexClass = 0; indexClass < Constants.Animals.CLASSES_NAME.length; indexClass++) {
+            for (int indexSpecies = 0; indexSpecies < Constants.Animals.SPECIES_NAME[indexClass].length; indexSpecies++) {
+                db.delete(Constants.Animals.getTableSpeciesName(indexClass, indexSpecies), "ID = ?", s);
+            }
+        }
     }
 }

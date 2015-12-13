@@ -44,122 +44,122 @@ public class AnimalRepository extends EntityRepository<Animal> {
 
 		Animal a;
 		switch (discriminant) {
-		case Constants.Animals.Mammal.BEAR:
+		case Constants.Animals.Mammals.BEAR:
 			a = new Bear();
 			a.decodeFromXML(element);
 			return a;
 
-		case Constants.Animals.Mammal.KANGAROO:
+		case Constants.Animals.Mammals.KANGAROO:
 			a = new Kangaroo();
 			a.decodeFromXML(element);
 			return a;
 
-		case Constants.Animals.Mammal.WHALE:
+		case Constants.Animals.Mammals.WHALE:
 			a = new Whale();
 			a.decodeFromXML(element);
 			return a;
 
-		case Constants.Animals.Mammal.RHINOCEROS:
+		case Constants.Animals.Mammals.RHINOCEROS:
 			a = new Rhinoceros();
 			a.decodeFromXML(element);
 			return a;
 
-		case Constants.Animals.Reptile.LIZARD:
+		case Constants.Animals.Reptiles.LIZARD:
 			a = new Lizard();
 			a.decodeFromXML(element);
 			return a;
 
-		case Constants.Animals.Reptile.TURTLE:
+		case Constants.Animals.Reptiles.TURTLE:
 			a = new Turtle();
 			a.decodeFromXML(element);
 			return a;
 
-		case Constants.Animals.Reptile.CROCODILE:
+		case Constants.Animals.Reptiles.CROCODILE:
 			a = new Crocodile();
 			a.decodeFromXML(element);
 			return a;
 
-		case Constants.Animals.Reptile.DRAGON:
+		case Constants.Animals.Reptiles.DRAGON:
 			a = new Dragon();
 			a.decodeFromXML(element);
 			return a;
 
-		case Constants.Animals.Bird.DOVE:
+		case Constants.Animals.Birds.DOVE:
 			a = new Dove();
 			a.decodeFromXML(element);
 			return a;
 
-		case Constants.Animals.Bird.OSTRICH:
+		case Constants.Animals.Birds.OSTRICH:
 			a = new Ostrich();
 			a.decodeFromXML(element);
 			return a;
 
-		case Constants.Animals.Bird.EAGLE:
+		case Constants.Animals.Birds.EAGLE:
 			a = new Eagle();
 			a.decodeFromXML(element);
 			return a;
 
-		case Constants.Animals.Bird.HUMMINGBIRD:
+		case Constants.Animals.Birds.HUMMINGBIRD:
 			a = new Hummingbird();
 			a.decodeFromXML(element);
 			return a;
 
-		case Constants.Animals.Aquatic.BASS:
+		case Constants.Animals.Aquatics.BASS:
 			a = new Bass();
 			a.decodeFromXML(element);
 			return a;
 
-		case Constants.Animals.Aquatic.CLOWNFISH:
+		case Constants.Animals.Aquatics.CLOWNFISH:
 			a = new Clownfish();
 			a.decodeFromXML(element);
 			return a;
 
-		case Constants.Animals.Aquatic.SURGEONFISH:
+		case Constants.Animals.Aquatics.SURGEONFISH:
 			a = new Surgeonfish();
 			a.decodeFromXML(element);
 			return a;
 
-		case Constants.Animals.Aquatic.LIONFISH:
+		case Constants.Animals.Aquatics.LIONFISH:
 			a = new Lionfish();
 			a.decodeFromXML(element);
 			return a;
 
-		case Constants.Animals.Insect.BEETLE:
+		case Constants.Animals.Insects.BEETLE:
 			a = new Beetle();
 			a.decodeFromXML(element);
 			return a;
 
-		case Constants.Animals.Insect.SCORPION:
+		case Constants.Animals.Insects.SCORPION:
 			a = new Scorpion();
 			a.decodeFromXML(element);
 			return a;
 
-		case Constants.Animals.Insect.MANTIS:
+		case Constants.Animals.Insects.MANTIS:
 			a = new Mantis();
 			a.decodeFromXML(element);
 			return a;
 
-		case Constants.Animals.Insect.DRAGONFLY:
+		case Constants.Animals.Insects.DRAGONFLY:
 			a = new Dragonfly();
 			a.decodeFromXML(element);
 			return a;
 
-		case Constants.Animals.Siege.RAM:
+		case Constants.Animals.Sieges.RAM:
 			a = new Ram();
 			a.decodeFromXML(element);
 			return a;
 
-		case Constants.Animals.Siege.MANGONEL:
+		case Constants.Animals.Sieges.MANGONEL:
 			a = new Mangonel();
 			a.decodeFromXML(element);
 			return a;
 
-		case Constants.Animals.Siege.BALLISTA:
+		case Constants.Animals.Sieges.BALLISTA:
 			a = new Ballista();
 			a.decodeFromXML(element);
 			return a;
 
-		case Constants.Animals.Siege.TREBUCHET:
+		case Constants.Animals.Sieges.TREBUCHET:
 			a = new Trebuchet();
 			a.decodeFromXML(element);
 			return a;

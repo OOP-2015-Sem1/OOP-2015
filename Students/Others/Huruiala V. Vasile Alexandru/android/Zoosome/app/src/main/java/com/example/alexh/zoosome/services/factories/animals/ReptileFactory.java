@@ -19,13 +19,13 @@ public class ReptileFactory extends SpeciesFactory {
 
     @Override
     public Animal getAnimal(String type) throws Exception {
-        if (Constants.Animals.Reptile.LIZARD.equals(type)) {
+        if (Constants.Animals.Reptiles.LIZARD.equals(type)) {
             return new Lizard();
-        } else if (Constants.Animals.Reptile.TURTLE.equals(type)) {
+        } else if (Constants.Animals.Reptiles.TURTLE.equals(type)) {
             return new Turtle();
-        } else if (Constants.Animals.Reptile.CROCODILE.equals(type)) {
+        } else if (Constants.Animals.Reptiles.CROCODILE.equals(type)) {
             return new Crocodile();
-        } else if (Constants.Animals.Reptile.DRAGON.equals(type)) {
+        } else if (Constants.Animals.Reptiles.DRAGON.equals(type)) {
             return new Dragon();
         } else {
             throw new Exception("Invalid animal exception!");
@@ -36,7 +36,7 @@ public class ReptileFactory extends SpeciesFactory {
     public Animal getRandomAnimalOfType(String type) throws Exception {
         String name = NameGenerator.getRandomName();
 
-        if (Constants.Animals.Reptile.LIZARD.equals(type)) {
+        if (Constants.Animals.Reptiles.LIZARD.equals(type)) {
             final int index = 0;
 
             name += NAME_ENDING[index];
@@ -46,7 +46,7 @@ public class ReptileFactory extends SpeciesFactory {
             final boolean eggs = (Math.random() <= LAYS_EGGS_CHANCE[index]);
 
             return new Lizard(name, noLegs, maintenanceCost, dangerPerc, eggs);
-        } else if (Constants.Animals.Reptile.TURTLE.equals(type)) {
+        } else if (Constants.Animals.Reptiles.TURTLE.equals(type)) {
             final int index = 1;
 
             name += NAME_ENDING[index];
@@ -56,7 +56,7 @@ public class ReptileFactory extends SpeciesFactory {
             final boolean eggs = (Math.random() <= LAYS_EGGS_CHANCE[index]);
 
             return new Turtle(name, noLegs, maintenanceCost, dangerPerc, eggs);
-        } else if (Constants.Animals.Reptile.CROCODILE.equals(type)) {
+        } else if (Constants.Animals.Reptiles.CROCODILE.equals(type)) {
             final int index = 2;
 
             name += NAME_ENDING[index];
@@ -66,7 +66,7 @@ public class ReptileFactory extends SpeciesFactory {
             final boolean eggs = (Math.random() <= LAYS_EGGS_CHANCE[index]);
 
             return new Crocodile(name, noLegs, maintenanceCost, dangerPerc, eggs);
-        } else if (Constants.Animals.Reptile.DRAGON.equals(type)) {
+        } else if (Constants.Animals.Reptiles.DRAGON.equals(type)) {
             final int index = 3;
 
             name += NAME_ENDING[index];

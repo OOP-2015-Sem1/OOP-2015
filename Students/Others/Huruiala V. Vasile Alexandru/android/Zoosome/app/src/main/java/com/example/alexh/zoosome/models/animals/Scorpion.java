@@ -9,6 +9,8 @@ import javax.xml.stream.XMLStreamException;
 */
 import com.example.alexh.zoosome.services.factories.Constants;
 
+import java.util.ArrayList;
+
 public class Scorpion extends Insect {
 	private static final String DEFAULT_NAME = "Deathstalker";
 	private static final int DEFAULT_NUMBER_OF_LEGS = 8;
@@ -27,8 +29,8 @@ public class Scorpion extends Insect {
 		super(animalName, numberOfLegs, maintenanceCost, dangerPerc, flyer, dangerous);
 	}
 
-	public Scorpion(String v1, String v2, String v3, String v4, String v5, String v6) {
-		super(new String[] { v1, v2, v3, v4, v5, v6 });
+	public Scorpion(ArrayList<String> parameters) {
+		super(parameters);
 	}
 /*
 	@Override
@@ -42,6 +44,6 @@ public class Scorpion extends Insect {
 
 	public void encodeToXML(XMLEventWriter eventWriter) throws XMLStreamException {
 		super.encodeToXML(eventWriter);
-		createNode(eventWriter, Constants.XML_TAGS.DISCRIMINANT, String.valueOf(Constants.Animals.Insect.SCORPION));
+		createNode(eventWriter, Constants.XML_TAGS.DISCRIMINANT, String.valueOf(Constants.Animals.Insects.SCORPION));
 	}*/
 }

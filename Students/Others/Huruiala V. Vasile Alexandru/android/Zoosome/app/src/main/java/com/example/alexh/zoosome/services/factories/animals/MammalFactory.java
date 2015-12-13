@@ -22,14 +22,14 @@ public class MammalFactory extends SpeciesFactory {
 
     @Override
     public Animal getAnimal(String type) throws Exception {
-        if (Constants.Animals.Mammal.BEAR.equals(type)) {
+        if (Constants.Animals.Mammals.BEAR.equals(type)) {
             Animal a = new Bear();
             return new Bear();
-        } else if (Constants.Animals.Mammal.KANGAROO.equals(type)) {
+        } else if (Constants.Animals.Mammals.KANGAROO.equals(type)) {
             return new Kangaroo();
-        } else if (Constants.Animals.Mammal.WHALE.equals(type)) {
+        } else if (Constants.Animals.Mammals.WHALE.equals(type)) {
             return new Whale();
-        } else if (Constants.Animals.Mammal.RHINOCEROS.equals(type)) {
+        } else if (Constants.Animals.Mammals.RHINOCEROS.equals(type)) {
             return new Rhinoceros();
         } else {
             System.out.println("e1");
@@ -41,7 +41,7 @@ public class MammalFactory extends SpeciesFactory {
     public Animal getRandomAnimalOfType(String type) throws Exception {
         String name = NameGenerator.getRandomName();
 
-        if (Constants.Animals.Mammal.BEAR.equals(type)) {
+        if (Constants.Animals.Mammals.BEAR.equals(type)) {
             final int index = 0;
 
             name += NAME_ENDING[index];
@@ -52,7 +52,7 @@ public class MammalFactory extends SpeciesFactory {
             final double percHair = PERC_HAIR_BASE[index] + PERC_HAIR_VAR[index] * Math.random();
 
             return new Bear(name, noLegs, maintenanceCost, dangerPerc, temp, percHair);
-        } else if (Constants.Animals.Mammal.KANGAROO.equals(type)) {
+        } else if (Constants.Animals.Mammals.KANGAROO.equals(type)) {
             final int index = 1;
 
             name += NAME_ENDING[index];
@@ -63,7 +63,7 @@ public class MammalFactory extends SpeciesFactory {
             final double percHair = PERC_HAIR_BASE[index] + PERC_HAIR_VAR[index] * Math.random();
 
             return new Kangaroo(name, noLegs, maintenanceCost, dangerPerc, temp, percHair);
-        } else if (Constants.Animals.Mammal.WHALE.equals(type)) {
+        } else if (Constants.Animals.Mammals.WHALE.equals(type)) {
             final int index = 2;
 
             name += NAME_ENDING[index];
@@ -74,7 +74,7 @@ public class MammalFactory extends SpeciesFactory {
             final double percHair = PERC_HAIR_BASE[index] + PERC_HAIR_VAR[index] * Math.random();
 
             return new Whale(name, noLegs, maintenanceCost, dangerPerc, temp, percHair);
-        } else if (Constants.Animals.Mammal.RHINOCEROS.equals(type)) {
+        } else if (Constants.Animals.Mammals.RHINOCEROS.equals(type)) {
             final int index = 3;
 
             name += NAME_ENDING[index];
