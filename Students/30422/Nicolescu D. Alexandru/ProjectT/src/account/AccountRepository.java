@@ -14,8 +14,9 @@ public class AccountRepository {
 	private static volatile AccountRepository accounts = null;
 	private Player players[] = Player.getInstance();
 	private int accountNr;
+	private Scanner keyboard;
 
-	public void readData() {
+	public void manageData() {
 
 		try {
 			FileInputStream fileIn = new FileInputStream("accounts.ser");
@@ -24,16 +25,8 @@ public class AccountRepository {
 			in.close();
 			fileIn.close();
 			if (ADD_ACCOUNT) {
-
-				Scanner keyboard = new Scanner(System.in);
-				System.out.println("Enter new account name:");
-				players[NUMBER_OF_ACCOUNTS-1].setUser(keyboard.nextLine());
-				System.out.println("Enter new account password:");
-				players[NUMBER_OF_ACCOUNTS-1].setPassword(keyboard.nextLine());
-				players[NUMBER_OF_ACCOUNTS-1].setScore(10);
-				serialize();
+				addAccount();
 			}
-
 		} catch (IOException i) {
 			i.printStackTrace();
 			return;
@@ -57,6 +50,16 @@ public class AccountRepository {
 		} catch (IOException i) {
 			i.printStackTrace();
 		}
+	}
+	
+	public void addAccount(){
+		keyboard = new Scanner(System.in);
+		System.out.println("Enter new account name:");
+		players[NUMBER_OF_ACCOUNTS-1].setUser(keyboard.nextLine());
+		System.out.println("Enter new account password:");
+		players[NUMBER_OF_ACCOUNTS-1].setPassword(keyboard.nextLine());
+		players[NUMBER_OF_ACCOUNTS-1].setScore(10);
+		serialize();
 	}
 
 	public void replace(int newscore) {
