@@ -1,3 +1,4 @@
+package logic;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,7 +21,7 @@ public class PVP {
 	public void playerVsPlayer() {
 		for (int i = 0; i < 13; i++) {
 			for (int j = 0; j < 13; j++) {
-				logic.b[i][j].addActionListener(new ActionListener() {
+				logic.buttons[i][j].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						JButton source = (JButton) e.getSource();
 						Point matrixIndeces = getMatrixIndeces(source);

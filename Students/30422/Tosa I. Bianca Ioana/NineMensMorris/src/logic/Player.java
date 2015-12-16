@@ -1,16 +1,26 @@
+package logic;
 
 public class Player {
 	public int playerMoves;
-	public boolean playerOneTurn;
+	public boolean active;
 	public int playerPieces;
 	public int oldNumberOfMorris;
-
-	public void setPlayerTurn(boolean playerOneTurn) {
-		this.playerOneTurn = playerOneTurn;
+	public int tag;
+	
+	public void setTag(int tag){
+		this.tag = tag;
+	}
+	
+	public int getTag(){
+		return this.tag;
 	}
 
-	public boolean getPlayerTurn() {
-		return this.playerOneTurn;
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public boolean isActive() {
+		return this.active;
 	}
 
 	public void setPlayerMoves(int moves) {

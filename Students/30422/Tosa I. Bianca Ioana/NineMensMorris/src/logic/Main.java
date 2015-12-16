@@ -1,3 +1,5 @@
+package logic;
+import graphics.GUI;
 
 public class Main {
 
