@@ -11,23 +11,29 @@ public class GameManagement {
 	private boolean pvp = false;
 	private AccountRepository accounts = AccountRepository.getInstance();
 	private int board[][] = new int[3][3];
+	private static final int NO_RESPONSE=-1;
 	private static final int HUMAN_MOVE = 1;
 	private static final int PC_MOVE = 2;
 	private static final int HARD = 0;
 	private static final int NORMAL = 1;
 	private static final int EASY = 2;
-	private static final int PVP = 3;
+	private static final int PVP = -1;
 	private static final int HUMAN = 1;
+	private static final int PLAYER1_MOVE = 2;
+	private static final int PLAYER2_MOVE = 1;
 	private static final int PC = 2;
 	private static final int SCORE_IF_WIN = 20;
 	private static final int SCORE_IF_TIE = 5;
 	private static final int SCORE_IF_LOST = -5;
 
-	private Sound s = new Sound();
+	private Sound sound = new Sound();
 	private AI computerPlayer = null;
 
 	public GameManagement(int difficulty) {
 		switch (difficulty) {
+		case PVP:
+			pvp = true;
+			break;
 		case HARD:
 			computerPlayer = new HardAI();
 			break;
@@ -40,87 +46,122 @@ public class GameManagement {
 		}
 	}
 
-	public int makeMove(int playerLastMove, int difficulty) {
+	public int manageLastPlayerMove(int playerLastMove) {
 
 		nrOfMove++;
-		if (((pvp) && (nrOfMove % 2 == 0)) || (!pvp)) {
-			switch (playerLastMove) {
-			case 0:
-				board[0][0] = HUMAN_MOVE;
-				break;
-			case 1:
-				board[0][1] = HUMAN_MOVE;
-				break;
-			case 2:
-				board[0][2] = HUMAN_MOVE;
-				break;
-			case 3:
-				board[1][0] = HUMAN_MOVE;
-				break;
-			case 4:
-				board[1][1] = HUMAN_MOVE;
-				break;
-			case 5:
-				board[1][2] = HUMAN_MOVE;
-				break;
-			case 6:
-				board[2][0] = HUMAN_MOVE;
-				break;
-			case 7:
-				board[2][1] = HUMAN_MOVE;
-				break;
-			case 8:
-				board[2][2] = HUMAN_MOVE;
-				break;
-			}
+		if (pvp) {
+			managePVPGame(playerLastMove);
+			return NO_RESPONSE;
+		} else {
+			int computerMoveDecision = managePVPCGame(playerLastMove);
+			return computerMoveDecision;
+		}
+
+	}
+
+	private int managePVPCGame(int playerLastMove) {
+		switch (playerLastMove) {
+		case 0:
+			board[0][0] = HUMAN_MOVE;
+			break;
+		case 1:
+			board[0][1] = HUMAN_MOVE;
+			break;
+		case 2:
+			board[0][2] = HUMAN_MOVE;
+			break;
+		case 3:
+			board[1][0] = HUMAN_MOVE;
+			break;
+		case 4:
+			board[1][1] = HUMAN_MOVE;
+			break;
+		case 5:
+			board[1][2] = HUMAN_MOVE;
+			break;
+		case 6:
+			board[2][0] = HUMAN_MOVE;
+			break;
+		case 7:
+			board[2][1] = HUMAN_MOVE;
+			break;
+		case 8:
+			board[2][2] = HUMAN_MOVE;
+			break;
 		}
 		checkWin();
 
-		// ------------------------------HARD---------------------------
+		int pcMove = computerPlayer.executeMove(playerLastMove);
+		int i = pcMove / 3;
+		int j = pcMove % 3;
+		board[i][j] = PC_MOVE;
+		return pcMove;
 
-		if (difficulty != PVP) {
+	}
 
-			int pcMove = computerPlayer.executeMove(playerLastMove);
-			int i = pcMove / 3;
-			int j = pcMove % 3;
-			board[i][j] = PC_MOVE;
-			return pcMove;
-
-		} else {
-			pvp = true;
-			if (nrOfMove % 2 == 1)
-				switch (playerLastMove) {
-				case 0:
-					board[0][0] = PC_MOVE;
-					break;
-				case 1:
-					board[0][1] = PC_MOVE;
-					break;
-				case 2:
-					board[0][2] = PC_MOVE;
-					break;
-				case 3:
-					board[1][0] = PC_MOVE;
-					break;
-				case 4:
-					board[1][1] = PC_MOVE;
-					break;
-				case 5:
-					board[1][2] = PC_MOVE;
-					break;
-				case 6:
-					board[2][0] = PC_MOVE;
-					break;
-				case 7:
-					board[2][1] = PC_MOVE;
-					break;
-				case 8:
-					board[2][2] = PC_MOVE;
-					break;
-				}
-
-			return -1;
+	private void managePVPGame(int playerLastMove) {
+		if (nrOfMove % 2 == 0) {
+			switch (playerLastMove) {
+			case 0:
+				board[0][0] = PLAYER2_MOVE;
+				break;
+			case 1:
+				board[0][1] = PLAYER2_MOVE;
+				break;
+			case 2:
+				board[0][2] = PLAYER2_MOVE;
+				break;
+			case 3:
+				board[1][0] = PLAYER2_MOVE;
+				break;
+			case 4:
+				board[1][1] = PLAYER2_MOVE;
+				break;
+			case 5:
+				board[1][2] = PLAYER2_MOVE;
+				break;
+			case 6:
+				board[2][0] = PLAYER2_MOVE;
+				break;
+			case 7:
+				board[2][1] = PLAYER2_MOVE;
+				break;
+			case 8:
+				board[2][2] = PLAYER2_MOVE;
+				break;
+			}
 		}
+		if (nrOfMove % 2 == 1)
+			switch (playerLastMove) {
+			case 0:
+				board[0][0] = PLAYER1_MOVE;
+				break;
+			case 1:
+				board[0][1] = PLAYER1_MOVE;
+				break;
+			case 2:
+				board[0][2] = PLAYER1_MOVE;
+				break;
+			case 3:
+				board[1][0] = PLAYER1_MOVE;
+				break;
+			case 4:
+				board[1][1] = PLAYER1_MOVE;
+				break;
+			case 5:
+				board[1][2] = PLAYER1_MOVE;
+				break;
+			case 6:
+				board[2][0] = PLAYER1_MOVE;
+				break;
+			case 7:
+				board[2][1] = PLAYER1_MOVE;
+				break;
+			case 8:
+				board[2][2] = PLAYER1_MOVE;
+				break;
+			}
+		checkWin();
 	}
 
 	public int winner() {
@@ -179,7 +220,7 @@ public class GameManagement {
 				JOptionPane.showMessageDialog(null, "Player 2 wins!");
 				System.exit(0);
 			} else {
-				s.SoundIt(HUMAN);
+				sound.SoundIt(HUMAN);
 				accounts.replace(accounts.getAccountScore(accounts.getAccountNr()) + SCORE_IF_WIN);
 				JOptionPane.showMessageDialog(null, "Player Wins");
 				System.exit(0);
@@ -191,7 +232,7 @@ public class GameManagement {
 				JOptionPane.showMessageDialog(null, "Player 1 wins!");
 				System.exit(0);
 			} else {
-				s.SoundIt(PC);
+				sound.SoundIt(PC);
 				if (accounts.getAccountNr() != 0)
 					accounts.replace(accounts.getAccountScore(accounts.getAccountNr()) + SCORE_IF_LOST);
 				JOptionPane.showMessageDialog(null, "I WIN!!");
