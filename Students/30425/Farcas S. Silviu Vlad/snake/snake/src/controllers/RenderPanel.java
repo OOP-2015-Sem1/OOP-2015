@@ -6,7 +6,9 @@ import java.awt.Point;
 
 import javax.swing.JPanel;
 
-import models.Snake;
+import models.*;
+import controllers.*;
+import views.*;
 
 public class RenderPanel extends JPanel {
 
@@ -18,7 +20,7 @@ public class RenderPanel extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		Snake snake = Snake.snake;
+		Snake snake = Snake.getSnake();
 
 		g.setColor(BLUEBEE);
 
@@ -26,24 +28,24 @@ public class RenderPanel extends JPanel {
 
 		g.setColor(GREENABEE);
 
-		for (Point point : snake.snakeParts) {
+		for (Point point : snake.getSnakeParts()) {
 			g.fillRect(point.x * Snake.SCALE, point.y * Snake.SCALE, Snake.SCALE, Snake.SCALE);
 		}
 
 		g.setColor(Color.BLACK);
-		if (snake.obstacles != null) {
-			for (Point point : snake.obstacles) {
+		if (snake.getObstacles() != null) {
+			for (Point point : snake.getObstacles()) {
 				g.fillRect(point.x * Snake.SCALE, point.y * Snake.SCALE, Snake.SCALE, Snake.SCALE);
 			}
 		}
 		
 		g.setColor(GREENABEE);
 		
-		g.fillRect(snake.head.x * Snake.SCALE, snake.head.y * Snake.SCALE, Snake.SCALE, Snake.SCALE);
+		g.fillRect(snake.getHead().x * Snake.SCALE, snake.getHead().y * Snake.SCALE, Snake.SCALE, Snake.SCALE);
 
 		g.setColor(Color.RED);
 
-		g.fillRect(snake.cherry.x * Snake.SCALE, snake.cherry.y * Snake.SCALE, Snake.SCALE, Snake.SCALE);
+		g.fillRect(snake.getCherry().x * Snake.SCALE, snake.getCherry().y * Snake.SCALE, Snake.SCALE, Snake.SCALE);
 
 		String string = "Score: " + snake.score + ", Length: " + snake.tailLength + ", Time: " + snake.time / 20;
 
@@ -53,13 +55,13 @@ public class RenderPanel extends JPanel {
 
 		string = "Game Over! Press \"Space\" to exit";
 
-		if (snake.over) {
+		if (snake.getOver()) {
 			g.drawString(string, (int) (getWidth() / 2 - string.length() * 2.5f), (int) snake.dim.getHeight() / 4);
 		}
 
 		string = "Paused!";
 
-		if (snake.paused && !snake.over) {
+		if (snake.getPaused() && !snake.getOver()) {
 			g.drawString(string, (int) (getWidth() / 2 - string.length() * 2.5f), (int) snake.dim.getHeight() / 4);
 		}
 	}
