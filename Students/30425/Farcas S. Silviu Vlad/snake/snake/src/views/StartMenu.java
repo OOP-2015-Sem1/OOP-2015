@@ -9,7 +9,9 @@ import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import models.Snake;
+import models.*;
+import controllers.*;
+import views.*;
 
 public class StartMenu extends JPanel implements KeyListener{
 	
@@ -76,7 +78,9 @@ public class StartMenu extends JPanel implements KeyListener{
 		
 		int i = e.getKeyCode();
 		if(i == KeyEvent.VK_SPACE){
-			Snake.snake = new Snake();
+			Snake.setSnake(new Snake());
+			Snake.getSnake().startGame();
+			
 		}
 		if(i==KeyEvent.VK_S){
 			small=1;
