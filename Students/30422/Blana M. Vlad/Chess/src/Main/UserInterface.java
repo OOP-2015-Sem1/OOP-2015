@@ -10,9 +10,9 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import Pieces.Colors;
-import Pieces.ListOfPieces;
-import Pieces.Piece;
+import PieceManipulation.Colors;
+import PieceManipulation.Piece;
+import PieceManipulation.Pieces;
 
 public class UserInterface extends JPanel implements MouseListener,
 		MouseMotionListener {
@@ -42,62 +42,62 @@ public class UserInterface extends JPanel implements MouseListener,
 
 		for (int i = 0; i < 64; i++) {
 			int j = -1, k = -1;
-			if (chessBoard[i / 8][i % 8].getType() == ListOfPieces.PAWN
+			if (chessBoard[i / 8][i % 8].getType() == Pieces.PAWN
 					&& chessBoard[i / 8][i % 8].getColor() == Colors.WHITE) {
 				j = 5;
 				k = 0;
 			}
-			if (chessBoard[i / 8][i % 8].getType() == ListOfPieces.ROOK
+			if (chessBoard[i / 8][i % 8].getType() == Pieces.ROOK
 					&& chessBoard[i / 8][i % 8].getColor() == Colors.WHITE) {
 				j = 2;
 				k = 0;
 			}
-			if (chessBoard[i / 8][i % 8].getType() == ListOfPieces.KNIGHT
+			if (chessBoard[i / 8][i % 8].getType() == Pieces.KNIGHT
 					&& chessBoard[i / 8][i % 8].getColor() == Colors.WHITE) {
 				j = 4;
 				k = 0;
 			}
-			if (chessBoard[i / 8][i % 8].getType() == ListOfPieces.BISHOP
+			if (chessBoard[i / 8][i % 8].getType() == Pieces.BISHOP
 					&& chessBoard[i / 8][i % 8].getColor() == Colors.WHITE) {
 				j = 3;
 				k = 0;
 			}
-			if (chessBoard[i / 8][i % 8].getType() == ListOfPieces.QUEEN
+			if (chessBoard[i / 8][i % 8].getType() == Pieces.QUEEN
 					&& chessBoard[i / 8][i % 8].getColor() == Colors.WHITE) {
 				j = 1;
 				k = 0;
 			}
-			if (chessBoard[i / 8][i % 8].getType() == ListOfPieces.KING
+			if (chessBoard[i / 8][i % 8].getType() == Pieces.KING
 					&& chessBoard[i / 8][i % 8].getColor() == Colors.WHITE) {
 				j = 0;
 				k = 0;
 			}
-			if (chessBoard[i / 8][i % 8].getType() == ListOfPieces.PAWN
+			if (chessBoard[i / 8][i % 8].getType() == Pieces.PAWN
 					&& chessBoard[i / 8][i % 8].getColor() == Colors.BLACK) {
 				j = 5;
 				k = 1;
 			}
-			if (chessBoard[i / 8][i % 8].getType() == ListOfPieces.ROOK
+			if (chessBoard[i / 8][i % 8].getType() == Pieces.ROOK
 					&& chessBoard[i / 8][i % 8].getColor() == Colors.BLACK) {
 				j = 2;
 				k = 1;
 			}
-			if (chessBoard[i / 8][i % 8].getType() == ListOfPieces.KNIGHT
+			if (chessBoard[i / 8][i % 8].getType() == Pieces.KNIGHT
 					&& chessBoard[i / 8][i % 8].getColor() == Colors.BLACK) {
 				j = 4;
 				k = 1;
 			}
-			if (chessBoard[i / 8][i % 8].getType() == ListOfPieces.BISHOP
+			if (chessBoard[i / 8][i % 8].getType() == Pieces.BISHOP
 					&& chessBoard[i / 8][i % 8].getColor() == Colors.BLACK) {
 				j = 3;
 				k = 1;
 			}
-			if (chessBoard[i / 8][i % 8].getType() == ListOfPieces.QUEEN
+			if (chessBoard[i / 8][i % 8].getType() == Pieces.QUEEN
 					&& chessBoard[i / 8][i % 8].getColor() == Colors.BLACK) {
 				j = 1;
 				k = 1;
 			}
-			if (chessBoard[i / 8][i % 8].getType() == ListOfPieces.KING
+			if (chessBoard[i / 8][i % 8].getType() == Pieces.KING
 					&& chessBoard[i / 8][i % 8].getColor() == Colors.BLACK) {
 				j = 0;
 				k = 1;
@@ -140,11 +140,33 @@ public class UserInterface extends JPanel implements MouseListener,
 				;
 
 				System.out.println(dragMove);
-				if (MainChess.checkValidMove(dragMove) == true) {
-					// if valid move
-					MainChess.makeMove(dragMove);
+				if (Movement.checkValidMove(dragMove) == true) {
+
+					Movement.makeMove(dragMove, chessBoard);
+
 					MainChess.whiteTurn = !MainChess.whiteTurn;
 					MainChess.board.flipBoard(chessBoard);
+					if (MainChess.whiteTurn == false) {
+						for (int i = 0; i <= 7; i++) {
+							for (int j = 0; j <= 7; j++) {
+								if (chessBoard[i][j].getType() == Pieces.KING
+										&& chessBoard[i][j].getColor() == Colors.WHITE) {
+									MainChess.whiteKingX = String.valueOf(i);
+									MainChess.whiteKingY = String.valueOf(j);
+								}
+							}
+						}
+					} else {
+						for (int i = 0; i <= 7; i++) {
+							for (int j = 0; j <= 7; j++) {
+								if (chessBoard[i][j].getType() == Pieces.KING
+										&& chessBoard[i][j].getColor() == Colors.BLACK) {
+									MainChess.blackKingX = String.valueOf(i);
+									MainChess.blackKingY = String.valueOf(j);
+								}
+							}
+						}
+					}
 					repaint();
 				}
 
