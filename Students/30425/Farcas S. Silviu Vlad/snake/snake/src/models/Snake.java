@@ -20,79 +20,21 @@ public class Snake {
 
 	private static Snake snake;
 
-	private JFrame jframe;
-
 	private RenderPanel renderPanel;
-
-	private SnakeTimer snakeTimer;
 
 	private ArrayList<Point> snakeParts = new ArrayList<Point>();
 
 	private ArrayList<Point> obstacles = new ArrayList<Point>();
 
-	public static final int UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3, SCALE = 10;
-
-	public int direction = DOWN, score, tailLength = 10, time;
+	public int tailLength = 14;
 
 	private Point head, cherry;
 
-	public Random random;
-
-	private boolean over = false, paused;
-
-	public Dimension dim;
-
 	public Snake() {
-		dim = Toolkit.getDefaultToolkit().getScreenSize();
-		jframe = new JFrame("Snake");
-		jframe.setVisible(true);
-		jframe.setSize(StartMenu.small * 400 + StartMenu.medium * 600 + StartMenu.large * 800,
-				StartMenu.small * 300 + StartMenu.medium * 500 + StartMenu.large * 700);
-		jframe.setResizable(false);
-		jframe.setLocation(dim.width / 2 - jframe.getWidth() / 2, dim.height / 2 - jframe.getHeight() / 2);
-		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setRenderPanel(new RenderPanel());
-		jframe.add(renderPanel);
-
 	}
 
-	public void startGame() {
-		over = false;
-		paused = false;
-		time = 0;
-		score = 0;
-		tailLength = 14;
-		direction = DOWN;
-		head = new Point(0, -1);
-		random = new Random();
-		snakeParts.clear();
-		cherry = new Point(random.nextInt(StartMenu.small * 39 + StartMenu.medium * 59 + StartMenu.large * 79),
-				random.nextInt(StartMenu.small * 26 + StartMenu.medium * 46 + StartMenu.large * 66));
-		if (StartMenu.easy == 1) {
-			obstacles = null;
-		}
-		if (StartMenu.normal == 1) {
-			for (int i = 0; i < StartMenu.small * 20 + StartMenu.medium * 40 + StartMenu.large * 80; i++) {
-				obstacles.add(
-						new Point(random.nextInt(StartMenu.small * 39 + StartMenu.medium * 59 + StartMenu.large * 79),
-								random.nextInt(StartMenu.small * 26 + StartMenu.medium * 46 + StartMenu.large * 66)));
-			}
-		}
-		if (StartMenu.hard == 1) {
-			for (int i = 0; i < StartMenu.small * 40 + StartMenu.medium * 80 + StartMenu.large * 160; i++) {
-				obstacles.add(
-						new Point(random.nextInt(StartMenu.small * 39 + StartMenu.medium * 59 + StartMenu.large * 79),
-								random.nextInt(StartMenu.small * 26 + StartMenu.medium * 46 + StartMenu.large * 66)));
-			}
-		}
-		do {
-			cherry = new Point(random.nextInt(StartMenu.small * 39 + StartMenu.medium * 59 + StartMenu.large * 79),
-					random.nextInt(StartMenu.small * 26 + StartMenu.medium * 46 + StartMenu.large * 66));
-		} while (noCherryAtObstacle() == false);
-		jframe.addKeyListener(new SnakeKey());
-		snakeTimer = new SnakeTimer();
-		snakeTimer.timer.start();
-	}
+	
 
 	public boolean noTailAndNoObstacleAt(int x, int y) {
 		for (Point point : snakeParts) {
@@ -153,6 +95,10 @@ public class Snake {
 	public ArrayList<Point> getObstacles() {
 		return obstacles;
 	}
+	
+	public void setObstacles(ArrayList<Point> obstacles){
+		this.obstacles=obstacles;
+	}
 
 	public void addObstacles(Point part) {
 		obstacles.add(part);
@@ -174,38 +120,9 @@ public class Snake {
 		this.cherry = cherry;
 	}
 
-	public boolean getOver() {
-		return over;
-	}
-
-	public void setOver(boolean over) {
-		this.over = over;
-	}
-
-	public boolean getPaused() {
-		return paused;
-	}
-
-	public void setPaused(boolean paused) {
-		this.paused = paused;
-	}
-
 	public void repaintRenderPanel(){
 		renderPanel.repaint();
 	}
 	
-	public JFrame getJframe(){
-		return jframe;
-	}
-	public static void main(String[] args) {
-		JFrame jf = new JFrame("Menu");
-		jf.setVisible(true);
-		jf.setSize(805, 700);
-		StartMenu menu = new StartMenu();
-		jf.add(menu);
-		jf.addKeyListener(menu);
-		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-	}
 
 }

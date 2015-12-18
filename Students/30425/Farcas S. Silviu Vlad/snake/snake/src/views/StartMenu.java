@@ -11,11 +11,11 @@ import javax.swing.JPanel;
 
 import models.*;
 import controllers.*;
-import views.*;
 
 public class StartMenu extends JPanel implements KeyListener{
 	
-	public static int small=0, medium=1, large=0, goThroughWalls=0, easy=0, normal=1, hard=0;
+	public static int small=0, medium=1, large=0, easy=0, normal=1, hard=0;
+	public static boolean goThroughWalls=false;
 	
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -40,7 +40,7 @@ public class StartMenu extends JPanel implements KeyListener{
 		if(large==1){
 			g.fillRect(440, 250, 220, 50);
 		}
-		if(goThroughWalls==1){
+		if(goThroughWalls){
 			g.fillRect(140, 390, 220, 50);
 		}
 		if(easy==1){
@@ -79,7 +79,9 @@ public class StartMenu extends JPanel implements KeyListener{
 		int i = e.getKeyCode();
 		if(i == KeyEvent.VK_SPACE){
 			Snake.setSnake(new Snake());
-			Snake.getSnake().startGame();
+			SnakeDirection.setSnakeDirection(new SnakeDirection());
+			GameManagement.setGame(new GameManagement());
+			GameManagement.getGame().startGame();
 			
 		}
 		if(i==KeyEvent.VK_S){
@@ -101,7 +103,7 @@ public class StartMenu extends JPanel implements KeyListener{
 			this.repaint();
 		}
 		if(i==KeyEvent.VK_G){
-			goThroughWalls=(goThroughWalls+1)%2;
+			goThroughWalls=!goThroughWalls;
 			this.repaint();
 		}
 		if(i==KeyEvent.VK_E){
