@@ -1,5 +1,4 @@
 package huffman.views;
-
 import javax.swing.JTextArea;
 
 public class CodeDisplay extends JTextArea {

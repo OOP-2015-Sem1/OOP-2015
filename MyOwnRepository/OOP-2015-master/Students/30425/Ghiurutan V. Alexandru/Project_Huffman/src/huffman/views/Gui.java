@@ -1,5 +1,4 @@
 package huffman.views;
-
 import javax.swing.*;
 import javax.swing.border.Border;
 import huffman.views.CodeDisplay;

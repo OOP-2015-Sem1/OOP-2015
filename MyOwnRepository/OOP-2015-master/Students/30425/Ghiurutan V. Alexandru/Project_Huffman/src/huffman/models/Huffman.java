@@ -1,5 +1,4 @@
 package huffman.models;
-
 import huffman.models.Node;
 import java.util.PriorityQueue;
 import java.util.ArrayList;
