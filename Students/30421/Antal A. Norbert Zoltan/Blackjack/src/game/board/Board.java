@@ -52,7 +52,7 @@ public class Board extends JFrame {
 		accMenu.add(login);
 		accMenu.add(guest);
 		accMenu.add(displayScore);
-		JMenu playerMenu = new JMenu("Adjust number of players");
+		JMenu playerMenu = new JMenu("Players");
 		JMenuItem playerMenuI = new JMenuItem("Adjust number of players");
 		playerMenuI.addActionListener(controller);
 		playerMenu.add(playerMenuI);
