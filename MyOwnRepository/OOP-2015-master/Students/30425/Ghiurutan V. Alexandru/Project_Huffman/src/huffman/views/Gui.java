@@ -37,6 +37,8 @@ public class Gui extends JFrame {
 						System.exit(0);
 					}
 					huffman = new Huffman(inputText);
+					huffman.determineNodePositions();
+					huffman.determineMaximumHeight();
 					canvas.clear();
 					drawTree(huffman.getRootOfHuffmanTree());
 					canvas.display();
