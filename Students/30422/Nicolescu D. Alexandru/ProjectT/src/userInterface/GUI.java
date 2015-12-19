@@ -24,31 +24,28 @@ public class GUI extends JFrame {
 	private JButton[] btnVec;
 	private static final int HARD = 0;
 	private static final int PC = 1;
-	private static final int PLACE_FIRST_MOVE=10;
-	private static final int TERMINATOR_SOUND=3;
+	private static final int PLACE_FIRST_MOVE = 10;
+	private static final int TERMINATOR_SOUND = 3;
 	private GameManagement game = null;
 	private boolean pvp = false;
-	private String dirName = "C:/Users/Andi/workspace/ProjectT/Icons";
 	private AccountRepository accounts = AccountRepository.getInstance();
-	private Icon X = new ImageIcon(dirName + "/X0.png");
-	private Icon X1 = new ImageIcon(dirName + "/Xbefore0.png");
-	private Icon O1 = new ImageIcon(dirName + "/Obefore0.png");
-	private Icon O = new ImageIcon(dirName + "/O0.png");
+	private Icon X = new ImageIcon("icons/X0.png");
+	private Icon X1 = new ImageIcon("icons/Xbefore0.png");
+	private Icon O1 = new ImageIcon("icons/Obefore0.png");
+	private Icon O = new ImageIcon("icons/O0.png");
 	private Icon aux;
 
 	private JPanel tictactoePanel = new JPanel();
 	private JPanel scorePanel = new JPanel();
 
 	public GUI() {
-		
+
 		createFrame();
+		inputAccountInformation();
 		createScorePanel();
 		createTTTPanel();
 
 		setLocationRelativeTo(null);
-	}
-
-	public void startGame() {
 
 		gameTypeChoice();
 		final int difficulty = difficultyChoice();
@@ -58,8 +55,6 @@ public class GUI extends JFrame {
 			s.SoundIt(TERMINATOR_SOUND);
 		}
 		int playerTurn = firstTurnChoice();
-		tictactoePanel.setVisible(true);
-		scorePanel.setVisible(true);
 		setVisible(true);
 		if ((playerTurn == PC) && (!pvp))
 			recordMoveInMatrix(PLACE_FIRST_MOVE);
@@ -78,7 +73,7 @@ public class GUI extends JFrame {
 						managePVPGame(source);
 					}
 					// --------------------PVPC------------------------
-					if (!pvp) {
+					else {
 						recordMoveInMatrix(Integer.parseInt(source.getName()));
 					}
 
@@ -87,6 +82,12 @@ public class GUI extends JFrame {
 			});
 		}
 
+	}
+
+	private void inputAccountInformation() {
+		LoginDialog input = new LoginDialog();
+		input.inputAccountInformation();
+		
 	}
 
 	private void managePVPGame(JButton source) {
@@ -103,7 +104,7 @@ public class GUI extends JFrame {
 		recordMoveInMatrix(Integer.parseInt(source.getName()));
 	}
 
-	private int gameTypeChoice() {
+	private void gameTypeChoice() {
 
 		String[] gameType = { "Play vs computer", "Play vs friend" };
 		final int type = JOptionPane.showOptionDialog(null, "Choose the game type", "TicTacToe",
@@ -112,8 +113,6 @@ public class GUI extends JFrame {
 			pvp = true;
 		if (type == -1)
 			System.exit(0);
-		return type;
-
 	}
 
 	private int difficultyChoice() {
@@ -164,28 +163,26 @@ public class GUI extends JFrame {
 		game.checkWin();
 
 	}
-	
-	private void createFrame(){
+
+	private void createFrame() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("TicTacToe");
 		setSize(800, 400);
 		setLayout(new GridLayout(1, 2));
 		add(tictactoePanel);
-		LoginDialog input = new LoginDialog();
-		input.inputAccountInformation();
 	}
 
 	private void createTTTPanel() {
 		tictactoePanel.setSize(400, 400);
 		tictactoePanel.setLayout(new GridLayout(3, 3));
 		btnVec = new JButton[9];
-		Icon BACKGROUND = new ImageIcon(dirName + "/background0.png");
+		Icon background = new ImageIcon("icons/background0.png");
 		for (int i = 0; i < 9; i++) {
 
 			btnVec[i] = new JButton();
 			btnVec[i].setName(String.valueOf(i));
 			tictactoePanel.add(btnVec[i]);
-			btnVec[i].setIcon(BACKGROUND);
+			btnVec[i].setIcon(background);
 			btnVec[i].setRolloverEnabled(true);
 			btnVec[i].setRolloverIcon(X1);
 			btnVec[i].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
