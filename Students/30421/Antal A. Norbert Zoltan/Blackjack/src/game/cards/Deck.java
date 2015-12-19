@@ -6,7 +6,7 @@ import game.cards.Card;
 
 public class Deck {
 
-	List<Card> cards = new ArrayList<Card>();
+	List<Card> cards;
 
 	public Deck(List<Card> cards) {
 		this.cards = new ArrayList<Card>(cards);
