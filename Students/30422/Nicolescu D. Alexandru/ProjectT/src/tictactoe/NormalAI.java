@@ -99,7 +99,6 @@ public class NormalAI extends RuleBasedStrategy {
 					for (int j = 0; j < 3; j++) {
 						if (board[k][j] == 0) {
 							board[k][j] = PC_MOVE;
-							System.out.println("nasol");
 							int l = k * 3 + j;
 							return l;
 						}
@@ -114,7 +113,6 @@ public class NormalAI extends RuleBasedStrategy {
 				for (int j = 0; j < 3; j++) {
 					if (board[k][j] == 0) {
 						board[k][j] = PC_MOVE;
-						System.out.println("nasol2");
 						int l = k * 3 + j;
 						return l;
 					}
