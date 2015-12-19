@@ -1,13 +1,14 @@
 package Main;
 
-import Pieces.Bishop;
-import Pieces.Colors;
-import Pieces.King;
-import Pieces.Knight;
-import Pieces.Pawn;
-import Pieces.Piece;
-import Pieces.Queen;
-import Pieces.Rook;
+import PieceManipulation.Bishop;
+import PieceManipulation.Colors;
+import PieceManipulation.King;
+import PieceManipulation.Knight;
+import PieceManipulation.NoPiece;
+import PieceManipulation.Pawn;
+import PieceManipulation.Piece;
+import PieceManipulation.Queen;
+import PieceManipulation.Rook;
 
 public class Board {
 	private Piece[][] chessBoard = new Piece[8][8];
@@ -23,7 +24,7 @@ public class Board {
 		}
 		for (i = 2; i < 6; i++) {
 			for (j = 0; j < 8; j++) {
-				chessBoard[i][j] = new Piece();
+				chessBoard[i][j] = new NoPiece();
 				chessBoard[i][j].setColor(Colors.WHITE);
 			}
 		}
