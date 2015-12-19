@@ -17,8 +17,7 @@ public class AnimalFactory {
         } else if (Constants.Animals.Sieges.NAME.equals(type)) {
             return new SiegeWorkshop();
         } else {
-            System.out.println("af");
-            throw new Exception("Invalid species exceprion!");
+            throw new Exception("Invalid class exception!");
         }
 
     }

@@ -5,7 +5,7 @@ import android.content.Context;
 import org.w3c.dom.Element;
 
 import com.example.alexh.zoosome.models.animals.Animal;
-import com.example.alexh.zoosome.models.animals.Ballista;
+import com.example.alexh.zoosome.models.animals.Scorpion;
 import com.example.alexh.zoosome.models.animals.Bass;
 import com.example.alexh.zoosome.models.animals.Bear;
 import com.example.alexh.zoosome.models.animals.Beetle;
@@ -24,7 +24,7 @@ import com.example.alexh.zoosome.models.animals.Mantis;
 import com.example.alexh.zoosome.models.animals.Ostrich;
 import com.example.alexh.zoosome.models.animals.Ram;
 import com.example.alexh.zoosome.models.animals.Rhinoceros;
-import com.example.alexh.zoosome.models.animals.Scorpion;
+import com.example.alexh.zoosome.models.animals.Spider;
 import com.example.alexh.zoosome.models.animals.Surgeonfish;
 import com.example.alexh.zoosome.models.animals.Trebuchet;
 import com.example.alexh.zoosome.models.animals.Turtle;
@@ -129,8 +129,8 @@ public class AnimalRepository extends EntityRepository<Animal> {
 			a.decodeFromXML(element);
 			return a;
 
-		case Constants.Animals.Insects.SCORPION:
-			a = new Scorpion();
+		case Constants.Animals.Insects.SPIDER:
+			a = new Spider();
 			a.decodeFromXML(element);
 			return a;
 
@@ -154,8 +154,8 @@ public class AnimalRepository extends EntityRepository<Animal> {
 			a.decodeFromXML(element);
 			return a;
 
-		case Constants.Animals.Sieges.BALLISTA:
-			a = new Ballista();
+		case Constants.Animals.Sieges.SCORPION:
+			a = new Scorpion();
 			a.decodeFromXML(element);
 			return a;
 

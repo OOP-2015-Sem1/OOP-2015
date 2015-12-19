@@ -1,10 +1,6 @@
 package com.example.alexh.zoosome;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +11,10 @@ import android.widget.TextView;
 import com.example.alexh.zoosome.models.animals.Animal;
 import com.example.alexh.zoosome.services.factories.Constants;
 
-public class AnimalAdapter extends ArrayAdapter<Animal> {
-    private Context context;
+public class CreateAnimalAdapter extends ArrayAdapter<Animal> {
 
-    public AnimalAdapter(Context context, Animal[] animals) {
+    public CreateAnimalAdapter(Context context, Animal[] animals) {
         super(context, R.layout.animal_element, animals);
-        this.context = context;
     }
 
     @Override

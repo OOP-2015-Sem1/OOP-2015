@@ -4,7 +4,7 @@ import android.graphics.Point;
 
 import com.example.alexh.zoosome.models.animals.Animal;
 import com.example.alexh.zoosome.models.animals.Aquatic;
-import com.example.alexh.zoosome.models.animals.Ballista;
+import com.example.alexh.zoosome.models.animals.Scorpion;
 import com.example.alexh.zoosome.models.animals.Bass;
 import com.example.alexh.zoosome.models.animals.Bear;
 import com.example.alexh.zoosome.models.animals.Beetle;
@@ -27,7 +27,7 @@ import com.example.alexh.zoosome.models.animals.Ostrich;
 import com.example.alexh.zoosome.models.animals.Ram;
 import com.example.alexh.zoosome.models.animals.Reptile;
 import com.example.alexh.zoosome.models.animals.Rhinoceros;
-import com.example.alexh.zoosome.models.animals.Scorpion;
+import com.example.alexh.zoosome.models.animals.Spider;
 import com.example.alexh.zoosome.models.animals.Siege;
 import com.example.alexh.zoosome.models.animals.Surgeonfish;
 import com.example.alexh.zoosome.models.animals.Trebuchet;
@@ -283,13 +283,13 @@ public final class Constants {
             public static final Class CLASS = Insect.class;
 
             public static final String BEETLE = "Beetle";
-            public static final String SCORPION = "Scorpion";
+            public static final String SPIDER = "Spider";
             public static final String MANTIS = "Mantis";
             public static final String DRAGONFLY = "Dragonfly";
 
-            public static final String[] INSECT = {BEETLE, SCORPION, MANTIS, DRAGONFLY};
+            public static final String[] INSECT = {BEETLE, SPIDER, MANTIS, DRAGONFLY};
 
-            public static final Class[] INSECT_CLASSES = {Beetle.class, Scorpion.class, Mantis.class,
+            public static final Class[] INSECT_CLASSES = {Beetle.class, Spider.class, Mantis.class,
                     Dragonfly.class};
 
             public static final Class[] INSECT_CONSTRUCTOR_CLASSES = {String.class, int.class, double.class,
@@ -327,12 +327,12 @@ public final class Constants {
 
             public static final String RAM = "Ram";
             public static final String MANGONEL = "Mangonel";
-            public static final String BALLISTA = "Ballista";
+            public static final String SCORPION = "Scorpion";
             public static final String TREBUCHET = "Trebuchet";
 
-            public static final String[] SIEGE = {RAM, MANGONEL, BALLISTA, TREBUCHET};
+            public static final String[] SIEGE = {RAM, MANGONEL, SCORPION, TREBUCHET};
 
-            public static final Class[] SIEGE_CLASSES = {Ram.class, Mangonel.class, Ballista.class, Trebuchet.class};
+            public static final Class[] SIEGE_CLASSES = {Ram.class, Mangonel.class, Scorpion.class, Trebuchet.class};
 
             public static final Class[] SIEGE_CONSTRUCTOR_CLASSES = {String.class, int.class, double.class,
                     double.class, int.class, boolean.class};
