@@ -6,6 +6,8 @@ import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLStreamException;
 */
 
+import com.example.alexh.zoosome.repositories.SQLiteZoosomeDatabase;
+
 import org.w3c.dom.Element;
 
 import java.util.ArrayList;
@@ -14,18 +16,20 @@ public abstract class Bird extends Animal {
     private static final boolean DEFAULT_MIGRATES = false;
     private static final int DEFAULT_AVG_FLIGHT_ALTITUDE = 0;
 
+    public static final String NAME = "Bird";
+
     private static final String FIELD_NAME_MIGRATES = "Migrates";
     private static final String FIELD_NAME_AVERAGE_FLIGHT_ALTITUDE = "Average flight altitude";
 
     // SQLite resources
-    public static final String TABLE_BIRD_NAME = "bird_table";
+    public static final String TABLE_BIRD_NAME = NAME.toLowerCase();
     public static final String TABLE_BIRD_COL_ID = TABLE_CLASS_COL_ID;
     public static final String TABLE_BIRD_COL_MIGRATES = "migrates";
     public static final String TABLE_BIRD_COL_AVERAGE_FLIGHT_ALTITUDE = "averageFlightAltitude";
 
     public static final String TABLE_BIRD_COL_ID_MODIFIERS = TABLE_CLASS_COL_ID_MODIFIERS;
-    public static final String TABLE_BIRD_COL_MIGRATES_MODIFIERS = "VARCHAR(5)";
-    public static final String TABLE_BIRD_COL_AVERAGE_FLIGHT_ALTITUDE_MODIFIERS = "INTEGER";
+    public static final String TABLE_BIRD_COL_MIGRATES_MODIFIERS = SQLiteZoosomeDatabase.BOOLEAN_MODIFIER;
+    public static final String TABLE_BIRD_COL_AVERAGE_FLIGHT_ALTITUDE_MODIFIERS = SQLiteZoosomeDatabase.INTEGER_MODIFIER;
 
     private boolean migrates;
     private int avgFlightAlitude;

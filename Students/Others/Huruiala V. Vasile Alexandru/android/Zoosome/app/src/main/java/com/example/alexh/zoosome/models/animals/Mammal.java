@@ -5,6 +5,8 @@ import static com.example.alexh.zoosome.repositories.EntityRepository.createNode
 import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLStreamException;
 */
+import com.example.alexh.zoosome.repositories.SQLiteZoosomeDatabase;
+
 import org.w3c.dom.Element;
 
 import java.util.ArrayList;
@@ -16,15 +18,17 @@ public abstract class Mammal extends Animal {
 	private static final String FIELD_NAME_NORMAL_BODY_TEMPERATURE = "Normal body temperature";
 	private static final String FIELD_NAME_PERCENTAGE_BODY_HAIR = "Percentage body hair";
 
+	public static final String NAME = "Mammal";
+
 	// SQLite resources
-	public static final String TABLE_MAMMAL_NAME = "mammal_table";
+	public static final String TABLE_MAMMAL_NAME = NAME.toLowerCase();
 	public static final String TABLE_MAMMAL_COL_ID = TABLE_CLASS_COL_ID;
 	public static final String TABLE_MAMMAL_COL_NORMAL_BODY_TEMPERATURE = "normalBodyTemp";
 	public static final String TABLE_MAMMAL_COL_PERCENTAGE_BODY_HAIR = "percBodyHair";
 
 	public static final String TABLE_MAMMAL_COL_ID_MODIFIERS = TABLE_CLASS_COL_ID_MODIFIERS;
-	public static final String TABLE_MAMMAL_COL_NORMAL_BODY_TEMPERATURE_MODIFIERS = "DOUBLE";
-	public static final String TABLE_MAMMAL_COL_PERCENTAGE_BODY_HAIR_MODIFIERS = "DOUBLE";
+	public static final String TABLE_MAMMAL_COL_NORMAL_BODY_TEMPERATURE_MODIFIERS = SQLiteZoosomeDatabase.DOUBLE_MODIFIER;
+	public static final String TABLE_MAMMAL_COL_PERCENTAGE_BODY_HAIR_MODIFIERS = SQLiteZoosomeDatabase.DOUBLE_MODIFIER;
 
 
 	private double normalBodyTemp;
