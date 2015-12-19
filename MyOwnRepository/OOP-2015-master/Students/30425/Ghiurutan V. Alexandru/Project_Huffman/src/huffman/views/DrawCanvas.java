@@ -1,4 +1,5 @@
 package huffman.views;
+
 import java.awt.*;
 
 public class DrawCanvas extends Canvas {

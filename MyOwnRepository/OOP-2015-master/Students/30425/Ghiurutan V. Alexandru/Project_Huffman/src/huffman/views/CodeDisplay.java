@@ -1,4 +1,5 @@
 package huffman.views;
+
 import javax.swing.JTextArea;
 
 public class CodeDisplay extends JTextArea {
@@ -56,11 +57,6 @@ public class CodeDisplay extends JTextArea {
 		for (String x : function) {
 			this.append(x);
 			this.append("\n");
-		}
-		try {
-			Thread.sleep(20);
-		} catch (InterruptedException e1) {
-			e1.printStackTrace();
 		}
 	}
 }

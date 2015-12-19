@@ -1,4 +1,5 @@
 package huffman.views;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import huffman.views.CodeDisplay;
@@ -36,12 +37,6 @@ public class Gui extends JFrame {
 						System.exit(0);
 					}
 					huffman = new Huffman(inputText);
-					codeDisplay.getFunction("frequency");
-					codeDisplay.getFunction("huffmanTree");
-					codeDisplay.getFunction("traverseTree");
-					codeDisplay.getFunction("encode");
-					huffman.determineNodePositions();
-					huffman.determineMaximumHeight();
 					canvas.clear();
 					drawTree(huffman.getRootOfHuffmanTree());
 					canvas.display();
@@ -53,7 +48,7 @@ public class Gui extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == button2) {
 					String text = huffman.getOutputText();
-					if (text.equals("")||(text==null)) {
+					if (text.equals("") || (text == null)) {
 						JOptionPane.showMessageDialog(Gui.this,
 								"Please enter first some text and build the Huffman Tree.", "Error",
 								JOptionPane.ERROR_MESSAGE);

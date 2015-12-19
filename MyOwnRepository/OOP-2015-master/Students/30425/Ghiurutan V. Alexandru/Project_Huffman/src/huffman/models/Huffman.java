@@ -1,4 +1,5 @@
 package huffman.models;
+
 import huffman.models.Node;
 import java.util.PriorityQueue;
 import java.util.ArrayList;
@@ -29,9 +30,9 @@ public class Huffman {
 		this.setOutputText("");
 		this.setDecodedText("");
 		this.getSymbolsFrequency();
-		buildHuffmanTree();
-		traverseHuffmanTree(getRootOfHuffmanTree(), "");
-		encodeText();
+		this.buildHuffmanTree();
+		this.traverseHuffmanTree(this.getRootOfHuffmanTree(), "");
+		this.encodeText();
 	}
 
 	public void getSymbolsFrequency() {

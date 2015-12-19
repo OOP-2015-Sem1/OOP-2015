@@ -1,4 +1,5 @@
 package huffman.models;
+
 public class Table {
 	private char ch;
 	private String code;

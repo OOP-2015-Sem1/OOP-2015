@@ -1,4 +1,5 @@
 package huffman.models;
+
 /**
  * 
  * @author Alexandru
