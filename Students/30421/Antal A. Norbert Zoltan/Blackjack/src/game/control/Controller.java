@@ -1,4 +1,4 @@
-package control;
+package game.control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,27 +8,30 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import account.Account;
-import board.Board;
-import cards.Card;
-import cards.Deck;
+import game.Player;
+import game.board.Board;
+import game.cards.Card;
+import game.cards.Deck;
 
 public class Controller implements ActionListener {
 	private Board board;
 	private Deck deck;
 
+	private List<Card> cards = new ArrayList<Card>();
+
 	private Account account = null;
 
-	private List<Card> dealerHand = new ArrayList<Card>();
-	private List<ArrayList<Card>> playerHands = new ArrayList<ArrayList<Card>>();
-
-	private boolean dealerDone;
-	private List<Boolean> playersDone = new ArrayList<Boolean>();
+	private Player dealer;
+	private List<Player> players = new ArrayList<Player>();
 
 	private int nrPlayers = 1;
 	private int mPlayerNr;
 
+	private boolean isPlayed = false;
+
 	public Controller() {
 		board = new Board(this);
+		loadCards();
 	}
 
 	public void actionPerformed(ActionEvent ae) {
@@ -52,33 +55,36 @@ public class Controller implements ActionListener {
 			board.showStart(nrPlayers);
 			board.displayScore.setEnabled(false);
 		} else if (button == "Adjust number of players") {
-			nrPlayers = Integer.parseInt((String) JOptionPane.showInputDialog(board,
-					"Please enter in the number of players(1-3):", "Number of players", JOptionPane.PLAIN_MESSAGE));
-			adjustNrPlayers();
+			if (!isPlayed) {
+				nrPlayers = Integer.parseInt((String) JOptionPane.showInputDialog(board,
+						"Please enter in the number of players(1-3):", "Number of players", JOptionPane.PLAIN_MESSAGE));
+				adjustNrPlayers();
+			} else {
+				JOptionPane.showMessageDialog(board,
+						"You can't change the number of players while a game is in progress.", "Error",
+						JOptionPane.PLAIN_MESSAGE);
+			}
 		} else if (button == "Display score") {
 			displayScore();
 		}
 	}
 
 	private void startNewGame() {
-		deck = new Deck();
+		setPlayed(true);
+		deck = new Deck(cards);
 		board.clear();
-		dealerHand.clear();
-		playerHands.clear();
-		playersDone.clear();
-		dealerDone = false;
+		dealer = new Player(deck, board);
+		players.clear();
 		for (int i = 0; i < nrPlayers; i++) {
-			playerHands.add(new ArrayList<Card>());
-			playersDone.add(false);
+			players.add(new Player(deck, board));
 		}
-		board.setButtons(true);
 		for (int i = 0; i < 2; i++) {
 			addNewCard();
 		}
-		if (checkScore(dealerHand) == 21) {
-			dealerDone = true;
+		if (dealer.checkScore() == 21) {
+			dealer.setDone(true);
 			for (int i = 0; i < nrPlayers; i++) {
-				playersDone.set(i, true);
+				players.get(i).setDone(true);
 			}
 			getResult();
 		}
@@ -86,62 +92,64 @@ public class Controller implements ActionListener {
 
 	private void addNewCard() {
 		for (int i = 0; i < nrPlayers; i++) {
-			if (!playersDone.get(i)) {
-				int pScore = addCard(playerHands.get(i));
+			Player player = players.get(i);
+			if (!player.getDone()) {
+				player.addRandCard();
+				int pScore = player.checkScore();
 				if (i == mPlayerNr) {
 					if (pScore >= 21) {
-						playersDone.set(i, true);
+						players.get(i).setDone(true);
 						getResult();
 					} else {
 						board.setInfo("Your score: " + pScore, i);
 					}
 				} else {
-					if (pScore > 21) {
-						playersDone.set(i, true);
-					} else if (pScore >= 17 && !isAce(playerHands.get(i)) || pScore >= 20) {
-						playersDone.set(i, true);
+					if (pScore >= 21) {
+						players.get(i).setDone(true);
+						if (pScore == 21) {
+							board.setInfo("Player" + (i + 1) + "won.", i);
+						}
+					} else {
+						if (pScore >= 17 && !player.isAce() || pScore >= 20) {
+							players.get(i).setDone(true);
+						}
 						board.setInfo("Player" + (i + 1) + " Score: " + pScore, i);
 					}
 				}
-				board.drawPlayer(playerHands.get(i).get(playerHands.get(i).size() - 1), i);
+				player.drawPlayer(i);
 			}
 		}
-		if (!dealerDone) {
-			int dScore = addCard(dealerHand);
+		if (!dealer.getDone()) {
+			dealer.addRandCard();
+			int dScore = dealer.checkScore();
 			if (dScore > 21) {
 				for (int i = 0; i < nrPlayers; i++) {
-					playersDone.set(i, true);
+					players.get(i).setDone(true);
 				}
-				dealerDone = true;
+				dealer.setDone(true);
 				getResult();
-			} else if (dScore >= 17) {
-				dealerDone = true;
-				board.drawDealer(dealerHand.get(dealerHand.size() - 1));
 			} else {
-				board.drawDealer(dealerHand.get(dealerHand.size() - 1));
+				if (dScore >= 17) {
+					dealer.setDone(true);
+				}
+				dealer.drawPlayer(15);
 			}
 		}
-	}
-
-	private int addCard(List<Card> hand) {
-		Card card = deck.getRandCard();
-		hand.add(card);
-		return checkScore(hand);
 	}
 
 	private void getResult() {
-		playersDone.set(mPlayerNr, true);
-		board.setButtons(false);
+		setPlayed(false);
+		players.get(mPlayerNr).setDone(true);
 		while (inGame()) {
 			addNewCard();
 		}
 		board.showDealer();
-		int dScore = checkScore(dealerHand);
+		int dScore = dealer.checkScore();
 		if (dScore > 21) {
 			dScore = 0;
 		}
 		for (int i = 0; i < nrPlayers; i++) {
-			int pScore = checkScore(playerHands.get(i));
+			int pScore = players.get(i).checkScore();
 			if (pScore > 21) {
 				if (i == mPlayerNr) {
 					board.setInfo("You busted.", i);
@@ -173,37 +181,6 @@ public class Controller implements ActionListener {
 		}
 	}
 
-	private int checkScore(List<Card> hand) {
-		int score = 0;
-		boolean isAce = false;
-		for (int i = 0; i < hand.size(); i++) {
-			int value = hand.get(i).getValue();
-			if (!isAce && value == 11) {
-				isAce = true;
-			}
-			score += value;
-			if (isAce && score > 21) {
-				score -= 10;
-				isAce = false;
-			}
-
-		}
-		return score;
-	}
-
-	private boolean isAce(List<Card> hand) {
-		for (Card card : hand) {
-			if (card.getValue() == 11) {
-				ArrayList<Card> tempHand = new ArrayList<Card>(hand);
-				tempHand.remove(card);
-				if (checkScore(tempHand) <= 10) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
 	private void adjustNrPlayers() {
 		if (nrPlayers == 3) {
 			mPlayerNr = 1;
@@ -214,10 +191,10 @@ public class Controller implements ActionListener {
 	}
 
 	private boolean inGame() {
-		if (dealerDone == false)
+		if (dealer.getDone() == false)
 			return true;
 		for (int i = 0; i < nrPlayers; i++) {
-			if (playersDone.get(i) == false)
+			if (players.get(i).getDone() == false)
 				return true;
 		}
 		return false;
@@ -225,12 +202,31 @@ public class Controller implements ActionListener {
 
 	private void updateAccount() {
 		if (account != null) {
-			account.addScore(checkScore(playerHands.get(mPlayerNr)));
+			account.addScore(players.get(mPlayerNr).checkScore());
 			account.saveScores();
 		}
 	}
 
 	private void displayScore() {
 		board.setInfo("Your total score is: " + account.returnScore(), mPlayerNr);
+	}
+
+	private void loadCards() {
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 4; j++) {
+				cards.add(new Card("CardImages/c" + (4 * i + j) + ".png", i + 2));
+			}
+		}
+		for (int i = 36; i < 48; i++) {
+			cards.add(new Card("CardImages/c" + i + ".png", 10));
+		}
+		for (int i = 48; i < 52; i++) {
+			cards.add(new Card("CardImages/c" + i + ".png", 11));
+		}
+	}
+
+	private void setPlayed(boolean isPlayed) {
+		this.isPlayed = isPlayed;
+		board.setButtons(isPlayed);
 	}
 }

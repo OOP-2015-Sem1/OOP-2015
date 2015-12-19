@@ -1,4 +1,4 @@
-package control;
+package game.control;
 
 public class Main {
 

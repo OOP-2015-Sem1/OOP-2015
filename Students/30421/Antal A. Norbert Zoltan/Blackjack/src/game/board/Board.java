@@ -1,12 +1,12 @@
-package board;
+package game.board;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
 
-import cards.Card;
-import control.Controller;
+import game.cards.Card;
+import game.control.Controller;
 
 public class Board extends JFrame {
 	private static final long serialVersionUID = 2195379760914381351L;
@@ -52,7 +52,7 @@ public class Board extends JFrame {
 		accMenu.add(login);
 		accMenu.add(guest);
 		accMenu.add(displayScore);
-		JMenu playerMenu = new JMenu("Adjust number of players");
+		JMenu playerMenu = new JMenu("Players");
 		JMenuItem playerMenuI = new JMenuItem("Adjust number of players");
 		playerMenuI.addActionListener(controller);
 		playerMenu.add(playerMenuI);
@@ -93,7 +93,6 @@ public class Board extends JFrame {
 	public void showDealer() {
 		dealer.remove(back);
 		dealer.add(new JLabel(hole.getImg()));
-		setButtons(false);
 	}
 
 	public void setInfo(String text, int playerNr) {

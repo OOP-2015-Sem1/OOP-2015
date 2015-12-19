@@ -1,7 +1,8 @@
-package cards;
+package game.cards;
+
 import javax.swing.ImageIcon;
 
-public class Card{
+public class Card {
 	private ImageIcon img;
 	private int value;
 	
