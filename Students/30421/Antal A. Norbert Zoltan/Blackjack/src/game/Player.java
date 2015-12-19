@@ -8,36 +8,36 @@ import game.cards.*;
 public class Player {
 	private List<Card> hand = new ArrayList<Card>();
 	private boolean done = false;
-	
+
 	private Deck deck;
 	private Board board;
-	
-	public Player(Deck deck, Board board){
+
+	public Player(Deck deck, Board board) {
 		this.deck = deck;
 		this.board = board;
 	}
-	
-	public void clear(){
+
+	public void clear() {
 		hand.clear();
 		done = false;
 	}
-	
-	public void setDone (boolean done){
+
+	public void setDone(boolean done) {
 		this.done = done;
 	}
-	
-	public boolean getDone (){
+
+	public boolean getDone() {
 		return done;
 	}
-	
-	public List<Card> getHand(){
+
+	public List<Card> getHand() {
 		return hand;
 	}
-	
-	public void addRandCard(){
+
+	public void addRandCard() {
 		hand.add(deck.getRandCard());
 	}
-	
+
 	public int checkScore() {
 		int score = 0;
 		boolean isAce = false;
@@ -55,14 +55,14 @@ public class Player {
 		}
 		return score;
 	}
-	
-	public boolean isAce(){
+
+	public boolean isAce() {
 		ArrayList<Card> tempHand = new ArrayList<Card>(hand);
 		boolean retVal = isAceH();
 		hand = tempHand;
 		return retVal;
 	}
-	
+
 	private boolean isAceH() {
 		Iterator<Card> itr = hand.iterator();
 		while (itr.hasNext()) {
@@ -76,13 +76,12 @@ public class Player {
 		}
 		return false;
 	}
-	
-	public void drawPlayer(int playerNr){
-		if (playerNr == 15){
-			board.drawDealer(hand.get(hand.size()-1));
-		}
-		else {
-			board.drawPlayer(hand.get(hand.size()-1), playerNr);
+
+	public void drawPlayer(int playerNr) {
+		if (playerNr == 15) {
+			board.drawDealer(hand.get(hand.size() - 1));
+		} else {
+			board.drawPlayer(hand.get(hand.size() - 1), playerNr);
 		}
 	}
 }
