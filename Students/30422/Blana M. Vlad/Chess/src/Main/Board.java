@@ -1,14 +1,14 @@
 package Main;
 
-import PieceManipulation.Bishop;
-import PieceManipulation.Colors;
-import PieceManipulation.King;
-import PieceManipulation.Knight;
-import PieceManipulation.NoPiece;
-import PieceManipulation.Pawn;
-import PieceManipulation.Piece;
-import PieceManipulation.Queen;
-import PieceManipulation.Rook;
+import pieces.Bishop;
+import pieces.Colors;
+import pieces.King;
+import pieces.Knight;
+import pieces.NoPiece;
+import pieces.Pawn;
+import pieces.Piece;
+import pieces.Queen;
+import pieces.Rook;
 
 public class Board {
 	private Piece[][] chessBoard = new Piece[8][8];

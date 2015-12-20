@@ -10,9 +10,9 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import PieceManipulation.Colors;
-import PieceManipulation.Piece;
-import PieceManipulation.Pieces;
+import pieces.Colors;
+import pieces.Piece;
+import pieces.Pieces;
 
 public class UserInterface extends JPanel implements MouseListener,
 		MouseMotionListener {

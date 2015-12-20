@@ -1,5 +1,5 @@
-package Pieces;
+package pieces;
 
-public enum ListOfPieces {
+public enum Pieces {
 	NOPIECE, PAWN, KNIGHT, ROOK, BISHOP, QUEEN, KING
 }
