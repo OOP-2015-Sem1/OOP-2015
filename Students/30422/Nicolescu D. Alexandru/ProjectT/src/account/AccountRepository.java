@@ -12,7 +12,7 @@ public class AccountRepository {
 	public static final int NUMBER_OF_ACCOUNTS = 6;
 	private static final boolean ADD_ACCOUNT = false;
 	private static volatile AccountRepository accounts = null;
-	private Player players[] = new Player[10];
+	private Player players[];
 	private int accountNr;
 	private Scanner keyboard;
 
