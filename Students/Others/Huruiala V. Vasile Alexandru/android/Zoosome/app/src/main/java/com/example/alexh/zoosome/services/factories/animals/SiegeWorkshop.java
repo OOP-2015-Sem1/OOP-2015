@@ -1,7 +1,7 @@
 package com.example.alexh.zoosome.services.factories.animals;
 
 import com.example.alexh.zoosome.models.animals.Animal;
-import com.example.alexh.zoosome.models.animals.Ballista;
+import com.example.alexh.zoosome.models.animals.Scorpion;
 import com.example.alexh.zoosome.models.animals.Mangonel;
 import com.example.alexh.zoosome.models.animals.Ram;
 import com.example.alexh.zoosome.models.animals.Trebuchet;
@@ -9,7 +9,7 @@ import com.example.alexh.zoosome.services.factories.Constants;
 import com.example.alexh.zoosome.services.factories.NameGenerator;
 
 public class SiegeWorkshop extends SpeciesFactory {
-    private static final String[] NAME_ENDING = {"ram", "mangonel", "ballista", "trebuchet"};
+    private static final String[] NAME_ENDING = {"ram", "mangonel", "scorpion", "trebuchet"};
     private static final int[] NO_LEGS_BASE = {4, 4, 2, 0};
     private static final int[] NO_LEGS_VAR = {2, 1, 1, 0};
     private static final double[] MAINTENANCE_COST_BASE = {1.5, 2.5, 1.25, 4.5};
@@ -26,8 +26,8 @@ public class SiegeWorkshop extends SpeciesFactory {
             return new Ram();
         } else if (Constants.Animals.Sieges.MANGONEL.equals(type)) {
             return new Mangonel();
-        } else if (Constants.Animals.Sieges.BALLISTA.equals(type)) {
-            return new Ballista();
+        } else if (Constants.Animals.Sieges.SCORPION.equals(type)) {
+            return new Scorpion();
         } else if (Constants.Animals.Sieges.TREBUCHET.equals(type)) {
             return new Trebuchet();
         } else {
@@ -61,7 +61,7 @@ public class SiegeWorkshop extends SpeciesFactory {
             final boolean mobile = (Math.random() <= MOBLIE_CHACE[index]);
 
             return new Mangonel(name, noLegs, maintenanceCost, dangerPerc, range, mobile);
-        } else if (Constants.Animals.Sieges.BALLISTA.equals(type)) {
+        } else if (Constants.Animals.Sieges.SCORPION.equals(type)) {
             final int index = 2;
 
             name += NAME_ENDING[index];
@@ -71,7 +71,7 @@ public class SiegeWorkshop extends SpeciesFactory {
             final int range = RANGE_BASE[index] + (int) (RANGE_VAR[index] * Math.random());
             final boolean mobile = (Math.random() <= MOBLIE_CHACE[index]);
 
-            return new Ballista(name, noLegs, maintenanceCost, dangerPerc, range, mobile);
+            return new Scorpion(name, noLegs, maintenanceCost, dangerPerc, range, mobile);
         } else if (Constants.Animals.Sieges.TREBUCHET.equals(type)) {
             final int index = 3;
 
