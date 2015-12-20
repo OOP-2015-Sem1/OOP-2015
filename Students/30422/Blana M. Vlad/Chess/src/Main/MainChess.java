@@ -1,8 +1,8 @@
 package Main;
 
-import PieceManipulation.Colors;
-import PieceManipulation.NoPiece;
-import PieceManipulation.Piece;
+import pieces.Colors;
+import pieces.NoPiece;
+import pieces.Piece;
 
 public class MainChess {
 	public static Board board = new Board();
