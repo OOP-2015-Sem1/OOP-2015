@@ -23,24 +23,23 @@ public class Screen extends JPanel implements Runnable {
 	ControlsPanel panelScore = new ControlsPanel();
 	private int xCoor = 10, yCoor = 10;
 	private int size = 5;
-	private int initSize = 5;
 	private int ticks = 0;
 
-	private Random r;
-	private BodyParts b;
+	private Random random;
+	private BodyParts bodyParts;
 	private ArrayList<BodyParts> snake;
-	private Food ap;
+	private Food food;
 	private ArrayList<Food> apples;
-
-	public static int score=5;
-	public static int speed =99999999;
+	public static int score = 0;
+	
+	public static int speed = 5000000;
 
 	public Screen() {
 		setFocussable(true);
 
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
-		r = new Random();
+		random = new Random();
 
 		snake = new ArrayList<BodyParts>();
 		apples = new ArrayList<Food>();
@@ -55,20 +54,23 @@ public class Screen extends JPanel implements Runnable {
 
 	public void tick() {
 		if (snake.size() == 0) {
-			b = new BodyParts(xCoor, yCoor, 40);
-			snake.add(b);
+			bodyParts = new BodyParts(xCoor, yCoor, 40);
+			snake.add(bodyParts);
 		}
 
 		if (apples.size() == 0) {
-			int xCoor = r.nextInt(19);
-			int yCoor = r.nextInt(19);
+			int xCoor = random.nextInt(19);
+			int yCoor = random.nextInt(19);
 
-			ap = new Food(xCoor, yCoor, 40);
-			apples.add(ap);
+			food = new Food(xCoor, yCoor, 40);
+			apples.add(food);
 		}
 		for (int i = 0; i < apples.size(); i++) {
 			if (xCoor == apples.get(i).getxCoor() && yCoor == apples.get(i).getyCoor()) {
 				size++;
+				score++;
+			
+			//	System.out.println(score);
 				apples.remove(i);
 				i--;
 			}
@@ -116,8 +118,8 @@ public class Screen extends JPanel implements Runnable {
 			if (Constants.down)
 				yCoor++;
 			ticks = 0;
-			b = new BodyParts(xCoor, yCoor, 40);
-			snake.add(b);
+			bodyParts = new BodyParts(xCoor, yCoor, 40);
+			snake.add(bodyParts);
 		}
 		if (snake.size() > size) {
 			snake.remove(0);
@@ -156,7 +158,7 @@ public class Screen extends JPanel implements Runnable {
 			g.setColor(Color.WHITE);
 			g.drawString("GAME  OVER", 350, 400);
 		}
-		
+
 	}
 
 	public void start() {
@@ -183,8 +185,7 @@ public class Screen extends JPanel implements Runnable {
 		while (running) {
 			tick();
 			repaint();
-			score = snake.size() - initSize;
-			panelScore.setScore(score);
+
 		}
 	}
 

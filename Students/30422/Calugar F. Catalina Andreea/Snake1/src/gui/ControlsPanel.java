@@ -42,7 +42,7 @@ public class ControlsPanel extends JPanel {
 		ctrlButton[1][0].setText(Constants.LEFT);
 		ctrlButton[1][2].setText(Constants.RIGHT);
 		ctrlButton[2][1].setText(Constants.DOWN);
-		ctrlButton[1][1].setBackground(Color.LIGHT_GRAY);
+		ctrlButton[1][1].setBackground(Color.white);
 		ctrlButton[1][1].setEnabled(false);
 
 	}

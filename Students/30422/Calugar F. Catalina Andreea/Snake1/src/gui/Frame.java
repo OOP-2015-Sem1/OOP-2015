@@ -7,7 +7,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -18,17 +17,18 @@ import javax.swing.JPanel;
 public class Frame {
 
 	private JFrame jframe = new JFrame();;
-	private JPanel panel1;
-	private JPanel panel2;
-	private ControlsPanel c = new ControlsPanel();
+	private JPanel snakePanel;
+	private JPanel buttonPanel;
+	private ControlsPanel ctrlPanel = new ControlsPanel();
 
 	private JMenuBar menubar;
 	private JMenu file;
 	private JMenuItem exit;
 	private JMenuItem newG;
-	private JButton b1;
-	private JButton b2;
-	private JButton b3;
+	private JButton buttonEasy;
+	private JButton buttonMed;
+	private JButton buttonHard;
+	public JButton scoreLabel;
 
 	public Frame() {
 
@@ -66,41 +66,48 @@ public class Frame {
 	public void init() {
 		jframe.setLayout(new FlowLayout(FlowLayout.TRAILING));
 
-		panel1 = new JPanel();
-		panel2 = new JPanel();
-		panel1.setLayout(new GridLayout(1, 1));
+		snakePanel = new JPanel();
+		buttonPanel = new JPanel();
+		snakePanel.setLayout(new GridLayout(1, 1));
 
-		Screen s = new Screen();
-		panel1.setFocusable(true);
-		panel1.add(s);
+		Screen screen = new Screen();
+		snakePanel.setFocusable(true);
+		snakePanel.add(screen);
 
-		b1 = new JButton("EASY");
-		b2 = new JButton("MEDIUM");
-		b3 = new JButton("HARD");
-		b1.setBackground(new Color(10, 100, 0));
-		b2.setBackground(new Color(10, 100, 0));
-		b3.setBackground(new Color(10, 100, 0));
+		buttonEasy = new JButton("EASY");
+		buttonMed = new JButton("MEDIUM");
+		buttonHard = new JButton("HARD");
+		buttonEasy.setBackground(new Color(10, 100, 0));
+		buttonMed.setBackground(new Color(10, 100, 0));
+		buttonHard.setBackground(new Color(10, 100, 0));
+
+		scoreLabel = new JButton("Score");
+		scoreLabel.setEnabled(false);
+		scoreLabel.setBackground(Color.WHITE);
 
 		event eDificulty1 = new event();
-		b1.addActionListener(eDificulty1);
+		buttonEasy.addActionListener(eDificulty1);
 
 		event2 eDificulty2 = new event2();
-		b2.addActionListener(eDificulty2);
+		buttonMed.addActionListener(eDificulty2);
 
 		event3 eDificulty3 = new event3();
-		b3.addActionListener(eDificulty3);
+		buttonHard.addActionListener(eDificulty3);
 
-		panel2.setBackground(Color.LIGHT_GRAY);
-		panel2.setLayout(new BoxLayout(panel2, BoxLayout.X_AXIS));
-		panel2.setSize(new Dimension(100, 100));
-		c.setScore(Screen.score);
-		panel2.add(b1);
-		panel2.add(b2);
-		panel2.add(b3);
-		panel2.add(c);
+		buttonPanel.setBackground(Color.LIGHT_GRAY);
+		buttonPanel.setLayout(new GridLayout(5, 1));
+		buttonPanel.setSize(new Dimension(100, 100));
 
-		jframe.add(panel1);
-		jframe.add(panel2);
+		buttonPanel.add(buttonEasy);
+		buttonPanel.add(buttonMed);
+		buttonPanel.add(buttonHard);
+		buttonPanel.add(scoreLabel);
+
+		ctrlPanel.setScore(Screen.score);
+		buttonPanel.add(ctrlPanel);
+
+		jframe.add(snakePanel);
+		jframe.add(buttonPanel);
 		jframe.pack();
 
 		jframe.setLocationRelativeTo(null);
@@ -109,7 +116,7 @@ public class Frame {
 	}
 
 	public JButton[][] getControlButtons() {
-		return this.c.getControlButtons();
+		return this.ctrlPanel.getControlButtons();
 	}
 
 	public void addActionListenerToButtons(ActionListener actionListener) {
@@ -133,7 +140,7 @@ public class Frame {
 		}
 
 		public void addActionListenerToButtons(ActionListener actionListener) {
-			c.addActionListenerToButtons(actionListener);
+			ctrlPanel.addActionListenerToButtons(actionListener);
 		}
 	}
 
