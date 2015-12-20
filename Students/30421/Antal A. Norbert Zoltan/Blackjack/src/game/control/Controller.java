@@ -8,10 +8,11 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import account.Account;
-import game.Player;
 import game.board.Board;
 import game.cards.Card;
 import game.cards.Deck;
+import game.player.Dealer;
+import game.player.Player;
 
 public class Controller implements ActionListener {
 	private Board board;
@@ -21,7 +22,7 @@ public class Controller implements ActionListener {
 
 	private Account account = null;
 
-	private Player dealer;
+	private Dealer dealer;
 	private List<Player> players = new ArrayList<Player>();
 
 	private int nrPlayers = 1;
@@ -73,7 +74,7 @@ public class Controller implements ActionListener {
 		setPlayed(true);
 		deck = new Deck(cards);
 		board.clear();
-		dealer = new Player(deck, board);
+		dealer = new Dealer(deck, board);
 		players.clear();
 		for (int i = 0; i < nrPlayers; i++) {
 			players.add(new Player(deck, board));
@@ -132,7 +133,7 @@ public class Controller implements ActionListener {
 				if (dScore >= 17) {
 					dealer.setDone(true);
 				}
-				dealer.drawPlayer(15);
+				dealer.drawPlayer();
 			}
 		}
 	}

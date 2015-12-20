@@ -1,4 +1,4 @@
-package game;
+package game.player;
 
 import java.util.*;
 
@@ -6,11 +6,11 @@ import game.board.Board;
 import game.cards.*;
 
 public class Player {
-	private List<Card> hand = new ArrayList<Card>();
+	protected List<Card> hand = new ArrayList<Card>();
 	private boolean done = false;
 
 	private Deck deck;
-	private Board board;
+	protected Board board;
 
 	public Player(Deck deck, Board board) {
 		this.deck = deck;
@@ -64,12 +64,11 @@ public class Player {
 	}
 
 	private boolean isAceH() {
-		Iterator<Card> itr = hand.iterator();
-		while (itr.hasNext()) {
-			Card card = itr.next();
+		for (int i = 0; i < hand.size(); i++){
+			Card card = hand.get(i);
 			if (card.getValue() == 11) {
-				hand.remove(card);
-				if (!isAce() && checkScore() <= 10) {
+				hand.remove(i);
+				if (!isAceH() && checkScore() <= 10) {
 					return true;
 				}
 			}
@@ -78,10 +77,6 @@ public class Player {
 	}
 
 	public void drawPlayer(int playerNr) {
-		if (playerNr == 15) {
-			board.drawDealer(hand.get(hand.size() - 1));
-		} else {
 			board.drawPlayer(hand.get(hand.size() - 1), playerNr);
-		}
 	}
 }
