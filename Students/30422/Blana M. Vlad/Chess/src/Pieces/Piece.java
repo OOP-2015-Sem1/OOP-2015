@@ -1,21 +1,21 @@
-package Pieces;
+package pieces;
 
-public class Piece {
+public abstract class Piece {
 	private Colors color;
 
+	/*
+	 * public Piece(Colors color) { this.setColor(color); }
+	 */
 	public void setColor(Colors color) {
 		this.color = color;
 	}
 
-	public ListOfPieces getType() {
-		return ListOfPieces.NOPIECE;
-	}
+	public abstract Pieces getType();
 
 	public Colors getColor() {
 		return this.color;
 	}
 
-	public String possibleMove(int r, int c) {
-		return "";
-	}
+	public abstract String possibleMove(int row, int column,
+			Piece[][] chessBoard);
 }
