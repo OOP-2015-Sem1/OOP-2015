@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
@@ -25,14 +26,14 @@ public class Game extends Canvas implements Runnable {
 
 	// Window 
 	JFrame frame;
-	public static String windowTitle = "Breakout Game";
-	public static int windowWidth = 800;
-	public static int windowHeight = 600;
-	public static Dimension gameDimension = new Dimension(windowWidth, windowHeight);
+	public static String WINDOW_TITLE = "Breakout Game";
+	public static int WINDOW_WIDTH = 800;
+	public static int WINDOW_HEIGHT = 600;
+	public static Dimension GAME_DIMENSION = new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT);
 
-	// Rendering 
+	// Drawings 
 	public Canvas canvas;
-	BufferedImage img = new BufferedImage(windowWidth, windowHeight, BufferedImage.TYPE_INT_RGB);
+	BufferedImage img = new BufferedImage(WINDOW_WIDTH, WINDOW_HEIGHT, BufferedImage.TYPE_INT_RGB);
 	BufferStrategy bs;
 	Graphics2D g;
 
@@ -87,28 +88,28 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public Game() {
-		init();
+		startGame();
 	}
 
 	private void init() {
 		
 		// Create frame
-		frame = new JFrame(windowTitle);
+		frame = new JFrame(WINDOW_TITLE);
 		frame.setVisible(true);
-		frame.setSize(windowWidth, windowHeight);
+		frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Create Canvas
 		canvas = new Canvas();
-		canvas.setSize(windowWidth, windowHeight);
-		canvas.setPreferredSize(gameDimension);
-		canvas.setMaximumSize(gameDimension);
-		canvas.setMinimumSize(gameDimension);
+		canvas.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+		canvas.setPreferredSize(GAME_DIMENSION);
+		canvas.setMaximumSize(GAME_DIMENSION);
+		canvas.setMinimumSize(GAME_DIMENSION);
 
 		frame.add(canvas, BorderLayout.CENTER);
 
-		// Init entities
+		// Initiate entities
 		score=0;
 		paddle = new Paddle(this);
 		ball = new Ball(this);
@@ -141,11 +142,11 @@ public class Game extends Canvas implements Runnable {
 			}
 		}
 
-		// Init inputs
+		// Initiate inputs
 		keys = new KeyboardHandler(canvas);
 		canvas.requestFocus();
 
-		// Init rendering 
+		// Initiate background
 		canvas.createBufferStrategy(3);
 		bs = canvas.getBufferStrategy();
 		g = (Graphics2D) bs.getDrawGraphics();
@@ -155,6 +156,66 @@ public class Game extends Canvas implements Runnable {
 	private void update() {
 		paddle.update();
 		ball.update();
+		
+		//Paddle intersection
+		if (ball.entityCollider.intersects(paddle.entityCollider)){
+			ball.ballYmove = -ball.ballSpeed;
+		}
+			
+
+		//Brick intersection
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 5; j++) {
+				
+				if ((ball.entityCollider.intersects(brick[i][j].entityCollider))) {
+					int ballLeft = (int) ball.entityCollider.getMinX();
+					int ballHeight = (int) ball.entityCollider.getHeight();
+					int ballWidth = (int) ball.entityCollider.getWidth();
+					int ballTop = (int) ball.entityCollider.getMinY();
+
+					Point pointRight = new Point(ballLeft + ballWidth , ballTop);
+					Point pointLeft = new Point(ballLeft , ballTop);
+					Point pointTop = new Point(ballLeft, ballTop );
+					Point pointBottom = new Point(ballLeft, ballTop + ballHeight );
+
+					if (!brick[i][j].isDestroyed()) {
+						if (brick[i][j].entityCollider.contains(pointRight)) {
+							ball.ballXmove = - ball.ballSpeed;
+						} else if (brick[i][j].entityCollider.contains(pointLeft)) {
+							ball.ballXmove = ball.ballSpeed;
+						}
+
+						if (brick[i][j].entityCollider.contains(pointTop)) {
+							ball.ballYmove = ball.ballSpeed;
+						} else if (brick[i][j].entityCollider.contains(pointBottom)) {
+							ball.ballYmove = - ball.ballSpeed;
+						}
+						brick[i][j].setIsDestroyed(true);
+						score++;
+						
+					}
+				}
+				
+			}
+		}
+		
+
+		if (ball.ballY <= 0)
+			ball.ballYmove = ball.ballSpeed;
+
+		if (ball.ballX <= 0)
+			ball.ballXmove = ball.ballSpeed;
+
+		if (ball.ballX + ball.ballDiameter >= canvas.getWidth())
+			ball.ballXmove = -ball.ballSpeed;
+
+		if (ball.ballY + ball.ballDiameter >= canvas.getHeight())
+			youLost();
+		
+		if (score == TOTAL_SCORE)
+			youWon();
+		
+		
 	}
 
 	private void paintComponents() {
@@ -170,12 +231,18 @@ public class Game extends Canvas implements Runnable {
 
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 5; j++) {
+				if(!brick[i][j].isDestroyed())
 				brick[i][j].paintComponent(g);
 			}
 		}
 
 		bs.show();
 
+	}
+	
+	public void startGame(){
+		JOptionPane.showMessageDialog(this, "Click OK to begin", "Start Game", JOptionPane.CLOSED_OPTION);
+		init();
 	}
 	
 	public void youLost(){

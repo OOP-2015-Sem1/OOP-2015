@@ -8,9 +8,8 @@ import breakoutGame.Game;
 
 public abstract class Entity {
 	
-	Rectangle entityCollider;
-	Game game;
-
+	public Rectangle entityCollider;
+	
 	public abstract void paintComponent(Graphics g);
 	
 	public abstract void update();

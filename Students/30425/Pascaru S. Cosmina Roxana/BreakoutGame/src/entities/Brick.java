@@ -8,11 +8,17 @@ import breakoutGame.Game;
 
 public class Brick extends Entity{
 	
+	
+	
 	//brick details
-	 int brickX = 100, brickY = 50, brickSpace = 70;
-	 int brickWidth =60, brickHeight=16;
+	int brickX = 100, brickY = 50, brickSpace = 70;
+	int brickWidth =60, brickHeight=16;
 	Color brickColor;
 	private boolean hit;
+	private boolean destroyed = false;
+	
+	//Game
+	private Game game;
 	
 	//constructor
 	public Brick(Game game,  Color color, int x, int y){
@@ -40,6 +46,14 @@ public class Brick extends Entity{
 	
 	public boolean isHit(){
 		return hit;
+	}
+	
+	public void setIsDestroyed(boolean var){
+		destroyed = var;
+	}
+	
+	public boolean isDestroyed(){
+		return destroyed;
 	}
 
 }
