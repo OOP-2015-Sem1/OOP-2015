@@ -38,27 +38,38 @@ public class Game implements ActionListener{
 		
 	}
 	
-	public void nextRound() {
+	private void nextRound() {
 		
 		checkEndOfGame();
 		timeInterval = 2;
-		if(activePlayer.equals(COMPUTER))
+		if(activePlayer.equals(COMPUTER)) {
+			System.out.println(" computer");
 			boardConfiguration.activateComputer();
-		else
+			startTimer();
+		}
+		else {
+			System.out.println(" player");
 			boardConfiguration.enableComputerBoard();
-		timer.start();
-	
+		}
+		
 	}
 	
 	private void checkEndOfGame() {
 		if(boardConfiguration.activePlayerDestroyedTheShips(otherPlayer)) {
-			JOptionPane.showMessageDialog(null, "You Won");
+			if(activePlayer.equals(COMPUTER))
+				JOptionPane.showMessageDialog(null, "Computer Won");
+			else
+				JOptionPane.showMessageDialog(null, "You Won");
 			System.exit(0);
 		}
 		
 	}
 	
-	private void switchPlayers() {
+	public void startTimer(){
+		timer.start();
+	}
+	
+	public void switchPlayers() {
 		if(activePlayer.equals(COMPUTER)) {
 			activePlayer = ME;
 			otherPlayer = COMPUTER;
@@ -73,9 +84,10 @@ public class Game implements ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		timeInterval -=1;
 		if(timeInterval == 0) {
-			boardFrame.setNextPlayer();
-			switchPlayers();
 			timer.stop();
+			switchPlayers();
+			boardFrame.setNextPlayer();
+			nextRound();
 		}
 	}
 }

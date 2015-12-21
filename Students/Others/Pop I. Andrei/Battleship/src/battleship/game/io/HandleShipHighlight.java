@@ -150,13 +150,13 @@ public class HandleShipHighlight extends MouseAdapter{
 				shipOrientation = "horizontal";
 			highlightTheShip(e);
 		}
-		else if(e.getButton() == MouseEvent.BUTTON1) {
+		else if(e.getButton() == MouseEvent.BUTTON1 && activeHighlight) {
 			if(validLocation(shipLocation))
 				ship.setLocation(shipLocation);
 				ship.setOrientation(shipOrientation);
 				markTheShipOnBoard();
-				theBoard.saveTheShip(ship);
 				setHiglightActive(false);
+				theBoard.saveTheShip(ship);
 		}
 	}
 
