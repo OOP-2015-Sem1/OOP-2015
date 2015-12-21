@@ -22,7 +22,7 @@ public class Controller implements ActionListener {
 
 	private Account account = null;
 
-	private Dealer dealer;
+	public Dealer dealer;
 	private List<Player> players = new ArrayList<Player>();
 
 	private int nrPlayers = 1;

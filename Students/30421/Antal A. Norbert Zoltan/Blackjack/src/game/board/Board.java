@@ -28,18 +28,37 @@ public class Board extends JFrame {
 	private Card hole;
 
 	private int nrPlayers;
+	
+	private Controller controller;
 
 	public Board(Controller controller) {
-		setLayout(new GridLayout(3, 1));
+		this.controller = controller;
+		setTitle("Blackjack");
+		setLayout(new GridBagLayout());
 		setSize(1200, 700);
-		this.add(dealer);
-		this.add(player);
+		GridBagConstraints c = new GridBagConstraints();
+		c.gridx = 0;
+		c.gridy = 0;
+		c.weightx = 0.1;
+		c.weighty = 0.2;
+		c.gridheight = 1;
+		c.anchor = GridBagConstraints.NORTH;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		this.add(dealer, c);
+		c.gridy = 1;
+		c.gridheight = 4;
+		c.weighty = 0.4;
+		c.ipady = 150;
+		this.add(player, c);
 		newButton.addActionListener(controller);
 		hitButton.addActionListener(controller);
-		controls.add(hitButton);
 		standButton.addActionListener(controller);
-		controls.add(standButton);
-		this.add(controls);
+		c.gridy = 5;
+		c.gridheight = 1;
+		c.weighty = 0.05;
+		c.ipady = 0;
+		c.anchor = GridBagConstraints.SOUTH;
+		this.add(controls, c);
 		JMenuBar menuBar = new JMenuBar();
 		JMenu accMenu = new JMenu("Accounts");
 		menuBar.add(accMenu);
@@ -91,8 +110,14 @@ public class Board extends JFrame {
 	}
 
 	public void showDealer() {
-		dealer.remove(back);
-		dealer.add(new JLabel(hole.getImg()));
+		if (back.getParent() == dealer){
+			dealer.remove(back);
+			dealer.add(new JLabel(hole.getImg()));
+			}
+			else {
+				dealer.add(new JLabel(controller.dealer.getHole().getImg()));
+			}
+		dealer.repaint();
 	}
 
 	public void setInfo(String text, int playerNr) {

@@ -51,7 +51,6 @@ public class Player {
 				score -= 10;
 				isAce = false;
 			}
-
 		}
 		return score;
 	}
