@@ -1,123 +1,124 @@
 import java.awt.Graphics;
-import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
-public class Pacman extends Rectangle {
+public class Pacman {
 	
-	private static final long serialVersionUID = 1L;
-	public double x;
-	private double y;
-	public double velX=2.4;
-	private double velY=0;
+	public int column;
+	private int row;
+	public int STEP=2;
+	int columns,rows;
+	int nextDir,curDir = KeyEvent.VK_RIGHT;
+	File file = new File("res/Map/map.txt");
 	
-	public BufferedImage[] pacman = new BufferedImage[24];
+	public BufferedImage pacman;
 	BufferedImageLoader load;
 	
-	public Pacman(double x, double y){
-		this.x = x;
-		this.y = y;
+	static int SUCCESS = 1, FAIL = 0;
+	
+	ArrayList<String> lines = new ArrayList<String>();
+	
+	public Pacman(){
+
 		load = new BufferedImageLoader();
 		try {
-			pacman[0] = load.loadImage("/RIGHT/RIGHT.png");
-			pacman[1] = load.loadImage("/RIGHT/RIGHT1.png");
-			pacman[2] = load.loadImage("/RIGHT/RIGHT2.png");
-			pacman[3] = load.loadImage("/RIGHT/RIGHT3.png");
-			pacman[4] = load.loadImage("/RIGHT/RIGHT4.png");
-			pacman[5] = load.loadImage("/RIGHT/RIGHT5.png");
-			pacman[6] = load.loadImage("/LEFT/LEFT.png");
-			pacman[7] = load.loadImage("/LEFT/LEFT1.png");
-			pacman[8] = load.loadImage("/LEFT/LEFT2.png");
-			pacman[9] = load.loadImage("/LEFT/LEFT3.png");
-			pacman[10] = load.loadImage("/LEFT/LEFT4.png");
-			pacman[11] = load.loadImage("/LEFT/LEFT5.png");
-			pacman[12] = load.loadImage("/UP/UP.png");
-			pacman[13] = load.loadImage("/UP/UP1.png");
-			pacman[14] = load.loadImage("/UP/UP2.png");
-			pacman[15] = load.loadImage("/UP/UP3.png");
-			pacman[16] = load.loadImage("/UP/UP4.png");
-			pacman[17] = load.loadImage("/UP/UP5.png");
-			pacman[18] = load.loadImage("/DOWN/DOWN.png");
-			pacman[19] = load.loadImage("/DOWN/DOWN1.png");
-			pacman[20] = load.loadImage("/DOWN/DOWN2.png");
-			pacman[21] = load.loadImage("/DOWN/DOWN3.png");
-			pacman[22] = load.loadImage("/DOWN/DOWN4.png");
-			pacman[23] = load.loadImage("/DOWN/DOWN5.png");
+			Scanner s = new Scanner(file);
+			int r = 0;
+				while(s.hasNextLine()){
+					String line = s.nextLine();
+					lines.add(line);
+					if(line.contains("5")){
+						row = r;
+						column = line.indexOf("5");
+					}
+					r++;	
+				}
+				
+			s.close();
 			
-		} catch (IOException e) {
+			rows = lines.size();
+			columns = lines.get(0).length();
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("File doesn't EXIST !!!");
 			e.printStackTrace();
 		}
-		
+			pacman = load.loadImage("Characters/Pacman.png");
 	}
 	
 	public void render(Graphics g,BufferedImage p){
-  		g.drawImage(p, (int)x, (int)y, null);
+	
+  		g.drawImage(p, column*STEP-14, row*STEP-14, null);
 	}
 	
-	public void tick(){
-		if(canMove(x+velX,y) == true) {
-			x+=velX;
-		}else{
-			velX=0;
-		}
+	public void render1(Graphics g){ // JUST A TEST, TO SEE PACMAN'S PATH
 		
-		if(canMove(x,y+velY) == true) {
-			y+=velY;
-		}else{
-			velY=0;
-		}
-		
-		
-		if(x <= 0) x = 0;
-		if(x >= 640-32) x=640-32;
-		
-		if(y <= 0) y = 0;
-		if(y >= 480-32) y=480-32;
-		
-
-	}
-	
-	public boolean canMove(double nextX, double nextY){
-		
-		Rectangle bounds =  new Rectangle((int)nextX,(int)nextY,29,29);
-		Map map = GameEngine.map;
-		
-		for (int a = 0; a<map.tiles.length;a++){
-			for(int b = 0; b<map.tiles[0].length;b++){
-				if(map.tiles[a][b] != null){
-					if(bounds.intersects(map.tiles[a][b])){
-						return false;
-					}
+		for(int r = 0;r<rows;r++){
+			for(int c = 0; c<columns;c++){
+				if(charAt(r,c) != '0'){
+					g.fillRect(c*STEP, r*STEP, STEP, STEP);
 				}
 			}
 		}
-		return true;
+		
 	}
 	
-	public double getX() {
-		return x;
+	public void tick(){
+		
+			if(move(nextDir) == SUCCESS){
+				curDir = nextDir;
+			}else{
+				move(curDir);
+			}
+	}
+			
+			private int move(int nextDir){
+			
+			switch(nextDir){
+			case KeyEvent.VK_LEFT:
+				if(column > 0 && charAt(row,column-1) != '0'){
+					column -= 1;
+				return SUCCESS;
+				}
+				break;
+			case KeyEvent.VK_RIGHT:
+				if(column < columns-1 && charAt(row,column+1) != '0'){
+					column += 1;
+					return SUCCESS;
+				}
+				break;
+			case KeyEvent.VK_UP:
+				if(row > 0 && charAt(row-1,column) != '0'){
+					row -= 1;
+					return SUCCESS;
+				}
+				break;
+			case KeyEvent.VK_DOWN:
+				if(row < rows-1 && charAt(row+1,column) != '0'){
+					row += 1;
+				return SUCCESS;
+				}
+				break;
+			}	
+			return FAIL;
 	}
 	
-	public void setX(double x) {
-		this.x = x;
+	public char charAt (int row, int column){
+		
+		return lines.get(row).charAt(column);
+		
 	}
 	
-	public double getY() {
-		return y;
+	public void setNextDir(int nextDir) {
+		this.nextDir = nextDir;
 	}
 	
-	public void setY(double y) {
-		this.y = y;
+	public int getCurDir() {
+		return curDir;
 	}
-	
-	public void setVelX(double velX) {
-		this.velX = velX;
-	}
-	
-	public void setVelY(double velY) {
-		this.velY = velY;
-	}
-	
-	
-	
 }
+

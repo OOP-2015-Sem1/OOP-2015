@@ -7,9 +7,14 @@ public class BufferedImageLoader {
 
 	private BufferedImage image;
 	
-	public BufferedImage loadImage(String path) throws IOException{
+	public BufferedImage loadImage(String path) {
 		
-		image = ImageIO.read(getClass().getResource(path));
+		try {
+			image = ImageIO.read(getClass().getResource(path));
+		} catch (IOException e) {
+			System.out.println("N-o incarca");
+			e.printStackTrace();
+		}
 		return image;
 	}
 	
