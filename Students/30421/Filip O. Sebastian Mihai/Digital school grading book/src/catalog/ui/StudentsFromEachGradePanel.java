@@ -32,7 +32,10 @@ public class StudentsFromGrade1 extends JPanel{
 
 package catalog.ui;
 
+import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -41,33 +44,18 @@ import javax.swing.JPanel;
 import catalog.brain.Main;
 
 public class StudentsFromEachGradePanel {
-	public JPanel StudentsPanelFromClasroom1 = new JPanel();  
-	public JPanel StudentsPanelFromClasroom2 = new JPanel();  
-	public JPanel StudentsPanelFromClasroom3 = new JPanel();  
-	public JPanel StudentsPanelFromClasroom4 = new JPanel();  
-	public JPanel StudentsPanelFromClasroom5 = new JPanel();  
-	public JPanel StudentsPanelFromClasroom6 = new JPanel();  
-	public JPanel StudentsPanelFromClasroom7 = new JPanel();  
-	public JPanel StudentsPanelFromClasroom8 = new JPanel();  
-	public JPanel StudentsPanelFromClasroom9 = new JPanel();  
-	public JPanel StudentsPanelFromClasroom10 = new JPanel();  
-	public JPanel StudentsPanelFromClasroom11 = new JPanel();  
-	public JPanel StudentsPanelFromClasroom12 = new JPanel(); 
+	public JPanel[] StudentsPanelFromClasroom = new JPanel[13];
+	public JPanel fau = new JPanel();
 	private JButton[] StudentButtons;
 	public StudentsFromEachGradePanel() {
+		
+		fau.setVisible(false);
+		
 		StudentButtons = new JButton[35];
-		ToGetButtonsOutOfArrayLists(StudentsPanelFromClasroom1,Main.Grade1);
-		ToGetButtonsOutOfArrayLists(StudentsPanelFromClasroom2,Main.Grade2);
-		ToGetButtonsOutOfArrayLists(StudentsPanelFromClasroom3,Main.Grade3);
-		ToGetButtonsOutOfArrayLists(StudentsPanelFromClasroom4,Main.Grade4);
-		ToGetButtonsOutOfArrayLists(StudentsPanelFromClasroom5,Main.Grade5);
-		ToGetButtonsOutOfArrayLists(StudentsPanelFromClasroom6,Main.Grade6);
-		ToGetButtonsOutOfArrayLists(StudentsPanelFromClasroom7,Main.Grade7);
-		ToGetButtonsOutOfArrayLists(StudentsPanelFromClasroom8,Main.Grade8);
-		ToGetButtonsOutOfArrayLists(StudentsPanelFromClasroom9,Main.Grade9);
-		ToGetButtonsOutOfArrayLists(StudentsPanelFromClasroom10,Main.Grade10);
-		ToGetButtonsOutOfArrayLists(StudentsPanelFromClasroom11,Main.Grade11);
-		ToGetButtonsOutOfArrayLists(StudentsPanelFromClasroom12,Main.Grade12);
+		for(int i = 1;i<13;i++){
+			StudentsPanelFromClasroom[i] = new JPanel();
+			ToGetButtonsOutOfArrayLists(StudentsPanelFromClasroom[i],Main.stud.studentsFromGrade[i]);
+		}
 	}
 	private void ToGetButtonsOutOfArrayLists (JPanel PanelForClassroom,ArrayList<String> grade){
 		Integer StringToSize = Integer.valueOf(grade.get(0));
@@ -75,7 +63,7 @@ public class StudentsFromEachGradePanel {
 		for (int i = 1; i < StringToSize; i++) {
 			StudentButtons[i] = new JButton(grade.get(i));
 			PanelForClassroom.add(StudentButtons[i]);
+			PanelForClassroom.setVisible(false);
 		}
-		PanelForClassroom.setVisible(false);
 	}
 }
