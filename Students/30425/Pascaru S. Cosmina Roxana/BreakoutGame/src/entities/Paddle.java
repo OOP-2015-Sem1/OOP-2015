@@ -49,4 +49,9 @@ public class Paddle extends Entity {
 	public void setPaddleSpeed(int speed) {
 		paddleSpeed = speed;
 	}
+	
+	public void restartPosition(){
+		paddleX = 450;
+		paddleY = 500;
+	}
 }

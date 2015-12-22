@@ -19,8 +19,7 @@ public class Game extends Canvas implements Runnable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	// Game thread
 	Thread thread = new Thread(this);
 	boolean running = false;
@@ -52,10 +51,8 @@ public class Game extends Canvas implements Runnable {
 	public KeyboardHandler keys;
 
 	// Levels
-	Level1 level1 = new Level1(this, ball, brick, paddle);
-	Level2 level2 = new Level2(this, ball, brick, paddle);
-	Level3 level3 = new Level3(this, ball, brick, paddle);
-	int level = 1;
+	Level currentLevel = new Level1(this, ball, brick, paddle);
+	int level = 0;
 
 	@Override
 	public void run() {
@@ -89,7 +86,6 @@ public class Game extends Canvas implements Runnable {
 
 	public Game() {
 		startGame();
-
 	}
 
 	private void init() {
@@ -110,27 +106,8 @@ public class Game extends Canvas implements Runnable {
 
 		frame.add(canvas, BorderLayout.CENTER);
 
-		// Levels
-		switch (level) {
-		case 1:
-			level1.init();
-			ball.setBallSpeed(5);
-			paddle.setPaddleSpeed(10);
-			break;
-
-		case 2:
-			level2.init();
-			ball.setBallSpeed(6);
-			paddle.setPaddleSpeed(14);
-			break;
-
-		case 3:
-			level3.init();
-			ball.setBallSpeed(8);
-			paddle.setPaddleSpeed(18);
-			break;
-
-		}
+		// Level
+		currentLevel.init();
 
 		// Initiate inputs
 		keys = new KeyboardHandler(canvas);
@@ -152,21 +129,8 @@ public class Game extends Canvas implements Runnable {
 			ball.ballYmove = -ball.ballSpeed;
 		}
 
-		// Brick intersection
-		switch (level) {
-		case 1:
-			level1.update();
-			break;
-
-		case 2:
-			level2.update();
-			break;
-
-		case 3:
-			level3.update();
-			break;
-
-		}
+		// Level
+		currentLevel.update();
 
 		if (ball.ballY <= 0)
 			ball.ballYmove = ball.ballSpeed;
@@ -180,16 +144,9 @@ public class Game extends Canvas implements Runnable {
 		if (ball.ballY + ball.ballDiameter >= canvas.getHeight())
 			youLost();
 
-		if (level1.getScore() == TOTAL_SCORE_LEVEL1) {
+		if (currentLevel.isComplete()) {
+			level++;
 			goToNextLevel();
-		}
-
-		if (level2.getScore() == TOTAL_SCORE_LEVEL2) {
-			goToNextLevel();
-		}
-
-		if (level3.getScore() == TOTAL_SCORE_LEVEL3) {
-			youWon();
 		}
 
 	}
@@ -205,20 +162,8 @@ public class Game extends Canvas implements Runnable {
 		paddle.paintComponent(g);
 		ball.paintComponent(g);
 
-		switch (level) {
-		case 1:
-			level1.paintComponents(g);
-			break;
-
-		case 2:
-			level2.paintComponents(g);
-			break;
-
-		case 3:
-			level3.paintComponents(g);
-			break;
-
-		}
+		// Level
+		currentLevel.paintComponents(g);
 
 		bs.show();
 
@@ -226,6 +171,8 @@ public class Game extends Canvas implements Runnable {
 
 	public void startGame() {
 		JOptionPane.showMessageDialog(this, "Click OK to begin", "Start Game", JOptionPane.CLOSED_OPTION);
+		ball.restartPosition();
+		paddle.restartPosition();
 		init();
 	}
 
@@ -235,17 +182,29 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public void youWon() {
-
 		JOptionPane.showMessageDialog(this, "You destroyed all the bricks!", "Congratlations",
 				JOptionPane.CLOSED_OPTION);
 		stop();
 	}
 
 	public void goToNextLevel() {
-		level++;
 		JOptionPane.showMessageDialog(this, "Click OK to move on to the next level", "Congratlations",
 				JOptionPane.CLOSED_OPTION);
-		startGame();
-	}
 
+		switch (level) {
+		case 1:
+			currentLevel = new Level2(this, ball, brick, paddle);
+			startGame();
+			break;
+
+		case 2:
+			currentLevel = new Level3(this, ball, brick, paddle);
+			startGame();
+			break;
+
+		case 3:
+			youWon();
+			break;
+		}
+	}
 }

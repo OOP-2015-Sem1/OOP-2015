@@ -8,15 +8,17 @@ import entities.Ball;
 import entities.Brick;
 import entities.Paddle;
 
-public class Level1 extends Levels {
+public class Level1 extends Level {
 
 	private int scoreLevel1 = 0;
+	private boolean isComplete = false;
 
 	public Level1(Game game, Ball ball, Brick[][] brick, Paddle paddle) {
 		this.game = game;
 		this.ball = ball;
 		this.brick = brick;
 		this.paddle = paddle;
+
 	}
 
 	@Override
@@ -86,6 +88,10 @@ public class Level1 extends Levels {
 				}
 			}
 		}
+
+		if (scoreLevel1 == Game.TOTAL_SCORE_LEVEL1) {
+			levelIsComplete(true);
+		}
 	}
 
 	@Override
@@ -101,6 +107,14 @@ public class Level1 extends Levels {
 
 	public int getScore() {
 		return scoreLevel1;
+	}
+
+	public boolean isComplete() {
+		return isComplete;
+	}
+
+	public void levelIsComplete(boolean var) {
+		isComplete = var;
 	}
 
 }

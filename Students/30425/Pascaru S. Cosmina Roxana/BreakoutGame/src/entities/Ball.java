@@ -35,5 +35,9 @@ public class Ball extends Entity {
 	public void setBallSpeed(int speed) {
 		ballSpeed = speed;
 	}
+	public void restartPosition(){
+		ballX = 200;
+		ballY = 200;
+	}
 
 }
