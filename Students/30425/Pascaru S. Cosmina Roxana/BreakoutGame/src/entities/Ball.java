@@ -2,10 +2,7 @@ package entities;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Point;
 import java.awt.Rectangle;
-
-import breakoutGame.Game;
 
 public class Ball extends Entity {
 
@@ -16,13 +13,9 @@ public class Ball extends Entity {
 	public int ballSpeed = 5;
 	public int ballXmove = ballSpeed;
 	public int ballYmove = ballSpeed;
-	
-	//Game
-	private Game game;
 
 	// constructor
-	public Ball(Game game) {
-		this.game = game;
+	public Ball() {
 		entityCollider = new Rectangle(ballX, ballY, ballDiameter, ballDiameter);
 	}
 
@@ -37,6 +30,10 @@ public class Ball extends Entity {
 		ballX += ballXmove;
 		ballY += ballYmove;
 		entityCollider.setLocation(ballX, ballY);
+	}
+
+	public void setBallSpeed(int speed) {
+		ballSpeed = speed;
 	}
 
 }
