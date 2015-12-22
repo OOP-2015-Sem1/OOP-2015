@@ -26,8 +26,11 @@ public class GUI extends JFrame {
 	private static final int PC = 1;
 	private static final int PLACE_FIRST_MOVE = 10;
 	private static final int TERMINATOR_SOUND = 3;
+	private static final int CVC_MODE = 20;
+	private static final int WAIT_TIME = 2;
 	private GameManagement game = null;
 	private boolean pvp = false;
+	private boolean cvc = false;
 	private AccountRepository accounts = AccountRepository.getInstance();
 	private Icon X = new ImageIcon("icons/X0.png");
 	private Icon X1 = new ImageIcon("icons/Xbefore0.png");
@@ -56,11 +59,12 @@ public class GUI extends JFrame {
 		}
 		int playerTurn = firstTurnChoice();
 		setVisible(true);
-		if ((playerTurn == PC) && (!pvp))
+		if (cvc) {
+			manageCVCGame();
+		} else if ((playerTurn == PC) && (!pvp))
 			recordMoveInMatrix(PLACE_FIRST_MOVE);
 		aux = X;
 		for (int i = 0; i < 9; i++) {
-
 			btnVec[i].addActionListener(new ActionListener() {
 
 				public void actionPerformed(ActionEvent e) {
@@ -84,10 +88,31 @@ public class GUI extends JFrame {
 
 	}
 
+	private void manageCVCGame() {
+		int playerLastMove = game.manageLastPlayerMove(CVC_MODE);
+		aux = X;
+		btnVec[playerLastMove].setIcon(aux);
+		for (int i = 0; i < 8; i++) {
+			try {
+				Thread.sleep(WAIT_TIME * 1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			playerLastMove = game.manageLastPlayerMove(playerLastMove);
+			if (aux == X)
+				aux = O;
+			else
+				aux = X;
+			btnVec[playerLastMove].setEnabled(false);
+			btnVec[playerLastMove].setDisabledIcon(aux);
+			game.checkWin();
+		}
+	}
+
 	private void inputAccountInformation() {
 		LoginDialog input = new LoginDialog();
 		input.inputAccountInformation();
-		
+
 	}
 
 	private void managePVPGame(JButton source) {
@@ -106,13 +131,19 @@ public class GUI extends JFrame {
 
 	private void gameTypeChoice() {
 
-		String[] gameType = { "Play vs computer", "Play vs friend" };
+		String[] gameType = { "Play vs computer", "Play vs friend", "Computer vs Computer" };
 		final int type = JOptionPane.showOptionDialog(null, "Choose the game type", "TicTacToe",
-				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, gameType, gameType[1]);
-		if (type == 1)
-			pvp = true;
-		if (type == -1)
+				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, gameType, gameType[2]);
+		switch (type) {
+		case -1:
 			System.exit(0);
+		case 1:
+			pvp = true;
+			break;
+		case 2:
+			cvc = true;
+			break;
+		}
 	}
 
 	private int difficultyChoice() {
@@ -132,7 +163,7 @@ public class GUI extends JFrame {
 
 	private int firstTurnChoice() {
 
-		if (!pvp) {
+		if ((!pvp) && (!cvc)) {
 			String[] difficultyOption = { "Player starts", "PC starts", "Randomly decide" };
 			final int starter = JOptionPane.showOptionDialog(null, "Choose who starts", "TicTacToe",
 					JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, difficultyOption,
