@@ -9,8 +9,6 @@ public class Node implements Comparable<Node> {
 	private char ch;
 	private int freq;
 	private Node left, right;
-	private int x;
-	private int y;
 
 	public Node(int freq, Node left, Node right) {
 		this.setFreq(freq);
@@ -23,8 +21,6 @@ public class Node implements Comparable<Node> {
 		this.setFreq(freq);
 		this.setLeft(left);
 		this.setRight(right);
-		this.setX(x);
-		this.setY(y);
 	}
 
 	public boolean isLeaf() {
@@ -33,22 +29,6 @@ public class Node implements Comparable<Node> {
 
 	public int compareTo(Node other) {
 		return (this.freq - other.freq);
-	}
-
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
 	}
 
 	public void setCh(char ch) {
