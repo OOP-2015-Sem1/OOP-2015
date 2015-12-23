@@ -37,15 +37,15 @@ public class EasyAI extends RuleBasedStrategy {
 			break;
 		}
 		moveMade = false;
-		int randomVariable = (int) (Math.random() * 8);
+		int randomVariable = (int) (Math.random() * 9);
 		while (moveMade == false) {
-			randomVariable = (int) (Math.random() * 8);
+			randomVariable = (int) (Math.random() * 9);
 			if (board[randomVariable / 3][randomVariable % 3] == 0) {
 				board[randomVariable / 3][randomVariable % 3] = PC_MOVE;
 				moveMade = true;
 				return randomVariable;
 			}
 		}
-		return 0;
+		return -1;
 	}
 }

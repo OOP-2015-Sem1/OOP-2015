@@ -161,14 +161,19 @@ class Board {
 public class HardAI implements AI {
 
 	Board b = new Board();
+	int nrOfMove=0;
+	boolean cvc;
 
 	public int executeMove(int playerMove) {
-
+		
+		nrOfMove++;
 		System.out.println(playerMove);
 		int pcMove = 0;
-		if (b.isBoardEmpty() && (playerMove == 10)) {
+		if (b.isBoardEmpty() && ((playerMove == 10) || playerMove==20 )) {
 			Random rand = new Random();
 			Point p = new Point(rand.nextInt(3), rand.nextInt(3));
+			if (playerMove==20)
+				cvc=true;
 			b.placeAMove(p, 1);
 			pcMove = p.x * 3 + p.y;
 			return pcMove;
@@ -178,20 +183,44 @@ public class HardAI implements AI {
 		int x = playerMove / 3;
 		int y = playerMove % 3;
 		Point userMove = new Point(x, y);
-
+		
+		doCVCTrick();
+		
 		b.placeAMove(userMove, 2);
 		b.displayBoard();
 
 		b.minimax(0, 1);
-
+		
 		System.out.println(b.computersMove + "\n");
 
 		pcMove = b.computersMove.x * 3 + b.computersMove.y;
 
 		b.placeAMove(b.computersMove, 1);
 		b.displayBoard();
-
+		
+		doCVCTrick();
+		
 		return pcMove;
 
+	}
+
+	private void doCVCTrick() {
+		if (cvc){
+			if (nrOfMove % 2 == 0){
+				switchPlayers();
+			}
+		}
+		
+	}
+
+	private void switchPlayers() {
+		for(int i=0;i<3;i++)
+			for(int j=0;j<3;j++){
+				if (b.board[i][j]==1)
+					b.board[i][j]=2;
+				else if (b.board[i][j]==2)
+					b.board[i][j]=1;
+			}
+		
 	}
 }
