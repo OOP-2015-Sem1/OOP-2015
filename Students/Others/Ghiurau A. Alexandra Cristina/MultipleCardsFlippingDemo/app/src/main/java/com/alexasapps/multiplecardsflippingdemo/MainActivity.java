@@ -2,61 +2,59 @@ package com.alexasapps.multiplecardsflippingdemo;
 
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView imgFront;// = (ImageView) findViewById(R.id.imgBack1);
-    ImageView imgBack;// = (ImageView) findViewById(R.id.imgApples);
 
-    //ImageView[] frontImages = {(ImageView) findViewById(R.id.imgBack1), (ImageView) findViewById(R.id.imgBack2)};
-    //ImageView[] backImages = {(ImageView) findViewById(R.id.imgApples), (ImageView) findViewById(R.id.imgBannana)};
-
-    boolean isBackVisible = false;
+    Button portalForNewActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.first_layout);
 
-        //imgFront = frontImages[0];
-       // imgBack = backImages[0];
+        portalForNewActivity = (Button) findViewById(R.id.button);
 
-        imgFront = (ImageView)findViewById(R.id.imgApples);
-        imgBack = (ImageView)findViewById(R.id.imgBack1);
+        portalForNewActivity.setOnClickListener(new View.OnClickListener() {
 
-        final AnimatorSet setRightOut = (AnimatorSet) AnimatorInflater.loadAnimator(getApplicationContext(),
-                R.animator.flip_right_out);
-
-
-        final AnimatorSet setLeftIn = (AnimatorSet) AnimatorInflater.loadAnimator(getApplicationContext(),
-                R.animator.flight_left_in);
-
-
-        imgFront.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!isBackVisible){
-                    setRightOut.setTarget(imgFront);
-                    setLeftIn.setTarget(imgBack);
-                    setRightOut.start();
-                    setLeftIn.start();
-                    isBackVisible = true;
-                }
-                else{
-                    setRightOut.setTarget(imgBack);
-                    setLeftIn.setTarget(imgFront);
-                    setRightOut.start();
-                    setLeftIn.start();
-                    isBackVisible = false;
-                }
+
+               // Intent i = new Intent(getApplicationContext(),CardFlipping.class);
+                //startActivity(i);
+                startActivity(new Intent(MainActivity.this, CardFlipping.class));
             }
         });
+        /*
+
+            frontImages[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!isBackVisible) {
+                        setRightOut.setTarget(frontImages[index]);
+                        setLeftIn.setTarget(backImages[index]);
+                        setRightOut.start();
+                        setLeftIn.start();
+                        isBackVisible = true;
+                    } else {
+                        setRightOut.setTarget(backImages[index]);
+                        setLeftIn.setTarget(frontImages[index]);
+                        setRightOut.start();
+                        setLeftIn.start();
+                        isBackVisible = false;
+                    }
+                }
+            });
+        }*/
+
     }
 
 
