@@ -4,27 +4,21 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-import breakoutGame.Game;
+public class Brick extends Entity {
 
-public class Brick extends Entity{
-	
-	
-	
-	//brick details
+	// brick details
 	int brickX = 100, brickY = 50, brickSpace = 70;
-	int brickWidth =60, brickHeight=16;
-	Color brickColor;
+	int brickWidth = 60, brickHeight = 16;
+	public Color brickColor;
 	private boolean hit;
 	private boolean destroyed = false;
-	
-	//Game
-	private Game game;
-	
-	//constructor
-	public Brick(Game game,  Color color, int x, int y){
-		this.game = game;
-		brickX=x;
-		brickY=y;
+
+	public int nrOfHits = 0;
+
+	// constructor
+	public Brick(Color color, int x, int y) {
+		brickX = x;
+		brickY = y;
 		brickColor = color;
 		entityCollider = new Rectangle(brickX, brickY, brickWidth, brickHeight);
 	}
@@ -37,23 +31,27 @@ public class Brick extends Entity{
 
 	@Override
 	public void update() {
-		
+
 	}
-	
-	public void wasHit(boolean var){
+
+	public void wasHit(boolean var) {
 		hit = true;
 	}
-	
-	public boolean isHit(){
+
+	public boolean isHit() {
 		return hit;
 	}
-	
-	public void setIsDestroyed(boolean var){
+
+	public void setIsDestroyed(boolean var) {
 		destroyed = var;
 	}
-	
-	public boolean isDestroyed(){
+
+	public boolean isDestroyed() {
 		return destroyed;
+	}
+
+	public void changeColor(Color color) {
+		brickColor = color;
 	}
 
 }

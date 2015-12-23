@@ -7,19 +7,17 @@ import java.awt.Rectangle;
 import breakoutGame.Game;
 
 public class Paddle extends Entity {
-	
-	
-	//paddle details
+
+	// paddle details
 	private int paddleX = 450, paddleY = 500;
-	private int paddleWidth =90, paddleHeight =13;
-	private int paddleSpeed =10 ;
-	private int paddleXmove, paddleYmove;
-	private int distanceToMargin =20;
-	
-	//Game
+	private int paddleWidth = 90, paddleHeight = 13;
+	public int paddleSpeed = 10;
+	private int distanceToMargin = 20;
+
+	// Game
 	private Game game;
 
-	//constructor
+	// constructor
 	public Paddle(Game game) {
 		this.game = game;
 		entityCollider = new Rectangle(paddleX, paddleY, paddleWidth, paddleHeight);
@@ -33,18 +31,27 @@ public class Paddle extends Entity {
 
 	@Override
 	public void update() {
-		if (game.keys.left)
+		if (game.keys.direction == "left")
 			paddleX -= paddleSpeed;
-		
-		if (game.keys.right)
+
+		if (game.keys.direction == "right")
 			paddleX += paddleSpeed;
-		
-		if(paddleX<=0)
-			paddleX=paddleSpeed;
-		
-		if(paddleX +paddleWidth + distanceToMargin >= game.WINDOW_WIDTH)
-			paddleX = game.WINDOW_WIDTH-paddleWidth -distanceToMargin;
-		
+
+		if (paddleX <= 0)
+			paddleX = paddleSpeed;
+
+		if (paddleX + paddleWidth + distanceToMargin >= Game.WINDOW_WIDTH)
+			paddleX = Game.WINDOW_WIDTH - paddleWidth - distanceToMargin;
+
 		entityCollider.setLocation(paddleX, paddleY);
+	}
+
+	public void setPaddleSpeed(int speed) {
+		paddleSpeed = speed;
+	}
+	
+	public void restartPosition(){
+		paddleX = 450;
+		paddleY = 500;
 	}
 }

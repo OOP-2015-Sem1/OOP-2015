@@ -2,60 +2,57 @@ package breakoutGame;
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-
 import entities.Ball;
 import entities.Brick;
 import entities.Paddle;
 
 public class Game extends Canvas implements Runnable {
 
-	// Game thread 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	// Game thread
 	Thread thread = new Thread(this);
 	boolean running = false;
 
-	// Window 
+	// Window
 	JFrame frame;
 	public static String WINDOW_TITLE = "Breakout Game";
 	public static int WINDOW_WIDTH = 800;
 	public static int WINDOW_HEIGHT = 600;
 	public static Dimension GAME_DIMENSION = new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT);
 
-	// Drawings 
+	// Drawings
 	public Canvas canvas;
 	BufferedImage img = new BufferedImage(WINDOW_WIDTH, WINDOW_HEIGHT, BufferedImage.TYPE_INT_RGB);
 	BufferStrategy bs;
 	Graphics2D g;
 
 	// Entities
-	public Paddle paddle;
-	Ball ball;
-
-	// Score variable
-	public int score;
-	public static final int TOTAL_SCORE = 45;
-
+	public Paddle paddle = new Paddle(this);
+	public Ball ball = new Ball();
 	public Brick[][] brick = new Brick[9][5];
 
-	// Brick details
-	private int brickWidth = 60;
-	private int brickX = 100;
-	private int brickY = 50;
-	private int brickSpace = 2;
-	private int brickHeight = 16;
+	// Total score
+	public static final int TOTAL_SCORE_LEVEL1 = 45;
+	public static final int TOTAL_SCORE_LEVEL2 = 37;
+	public static final int TOTAL_SCORE_LEVEL3 = 45;
 
 	// Inputs
 	public KeyboardHandler keys;
+
+	// Levels
+	Level currentLevel = new Level1(this, ball, brick, paddle);
+	int level = 0;
 
 	@Override
 	public void run() {
@@ -63,11 +60,11 @@ public class Game extends Canvas implements Runnable {
 			update();
 			paintComponents();
 			try {
-				Thread.sleep(1000 / 60); 
+				Thread.sleep(1000 / 60);
 			} catch (InterruptedException e) {
 
 				e.printStackTrace();
-			}		
+			}
 		}
 	}
 
@@ -92,7 +89,7 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	private void init() {
-		
+
 		// Create frame
 		frame = new JFrame(WINDOW_TITLE);
 		frame.setVisible(true);
@@ -109,38 +106,8 @@ public class Game extends Canvas implements Runnable {
 
 		frame.add(canvas, BorderLayout.CENTER);
 
-		// Initiate entities
-		score=0;
-		paddle = new Paddle(this);
-		ball = new Ball(this);
-
-		for (int i = 0; i < 9; i++) {
-			for (int j = 0; j < 5; j++) {
-				switch (j) {
-				case 0:
-					brick[i][j] = new Brick(this, Color.RED, brickX + i * brickWidth + i * brickSpace,
-							brickY + j * brickHeight + j * brickSpace);
-					break;
-				case 1:
-					brick[i][j] = new Brick(this, Color.ORANGE, brickX + i * brickWidth + i * brickSpace,
-							brickY + j * brickHeight + j * brickSpace);
-					break;
-				case 2:
-					brick[i][j] = new Brick(this, Color.YELLOW, brickX + i * brickWidth + i * brickSpace,
-							brickY + j * brickHeight + j * brickSpace);
-					break;
-				case 3:
-					brick[i][j] = new Brick(this, Color.CYAN, brickX + i * brickWidth + i * brickSpace,
-							brickY + j * brickHeight + j * brickSpace);
-					break;
-				case 4:
-					brick[i][j] = new Brick(this, Color.GREEN, brickX + i * brickWidth + i * brickSpace,
-							brickY + j * brickHeight + j * brickSpace);
-					break;
-
-				}
-			}
-		}
+		// Level
+		currentLevel.init();
 
 		// Initiate inputs
 		keys = new KeyboardHandler(canvas);
@@ -156,49 +123,14 @@ public class Game extends Canvas implements Runnable {
 	private void update() {
 		paddle.update();
 		ball.update();
-		
-		//Paddle intersection
-		if (ball.entityCollider.intersects(paddle.entityCollider)){
+
+		// Paddle intersection
+		if (ball.entityCollider.intersects(paddle.entityCollider)) {
 			ball.ballYmove = -ball.ballSpeed;
 		}
-			
 
-		//Brick intersection
-		for (int i = 0; i < 9; i++) {
-			for (int j = 0; j < 5; j++) {
-				
-				if ((ball.entityCollider.intersects(brick[i][j].entityCollider))) {
-					int ballLeft = (int) ball.entityCollider.getMinX();
-					int ballHeight = (int) ball.entityCollider.getHeight();
-					int ballWidth = (int) ball.entityCollider.getWidth();
-					int ballTop = (int) ball.entityCollider.getMinY();
-
-					Point pointRight = new Point(ballLeft + ballWidth , ballTop);
-					Point pointLeft = new Point(ballLeft , ballTop);
-					Point pointTop = new Point(ballLeft, ballTop );
-					Point pointBottom = new Point(ballLeft, ballTop + ballHeight );
-
-					if (!brick[i][j].isDestroyed()) {
-						if (brick[i][j].entityCollider.contains(pointRight)) {
-							ball.ballXmove = - ball.ballSpeed;
-						} else if (brick[i][j].entityCollider.contains(pointLeft)) {
-							ball.ballXmove = ball.ballSpeed;
-						}
-
-						if (brick[i][j].entityCollider.contains(pointTop)) {
-							ball.ballYmove = ball.ballSpeed;
-						} else if (brick[i][j].entityCollider.contains(pointBottom)) {
-							ball.ballYmove = - ball.ballSpeed;
-						}
-						brick[i][j].setIsDestroyed(true);
-						score++;
-						
-					}
-				}
-				
-			}
-		}
-		
+		// Level
+		currentLevel.update();
 
 		if (ball.ballY <= 0)
 			ball.ballYmove = ball.ballSpeed;
@@ -211,11 +143,12 @@ public class Game extends Canvas implements Runnable {
 
 		if (ball.ballY + ball.ballDiameter >= canvas.getHeight())
 			youLost();
-		
-		if (score == TOTAL_SCORE)
-			youWon();
-		
-		
+
+		if (currentLevel.isComplete()) {
+			level++;
+			goToNextLevel();
+		}
+
 	}
 
 	private void paintComponents() {
@@ -229,32 +162,49 @@ public class Game extends Canvas implements Runnable {
 		paddle.paintComponent(g);
 		ball.paintComponent(g);
 
-		for (int i = 0; i < 9; i++) {
-			for (int j = 0; j < 5; j++) {
-				if(!brick[i][j].isDestroyed())
-				brick[i][j].paintComponent(g);
-			}
-		}
+		// Level
+		currentLevel.paintComponents(g);
 
 		bs.show();
 
 	}
-	
-	public void startGame(){
+
+	public void startGame() {
 		JOptionPane.showMessageDialog(this, "Click OK to begin", "Start Game", JOptionPane.CLOSED_OPTION);
+		ball.restartPosition();
+		paddle.restartPosition();
 		init();
 	}
-	
-	public void youLost(){
+
+	public void youLost() {
 		JOptionPane.showMessageDialog(this, "More luck next time ...", "Game Over", JOptionPane.YES_OPTION);
 		stop();
 	}
-	
-	public void youWon(){
-		
-		JOptionPane.showMessageDialog(this, "You destroyed all the bricks!", "Congratlations", JOptionPane.CLOSED_OPTION);
+
+	public void youWon() {
+		JOptionPane.showMessageDialog(this, "You destroyed all the bricks!", "Congratlations",
+				JOptionPane.CLOSED_OPTION);
 		stop();
 	}
-	
-	
+
+	public void goToNextLevel() {
+		JOptionPane.showMessageDialog(this, "Click OK to move on to the next level", "Congratlations",
+				JOptionPane.CLOSED_OPTION);
+
+		switch (level) {
+		case 1:
+			currentLevel = new Level2(this, ball, brick, paddle);
+			startGame();
+			break;
+
+		case 2:
+			currentLevel = new Level3(this, ball, brick, paddle);
+			startGame();
+			break;
+
+		case 3:
+			youWon();
+			break;
+		}
+	}
 }
