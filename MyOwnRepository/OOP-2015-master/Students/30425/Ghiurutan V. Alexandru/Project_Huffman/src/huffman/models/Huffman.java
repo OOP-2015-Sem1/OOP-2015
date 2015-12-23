@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 public class Huffman {
 	private static final int MAX_NR_OF_SYMBOLS = 256;
-	private static final String EMPTY_STRING = "";
 	private int[] frequency;
 	private PriorityQueue<Node> forest;
 	private Node root;
@@ -22,6 +21,7 @@ public class Huffman {
 	private int totalNodes;
 	private int maximumHeight;
 	private String decodedText;
+	private int averageBitsPerLetter;
 
 	public Huffman(String text) {
 		forest = new PriorityQueue<Node>();
@@ -29,10 +29,7 @@ public class Huffman {
 		this.setInputText(text);
 		this.setOutputText("");
 		this.setDecodedText("");
-		this.getSymbolsFrequency();
-		this.buildHuffmanTree();
-		this.traverseHuffmanTree(this.getRootOfHuffmanTree(), "");
-		this.encodeText();
+		this.setAverageBitsPerLetter(0);
 	}
 
 	public void getSymbolsFrequency() {
@@ -95,12 +92,21 @@ public class Huffman {
 	}
 
 	public void decode(String text) {
-		while (!text.equals(EMPTY_STRING)) {
-			for (int i = 0; i < arrayTable.size(); i++) {
+		setDecodedText("");
+		boolean ind;
+		int i;
+		loop: while (!text.equals("")) {
+			ind = false;
+			for (i = 0; i < arrayTable.size(); i++) {
 				if (text.startsWith(arrayTable.get(i).getCode())) {
 					text = text.substring(arrayTable.get(i).getCode().length());
 					decodedText += arrayTable.get(i).getCh();
+					ind = true;
 					break;
+				}
+				if (!ind && (i == arrayTable.size() - 1)) {
+					decodedText += "...";
+					break loop;
 				}
 			}
 		}
@@ -149,16 +155,15 @@ public class Huffman {
 		}
 	}
 
-	public void determineNodePositions() {
-		inorderTraversal(root, 0);
+	public void determineNumberOfNodes() {
+		inorderTraversal(root);
 	}
 
-	public void inorderTraversal(Node root, int depth) {
+	public void inorderTraversal(Node root) {
 		if (root != null) {
-			inorderTraversal(root.getLeft(), depth + 1);
-			root.setX(totalNodes++);
-			root.setY(depth);
-			inorderTraversal(root.getRight(), depth + 1);
+			inorderTraversal(root.getLeft());
+			totalNodes++;
+			inorderTraversal(root.getRight());
 		}
 	}
 
@@ -172,5 +177,23 @@ public class Huffman {
 
 	public void setDecodedText(String decodedText) {
 		this.decodedText = decodedText;
+	}
+
+	public int getAverageBitsPerLetter() {
+		return averageBitsPerLetter;
+	}
+
+	public void setAverageBitsPerLetter(int averageBitsPerLetter) {
+		this.averageBitsPerLetter = averageBitsPerLetter;
+	}
+
+	public void computeAverageBitsPerLetter() {
+		for (int i = 0; i < arrayTable.size(); i++) {
+			averageBitsPerLetter += arrayTable.get(i).getCode().length() * arrayTable.get(i).getFreq();
+		}
+	}
+
+	public ArrayList<Table> getArrayListOfNodes() {
+		return arrayTable;
 	}
 }
