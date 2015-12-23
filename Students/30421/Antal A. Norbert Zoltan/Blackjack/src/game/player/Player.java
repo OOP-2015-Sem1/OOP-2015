@@ -9,17 +9,15 @@ public class Player {
 	protected List<Card> hand = new ArrayList<Card>();
 	private boolean done = false;
 
+	private int aces = 0;
+	private int score = 0;
+
 	private Deck deck;
 	protected Board board;
 
 	public Player(Deck deck, Board board) {
 		this.deck = deck;
 		this.board = board;
-	}
-
-	public void clear() {
-		hand.clear();
-		done = false;
 	}
 
 	public void setDone(boolean done) {
@@ -30,29 +28,25 @@ public class Player {
 		return done;
 	}
 
-	public List<Card> getHand() {
-		return hand;
-	}
-
 	public void addRandCard() {
 		hand.add(deck.getRandCard());
+		calcScore();
 	}
 
 	public int checkScore() {
-		int score = 0;
-		boolean isAce = false;
-		for (int i = 0; i < hand.size(); i++) {
-			int value = hand.get(i).getValue();
-			if (!isAce && value == 11) {
-				isAce = true;
-			}
-			score += value;
-			if (isAce && score > 21) {
-				score -= 10;
-				isAce = false;
-			}
-		}
 		return score;
+	}
+
+	private void calcScore() {
+		int value = hand.get(hand.size() - 1).getValue();
+		if (value == 11) {
+			aces++;
+		}
+		score += value;
+		if (aces > 0 && score > 21) {
+			score -= 10;
+			aces--;
+		}
 	}
 
 	public boolean isAce() {
@@ -63,7 +57,7 @@ public class Player {
 	}
 
 	private boolean isAceH() {
-		for (int i = 0; i < hand.size(); i++){
+		for (int i = 0; i < hand.size(); i++) {
 			Card card = hand.get(i);
 			if (card.getValue() == 11) {
 				hand.remove(i);
@@ -76,6 +70,6 @@ public class Player {
 	}
 
 	public void drawPlayer(int playerNr) {
-			board.drawPlayer(hand.get(hand.size() - 1), playerNr);
+		board.drawPlayer(hand.get(hand.size() - 1), playerNr);
 	}
 }

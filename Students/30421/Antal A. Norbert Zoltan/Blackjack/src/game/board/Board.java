@@ -25,15 +25,12 @@ public class Board extends JFrame {
 
 	private JLabel back = new JLabel(new ImageIcon("CardImages/back.png"));
 
-	private Card hole;
+	private JLabel hole;
 
 	private int nrPlayers;
-	
-	private Controller controller;
 
 	public Board(Controller controller) {
-		this.controller = controller;
-		setTitle("Blackjack");
+		this.setTitle("Blackjack");
 		setLayout(new GridBagLayout());
 		setSize(1200, 700);
 		GridBagConstraints c = new GridBagConstraints();
@@ -93,30 +90,29 @@ public class Board extends JFrame {
 	public void drawPlayer(Card pCard, int playerNr) {
 		JPanel playerPanel = players.get(playerNr);
 		playerPanel.add(new JLabel(pCard.getImg()));
-		playerPanel.repaint();
+		player.revalidate();
 		player.repaint();
 	}
 
 	public void drawDealer(Card hole) {
 		if (back.getParent() == dealer) {
 			dealer.remove(back);
-			dealer.add(new JLabel(this.hole.getImg()));
+			dealer.add(this.hole);
 			dealer.add(back);
 		} else {
 			dealer.add(back);
 		}
-		this.hole = hole;
+		this.hole = new JLabel(hole.getImg());
+		dealer.revalidate();
 		dealer.repaint();
 	}
 
 	public void showDealer() {
-		if (back.getParent() == dealer){
-			dealer.remove(back);
-			dealer.add(new JLabel(hole.getImg()));
-			}
-			else {
-				dealer.add(new JLabel(controller.dealer.getHole().getImg()));
-			}
+		if (hole.getParent() != dealer) {
+			dealer.add(this.hole);
+		}
+		dealer.remove(back);
+		dealer.revalidate();
 		dealer.repaint();
 	}
 
