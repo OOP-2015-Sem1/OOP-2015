@@ -1,6 +1,5 @@
 package catalog.ui;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
@@ -8,8 +7,9 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 public class CatalogFrame {
-	static JFrame CatalogTheRealFrame = new JFrame("Catalog");
+	public JFrame CatalogTheRealFrame = new JFrame("Catalog");
 	private ClassroomsFromSchoolPanel ClassroomsPanel = new ClassroomsFromSchoolPanel();
+
 	public CatalogFrame() {
 		CatalogTheRealFrame.setVisible(true);
 		CatalogTheRealFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -22,13 +22,12 @@ public class CatalogFrame {
 		int widthInt = (int) width;
 		int hightInt = (int) height;
 		CatalogTheRealFrame.setSize(widthInt, hightInt);
-		// terminate adjustng window size
-
+		// terminate adjusting window size
 		// adding classroom panel
 		ClassroomsPanel.setVisible(true);
 		CatalogTheRealFrame.add(ClassroomsPanel);
 		CatalogTheRealFrame.add(ClassroomsPanel.StudentsFromClassrooms);
-		//ClassroomsPanel.panel.setVisible(true);
-		//CatalogTheRealFrame.add(ClassroomsPanel.panel);
+		// ClassroomsPanel.panel.setVisible(true);
+		// CatalogTheRealFrame.add(ClassroomsPanel.panel);
 	}
 }
