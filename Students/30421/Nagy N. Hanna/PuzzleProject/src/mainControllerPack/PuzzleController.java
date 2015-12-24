@@ -37,17 +37,17 @@ public class PuzzleController {
 		public void actionPerformed(ActionEvent event) {
 
 			if (event.getSource() == images[0]) {
-				newGame("flower.png");
+				newGame("resources/flower.png");
 
 			}
 			if (event.getSource() == images[1]) {
-				newGame("diCaprio.png");
+				newGame("resources/diCaprio.png");
 			}
 			if (event.getSource() == images[2]) {
-				newGame("eiffel.png");
+				newGame("resources/eiffel.png");
 			}
 			if (event.getSource() == images[3]) {
-				newGame("singapore.png");
+				newGame("resources/singapore.png");
 			}
 
 		}

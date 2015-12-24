@@ -5,6 +5,7 @@ import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
 import java.awt.image.ImageProducer;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.*;
@@ -107,7 +108,14 @@ public class ImageCreator extends Component{
 		
 		BufferedImage image = null;
 		try {
-			image = ImageIO.read(new File(getClass().getResource(pathImage).toURI()));
+			//File file = new File(pathImage);   
+		   // FileInputStream fis = new FileInputStream(file);  
+		   // BufferedImage image = ImageIO.read(fis); //reading the image file  
+			//image = ImageIO.read(new File(getClass().getResource(pathImage).toURI()));
+			
+			image = ImageIO.read(new File(pathImage));
+			
+		    //image = ImageIO.read(fis);
 
 		} catch (IOException e) {
 			System.out.println("" + e.getMessage());

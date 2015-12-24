@@ -6,7 +6,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		new PuzzleController().runPuzzle("Image.png");
+		new PuzzleController().runPuzzle("resources/Image.png");
 	}
 
 }
