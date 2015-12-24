@@ -9,13 +9,14 @@ import java.util.Scanner;
 
 public class AccountRepository {
 
-	public static final int NUMBER_OF_ACCOUNTS = 4;
+	public static final int NUMBER_OF_ACCOUNTS = 6;
 	private static final boolean ADD_ACCOUNT = false;
 	private static volatile AccountRepository accounts = null;
-	private Player players[] = Player.getInstance();
+	private Player players[];
 	private int accountNr;
+	private Scanner keyboard;
 
-	public void readData() {
+	public void manageData() {
 
 		try {
 			FileInputStream fileIn = new FileInputStream("accounts.ser");
@@ -24,16 +25,8 @@ public class AccountRepository {
 			in.close();
 			fileIn.close();
 			if (ADD_ACCOUNT) {
-
-				Scanner keyboard = new Scanner(System.in);
-				System.out.println("Enter new account name:");
-				players[NUMBER_OF_ACCOUNTS].setUser(keyboard.nextLine());
-				System.out.println("Enter new account password:");
-				players[NUMBER_OF_ACCOUNTS].setPassword(keyboard.nextLine());
-				players[NUMBER_OF_ACCOUNTS].setScore(10);
-				serialize();
+				addAccount();
 			}
-
 		} catch (IOException i) {
 			i.printStackTrace();
 			return;
@@ -57,6 +50,16 @@ public class AccountRepository {
 		} catch (IOException i) {
 			i.printStackTrace();
 		}
+	}
+	
+	public void addAccount(){
+		keyboard = new Scanner(System.in);
+		System.out.println("Enter new account name:");
+		players[NUMBER_OF_ACCOUNTS-1].setUser(keyboard.nextLine());
+		System.out.println("Enter new account password:");
+		players[NUMBER_OF_ACCOUNTS-1].setPassword(keyboard.nextLine());
+		players[NUMBER_OF_ACCOUNTS-1].setScore(10);
+		serialize();
 	}
 
 	public void replace(int newscore) {
@@ -94,11 +97,11 @@ public class AccountRepository {
 		this.accountNr = accountNr;
 	}
 
-	public int getAccountScore() {
-		return players[getAccountNr()].getScore();
+	public int getAccountScore(int accountNr) {
+		return players[accountNr].getScore();
 	}
 
-	public String getAccountName() {
-		return players[getAccountNr()].getUser();
+	public String getAccountName(int accountNr) {
+		return players[accountNr].getUser();
 	}
 }

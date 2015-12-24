@@ -1,9 +1,11 @@
-package account;
+package userInterface;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import account.AccountRepository;
 
 public class LoginDialog {
 
@@ -11,7 +13,7 @@ public class LoginDialog {
 		JTextField account = new JTextField(10);
 		JPasswordField password = new JPasswordField(10);
 		AccountRepository accounts=AccountRepository.getInstance();
-		accounts.readData();
+		accounts.manageData();
 		JPanel p = new JPanel();
 		p.add(new JLabel("Id :"));
 		p.add(account);

@@ -1,44 +1,54 @@
 package tictactoe;
 
 public class NormalAI extends RuleBasedStrategy {
-	
-	private int nrOfMove=0;
-	private int moveMade=0;
-	private int board[][]=new int[3][3];
+
+	private int nrOfMove = 0;
+	private int moveMade = 0;
+	private boolean cvc = false;
+	private int board[][] = new int[3][3];
 	private static final int HUMAN_MOVE = 1;
 	private static final int PC_MOVE = 2;
-	
-	public int executeMove(int playerLastMove){
-			switch (playerLastMove) {
-			case 0:
-				board[0][0] = HUMAN_MOVE;
-				break;
-			case 1:
-				board[0][1] = HUMAN_MOVE;
-				break;
-			case 2:
-				board[0][2] = HUMAN_MOVE;
-				break;
-			case 3:
-				board[1][0] = HUMAN_MOVE;
-				break;
-			case 4:
-				board[1][1] = HUMAN_MOVE;
-				break;
-			case 5:
-				board[1][2] = HUMAN_MOVE;
-				break;
-			case 6:
-				board[2][0] = HUMAN_MOVE;
-				break;
-			case 7:
-				board[2][1] = HUMAN_MOVE;
-				break;
-			case 8:
-				board[2][2] = HUMAN_MOVE;
-				break;
-			}
-			nrOfMove++;
+	private static final int CVC_MODE = 20;
+	private static final int PLAYER1_MOVE = 1;
+	private static final int PLAYER2_MOVE = 2;
+
+	public int executeMove(int playerLastMove) {
+		if (playerLastMove == CVC_MODE)
+			cvc = true;
+		int activePlayer = nrOfMove % 2 == 0 ? PLAYER2_MOVE : PLAYER1_MOVE;
+		if (!cvc)
+			activePlayer = HUMAN_MOVE;
+		switch (playerLastMove) {
+		case 0:
+			board[0][0] = activePlayer;
+			break;
+		case 1:
+			board[0][1] = activePlayer;
+			break;
+		case 2:
+			board[0][2] = activePlayer;
+			break;
+		case 3:
+			board[1][0] = activePlayer;
+			break;
+		case 4:
+			board[1][1] = activePlayer;
+			break;
+		case 5:
+			board[1][2] = activePlayer;
+			break;
+		case 6:
+			board[2][0] = activePlayer;
+			break;
+		case 7:
+			board[2][1] = activePlayer;
+			break;
+		case 8:
+			board[2][2] = activePlayer;
+			break;
+
+		}
+		nrOfMove++;
 		int randomVariable = (int) (Math.random() * 8);
 
 		switch (nrOfMove) {
@@ -54,8 +64,10 @@ public class NormalAI extends RuleBasedStrategy {
 			break;
 		case 2:
 			int temp = notLose(board);
-			if (temp != (-1))
+			if (temp != (-1)) {
+				moveMade = 2;
 				return temp;
+			}
 
 			while (moveMade == 1) {
 				randomVariable = (int) (Math.random() * 8);
@@ -68,63 +80,166 @@ public class NormalAI extends RuleBasedStrategy {
 			break;
 		case 3:
 			temp = notLose(board);
-			if (temp != (-1))
+			if (temp != (-1)) {
+				moveMade = 3;
 				return temp;
+			}
 			temp = winLines(board);
-			if (temp != (-1))
+			if (temp != (-1)) {
+				moveMade = 3;
 				return temp;
+			}
 			temp = winDiagonals(board);
-			if (temp != (-1))
+			if (temp != (-1)) {
+				moveMade = 3;
 				return temp;
-			temp = winDiagonals(board);
-			if (temp != (-1))
-				return temp;
-			for (int k = 0; k < 3; k++)
-				for (int j = 0; j < 3; j++) {
-					if (board[k][j] == 0) {
-						board[k][j] = PC_MOVE;
-						int l = k * 3 + j;
-						return l;
-					}
+			}
+			while (moveMade == 2) {
+				randomVariable = (int) (Math.random() * 8);
+				if (board[randomVariable / 3][randomVariable % 3] == 0) {
+					board[randomVariable / 3][randomVariable % 3] = PC_MOVE;
+					moveMade = 3;
+					return randomVariable;
 				}
+			}
 			break;
 		case 4:
 			temp = notLose(board);
-			if (temp != (-1))
+			if (temp != (-1)) {
+				moveMade = 4;
 				return temp;
+			}
 			temp = winLines(board);
-			if (temp != (-1))
+			if (temp != (-1)) {
+				moveMade = 4;
 				return temp;
+			}
 			temp = winDiagonals(board);
-			if (temp != (-1))
-
-				for (int k = 0; k < 3; k++)
-					for (int j = 0; j < 3; j++) {
-						if (board[k][j] == 0) {
-							board[k][j] = PC_MOVE;
-							System.out.println("nasol");
-							int l = k * 3 + j;
-							return l;
-						}
-					}
+			if (temp != (-1)) {
+				moveMade = 4;
+				return temp;
+			}
+			while (moveMade == 3) {
+				randomVariable = (int) (Math.random() * 8);
+				if (board[randomVariable / 3][randomVariable % 3] == 0) {
+					board[randomVariable / 3][randomVariable % 3] = PC_MOVE;
+					moveMade = 4;
+					return randomVariable;
+				}
+			}
 			break;
 
 		case 5:
 			temp = notLose(board);
-			if (temp != (-1))
+			if (temp != (-1)) {
+				moveMade = 5;
 				return temp;
-			for (int k = 0; k < 3; k++)
-				for (int j = 0; j < 3; j++) {
-					if (board[k][j] == 0) {
-						board[k][j] = PC_MOVE;
-						System.out.println("nasol2");
-						int l = k * 3 + j;
-						return l;
-					}
+			}
+			temp = winLines(board);
+			if (temp != (-1)) {
+				moveMade = 5;
+				return temp;
+			}
+			temp = winDiagonals(board);
+			if (temp != (-1)) {
+				moveMade = 5;
+				return temp;
+			}
+			while (moveMade == 4) {
+				randomVariable = (int) (Math.random() * 8);
+				if (board[randomVariable / 3][randomVariable % 3] == 0) {
+					board[randomVariable / 3][randomVariable % 3] = PC_MOVE;
+					moveMade = 5;
+					return randomVariable;
 				}
+			}
+			break;
+		case 6:
+			temp = notLose(board);
+			if (temp != (-1)) {
+				moveMade = 6;
+				return temp;
+			}
+			temp = winLines(board);
+			if (temp != (-1)) {
+				moveMade = 6;
+				return temp;
+			}
+			temp = winDiagonals(board);
+			if (temp != (-1)) {
+				moveMade = 6;
+				return temp;
+			}
+			while (moveMade == 5) {
+				randomVariable = (int) (Math.random() * 8);
+				if (board[randomVariable / 3][randomVariable % 3] == 0) {
+					board[randomVariable / 3][randomVariable % 3] = PC_MOVE;
+					moveMade = 6;
+					return randomVariable;
+				}
+			}
+			break;
+		case 7:
+			temp = notLose(board);
+			if (temp != (-1)) {
+				moveMade = 7;
+				return temp;
+			}
+			temp = winLines(board);
+			if (temp != (-1)) {
+				moveMade = 7;
+				return temp;
+			}
+			temp = winDiagonals(board);
+			if (temp != (-1)) {
+				moveMade = 7;
+				return temp;
+			}
+			while (moveMade == 6) {
+				randomVariable = (int) (Math.random() * 8);
+				if (board[randomVariable / 3][randomVariable % 3] == 0) {
+					board[randomVariable / 3][randomVariable % 3] = PC_MOVE;
+					moveMade = 7;
+					return randomVariable;
+				}
+			}
+			break;
+		case 8:
+			while (moveMade == 7) {
+				randomVariable = (int) (Math.random() * 8);
+				if (board[randomVariable / 3][randomVariable % 3] == 0) {
+					board[randomVariable / 3][randomVariable % 3] = PC_MOVE;
+					moveMade = 8;
+					return randomVariable;
+				}
+			}
+			break;
+		case 9:
+			temp = notLose(board);
+			if (temp != (-1)) {
+				moveMade = 9;
+				return temp;
+			}
+			temp = winLines(board);
+			if (temp != (-1)) {
+				moveMade = 9;
+				return temp;
+			}
+			temp = winDiagonals(board);
+			if (temp != (-1)) {
+				moveMade = 9;
+				return temp;
+			}
+			while (moveMade == 8) {
+				randomVariable = (int) (Math.random() * 8);
+				if (board[randomVariable / 3][randomVariable % 3] == 0) {
+					board[randomVariable / 3][randomVariable % 3] = PC_MOVE;
+					moveMade = 9;
+					return randomVariable;
+				}
+			}
 			break;
 		}
-
-		return 7;
+		return -1;
 	}
 }
