@@ -72,7 +72,7 @@ public class PuzzleController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == newGameButton) {
-				newGame("Image.png");
+				newGame("resources/Image.png");
 			}
 			if (e.getSource() == musicButton) {
 
