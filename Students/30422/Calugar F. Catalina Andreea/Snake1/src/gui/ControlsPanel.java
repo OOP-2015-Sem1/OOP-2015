@@ -44,14 +44,9 @@ public class ControlsPanel extends JPanel {
 		ctrlButton[2][1].setText(Constants.DOWN);
 		ctrlButton[1][1].setBackground(Color.white);
 		ctrlButton[1][1].setEnabled(false);
-
 	}
 
-	public void setScore(int score) {
-		ctrlButton[0][0].setText(String.valueOf(score));
-	}
-
-	public JButton[][] getControlButtons() {
+	public JButton[][] getCtrlButton() {
 		return this.ctrlButton;
 	}
 
@@ -59,6 +54,7 @@ public class ControlsPanel extends JPanel {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
 				ctrlButton[i][j].addActionListener(actionListener);
+
 			}
 		}
 	}
