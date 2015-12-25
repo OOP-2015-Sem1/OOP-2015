@@ -1,6 +1,6 @@
 package pieces;
 
-import Main.MainChess;
+import Main.Controller;
 import Main.Restrictions;
 
 public class King extends Piece {
@@ -10,12 +10,13 @@ public class King extends Piece {
 	}
 
 	@Override
-	public String possibleMove(int row, int column, Piece chessBoard[][]) {
+	public String possibleMove(int row, int column, Piece chessBoard[][],
+			boolean checkKingSafety, Controller controller) {
 		// Piece[][] chessBoard = MainChess.board.getBoard();
 		String list = "";
 		Piece oldPiece;
 		Colors currentColor;
-		if (MainChess.whiteTurn == true) {
+		if (controller.whiteTurn == true) {
 			currentColor = Colors.WHITE;
 		} else {
 			currentColor = Colors.BLACK;
@@ -47,9 +48,10 @@ public class King extends Piece {
 						oldPiece = chessBoard[row + rowOffset][column
 								+ columnOffset];
 						chessBoard[row + rowOffset][column + columnOffset] = chessBoard[row][column];
-						chessBoard[row][column] = MainChess.emptySpace;
+						chessBoard[row][column] = controller.emptySpace;
 
-						if (Restrictions.kingSafety(chessBoard, currentColor) == true) {
+						if (Restrictions.kingSafety(chessBoard, currentColor,
+								controller) == true) {
 							list = list + row + column + (row + rowOffset)
 									+ (column + columnOffset) + " ";
 						}
@@ -63,9 +65,10 @@ public class King extends Piece {
 						oldPiece = chessBoard[row + rowOffset][column
 								+ columnOffset];
 						chessBoard[row + rowOffset][column + columnOffset] = chessBoard[row][column];
-						chessBoard[row][column] = MainChess.emptySpace;
+						chessBoard[row][column] = controller.emptySpace;
 
-						if (Restrictions.kingSafety(chessBoard, currentColor) == true) {
+						if (Restrictions.kingSafety(chessBoard, currentColor,
+								controller) == true) {
 							list = list + row + column + (row + rowOffset)
 									+ (column + columnOffset) + "p";
 						}
@@ -103,9 +106,10 @@ public class King extends Piece {
 						oldPiece = chessBoard[row + rowOffset][column
 								+ columnOffset];
 						chessBoard[row + rowOffset][column + columnOffset] = chessBoard[row][column];
-						chessBoard[row][column] = MainChess.emptySpace;
+						chessBoard[row][column] = controller.emptySpace;
 
-						if (Restrictions.kingSafety(chessBoard, currentColor) == true) {
+						if (Restrictions.kingSafety(chessBoard, currentColor,
+								controller) == true) {
 							list = list + row + column + (row + rowOffset)
 									+ (column + columnOffset) + " ";
 						}
@@ -119,9 +123,10 @@ public class King extends Piece {
 						oldPiece = chessBoard[row + rowOffset][column
 								+ columnOffset];
 						chessBoard[row + rowOffset][column + columnOffset] = chessBoard[row][column];
-						chessBoard[row][column] = MainChess.emptySpace;
+						chessBoard[row][column] = controller.emptySpace;
 
-						if (Restrictions.kingSafety(chessBoard, currentColor) == true) {
+						if (Restrictions.kingSafety(chessBoard, currentColor,
+								controller) == true) {
 							list = list + row + column + (row + rowOffset)
 									+ (column + columnOffset) + "p";
 						}

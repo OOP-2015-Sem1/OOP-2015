@@ -1,6 +1,6 @@
 package pieces;
 
-import Main.MainChess;
+import Main.Controller;
 import Main.Restrictions;
 
 public class Knight extends Piece {
@@ -10,12 +10,13 @@ public class Knight extends Piece {
 	}
 
 	@Override
-	public String possibleMove(int row, int column, Piece chessBoard[][]) { // CAL
+	public String possibleMove(int row, int column, Piece chessBoard[][],
+			boolean checkKingSafety, Controller controller) { // CAL
 		// Piece[][] chessBoard = MainChess.board.getBoard();
 		String list = "";
 		Piece oldPiece;
 		Colors currentColor;
-		if (MainChess.whiteTurn == true) {
+		if (controller.whiteTurn == true) {
 			currentColor = Colors.WHITE;
 		} else {
 			currentColor = Colors.BLACK;
@@ -66,16 +67,20 @@ public class Knight extends Piece {
 						oldPiece = chessBoard[row + rowOffset][column
 								+ columnOffset];
 						chessBoard[row + rowOffset][column + columnOffset] = chessBoard[row][column];
-						chessBoard[row][column] = MainChess.emptySpace;
-
-						if (Restrictions.kingSafety(chessBoard, currentColor) == true) {
+						chessBoard[row][column] = controller.emptySpace;
+						if (checkKingSafety == true) {
+							if (Restrictions.kingSafety(chessBoard,
+									currentColor, controller) == true) {
+								list = list + row + column + (row + rowOffset)
+										+ (column + columnOffset) + "p";
+							}
+						} else {
 							list = list + row + column + (row + rowOffset)
-									+ (column + columnOffset) + " ";
+									+ (column + columnOffset) + "p";
 						}
 						chessBoard[row][column] = chessBoard[row + rowOffset][column
 								+ columnOffset];
 						chessBoard[row + rowOffset][column + columnOffset] = oldPiece;
-
 					}
 
 				} catch (Exception e) {
