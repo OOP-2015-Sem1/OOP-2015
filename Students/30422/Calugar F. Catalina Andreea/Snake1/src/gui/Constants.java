@@ -15,8 +15,6 @@ public class Constants {
 	public static final LineBorder LINE_BORDER = new LineBorder(Color.GRAY);
 	public static boolean canWeGoThroughWalls;
 
-	public static boolean right = true;
-	public static boolean left = false;
-	public static boolean up = false;
-	public static boolean down = false;
+	public static final int WIDTH = 800;
+	public static final int HEIGHT = 800;
 }
