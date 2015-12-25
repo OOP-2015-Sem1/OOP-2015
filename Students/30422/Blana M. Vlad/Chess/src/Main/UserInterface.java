@@ -16,7 +16,9 @@ import pieces.Pieces;
 
 public class UserInterface extends JPanel implements MouseListener,
 		MouseMotionListener {
-	static int mouseX, mouseY, newMouseX, newMouseY, squareSize = 100;
+	int mouseX, mouseY, newMouseX, newMouseY, squareSize = 100;
+	private Movement dragMove = new Movement();
+	private Controller controller = MainChess.controller;
 
 	public UserInterface() {
 		this.addMouseListener(this);
@@ -25,7 +27,7 @@ public class UserInterface extends JPanel implements MouseListener,
 
 	@Override
 	public void paintComponent(Graphics g) {
-		Piece[][] chessBoard = MainChess.board.getBoard();
+		Piece[][] chessBoard = controller.board.getBoard();
 		super.paintComponent(g);
 		this.setBackground(new Color(80, 80, 80));
 
@@ -126,33 +128,30 @@ public class UserInterface extends JPanel implements MouseListener,
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		Piece[][] chessBoard = MainChess.board.getBoard();
+		Piece[][] chessBoard = controller.board.getBoard();
 		if (e.getX() < 8 * squareSize && e.getY() < 8 * squareSize) {
 			// if inside the board
 			newMouseX = e.getX();
 			newMouseY = e.getY();
 			if (e.getButton() == MouseEvent.BUTTON1) {
-				String dragMove = "" + mouseY / squareSize + mouseX
-						/ squareSize + newMouseY / squareSize + newMouseX
-						/ squareSize
-				// + chessBoard[newMouseY / squareSize][newMouseX
-				// / squareSize]
-				;
+				dragMove.setMove(mouseY / squareSize, mouseX / squareSize,
+						newMouseY / squareSize, newMouseX / squareSize);
+				System.out.println(dragMove.encodeMoveToString());
+				if (controller.movementManager.checkValidMove(dragMove,
+						controller) == true) {
 
-				System.out.println(dragMove);
-				if (Movement.checkValidMove(dragMove) == true) {
+					controller.movementManager.makeMove(dragMove, chessBoard,
+							controller);
 
-					Movement.makeMove(dragMove, chessBoard);
-
-					MainChess.whiteTurn = !MainChess.whiteTurn;
-					MainChess.board.flipBoard(chessBoard);
-					if (MainChess.whiteTurn == false) {
+					controller.whiteTurn = !controller.whiteTurn;
+					controller.board.flipBoard(chessBoard);
+					if (controller.whiteTurn == false) {
 						for (int i = 0; i <= 7; i++) {
 							for (int j = 0; j <= 7; j++) {
 								if (chessBoard[i][j].getType() == Pieces.KING
 										&& chessBoard[i][j].getColor() == Colors.WHITE) {
-									MainChess.whiteKingX = String.valueOf(i);
-									MainChess.whiteKingY = String.valueOf(j);
+									controller.whiteKingX = String.valueOf(i);
+									controller.whiteKingY = String.valueOf(j);
 								}
 							}
 						}
@@ -161,8 +160,8 @@ public class UserInterface extends JPanel implements MouseListener,
 							for (int j = 0; j <= 7; j++) {
 								if (chessBoard[i][j].getType() == Pieces.KING
 										&& chessBoard[i][j].getColor() == Colors.BLACK) {
-									MainChess.blackKingX = String.valueOf(i);
-									MainChess.blackKingY = String.valueOf(j);
+									controller.blackKingX = String.valueOf(i);
+									controller.blackKingY = String.valueOf(j);
 								}
 							}
 						}

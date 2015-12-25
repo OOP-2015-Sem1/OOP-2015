@@ -5,31 +5,34 @@ import pieces.Piece;
 
 public class Restrictions {
 
-	public static boolean kingSafety(Piece[][] chessBoard, Colors color) {
+	public static boolean kingSafety(Piece[][] chessBoard, Colors color,
+			Controller controller) {
 		String list = "";
-		String whiteKingPosition = MainChess.whiteKingX + MainChess.whiteKingY
-				+ "p";
-		String blackKingPosition = MainChess.blackKingX + MainChess.blackKingY
-				+ "p";
-		MainChess.board.flipBoard(chessBoard);
-		// MainChess.whiteTurn = !MainChess.whiteTurn;
+		String whiteKingPosition = controller.whiteKingX
+				+ controller.whiteKingY + "p";
+		String blackKingPosition = controller.blackKingX
+				+ controller.blackKingY + "p";
+		controller.board.flipBoard(chessBoard);
+		// controller.whiteTurn = !controller.whiteTurn;
 		if (color == Colors.WHITE) {
-			list += Movement.generateAllMoves(chessBoard, Colors.BLACK);
+			list += controller.movementManager.generateAllMoves(chessBoard,
+					Colors.BLACK, controller);
 			if (list.contains(whiteKingPosition)) {
-				// MainChess.whiteTurn = !MainChess.whiteTurn;
-				MainChess.board.flipBoard(chessBoard);
+				controller.whiteTurn = !controller.whiteTurn;
+				controller.board.flipBoard(chessBoard);
 				return false;
 			}
 		} else {
-			list += Movement.generateAllMoves(chessBoard, Colors.WHITE);
+			list += controller.movementManager.generateAllMoves(chessBoard,
+					Colors.WHITE, controller);
 			if (list.contains(blackKingPosition)) {
-				MainChess.whiteTurn = !MainChess.whiteTurn;
-				MainChess.board.flipBoard(chessBoard);
+				controller.whiteTurn = !controller.whiteTurn;
+				controller.board.flipBoard(chessBoard);
 				return false;
 			}
 		}
-		// MainChess.whiteTurn = !MainChess.whiteTurn;
-		MainChess.board.flipBoard(chessBoard);
+		// controller.whiteTurn = !controller.whiteTurn;
+		controller.board.flipBoard(chessBoard);
 		System.out.println(whiteKingPosition);
 
 		return true;
