@@ -1,5 +1,7 @@
 package pieces;
 
+import Main.Controller;
+
 public abstract class Piece {
 	private Colors color;
 
@@ -17,5 +19,5 @@ public abstract class Piece {
 	}
 
 	public abstract String possibleMove(int row, int column,
-			Piece[][] chessBoard);
+			Piece[][] chessBoard, boolean checkKingSafety, Controller controller);
 }

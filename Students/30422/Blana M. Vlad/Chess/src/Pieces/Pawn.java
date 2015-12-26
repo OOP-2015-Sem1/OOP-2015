@@ -1,17 +1,18 @@
 package pieces;
 
-import Main.MainChess;
+import Main.Controller;
 import Main.Restrictions;
 
 public class Pawn extends Piece {
 
 	@Override
-	public String possibleMove(int row, int column, Piece chessBoard[][]) {
+	public String possibleMove(int row, int column, Piece chessBoard[][],
+			boolean checkKingSafety, Controller controller) {
 		// Piece[][] chessBoard = MainChess.board.getBoard();
 		String list = "";
 		Piece oldPiece = new NoPiece();
 		Colors currentColor;
-		if (MainChess.whiteTurn == true) {
+		if (controller.whiteTurn == true) {
 			currentColor = Colors.WHITE;
 		} else {
 			currentColor = Colors.BLACK;
@@ -20,12 +21,13 @@ public class Pawn extends Piece {
 			try {// move one up
 				if ((chessBoard[row - 1][column]).getType() == Pieces.NOPIECE) {
 					chessBoard[row - 1][column] = chessBoard[row][column];
-					chessBoard[row][column] = MainChess.emptySpace;
-					if (Restrictions.kingSafety(chessBoard, currentColor) == true) {
+					chessBoard[row][column] = controller.emptySpace;
+					if (Restrictions.kingSafety(chessBoard, currentColor,
+							controller) == true) {
 						list = list + row + column + (row - 1) + column + " ";
 					}
 					chessBoard[row][column] = chessBoard[row - 1][column];
-					chessBoard[row - 1][column] = MainChess.emptySpace;
+					chessBoard[row - 1][column] = controller.emptySpace;
 
 				}
 			} catch (Exception e) {
@@ -35,12 +37,13 @@ public class Pawn extends Piece {
 						&& row == 6
 						&& chessBoard[row - 1][column].getType() == Pieces.NOPIECE) {
 					chessBoard[row - 2][column] = chessBoard[row][column];
-					chessBoard[row][column] = MainChess.emptySpace;
-					if (Restrictions.kingSafety(chessBoard, currentColor) == true) {
+					chessBoard[row][column] = controller.emptySpace;
+					if (Restrictions.kingSafety(chessBoard, currentColor,
+							controller) == true) {
 						list = list + row + column + (row - 2) + column + " ";
 					}
 					chessBoard[row][column] = chessBoard[row - 2][column];
-					chessBoard[row - 2][column] = MainChess.emptySpace;
+					chessBoard[row - 2][column] = controller.emptySpace;
 
 				}
 			} catch (Exception e) {
@@ -51,8 +54,9 @@ public class Pawn extends Piece {
 						&& chessBoard[row][column].getColor() == currentColor) {
 					oldPiece = chessBoard[row - 1][column + 1];
 					chessBoard[row - 1][column + 1] = chessBoard[row][column];
-					chessBoard[row][column] = MainChess.emptySpace;
-					if (Restrictions.kingSafety(chessBoard, currentColor) == true) {
+					chessBoard[row][column] = controller.emptySpace;
+					if (Restrictions.kingSafety(chessBoard, currentColor,
+							controller) == true) {
 						list = list + row + column + (row - 1) + (column + 1)
 								+ "p";
 					}
@@ -69,8 +73,9 @@ public class Pawn extends Piece {
 						&& chessBoard[row][column].getColor() == currentColor) {
 					oldPiece = chessBoard[row - 1][column - 1];
 					chessBoard[row - 1][column - 1] = chessBoard[row][column];
-					chessBoard[row][column] = MainChess.emptySpace;
-					if (Restrictions.kingSafety(chessBoard, currentColor) == true) {
+					chessBoard[row][column] = controller.emptySpace;
+					if (Restrictions.kingSafety(chessBoard, currentColor,
+							controller) == true) {
 						list = list + row + column + (row - 1) + (column - 1)
 								+ "p";
 					}
