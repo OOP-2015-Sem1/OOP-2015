@@ -1,5 +1,6 @@
 package GUI;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,38 +15,51 @@ import javax.swing.JPanel;
 public class StartGameFrame implements ActionListener{
 	
 	private JFrame startFrame;
-	private JButton startButton;
+	private JButton rButton;
 	private JLabel wellcomeLabel;
+	private JButton lButton;
 	
 	public StartGameFrame(){
-		startFrame = new JFrame();  
+ 
 		ImageIcon start = new ImageIcon("images/bfb.jpg");
 		wellcomeLabel = new JLabel(start);
-		startButton = new JButton("START");
-		JPanel jp = new JPanel();
-		jp.setBackground(Color.BLACK);
-		jp.add(startButton);
+		rButton = new JButton("Register");
+		lButton = new JButton("Login");
+		startFrame = new JFrame(); 
+		
 		this.startFrame.setTitle("Wellcome To Pau's Casino");
 		this.startFrame.setLayout(new GridLayout(2,1,9,9));
-		this.startFrame.add(wellcomeLabel);
-		this.startFrame.add(jp);
 		this.startFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.startFrame.setSize(600,400);  
 		this.startFrame.setVisible(true); 
 		this.startFrame.setLocationRelativeTo(null);
+		
+		JPanel jp = new JPanel();
+		jp.setLayout(new FlowLayout());
+		jp.setBackground(Color.BLACK);
+		jp.add(rButton);
+		jp.add(lButton);
+		
+		this.startFrame.add(wellcomeLabel);
+		this.startFrame.add(jp);
+
 		addActionListeners();
 	}
 	
 	 private void addActionListeners(){
-		 this.startButton.addActionListener(this);
+		 this.rButton.addActionListener(this);
+		 this.lButton.addActionListener(this);
 	 }
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		if( arg0.getSource() == this.startButton ){
+		if( arg0.getSource() == this.rButton ){
 			this.startFrame.setVisible(false);
-			new SelectNumberOfPlayersFrame();
+			new RegisterFrame();
+		}
+		if( arg0.getSource() == this.lButton ){
+			this.startFrame.setVisible(false);
+			new LogInFrame();
 		}
 	
 	}
