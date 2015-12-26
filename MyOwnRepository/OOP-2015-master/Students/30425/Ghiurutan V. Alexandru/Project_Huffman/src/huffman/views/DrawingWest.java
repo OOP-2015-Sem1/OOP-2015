@@ -24,6 +24,10 @@ public class DrawingWest extends JPanel {
 		this.parent = graph.getDefaultParent();
 	}
 
+	public void clearTheWest() {
+		this.removeAll();
+	}
+
 	public void action(Huffman huffman) {
 		this.removeAll();
 		setHuffman(huffman);

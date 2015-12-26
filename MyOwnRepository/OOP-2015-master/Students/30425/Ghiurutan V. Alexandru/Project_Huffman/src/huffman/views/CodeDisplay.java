@@ -90,6 +90,7 @@ public class CodeDisplay extends JTextArea {
 	}
 
 	private void printFunction(String[] function) {
+		this.setText("");
 		for (String x : function) {
 			this.append(x);
 			this.append("\n");

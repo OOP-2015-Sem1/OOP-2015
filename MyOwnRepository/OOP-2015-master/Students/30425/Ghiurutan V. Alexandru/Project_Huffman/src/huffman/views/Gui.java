@@ -8,7 +8,7 @@ import java.awt.event.*;
 import huffman.models.Huffman;
 
 public class Gui extends JFrame {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -5669393605620836091L;
 	private JTextArea inputMessageArea1, inputMessageArea2, outputMessageArea1, outputMessageArea2;
 	private JButton button1, button2, button3;
 	private JPanel inputArea1, inputArea1A, inputArea1B, inputArea1Ba, outputAreaSouth;
@@ -16,11 +16,12 @@ public class Gui extends JFrame {
 	private DrawingWest drawTree;
 	private CodeDisplay codeDisplay;
 	private String inputText;
-	private JScrollPane scroll1, scroll2, scroll3, scroll4,scroll5,scroll6;
+	private JScrollPane scroll1, scroll2, scroll3, scroll4, scroll5, scroll6;
 	private Border border;
 	private Handler handler;
 	private SouthArea1 southArea1;
 	private SouthArea2 southArea2;
+	private int clickCount = 0;
 
 	public Gui() {
 		super("Huffman simulation");
@@ -33,14 +34,16 @@ public class Gui extends JFrame {
 		initializeEastSection();
 		initializeSouthSection();
 		this.setVisible(true);
-
+		JOptionPane.showMessageDialog(Gui.this,
+				"To start enter the text and press the next button to apply the algorithm.", "Welcome",
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	private void initializeNorthSection() {
-		button1 = new JButton("Build Huffman Tree");
+		button1 = new JButton("Next");
 		button1.addActionListener(handler);
 
-		button2 = new JButton("Encode text");
+		button2 = new JButton("Display encoded text");
 		button2.addActionListener(handler);
 
 		inputMessageArea1 = new JTextArea(3, 20);
@@ -111,19 +114,21 @@ public class Gui extends JFrame {
 		outputAreaSouth.setLayout(new GridLayout(1, 2));
 		southArea1 = new SouthArea1(3, 20);
 		southArea2 = new SouthArea2(3, 20);
-		scroll5=new JScrollPane(southArea1,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scroll5 = new JScrollPane(southArea1, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll5.setBorder(border);
-		scroll6=new JScrollPane(southArea2,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scroll6 = new JScrollPane(southArea2, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll6.setBorder(border);
 		outputAreaSouth.add(scroll5);
 		outputAreaSouth.add(scroll6);
-		this.add(outputAreaSouth,BorderLayout.SOUTH);
+		this.add(outputAreaSouth, BorderLayout.SOUTH);
 	}
 
 	private class Handler implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			if (event.getSource() == button1) {
+			if (event.getSource() == button1 && (clickCount == 0)) {
 				inputText = inputMessageArea1.getText();
 				if (inputText.equals("")) {
 					JOptionPane.showMessageDialog(Gui.this, "Please enter some text.", "Error",
@@ -133,31 +138,56 @@ public class Gui extends JFrame {
 				inputMessageArea2.setText("");
 				outputMessageArea1.setText("");
 				outputMessageArea2.setText("");
+				drawTree.clearTheWest();
 				huffman = new Huffman(inputText);
 				huffman.getSymbolsFrequency();
 				codeDisplay.getFunction("frequency");
+				clickCount++;
+			} else if (event.getSource() == button1 && (clickCount == 1)) {
 				huffman.buildHuffmanTree();
 				codeDisplay.getFunction("huffmanTree");
+				clickCount++;
+			} else if (event.getSource() == button1 && (clickCount == 2)) {
 				huffman.traverseHuffmanTree(huffman.getRootOfHuffmanTree(), "");
 				codeDisplay.getFunction("traverseTree");
+				clickCount++;
+			} else if (event.getSource() == button1 && (clickCount == 3)) {
 				huffman.encodeText();
 				codeDisplay.getFunction("encode");
+				clickCount++;
+			} else if (event.getSource() == button1 && (clickCount == 4)) {
 				huffman.determineMaximumHeight();
 				codeDisplay.getFunction("determineMaximumHeight");
+				clickCount++;
+			} else if (event.getSource() == button1 && (clickCount == 5)) {
 				huffman.determineNumberOfNodes();
 				codeDisplay.getFunction("determineNumberOfNodes");
+				clickCount++;
+			} else if (event.getSource() == button1 && (clickCount == 6)) {
 				drawTree.action(huffman);
 				codeDisplay.getFunction("drawTree");
 				southArea1.setEfficiencyResults(huffman);
 				southArea2.displayEncodingCharacteristics(huffman);
+				clickCount++;
+				JOptionPane.showMessageDialog(Gui.this,
+						"The simulation of Huffman tree construction ended.You can now decode and encode texts with this code.",
+						"Finish", JOptionPane.INFORMATION_MESSAGE);
+				clickCount = 0;
 			} else if (event.getSource() == button2) {
-				String text = huffman.getOutputText();
-				if (text.equals("") || (text == null)) {
-					JOptionPane.showMessageDialog(Gui.this, "Please enter first some text and build the Huffman Tree.",
+				if (huffman == null) {
+					JOptionPane.showMessageDialog(Gui.this,
+							"Please first enter some text and then follow the steps to build the Huffman Tree.",
 							"Error", JOptionPane.ERROR_MESSAGE);
 				} else {
-					outputMessageArea1.setText(text);
-					codeDisplay.getFunction("encode");
+					String text = huffman.getOutputText();
+					if (text.equals("") || (text == null)) {
+						JOptionPane.showMessageDialog(Gui.this,
+								"Please first enter some text and then follow the steps to build the Huffman Tree.",
+								"Error", JOptionPane.ERROR_MESSAGE);
+					} else {
+						outputMessageArea1.setText(text);
+						codeDisplay.getFunction("encode");
+					}
 				}
 			} else if (event.getSource() == button3) {
 				String text = "";
@@ -171,7 +201,6 @@ public class Gui extends JFrame {
 				codeDisplay.getFunction("decode");
 				outputMessageArea2.setText(huffman.getDecodedText());
 			}
-
 		}
 	}
 }

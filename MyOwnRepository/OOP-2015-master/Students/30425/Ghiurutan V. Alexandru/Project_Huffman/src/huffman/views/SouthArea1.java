@@ -9,6 +9,7 @@ public class SouthArea1 extends JTextArea {
 	public SouthArea1(int x, int y) {
 		super(x, y);
 		this.setOpaque(false);
+		this.setEditable(false);
 	}
 
 	public void setEfficiencyResults(Huffman huffman) {
