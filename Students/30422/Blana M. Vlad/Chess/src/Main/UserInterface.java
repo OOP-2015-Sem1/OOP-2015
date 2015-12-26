@@ -134,8 +134,15 @@ public class UserInterface extends JPanel implements MouseListener,
 			newMouseX = e.getX();
 			newMouseY = e.getY();
 			if (e.getButton() == MouseEvent.BUTTON1) {
-				dragMove.setMove(mouseY / squareSize, mouseX / squareSize,
-						newMouseY / squareSize, newMouseX / squareSize);
+				if (chessBoard[newMouseY / squareSize][newMouseX / squareSize] != controller.emptySpace) {
+					dragMove.setMove(mouseY / squareSize, mouseX / squareSize,
+							newMouseY / squareSize, newMouseX / squareSize,
+							true);
+				} else {
+					dragMove.setMove(mouseY / squareSize, mouseX / squareSize,
+							newMouseY / squareSize, newMouseX / squareSize,
+							false);
+				}
 				System.out.println(dragMove.encodeMoveToString());
 				if (controller.movementManager.checkValidMove(dragMove,
 						controller) == true) {

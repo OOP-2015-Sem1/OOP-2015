@@ -1,6 +1,10 @@
 package pieces;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Main.Controller;
+import Main.Movement;
 import Main.Restrictions;
 
 public class Bishop extends Piece {
@@ -10,10 +14,10 @@ public class Bishop extends Piece {
 	}
 
 	@Override
-	public String possibleMove(int row, int column, Piece chessBoard[][],
-			boolean checkKingSafety, Controller controller) { // TURA
-		// Piece[][] chessBoard = MainChess.board.getBoard();
-		String list = "";
+	public List<Movement> possibleMove(int row, int column,
+			Piece chessBoard[][], boolean checkKingSafety, Controller controller) {
+		List<Movement> list = new ArrayList<Movement>();
+		Movement move = new Movement();
 		Piece oldPiece;
 		Colors currentColor;
 		if (controller.whiteTurn == true) {
@@ -52,8 +56,9 @@ public class Bishop extends Piece {
 
 						if (Restrictions.kingSafety(chessBoard, currentColor,
 								controller) == true) {
-							list = list + row + column + (row + rowOffset)
-									+ (column + columnOffset) + " ";
+							move.setMove(row, column, row + rowOffset, column
+									+ columnOffset, false);
+							list.add(move);
 						}
 						chessBoard[row][column] = chessBoard[row + rowOffset][column
 								+ columnOffset];
@@ -78,6 +83,7 @@ public class Bishop extends Piece {
 							break;
 						}
 					}
+					// capture
 					if (chessBoard[row + rowOffset][column + columnOffset]
 							.getColor() != chessBoard[row][column].getColor()) {
 						oldPiece = chessBoard[row + rowOffset][column
@@ -87,8 +93,10 @@ public class Bishop extends Piece {
 
 						if (Restrictions.kingSafety(chessBoard, currentColor,
 								controller) == true) {
-							list = list + row + column + (row + rowOffset)
-									+ (column + columnOffset) + "p";
+							move.setMove(row, column, row + rowOffset, column
+									+ columnOffset, true);
+							list.add(move);
+
 						}
 						chessBoard[row][column] = chessBoard[row + rowOffset][column
 								+ columnOffset];

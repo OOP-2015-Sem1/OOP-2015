@@ -1,5 +1,8 @@
 package Main;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import pieces.Colors;
 import pieces.Piece;
 import pieces.Pieces;
@@ -27,13 +30,14 @@ public class MovementManager {
 		controller.board.setBoard(chessBoard);
 	}
 
-	public String generateAllMoves(Piece[][] chessBoard, Colors color,
+	public List<Movement> generateAllMoves(Piece[][] chessBoard, Colors color,
 			Controller controller) {
-		String list = "";
+		List<Movement> list = new ArrayList<Movement>();
 		for (int i = 0; i <= 7; i++) {
 			for (int j = 0; j <= 7; j++) {
 				if (chessBoard[i][j].getColor() == color)
-					list += chessBoard[i][j].possibleMove(i, j, chessBoard,
+					list = chessBoard[i][j].possibleMove(i, j, chessBoard,// needs
+																			// work
 							false, controller);
 			}
 		}
@@ -42,12 +46,11 @@ public class MovementManager {
 
 	public Boolean checkValidMove(Movement move, Controller controller) {
 		Piece[][] chessBoard = controller.board.getBoard();
-		String list = "";
-		list += chessBoard[move.source.x][move.source.y].possibleMove(
-				move.source.x, move.source.y, chessBoard, true, controller);
+		List<Movement> list = new ArrayList<Movement>();
+		list = (chessBoard[move.source.x][move.source.y].possibleMove(
+				move.source.x, move.source.y, chessBoard, true, controller));
 
-		if (list.replaceAll(move.encodeMoveToString(), "").length() < list
-				.length()) {
+		if (list.contains(move)) {
 			return true;
 		} else
 			return false;
