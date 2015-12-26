@@ -3,11 +3,11 @@ package entities;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class BodyPart {
+public class SnakeBodyPart {
 
 	private int xCoor, yCoor, width, height;
 
-	public BodyPart(int xCoor, int yCoor, int tileSize) {
+	public SnakeBodyPart(int xCoor, int yCoor, int tileSize) {
 		this.xCoor = xCoor;
 		this.yCoor = yCoor;
 		setWidth(tileSize);
@@ -21,7 +21,7 @@ public class BodyPart {
 		g.setColor(Color.BLACK);
 		g.fillRect(xCoor * getWidth(), yCoor * getHeight(), getWidth(), getHeight());
 		g.setColor(Color.GREEN);
-		g.fillRect(xCoor * getWidth() + 2, yCoor * getHeight() + 2, getWidth() - 4, getHeight() - 4);
+		g.fillRect(xCoor * getWidth() + 2, yCoor * getHeight() + 2, getWidth() - 2, getHeight() - 2);
 	}
 
 	public int getxCoor() {

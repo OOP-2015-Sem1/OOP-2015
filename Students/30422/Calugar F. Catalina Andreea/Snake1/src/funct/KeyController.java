@@ -1,16 +1,20 @@
-package gui;
+package funct;
 
-import static gui.Constants.DOWN;
-import static gui.Constants.LEFT;
-import static gui.Constants.RIGHT;
-import static gui.Constants.UP;
+import static entities.Constants.DOWN;
+import static entities.Constants.LEFT;
+import static entities.Constants.RIGHT;
+import static entities.Constants.UP;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import gui.SnakeAndFood;
+
 public class KeyController implements KeyListener {
 
-	private Snake snake = new Snake();
+	private SnakeAndFood snake = new SnakeAndFood();
+
+
 
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();

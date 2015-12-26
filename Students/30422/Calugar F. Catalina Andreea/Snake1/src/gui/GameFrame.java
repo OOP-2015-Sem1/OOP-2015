@@ -1,8 +1,10 @@
 package gui;
 
+import static entities.Constants.BOARD_SIZE;
+
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,12 +16,14 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import entities.Constants;
+import funct.KeyController;
+
 public class GameFrame {
 
 	JFrame jframe = new JFrame();;
 	private static JPanel snakePanel;
 	private JPanel buttonPanel;
-	private ControlsPanel ctrlPanel = new ControlsPanel();
 
 	private JMenuBar menubar;
 	private JMenu file;
@@ -28,11 +32,19 @@ public class GameFrame {
 	private JButton buttonEasy;
 	private JButton buttonMed;
 	private JButton buttonHard;
-	GameFrame g;
+	public static JButton scr;
+	public JPanel beautyPanel1;
+	public JPanel beautyPanel2;
+	public JPanel beautyPanel3;
+
+	public buttonPanel buttons;
+
+	SnakeAndFood screen;
 
 	public GameFrame() {
 
 		Constants.canWeGoThroughWalls = GoThroughWalls.queryForGoingThroughWalls();
+		BOARD_SIZE = BoardSizeDialogBox.queryForBoardSize();
 
 		menubar = new JMenuBar();
 		jframe.setJMenuBar(menubar);
@@ -65,22 +77,23 @@ public class GameFrame {
 	}
 
 	public void init() {
-		jframe.setLayout(new FlowLayout(FlowLayout.TRAILING));
+		jframe.setLayout(new BorderLayout());
 
 		snakePanel = new JPanel();
 		buttonPanel = new JPanel();
 		snakePanel.setLayout(new GridLayout(1, 1));
 
-		Snake screen = new Snake();
+		screen = new SnakeAndFood();
 		snakePanel.setFocusable(true);
+		screen.setPreferredSize(new Dimension(Constants.DIMENSION, Constants.DIMENSION));
 		snakePanel.add(screen);
 
 		buttonEasy = new JButton("EASY");
 		buttonMed = new JButton("MEDIUM");
 		buttonHard = new JButton("HARD");
-		buttonEasy.setBackground(new Color(10, 100, 0));
-		buttonMed.setBackground(new Color(10, 100, 0));
-		buttonHard.setBackground(new Color(10, 100, 0));
+		buttonEasy.setBackground(Color.GREEN);
+		buttonMed.setBackground(Color.GREEN);
+		buttonHard.setBackground(Color.GREEN);
 
 		EventEasyBut easyDificulty = new EventEasyBut();
 		buttonEasy.addActionListener(easyDificulty);
@@ -91,21 +104,34 @@ public class GameFrame {
 		EventHardBut hardDificulty = new EventHardBut();
 		buttonHard.addActionListener(hardDificulty);
 
-		ctrlPanel.addActionListenerToButtons(new SnakeMouseControllsClickListener());
-
 		buttonPanel.setBackground(Color.LIGHT_GRAY);
-		buttonPanel.setLayout(new GridLayout(5, 1));
-		buttonPanel.setSize(new Dimension(100, 100));
+		buttonPanel.setLayout(new GridLayout(1, 4));
+		buttonPanel.setPreferredSize(new Dimension(Constants.DIMENSION, 50));
 
+		scr = new JButton("Score: 0");
+		scr.setEnabled(false);
+		scr.setBackground(Color.WHITE);
+
+		buttonPanel.add(scr);
 		buttonPanel.add(buttonEasy);
 		buttonPanel.add(buttonMed);
 		buttonPanel.add(buttonHard);
-		buttonPanel.add(Snake.scr);
 
-		buttonPanel.add(ctrlPanel);
+		beautyPanel1 = new JPanel();
+		beautyPanel2 = new JPanel();
+		beautyPanel3 = new JPanel();
+		beautyPanel1.setPreferredSize(new Dimension(10, Constants.DIMENSION));
+		beautyPanel2.setPreferredSize(new Dimension(10, Constants.DIMENSION));
+		beautyPanel3.setPreferredSize(new Dimension(Constants.DIMENSION, 10));
+		beautyPanel1.setBackground(Color.GREEN);
+		beautyPanel2.setBackground(Color.GREEN);
+		beautyPanel3.setBackground(Color.GREEN);
 
-		jframe.add(snakePanel);
-		jframe.add(buttonPanel);
+		jframe.add(beautyPanel1, BorderLayout.EAST);
+		jframe.add(beautyPanel2, BorderLayout.WEST);
+		jframe.add(beautyPanel3, BorderLayout.SOUTH);
+		jframe.add(snakePanel, BorderLayout.CENTER);
+		jframe.add(buttonPanel, BorderLayout.NORTH);
 		jframe.pack();
 
 		jframe.setLocationRelativeTo(null);
@@ -115,7 +141,6 @@ public class GameFrame {
 
 	public class evMenu implements ActionListener {
 		public void actionPerformed(ActionEvent enG) {
-
 			jframe.setVisible(false);
 			jframe.dispose();
 			new GameFrame();
@@ -129,15 +154,12 @@ public class GameFrame {
 			System.exit(0);
 		}
 
-		public void addActionListenerToButtons(ActionListener actionListener) {
-			ctrlPanel.addActionListenerToButtons(actionListener);
-		}
 	}
 
 	public class EventEasyBut implements ActionListener {
 		public void actionPerformed(ActionEvent eDificulty1) {
 
-			Snake.speed = 1000000;
+			SnakeAndFood.speed = 1000000;
 			jframe.requestFocus();
 
 		}
@@ -146,7 +168,7 @@ public class GameFrame {
 	public class EventMedBut implements ActionListener {
 		public void actionPerformed(ActionEvent eDificulty3) {
 
-			Snake.speed = 600000;
+			SnakeAndFood.speed = 600000;
 			jframe.requestFocus();
 		}
 	}
@@ -154,17 +176,9 @@ public class GameFrame {
 	public class EventHardBut implements ActionListener {
 		public void actionPerformed(ActionEvent hardDifficulty) {
 
-			Snake.speed = 300000;
+			SnakeAndFood.speed = 300000;
 			jframe.requestFocus();
 		}
-	}
-
-	public JButton[][] getCtrlButton() {
-		return this.ctrlPanel.getCtrlButton();
-	}
-
-	public void addActionListenerToButtons(ActionListener actionListener) {
-		ctrlPanel.addActionListenerToButtons(actionListener);
 	}
 
 }
