@@ -1,6 +1,9 @@
 package pieces;
 
+import java.util.List;
+
 import Main.Controller;
+import Main.Movement;
 
 public abstract class Piece {
 	private Colors color;
@@ -18,6 +21,6 @@ public abstract class Piece {
 		return this.color;
 	}
 
-	public abstract String possibleMove(int row, int column,
+	public abstract List<Movement> possibleMove(int row, int column,
 			Piece[][] chessBoard, boolean checkKingSafety, Controller controller);
 }

@@ -1,5 +1,8 @@
 package Main;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import pieces.Colors;
 import pieces.Piece;
 import pieces.Pieces;
@@ -42,9 +45,10 @@ public class MovementManager {
 
 	public Boolean checkValidMove(Movement move, Controller controller) {
 		Piece[][] chessBoard = controller.board.getBoard();
-		String list = "";
-		list += chessBoard[move.source.x][move.source.y].possibleMove(
-				move.source.x, move.source.y, chessBoard, true, controller);
+		List<Movement> list = new ArrayList<Movement>();
+		// String list = "";
+		list = (chessBoard[move.source.x][move.source.y].possibleMove(
+				move.source.x, move.source.y, chessBoard, true, controller));
 
 		if (list.replaceAll(move.encodeMoveToString(), "").length() < list
 				.length()) {
