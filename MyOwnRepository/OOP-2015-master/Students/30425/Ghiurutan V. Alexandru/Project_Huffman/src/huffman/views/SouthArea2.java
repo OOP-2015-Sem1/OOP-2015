@@ -12,6 +12,7 @@ public class SouthArea2 extends JTextArea {
 	public SouthArea2(int x, int y) {
 		super(x, y);
 		this.setOpaque(false);
+		this.setEditable(false);
 	}
 
 	public void displayEncodingCharacteristics(Huffman huffman) {
