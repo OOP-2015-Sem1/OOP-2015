@@ -1,101 +1,95 @@
 package shapes;
 
+import java.awt.Color;
 import java.util.Random;
 
 public class Shape {
 
-	enum Tetrominoes{ NoShape, IShape, JShape, LShape, OShape, SShape, Tshape, ZShape};
+	private static final boolean[][] I_PIECE = { { true, true, true, true }, {false, false, false, false}};
+
+	private static final boolean[][] J_PIECE = { { true, false, false, false }, { true, true, true, false } };
+
+	private static final boolean[][] L_PIECE = { { false, false, true, false }, { true, true, true, false } };
+
+	private static final boolean[][] O_PIECE = { { true, true, false, false }, { true, true, false, false } };
+
+	private static final boolean[][] S_PIECE = { { false, true, true, false }, { true, true, false, false } };
+
+	private static final boolean[][] T_PIECE = { { false, true, false, false }, { true, true, true, false } };
+
+	private static final boolean[][] Z_PIECE = { { true, true, false, false }, { false, true, true, false } };
 	
-	private Tetrominoes piece;
-	private int coordinates[][];
-	private int coordinatesTable[][][];
 	
+
+	public static boolean[][][] TETROMINOES = { 
+			I_PIECE, J_PIECE, L_PIECE, O_PIECE, S_PIECE, T_PIECE, Z_PIECE };
+
+	private static Color[] TETROMINO_COLORS = 
+		{ Color.red, Color.yellow, Color.magenta, Color.pink, Color.cyan, Color.green, Color.orange };
 	
-	public void setShape(Tetrominoes shape) {
-		coordinatesTable = new int[][][]{
-			{{0, 0}, {0, 0}, {0, 0}, {0, 0}},//NoShape
-			{{0, -1}, {0, 0}, {0, 1}, {0, 2}},//IShape
-			{{-1, -1}, {0, -1}, {0, 0}, {0, 1}},//JShape
-			{{0, 0}, {1, 0}, {0, 1}, {1, 1}},//LShape
-			{{1, -1}, {0, -1}, {0, 0}, {0, 1}},//OShape
-			{{0, -1}, {0, 0}, {-1, 0}, {-1, 1}},//SShape
-			{{-1, 0}, {0, 0}, {1, 0}, {0, 1}},//TShape
-			{{0, -1}, {0, 0}, {1, 0}, {1, 1}}//ZShape
-		};
-		
-		for(int i = 0; i < 4; i++){
-			for(int j = 0; j < 2; j++){
-				coordinates[i][j] = coordinatesTable[shape.ordinal()][i][j];
-			}
-		}
-		
-		piece = shape;
-	}
+	private static int DEFAULT_PIECE_ROW = 0, DEFAULT_PIECE_COL = 10;
 	
-	public Tetrominoes getShape(){
-		return this.piece;
-	}
+	public static int TETROMINO_MATRIX_ROWS = 2, TETROMINO_MATRIX_COLS = 4;
+
+	private int pieceRow, pieceCol;
+	
+	public Color randomPieceColor;
+	public int randomPieceNumber;
+	
+	public boolean[][] fallingPiece;
+	
 	
 	public Shape(){
-		coordinates = new int[4][2];
-		setShape(Tetrominoes.NoShape);
-	}
-	
-	public void setX(int index, int x){
-		coordinates[index][0] = x;
-	}
-	
-	public int getX(int index){
-		return coordinates[index][0];
-		}
-	
-	public void setY(int index, int y){
-		coordinates[0][index] = y;
-	}
-	
-	public int getY(int index){
-		return coordinates[0][index];
-	}
-	
-	public void setRandomShape(){
+		this.generateNewFallingPiece();
+		this.generatePieceColor();
 		
-		Random random = new Random();
-		int randomValue = Math.abs(random.nextInt() % 7 + 1);
-		Tetrominoes[] shapeValues = Tetrominoes.values();// array of tetromino enum elements
-		setShape(shapeValues[randomValue]);
-		
-	}
-	
-	public Shape rotateRight(){
-		if(piece == Tetrominoes.OShape){
-			return this;
-			}
-		Shape rightRotatedShape = new Shape();
-		rightRotatedShape.piece = piece;
-		
-		for(int i = 0; i < 4; i++){
-			rightRotatedShape.setX(i, -getY(i));
-			rightRotatedShape.setY(i, getX(i));
-		}
-		
-		return rightRotatedShape;
-	}
-	
-	public Shape rotateLeft(){
-		if(piece == Tetrominoes.OShape){
-			return this;
-			}
-		Shape leftRotatedShape = new Shape();
-		leftRotatedShape.piece = piece;
-		
-		for(int i = 0; i < 4; i++){
-			leftRotatedShape.setX(i, getY(i));
-			leftRotatedShape.setY(i, -getX(i));
-		}
-		
-		return leftRotatedShape;
 	}
 
+	public void setPieceRow(int row) {
+		this.pieceRow = row;
+	}
+
+	public int getPieceRow() {
+		return this.pieceRow;
+	}
+
+	public void setPieceCol(int y) {
+		this.pieceCol = y;
+	}
+
+	public int getPieceCol() {
+		return this.pieceCol;
+	}
+
+	public int generateRandomValue() {
+
+		Random random = new Random();
+		int randomValue = Math.abs(random.nextInt() % 6 + 1);
+		
+		return randomValue;
+
+	}
+
+	public void generateNewFallingPiece(){
+		
+		 this.randomPieceNumber = generateRandomValue();
+		 
+		 
+		 
+	
+	}
+
+	public void generatePieceColor(){
+		int randomColorNumber = generateRandomValue();
+		this.randomPieceColor = TETROMINO_COLORS[randomColorNumber];
+		System.out.println("Color is: " + randomPieceColor);
+	}
 	
 	
+
+	public static void move(String direction) {
+		// TODO Auto-generated method stub
+
+	}
+
 }
