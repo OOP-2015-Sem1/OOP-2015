@@ -6,11 +6,9 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import models.*;
-import controllers.*;
 
 public class StartMenu extends JPanel implements KeyListener{
 	
@@ -78,10 +76,9 @@ public class StartMenu extends JPanel implements KeyListener{
 		
 		int i = e.getKeyCode();
 		if(i == KeyEvent.VK_SPACE){
-			Snake.setSnake(new Snake());
-			SnakeDirection.setSnakeDirection(new SnakeDirection());
-			GameManagement.setGame(new GameManagement());
-			GameManagement.getGame().startGame();
+			Snake snake=new Snake();
+			GameManagement game = new GameManagement(snake);
+			game.startGame();
 			
 		}
 		if(i==KeyEvent.VK_S){
