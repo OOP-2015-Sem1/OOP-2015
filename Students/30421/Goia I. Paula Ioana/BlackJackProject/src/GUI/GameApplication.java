@@ -91,7 +91,12 @@ public class GameApplication implements ActionListener {
 		display(this.decks.get(0), 0);
 		this.panelPlayers.get(0).repaint();
 		// add to others
-		keepPlayingWithoutMe();
+		if(this.decks.get(0).getSumValue()>=21){
+			keepPlayingWithoutMe();
+			win();
+		}
+		else
+		 keepPlayingWithoutMe();
 	}
 
 	private void keepPlayingWithoutMe() {
