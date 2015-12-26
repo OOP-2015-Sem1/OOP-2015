@@ -15,7 +15,6 @@ public class Controller {
 	public String blackKingY = "3";
 
 	public Controller() {
-
 		emptySpace.setColor(Colors.WHITE);
 	}
 }
