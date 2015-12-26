@@ -11,13 +11,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
-public class StartGame implements ActionListener{
+public class StartGameFrame implements ActionListener{
 	
 	private JFrame startFrame;
 	private JButton startButton;
 	private JLabel wellcomeLabel;
 	
-	public StartGame(){
+	public StartGameFrame(){
 		startFrame = new JFrame();  
 		ImageIcon start = new ImageIcon("images/bfb.jpg");
 		wellcomeLabel = new JLabel(start);
@@ -32,6 +32,7 @@ public class StartGame implements ActionListener{
 		this.startFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.startFrame.setSize(600,400);  
 		this.startFrame.setVisible(true); 
+		this.startFrame.setLocationRelativeTo(null);
 		addActionListeners();
 	}
 	
@@ -44,7 +45,7 @@ public class StartGame implements ActionListener{
 		// TODO Auto-generated method stub
 		if( arg0.getSource() == this.startButton ){
 			this.startFrame.setVisible(false);
-			new SelectNumberOfPlayers();
+			new SelectNumberOfPlayersFrame();
 		}
 	
 	}

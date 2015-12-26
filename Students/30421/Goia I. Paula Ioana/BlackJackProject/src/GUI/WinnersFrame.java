@@ -2,13 +2,16 @@ package GUI;
 
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Winners {
+public class WinnersFrame implements ActionListener {
 	
 	private JFrame winFrame;
 	private ArrayList<String> winners;
@@ -17,11 +20,13 @@ public class Winners {
 	private  ArrayList<JLabel> info;
 	private JPanel infoPanel;
 	private JPanel winPanel;
+	private JButton newGame;
 	
 	
-	public Winners(ArrayList<String> winners , ArrayList<String> playersInformation){
+	public WinnersFrame(ArrayList<String> winners , ArrayList<String> playersInformation){
 		this.winners = winners;
 		this.playersInformation =  playersInformation;
+		this.newGame = new JButton("New Game");
 		this.win = new ArrayList<>();
 		this.info = new ArrayList<>();
 		this.winFrame = new JFrame();
@@ -30,11 +35,13 @@ public class Winners {
 		this.winFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.winFrame.setSize(500, 700);
 		this.winFrame.setVisible(true);
+		this.winFrame.setLocationRelativeTo(null);
 		displayResults();
 		this.winFrame.setLayout(new GridLayout(2,1));
 		addInFrame();
 		this.winFrame.add(this.infoPanel);
 		this.winFrame.add(this.winPanel);
+		addActionListeners();
 		
 	}
 	
@@ -44,10 +51,11 @@ public class Winners {
 		for (JLabel infoPlayer : this.info){
 			this.infoPanel.add(infoPlayer);
 		}
-		this.winPanel.setLayout(new GridLayout(13,1,5,5));
+		this.winPanel.setLayout(new GridLayout(14,1,5,5));
 		for (JLabel winnerPlayer : this.win){
 			this.winPanel.add(winnerPlayer);
 		}
+		this.winPanel.add(this.newGame);
 	}
 	
 	private void displayResults(){
@@ -61,6 +69,17 @@ public class Winners {
 			this.win.add(aux);
 		}
 
+		
+	}
+	private void addActionListeners(){
+		 this.newGame.addActionListener(this);
+	 }
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		if( arg0.getSource() == this.newGame ){
+			this.winFrame.setVisible(false);
+			new StartGameFrame();
+		}
 		
 	}
 

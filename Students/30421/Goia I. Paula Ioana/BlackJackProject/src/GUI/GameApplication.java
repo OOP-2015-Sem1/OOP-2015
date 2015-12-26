@@ -20,7 +20,7 @@ public class GameApplication implements ActionListener {
 	private int nbPlayers;
 	private JFrame gameFrame;
 	private ArrayList<JPanel> panelPlayers;
-	private JPanel button;
+	private JPanel pannelForButtons;
 	private JButton hit;
 	private JButton stand;
 	private JButton newGame;
@@ -28,8 +28,10 @@ public class GameApplication implements ActionListener {
 	private ArrayList<Deck> decks;
 	private ArrayList<String> winners;
 	private ArrayList<String> playersInformation;
-
-	public GameApplication(int nbPlayers) {
+	private ArrayList<String> namePlayers;
+	
+	public GameApplication(int nbPlayers, ArrayList<String> namePlayers) {
+		this.namePlayers = namePlayers;
 		this.nbPlayers = nbPlayers;
 		this.gameFrame = new JFrame();
 		this.panelPlayers = new ArrayList<>();
@@ -38,13 +40,14 @@ public class GameApplication implements ActionListener {
 		this.hit = new JButton("Hit");
 		this.stand = new JButton("Stand");
 		this.newGame = new JButton("New Game");
-		this.button = new JPanel();
+		this.pannelForButtons = new JPanel();
 		this.deck = new Deck();
 		this.decks = new ArrayList<>();
 		this.deck.createFullDeck(this.deck.getDeck());
 		this.gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.gameFrame.setSize(1200, 780);
 		this.gameFrame.setVisible(true);
+		this.gameFrame.setLocationRelativeTo(null);
 		setGameLayout();
 		initGame();
 		addActionListeners();
@@ -62,11 +65,11 @@ public class GameApplication implements ActionListener {
 			this.gameFrame.add(this.panelPlayers.get(i));
 			this.decks.add(new Deck());
 		}
-		this.button.setLayout(new FlowLayout());
-		this.button.add(this.hit);
-		this.button.add(this.stand);
-		this.button.add(this.newGame);
-		this.gameFrame.add(this.button);
+		this.pannelForButtons.setLayout(new FlowLayout());
+		this.pannelForButtons.add(this.hit);
+		this.pannelForButtons.add(this.stand);
+		this.pannelForButtons.add(this.newGame);
+		this.gameFrame.add(this.pannelForButtons);
 	}
 
 	private void initGame() {
@@ -104,10 +107,10 @@ public class GameApplication implements ActionListener {
 
 	private void display(Deck deck1, int panel) {
 		this.panelPlayers.get(panel).removeAll();
-		JLabel name = new JLabel(PlayersName.getNamePlayers().get(panel));
+		JLabel name = new JLabel(this.namePlayers.get(panel));
 		this.panelPlayers.get(panel).add(name);
 		this.panelPlayers.get(panel).invalidate();
-		if(PlayersName.getNamePlayers().get(panel).equals("Dealer")){
+		if(this.namePlayers.get(panel).equals("Dealer")){
 			this.panelPlayers.get(panel).add(
 					new JLabel("Value:hidden"));
 			this.panelPlayers.get(panel).setLayout(new FlowLayout());
@@ -144,18 +147,18 @@ public class GameApplication implements ActionListener {
 				}			
 			}
 			for (int i = 0; i < this.nbPlayers + 1; i++) {
-				this.playersInformation.add("   "+PlayersName.getNamePlayers().get(i)+" has the value " + this.decks.get(i).getSumValue());
-					if( this.decks.get(i).getSumValue() < 21 && this.decks.get(i).getSumValue() > max21 ){
+				this.playersInformation.add("   "+this.namePlayers.get(i)+" has the value " + this.decks.get(i).getSumValue());
+					if( this.decks.get(i).getSumValue() <= 21 && this.decks.get(i).getSumValue() > max21 ){
 						max21 = this.decks.get(i).getSumValue();
 				}		
 			}
 			for (int i = 0; i < this.nbPlayers + 1; i++) {
 				if ( this.decks.get(i).getSumValue() == max21 ){
-					winners.add(PlayersName.getNamePlayers().get(i));
+					winners.add(this.namePlayers.get(i));
 				}
 			}
 			this.gameFrame.setVisible(false);
-			new Winners(winners, this.playersInformation);
+			new WinnersFrame(winners, this.playersInformation);
 		}
 		else keepPlayingWithoutMe();
 	}
@@ -177,7 +180,7 @@ public class GameApplication implements ActionListener {
 		}
 		if (arg0.getSource() == this.newGame) {
 			this.gameFrame.setVisible(false);
-			new StartGame();
+			new StartGameFrame();
 		}
 
 	}

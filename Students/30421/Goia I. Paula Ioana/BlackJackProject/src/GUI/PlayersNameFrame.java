@@ -13,25 +13,26 @@ import javax.swing.JTextField;
 
 
 
-public class PlayersName implements ActionListener {
+public class PlayersNameFrame implements ActionListener {
 
 	private JFrame playerName;
 	private int nbPlayers;
-	private static ArrayList<String> namePlayers;
+	private ArrayList<String> namePlayers;
 	private JPanel namePanel;
 	private JButton saveName ;
 	private JPanel saveNamePanel;
 	private ArrayList<JTextField> arrayPlayers;
 	
-	public PlayersName(int nbPlayers){
+	public PlayersNameFrame(int nbPlayers){
 		playerName = new JFrame();
 		playerName.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		playerName.setSize(800,500);  
 		playerName.setVisible(true);
+		this.playerName.setLocationRelativeTo(null);
 		this.playerName.setLayout(new GridLayout(2, 1));
 		this.namePanel = new JPanel();
 		this.saveNamePanel = new JPanel();
-		PlayersName.namePlayers = new ArrayList<>();
+		this.namePlayers = new ArrayList<>();
 		this.arrayPlayers = new ArrayList<>();
 		this.nbPlayers = nbPlayers;
 		this.saveName = new JButton("Save");
@@ -70,17 +71,13 @@ public class PlayersName implements ActionListener {
 		// TODO Auto-generated method stub
 		if( e.getSource() == this.saveName ){
 			for (JTextField s : this.arrayPlayers){
-				PlayersName.namePlayers.add(s.getText());
+				this.namePlayers.add(s.getText());
 			}
-			PlayersName.namePlayers.add("Dealer");
+			this.namePlayers.add("Dealer");
 			this.playerName.setVisible(false);
 			
-			new GameApplication(this.nbPlayers);
+			new GameApplication(this.nbPlayers, this.namePlayers);
 		}
-	}
-	
-	public static ArrayList<String> getNamePlayers() {
-		return namePlayers;
 	}
 
 }
