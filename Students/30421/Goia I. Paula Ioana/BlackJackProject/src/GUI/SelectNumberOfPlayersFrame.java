@@ -9,13 +9,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class SelectNumberOfPlayers implements ActionListener {
+public class SelectNumberOfPlayersFrame implements ActionListener {
 	private JFrame NOPlayers;
 	private JLabel selectMessage;
 	private JTextField nrIntroduced;
 	private JButton OK;
 
-	public SelectNumberOfPlayers() {
+	public SelectNumberOfPlayersFrame() {
 		NOPlayers = new JFrame();
 		OK = new JButton("OK");
 		nrIntroduced = new JTextField();
@@ -27,6 +27,7 @@ public class SelectNumberOfPlayers implements ActionListener {
 		NOPlayers.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		NOPlayers.setSize(500, 100);
 		NOPlayers.setVisible(true);
+		this.NOPlayers.setLocationRelativeTo(null);
 		addActionListeners();
 	}
 
@@ -41,9 +42,9 @@ public class SelectNumberOfPlayers implements ActionListener {
 			int nbPlayers;
 			nbPlayers = Integer.parseInt(nrIntroduced.getText());
 			if (nbPlayers>12 || nbPlayers<1){
-				new ErrorNumberIntroduced();
+				new ErrorNumberIntroducedFrame();
 			}
-		   else new PlayersName(nbPlayers);
+		   else new PlayersNameFrame(nbPlayers);
 		}
 
 	}

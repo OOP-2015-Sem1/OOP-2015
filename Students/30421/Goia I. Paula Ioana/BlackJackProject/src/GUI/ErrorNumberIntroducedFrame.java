@@ -8,12 +8,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class ErrorNumberIntroduced implements ActionListener {
+public class ErrorNumberIntroducedFrame implements ActionListener {
 	private JFrame noNumber;
 	private JLabel errorMessage;
 	private JButton OK;
 
-	public ErrorNumberIntroduced() {
+	public ErrorNumberIntroducedFrame() {
 		this.noNumber = new JFrame();
 		this.errorMessage = new JLabel();
 		this.OK = new JButton("OK");
@@ -36,7 +36,7 @@ public class ErrorNumberIntroduced implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == this.OK) {
 			this.noNumber.setVisible(false);
-			new SelectNumberOfPlayers();
+			new SelectNumberOfPlayersFrame();
 		}
 
 	}
