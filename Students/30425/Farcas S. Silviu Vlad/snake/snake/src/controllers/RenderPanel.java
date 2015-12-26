@@ -14,13 +14,14 @@ import views.*;
 
 public class RenderPanel extends JPanel {
 
-	public int start = 0;
 	public static final Color BLUEBEE = new Color(65,156,186);
 	public static final Color GREENABEE = new Color(8,69,34);
 	private Dimension dim;
 	public static JFrame jframe;
+	private Snake snake;
+	private GameManagement game;
 
-	public RenderPanel(){
+	public RenderPanel(Snake snake, GameManagement game){
 		dim = Toolkit.getDefaultToolkit().getScreenSize();
 		jframe = new JFrame("Snake");
 		jframe.setVisible(true);
@@ -30,14 +31,12 @@ public class RenderPanel extends JPanel {
 		jframe.setLocation(dim.width / 2 - jframe.getWidth() / 2, dim.height / 2 - jframe.getHeight() / 2);
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jframe.add(this);
+		this.snake=snake;
+		this.game=game;
 	}
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
-		Snake snake = Snake.getSnake();
-		
-		GameManagement game = GameManagement.getGame();
 
 		g.setColor(BLUEBEE);
 
@@ -46,23 +45,23 @@ public class RenderPanel extends JPanel {
 		g.setColor(GREENABEE);
 
 		for (Point point : snake.getSnakeParts()) {
-			g.fillRect(point.x * SnakeDirection.SCALE, point.y * SnakeDirection.SCALE, SnakeDirection.SCALE, SnakeDirection.SCALE);
+			g.fillRect(point.x * Snake.SCALE, point.y * Snake.SCALE, Snake.SCALE, Snake.SCALE);
 		}
 
 		g.setColor(Color.BLACK);
-		if (snake.getObstacles() != null) {
-			for (Point point : snake.getObstacles()) {
-				g.fillRect(point.x * SnakeDirection.SCALE, point.y * SnakeDirection.SCALE, SnakeDirection.SCALE, SnakeDirection.SCALE);
+		if (game.getObstacles() != null) {
+			for (Point point : game.getObstacles()) {
+				g.fillRect(point.x * Snake.SCALE, point.y * Snake.SCALE, Snake.SCALE, Snake.SCALE);
 			}
 		}
 		
 		g.setColor(GREENABEE);
 		
-		g.fillRect(snake.getHead().x * SnakeDirection.SCALE, snake.getHead().y * SnakeDirection.SCALE, SnakeDirection.SCALE, SnakeDirection.SCALE);
+		g.fillRect(snake.getHead().x * Snake.SCALE, snake.getHead().y * Snake.SCALE, Snake.SCALE, Snake.SCALE);
 
 		g.setColor(Color.RED);
 
-		g.fillRect(snake.getCherry().x * SnakeDirection.SCALE, snake.getCherry().y * SnakeDirection.SCALE, SnakeDirection.SCALE, SnakeDirection.SCALE);
+		g.fillRect(snake.getCherry().x * Snake.SCALE, snake.getCherry().y * Snake.SCALE, Snake.SCALE, Snake.SCALE);
 
 		String string = "Score: " + game.getScore() + ", Length: " + snake.tailLength + ", Time: " + game.getTime() / 20;
 

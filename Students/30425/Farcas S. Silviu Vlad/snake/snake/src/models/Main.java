@@ -3,11 +3,10 @@ package models;
 
 import javax.swing.JFrame;
 
-import controllers.*;
 import views.*;
 
 public class Main {
-
+	
 	public static void main(String[] args) {
 		JFrame jf = new JFrame("Menu");
 		jf.setVisible(true);
