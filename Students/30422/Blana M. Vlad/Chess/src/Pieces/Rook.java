@@ -56,12 +56,19 @@ public class Rook extends Piece {
 						chessBoard[row + rowOffset][column + columnOffset] = chessBoard[row][column];
 						chessBoard[row][column] = controller.emptySpace;
 
-						if (Restrictions.kingSafety(chessBoard, currentColor,
-								controller) == true) {
+						if (checkKingSafety == true) {
+							if (Restrictions.kingSafety(chessBoard,
+									currentColor, controller) == true) {
+								move = new Movement();
+								move.setMove(row, column, row + rowOffset,
+										column + columnOffset, true);
+								list.add(move);
+							}
+						} else {
+							move = new Movement();
 							move.setMove(row, column, row + rowOffset, column
-									+ columnOffset, false);
+									+ columnOffset, true);
 							list.add(move);
-
 						}
 						chessBoard[row][column] = chessBoard[row + rowOffset][column
 								+ columnOffset];
@@ -89,8 +96,16 @@ public class Rook extends Piece {
 						chessBoard[row + rowOffset][column + columnOffset] = chessBoard[row][column];
 						chessBoard[row][column] = controller.emptySpace;
 
-						if (Restrictions.kingSafety(chessBoard, currentColor,
-								controller) == true) {
+						if (checkKingSafety == true) {
+							if (Restrictions.kingSafety(chessBoard,
+									currentColor, controller) == true) {
+								move = new Movement();
+								move.setMove(row, column, row + rowOffset,
+										column + columnOffset, true);
+								list.add(move);
+							}
+						} else {
+							move = new Movement();
 							move.setMove(row, column, row + rowOffset, column
 									+ columnOffset, true);
 							list.add(move);
