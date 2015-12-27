@@ -11,6 +11,16 @@ public class Movement {
 
 	}
 
+	public boolean equals(Movement move) {
+		if (this.source.x == move.source.x
+				&& this.destination.x == move.destination.x
+				&& this.source.y == move.source.y
+				&& this.destination.y == move.destination.y)
+			return true;
+		else
+			return false;
+	}
+
 	public void setMove(int xSource, int ySource, int xDestination,
 			int yDestination, boolean capturedPiece) {
 		this.source.x = xSource;
@@ -21,7 +31,6 @@ public class Movement {
 	}
 
 	public String encodeMoveToString() {
-		// String string
 		return "" + source.x + source.y + destination.x + destination.y;
 	}
 }

@@ -18,7 +18,7 @@ public class Knight extends Piece {
 			Piece chessBoard[][], boolean checkKingSafety, Controller controller) { // CAL
 		// Piece[][] chessBoard = MainChess.board.getBoard();
 		List<Movement> list = new ArrayList<Movement>();
-		Movement move = new Movement();
+		Movement move;
 		Piece oldPiece;
 		Colors currentColor;
 		if (controller.whiteTurn == true) {
@@ -76,11 +76,13 @@ public class Knight extends Piece {
 						if (checkKingSafety == true) {
 							if (Restrictions.kingSafety(chessBoard,
 									currentColor, controller) == true) {
+								move = new Movement();
 								move.setMove(row, column, row + rowOffset,
 										column + columnOffset, true);
 								list.add(move);
 							}
 						} else {
+							move = new Movement();
 							move.setMove(row, column, row + rowOffset, column
 									+ columnOffset, true);
 							list.add(move);

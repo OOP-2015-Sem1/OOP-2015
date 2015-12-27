@@ -157,8 +157,8 @@ public class UserInterface extends JPanel implements MouseListener,
 							for (int j = 0; j <= 7; j++) {
 								if (chessBoard[i][j].getType() == Pieces.KING
 										&& chessBoard[i][j].getColor() == Colors.WHITE) {
-									controller.whiteKingX = String.valueOf(i);
-									controller.whiteKingY = String.valueOf(j);
+									controller.whiteKingPosition.destination.x = i;
+									controller.whiteKingPosition.destination.y = j;
 								}
 							}
 						}
@@ -167,8 +167,8 @@ public class UserInterface extends JPanel implements MouseListener,
 							for (int j = 0; j <= 7; j++) {
 								if (chessBoard[i][j].getType() == Pieces.KING
 										&& chessBoard[i][j].getColor() == Colors.BLACK) {
-									controller.blackKingX = String.valueOf(i);
-									controller.blackKingY = String.valueOf(j);
+									controller.blackKingPosition.destination.x = i;
+									controller.blackKingPosition.destination.y = j;
 								}
 							}
 						}
