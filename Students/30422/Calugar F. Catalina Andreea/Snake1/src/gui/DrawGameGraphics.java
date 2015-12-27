@@ -31,10 +31,5 @@ public class DrawGameGraphics {
 		g.drawString("GAME  OVER", 350, 400);
 	}
 
-	public void drawPanel(Graphics g) {
-		clearDrawing(g);
-		g.setColor(new Color(10, 80, 0));
-		fillDrawing(g);
-		g.setColor(Color.BLACK);
-	}
+	
 }
