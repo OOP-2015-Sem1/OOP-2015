@@ -6,20 +6,26 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import logic.GameLogic;
 import logic.PVP;
+import login.FileSerialization;
 
 public class GUI extends JFrame {
 
+
+	private static final long serialVersionUID = 1L;
 	private JPanel board = new JPanel();
 	private MorrisIcons icons = MorrisIcons.getInstance();
 	PVP playerMovesOnBoard = new PVP();
 	private GameLogic logic = GameLogic.getInstance();
+	FileSerialization serial = FileSerialization.getInstance();
 
 	public GUI() {
 		super("Board");
 		setBoard();
 		playerMovesOnBoard.playerVsPlayer();
+		serial.login();
 	}
 
 	public void setBoard() {

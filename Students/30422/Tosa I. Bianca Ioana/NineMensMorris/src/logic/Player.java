@@ -6,12 +6,12 @@ public class Player {
 	public int playerPieces;
 	public int oldNumberOfMorris;
 	public int tag;
-	
-	public void setTag(int tag){
+
+	public void setTag(int tag) {
 		this.tag = tag;
 	}
-	
-	public int getTag(){
+
+	public int getTag() {
 		return this.tag;
 	}
 
@@ -54,5 +54,7 @@ public class Player {
 	public void decrementPieces() {
 		this.playerPieces--;
 	}
+
+	
 
 }
