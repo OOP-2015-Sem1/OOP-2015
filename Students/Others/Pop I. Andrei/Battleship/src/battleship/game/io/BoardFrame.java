@@ -31,7 +31,8 @@ public class BoardFrame extends JFrame implements ActionListener{
 	private JMenuItem save, restore, exit;
 	private HandleFire handleFireAction;
 	private HandleShipHighlight shipHighlight;
-	private JLabel statusLabel;
+	private JLabel statusLabel, playerLabel;
+	private JTextArea infoLabel;
 
 	public BoardFrame(int MAX_ROW, int MAX_COL, BoardConfiguration board, Game myGame) {
 		super("BATTLESHIP");
@@ -43,7 +44,9 @@ public class BoardFrame extends JFrame implements ActionListener{
 		this.myGame = myGame;
 		myBoardCells = new JButton[MAX_ROW][MAX_COL];
 		computerBoardCells = new JButton[MAX_ROW][MAX_COL];
-		statusLabel = new JLabel("GameStatus");
+		statusLabel = new JLabel();
+		playerLabel = new JLabel();
+		infoLabel = new JTextArea();
 		shipHighlight = new HandleShipHighlight(myBoardCells, theBoard);//  de ce aici pot sa ii trimit boardCells chiar daca in momentul asta nu au fost initializate si el totusi sa le vada ca si cum ar fi initializate
 		handleFireAction = new HandleFire(theBoard, this, myGame);
 		//createTheMenu();
@@ -76,7 +79,13 @@ public class BoardFrame extends JFrame implements ActionListener{
 		statusPanel = new JPanel();
 		
 		statusLabel.setFont(new Font("Serif", Font.BOLD, 16));
+		playerLabel.setFont(new Font("Serif", Font.BOLD, 16));
+		infoLabel.setFont(new Font("Serif", Font.BOLD, 16));
+		infoLabel.setEditable(false);
+		infoLabel.setBackground(Color.LIGHT_GRAY);
 		statusPanel.add(statusLabel);
+		statusPanel.add(playerLabel);
+		statusPanel.add(infoLabel);
 		statusPanel.setMaximumSize(new Dimension(150, 150));
 		statusPanel.setSize(new Dimension(150, 150));
 		
@@ -130,8 +139,16 @@ public class BoardFrame extends JFrame implements ActionListener{
 		return computerBoardCells;
 	}
 	
-	public void setGameInfo(String info) {
+	public void setStatusInfo(String info) {
 		statusLabel.setText(info);
+	}
+	
+	public void setPlayerInfo(String info) {
+		playerLabel.setText("Player: " + info);
+	}
+	
+	public void setGameInfo(String info) {
+		infoLabel.setText(info);
 	}
 
 	@Override

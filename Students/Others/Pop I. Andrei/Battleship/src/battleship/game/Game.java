@@ -1,13 +1,10 @@
 package battleship.game;
 
-import java.awt.*;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
-
 import battleship.game.io.BoardFrame;
-import battleship.models.Ship;
 
 public class Game implements ActionListener{
 	
@@ -17,23 +14,24 @@ public class Game implements ActionListener{
 	private final String COMPUTER = "computer";
 	private String activePlayer = ME;
 	private String otherPlayer = COMPUTER;
-	private boolean endOfGame = false;
 	private Timer timer;
 	private int timeInterval;
+	private Point hitPoint;
 	
 	public Game() {
 		boardConfiguration = new BoardConfiguration(this);
 		boardFrame = boardConfiguration.getTheBoardFrame();
-		boardFrame.setGameInfo("Placing the ships");
+		boardFrame.setStatusInfo("Status: Placing ships!");
 		timer = new Timer(1000, this);
 	}
 	
 	public void startTheGame() {
 		//myBoard.enableMyBoard();
 		//myBoard.clearComputerBoard();
-		boardFrame.setGameInfo("Starting the game");
+		boardFrame.setStatusInfo("Status: Game started");
 		activePlayer = COMPUTER;
 		otherPlayer = ME;
+		boardFrame.setPlayerInfo(activePlayer);
 		nextRound();
 		
 	}
@@ -41,14 +39,15 @@ public class Game implements ActionListener{
 	private void nextRound() {
 		
 		checkEndOfGame();
+		boardFrame.setPlayerInfo(activePlayer);
 		timeInterval = 2;
 		if(activePlayer.equals(COMPUTER)) {
-			System.out.println(" computer");
-			boardConfiguration.activateComputer();
+			//System.out.println(" computer");
+			hitPoint = boardConfiguration.activateComputer();
 			startTimer();
 		}
 		else {
-			System.out.println(" player");
+			//System.out.println(" player");
 			boardConfiguration.enableComputerBoard();
 		}
 		
@@ -81,9 +80,10 @@ public class Game implements ActionListener{
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent e) {
 		timeInterval -=1;
 		if(timeInterval == 0) {
+			boardConfiguration.repaintHitCellAfterFire(hitPoint);
 			timer.stop();
 			switchPlayers();
 			boardFrame.setNextPlayer();

@@ -12,7 +12,7 @@ import battleship.game.io.Fire;
 import battleship.game.io.ReadFromFile;
 import battleship.models.Ship;
 
-public class BoardConfiguration extends Fire{
+public class BoardConfiguration{
 	
 	private final int MAX_ROW = 10;
 	private final int MAX_COL = 10;
@@ -23,20 +23,23 @@ public class BoardConfiguration extends Fire{
 	private JButton[][] computerBoardCells;
 	private ArrayList <Ship> myShips = new ArrayList<Ship>(); //  the ships will always be stored sorted by dimension: smallest -> biggest
 	private ArrayList <Ship> computerShips = new ArrayList<Ship>();
-	private Ship[] tempShips = new Ship[5];
 	private final Game myGame;
 	private final RandomGenerator generator;
+	private final Fire fire;
 	
 	public BoardConfiguration(Game myGame) {
-		
+		fire = new Fire();
 		this.myGame = myGame;
-		ReadFromFile boardReader = new ReadFromFile("battle.txt");
-		boardReader.readContent(computerBoard);
+		//ReadFromFile boardReader = new ReadFromFile("battle.txt");
+		//boardReader.readContent(computerBoard);
+		
 		initializeMyBoard();
 		boardFrame = new BoardFrame(MAX_ROW, MAX_COL, this, myGame);
 		myBoardCells = boardFrame.getMyBoardCells();
 		computerBoardCells = boardFrame.getComputerBoardCells();
-		generator = new RandomGenerator(MAX_ROW, MAX_COL, boardFrame);
+		generator = new RandomGenerator(MAX_ROW, myBoardCells);
+		computerBoard = generator.generateRandomComputerConfiguration();
+		
 		initializeMyShips();
 	}
 	
@@ -49,15 +52,24 @@ public class BoardConfiguration extends Fire{
 			return true;
 	}
 	
-	public void activateComputer() {
+	public Point activateComputer() {
 		Point location = generator.generateHit();
 		
 		if(hitSomeShip(location)){
 			myBoardCells[location.x][location.y].setBackground(Color.RED);
-			identifyTheHitShip(location, myShips);
+			fire.identifyTheHitShip(location, myShips);
 		}
 		else
-			myBoardCells[location.x][location.y].setBackground(Color.GRAY);
+			myBoardCells[location.x][location.y].setBackground(Color.GREEN);
+		
+		return location;
+	}
+	
+	public void repaintHitCellAfterFire(Point hitPoint) {
+		if(!hitSomeShip(hitPoint)) {
+			myBoardCells[hitPoint.x][hitPoint.y].setBackground(Color.GRAY);
+		}
+		
 	}
 	
 	public void initializeMyBoard() {
@@ -158,10 +170,10 @@ public class BoardConfiguration extends Fire{
 		for(int i = 0; i < MAX_ROW; i++)
 			for(int j = 0; j < MAX_COL; j++) {
 				if(saveMatrix[i][j] != '~') {
-					System.out.println(computerBoard[i][j]);
 					saveComputerShipOnLocation(new Point(i, j), saveMatrix);
-					removeShipFromMatrix(saveMatrix, new Point(i, j));
 					printTheBoard(saveMatrix);
+					System.out.println();
+					removeShipFromMatrix(saveMatrix, new Point(i, j));
 				}
 			}
 	}
