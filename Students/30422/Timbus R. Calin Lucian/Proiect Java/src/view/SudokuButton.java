@@ -32,18 +32,23 @@ public class SudokuButton extends JButton {
 		if (j == 0 || j == 8) {
 			gameButton.setText(" ");
 			gameButton.setPreferredSize(new Dimension(SQUARE_SIZE, SQUARE_SIZE));
+			gameButton.setActionCommand("Alterable");
 		} else if ((j == 1 || j == 7) && (i == 0 || i == 2 || i == 3 || i == 5 || i == 6 || i == 8)) {
 			gameButton.setText(" ");
 			gameButton.setPreferredSize(new Dimension(SQUARE_SIZE, SQUARE_SIZE));
+			gameButton.setActionCommand("Alterable");
 		} else if ((j == 2 || j == 6) && (i == 0 || i == 1 || i == 4 || i == 7 || i == 8)) {
 			gameButton.setText(" ");
 			gameButton.setPreferredSize(new Dimension(SQUARE_SIZE, SQUARE_SIZE));
+			gameButton.setActionCommand("Alterable");
 		} else if ((j == 3 || j == 5) && (i == 2 || i == 4 || i == 6)) {
 			gameButton.setText(" ");
 			gameButton.setPreferredSize(new Dimension(SQUARE_SIZE, SQUARE_SIZE));
+			gameButton.setActionCommand("Alterable");
 		} else if ((j == 4) && (i == 0 || i == 2 || i == 3 || i == 4 || i == 5 || i == 6 || i == 8)) {
 			gameButton.setText(" ");
 			gameButton.setPreferredSize(new Dimension(SQUARE_SIZE, SQUARE_SIZE));
+			gameButton.setActionCommand("Alterable");
 		}
 	}
 

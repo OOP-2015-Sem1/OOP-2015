@@ -3,22 +3,21 @@ package view;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
 import model.Answerable;
 import model.IdentityMatrix;
 import model.SudokuMatrixGenerator;
+import model.TimerClass;
 import model.Verification;
 
 public class GamePanelUI extends JFrame implements ActionListener, Answerable {
 	private static final int BOARD_SIZE = 1250;
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8853494294640988939L;
 	private JPanel gamePanel;
 	private int[][] SudokuGameMatrix;
@@ -30,7 +29,11 @@ public class GamePanelUI extends JFrame implements ActionListener, Answerable {
 		gamePanel = new JPanel();
 		generator = new SudokuMatrixGenerator();
 		SudokuGameMatrix = generator.returnSudokuMatrix();
-		SudokuPatternMatrix = SudokuGameMatrix;
+		SudokuPatternMatrix = new int[9][9];
+		for (int i = 0; i < 9; i++)
+			for (int j = 0; j < 9; j++) {
+				SudokuPatternMatrix[i][j] = SudokuGameMatrix[i][j];
+			}
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 				System.out.print(SudokuGameMatrix[i][j] + " ");
@@ -54,6 +57,18 @@ public class GamePanelUI extends JFrame implements ActionListener, Answerable {
 			}
 			System.out.println(" ");
 		}
+
+		JMenuBar menuBar = new JMenuBar();
+		this.setJMenuBar(menuBar);
+		JMenu options = new JMenu("Options");
+		menuBar.add(options);
+		JMenuItem timer = new JMenuItem("Timer");
+		timer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new TimerClass();
+			}
+		});
+		options.add(timer);
 		this.add(gamePanel);
 		this.setSize(BOARD_SIZE, BOARD_SIZE);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,8 +82,9 @@ public class GamePanelUI extends JFrame implements ActionListener, Answerable {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+
 		SudokuButton but = (SudokuButton) e.getSource();
-		if (but.getText().equals(" ")) {
+		if (but.getActionCommand().equals("Alterable")) {
 			int r = but.returnX();
 			int c = but.returnY();
 			gamePanel.removeAll();
@@ -89,18 +105,6 @@ public class GamePanelUI extends JFrame implements ActionListener, Answerable {
 			gamePanel.revalidate();
 			gamePanel.repaint();
 			gamePanel.setFocusable(true);
-
-			/*
-			 * but.setText("aaa"); String number =
-			 * JOptionPane.showInputDialog(this.getParent(), "Enter a number",
-			 * "Aaa", JOptionPane.OK_OPTION); int n = Integer.parseInt(number);
-			 * Verification verify = new Verification(); int row =
-			 * but.returnX(); int col = but.returnY(); boolean result =
-			 * verify.ValidateInput(this, n, row, col, SudokuPatternMatrix); if
-			 * (result == true) { but.setText(number);
-			 * SudokuPatternMatrix[row][col] = n; }
-			 */
-
 		}
 	}
 
@@ -109,8 +113,9 @@ public class GamePanelUI extends JFrame implements ActionListener, Answerable {
 		IdentityMatrix identityMatrix = new IdentityMatrix();
 		if (identityMatrix.checkIfIdentical(SudokuPatternMatrix, SudokuGameMatrix)) {
 			System.out.println("tralala");
+			JOptionPane.showMessageDialog(this, "Congratulations, you won");
 		}
-		// System.out.println(answer);
+		System.out.println(answer);
 		Verification verify = new Verification();
 		boolean result = verify.ValidateInput(this, answer, row, column, SudokuPatternMatrix);
 		if (result == true) {
@@ -119,14 +124,12 @@ public class GamePanelUI extends JFrame implements ActionListener, Answerable {
 			System.out.println("Ba, nu-i okay");
 		}
 		SudokuPatternMatrix[row][column] = answer;
-		// System.out.println(SudokuPatternMatrix[row][column]);
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 				System.out.print(SudokuGameMatrix[i][j] + " ");
 			}
 			System.out.println(" ");
 		}
-
 		System.out.println("");
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
@@ -135,5 +138,4 @@ public class GamePanelUI extends JFrame implements ActionListener, Answerable {
 			System.out.println(" ");
 		}
 	}
-
 }
