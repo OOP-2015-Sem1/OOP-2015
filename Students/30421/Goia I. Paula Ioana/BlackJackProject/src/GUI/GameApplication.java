@@ -12,8 +12,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import source.Account;
 import source.Card;
 import source.Deck;
+import source.User;
 
 public class GameApplication implements ActionListener {
 
@@ -29,11 +31,19 @@ public class GameApplication implements ActionListener {
 	private ArrayList<String> winners;
 	private ArrayList<String> playersInformation;
 	private ArrayList<String> namePlayers;
-	
-	public GameApplication(int nbPlayers, ArrayList<String> namePlayers) {
+	private User user;
+	private int betMoney;
+	private Account account;
+
+	public GameApplication(int nbPlayers, ArrayList<String> namePlayers,
+			User user, int betMoney) {
+
+		this.betMoney = betMoney;
+		this.user = user;
 		this.namePlayers = namePlayers;
 		this.nbPlayers = nbPlayers;
-		this.gameFrame = new JFrame();
+
+		this.account = new Account();
 		this.panelPlayers = new ArrayList<>();
 		this.winners = new ArrayList<>();
 		this.playersInformation = new ArrayList<>();
@@ -43,11 +53,15 @@ public class GameApplication implements ActionListener {
 		this.pannelForButtons = new JPanel();
 		this.deck = new Deck();
 		this.decks = new ArrayList<>();
-		this.deck.createFullDeck(this.deck.getDeck());
+		this.gameFrame = new JFrame();
+
 		this.gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.gameFrame.setSize(1200, 780);
 		this.gameFrame.setVisible(true);
 		this.gameFrame.setLocationRelativeTo(null);
+
+		this.deck.createFullDeck(this.deck.getDeck());
+
 		setGameLayout();
 		initGame();
 		addActionListeners();
@@ -58,6 +72,7 @@ public class GameApplication implements ActionListener {
 		if (this.nbPlayers % 2 != 0)
 			lines++;
 		this.gameFrame.setLayout(new GridLayout((lines + 2) / 2, 2));
+
 		for (int i = 0; i < this.nbPlayers + 1; i++) {
 			JPanel jp = new JPanel();
 			jp.setLayout(new GridLayout(1, 10));
@@ -65,10 +80,13 @@ public class GameApplication implements ActionListener {
 			this.gameFrame.add(this.panelPlayers.get(i));
 			this.decks.add(new Deck());
 		}
+
 		this.pannelForButtons.setLayout(new FlowLayout());
+
 		this.pannelForButtons.add(this.hit);
 		this.pannelForButtons.add(this.stand);
 		this.pannelForButtons.add(this.newGame);
+
 		this.gameFrame.add(this.pannelForButtons);
 	}
 
@@ -91,7 +109,11 @@ public class GameApplication implements ActionListener {
 		display(this.decks.get(0), 0);
 		this.panelPlayers.get(0).repaint();
 		// add to others
-		keepPlayingWithoutMe();
+		if (this.decks.get(0).getSumValue() >= 21) {
+			keepPlayingWithoutMe();
+			win();
+		} else
+			keepPlayingWithoutMe();
 	}
 
 	private void keepPlayingWithoutMe() {
@@ -110,57 +132,83 @@ public class GameApplication implements ActionListener {
 		JLabel name = new JLabel(this.namePlayers.get(panel));
 		this.panelPlayers.get(panel).add(name);
 		this.panelPlayers.get(panel).invalidate();
-		if(this.namePlayers.get(panel).equals("Dealer")){
-			this.panelPlayers.get(panel).add(
-					new JLabel("Value:hidden"));
+		if (this.namePlayers.get(panel).equals("Dealer")) {
+			this.panelPlayers.get(panel).add(new JLabel("Value:hidden"));
 			this.panelPlayers.get(panel).setLayout(new FlowLayout());
-			this.panelPlayers.get(panel).add(new JLabel(deck1.getDeck().get(0).getImg()));
+			this.panelPlayers.get(panel).add(
+					new JLabel(deck1.getDeck().get(0).getImg()));
 			ImageIcon img = new ImageIcon("images/b.gif");
 			deck1.getDeck().get(1).setImg(img);
-			this.panelPlayers.get(panel).add(new JLabel(deck1.getDeck().get(1).getImg()));
-		}
-		else {
+			this.panelPlayers.get(panel).add(
+					new JLabel(deck1.getDeck().get(1).getImg()));
+		} else {
 			this.panelPlayers.get(panel).add(
 					new JLabel("Value:" + deck1.getSumValue()));
 			this.panelPlayers.get(panel).setLayout(new FlowLayout());
 			for (Card d : deck1.getDeck()) {
 				this.panelPlayers.get(panel).add(new JLabel(d.getImg()));
 			}
-		}		
+		}
 		this.panelPlayers.get(panel).validate();
 		this.panelPlayers.get(panel).repaint();
 	}
-	
-	private void win(){
+
+	private void win() {
 		Boolean stopGame = false;
 		int max21 = 0;
 		for (int i = 1; i < this.nbPlayers + 1; i++) {
-			if(this.decks.get(i).getSumValue() >= 17){
+			if (this.decks.get(i).getSumValue() >= 17) {
 				stopGame = true;
-			}	
+			}
 		}
-		if( stopGame == true){
+		if (stopGame == true) {
 			for (int i = 0; i < this.nbPlayers + 1; i++) {
-				if ( this.decks.get(i).getSumValue() <= 21){
+				if (this.decks.get(i).getSumValue() <= 21) {
 					max21 = this.decks.get(i).getSumValue();
 					break;
-				}			
+				}
 			}
 			for (int i = 0; i < this.nbPlayers + 1; i++) {
-				this.playersInformation.add("   "+this.namePlayers.get(i)+" has the value " + this.decks.get(i).getSumValue());
-					if( this.decks.get(i).getSumValue() <= 21 && this.decks.get(i).getSumValue() > max21 ){
-						max21 = this.decks.get(i).getSumValue();
-				}		
+				this.playersInformation.add("   " + this.namePlayers.get(i)
+						+ " has the value " + this.decks.get(i).getSumValue());
+				if (this.decks.get(i).getSumValue() <= 21
+						&& this.decks.get(i).getSumValue() > max21) {
+					max21 = this.decks.get(i).getSumValue();
+				}
 			}
 			for (int i = 0; i < this.nbPlayers + 1; i++) {
-				if ( this.decks.get(i).getSumValue() == max21 ){
+				if (this.decks.get(i).getSumValue() == max21) {
 					winners.add(this.namePlayers.get(i));
 				}
 			}
+			if (this.decks.get(0).getSumValue() == max21) {
+				for (User u : this.account.getUserList()) {
+					if (user.getUserName().equals(u.getUserName())
+							&& user.getUserPassword().equals(
+									u.getUserPassword())) {
+						u.setMoney(this.user.getMoney() + this.betMoney);
+					}
+					user = u;
+					break;
+				}
+				this.account.write(this.account.getUserList());
+			} else {
+				for (User u : this.account.getUserList()) {
+					if (user.getUserName().equals(u.getUserName())
+							&& user.getUserPassword().equals(
+									u.getUserPassword())) {
+						u.setMoney(this.user.getMoney() - this.betMoney);
+					}
+					user = u;
+					break;
+				}
+				this.account.write(this.account.getUserList());
+
+			}
 			this.gameFrame.setVisible(false);
-			new WinnersFrame(winners, this.playersInformation);
-		}
-		else keepPlayingWithoutMe();
+			new WinnersFrame(winners, this.playersInformation, this.user);
+		} else
+			keepPlayingWithoutMe();
 	}
 
 	private void addActionListeners() {
@@ -184,9 +232,9 @@ public class GameApplication implements ActionListener {
 		}
 
 	}
-	
+
 	public ArrayList<String> getWinners() {
 		return winners;
 	}
-	
+
 }
