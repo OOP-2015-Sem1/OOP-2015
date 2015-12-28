@@ -15,19 +15,19 @@ public class Sound {
 	public void SoundIt(int choice) {
 		try {
 			if (choice == HUMAN_WON) {
-				File soundFile = new File("C:/Users/Andi/workspace/ProjectT/src/Sounds/t1.wav");
+				File soundFile = new File("sounds/t1.wav");
 				AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
 				Clip clip = AudioSystem.getClip();
 				clip.open(audioIn);
 				clip.start();
 			} else if (choice == PC_WON) {
-				File soundFile = new File("C:/Users/Andi/workspace/ProjectT/src/Sounds/ouch.wav");
+				File soundFile = new File("sounds/ouch.wav");
 				AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
 				Clip clip = AudioSystem.getClip();
 				clip.open(audioIn);
 				clip.start();
 			} else if (choice == PC_LOST) {
-				File soundFile = new File("C:/Users/Andi/workspace/ProjectT/src/Sounds/t2.wav");
+				File soundFile = new File("sounds/t2.wav");
 				AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
 				Clip clip = AudioSystem.getClip();
 				clip.open(audioIn);

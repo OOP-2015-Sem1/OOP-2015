@@ -88,9 +88,9 @@ public class Game {
 	
 	public void runFrame() {
 		BoardFrame frame = new BoardFrame(this);// it is the first time when the board is printed so we want to see the content
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(1600, 800);
+		frame.myFrame.setVisible(true);
+		frame.myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.myFrame.setSize(1600, 800);
 	}
 	
 	

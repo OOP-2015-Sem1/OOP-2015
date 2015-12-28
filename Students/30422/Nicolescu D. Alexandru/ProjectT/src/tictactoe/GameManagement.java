@@ -9,25 +9,35 @@ public class GameManagement {
 
 	private int nrOfMove = 0;
 	private boolean pvp = false;
+	private boolean cvc = false;
 	private AccountRepository accounts = AccountRepository.getInstance();
 	private int board[][] = new int[3][3];
+	private static final int NO_RESPONSE = -1;
 	private static final int HUMAN_MOVE = 1;
 	private static final int PC_MOVE = 2;
 	private static final int HARD = 0;
 	private static final int NORMAL = 1;
 	private static final int EASY = 2;
-	private static final int PVP = 3;
+	private static final int PVP = -1;
 	private static final int HUMAN = 1;
+	private static final int PLAYER1_MOVE = 2;
+	private static final int PLAYER2_MOVE = 1;
 	private static final int PC = 2;
 	private static final int SCORE_IF_WIN = 20;
 	private static final int SCORE_IF_TIE = 5;
 	private static final int SCORE_IF_LOST = -5;
+	private static final int PVP_MOVE = 0;
+	private static final int PVPC_MOVE = 1;
+	private static final int CVC_MODE = 20;
 
-	private Sound s = new Sound();
+	private Sound sound = new Sound();
 	private AI computerPlayer = null;
 
 	public GameManagement(int difficulty) {
 		switch (difficulty) {
+		case PVP:
+			pvp = true;
+			break;
 		case HARD:
 			computerPlayer = new HardAI();
 			break;
@@ -40,86 +50,85 @@ public class GameManagement {
 		}
 	}
 
-	public int makeMove(int playerLastMove, int difficulty) {
-
-		nrOfMove++;
-		if (((pvp) && (nrOfMove % 2 == 0)) || (!pvp)) {
-			switch (playerLastMove) {
-			case 0:
-				board[0][0] = HUMAN_MOVE;
-				break;
-			case 1:
-				board[0][1] = HUMAN_MOVE;
-				break;
-			case 2:
-				board[0][2] = HUMAN_MOVE;
-				break;
-			case 3:
-				board[1][0] = HUMAN_MOVE;
-				break;
-			case 4:
-				board[1][1] = HUMAN_MOVE;
-				break;
-			case 5:
-				board[1][2] = HUMAN_MOVE;
-				break;
-			case 6:
-				board[2][0] = HUMAN_MOVE;
-				break;
-			case 7:
-				board[2][1] = HUMAN_MOVE;
-				break;
-			case 8:
-				board[2][2] = HUMAN_MOVE;
-				break;
-			}
+	public int manageLastPlayerMove(int playerLastMove) {
+		int computerMoveDecision;
+		if (playerLastMove == CVC_MODE) {
+			cvc = true;
 		}
-		checkWin();
-
-		// ------------------------------HARD---------------------------
-
-		if (difficulty != PVP) {
-
-			int pcMove = computerPlayer.executeMove(playerLastMove);
-			int i = pcMove / 3;
-			int j = pcMove % 3;
-			board[i][j] = PC_MOVE;
-			return pcMove;
-
+		if (pvp) {
+			managePVPGame(playerLastMove);
+			return NO_RESPONSE;
+		} else if (cvc) {
+			computerMoveDecision = manageCVCGame(playerLastMove);
+			return computerMoveDecision;
 		} else {
-			pvp = true;
-			if (nrOfMove % 2 == 1)
-				switch (playerLastMove) {
-				case 0:
-					board[0][0] = PC_MOVE;
-					break;
-				case 1:
-					board[0][1] = PC_MOVE;
-					break;
-				case 2:
-					board[0][2] = PC_MOVE;
-					break;
-				case 3:
-					board[1][0] = PC_MOVE;
-					break;
-				case 4:
-					board[1][1] = PC_MOVE;
-					break;
-				case 5:
-					board[1][2] = PC_MOVE;
-					break;
-				case 6:
-					board[2][0] = PC_MOVE;
-					break;
-				case 7:
-					board[2][1] = PC_MOVE;
-					break;
-				case 8:
-					board[2][2] = PC_MOVE;
-					break;
-				}
+			computerMoveDecision = managePVPCGame(playerLastMove);
+			return computerMoveDecision;
+		}
 
-			return -1;
+	}
+
+	private int manageCVCGame(int playerLastMove) {
+		int pcMove = computerPlayer.executeMove(playerLastMove);
+		setMove(pcMove, PVP_MOVE);
+		return pcMove;
+	}
+
+	private int managePVPCGame(int playerLastMove) {
+		int pcMove = computerPlayer.executeMove(playerLastMove);
+		int i = pcMove / 3;
+		int j = pcMove % 3;
+		board[i][j] = PC_MOVE;
+		setMove(playerLastMove, PVPC_MOVE);
+		return pcMove;
+
+	}
+
+	private void managePVPGame(int playerLastMove) {
+		setMove(playerLastMove, PVP_MOVE);
+	}
+
+	private void setMove(int playerLastMove, int moveType) {
+		nrOfMove++;
+//		System.out.println(playerLastMove + " " + nrOfMove);
+//		for (int i = 0; i < 3; i++) {
+//			for (int j = 0; j < 3; j++)
+//				System.out.print(board[i][j]);
+//			System.out.println();
+//		}
+//		System.out.println();
+		int activePlayer = nrOfMove % 2 == 0 ? PLAYER2_MOVE : PLAYER1_MOVE;
+		if (moveType == PVPC_MOVE)
+			activePlayer = HUMAN_MOVE;
+		switch (playerLastMove) {
+		case 0:
+			board[0][0] = activePlayer;
+			break;
+		case 1:
+			board[0][1] = activePlayer;
+			break;
+		case 2:
+			board[0][2] = activePlayer;
+			break;
+		case 3:
+			board[1][0] = activePlayer;
+			break;
+		case 4:
+			board[1][1] = activePlayer;
+			break;
+		case 5:
+			board[1][2] = activePlayer;
+			break;
+		case 6:
+			board[2][0] = activePlayer;
+			break;
+		case 7:
+			board[2][1] = activePlayer;
+			break;
+		case 8:
+			board[2][2] = activePlayer;
+			break;
+
 		}
 	}
 
@@ -172,28 +181,29 @@ public class GameManagement {
 			}
 		return full;
 	}
+	
 
 	public void checkWin() {
 		if (winner() == HUMAN) {
-			if (pvp) {
+			if ((pvp) || (cvc)) {
 				JOptionPane.showMessageDialog(null, "Player 2 wins!");
 				System.exit(0);
 			} else {
-				s.SoundIt(HUMAN);
-				accounts.replace(accounts.getAccountScore() + SCORE_IF_WIN);
+				sound.SoundIt(HUMAN);
+				accounts.replace(accounts.getAccountScore(accounts.getAccountNr()) + SCORE_IF_WIN);
 				JOptionPane.showMessageDialog(null, "Player Wins");
 				System.exit(0);
 			}
 		}
 
 		if (winner() == PC) {
-			if (pvp) {
+			if ((pvp) || (cvc)) {
 				JOptionPane.showMessageDialog(null, "Player 1 wins!");
 				System.exit(0);
 			} else {
-				s.SoundIt(PC);
+				sound.SoundIt(PC);
 				if (accounts.getAccountNr() != 0)
-					accounts.replace(accounts.getAccountScore() + SCORE_IF_LOST);
+					accounts.replace(accounts.getAccountScore(accounts.getAccountNr()) + SCORE_IF_LOST);
 				JOptionPane.showMessageDialog(null, "I WIN!!");
 				System.exit(0);
 			}
@@ -203,7 +213,7 @@ public class GameManagement {
 
 			if (winner() == 0) {
 				if (accounts.getAccountNr() != 0)
-					accounts.replace(accounts.getAccountScore() + SCORE_IF_TIE);
+					accounts.replace(accounts.getAccountScore(accounts.getAccountNr()) + SCORE_IF_TIE);
 				JOptionPane.showMessageDialog(null, "It's a Tie");
 				System.exit(0);
 			}

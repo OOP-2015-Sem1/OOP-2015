@@ -1,5 +1,6 @@
 package fluffy.the.cat.io;
 
+
 import static fluffly.the.cat.game.BoardConfiguration.MAX_VIEW_DISTANCE;
 
 import fluffly.the.cat.game.BoardConfiguration;

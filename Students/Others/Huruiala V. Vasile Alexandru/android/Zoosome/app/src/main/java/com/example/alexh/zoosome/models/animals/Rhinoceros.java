@@ -7,6 +7,8 @@ import javax.xml.stream.XMLStreamException;
 */
 import com.example.alexh.zoosome.services.factories.Constants;
 
+import java.util.ArrayList;
+
 public class Rhinoceros extends Mammal {
 	private static final String DEFAULT_NAME = "Javan rhinoceros";
 	private static final int DEFAULT_NUMBER_OF_LEGS = 4;
@@ -25,12 +27,12 @@ public class Rhinoceros extends Mammal {
 		super(animalName, numberOfLegs, maintenanceCost, dangerPerc, normalTemp, muchHair);
 	}
 
-	public Rhinoceros(String v1, String v2, String v3, String v4, String v5, String v6) {
-		super(new String[] { v1, v2, v3, v4, v5, v6 });
+	public Rhinoceros(ArrayList<String> parameters) {
+		super(parameters);
 	}
 /*
 	public void encodeToXML(XMLEventWriter eventWriter) throws XMLStreamException {
 		super.encodeToXML(eventWriter);
-		createNode(eventWriter, Constants.XML_TAGS.DISCRIMINANT, String.valueOf(Constants.Animals.Mammal.RHINOCEROS));
+		createNode(eventWriter, Constants.XML_TAGS.DISCRIMINANT, String.valueOf(Constants.Animals.Mammals.RHINOCEROS));
 	}*/
 }

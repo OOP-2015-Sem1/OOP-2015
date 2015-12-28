@@ -1,6 +1,5 @@
 package fluffy.the.cat.io;
 
-import static fluffly.the.cat.game.BoardConfiguration.MAX_VIEW_DISTANCE;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -12,27 +11,29 @@ import javax.swing.text.Position;
 import fluffly.the.cat.game.BoardConfiguration;
 import fluffly.the.cat.game.Game;
 
-public class BoardFrame extends JFrame{
+public class BoardFrame extends BoardPrinterClass{
 	
 	private MyPanel[][] panel;
-	private static final int path = 0;
-	private static final int wall = 1;
-	private static final int cat= 2;
-	private static final int hat = 3;
-	private Game g;
+	private static final int PATH = 0;
+	private static final int WALL = 1;
+	private static final int CAT= 2;
+	private static final int HAT = 3;
+	private Game theGame;
+	public JFrame myFrame;
 	
-	public BoardFrame(Game g) {
-		super("The game");
+	public BoardFrame(Game theGame) {
+		myFrame = new JFrame();
+		myFrame.setTitle("The game");
+		myFrame.setLayout(new GridLayout(20, 40));
 		panel = new MyPanel[25][50];
-		this.g = g;
+		this.theGame = theGame;
+		FluffyCommandKeyListener listener = new FluffyCommandKeyListener();
+		myFrame.addKeyListener(listener);
 		
-		ListenClass listener = new ListenClass();
-		addKeyListener(listener);
-		
-		createInitialBoard(g.getBoardConfiguration());
+		createInitialBoard(theGame.getBoardConfiguration());
 	}
 	
-	public class ListenClass implements KeyListener {
+	public class FluffyCommandKeyListener implements KeyListener {
 
 		@Override
 		public void keyPressed(KeyEvent e) {
@@ -50,20 +51,11 @@ public class BoardFrame extends JFrame{
 			System.out.println(key);
 			String command = "";
 			command+=key;
-			g.executeCommand(command);
-			printTheBoard(g.getBoardConfiguration());
+			theGame.executeCommand(command);
+			printTheBoard(theGame.getBoardConfiguration());
 		}
 	}
 	
-	private boolean withinRangeOfFluffy(int i, int j, BoardConfiguration boardConfiguration) {
-		int fluffyX = boardConfiguration.getFluffy().getPosition().x;
-		int fluffyY = boardConfiguration.getFluffy().getPosition().y;
-
-		double dist = Math.sqrt(Math.pow(fluffyX - i, 2)
-				+ Math.pow(fluffyY - j, 2));
-
-		return dist < MAX_VIEW_DISTANCE;
-	}
 	
 	protected void printTheBoard(BoardConfiguration board) {
 		char[][] matrix = board.getBoard();
@@ -74,7 +66,7 @@ public class BoardFrame extends JFrame{
 		
 		for(int i = 0; i < rows; i++)
 			for(int j = 0; j < cols; j++) {
-				if(withinRangeOfFluffy(i, j, board)) {
+				if(super.withinRangeOfFluffy(i, j, board)) {
 					panelType = getPanelType(matrix[i][j]);
 				}
 				else {
@@ -84,28 +76,28 @@ public class BoardFrame extends JFrame{
 //				panel[i][j].setBackground(Color.BLACK);
 				panel[i][j].setCareImagine(panelType);
 		}
-		Point p = g.getFluffy().getPosition();
-		panel[p.x][p.y].setCareImagine(cat);
-		this.repaint();
+		Point p = theGame.getFluffy().getPosition();
+		panel[p.x][p.y].setCareImagine(CAT);
+		myFrame.repaint();
 	}
 
 	private int getPanelType(char x) {
 		
 		switch(x) {
 		case '*': {
-			return wall;
+			return WALL;
 		}
 		case ' ': {
-			return path;
+			return PATH;
 		}
 		case 'H': {
-			return hat;
+			return HAT;
 		}
 		case 'F': {
-			return cat;
+			return CAT;
 		}
 		case 'W' : {
-			return hat;
+			return HAT;
 		}
 		default : {
 			return 0;
@@ -117,7 +109,7 @@ public class BoardFrame extends JFrame{
 		
 		char[][] matrix = board.getBoard();
 		
-		setLayout(new GridLayout(20, 40));int panelType;
+		int panelType;
 		
 		int rows = matrix.length;
 		int cols = matrix[0].length;
@@ -127,11 +119,23 @@ public class BoardFrame extends JFrame{
 				panelType = getPanelType(matrix[i][j]);
 				panel[i][j] = new MyPanel();
 				panel[i][j].setBackground(Color.BLACK);
+				if(withinRangeOfFluffy(i, j, board)) {
+					panelType = getPanelType(matrix[i][j]);
+				}
+				else {
+					panelType = 0;
+				}
 				panel[i][j].setCareImagine(panelType);
-				add(panel[i][j]);
+				myFrame.add(panel[i][j]);
 		}
-		Point p = g.getFluffy().getPosition();
-		panel[p.x][p.y].setCareImagine(cat);
-		this.repaint();
+		Point p = theGame.getFluffy().getPosition();
+		panel[p.x][p.y].setCareImagine(CAT);
+		myFrame.repaint();
+	}
+
+	@Override
+	public void printConsole(BoardConfiguration board) {
+		// TODO Auto-generated method stub
+		
 	}
 }
