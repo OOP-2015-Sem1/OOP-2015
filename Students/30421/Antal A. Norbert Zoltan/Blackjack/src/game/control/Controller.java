@@ -8,10 +8,11 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import account.Account;
-import game.Player;
 import game.board.Board;
 import game.cards.Card;
 import game.cards.Deck;
+import game.player.Dealer;
+import game.player.Player;
 
 public class Controller implements ActionListener {
 	private Board board;
@@ -21,7 +22,7 @@ public class Controller implements ActionListener {
 
 	private Account account = null;
 
-	private Player dealer;
+	public Dealer dealer;
 	private List<Player> players = new ArrayList<Player>();
 
 	private int nrPlayers = 1;
@@ -55,14 +56,23 @@ public class Controller implements ActionListener {
 			board.showStart(nrPlayers);
 			board.displayScore.setEnabled(false);
 		} else if (button == "Adjust number of players") {
-			if (!isPlayed) {
-				nrPlayers = Integer.parseInt((String) JOptionPane.showInputDialog(board,
-						"Please enter in the number of players(1-3):", "Number of players", JOptionPane.PLAIN_MESSAGE));
-				adjustNrPlayers();
-			} else {
-				JOptionPane.showMessageDialog(board,
-						"You can't change the number of players while a game is in progress.", "Error",
-						JOptionPane.PLAIN_MESSAGE);
+			try {
+				if (isPlayed) {
+					throw new Exception("You can't adjust the number of players while a game is in progress.");
+				}
+				String nrPlayersS = (String) JOptionPane.showInputDialog(board,
+						"Please enter in the number of players(1-3):", "Number of players", JOptionPane.PLAIN_MESSAGE);
+				if (nrPlayersS != null) {
+					nrPlayers = Integer.parseInt(nrPlayersS);
+					if (!(nrPlayers > 0 && nrPlayers <= 3)) {
+						throw new Exception("Wrong number.");
+					}
+					adjustNrPlayers();
+				}
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(board, "Wrong format.", "Error", JOptionPane.ERROR_MESSAGE);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(board, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		} else if (button == "Display score") {
 			displayScore();
@@ -73,7 +83,7 @@ public class Controller implements ActionListener {
 		setPlayed(true);
 		deck = new Deck(cards);
 		board.clear();
-		dealer = new Player(deck, board);
+		dealer = new Dealer(deck, board);
 		players.clear();
 		for (int i = 0; i < nrPlayers; i++) {
 			players.add(new Player(deck, board));
@@ -86,6 +96,9 @@ public class Controller implements ActionListener {
 			for (int i = 0; i < nrPlayers; i++) {
 				players.get(i).setDone(true);
 			}
+			getResult();
+		} else if (nrPlayers == 1 && players.get(mPlayerNr).checkScore() == 21) {
+			dealer.setDone(true);
 			getResult();
 		}
 	}
@@ -127,12 +140,13 @@ public class Controller implements ActionListener {
 					players.get(i).setDone(true);
 				}
 				dealer.setDone(true);
+				dealer.drawPlayer();
 				getResult();
 			} else {
 				if (dScore >= 17) {
 					dealer.setDone(true);
 				}
-				dealer.drawPlayer(15);
+				dealer.drawPlayer();
 			}
 		}
 	}
