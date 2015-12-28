@@ -151,12 +151,13 @@ public class HandleShipHighlight extends MouseAdapter{
 			highlightTheShip(e);
 		}
 		else if(e.getButton() == MouseEvent.BUTTON1 && activeHighlight) {
-			if(validLocation(shipLocation))
+			if(validLocation(shipLocation)) {
 				ship.setLocation(shipLocation);
 				ship.setOrientation(shipOrientation);
 				markTheShipOnBoard();
 				setHiglightActive(false);
 				theBoard.saveTheShip(ship);
+			} // aici pe else trebuie adaugat un Text Field care sa zica ca nu o pot plasa in afara boardului
 		}
 	}
 

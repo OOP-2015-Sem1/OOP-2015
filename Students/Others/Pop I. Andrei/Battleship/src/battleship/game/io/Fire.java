@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import battleship.models.Ship;
 
-public abstract class Fire {
+public class Fire {
 	
 	public void markIfDestroyed(Ship myShip) {
 		if(myShip.getLife() == 0) {

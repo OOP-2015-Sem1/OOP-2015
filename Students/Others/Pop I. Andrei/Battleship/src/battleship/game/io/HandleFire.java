@@ -20,13 +20,13 @@ public class HandleFire extends Fire implements ActionListener {
 	private final BoardFrame boardFrame;
 	private final Game theGame;
 	
-	public HandleFire(BoardConfiguration playBoard, BoardFrame boardFrame, Game theGame) {
-		this.boardConfiguration = playBoard;
+	public HandleFire(BoardConfiguration boardConfiguration, BoardFrame boardFrame, Game theGame) {
+		this.boardConfiguration = boardConfiguration;
 		this.boardFrame = boardFrame;
 		this.theGame = theGame;
-		computerBoard = playBoard.getComputerBoard();
+		computerBoard = boardConfiguration.getComputerBoard(); // problema e aici, ca nu am nimic in computerBoard in momentul asta, dar daca ar fi fost transmis un pointer ar fi mers
 		computerBoardCells = boardFrame.getComputerBoardCells();
-		computerShips = playBoard.getComputerShips();
+		computerShips = boardConfiguration.getComputerShips();
 	}
 	
 	
