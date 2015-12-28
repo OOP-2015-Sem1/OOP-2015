@@ -19,10 +19,10 @@ public class TetrominoController implements GameObserver{
 	
 	private class TetrisKeyListener implements KeyListener{
 
-		private static final String ROTATE = "ROTATE";
-		private static final String LEFT = "LEFT";
-		private static final String RIGHT = "RIGHT";
-		private static final String DOWN = "DOWN";
+		public static final String ROTATE = "ROTATE";
+		public static final String LEFT = "LEFT";
+		public static final String RIGHT = "RIGHT";
+		public static final String DOWN = "DOWN";
 
 		@Override
 		public void keyPressed(KeyEvent e) {

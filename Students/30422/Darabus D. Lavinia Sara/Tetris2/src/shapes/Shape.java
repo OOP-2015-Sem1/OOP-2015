@@ -3,6 +3,8 @@ package shapes;
 import java.awt.Color;
 import java.util.Random;
 
+import core.TetrominoController;
+
 public class Shape {
 
 	private static final boolean[][] I_PIECE = { { true, true, true, true }, {false, false, false, false}};
@@ -27,14 +29,12 @@ public class Shape {
 	private static Color[] TETROMINO_COLORS = 
 		{ Color.red, Color.yellow, Color.magenta, Color.pink, Color.cyan, Color.green, Color.orange };
 	
-	private static int DEFAULT_PIECE_ROW = 0, DEFAULT_PIECE_COL = 10;
-	
 	public static int TETROMINO_MATRIX_ROWS = 2, TETROMINO_MATRIX_COLS = 4;
 
-	private int pieceRow, pieceCol;
+	private int pieceRow, pieceCol, prevPieceRow, prevPieceCol;
 	
-	public Color randomPieceColor;
-	public int randomPieceNumber;
+	private Color randomPieceColor;
+	private int randomPieceNumber;
 	
 	public boolean[][] fallingPiece;
 	
@@ -42,7 +42,8 @@ public class Shape {
 	public Shape(){
 		this.generateNewFallingPiece();
 		this.generatePieceColor();
-		
+		this.setPieceRow(0);
+		this.setPieceCol(7);
 	}
 
 	public void setPieceRow(int row) {
@@ -60,6 +61,22 @@ public class Shape {
 	public int getPieceCol() {
 		return this.pieceCol;
 	}
+	
+	public void setPrevPieceRow(int prevRow){
+		this.prevPieceRow = prevRow;
+	}
+	
+	public int getPrevPieceRow(){
+		return this.prevPieceRow;
+	}
+	
+	public void setPrevPieceCol(int prevCol){
+		this.prevPieceCol = prevCol;
+	}
+	
+	public int getPrevPieceCol(){
+		return this.prevPieceCol;
+	}
 
 	public int generateRandomValue() {
 
@@ -74,22 +91,40 @@ public class Shape {
 		
 		 this.randomPieceNumber = generateRandomValue();
 		 
-		 
-		 
+		 }
 	
+	public int getRandomPieceNumber(){
+		return this.randomPieceNumber;
 	}
 
 	public void generatePieceColor(){
 		int randomColorNumber = generateRandomValue();
 		this.randomPieceColor = TETROMINO_COLORS[randomColorNumber];
-		System.out.println("Color is: " + randomPieceColor);
+		//System.out.println("Color is: " + randomPieceColor);
 	}
 	
-	
+	public Color getRandomPieceColor(){
+		return this.randomPieceColor;
+	}
 
-	public static void move(String direction) {
+	public static void move(String direction, Shape shape) {
 		// TODO Auto-generated method stub
-
+		if(direction.equals("DOWN")){
+			shape.setPrevPieceRow(shape.getPieceRow());
+			shape.setPrevPieceCol(shape.getPieceCol());
+			shape.setPieceRow(shape.getPieceRow() + 1);
+		}
+		else if(direction.equals("RIGHT")){
+			shape.setPrevPieceRow(shape.getPieceRow());
+			shape.setPrevPieceCol(shape.getPieceCol());
+			shape.setPieceCol(shape.getPieceCol() + 1);
+		}
+		else if(direction.equals("LEFT")){
+			shape.setPrevPieceRow(shape.getPieceRow());
+			shape.setPrevPieceCol(shape.getPieceCol());
+			shape.setPieceCol(shape.getPieceCol() -1);
+		}
+		
 	}
 
 }

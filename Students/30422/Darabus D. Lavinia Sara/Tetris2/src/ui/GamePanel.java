@@ -17,28 +17,28 @@ import javax.swing.border.Border;
 
 public class GamePanel extends JPanel {
 	
-	private static final int BOARD_ROWS = 40;
-	private static final int BOARD_COLS = 21;
+	private static final int BOARD_ROWS = 35;
+	private static final int BOARD_COLS = 18;
+	private static final int OFFSET = 7;
 	public JLabel[][] squares = new JLabel[BOARD_ROWS][BOARD_COLS];;
-	public Shape shape;
-
+	public static Shape shape;
+	public int currentRow, currentColumn;
 	
 	
 	public GamePanel(){
-		
-		setLayout(new GridLayout(BOARD_ROWS, BOARD_COLS));
 		shape = new Shape();
+		setLayout(new GridLayout(BOARD_ROWS, BOARD_COLS));
 		for (int i = 0; i < BOARD_ROWS; i++) {
 			for (int j = 0; j < BOARD_COLS; j++) {
 				squares[i][j] = new JLabel();
 				squares[i][j].setBackground(Color.LIGHT_GRAY);
 				squares[i][j].setOpaque(true);
 				squares[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
-				
 				add(squares[i][j]);
 			}
 		}
-		paintTetromino();
+				
+		paintTetromino(shape.getPieceRow(), shape.getPieceCol());	
 	}
 	
 	public void paintCell(int row, int col, Color color){
@@ -46,16 +46,63 @@ public class GamePanel extends JPanel {
 	}
 	
 	
-	public void paintTetromino(){
+	public void paintTetromino(int deltaRow, int deltaColumn){
 		for(int i = 0; i < shape.TETROMINO_MATRIX_ROWS; i++){
-			for(int j = 0; i < shape.TETROMINO_MATRIX_COLS; j++){
-						if(shape.TETROMINOES[shape.randomPieceNumber][i][j]){
-							paintCell(i,j,shape.randomPieceColor);
+			for(int j = 0; j < (shape.TETROMINO_MATRIX_COLS); j++){
+						if(shape.TETROMINOES[shape.getRandomPieceNumber()][i][j]){
+							paintCell(i+deltaRow,j + deltaColumn ,shape.getRandomPieceColor());
 						}
 					}
 			 }
 	}	
+	
+	public void paintGrey(){
 		
+		for (int i = 0; i < BOARD_ROWS; i++) {
+			for (int j = 0; j < BOARD_COLS; j++) {
+				
+				squares[i][j].setBackground(Color.LIGHT_GRAY);
+				squares[i][j].setOpaque(true);
+				squares[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			}
+		}
+		
+		}
+		
+	public void updateBoard(){
+		/*currentRow = 0;
+		currentColumn = 0;
+		for(int i = 0; i < BOARD_ROWS; i = i+2){
+			if(i == 0)
+				currentRow = 0;
+			else
+				currentRow = i-2;
+				
+				paintTetromino(currentRow, currentColumn, Color.LIGHT_GRAY);
+				
+				paintTetromino(i, currentColumn, shape.randomPieceColor);
+			}*/
+		paintGrey();
+		checkIfMoveWasLegal();
+		paintTetromino(shape.getPieceRow(), shape.getPieceCol());
+		
+	}
+	
+	public void checkIfMoveWasLegal(){
+		for(int i = 0; i < shape.TETROMINO_MATRIX_ROWS; i++){
+			for(int j = 0; j < (shape.TETROMINO_MATRIX_COLS); j++){
+						if(shape.TETROMINOES[shape.getRandomPieceNumber()][i][j]){
+							if(((j + shape.getPieceCol()) > (BOARD_COLS - 1)) || ((j + shape.getPieceCol()) < 0) ||
+							((i + shape.getPieceRow()) > (BOARD_ROWS - 1)) || //check for bounds
+							((squares[i + shape.getPieceRow()][j + shape.getPieceCol()].getBackground()) != 
+							Color.LIGHT_GRAY)){                                //check for other pieces already there
+								shape.setPieceRow(shape.getPrevPieceRow());
+								shape.setPieceCol(shape.getPrevPieceCol());
+							}
+						}
+					}
+			 }
+	}
 		
 			
 		

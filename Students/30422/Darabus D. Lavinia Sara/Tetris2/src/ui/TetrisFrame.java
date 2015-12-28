@@ -31,6 +31,7 @@ public class TetrisFrame extends JFrame{
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
+		
 		gamePanel = new GamePanel();
 		scoreLabel = new JLabel("score: " + score);
 		
@@ -46,14 +47,14 @@ public class TetrisFrame extends JFrame{
 	}
 	
 	public void moveTetromino(String direction) {
-		Shape.move(direction);
+		Shape.move(direction, GamePanel.shape);
 		updateBoard();
 		requestFocus();
 	}
 
 	private void updateBoard() {
 		// TODO Auto-generated method stub
-		
+		gamePanel.updateBoard();
 	}
 	
 
