@@ -190,7 +190,6 @@ public class Board
 
 		if( !overlap )
 		{ 
-			System.out.println("Ship Part:"+0+" X:"+ship.getPartAtIndex(0).getLocation().getX()+" Y:"+ship.getPartAtIndex(0).getLocation().getY());
 			if( ship.getOrientation() == 'H' )
 			{
 				int index = 1;
@@ -235,33 +234,7 @@ public class Board
 				}
 		
 			}
-//			if(ship.getSize()==5)
-//			{
-//				System.out.println("Ship Part:"+4+" X:"+ship.getPartAtIndex(4).getLocation().getX()+" Y:"+ship.getPartAtIndex(4).getLocation().getY());
-//				System.out.println("Ship Part:"+3+" X:"+ship.getPartAtIndex(3).getLocation().getX()+" Y:"+ship.getPartAtIndex(3).getLocation().getY());
-//				System.out.println("Ship Part:"+2+" X:"+ship.getPartAtIndex(2).getLocation().getX()+" Y:"+ship.getPartAtIndex(2).getLocation().getY());
-//				System.out.println("Ship Part:"+1+" X:"+ship.getPartAtIndex(1).getLocation().getX()+" Y:"+ship.getPartAtIndex(1).getLocation().getY());
-//				//System.out.println("Ship Part:"+0+" X:"+ship.getPartAtIndex(0).getLocation().getX()+" Y:"+ship.getPartAtIndex(0).getLocation().getY());
-//			}
-//			if(ship.getSize()==4)
-//			{
-//				System.out.println("Ship Part:"+3+" X:"+ship.getPartAtIndex(3).getLocation().getX()+" Y:"+ship.getPartAtIndex(3).getLocation().getY());
-//				System.out.println("Ship Part:"+2+" X:"+ship.getPartAtIndex(2).getLocation().getX()+" Y:"+ship.getPartAtIndex(2).getLocation().getY());
-//				System.out.println("Ship Part:"+1+" X:"+ship.getPartAtIndex(1).getLocation().getX()+" Y:"+ship.getPartAtIndex(1).getLocation().getY());
-//				//System.out.println("Ship Part:"+0+" X:"+ship.getPartAtIndex(0).getLocation().getX()+" Y:"+ship.getPartAtIndex(1).getLocation().getY());
-//			}
-//			if(ship.getSize()==3)
-//			{
-//				System.out.println("Ship Part:"+2+" X:"+ship.getPartAtIndex(2).getLocation().getX()+" Y:"+ship.getPartAtIndex(2).getLocation().getY());
-//				System.out.println("Ship Part:"+1+" X:"+ship.getPartAtIndex(1).getLocation().getX()+" Y:"+ship.getPartAtIndex(1).getLocation().getY());
-//				//System.out.println("Ship Part:"+0+" X:"+ship.getPartAtIndex(0).getLocation().getX()+" Y:"+ship.getPartAtIndex(1).getLocation().getY());
-//			}
-//			if(ship.getSize()==2)
-//			{
-//				
-//				System.out.println("Ship Part:"+1+" X:"+ship.getPartAtIndex(1).getLocation().getX()+" Y:"+ship.getPartAtIndex(1).getLocation().getY());
-//				//System.out.println("Ship Part:"+0+" X:"+ship.getPartAtIndex(0).getLocation().getX()+" Y:"+ship.getPartAtIndex(1).getLocation().getY());
-//			}
+
 			
 			ship.setIsPlaced(true);
 
@@ -283,7 +256,7 @@ public class Board
 	
 	public int markAsHitOrMiss(int row,int column)
 	{
-		System.out.println(row+" - "+column);
+
 		if(board[row][column].getPiece().equals("_@_|"))
 		{
 

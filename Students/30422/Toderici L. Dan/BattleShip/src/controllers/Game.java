@@ -13,7 +13,7 @@ public class Game
 	private Ai firstPlayer;
 	private Ai secondPlayer;
 	private Scanner scanner;
-	private boolean wasHit;
+	private boolean didPlayerHit;
 
 	public Game()
 	{
@@ -35,7 +35,8 @@ public class Game
 
 		System.out.println();
 		System.out.println("Place your ships on the board");
-		System.out.println("You have 10 ships:");
+		System.out.println("You have 5 ships:");
+		System.out.println("1: 5, 1 spot-size SealShip");
 		System.out.println("1: 4, 1 spot-size Submarine");
 		System.out.println("1: 3, 2 spot-size Destroyer");
 		System.out.println("1: 2, 3 spot-size Cruiser");
@@ -66,23 +67,26 @@ public class Game
 		{
 
 			String coordinates = "N";
-			setWasHit(true);
+			setDidPlayerHit(false);
 			if(turn%2 == 1)
 			{
 
-				while(coordinates.equals("N") || (getWasHit()))
+				while(coordinates.equals("N") || (getDidPlayerHit()))
 				{
 					firstPlayer.printBoard();
 					firstPlayer.printHuntingBoard();
-					//System.out.println(coordinates);
+
+
 
 					System.out.println("press enter to continue");
 					scanner.nextLine();
 					System.out.println(firstPlayer.getName()+" take hit :");
 
-					coordinates = takeAHit(scanner,turn);
+					coordinates = takeAHit(turn,true);
 					System.out.println(coordinates);
-					
+
+
+
 					if(checkForWinner(turn))
 					{
 						break;
@@ -96,7 +100,7 @@ public class Game
 			}
 			else
 			{
-				while(coordinates.equals("N") || (getWasHit()))
+				while(coordinates.equals("N") || (getDidPlayerHit()))
 				{
 					secondPlayer.printBoard();
 					secondPlayer.printHuntingBoard();
@@ -105,9 +109,12 @@ public class Game
 					scanner.nextLine();
 					System.out.println(secondPlayer.getName()+" take hit :");
 
-					coordinates = takeAHit(scanner,turn);
+					coordinates = takeAHit(turn,true);
 					System.out.println(coordinates);
-					
+
+
+
+
 					if(checkForWinner(turn))
 					{
 						break;
@@ -121,13 +128,24 @@ public class Game
 
 	}
 
-	public String takeAHit(Scanner scanner,int turn)
+	public String takeAHit(int turn,boolean isAi)
 	{
+		String coordinates;
 		if(turn %2 == 1 )
 		{
+
 			System.out.println(firstPlayer.getName()+ " place coordinates for hit:");
 
-			String coordinates = firstPlayer.getHuntingBoard().hitCell(scanner.nextLine());
+			if(!isAi)
+			{
+				coordinates = firstPlayer.getHuntingBoard().hitCell(this.scanner.nextLine());
+			}
+			else
+			{
+				coordinates = firstPlayer.getHuntingBoard().hitCell(firstPlayer.generateHitByAi());
+
+			}
+
 			if(!coordinates.equals("N"))
 			{
 				String[] parts = coordinates.split("-");
@@ -135,18 +153,47 @@ public class Game
 				int column = Integer.parseInt(parts[1]);
 
 				int type = secondPlayer.getPlacementBoard().markAsHitOrMiss(row, column);
+
 				if(type ==0)
 				{
-					setWasHit(false);
+					setDidPlayerHit(false);
+					
+					if(firstPlayer.getDidHitSomething() == 1)
+					{
+						firstPlayer.setCoordinatesOfLastHitPart(firstPlayer.getCoordinatesOfInitialHit());
+					}
+					
 				}
 				else
 				{
-					setWasHit(true);
+					setDidPlayerHit(true);
+
+					if(secondPlayer.getDidHitSomething() == 0)
+					{
+						firstPlayer.setCoordinatesOfInitialHit(new Point(row, column));
+						firstPlayer.setCoordinatesOfLastHitPart(new Point(row, column));
+					}
+					else
+					{
+						firstPlayer.setCoordinatesOfLastHitPart(new Point(row, column));
+					}
+
+					firstPlayer.setDidHitSomething(1);
+
 				}
-				if(getWasHit())
+
+				if(getDidPlayerHit())
 				{
 					Point location = new Point(row, column);
 					secondPlayer.getShipOfType(type).destroyAPartFromLocation(location);
+					if(secondPlayer.isShipOfTypeDestroyed(type))
+					{
+						System.out.println("Ship of type:"+type+" is destroyed");
+						
+						firstPlayer.setDidHitSomething(0);
+					}
+
+
 				}
 			}
 			return coordinates;
@@ -155,7 +202,16 @@ public class Game
 		{
 			System.out.println(secondPlayer.getName()+ " place coordinates for hit:");
 
-			String coordinates = secondPlayer.getHuntingBoard().hitCell(scanner.nextLine());
+		
+			if(!isAi)
+			{
+				coordinates = secondPlayer.getHuntingBoard().hitCell(this.scanner.nextLine());
+			}
+			else
+			{
+				coordinates = secondPlayer.getHuntingBoard().hitCell(secondPlayer.generateHitByAi());
+
+			}
 			if(!coordinates.equals("N"))
 			{
 				String[] parts = coordinates.split("-");
@@ -164,16 +220,44 @@ public class Game
 				int type = firstPlayer.getPlacementBoard().markAsHitOrMiss(row, column);
 				if(type ==0)
 				{
-					setWasHit(false);
+					setDidPlayerHit(false);
+					
+					if(secondPlayer.getDidHitSomething() == 1)
+					{
+						secondPlayer.setCoordinatesOfLastHitPart(secondPlayer.getCoordinatesOfInitialHit());
+					}
+
 				}
 				else
 				{
-					setWasHit(true);
+					setDidPlayerHit(true);
+
+					if(secondPlayer.getDidHitSomething() == 0)
+					{
+						secondPlayer.setCoordinatesOfInitialHit(new Point(row, column));
+						secondPlayer.setCoordinatesOfLastHitPart(new Point(row, column));
+					}
+					else
+					{
+						secondPlayer.setCoordinatesOfLastHitPart(new Point(row, column));
+					}
+
+					secondPlayer.setDidHitSomething(1);
+
+
 				}
-				if(getWasHit())
+				if(getDidPlayerHit())
 				{
 					Point location = new Point(row, column);
 					firstPlayer.getShipOfType(type).destroyAPartFromLocation(location);
+					if(firstPlayer.isShipOfTypeDestroyed(type))
+					{
+						System.out.println("Ship of type:"+type+" is destroyed");
+
+
+						secondPlayer.setDidHitSomething(0);
+					}
+
 				}
 			}
 			return coordinates;
@@ -206,22 +290,12 @@ public class Game
 	}
 
 
-
-
-
-	public static void main(String[] args) 
-	{
-		Game g = new Game();
-
+	public boolean getDidPlayerHit() {
+		return didPlayerHit;
 	}
 
-
-	public boolean getWasHit() {
-		return wasHit;
-	}
-
-	public void setWasHit(boolean wasHit) {
-		this.wasHit = wasHit;
+	public void setDidPlayerHit(boolean wasHit) {
+		this.didPlayerHit = wasHit;
 	}
 
 }
