@@ -1,13 +1,11 @@
 
 package Functionality;
 
-import static Main.ValuesToWorkWith.bet;
 import static Main.ValuesToWorkWith.credit;
-import static Main.ValuesToWorkWith.numberOfLines;
-import static Main.ValuesToWorkWith.winning;
 
 import javax.swing.JOptionPane;
 
+import Main.ValuesToWorkWith;
 import UserInterface.ButtonsPanel;
 import UserInterface.CustomizedFrame;
 import UserInterface.GamblingFrame;
@@ -17,30 +15,33 @@ import UserInterface.TilesPanel;
 public class ButtonsFunctionality {
 	
 	private Winnings win = new Winnings();
+	private CustomizedFrame frame = new CustomizedFrame("");
+	private ValuesToWorkWith values = new ValuesToWorkWith();
+	private ButtonsPanel butPanel = new ButtonsPanel();
 
 	public void actionForSpin(){
 		
 		//automatic collect
 			actionForCollect();
 		
-		if (credit - bet < 0) {
+		if (credit - values.getBet() < 0) {
 			JOptionPane.showMessageDialog(null, "Please select a smaller Bet", "Insufficient funds !",
 					JOptionPane.WARNING_MESSAGE);
 	
-		} else if (credit-bet >= 0){
+		} else if (credit - values.getBet() >= 0){
 			
-			credit -= bet;	
-			CustomizedFrame.display.setVisible(false);
+			credit -= values.getBet();	
+			frame.getDisplay().setVisible(false);
 			TilesPanel.displayValues();
 			ButtonsPanel.newCredit();
-			CustomizedFrame.display.setVisible(true);
+			frame.getDisplay().setVisible(true);
 			
-			winning = win.lookForWinnings(numberOfLines);
-			ButtonsPanel.newWinning();
+			values.setWinning(win.lookForWinnings(values.getNumberOfLines()));
+			butPanel.newWinning();
 			
 		}
 		
-		if (credit == 0 && winning == 0) {
+		if (credit == 0 && values.getWinning() == 0) {
 					Labels.creditLabel.setText("" + 0);
 					JOptionPane.showMessageDialog(null, "Thanks for Playing", "Out of Credit !",
 					JOptionPane.INFORMATION_MESSAGE);
@@ -50,17 +51,17 @@ public class ButtonsFunctionality {
 
 	public void actionForCollect(){
 		
-		if(winning != 0) {
-			credit += winning;
+		if(values.getWinning() != 0) {
+			credit += values.getWinning();
 			ButtonsPanel.newCredit();
-			winning = 0;
-			ButtonsPanel.newWinning();
+			values.setWinning(0);
+			butPanel.newWinning();
 		}
 	}
 	
 	public void actionForGamble(){
 	
-		if(winning != 0){
+		if(values.getWinning() != 0){
 			new GamblingFrame("GAMBLE");
 		}
 		

@@ -1,7 +1,6 @@
 package UserInterface;
 
 import static Main.ValuesToWorkWith.credit;
-import static Main.ValuesToWorkWith.winning;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -13,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Functionality.ButtonsFunctionality;
+import Main.ValuesToWorkWith;
 
 public class ButtonsPanel extends JPanel {
 
@@ -26,6 +26,8 @@ public class ButtonsPanel extends JPanel {
 	private JPanel leftPanel = new JPanel();
 	private JPanel rightPanel = new JPanel();
 	private JPanel middlePanel = new JPanel();
+	
+	private ValuesToWorkWith values = new ValuesToWorkWith();
 
 	public ButtonsPanel() {
 
@@ -131,8 +133,8 @@ public class ButtonsPanel extends JPanel {
 		return Labels.creditLabel;
 	}
 	
-	public static JLabel newWinning(){
-		Labels.winningLabel.setText(""+winning);
+	public JLabel newWinning(){
+		Labels.winningLabel.setText(""+ values.getWinning());
 		Labels.winningLabel.setForeground(Color.RED);
 		return Labels.winningLabel;
 		

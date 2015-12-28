@@ -1,8 +1,8 @@
 
 package Functionality;
 
+import Main.ValuesToWorkWith;
 import UserInterface.TilesPanel;
-import static Main.ValuesToWorkWith.bet;
 
 public class Winnings {
 
@@ -10,6 +10,7 @@ public class Winnings {
 	private int[] result = new int[2];
 	private WinningPlanValues plan = new WinningPlanValues();
 	private int[][] valueToMultiplyWithBet = new int[8][5];
+	private ValuesToWorkWith values = new ValuesToWorkWith();
 	
 	private String queryForTileType(int cod) {
 
@@ -161,7 +162,7 @@ public class Winnings {
 			result[1] = oneWinningLine(1)[1]; 
 			System.out.println("MidLine: " + result[0] + " " + queryForTileType(result[1]) + " match");
 			System.out.println("Bet x " + valueToMultiplyWithBet[result[1]][result[0]-1]);
-			sum = bet * valueToMultiplyWithBet[result[1]][result[0]-1];
+			sum = values.getBet() * valueToMultiplyWithBet[result[1]][result[0]-1];
 			
 		}
 
@@ -174,7 +175,7 @@ public class Winnings {
 				result[1] = oneWinningLine(k)[1];
 				System.out.println("Line " + k + ": " + result[0] + " " + queryForTileType(result[1]) + " match");
 				System.out.println("Bet x " + valueToMultiplyWithBet[result[1]][result[0]-1]);
-				sum += bet * valueToMultiplyWithBet[result[1]][result[0]-1];
+				sum += values.getBet() * valueToMultiplyWithBet[result[1]][result[0]-1];
 			}
 			
 		}
@@ -188,13 +189,13 @@ public class Winnings {
 			result[1] = ascendingLine()[1];
 			System.out.println("AscendingLine: " + result[0] + " " + queryForTileType(result[1]) + " match");
 			System.out.println("Bet x " + valueToMultiplyWithBet[result[1]][result[0]-1]);
-			sum += bet * valueToMultiplyWithBet[result[1]][result[0]-1];
+			sum += values.getBet() * valueToMultiplyWithBet[result[1]][result[0]-1];
 			
 			result[0] = descendingLine()[0];
 			result[1] = descendingLine()[1];
 			System.out.println("DescendingLine: " + result[0] + " " + queryForTileType(result[1]) + " match");
 			System.out.println("Bet x " + valueToMultiplyWithBet[result[1]][result[0]-1]);
-			sum += bet * valueToMultiplyWithBet[result[1]][result[0]-1];
+			sum += values.getBet() * valueToMultiplyWithBet[result[1]][result[0]-1];
 			
 		}
 		

@@ -1,14 +1,13 @@
 package UserInterface;
 
-import static Main.ValuesToWorkWith.bet;
-import static Main.ValuesToWorkWith.numberOfLines;
-
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
+
+import Main.ValuesToWorkWith;
 
 public class Buttons {
 
@@ -24,6 +23,8 @@ public class Buttons {
 	public JRadioButton fiveLines = new JRadioButton("5 Lines", false);
 	private ButtonGroup groupLines = new ButtonGroup();
 	private ButtonGroup groupBet = new ButtonGroup();
+	
+	private ValuesToWorkWith values = new ValuesToWorkWith();
 	
 	public Buttons(){
 		groupLines.add(oneLine);
@@ -46,42 +47,46 @@ public class Buttons {
 		bet4.addItemListener(new ClassForBet(bet4.getText()));
 	}
 
-}
+	 private class ClassForLines implements ItemListener{
 
- class ClassForLines implements ItemListener{
-
-	 private String descriptiveText;
-	 
-	 public ClassForLines(String text){
-		descriptiveText = text;
-	}
-	 
-	@Override
-	public void itemStateChanged(ItemEvent arg0) {
-		if (descriptiveText == "1 Line"){
-			numberOfLines = 1;
-		}else if(descriptiveText == "3 Lines"){
-			numberOfLines = 3;
-		}else if(descriptiveText == "5 Lines"){
-			numberOfLines = 5; 
+		 private String descriptiveText;
+		 
+		 public ClassForLines(String text){
+			descriptiveText = text;
 		}
-		
-	}
-	 
- }
+		 
+		@Override
+		public void itemStateChanged(ItemEvent arg0) {
+			if (descriptiveText == "1 Line"){
+				values.setNumberOfLines(1);
+			}else if(descriptiveText == "3 Lines"){
+				values.setNumberOfLines(3);
+			}else if(descriptiveText == "5 Lines"){
+				values.setNumberOfLines(5); 
+			}
+			
+		}
+		 
+	 }
 
- class ClassForBet implements ItemListener{
 
-	private int valueToBet;
-	
-	public ClassForBet(String bet) {
-		valueToBet = Integer.parseInt(bet);
-	}
+	 private class ClassForBet implements ItemListener{
 
-	@Override
-	public void itemStateChanged(ItemEvent event) {
-		bet = valueToBet;
-		
-	}
-	
+			private int valueToBet;
+			
+			public ClassForBet(String bet) {
+				valueToBet = Integer.parseInt(bet);
+			}
+
+			@Override
+			public void itemStateChanged(ItemEvent event) {
+				values.setBet(valueToBet);
+			}
+			
+		}
 }
+
+
+
+
+ 
