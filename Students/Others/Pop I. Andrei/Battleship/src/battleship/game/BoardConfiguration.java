@@ -19,13 +19,16 @@ public class BoardConfiguration{
 	private char myBoard[][] = new char[MAX_ROW][MAX_COL];
 	private char computerBoard[][] = new char[MAX_ROW][MAX_COL];
 	private final BoardFrame boardFrame;
-	private JButton[][] myBoardCells;
-	private JButton[][] computerBoardCells;
+	private JButton[][] myBoardCells = new JButton[MAX_ROW][MAX_COL];
+	private JButton[][] computerBoardCells = new JButton[MAX_ROW][MAX_COL];
 	private ArrayList <Ship> myShips = new ArrayList<Ship>(); //  the ships will always be stored sorted by dimension: smallest -> biggest
 	private ArrayList <Ship> computerShips = new ArrayList<Ship>();
 	private final Game myGame;
 	private final RandomGenerator generator;
 	private final Fire fire;
+	private Ship attackedShip;
+	private Point lastComputerHit;
+	private final int LEFT = 0, X = 0;
 	
 	public BoardConfiguration(Game myGame) {
 		fire = new Fire();
@@ -34,11 +37,11 @@ public class BoardConfiguration{
 		//boardReader.readContent(computerBoard);
 		
 		initializeMyBoard();
+		generator = new RandomGenerator(MAX_ROW, myBoardCells);
+		computerBoard = generator.generateRandomComputerConfiguration();
 		boardFrame = new BoardFrame(MAX_ROW, MAX_COL, this, myGame);
 		myBoardCells = boardFrame.getMyBoardCells();
 		computerBoardCells = boardFrame.getComputerBoardCells();
-		generator = new RandomGenerator(MAX_ROW, myBoardCells);
-		computerBoard = generator.generateRandomComputerConfiguration();
 		
 		initializeMyShips();
 	}
@@ -52,17 +55,47 @@ public class BoardConfiguration{
 			return true;
 	}
 	
-	public Point activateComputer() {
+	public void activateComputer() {
 		Point location = generator.generateHit();
+		lastComputerHit = location;
+		
+		int hitDirection = generator.getHitDirection();
+		int hitAxis = generator.getHitAxis();
 		
 		if(hitSomeShip(location)){
 			myBoardCells[location.x][location.y].setBackground(Color.RED);
-			fire.identifyTheHitShip(location, myShips);
+			attackedShip = fire.identifyTheHitShip(location, myShips);
+			
+			if(generator.getHitNear() == false) {
+				generator.setHitNear(true);
+			}
+			generator.setLastHitPoint(location);
 		}
-		else
+		else {
 			myBoardCells[location.x][location.y].setBackground(Color.GREEN);
 		
-		return location;
+			if(attackedShip != null && attackedShip.isDestroyed()) {
+				generator.setHitNear(false);		
+				generator.resetToDefault();
+			}
+			
+			if(attackedShip != null && attackedShip.isDestroyed() == false && generator.getHitNear() == true){
+				if(hitDirection == LEFT && hitAxis == X) {
+					generator.changeHitDirection();
+				}
+				else if(hitDirection != LEFT && hitAxis == X){
+					generator.changeHitAxis();
+					generator.changeHitDirection();
+				}
+				else if(hitAxis != X && hitDirection == LEFT) {
+					generator.changeHitDirection();
+				}
+			}
+		}
+	}
+	
+	public Point getLastComputerHit() {
+		return lastComputerHit;
 	}
 	
 	public void repaintHitCellAfterFire(Point hitPoint) {
@@ -89,7 +122,8 @@ public class BoardConfiguration{
 	public void enableComputerBoard() {
 		for(int i = 0; i < computerBoardCells.length; i++)
 			for(int j = 0; j< computerBoardCells[0].length; j++) {
-				computerBoardCells[i][j].setEnabled(true);
+				if(computerBoardCells[i][j].getBackground() == Color.BLACK)
+					computerBoardCells[i][j].setEnabled(true);
 			}
 	}
 	
@@ -199,6 +233,14 @@ public class BoardConfiguration{
 	
 	public BoardFrame getTheBoardFrame() {
 		return boardFrame;
+	}
+	
+	public JButton[][] getMyBoardCells() {
+		return myBoardCells;
+	}
+	
+	public JButton[][] getComputerBoardCells(){
+		return computerBoardCells;
 	}
 	
 	public char[][] getMyBoard() {

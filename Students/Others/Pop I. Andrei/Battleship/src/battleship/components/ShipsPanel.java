@@ -91,6 +91,7 @@ public class ShipsPanel extends JPanel implements MouseListener {
 			shipHighlight.setHighlightedShip(ships.get(4));
 			ship5.setVisible(false);
 		}
+		shipHighlight.resetShipOrientation();
 	}
 
 	@Override
