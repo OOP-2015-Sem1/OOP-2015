@@ -1,18 +1,23 @@
 package logic;
+import java.awt.Point;
+
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import graphics.MorrisIcons;
+import login.FileSerialization;
 
 
 public class GameLogic {
 	public JButton[][] buttons = new JButton[13][13];
 	public int[][] matrix = new int[13][13];
 	private static final int MAX_PLAYER_PIECES = 5;
+	private static final int WIN_BONUS = 1;
 	private boolean deleteMode = false;
 	private boolean movementInProgress = false;
 	private int selectedPiece;
 	private MorrisIcons icons = MorrisIcons.getInstance();
+	FileSerialization serial = FileSerialization.getInstance();
 	private Player playerOne = new Player();
 	private Player playerTwo = new Player();
 	private static GameLogic logic;
@@ -23,6 +28,7 @@ public class GameLogic {
 		}
 		return logic;
 	}
+	
 
 	public GameLogic() {
 		playerOne.setPlayerMoves(0);
@@ -71,8 +77,11 @@ public class GameLogic {
 				}
 			} else if (selectedPiece != getPosition(source)) {
 				if (validMove(source, selectedPiece)) {
-					matrix[selectedPiece / 100][selectedPiece % 100] = 0;
-					buttons[selectedPiece / 100][selectedPiece % 100].setIcon(icons.Button);
+					Point selectedPieceIndeces = getPieceIndeces(selectedPiece);
+					int pieceIndexI = selectedPieceIndeces.x;
+					int pieceIndexJ = selectedPieceIndeces.y;
+					matrix[pieceIndexI][pieceIndexJ] = 0;
+					buttons[pieceIndexI][pieceIndexJ].setIcon(icons.Button);
 					if (getCurrentPlayer().getTag() == 1) {
 						playerOne.setOldNumberOfMorris(numberOfMorrisOnBoard(playerOne));
 					}
@@ -105,11 +114,19 @@ public class GameLogic {
 
 	public void gamePartThree() {
 		if (playerOne.getPlayerPieces() == 2) {
-			JOptionPane.showMessageDialog(null, "Player 2 WINS");
+			serial.account[serial.getFirstPlayerAccountNr()].setScore(serial.account[serial.getFirstPlayerAccountNr()].getScore()-WIN_BONUS);
+			serial.account[serial.getSecondPlayerAccountNr()].setScore(serial.account[serial.getSecondPlayerAccountNr()].getScore()+WIN_BONUS);
+			JOptionPane.showMessageDialog(null, serial.account[serial.getSecondPlayerAccountNr()].getName()+" WINS. Score : " + serial.account[serial.getSecondPlayerAccountNr()].getScore());
+			JOptionPane.showMessageDialog(null, serial.account[serial.getFirstPlayerAccountNr()].getName()+" LOSES. Score : " + serial.account[serial.getFirstPlayerAccountNr()].getScore());
+			serial.createAccount("onlySave");
 			System.exit(0);
 		}
 		if (playerTwo.getPlayerPieces() == 2) {
-			JOptionPane.showMessageDialog(null, "Player 1 WINS");
+			serial.account[serial.getFirstPlayerAccountNr()].setScore(serial.account[serial.getFirstPlayerAccountNr()].getScore()+WIN_BONUS);
+			serial.account[serial.getSecondPlayerAccountNr()].setScore(serial.account[serial.getSecondPlayerAccountNr()].getScore()-WIN_BONUS);
+			JOptionPane.showMessageDialog(null, serial.account[serial.getFirstPlayerAccountNr()].getName()+" WINS. Score : " + serial.account[serial.getFirstPlayerAccountNr()].getScore());
+			JOptionPane.showMessageDialog(null, serial.account[serial.getSecondPlayerAccountNr()].getName()+" LOSES. Score : " + serial.account[serial.getSecondPlayerAccountNr()].getScore());
+			serial.createAccount("onlySave");
 			System.exit(0);
 		}
 	}
@@ -272,5 +289,12 @@ public class GameLogic {
 
 	public int getPosition(JButton source) {
 		return Integer.parseInt(source.getName());
+	}
+	protected Point getPieceIndeces(int position) {
+		Point pieceIndeces = new Point();
+
+		pieceIndeces.x = position / 100;
+		pieceIndeces.y = position % 100;
+		return pieceIndeces;
 	}
 }
