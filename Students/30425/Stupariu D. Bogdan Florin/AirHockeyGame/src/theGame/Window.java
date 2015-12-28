@@ -14,9 +14,8 @@ public class Window extends Canvas {
 
 	private static final long serialVersionUID = -7288914953391361607L;
 
-	
+	public Window(int width, int height, String title, MainGame mainGame) {
 
-	public Window(int width, int height, String title, MainGame game) {
 		JFrame myFrame = new JFrame(title);
 
 		myFrame.setPreferredSize(new Dimension(width, height));
@@ -27,21 +26,58 @@ public class Window extends Canvas {
 		myFrame.setResizable(false);
 		myFrame.setLocationRelativeTo(null);
 
-		// ----------------------------------MARGINS----------------------------------------
+		drawNMargin(myFrame);
+		drawSMargin(myFrame);
+		drawLeftGate(myFrame);
+		drawRightGate(myFrame);
+
+		myFrame.add(mainGame);
+		myFrame.setVisible(true);
+		mainGame.startGame();
+
+	}
+
+	private void drawNMargin(JFrame myFrame) {
 		JButton buttonN;
 		buttonN = new JButton("");
-		buttonN.setBackground(Color.blue);
 		buttonN.setPreferredSize(new Dimension(0, 20));
+		buttonN.setBackground(Color.blue);
 		myFrame.add(buttonN, BorderLayout.PAGE_START);
+	}
 
+	private void drawSMargin(JFrame myFrame) {
 		JButton buttonS;
 		buttonS = new JButton("");
 		buttonS.setBackground(Color.blue);
 		buttonS.setPreferredSize(new Dimension(0, 20));
 		myFrame.add(buttonS, BorderLayout.PAGE_END);
+	}
 
-		// -------------------------------GATES----------------------------------------------
+	private void drawRightGate(JFrame myFrame) {
+		JButton buttonE;
+		buttonE = new JButton("");
+		buttonE.setBorder(null);
+		buttonE.setPreferredSize(new Dimension(20, 0));
 
+		JPanel gateE;
+		gateE = new JPanel(new GridLayout(3, 1));
+
+		JButton buttonE1 = new JButton("");
+		buttonE1.setBackground(Color.BLUE);
+		gateE.add(buttonE1, BorderLayout.NORTH);
+		JButton buttonGate2 = new JButton("");
+		buttonGate2.setBackground(Color.RED);
+		gateE.add(buttonGate2);
+		JButton buttonE2 = new JButton("");
+		buttonE2.setBackground(Color.BLUE);
+		gateE.add(buttonE2, BorderLayout.SOUTH);
+
+		buttonE.add(gateE);
+
+		myFrame.add(buttonE, BorderLayout.EAST);
+	}
+
+	private void drawLeftGate(JFrame myFrame) {
 		JButton buttonW;
 		buttonW = new JButton("");
 		buttonW.setBorder(null);
@@ -62,38 +98,6 @@ public class Window extends Canvas {
 
 		buttonW.add(gateW);
 		myFrame.add(buttonW, BorderLayout.WEST);
-
-		JButton buttonE;
-		buttonE = new JButton("");
-		buttonE.setBorder(null);
-		buttonE.setPreferredSize(new Dimension(20, 0));
-
-		JPanel gateE;
-		gateE = new JPanel(new GridLayout(3, 1));
-
-		JButton buttonE1 = new JButton("");
-		buttonE1.setBackground(Color.BLUE);
-		gateE.add(buttonE1, BorderLayout.NORTH);
-		JButton buttonGate2 = new JButton("");
-		buttonGate2.setBackground(Color.RED);
-		gateE.add(buttonGate2);
-		JButton buttonE2 = new JButton("");
-		buttonE2.setBackground(Color.BLUE);
-		gateE.add(buttonE2, BorderLayout.SOUTH);
-
-		buttonE.add(gateE);
-		myFrame.add(buttonE, BorderLayout.EAST);
-		
-		myFrame.add(game);
-		
-	
-		myFrame.setVisible(true);
-		
-		game.startGame();
-		
 	}
-
-
-
 
 }

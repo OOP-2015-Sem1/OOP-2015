@@ -18,11 +18,13 @@ public class Player extends GameObjects {
 	public void tick() {
 		// TODO Auto-generated method stub
 
-		setX((int) (getX() + getSpeedX()));
-		setY((int) (getY() + getSpeedY()));
-
-		setX(MainGame.posRelToMargins(getX(), 0, MainGame.WIDTH / 2 - 90));
-		setY(MainGame.posRelToMargins(getY(), 0, MainGame.HEIGHT - 140));
+		setX(getx() + getSpeedX());
+		setY(gety() + getSpeedY());
+		
+		float notCrossXmargins =MainGame.posRelToMargins(getx(), 0, MainGame.WIDTH / 2 - 90);
+		float notCrossYmargins = MainGame.posRelToMargins(gety(), 0, MainGame.HEIGHT - 140);
+		setX(notCrossXmargins);
+		setY(notCrossYmargins);
 
 	}
 
@@ -31,7 +33,7 @@ public class Player extends GameObjects {
 		// TODO Auto-generated method stub
 
 		graph.setColor(Color.BLUE);
-		graph.fillOval(getX(), getY(), 69, 69);
+		graph.fillOval((int)getx(), (int)gety(), 69, 69);
 
 	}
 

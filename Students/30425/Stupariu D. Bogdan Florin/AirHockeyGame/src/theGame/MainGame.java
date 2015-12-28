@@ -2,6 +2,7 @@ package theGame;
 
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
@@ -12,27 +13,37 @@ public class MainGame extends Canvas implements Runnable {
 	// Dimensions of the window
 	public static final int WIDTH = 980;
 	public static final int HEIGHT = 640;
+	public static boolean paused = false;
 
 	private Thread myThread;
-	boolean ifRunning = false;
 	private Handler handler;
 	private Score score;
+	private Menu menu;
 
-	GameObjects player = new Player(50, HEIGHT / 2 - 70, ObjectID.Player);
-	Ball ball = new Ball(WIDTH / 2 - 50, HEIGHT / 2 - 50, ObjectID.Ball);
+	boolean ifRunning = false;
+
+	public enum STATE {
+		Menu, Game, Multiplayer
+	};
+
+	public STATE gameState = STATE.Menu;
 
 	public MainGame() {
 		new Window(WIDTH, HEIGHT, "Air Hockey", this);
-		
+
 		handler = new Handler();
-		this.addKeyListener(new KeyInput(handler));
+		menu = new Menu(this);
+
+		this.addKeyListener(new KeyInput(handler, this));
+		this.addMouseListener(menu);
+
+		Audio.load();
+
 		score = new Score();
-			
-		handler.addObject(new Ball(WIDTH / 2 - 50, HEIGHT / 2 - 50, ObjectID.Ball));
-		handler.addObject(new Player(50, HEIGHT / 2 - 70, ObjectID.Player));
-		handler.addObject(new Player2(WIDTH - 170, HEIGHT / 2 - 70, ObjectID.Player2));
-		
-		
+
+		handler.addObject(new Ball(MainGame.WIDTH / 2 - 50, MainGame.HEIGHT / 2 - 50, ObjectID.Ball));
+		handler.addObject(new Player(50, MainGame.HEIGHT / 2 - 70, ObjectID.Player));
+		handler.addObject(new Player2(MainGame.WIDTH - 170, MainGame.HEIGHT / 2 - 70, ObjectID.Player2));
 
 	}
 
@@ -83,9 +94,15 @@ public class MainGame extends Canvas implements Runnable {
 	}
 
 	private void tick() {
-		handler.tick();
-		score.tick();
+		if (gameState == STATE.Game || gameState == STATE.Multiplayer) {
+			if (!paused) {
+				handler.tick();
+				score.tick();
+			}
 
+		} else if (gameState == STATE.Menu) {
+			menu.tick();
+		}
 	}
 
 	private void render() {
@@ -96,27 +113,60 @@ public class MainGame extends Canvas implements Runnable {
 		}
 
 		Graphics graph = bs.getDrawGraphics();
-
-		graph.setColor(Color.white);
+		if (gameState == STATE.Game || gameState == STATE.Multiplayer) {
+			graph.setColor(Color.white);
+		} else {
+			graph.setColor(Color.black);
+		}
 		graph.fillRect(0, 0, WIDTH, HEIGHT);
 
-		
-		graph.setColor(Color.LIGHT_GRAY);
-		graph.drawLine(WIDTH / 2 - 20, 0, WIDTH / 2 - 20, HEIGHT);
-		graph.setColor(Color.LIGHT_GRAY);
-		graph.fillRoundRect(WIDTH / 2 - 121, HEIGHT / 2 - 130, 200, 200, 200, 200);
-	
-		graph.fillRoundRect(WIDTH / 2 - 101, HEIGHT / 2 - 110, 160, 160, 160, 160);
-	
-		handler.render(graph);
-		
-		score.render(graph);
+		if (gameState == STATE.Game || gameState == STATE.Multiplayer) {
+			drawCenterCircle(graph);
+			handler.render(graph);
+			score.render(graph);
+		}
+
+		if (paused) {
+			drawPauseText(graph);
+		}
+
+		else if (gameState == STATE.Menu) {
+			menu.render(graph);
+			drawControlIndications(graph);
+		}
 
 		graph.dispose();
 		bs.show();
 	}
 
-	public static int posRelToMargins(int var, int min, int max) {
+	private void drawCenterCircle(Graphics graph) {
+		// TODO Auto-generated method stub
+		graph.setColor(Color.LIGHT_GRAY);
+		graph.drawLine(WIDTH / 2 - 20, 0, WIDTH / 2 - 20, HEIGHT);
+		graph.setColor(Color.LIGHT_GRAY);
+		graph.fillRoundRect(WIDTH / 2 - 121, HEIGHT / 2 - 130, 200, 200, 200, 200);
+	}
+
+	private void drawControlIndications(Graphics graph) {
+		// TODO Auto-generated method stub
+		Font indicationsfnt = new Font("Arial", 1, 10);
+		graph.setColor(Color.WHITE);
+		graph.setFont(indicationsfnt);
+		graph.drawString("Player1:  W - up, A - left, S - down, D - right", 30, 30);
+		graph.drawString("Player2:  UP - up, LEFT - left, DOWN - down, RIGHT - right", 30, 60);
+		graph.drawString("Pause game:  press P", 30, 90);
+		graph.drawString("Exit game:  press Exit", 30, 120);
+	}
+
+	private void drawPauseText(Graphics graph) {
+		// TODO Auto-generated method stub
+		Font pausefnt = new Font("Arial", 1, 70);
+		graph.setColor(Color.BLACK);
+		graph.setFont(pausefnt);
+		graph.drawString("PAUSED", 320, 310);
+	}
+
+	public static float posRelToMargins(float var, float min, float max) {
 		if (var >= max)
 			return var = max;
 		else if (var <= min)

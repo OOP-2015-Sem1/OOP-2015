@@ -5,5 +5,4 @@ public enum ObjectID {
 	Player2(),
 	Computer(),
 	Ball(),
-	Architecture();
 }

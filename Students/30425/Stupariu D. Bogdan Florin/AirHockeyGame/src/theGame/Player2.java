@@ -13,7 +13,7 @@ public class Player2 extends GameObjects {
 	public Player2(int x, int y, ObjectID identity) {
 		super(x, y, identity);
 		// TODO Auto-generated constructor stub
-	
+
 		setSpeedX(0);
 		setSpeedY(0);
 	}
@@ -21,13 +21,14 @@ public class Player2 extends GameObjects {
 	@Override
 	public void tick() {
 		// TODO Auto-generated method stub
-		
-		setX((int) (getX() + getSpeedX()));
-		setY((int) (getY() + getSpeedY()));
-		
-		setX( MainGame.posRelToMargins(getX(), MainGame.WIDTH/2-20, MainGame.WIDTH-116));
-		setY( MainGame.posRelToMargins(getY(), 0, MainGame.HEIGHT-140));
-		
+
+		setX(getx() + getSpeedX());
+		setY(gety() + getSpeedY());
+
+		float notCrossXmargins = MainGame.posRelToMargins(getx(), MainGame.WIDTH / 2 - 20, MainGame.WIDTH - 116);
+		float notCrossYmargins = MainGame.posRelToMargins(gety(), 0, MainGame.HEIGHT - 140);
+		setX(notCrossXmargins);
+		setY(notCrossYmargins);
 	}
 
 	@Override
@@ -35,10 +36,8 @@ public class Player2 extends GameObjects {
 		// TODO Auto-generated method stub
 
 		graph.setColor(Color.GREEN);
-		graph.fillOval(getX(), getY(), 69, 69);
-		
-	}
-	
+		graph.fillOval((int) getx(), (int) gety(), 69, 69);
 
+	}
 
 }

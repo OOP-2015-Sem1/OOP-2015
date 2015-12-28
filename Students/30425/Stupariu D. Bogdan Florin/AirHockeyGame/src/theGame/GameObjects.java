@@ -10,13 +10,13 @@ public abstract class GameObjects extends JFrame {
 	 */
 	private static final long serialVersionUID = 4159401302361680283L;
 
-	private int x;
-	private int y;
+	private float x;
+	private float y;
 	private ObjectID identity;
 	private float speedX, speedY;
 	private float angle;
 
-	public GameObjects(int x, int y, ObjectID identity) {
+	public GameObjects(float x, float y, ObjectID identity) {
 		this.x = x;
 		this.y = y;
 		this.identity = identity;
@@ -27,19 +27,19 @@ public abstract class GameObjects extends JFrame {
 
 	public abstract void render(Graphics graph);
 
-	public void setX(int x) {
+	public void setX(float x) {
 		this.x = x;
 	}
 
-	public int getX() {
+	public float getx() {
 		return x;
 	}
 
-	public void setY(int y) {
+	public void setY(float y) {
 		this.y = y;
 	}
 
-	public int getY() {
+	public float gety() {
 		return y;
 	}
 
@@ -75,11 +75,11 @@ public abstract class GameObjects extends JFrame {
 		return angle;
 	}
 
-	public int gCenterPX(int x, int width) {
+	public float gCenterPX(float x, float width) {
 		return width / 2 - x;
 	}
 
-	public int gCenterPY(int y, int height) {
+	public float gCenterPY(float y, float height) {
 		return height / 2 - y;
 	}
 

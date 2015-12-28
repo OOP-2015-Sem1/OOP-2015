@@ -13,19 +13,22 @@ public class Score {
 	}
 	
 	public void render(Graphics graph){
-		//Player1 Score
+		drawPlayer1Score(graph);
+		drawPlayer2Score(graph);
+	}
+
+	private void drawPlayer1Score(Graphics graph) {
 		graph.setColor(Color.DARK_GRAY);
 		graph.fillRect(20, 10, 150, 30);
 		graph.setColor(Color.WHITE);
 		graph.drawString("PLAYER 1 SCORE : " + SCORE1 , 30,30);
-		
-		
-		//Player2 Score
+	}
+
+	private void drawPlayer2Score(Graphics graph) {
 		graph.setColor(Color.DARK_GRAY);
 		graph.fillRect(MainGame.WIDTH-230, 10, 150, 30);
 		graph.setColor(Color.WHITE);
 		graph.drawString("PLAYER 2 SCORE : " + SCORE2 , MainGame.WIDTH-220,30);
-		
 	}
 	
 }
