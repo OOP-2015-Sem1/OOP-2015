@@ -6,6 +6,16 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import display.Menu;
+import display.Score;
+import display.Window;
+import inputDevices.Audio;
+import inputDevices.KeyInput;
+import objects.Ball;
+import objects.ObjectID;
+import objects.Player;
+import objects.Player2;
+
 public class MainGame extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = -4040703231116492000L;
