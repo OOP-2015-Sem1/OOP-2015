@@ -22,6 +22,7 @@ public class DrawingWest extends JPanel {
 	public DrawingWest() {
 		this.graph = new mxGraph();
 		this.parent = graph.getDefaultParent();
+		this.setOpaque(false);
 	}
 
 	public void clearTheWest() {

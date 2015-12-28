@@ -15,6 +15,10 @@ public class SouthArea2 extends JTextArea {
 		this.setEditable(false);
 	}
 
+	public void clearArea() {
+		this.setText("");
+	}
+
 	public void displayEncodingCharacteristics(Huffman huffman) {
 		this.arrayTable = huffman.getArrayListOfNodes();
 		this.setText("Character\tEncoding\t\t\tFrequency\n");
