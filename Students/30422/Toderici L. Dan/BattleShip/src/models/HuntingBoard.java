@@ -143,6 +143,11 @@ public class HuntingBoard {
 			System.out.println();
 		}
 	}
+	
+	public BoardPiece [][] getHuntingBoardMatrix()
+	{
+		return huntingBoard;
+	}
 
 
 }

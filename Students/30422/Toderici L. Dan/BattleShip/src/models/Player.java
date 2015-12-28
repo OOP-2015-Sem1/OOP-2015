@@ -92,6 +92,12 @@ public class Player
 		return true;
 
 	}
+	
+	public boolean isShipOfTypeDestroyed(int type)
+	{
+		Ship ship = getShipOfType(type);
+		return ship.getIsDestroyed();
+	}
 
 	public void printShips()
 	{
