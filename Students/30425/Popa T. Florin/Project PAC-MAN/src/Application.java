@@ -10,7 +10,7 @@ public class Application {
 		JFrame frame = new JFrame();
 		frame.add(game);
 		frame.setTitle(game.TITLE);
-		frame.setSize(576,500);
+		frame.setSize(576,530);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
