@@ -3,11 +3,18 @@ package theGame;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
+import display.Score;
+import inputDevices.Audio;
+import objects.Ball;
+import objects.GameObjects;
+import objects.ObjectID;
+import objects.Player;
+import objects.Player2;
 import theGame.MainGame.STATE;
 
 public class Handler {
 
-	LinkedList<GameObjects> allObjects = new LinkedList<GameObjects>();
+	public LinkedList<GameObjects> allObjects = new LinkedList<GameObjects>();
 	private boolean reset = false;
 	private boolean leftGateHit;
 	private boolean rightGateHit;
