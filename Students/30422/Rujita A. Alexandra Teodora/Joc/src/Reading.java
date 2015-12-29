@@ -4,20 +4,20 @@ import java.io.IOException;
 
 public class Reading {
 
-	public void CitireIntrebari(String[] intrebari, int nrIntrebari) throws Exception {
+	public void CitireIntrebari(String[] questions, int nrIntrebari) throws Exception {
 
 		FileReader file = new FileReader("Intrebari.txt");
 		BufferedReader reader = new BufferedReader(file);
 		String line = reader.readLine();
 
 		for (int i = 0; i < nrIntrebari; i++) {
-			intrebari[i] = line;
+			questions[i] = line;
 			line = reader.readLine();
 		}
-		reader.close();
+		file.close();
 	}
 
-	public int indexIntrebari() throws IOException {
+	public int noOfQuestions() throws IOException {
 
 		FileReader file = new FileReader("Intrebari.txt");
 		BufferedReader reader = new BufferedReader(file);
