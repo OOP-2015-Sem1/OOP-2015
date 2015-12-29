@@ -1,4 +1,3 @@
-import java.awt.Component;
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -6,29 +5,30 @@ import javax.swing.JOptionPane;
 public class Game {
 
 	private Characteristics pers1[];
-	private final int nrPers = 24;
-	public int score;
-	private int chrRamaseCalc, chrRamaseJucator = nrPers;
-	private boolean jucator = true;
-	private boolean calc = false;
-	boolean[] valButoaneCalc, valButoaneJucator;
+	private final int noPers = 24;
+	private int remainingCompChr, remainingPlayerChr = noPers;
+	private boolean player = true;
+	private boolean computer = false;
+	public boolean[] valButoaneCalc, valButoaneJucator;
 	private String intrebariText[];
+	private int compChrIndex = 25;
 
-	Game() throws Exception {
+	public Game() throws Exception {
 
-		valButoaneCalc = new boolean[nrPers];
-		valButoaneJucator = new boolean[nrPers];
-		for (int i = 0; i < nrPers; i++) {
+		valButoaneCalc = new boolean[noPers];
+		valButoaneJucator = new boolean[noPers];
+
+		for (int i = 0; i < noPers; i++) {
 			valButoaneCalc[i] = true;
 			valButoaneJucator[i] = true;
 		}
 
 		Reading text = new Reading();
-		int count = text.indexIntrebari();
+		int count = text.noOfQuestions();
 		intrebariText = new String[count];
 		text.CitireIntrebari(intrebariText, count);
 	}
-
+	
 	private void settingCharacteristics(Characteristics[] pers) {
 
 		pers[0] = new Characteristics(false, false, false, false, true, false, false, true, true, true, true, false,
@@ -82,144 +82,154 @@ public class Game {
 
 	}
 
-	private void settingButtonsValue(boolean areProp, int pozAles, boolean[] v_butonCaracter, int chrEliminated) {
 
-		pers1 = new Characteristics[nrPers];
+	private void settingButtonsValue(int i, boolean prop, boolean areProp, int indexChosenChr, boolean[] chrButtonValue,
+			boolean chrEliminated) {
+
+		if (chrButtonValue[i]) {
+			chrButtonValue[i] = !(prop ^ areProp);
+			String val = String.valueOf(chrButtonValue[i]);
+			if (computer)
+				remainingPlayerChr += (val.length() - 4);
+			else if (player)
+				remainingCompChr += (val.length() - 4);
+		}
+	}
+
+	private void checkingProp(int indexQuestion, int indexChosenChr, boolean[] chrButtonValue, boolean chrEliminated1) {
+
+		pers1 = new Characteristics[noPers];
 		settingCharacteristics(pers1);
-		System.out.println("intra in elimina");
-		for (int i = 0; i < nrPers; i++) {
-			if (i != pozAles && v_butonCaracter[i]) {
-				v_butonCaracter[i] = pers1[i].african_american ^ areProp;
-				v_butonCaracter[i] = pers1[i].beard ^ areProp;
-				v_butonCaracter[i] = pers1[i].black_hair ^ areProp;
-				v_butonCaracter[i] = pers1[i].blonde_hair ^ areProp;
-				v_butonCaracter[i] = pers1[i].brown_hair ^ areProp;
-				v_butonCaracter[i] = pers1[i].bunny_ears ^ areProp;
-				v_butonCaracter[i] = pers1[i].curly_hair ^ areProp;
-				v_butonCaracter[i] = pers1[i].earrings ^ areProp;
-				v_butonCaracter[i] = pers1[i].female ^ areProp;
-				v_butonCaracter[i] = pers1[i].glasses ^ areProp;
-				v_butonCaracter[i] = pers1[i].long_hair ^ areProp;
-				v_butonCaracter[i] = pers1[i].moustache ^ areProp;
-				v_butonCaracter[i] = pers1[i].naked ^ areProp;
-				v_butonCaracter[i] = pers1[i].old ^ areProp;
-				v_butonCaracter[i] = pers1[i].pink_hair ^ areProp;
-				v_butonCaracter[i] = pers1[i].pink_shirt ^ areProp;
-				v_butonCaracter[i] = pers1[i].white_hair ^ areProp;
-				v_butonCaracter[i] = pers1[i].man ^ areProp;
-				chrEliminated += -("false".indexOf("" + v_butonCaracter[i]));
+		Characteristics ales = pers1[indexChosenChr];
+
+		for (int i = 0; i < noPers; i++) {
+			if (i != indexChosenChr) {
+				if (indexQuestion == 17)
+					settingButtonsValue(i, pers1[i].africanAmerican, ales.africanAmerican, indexChosenChr,
+							chrButtonValue, chrEliminated1);
+				if (indexQuestion == 3)
+					settingButtonsValue(i, pers1[i].beard, ales.beard, indexChosenChr, chrButtonValue, chrEliminated1);
+				if (indexQuestion == 2)
+					settingButtonsValue(i, pers1[i].blackHair, ales.blackHair, indexChosenChr, chrButtonValue,
+							chrEliminated1);
+				if (indexQuestion == 9)
+					settingButtonsValue(i, pers1[i].blondeHair, ales.blondeHair, indexChosenChr, chrButtonValue,
+							chrEliminated1);
+				if (indexQuestion == 11)
+					settingButtonsValue(i, pers1[i].brownHair, ales.brownHair, indexChosenChr, chrButtonValue,
+							chrEliminated1);
+				if (indexQuestion == 14)
+					settingButtonsValue(i, pers1[i].bunnyEars, ales.bunnyEars, indexChosenChr, chrButtonValue,
+							chrEliminated1);
+				if (indexQuestion == 15)
+					settingButtonsValue(i, pers1[i].curlyHair, ales.curlyHair, indexChosenChr, chrButtonValue,
+							chrEliminated1);
+				if (indexQuestion == 5)
+					settingButtonsValue(i, pers1[i].earrings, ales.earrings, indexChosenChr, chrButtonValue,
+							chrEliminated1);
+				if (indexQuestion == 6)
+					settingButtonsValue(i, pers1[i].female, ales.female, indexChosenChr, chrButtonValue,
+							chrEliminated1);
+				if (indexQuestion == 13)
+					settingButtonsValue(i, pers1[i].glasses, ales.glasses, indexChosenChr, chrButtonValue,
+							chrEliminated1);
+				if (indexQuestion == 1)
+					settingButtonsValue(i, pers1[i].longHair, ales.longHair, indexChosenChr, chrButtonValue,
+							chrEliminated1);
+				if (indexQuestion == 4)
+					settingButtonsValue(i, pers1[i].moustache, ales.moustache, indexChosenChr, chrButtonValue,
+							chrEliminated1);
+				if (indexQuestion == 16)
+					settingButtonsValue(i, pers1[i].naked, ales.naked, indexChosenChr, chrButtonValue, chrEliminated1);
+				if (indexQuestion == 12)
+					settingButtonsValue(i, pers1[i].old, ales.old, indexChosenChr, chrButtonValue, chrEliminated1);
+				if (indexQuestion == 8)
+					settingButtonsValue(i, pers1[i].pinkHair, ales.pinkHair, indexChosenChr, chrButtonValue,
+							chrEliminated1);
+				if (indexQuestion == 18)
+					settingButtonsValue(i, pers1[i].pinkShirt, ales.pinkShirt, indexChosenChr, chrButtonValue,
+							chrEliminated1);
+				if (indexQuestion == 10)
+					settingButtonsValue(i, pers1[i].whiteHair, ales.whiteHair, indexChosenChr, chrButtonValue,
+							chrEliminated1);
+				if (indexQuestion == 7)
+					settingButtonsValue(i, pers1[i].man, ales.man, indexChosenChr, chrButtonValue, chrEliminated1);
 			}
 		}
-		System.out.println("caractere eliminate " + chrEliminated + "\n");
-
 	}
 
-	private boolean checkingProp(int indexQuestion, int pozAles) {
-
-		pers1 = new Characteristics[nrPers];
-		settingCharacteristics(pers1);
-		Characteristics ales = pers1[pozAles];
-		System.out.println("intra in properties");
-
-		if (ales.african_american && (indexQuestion == 17))
-			return true;
-		if (ales.beard && (indexQuestion == 3))
-			return true;
-		if (ales.black_hair && (indexQuestion == 2))
-			return true;
-		if (ales.blonde_hair && (indexQuestion == 9))
-			return true;
-		if (ales.brown_hair && (indexQuestion == 11))
-			return true;
-		if (ales.bunny_ears && (indexQuestion == 14))
-			return true;
-		if (ales.curly_hair && (indexQuestion == 15))
-			return true;
-		if (ales.earrings && (indexQuestion == 5))
-			return true;
-		if (ales.female && (indexQuestion == 6))
-			return true;
-		if (ales.glasses && (indexQuestion == 13))
-			return true;
-		if (ales.long_hair && (indexQuestion == 1))
-			return true;
-		if (ales.moustache && (indexQuestion == 4))
-			return true;
-		if (ales.naked && (indexQuestion == 16))
-			return true;
-		if (ales.old && (indexQuestion == 12))
-			return true;
-		if (ales.pink_hair && (indexQuestion == 8))
-			return true;
-		if (ales.pink_shirt && (indexQuestion == 18))
-			return true;
-		if (ales.white_hair && (indexQuestion == 10))
-			return true;
-		if (ales.man && (indexQuestion == 7))
-			return true;
-		return false;
-	}
-
-	public void score(int persons, int aScore) {
-
-		score += persons * 10;
-	}
-
-	public void newGame() throws Exception {
-
-		JOptionPane.showMessageDialog(null, "Congratulation you won! /n Your score is: " + score);
-		new GUI();
-
-	}
-
-	protected void eliminateCharacters(int indexIntr, String chrAles2) throws Exception {
+	public void checkingCharacters(int indexIntr, String chosenCharacter) throws Exception {
 
 		Computer c = new Computer();
-		GUI g = new GUI();
-		int playerChr = Integer.valueOf(chrAles2);
+		int playerChr = Integer.valueOf(chosenCharacter);
 		int computerChr = c.chooseChr();
-		boolean hasProp;
 
-		while (chrRamaseCalc >= 1 || chrRamaseJucator >= 1)
-			if (chrRamaseCalc == 1 || chrRamaseJucator == 1)
-				newGame();
-			else {
-				if (jucator) {
-					System.out.println("tura jucator");
-					int nrChrElim = 0;
-					hasProp = checkingProp(indexIntr, computerChr);
-					settingButtonsValue(hasProp, computerChr, valButoaneCalc, nrChrElim);
-					g.disablingButtons(valButoaneCalc, calc, jucator);
-					chrRamaseCalc -= nrChrElim;
-					g.chooseQuestion(chrAles2);
-					calc = true;
-					jucator = false;
-				} else {
-					System.out.println("tura calc");
-					int nrChrElim = 0;
-					int indexIntrCalc = c.askQuestions();
-					if (questionDialog(indexIntrCalc)) {
-						hasProp = checkingProp(indexIntrCalc, playerChr);
-						settingButtonsValue(hasProp, playerChr, valButoaneJucator, nrChrElim);
-						g.disablingButtons(valButoaneJucator, calc, jucator);
-					}
-					calc = false;
-					jucator = true;
-					chrRamaseJucator -= nrChrElim;
-				}
+		if (remainingCompChr == 1 || remainingPlayerChr == 1) {
+			compChrIndex = computerChr;
+			newGame();
+		} else
+			while (remainingCompChr > 1 || remainingPlayerChr > 1) {
+				// playerTurn(playerChr,indexIntr, computerChr,
+				compCharacterIndex(25);
+				computerTurn(playerChr, indexIntr, computerChr, chosenCharacter);
 			}
 	}
 
-	private boolean questionDialog(int indexIntrCalc2) {
+	private int compCharacterIndex(int computerChr) {
 
-		JDialog j = new JDialog();
-		j.setDefaultLookAndFeelDecorated(true);
-		int response = JOptionPane.showConfirmDialog(null, intrebariText[indexIntrCalc2], "Answer",
-				JOptionPane.YES_NO_OPTION);
-		if (response == JOptionPane.CLOSED_OPTION)
-			return false;
-		j.dispose();
-		return true;
+		return computerChr;
 
 	}
-}
+
+	private void playerTurn(int playerChr, int indexIntr, int computerChr, String chosenCharacter) throws Exception {
+
+		checkingProp(indexIntr, computerChr, valButoaneCalc, computer);
+		score(remainingCompChr);
+		GUI.disablingButtons(valButoaneCalc, computer, player);
+		GUI.chooseQuestion(chosenCharacter);
+		computer = true;
+		player = false;
+		computerTurn(playerChr, indexIntr, computerChr, chosenCharacter);
+
+	}
+
+	private void computerTurn(int playerChr, int indexIntr, int computerChr, String chosenCharacter) throws Exception {
+
+		Computer c = new Computer();
+		int indexIntrCalc = c.askQuestions();
+		System.out.println(intrebariText[indexIntrCalc]);
+		questionDialog(indexIntrCalc);
+		playerTurn(playerChr, indexIntr, computerChr, chosenCharacter);
+		checkingProp(indexIntrCalc, playerChr, valButoaneJucator, player);
+		GUI.disablingButtons(valButoaneJucator, computer, player);
+		computer = false;
+		player = true;
+		playerTurn(playerChr, indexIntr, computerChr, chosenCharacter);
+	}
+	
+	private void questionDialog(int indexIntrCalc2) {
+
+		JDialog.setDefaultLookAndFeelDecorated(true);
+		JOptionPane.showConfirmDialog(null, intrebariText[indexIntrCalc2], "Answer", JOptionPane.YES_NO_OPTION);
+
+	}
+
+	public void score(int persons) {
+
+		GUI.score(persons * 10);
+	}
+
+	public int compCharacter() {
+		return compChrIndex;
+	}
+
+	private void newGame() throws Exception {
+
+		// JOptionPane.showMessageDialog(null, "Congratulation you won! /n Your
+		// score is: " + score);
+		new GUI();
+	}
+
+
+
+	}

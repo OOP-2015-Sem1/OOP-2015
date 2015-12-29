@@ -16,7 +16,7 @@ public class Computer {
 
 		List<Integer> askedQuestions = new ArrayList<Integer>();
 		Random randomGenerator = new Random();
-		int randomQuestion = randomGenerator.nextInt(18);
+		int randomQuestion = randomGenerator.nextInt(17)+1;
 		Iterator<Integer> it = askedQuestions.iterator();
 
 		while (it.hasNext()) {
