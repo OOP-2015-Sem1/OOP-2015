@@ -1,7 +1,5 @@
 package UserInterface;
 
-import static Main.ValuesToWorkWith.winning;
-
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -12,6 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import Main.ValuesToWorkWith;
 
 public class GamblingFrame extends JFrame {
 
@@ -24,7 +24,10 @@ public class GamblingFrame extends JFrame {
 	private JPanel cardPanel = new JPanel();
 	private int code;
 	private int gambleIterator = 0;
-
+	private ValuesToWorkWith values = new ValuesToWorkWith();
+	
+	private ButtonsPanel butPanel = new ButtonsPanel();
+	
 	public GamblingFrame(String title) {
 
 		super(title);
@@ -53,12 +56,12 @@ public class GamblingFrame extends JFrame {
 				}
 
 				if (code >= 6 && gambleIterator < 3) {
-					winning *= 2;
-					ButtonsPanel.newWinning();
+					values.setWinning(values.getWinning() * 2);
+					butPanel.newWinning();
 					gambleIterator++;
 				} else if (code < 6) {
-					winning = 0;
-					ButtonsPanel.newWinning();
+					 values.setWinning(0);
+					butPanel.newWinning();
 					setVisible(false);
 				}
 
@@ -79,12 +82,12 @@ public class GamblingFrame extends JFrame {
 				}
 
 				if (code < 6 && gambleIterator < 3) {
-					winning *= 2;
-					ButtonsPanel.newWinning();
+					values.setWinning(values.getWinning() * 2);
+					butPanel.newWinning();
 					gambleIterator++;
 				} else if (code >= 6) {
-					winning = 0;
-					ButtonsPanel.newWinning();
+					values.setWinning(0);
+					butPanel.newWinning();
 					setVisible(false);
 				}
 

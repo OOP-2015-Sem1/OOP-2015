@@ -1,8 +1,8 @@
 
 package Functionality;
 
+import Main.ValuesToWorkWith;
 import UserInterface.TilesPanel;
-import static Main.ValuesToWorkWith.bet;
 
 public class Winnings {
 
@@ -10,6 +10,8 @@ public class Winnings {
 	private int[] result = new int[2];
 	private WinningPlanValues plan = new WinningPlanValues();
 	private int[][] valueToMultiplyWithBet = new int[8][5];
+	private ValuesToWorkWith values = new ValuesToWorkWith();
+	private TilesPanel panel = new TilesPanel();
 	
 	private String queryForTileType(int cod) {
 
@@ -56,8 +58,8 @@ public class Winnings {
 		int tileIterator = 0;
 
 		while (match && tileIterator < 4) {
-			if (TilesPanel.imageCode[lineNumber][tileIterator] 
-				== TilesPanel.imageCode[lineNumber][tileIterator + 1]) {
+			if (panel.getImageCode()[lineNumber][tileIterator] 
+				== panel.getImageCode()[lineNumber][tileIterator + 1]) {
 				matchingIterator++;
 				tileIterator++;
 
@@ -66,7 +68,7 @@ public class Winnings {
 			}
 		}
 
-		code = TilesPanel.imageCode[lineNumber][tileIterator];
+		code = panel.getImageCode()[lineNumber][tileIterator];
 		spinQuery[0] = matchingIterator;
 		spinQuery[1] = code;
 		return spinQuery;
@@ -79,31 +81,31 @@ public class Winnings {
 		int code = 8;
 		boolean match = true;
 
-		if (TilesPanel.imageCode[2][0] == TilesPanel.imageCode[1][1] && match) {
+		if (panel.getImageCode()[2][0] == panel.getImageCode()[1][1] && match) {
 			matchingIterator++;
 		} else {
 			match = false;
 		}
 
-		if (TilesPanel.imageCode[1][1] == TilesPanel.imageCode[0][2] && match) {
+		if (panel.getImageCode()[1][1] == panel.getImageCode()[0][2] && match) {
 			matchingIterator++;
 		} else {
 			match = false;
 		}
 
-		if (TilesPanel.imageCode[0][2] == TilesPanel.imageCode[1][3] && match) {
+		if (panel.getImageCode()[0][2] == panel.getImageCode()[1][3] && match) {
 			matchingIterator++;
 		} else {
 			match = false;
 		}
 
-		if (TilesPanel.imageCode[1][3] == TilesPanel.imageCode[2][4] && match) {
+		if (panel.getImageCode()[1][3] == panel.getImageCode()[2][4] && match) {
 			matchingIterator++;
 		} else {
 			match = false;
 		}
 
-		code = TilesPanel.imageCode[2][0];
+		code = panel.getImageCode()[2][0];
 		spinQuery[0] = matchingIterator;
 		spinQuery[1] = code;
 		return spinQuery;
@@ -115,31 +117,31 @@ public class Winnings {
 		int code = 8;
 		boolean match = true;
 
-		if (TilesPanel.imageCode[0][0] == TilesPanel.imageCode[1][1] && match) {
+		if (panel.getImageCode()[0][0] == panel.getImageCode()[1][1] && match) {
 			matchingIterator++;
 		} else {
 			match = false;
 		}
 
-		if (TilesPanel.imageCode[1][1] == TilesPanel.imageCode[2][2] && match) {
+		if (panel.getImageCode()[1][1] == panel.getImageCode()[2][2] && match) {
 			matchingIterator++;
 		} else {
 			match = false;
 		}
 
-		if (TilesPanel.imageCode[2][2] == TilesPanel.imageCode[1][3] && match) {
+		if (panel.getImageCode()[2][2] == panel.getImageCode()[1][3] && match) {
 			matchingIterator++;
 		} else {
 			match = false;
 		}
 
-		if (TilesPanel.imageCode[1][3] == TilesPanel.imageCode[0][4] && match) {
+		if (panel.getImageCode()[1][3] == panel.getImageCode()[0][4] && match) {
 			matchingIterator++;
 		} else {
 			match = false;
 		}
 
-		code = TilesPanel.imageCode[0][0];
+		code = panel.getImageCode()[0][0];
 		spinQuery[0] = matchingIterator;
 		spinQuery[1] = code;
 		return spinQuery;
@@ -161,7 +163,7 @@ public class Winnings {
 			result[1] = oneWinningLine(1)[1]; 
 			System.out.println("MidLine: " + result[0] + " " + queryForTileType(result[1]) + " match");
 			System.out.println("Bet x " + valueToMultiplyWithBet[result[1]][result[0]-1]);
-			sum = bet * valueToMultiplyWithBet[result[1]][result[0]-1];
+			sum = values.getBet() * valueToMultiplyWithBet[result[1]][result[0]-1];
 			
 		}
 
@@ -174,7 +176,7 @@ public class Winnings {
 				result[1] = oneWinningLine(k)[1];
 				System.out.println("Line " + k + ": " + result[0] + " " + queryForTileType(result[1]) + " match");
 				System.out.println("Bet x " + valueToMultiplyWithBet[result[1]][result[0]-1]);
-				sum += bet * valueToMultiplyWithBet[result[1]][result[0]-1];
+				sum += values.getBet() * valueToMultiplyWithBet[result[1]][result[0]-1];
 			}
 			
 		}
@@ -188,13 +190,13 @@ public class Winnings {
 			result[1] = ascendingLine()[1];
 			System.out.println("AscendingLine: " + result[0] + " " + queryForTileType(result[1]) + " match");
 			System.out.println("Bet x " + valueToMultiplyWithBet[result[1]][result[0]-1]);
-			sum += bet * valueToMultiplyWithBet[result[1]][result[0]-1];
+			sum += values.getBet() * valueToMultiplyWithBet[result[1]][result[0]-1];
 			
 			result[0] = descendingLine()[0];
 			result[1] = descendingLine()[1];
 			System.out.println("DescendingLine: " + result[0] + " " + queryForTileType(result[1]) + " match");
 			System.out.println("Bet x " + valueToMultiplyWithBet[result[1]][result[0]-1]);
-			sum += bet * valueToMultiplyWithBet[result[1]][result[0]-1];
+			sum += values.getBet() * valueToMultiplyWithBet[result[1]][result[0]-1];
 			
 		}
 		
