@@ -1,6 +1,7 @@
 package UserInterface;
 
 import static Main.ValuesToWorkWith.credit;
+import static Main.ValuesToWorkWith.winning;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,37 +13,35 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Functionality.ButtonsFunctionality;
-import Main.ValuesToWorkWith;
 
-public class ButtonsPanel {
+public class ButtonsPanel extends JPanel {
 
-	public JPanel buttonsPanel = new JPanel();
+	private static final long serialVersionUID = -8040401353962174500L;
 	
 	private Buttons buttons = new Buttons();
 	private Labels labels = new Labels();
 	private Fonts fonts = new Fonts();
 	private ButtonsFunctionality functions = new ButtonsFunctionality();
+	
 	private JPanel leftPanel = new JPanel();
 	private JPanel rightPanel = new JPanel();
 	private JPanel middlePanel = new JPanel();
-	
-	private ValuesToWorkWith values = new ValuesToWorkWith();
 
 	public ButtonsPanel() {
 
-		Dimension size = buttonsPanel.getPreferredSize();
+		Dimension size = getPreferredSize();
 		size.height = 150;
 		size.width = 350;
-		buttonsPanel.setPreferredSize(size);
-		buttonsPanel.setLayout(new GridLayout(1, 3));
+		setPreferredSize(size);
+		setLayout(new GridLayout(1, 3));
 		
 		leftPanel = createLeftPanel();
 		rightPanel = createRightPanel();
 		middlePanel = createMiddlePanel();
 		
-		buttonsPanel.add(leftPanel);
-		buttonsPanel.add(middlePanel);
-		buttonsPanel.add(rightPanel);
+		add(leftPanel);
+		add(middlePanel);
+		add(rightPanel);
 
 	}
 
@@ -80,7 +79,7 @@ public class ButtonsPanel {
 		panel.add(buttons.collect);
 	
 		buttons.collect.addActionListener(new ActionListener() {
-		@Override
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				functions.actionForCollect();
 			}
@@ -132,19 +131,11 @@ public class ButtonsPanel {
 		return Labels.creditLabel;
 	}
 	
-	public JLabel newWinning(){
-		Labels.winningLabel.setText(""+ values.getWinning());
+	public static JLabel newWinning(){
+		Labels.winningLabel.setText(""+winning);
 		Labels.winningLabel.setForeground(Color.RED);
 		return Labels.winningLabel;
 		
-	}
-
-	public JPanel getButtonsPanel() {
-		return buttonsPanel;
-	}
-
-	public void setButtonsPanel(JPanel buttonsPanel) {
-		this.buttonsPanel = buttonsPanel;
 	}
 	
 }
