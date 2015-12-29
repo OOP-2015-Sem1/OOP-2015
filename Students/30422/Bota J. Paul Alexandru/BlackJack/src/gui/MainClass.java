@@ -14,7 +14,7 @@ public class MainClass   {
 	  JFrame f=new JFrame();
 	  f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	  Interface p=new Interface();
-	  //f.setResizable(false);
+	  f.setResizable(false);
 	 f.setTitle("BlackJack");
 	  f.add(p);
 	 
