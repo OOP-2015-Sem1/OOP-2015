@@ -38,12 +38,12 @@ public class Game implements ActionListener{
 	
 	private void nextRound() {
 		
-		checkEndOfGame();
 		boardFrame.setPlayerInfo(activePlayer);
 		timeInterval = 2;
 		if(activePlayer.equals(COMPUTER)) {
 			//System.out.println(" computer");
-			hitPoint = boardConfiguration.activateComputer();
+			boardConfiguration.activateComputer();
+			hitPoint = boardConfiguration.getLastComputerHit();
 			startTimer();
 		}
 		else {
@@ -83,6 +83,7 @@ public class Game implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		timeInterval -=1;
 		if(timeInterval == 0) {
+			checkEndOfGame();
 			boardConfiguration.repaintHitCellAfterFire(hitPoint);
 			timer.stop();
 			switchPlayers();

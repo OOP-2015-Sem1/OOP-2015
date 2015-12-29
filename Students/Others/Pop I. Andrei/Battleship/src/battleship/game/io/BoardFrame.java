@@ -42,8 +42,8 @@ public class BoardFrame extends JFrame implements ActionListener{
 		this.theBoard = board;
 		this.ships =  board.getMyShips();
 		this.myGame = myGame;
-		myBoardCells = new JButton[MAX_ROW][MAX_COL];
-		computerBoardCells = new JButton[MAX_ROW][MAX_COL];
+		myBoardCells = board.getMyBoardCells();
+		computerBoardCells = board.getComputerBoardCells();
 		statusLabel = new JLabel();
 		playerLabel = new JLabel();
 		infoLabel = new JTextArea();
@@ -81,8 +81,7 @@ public class BoardFrame extends JFrame implements ActionListener{
 		statusLabel.setFont(new Font("Serif", Font.BOLD, 16));
 		playerLabel.setFont(new Font("Serif", Font.BOLD, 16));
 		infoLabel.setFont(new Font("Serif", Font.BOLD, 16));
-		infoLabel.setEditable(false);
-		infoLabel.setBackground(Color.LIGHT_GRAY);
+		
 		statusPanel.add(statusLabel);
 		statusPanel.add(playerLabel);
 		statusPanel.add(infoLabel);

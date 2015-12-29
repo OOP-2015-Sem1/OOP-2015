@@ -24,6 +24,10 @@ public class HandleShipHighlight extends MouseAdapter{
 		this.theBoard = theBoard;
 	}
 	
+	public void resetShipOrientation() {
+		shipOrientation = "horizontal";
+	}
+	
 	public void  setHiglightActive(boolean activate){
 		activeHighlight = activate;
 	}

@@ -35,7 +35,7 @@ public class Fire {
 		return false;
 	}	
 	
-	public void identifyTheHitShip(Point hitLocation, ArrayList<Ship> computerShips) {
+	public Ship identifyTheHitShip(Point hitLocation, ArrayList<Ship> computerShips) {
 		Ship myShip;
 		int life;
 		
@@ -45,10 +45,11 @@ public class Fire {
 				life = myShip.getLife();
 				myShip.setLife(life - 1);
 				markIfDestroyed(myShip);
+				return myShip;
 			}
 		}
 		
-		
+		return null;
 	}
 	
 }

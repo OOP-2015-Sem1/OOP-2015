@@ -11,6 +11,12 @@ public class RandomGenerator {
 	private final int MAX_DIM;
 	private JButton[][] playerBoardCells;
 	private char[][] computerMatrix;
+	private final int X = 0;
+	private final int LEFT = 0;
+	private boolean hitNear;
+	private int hitAxis;
+	private int hitDirection;
+	private Point lastHitPoint;
 	
 	public RandomGenerator(int MAX_DIM, JButton[][] playerBoardCells) {
 		this.MAX_DIM = MAX_DIM;
@@ -19,16 +25,96 @@ public class RandomGenerator {
 		fillInitialMatrix();
 	}
 	
-	private Point generateLocation() {
-		
-		
+	public void resetToDefault() {
+		hitNear = false;
+		hitAxis = X;
+		hitDirection = LEFT;
+	}
+	
+	public void setLastHitPoint(Point thePoint) {
+		lastHitPoint = thePoint;
+	}
+	
+	public void setHitNear(boolean hit) {
+		hitNear = hit;
+		hitAxis = X;
+		hitDirection = LEFT;
+	}
+	
+	public boolean getHitNear() {
+		return hitNear;
+	}
+	
+	public int getHitDirection() {
+		return hitDirection;
+	}
+	
+	public int getHitAxis() {
+		return hitAxis;
+	}
+	
+	public void changeHitAxis() {
+		hitAxis = 1-hitAxis;
+	}
+	
+	public void changeHitDirection() {
+		hitDirection = 1 - hitDirection;
+	}
+	
+	private Point generateRandomLocation() {
 		int x = (int) (Math.random() * MAX_DIM);
 		int y = (int) (Math.random() * MAX_DIM);
 		return new Point(x, y);
 	}
 	
+	private Point generateLocation() {
+		
+		if(hitNear == false) {
+			return generateRandomLocation();
+		}
+		else {
+			if(hitAxis == X) {
+				if(hitDirection == LEFT) {
+					if(lastHitPoint.y - 1 >= 0)
+						return new Point(lastHitPoint.x, lastHitPoint.y - 1);
+					else {
+						changeHitDirection();
+						return new Point(lastHitPoint.x, lastHitPoint.y + 1);
+					}
+				}
+				else {
+					if(lastHitPoint.x + 1 < MAX_DIM)
+						return new Point(lastHitPoint.x, lastHitPoint.y + 1);
+					else if(lastHitPoint.x - 1 >= 0){
+						changeHitAxis();
+						changeHitDirection();
+						return new Point(lastHitPoint.x - 1, lastHitPoint.y);
+					}
+				}
+			}
+			else {
+				if(hitDirection == LEFT) {
+					if(lastHitPoint.x - 1 >= 0)
+						return new Point(lastHitPoint.x - 1, lastHitPoint.y);
+					else {
+						changeHitDirection();
+						return new Point(lastHitPoint.x + 1, lastHitPoint.y);
+					}
+				}
+				else {
+					if(lastHitPoint.x + 1 < MAX_DIM)
+						return new Point(lastHitPoint.x + 1, lastHitPoint.y);
+					else
+						return generateRandomLocation();
+				}
+			}
+		}
+		
+		return generateRandomLocation();
+	}
+	
 	private boolean notValidHitLocation(Point hitLocation) {
-		if(playerBoardCells[hitLocation.x][hitLocation.y].getBackground() != Color.BLACK) {
+		if(playerBoardCells[hitLocation.x][hitLocation.y].getBackground() == Color.RED || playerBoardCells[hitLocation.x][hitLocation.y].getBackground() == Color.GRAY) {
 			return true;
 		}
 		return false;
@@ -36,8 +122,10 @@ public class RandomGenerator {
 	
 	public Point generateHit() {
 		Point hitLocation = generateLocation();
-		while(notValidHitLocation(hitLocation))
+		while(notValidHitLocation(hitLocation)) { 
 			hitLocation = generateLocation();
+			lastHitPoint = hitLocation;
+		}
 		return hitLocation;
 	}
 	

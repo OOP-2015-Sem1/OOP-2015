@@ -60,7 +60,7 @@ public class HandleFire extends Fire implements ActionListener {
 			computerBoardCells[hitPoint.x][hitPoint.y].setBackground(Color.RED); // show the hit ships with red
 		}
 		else {
-			computerBoardCells[hitPoint.x][hitPoint.y].setBackground(Color.GRAY); // show the hit ships with red
+			computerBoardCells[hitPoint.x][hitPoint.y].setBackground(Color.GRAY);// show the hit ships with red
 		}
 		computerBoardCells[hitPoint.x][hitPoint.y].setEnabled(false);
 		theGame.startTimer();
