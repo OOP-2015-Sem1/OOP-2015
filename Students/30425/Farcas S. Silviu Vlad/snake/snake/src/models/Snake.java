@@ -1,12 +1,10 @@
 package models;
 
-
 import views.*;
 import java.awt.Point;
 
 import java.util.ArrayList;
 import java.util.Random;
-
 
 public class Snake {
 
@@ -20,7 +18,7 @@ public class Snake {
 
 	public int tailLength = 14;
 
-	private Point head, cherry;
+	private Point head;
 
 	public Snake() {
 		ticks = 0;
@@ -40,151 +38,57 @@ public class Snake {
 
 			int maximumY = StartMenu.small * 27 + StartMenu.medium * 47 + StartMenu.large * 67;
 			int maximumX = StartMenu.small * 39 + StartMenu.medium * 59 + StartMenu.large * 79;
-
+			Point point = null;
 			if (direction == UP) {
-				boolean noTailAndNoObstaclesAtUp = noTailAndNoObstacleAt(head.x, head.y - 1, game);
-				boolean headGreaterThanZero = (head.y - 1 >= 0);
-				Point point = new Point(head.x, head.y - 1);
-				if (!StartMenu.goThroughWalls) {
-					if (noTailAndNoObstaclesAtUp) {
-						if (headGreaterThanZero) {
-							head = point;
-						} else {
-							game.setOver(true);
-						}
-					} else {
-						game.setOver(true);
-					}
-				} else {
-					if (headGreaterThanZero) {
-						if (noTailAndNoObstaclesAtUp) {
-							head = point;
-						} else {
-							game.setOver(true);
-						}
-					} else {
-						if (noTailAndNoObstacleAt(head.x, maximumY, game)) {
-							head = new Point(head.x, maximumY);
-						} else {
-							game.setOver(true);
-						}
-					}
-				}
+				point = new Point(head.x, head.y - 1);
 			}
-
 			if (direction == DOWN) {
-				boolean noTailAndNoObstaclesAtDown = noTailAndNoObstacleAt(head.x, head.y + 1, game);
-				boolean headSmallerThanMax = (head.y + 1 < maximumY);
-				Point point = new Point(head.x, head.y + 1);
-				if (!StartMenu.goThroughWalls) {
-					if (noTailAndNoObstaclesAtDown) {
-						if (headSmallerThanMax) {
-							head = point;
-						} else {
-							game.setOver(true);
-						}
-					} else {
-						game.setOver(true);
-					}
-				} else {
-					if (headSmallerThanMax) {
-						if (noTailAndNoObstaclesAtDown) {
-							head = point;
-						} else {
-							game.setOver(true);
-						}
-					} else {
-						if (noTailAndNoObstacleAt(head.x, 0, game)) {
-							head = new Point(head.x, 0);
-						} else {
-							game.setOver(true);
-						}
-					}
-				}
+				point = new Point(head.x, head.y + 1);
 			}
-
 			if (direction == LEFT) {
-				boolean noTailAndNoObstacleAtLeft = noTailAndNoObstacleAt(head.x - 1, head.y, game);
-				Point point = new Point(head.x - 1, head.y);
-				boolean headGreaterThanZero = (head.x - 1 >= 0);
-				if (!StartMenu.goThroughWalls) {
-					if (noTailAndNoObstacleAtLeft) {
-						if (headGreaterThanZero) {
-							head = point;
-						} else {
-							game.setOver(true);
-						}
-					} else {
-						game.setOver(true);
-					}
-				} else {
-					if (headGreaterThanZero) {
-						if (noTailAndNoObstacleAtLeft) {
-							head = point;
-						} else {
-							game.setOver(true);
-						}
-					} else {
-						if (noTailAndNoObstacleAt(maximumX, head.y, game)) {
-							head = new Point(maximumX, head.y);
-						} else {
-							game.setOver(true);
-						}
-					}
-				}
+				point = new Point(head.x - 1, head.y);
+			}
+			if (direction == RIGHT) {
+				point = new Point(head.x + 1, head.y);
 			}
 
-			if (direction == RIGHT)
-
-			{
-				boolean headSmallerThanMax = (head.x + 1 < maximumX);
-				Point point = new Point(head.x + 1, head.y);
-				boolean noTailAndNoObstacleAtRight = noTailAndNoObstacleAt(head.x + 1, head.y, game);
-				if (!StartMenu.goThroughWalls) {
-					if (noTailAndNoObstacleAtRight) {
-						if (headSmallerThanMax) {
-							head = point;
-						} else {
-							game.setOver(true);
-						}
-					} else {
-						game.setOver(true);
-					}
-				} else {
-					if (head.x + 1 < maximumX) {
-						if (noTailAndNoObstacleAtRight) {
-							head = point;
-						} else {
-							game.setOver(true);
-						}
-					} else {
-						if (noTailAndNoObstacleAt(0, head.y, game)) {
-							head = new Point(0, head.y);
-						} else {
-							game.setOver(true);
-						}
-					}
-				}
+			if (!noTailAndNoObstacleAt(point.x, point.y, game)) {
+				game.setOver(true);
 			}
 
-			if (snakeParts.size() > tailLength)
-
-			{
+			if (StartMenu.goThroughWalls) {
+				if (point.x < 0) {
+					point.x = maximumX;
+				}
+				if (point.y < 0) {
+					point.y = maximumY;
+				}
+				if (point.x > maximumX) {
+					point.x = 0;
+				}
+				if (point.y > maximumY) {
+					point.y = 0;
+				}
+			} else if (point.x < 0 || point.x > maximumX || point.y < 0 || point.y > maximumY) {
+				game.setOver(true);
+			}
+			if (!game.getOver()) {
+				head = point;
+			}
+			if (snakeParts.size() > tailLength) {
 				snakeParts.remove(0);
 
 			}
-
-			if (cherry != null)
-
-			{
-				if (head.equals(cherry)) {
+			if (game.getCherry() != null) {
+				if (head.equals(game.getCherry())) {
 					game.setScore(game.getScore() + 10);
 					tailLength++;
 					do {
-						cherry.setLocation(
-								random.nextInt(StartMenu.small * 39 + StartMenu.medium * 59 + StartMenu.large * 79),
+						game.getCherry()
+								.setLocation(random.nextInt(
+										StartMenu.small * 39 + StartMenu.medium * 59 + StartMenu.large * 79),
 								random.nextInt(StartMenu.small * 26 + StartMenu.medium * 46 + StartMenu.large * 66));
-					} while (noCherryAtObstacle(game) == false);
+					} while (game.noCherryAtObstacle() == false);
 				}
 			}
 		}
@@ -207,18 +111,6 @@ public class Snake {
 		return true;
 	}
 
-	public boolean noCherryAtObstacle(GameManagement game) {
-		if (game.getObstacles() == null) {
-			return true;
-		}
-		for (Point point : game.getObstacles()) {
-			if (cherry.equals(point)) {
-				return false;
-			}
-		}
-		return true;
-	}
-	
 	public ArrayList<Point> getSnakeParts() {
 		return snakeParts;
 	}
@@ -239,20 +131,12 @@ public class Snake {
 		this.head = head;
 	}
 
-	public Point getCherry() {
-		return cherry;
+	public void setDirection(int direction) {
+		this.direction = direction;
 	}
 
-	public void setCherry(Point cherry) {
-		this.cherry = cherry;
-	}
-
-	public void setDirection(int direction){
-		this.direction=direction;
-	}
-	
-	public int getDirection(){
+	public int getDirection() {
 		return direction;
 	}
-	
+
 }
