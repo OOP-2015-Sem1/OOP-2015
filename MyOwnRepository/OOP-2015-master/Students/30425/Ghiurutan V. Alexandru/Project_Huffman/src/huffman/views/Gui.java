@@ -16,7 +16,7 @@ public class Gui extends JFrame {
 	private DrawingWest drawTree;
 	private CodeDisplay codeDisplay;
 	private String inputText;
-	private JScrollPane scroll1, scroll2, scroll3, scroll4, scroll5, scroll6;
+	private JScrollPane scroll1, scroll2, scroll3, scroll4, scroll5, scroll6, scroll7;
 	private Border border;
 	private Handler handler;
 	private SouthArea1 southArea1;
@@ -100,7 +100,9 @@ public class Gui extends JFrame {
 
 	private void initializeWestSection() {
 		drawTree = new DrawingWest();
-		this.add(drawTree, BorderLayout.WEST);
+		scroll7 = new JScrollPane(drawTree, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		this.add(scroll7, BorderLayout.WEST);
 	}
 
 	private void initializeEastSection() {
@@ -138,6 +140,8 @@ public class Gui extends JFrame {
 				inputMessageArea2.setText("");
 				outputMessageArea1.setText("");
 				outputMessageArea2.setText("");
+				southArea1.clearArea();
+				southArea2.clearArea();
 				drawTree.clearTheWest();
 				huffman = new Huffman(inputText);
 				huffman.getSymbolsFrequency();
@@ -168,7 +172,6 @@ public class Gui extends JFrame {
 				codeDisplay.getFunction("drawTree");
 				southArea1.setEfficiencyResults(huffman);
 				southArea2.displayEncodingCharacteristics(huffman);
-				clickCount++;
 				JOptionPane.showMessageDialog(Gui.this,
 						"The simulation of Huffman tree construction ended.You can now decode and encode texts with this code.",
 						"Finish", JOptionPane.INFORMATION_MESSAGE);

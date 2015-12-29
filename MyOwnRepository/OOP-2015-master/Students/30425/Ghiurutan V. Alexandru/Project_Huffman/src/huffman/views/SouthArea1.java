@@ -12,6 +12,10 @@ public class SouthArea1 extends JTextArea {
 		this.setEditable(false);
 	}
 
+	public void clearArea() {
+		this.setText("");
+	}
+
 	public void setEfficiencyResults(Huffman huffman) {
 		huffman.computeAverageBitsPerLetter();
 		this.setText("The average number of bits per encoding is: " + huffman.getAverageBitsPerLetter() + ".\n");
