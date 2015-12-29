@@ -14,17 +14,16 @@ public class Paddle {
 	public MouseEvent e;
 	private int PADDLE_WIDTH = 200;
 	private int PADDLE_HEIGHT = 10;
-	private Color PADDLE_COLOR = Color.black;
-	private long TIME_DELAY = 2;
-	private int SCREEN_WIDTH, SCREEN_HEIGHT;
+	private Color PADDLE_COLOR = Color.gray;
 	public boolean mouseMoved;
+	private boolean paddleHit;
 
 	public Paddle(int x, int y, JFrame j) {
 
-		// this.x = x;
+		
 		this.y = y;
-		SCREEN_WIDTH = j.getWidth();
-		SCREEN_HEIGHT = j.getHeight();
+		j.getWidth();
+		j.getHeight();
 	}
 
 	public int getX() {
@@ -52,14 +51,23 @@ public class Paddle {
 		Graphics2D gp = (Graphics2D) g;
 		gp.setColor(PADDLE_COLOR);
 		gp.fillRoundRect((int) x, y, PADDLE_WIDTH, PADDLE_HEIGHT, 10, 10);
+		
 	}
 
 	public void movePaddle(JFrame j) {
 		j.addMouseMotionListener(new MouseMotionAdapter() {
 			public void mouseMoved(MouseEvent e) {
 				setX(e.getX());
+				
 			}
 		});
 
+	}
+	
+	public void setPaddleHit(boolean paddleWasHit){
+		this.paddleHit=paddleWasHit;
+	}
+	public boolean getPaddleHit(){
+		return paddleHit;
 	}
 }

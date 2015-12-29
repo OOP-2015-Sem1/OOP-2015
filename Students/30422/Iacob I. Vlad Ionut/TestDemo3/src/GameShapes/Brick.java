@@ -13,6 +13,8 @@ public class Brick {
 	private int y;
 	private boolean brickIsDead;
 	private Graphics g;
+	private int xDirection;
+	private int yDirection;
 
 	public Brick(int x, int y) {
 		this.x = x;
@@ -26,6 +28,8 @@ public class Brick {
 		gdr.setColor(brickcolor);
 		gdr.fillRoundRect(x, y, BRICK_WIDTH - 3, BRICK_HEIGHT - 3, 9, 9);
 	}
+	
+	
 
 	public int getY() {
 

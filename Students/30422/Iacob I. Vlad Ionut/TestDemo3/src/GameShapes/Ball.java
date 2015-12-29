@@ -4,12 +4,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.io.File;
-import java.util.Random;
 import java.util.TreeSet;
 import java.lang.Math;
 import javax.swing.JFrame;
 
-public class Ball extends Sound{
+public class Ball {
 
 	private int xDirection;
 	private int yDirection;
@@ -23,16 +22,23 @@ public class Ball extends Sound{
 	public TreeSet<Integer> yCoordinate = new TreeSet<Integer>();
 	public static File brickHit = new File("brick.wav");
 	public static File wallHit = new File("paddle.wav");
-	
-	public Ball(int x, int y, Color ballcolor, JFrame j)  {
+	private Sound sound;
+	private int GAME_SCREEN_WIDTH = 915;
+	private int GAME_SCREEN_HEIGHT = 850;
+	private boolean gameOver;
+	private int score;
+	private int brickCount = 0;
+
+	public Ball(int x, int y, Color ballcolor, JFrame j) {
 
 		this.x = x;
 		this.y = y;
-		SCREEN_WIDTH = j.getWidth();
-		SCREEN_HEIGHT = j.getHeight();
+
+		SCREEN_WIDTH = GAME_SCREEN_WIDTH;
+		SCREEN_HEIGHT = GAME_SCREEN_HEIGHT;
 		do {
-			xDirection = 2;
-			yDirection = 2;
+			xDirection = 3;
+			yDirection = 3;
 			if (Math.random() < .5) {
 				xDirection *= -1;
 			}
@@ -49,14 +55,12 @@ public class Ball extends Sound{
 
 		for (int i = 15; i <= 895; i += 110) {
 			xCoordinate.add(i);
-			// System.out.println(i);
 		}
 	}
 
 	public void yBrickCoordinates() {
 		for (int i = 35; i <= 235; i += 20) {
 			yCoordinate.add(i);
-			// System.out.println(i);
 		}
 	}
 
@@ -68,74 +72,72 @@ public class Ball extends Sound{
 		this.y += yDirection;
 		if (x < 0) {
 			xDirection *= -1;
+
 		}
 		if (y < 0) {
 			yDirection *= -1;
 		}
-		if (y + area  > SCREEN_HEIGHT) {
-			
+		if (y + area > SCREEN_HEIGHT) {
+
 			yDirection *= -1;
-			
 		}
-		if (x + area  > SCREEN_WIDTH) {
+		if (x + area > SCREEN_WIDTH) {
+
 			xDirection *= -1;
-			
-		}
-		if (y >= paddle.getY() && y < paddle.getY() + paddle.getHEIGHT()) {
-			if ((x < paddle.getX() + paddle.getWIDTH() / 2 - 45)&&(x>50)) {
-				yDirection *= -1;
-				xDirection *= -1;
-				PlaySound(wallHit);
-				
-			} else if ((x > paddle.getX() + paddle.getWIDTH() / 2 + 25)&&(x<350)) {
-				yDirection *= -1;
-				xDirection *= -1;
-				PlaySound(wallHit);
-				
-			}
-			else{
-				yDirection*=-1;
-				PlaySound(wallHit);
-			}
+
 		}
 
-		if ((x >= 15 && x <= 895) & (y >= 35 && y <= 235)) {
+		if (y + area >= 850) {
+			gameOver = true;
+		}
+
+		if ((y > paddle.getY()) && (y < paddle.getY() + paddle.getHEIGHT())) {
+			if ((x > paddle.getX()) && (x < paddle.getX() + paddle.getWIDTH())) {
+				yDirection *= -1;
+				sound.PlaySound(wallHit);
+				
+				
+			}
+
+		}
+
+		if ((x >= 15 && x <= 895) & (y >= 55 && y <= 235)) {
 
 			if (samplebrick[xCoordinate.floor(x)][yCoordinate.floor(y)].getVisibility() == false) {
-
-				System.out.println("collision at" + xCoordinate.floor(x) + " " + y);
-
 				if ((samplebrick[x][y].getY() <= yCoordinate.ceiling(y))
 						|| (samplebrick[x][y].getY() >= yCoordinate.floor(y))) {
-
 					yDirection *= -1;
+					score += 15;
 					
-				
 				}
-					System.out.println("collision at y");
-				  
-                samplebrick[xCoordinate.floor(x)][yCoordinate.floor(y)].setVisiblity(true);
-                PlaySound(brickHit);
-              
+				samplebrick[xCoordinate.floor(x)][yCoordinate.floor(y)].setVisiblity(true);
+				sound.PlaySound(brickHit);
+				score += 15;
+				brickCount+=1;
+
 			}
 		}
+		
 		try
 
 		{
 			Thread.sleep(TIME_DELAY);
 		} catch (
-				
+
 		Exception e) {
-			
+
 		}
 	}
-
 	public int getx() {
 		return x;
 	}
-	
+
 	public int gety() {
 		return y;
+	}
+
+	public boolean getGameOver() {
+		return gameOver;
 	}
 
 	public void Paint(Graphics g) {
@@ -143,5 +145,20 @@ public class Ball extends Sound{
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setColor(ballcolor);
 		g2d.fillOval(x, y, area, area);
+	}
+
+	public String getScore() {
+
+		return String.valueOf(score);
+	}
+
+	public void setGameOver(boolean b) {
+		this.gameOver = b;
+
+	}
+	
+	public int getBrickCount() {
+
+		return brickCount;
 	}
 }

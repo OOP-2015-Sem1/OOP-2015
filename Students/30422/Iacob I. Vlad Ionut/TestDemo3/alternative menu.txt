@@ -1,0 +1,22 @@
+JFrame mainMenu=new JFrame("Main Menu");
+		mainMenu.setSize(400, 400);
+		mainMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JPanel mainMenuPanel=new JPanel(new GridLayout(2,2,1,1));
+		NewGameButton.setBackground(Color.GREEN);
+		NewGameButton.setIcon(new ImageIcon("E:\\UTCN\\JAVA\\workspace\\TestDemo3\\play.png"));
+		mainMenuPanel.add(NewGameButton);
+		NewGameButton.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				Screen screen = new Screen();
+				screen.run();
+				mainMenu.setVisible(false);
+				
+			}
+			
+		});
+		mainMenu.add(mainMenuPanel);
+        mainMenu.setVisible(true);
+	}

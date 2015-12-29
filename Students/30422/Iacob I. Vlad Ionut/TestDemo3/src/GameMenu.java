@@ -14,18 +14,16 @@ import java.io.File;
 import GameShapes.Ball;
 import GameShapes.Sound;
 
-public class GameMenu extends Sound {
+public class GameMenu  {
 
 	
-
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		Screen screen = new Screen();
-		//PlaySound(music);
-
+	
+		Screen screen=new Screen();
 		screen.run();
 
-	}
-
+}
 }
