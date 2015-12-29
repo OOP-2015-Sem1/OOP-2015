@@ -1,5 +1,7 @@
-package com.gellert.digitalcatalog;
+package com.gellert.digitalcatalog.activities;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,7 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.gellert.digitalcatalog.R;
+
 public class LoginActivity extends AppCompatActivity {
+
+    private static final int USERTYPE_TEACHER = 1;
+    private static final int USERTYPE_STUDENT = 2;
 
     Button btnSignIn;
     EditText txtUsername;
@@ -35,10 +42,23 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(catalogDB.authenticateUser(username, password)) {
                     personID = catalogDB.getPersonID(username);
-                    Toast.makeText(LoginActivity.this, "Success: " + personID, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Welcome " + catalogDB.getPersonName(personID) + "!", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Toast.makeText(LoginActivity.this, "Fail", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Username or password is incorrect!", Toast.LENGTH_SHORT).show();
+                }
+
+                int userType = catalogDB.getUserType(personID);
+                if (userType == USERTYPE_TEACHER) {
+
+                }
+                else if (userType == USERTYPE_STUDENT) {
+                    Intent studentActivityIntent = new Intent(LoginActivity.this, StudentActivity.class);
+                    studentActivityIntent.putExtra("personID", String.valueOf(personID));
+                    startActivity(studentActivityIntent);
+                }
+                else {
+                    Toast.makeText(LoginActivity.this, "Error while getting USERTYPE.", Toast.LENGTH_SHORT).show();
                 }
 
             }
