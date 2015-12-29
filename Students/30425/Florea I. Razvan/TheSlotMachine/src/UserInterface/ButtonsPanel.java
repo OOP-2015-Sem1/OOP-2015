@@ -14,15 +14,14 @@ import javax.swing.JPanel;
 import Functionality.ButtonsFunctionality;
 import Main.ValuesToWorkWith;
 
-public class ButtonsPanel extends JPanel {
+public class ButtonsPanel {
 
-	private static final long serialVersionUID = -8040401353962174500L;
+	public JPanel buttonsPanel = new JPanel();
 	
 	private Buttons buttons = new Buttons();
 	private Labels labels = new Labels();
 	private Fonts fonts = new Fonts();
 	private ButtonsFunctionality functions = new ButtonsFunctionality();
-	
 	private JPanel leftPanel = new JPanel();
 	private JPanel rightPanel = new JPanel();
 	private JPanel middlePanel = new JPanel();
@@ -31,19 +30,19 @@ public class ButtonsPanel extends JPanel {
 
 	public ButtonsPanel() {
 
-		Dimension size = getPreferredSize();
+		Dimension size = buttonsPanel.getPreferredSize();
 		size.height = 150;
 		size.width = 350;
-		setPreferredSize(size);
-		setLayout(new GridLayout(1, 3));
+		buttonsPanel.setPreferredSize(size);
+		buttonsPanel.setLayout(new GridLayout(1, 3));
 		
 		leftPanel = createLeftPanel();
 		rightPanel = createRightPanel();
 		middlePanel = createMiddlePanel();
 		
-		add(leftPanel);
-		add(middlePanel);
-		add(rightPanel);
+		buttonsPanel.add(leftPanel);
+		buttonsPanel.add(middlePanel);
+		buttonsPanel.add(rightPanel);
 
 	}
 
@@ -81,7 +80,7 @@ public class ButtonsPanel extends JPanel {
 		panel.add(buttons.collect);
 	
 		buttons.collect.addActionListener(new ActionListener() {
-			@Override
+		@Override
 			public void actionPerformed(ActionEvent e) {
 				functions.actionForCollect();
 			}
@@ -138,6 +137,14 @@ public class ButtonsPanel extends JPanel {
 		Labels.winningLabel.setForeground(Color.RED);
 		return Labels.winningLabel;
 		
+	}
+
+	public JPanel getButtonsPanel() {
+		return buttonsPanel;
+	}
+
+	public void setButtonsPanel(JPanel buttonsPanel) {
+		this.buttonsPanel = buttonsPanel;
 	}
 	
 }

@@ -3,11 +3,12 @@ package Functionality;
 
 import static Main.ValuesToWorkWith.credit;
 
+import java.awt.Color;
+
 import javax.swing.JOptionPane;
 
 import Main.ValuesToWorkWith;
 import UserInterface.ButtonsPanel;
-import UserInterface.CustomizedFrame;
 import UserInterface.GamblingFrame;
 import UserInterface.Labels;
 import UserInterface.TilesPanel;
@@ -15,9 +16,8 @@ import UserInterface.TilesPanel;
 public class ButtonsFunctionality {
 	
 	private Winnings win = new Winnings();
-	private CustomizedFrame frame = new CustomizedFrame("");
 	private ValuesToWorkWith values = new ValuesToWorkWith();
-	private ButtonsPanel butPanel = new ButtonsPanel();
+	private TilesPanel tiles = new TilesPanel();
 
 	public void actionForSpin(){
 		
@@ -31,14 +31,11 @@ public class ButtonsFunctionality {
 		} else if (credit - values.getBet() >= 0){
 			
 			credit -= values.getBet();	
-			frame.getDisplay().setVisible(false);
-			TilesPanel.displayValues();
+			tiles.displayValues();
 			ButtonsPanel.newCredit();
-			frame.getDisplay().setVisible(true);
-			
 			values.setWinning(win.lookForWinnings(values.getNumberOfLines()));
-			butPanel.newWinning();
-			
+			Labels.winningLabel.setText(""+ values.getWinning());
+			Labels.winningLabel.setForeground(Color.RED);
 		}
 		
 		if (credit == 0 && values.getWinning() == 0) {
@@ -55,7 +52,6 @@ public class ButtonsFunctionality {
 			credit += values.getWinning();
 			ButtonsPanel.newCredit();
 			values.setWinning(0);
-			butPanel.newWinning();
 		}
 	}
 	

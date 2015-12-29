@@ -11,23 +11,23 @@ import javax.swing.JPanel;
 
 import static Main.Constants.NUMBER_OF_SPINNING_VALUES;
 
-public class TilesPanel extends JPanel {
-
-	private static final long serialVersionUID = 2039233574904754139L;
-	public static  JPanel[][] tile = new JPanel[3][5];
-	public static JLabel[][] thumb = new JLabel[3][5];
-	private static Random random = new Random();
-	public static int[][] imageCode = new int[3][5];
+public class TilesPanel {
+	
+	public JPanel[][] tile = new JPanel[3][5];
+	public JLabel[][] thumb = new JLabel[3][5];
+	private Random random = new Random();
+	public int[][] imageCode = new int[3][5];
+	private JPanel tilesPanel = new JPanel();
 
 	public TilesPanel() {
 
-		Dimension size = getPreferredSize();
+		Dimension size = tilesPanel.getPreferredSize();
 		size.height = 250;
 		size.width = 350;
-		setPreferredSize(size);
+		tilesPanel.setPreferredSize(size);
 
-		setBorder(BorderFactory.createTitledBorder("Good Luck !"));
-		setLayout(new GridLayout(3, 5));
+		tilesPanel.setBorder(BorderFactory.createTitledBorder("Good Luck !"));
+		tilesPanel.setLayout(new GridLayout(3, 5));
 
 		createTiles();
 
@@ -39,7 +39,7 @@ public class TilesPanel extends JPanel {
 			for (int j = 0; j < 5; j++) {
 				tile[i][j] = new JPanel();
 				tile[i][j].setBackground(Color.WHITE);
-				add(tile[i][j]);
+				tilesPanel.add(tile[i][j]);
 
 			}
 
@@ -47,7 +47,7 @@ public class TilesPanel extends JPanel {
 		return tile;
 	}
 
-	public static  int[][] displayValues() {
+	public int[][] displayValues() {
 
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 5; j++) {
@@ -58,8 +58,24 @@ public class TilesPanel extends JPanel {
 				tile[i][j].add(thumb[i][j]);
 			}
 		}
+		tilesPanel.setVisible(true);
 
 		return imageCode;
 	}
 
+	public JPanel getTilesPanel() {
+		return tilesPanel;
+	}
+
+	public void setTilesPanel(JPanel tilesPanel) {
+		this.tilesPanel = tilesPanel;
+	}
+	
+	public int[][] getImageCode() {
+		return imageCode;
+	}
+
+	public void setImageCode(int[][] imageCode) {
+		this.imageCode = imageCode;
+	}
 }
