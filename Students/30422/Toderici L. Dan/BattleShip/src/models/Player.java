@@ -13,9 +13,9 @@ public class Player
 	private ArrayList<Ship> playerShips ;
 
 	private Board placementBoard;
-    private HuntingBoard huntingBoard;
-    //private boolean wasHit;
-    
+	private HuntingBoard huntingBoard;
+	//private boolean wasHit;
+
 	public Player(String name)
 	{
 		setName(name);
@@ -28,9 +28,17 @@ public class Player
 		//		this.setHuntingBoard(new HuntingBoard(placementBoard.getBoard(), "Player 1"));
 
 	}
-	public void initHuntingBoard(BoardPiece[][] checkBoard)
+
+	//	public void initHuntingBoard(BoardPiece[][] checkBoard)
+	//	{
+	//		this.huntingBoard = new HuntingBoard(checkBoard);
+	//	}
+
+	public boolean initHuntingBoard(BoardPiece[][] checkBoard)
 	{
 		this.huntingBoard = new HuntingBoard(checkBoard);
+	
+			return true;
 	}
 
 	public void addShips( ArrayList<Ship>groupOfShips)
@@ -92,7 +100,7 @@ public class Player
 		return true;
 
 	}
-	
+
 	public boolean isShipOfTypeDestroyed(int type)
 	{
 		Ship ship = getShipOfType(type);
@@ -122,14 +130,14 @@ public class Player
 		huntingBoard.printHuntingBoard();
 	}
 
-		public HuntingBoard getHuntingBoard() {
-			return huntingBoard;
-		}
-	
-		public void setHuntingBoard(HuntingBoard huntingBoard) {
-			this.huntingBoard = huntingBoard;
-		}
-		
+	public HuntingBoard getHuntingBoard() {
+		return huntingBoard;
+	}
+
+	public void setHuntingBoard(HuntingBoard huntingBoard) {
+		this.huntingBoard = huntingBoard;
+	}
+
 	public Board getPlacementBoard() {
 		return placementBoard;
 	}
@@ -148,41 +156,77 @@ public class Player
 		return this.name;
 	}
 
-	public void placementMadeByPlayer(Scanner input)
+	//	public void placementMadeByPlayer(Scanner input)
+	//	{
+	//		String inputString = null;
+	//
+	//		while(!placementBoard.getIsBoardReady())
+	//		{
+	//			inputString = input.nextLine();
+	//			if(placementBoard.verifyInput(inputString))
+	//			{
+	//
+	//				if(inputString.equals("S") && this.areAllShipsPlaced())
+	//				{
+	//					System.out.println("intra");
+	//					placementBoard.setIsBoardReady(true);
+	//					System.out.println(name+"is ready");
+	//					break;
+	//				}
+	//				else if(inputString.equals("S") && !this.areAllShipsPlaced())
+	//				{
+	//					System.out.println(inputString);
+	//					System.out.println("Not or ships are placed");
+	//				}
+	//				else if(!this.getShipOfType(inputString.charAt(0)-'0').getIsPlaced())
+	//				{
+	//					placementBoard.placeShipOnBoard(this.initShipToBePlaced(inputString, inputString.charAt(0) - '0' ));
+	//					
+	//						//this.setShipOfTypeAsPlaced(inputString.charAt(0)-'0');
+	//
+	//					
+	//				}
+	//				else
+	//				{
+	//					int type = inputString.charAt(0)-'0';
+	//					System.out.println("No ships of size "+type+" are left to be placed");
+	//				}
+	//			}
+	//		}
+	//	}
+
+	public void placementMadeByPlayer(String inputString)
 	{
-		String inputString = null;
+		System.out.println("input :"+inputString);
 
-		while(!placementBoard.getIsBoardReady())
+		if(placementBoard.verifyInput(inputString))
 		{
-			inputString = input.nextLine();
-			if(placementBoard.verifyInput(inputString))
+
+			if(inputString.equals("S") && this.areAllShipsPlaced())
 			{
+				System.out.println("intra");
+				placementBoard.setIsBoardReady(true);
+				System.out.println(name+"is ready");
+				//break;
+			}
+			else if(inputString.equals("S") && !this.areAllShipsPlaced())
+			{
+				System.out.println(inputString);
+				System.out.println("Not or ships are placed");
+			}
+			else if(!this.getShipOfType(inputString.charAt(0)-'0').getIsPlaced())
+			{
+				placementBoard.placeShipOnBoard(this.initShipToBePlaced(inputString, inputString.charAt(0) - '0' ));
 
-				if(inputString.equals("S") && this.areAllShipsPlaced())
-				{
-					System.out.println("intra");
-					placementBoard.setIsBoardReady(true);
-					System.out.println(name+"is ready");
-					break;
-				}
-				else if(inputString.equals("S") && !this.areAllShipsPlaced())
-				{
-					System.out.println(inputString);
-					System.out.println("Not or ships are placed");
-				}
-				else if(!this.getShipOfType(inputString.charAt(0)-'0').getIsPlaced())
-				{
-					placementBoard.placeShipOnBoard(this.initShipToBePlaced(inputString, inputString.charAt(0) - '0' ));
-					
-						//this.setShipOfTypeAsPlaced(inputString.charAt(0)-'0');
+				//this.setShipOfTypeAsPlaced(inputString.charAt(0)-'0');
 
-					
-				}
-				else
-				{
-					int type = inputString.charAt(0)-'0';
-					System.out.println("No ships of size "+type+" are left to be placed");
-				}
+
+			}
+			else
+			{
+				int type = inputString.charAt(0)-'0';
+				System.out.println("No ships of size "+type+" are left to be placed");
+				placementBoard.setErrorMessage("No ships of size "+type+" are left to be placed");
 			}
 		}
 	}
@@ -215,32 +259,8 @@ public class Player
 		//System.out.println("Ship of type:"+ship.getSize()+" at location"+ship.getPartAtIndex(0).getLocation().getX()+"-"+ship.getPartAtIndex(0).getLocation().getY());
 		return ship;
 	}
-	
-//	public String takeAHit(Scanner scanner)
-//	{
-//		System.out.println(getName()+ " place coordinates for hit:");
-//		
-//		String coordinates = this.huntingBoard.hitCell(scanner.nextLine());
-//		if(!coordinates.equals("N"))
-//		{
-//			String[] parts = coordinates.split("-");
-//			int row = Integer.parseInt(parts[0]);
-//			int column = Integer.parseInt(parts[1]);
-//			setWasHit(placementBoard.markAsHitOrMiss(row, column));
-//			
-//		}
-//		return coordinates;
-//		
-//	}
 
-//	public boolean getWasHit() {
-//		return wasHit;
-//	}
-//
-//	public void setWasHit(boolean wasHit) {
-//		this.wasHit = wasHit;
-//	}
-//	
-	
-	
+
+
+
 }

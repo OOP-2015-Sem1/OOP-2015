@@ -38,19 +38,18 @@ public class HuntingBoard {
 			{
 				if(checkBoard[rowToHit][columnToHit].getPiece().equals("_@_|"))
 				{
-					
 					huntingBoard[rowToHit][columnToHit].setPiece("_X_|");
 					returnCoordinates = rowToHit +"-"+ columnToHit;
 					this.printHuntingBoard();
+					//System.out.println("C:"+returnCoordinates);
 					return returnCoordinates;
 				}
 				else
 				{
-
-					
 					huntingBoard[rowToHit][columnToHit].setPiece("_O_|");
 					returnCoordinates = rowToHit +"-"+ columnToHit;
 					this.printHuntingBoard();
+					//System.out.println("C:"+returnCoordinates);
 					return returnCoordinates;
 				}
 			}

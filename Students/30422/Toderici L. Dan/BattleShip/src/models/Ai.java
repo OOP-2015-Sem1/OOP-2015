@@ -105,8 +105,8 @@ public class Ai extends Player
 
 
 			Point nextLocation = getCoordinatesInSameArea();
-			nextLocation.x =  nextLocation.x +1;
-			nextLocation.y = nextLocation.y +1;
+			nextLocation.x =  nextLocation.x+1 ;
+			nextLocation.y = nextLocation.y+1;
 			
 			System.out.println("next location: "+nextLocation.x+" "+nextLocation.y);
 
@@ -231,7 +231,7 @@ public class Ai extends Player
 
 		int row = 0;
 		int column = 0;
-
+		System.out.println("dir:"+direction);
 		System.out.println("last coordinates: "+getCoordinatesOfLastHitPart().x + " "+getCoordinatesOfLastHitPart().y);
 
 		switch(direction)

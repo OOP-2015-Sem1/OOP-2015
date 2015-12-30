@@ -8,6 +8,9 @@ public class Board
 {
 	private BoardPiece[][] board ;
 	private boolean isBoardReady = false;
+	private String errorMessage;
+	private String messageToTheEnemy;
+	
 	
 	public Board()
 	{
@@ -58,6 +61,7 @@ public class Board
 				{
 					System.out.println(input.length());
 					System.out.println("Invalid Input. Try Again");
+					setErrorMessage("Invalid Input. Try Again");
 					return false;
 				}
 			}
@@ -70,6 +74,7 @@ public class Board
 			if(input.charAt(0)!= 'S')
 			{
 				System.out.println("Invalid Input. Try Again.");
+				setErrorMessage("Invalid Input. Try Again");
 				return false;
 			}
 		}
@@ -79,11 +84,13 @@ public class Board
 			if(((int)input.charAt(3)-49) >= 9 || ((int)input.charAt(3)-49) < 0)
 			{
 				System.out.println("Invalid Column. Try Again.");
+				setErrorMessage("Invalid Input. Try Again");
 				return false;
 			}
 			else if((int)input.charAt(5) != 72 && (int)input.charAt(5) != 86)
 			{
 				System.out.println("Invalid Orientation. Try Again.");
+				setErrorMessage("Invalid Orientation. Try Again.");
 				return false;
 			}
 			//System.out.println("R:"+Integer.parseInt(""+(input.charAt(2)-65))+" C:"+Integer.parseInt(""+input.charAt(3))+" S:"+Integer.parseInt(""+input.charAt(0))+" O:"+input.charAt(5));
@@ -98,16 +105,19 @@ public class Board
 			if(input.charAt(3)!='1')
 			{
 				System.out.println("Invalid Column. Try Again.");
+				setErrorMessage("Invalid Column. Try Again.");
 				return false;
 			}
 			else if(input.charAt(4)!='0')
 			{
 				System.out.println("Invalid Column. Try Again.");
+				setErrorMessage("Invalid Column. Try Again.");
 				return false;
 			}
 			else if((int)input.charAt(6) != 72 && (int)input.charAt(6) != 86)
 			{
 				System.out.println("Invalid Orientation. Try Again.");
+				setErrorMessage("Invalid Orientation. Try Again.");
 				return false;
 			}
 
@@ -120,11 +130,13 @@ public class Board
 			if(input.charAt(0) - '0' >= 6)
 			{
 				System.out.println("Invalid Ship Type. Try Again.");
+				setErrorMessage("Invalid Ship Type. Try Again.");
 				return false;
 			}
 			else if(((int)input.charAt(2)-65) >= 10 || ((int)input.charAt(2)-65) < 0)
 			{
 				System.out.println("Invalid Row. Try Again.");
+				setErrorMessage("Invalid Row. Try Again.");
 				return false;
 			}
 		}
@@ -139,6 +151,7 @@ public class Board
 			if(column+size>10)
 			{
 				System.out.println("Ship to big to be put orizontaly");
+				setErrorMessage("Ship to big to be put orizontaly");
 				return false;
 			}
 		}
@@ -147,6 +160,7 @@ public class Board
 			if(row+size>10)
 			{
 				System.out.println("Ship to big to be put verticaly");
+				setErrorMessage("Ship to big to be put verticaly");
 				return false;
 			}
 		}
@@ -243,6 +257,7 @@ public class Board
 		else
 		{
 			System.out.println("Invalid Placement. Ships Overlap.");
+			setErrorMessage("Invalid Placement. Ships Overlap.");
 		}
 	}
 	
@@ -257,11 +272,12 @@ public class Board
 	public int markAsHitOrMiss(int row,int column)
 	{
 
-		if(board[row][column].getPiece().equals("_@_|"))
+		if(board[row][column].getPiece().equals("_@_|")||board[row][column].getPiece().equals("_X_|"))
 		{
 
 			board[row][column].setPiece("_X_|");
 			System.out.println("HIT");
+			setMessageToTheEnemy("HIT!");
 			return board[row][column].getType();
 
 		}
@@ -269,9 +285,27 @@ public class Board
 		{
 			board[row][column].setPiece("_O_|");
 			System.out.println("MISS");
+			setMessageToTheEnemy("MISS!");
 		}
+		
 		return 0;
 
+	}
+
+	public String getErrorMessage() {
+		return errorMessage;
+	}
+
+	public void setErrorMessage(String errorMessage) {
+		this.errorMessage = errorMessage;
+	}
+	
+	public String getMessageToTheEnemy() {
+		return messageToTheEnemy;
+	}
+
+	public void setMessageToTheEnemy(String message) {
+		this.messageToTheEnemy = message;
 	}
 
 }
