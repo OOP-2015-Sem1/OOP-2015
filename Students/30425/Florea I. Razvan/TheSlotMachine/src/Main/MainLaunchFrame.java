@@ -6,10 +6,13 @@ import Functionality.UserDialog;
 
 public class MainLaunchFrame {
 	
+	static CustomizedFrame frame = new CustomizedFrame("Slot Machine -- OOP Project --");
+	
 	public static void main(String[] args) {
 		
 		credit=UserDialog.getInitialCredit();
-		new CustomizedFrame("OOP Project  --Slot Machine--");
+		frame.getMainFrame();
+		
 	}
 	
 	

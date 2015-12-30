@@ -1,5 +1,7 @@
 package UserInterface;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
@@ -7,6 +9,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
 
+import Functionality.ButtonsFunctionality;
 import Main.ValuesToWorkWith;
 
 public class Buttons {
@@ -23,6 +26,8 @@ public class Buttons {
 	public JRadioButton fiveLines = new JRadioButton("5 Lines", false);
 	private ButtonGroup groupLines = new ButtonGroup();
 	private ButtonGroup groupBet = new ButtonGroup();
+	
+	private ButtonsFunctionality functions = new ButtonsFunctionality();
 	
 	private ValuesToWorkWith values = new ValuesToWorkWith();
 	
@@ -45,6 +50,31 @@ public class Buttons {
 		bet2.addItemListener(new ClassForBet(bet2.getText()));
 		bet3.addItemListener(new ClassForBet(bet3.getText()));
 		bet4.addItemListener(new ClassForBet(bet4.getText()));
+		
+		collect.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				functions.actionForCollect();
+			}
+		});
+		
+		
+		gamble.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				functions.actionForGamble();
+			}
+			
+		});
+		
+		
+		spin.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				functions.actionForSpin();
+			}
+		});
 	}
 
 	 private class ClassForLines implements ItemListener{

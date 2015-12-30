@@ -3,36 +3,44 @@ package UserInterface;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
 
-public class CustomizedFrame extends JFrame {
-
-	private static final long serialVersionUID = -2596512545482309233L;
+public class CustomizedFrame {
 
 	private TilesPanel display;
 	private ButtonsPanel controlPanel;
+	private JFrame mainFrame = new JFrame();
 	
 	public CustomizedFrame(String title) {
 		
-		super(title);
+		mainFrame.setTitle(title);
 		display = new TilesPanel();
 		controlPanel = new ButtonsPanel();
 		
-		setDefaultCloseOperation(CustomizedFrame.EXIT_ON_CLOSE);
-		setSize(700, 500);
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.setSize(700, 500);
 		
-		setLayout(new BorderLayout());
-		add(display, BorderLayout.CENTER);
-		add(controlPanel, BorderLayout.SOUTH);
+		mainFrame.setLayout(new BorderLayout());
+		mainFrame.add(display.getTilesPanel(), BorderLayout.CENTER);
+		mainFrame.add(controlPanel.getButtonsPanel(), BorderLayout.SOUTH);
 
-		setLocationRelativeTo(null);
-		setVisible(true);
+		mainFrame.setLocationRelativeTo(null);
+		mainFrame.setVisible(true);
+	}
+	
+	public JFrame getMainFrame() {
+		return mainFrame;
 	}
 
+
+	public void setMainFrame(JFrame mainFrame) {
+		this.mainFrame = mainFrame;
+	}
+	
 	public TilesPanel getDisplay() {
 		return display;
 	}
 
-	public void setDisplay(TilesPanel display) {
-		this.display = display;
+	public void setDisplay(TilesPanel tilesPanel) {
+		this.display = tilesPanel;
 	}
 
 	public ButtonsPanel getControlPanel() {
@@ -42,5 +50,4 @@ public class CustomizedFrame extends JFrame {
 	public void setControlPanel(ButtonsPanel controlPanel) {
 		this.controlPanel = controlPanel;
 	}
-	
 }
