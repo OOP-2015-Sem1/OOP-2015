@@ -10,19 +10,21 @@ import views.*;
 public class GameManagement {
 
 	private boolean over = false, paused;
-	
+
 	private RenderPanel renderPanel;
 
 	private int time, score;
 
 	private SnakeTimer snakeTimer;
-	
+
 	private ArrayList<Point> obstacles = new ArrayList<Point>();
-	
+
 	private Snake snake;
 
+	private Point cherry;
+
 	public GameManagement(Snake snake) {
-		this.snake=snake;
+		this.snake = snake;
 	}
 
 	public void startGame() {
@@ -34,10 +36,10 @@ public class GameManagement {
 		snake.setHead(new Point(0, -1));
 		Random random = new Random();
 		snake.getSnakeParts().clear();
-		snake.setCherry(new Point(random.nextInt(StartMenu.small * 39 + StartMenu.medium * 59 + StartMenu.large * 79),
-				random.nextInt(StartMenu.small * 26 + StartMenu.medium * 46 + StartMenu.large * 66)));
+		cherry = new Point(random.nextInt(StartMenu.small * 39 + StartMenu.medium * 59 + StartMenu.large * 79),
+				random.nextInt(StartMenu.small * 26 + StartMenu.medium * 46 + StartMenu.large * 66));
 		if (StartMenu.easy == 1) {
-			obstacles=null;
+			obstacles = null;
 		}
 		if (StartMenu.normal == 1) {
 			for (int i = 0; i < StartMenu.small * 20 + StartMenu.medium * 40 + StartMenu.large * 80; i++) {
@@ -54,15 +56,26 @@ public class GameManagement {
 			}
 		}
 		do {
-			snake.setCherry(
-					new Point(random.nextInt(StartMenu.small * 39 + StartMenu.medium * 59 + StartMenu.large * 79),
-							random.nextInt(StartMenu.small * 26 + StartMenu.medium * 46 + StartMenu.large * 66)));
-		} while (snake.noCherryAtObstacle(this) == false);
+			cherry = new Point(random.nextInt(StartMenu.small * 39 + StartMenu.medium * 59 + StartMenu.large * 79),
+					random.nextInt(StartMenu.small * 26 + StartMenu.medium * 46 + StartMenu.large * 66));
+		} while (noCherryAtObstacle() == false);
 		RenderPanel.jframe.addKeyListener(new SnakeKey(snake, this));
 		snakeTimer = new SnakeTimer(this, snake);
 		snakeTimer.timer.start();
 	}
 
+	public boolean noCherryAtObstacle() {
+		if (obstacles == null) {
+			return true;
+		}
+		for (Point point : obstacles) {
+			if (cherry.equals(point)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	public boolean getOver() {
 		return over;
 	}
@@ -94,7 +107,7 @@ public class GameManagement {
 	public void setScore(int score) {
 		this.score = score;
 	}
-	
+
 	public RenderPanel getRenderPanel() {
 		return renderPanel;
 	}
@@ -103,15 +116,23 @@ public class GameManagement {
 		this.renderPanel = renderPanel;
 	}
 
-	public void setObstacles(ArrayList<Point> obstacles){
-		this.obstacles=obstacles;
+	public void setObstacles(ArrayList<Point> obstacles) {
+		this.obstacles = obstacles;
 	}
 
-	public ArrayList<Point> getObstacles(){
+	public ArrayList<Point> getObstacles() {
 		return obstacles;
 	}
-	
+
 	public void addObstacles(Point part) {
 		obstacles.add(part);
+	}
+
+	public Point getCherry() {
+		return cherry;
+	}
+
+	public void setCherry(Point cherry) {
+		this.cherry = cherry;
 	}
 }

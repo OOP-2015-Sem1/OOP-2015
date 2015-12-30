@@ -61,7 +61,7 @@ public class RenderPanel extends JPanel {
 
 		g.setColor(Color.RED);
 
-		g.fillRect(snake.getCherry().x * Snake.SCALE, snake.getCherry().y * Snake.SCALE, Snake.SCALE, Snake.SCALE);
+		g.fillRect(game.getCherry().x * Snake.SCALE, game.getCherry().y * Snake.SCALE, Snake.SCALE, Snake.SCALE);
 
 		String string = "Score: " + game.getScore() + ", Length: " + snake.tailLength + ", Time: " + game.getTime() / 20;
 
