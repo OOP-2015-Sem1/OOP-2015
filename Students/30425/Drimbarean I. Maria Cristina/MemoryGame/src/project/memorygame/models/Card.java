@@ -22,7 +22,7 @@ public class Card extends JButton {
 		if (flipped == true) {
 			if (matched != true) {
 				flipped = false;
-				this.setIcon(new ImageIcon("D:\\Worckspace Java\\MemoryGame\\src\\Pictures\\ironthrone.jpg"));
+				this.setIcon(new ImageIcon(this.getClass().getResource("/ironthrone.jpg")));
 				// to remote the spacing between the image and button's borders
 				this.setMargin(new Insets(0, 0, 0, 0));
 				// to remove the border
@@ -31,7 +31,7 @@ public class Card extends JButton {
 		} else {
 			flipped = true;
 			this.setIcon(
-					new ImageIcon("D:\\Worckspace Java\\MemoryGame\\src\\Pictures\\" + Integer.toString(id) + ".jpg"));
+					new ImageIcon(this.getClass().getResource("/"+Integer.toString(id) + ".jpg")));
 			// to remote the spacing between the image and button's borders
 			this.setMargin(new Insets(0, 0, 0, 0));
 			// to remove the border
@@ -43,7 +43,7 @@ public class Card extends JButton {
 	 * Constructor
 	 */
 	public Card() {
-		this.setIcon(new ImageIcon("D:\\Worckspace Java\\MemoryGame\\src\\Pictures\\ironthrone.jpg"));
+		this.setIcon(new ImageIcon(this.getClass().getResource("/ironthrone.jpg")));
 		// to remote the spacing between the image and button's borders
 		this.setMargin(new Insets(0, 0, 0, 0));
 		// to remove the border
