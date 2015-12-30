@@ -5,12 +5,12 @@ import java.awt.event.KeyListener;
 
 import models.*;
 
-public class SnakeKey implements KeyListener {
+public class SnakeController implements KeyListener {
 
 	private Snake snake;
 	private GameManagement game;
 
-	public SnakeKey(Snake snake, GameManagement game) {
+	public SnakeController(Snake snake, GameManagement game) {
 		this.snake = snake;
 		this.game = game;
 	}
@@ -36,7 +36,7 @@ public class SnakeKey implements KeyListener {
 
 		if (i == KeyEvent.VK_SPACE) {
 			if (game.getOver()) {
-				RenderPanel.jframe.dispose();
+				game.getGameFrame().dispose();
 			} else {
 				game.setPaused(!game.getPaused());
 			}

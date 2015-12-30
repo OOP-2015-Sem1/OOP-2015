@@ -4,6 +4,8 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JFrame;
+
 import controllers.*;
 import views.*;
 
@@ -59,7 +61,7 @@ public class GameManagement {
 			cherry = new Point(random.nextInt(StartMenu.small * 39 + StartMenu.medium * 59 + StartMenu.large * 79),
 					random.nextInt(StartMenu.small * 26 + StartMenu.medium * 46 + StartMenu.large * 66));
 		} while (noCherryAtObstacle() == false);
-		RenderPanel.jframe.addKeyListener(new SnakeKey(snake, this));
+		getGameFrame().addKeyListener(new SnakeController(snake, this));
 		snakeTimer = new SnakeTimer(this, snake);
 		snakeTimer.timer.start();
 	}
@@ -134,5 +136,8 @@ public class GameManagement {
 
 	public void setCherry(Point cherry) {
 		this.cherry = cherry;
+	}
+	public JFrame getGameFrame(){
+		return renderPanel.getFrame();
 	}
 }
