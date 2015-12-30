@@ -1,4 +1,5 @@
 package logic;
+
 import java.awt.Point;
 
 import javax.swing.JButton;
@@ -7,11 +8,11 @@ import javax.swing.JOptionPane;
 import graphics.MorrisIcons;
 import login.FileSerialization;
 
-
 public class GameLogic {
 	public JButton[][] buttons = new JButton[13][13];
 	public int[][] matrix = new int[13][13];
-	private static final int MAX_PLAYER_PIECES = 5;
+	public JButton hint = new JButton();
+	private static final int MAX_PLAYER_PIECES = 4;
 	private static final int WIN_BONUS = 1;
 	private boolean deleteMode = false;
 	private boolean movementInProgress = false;
@@ -28,7 +29,6 @@ public class GameLogic {
 		}
 		return logic;
 	}
-	
 
 	public GameLogic() {
 		playerOne.setPlayerMoves(0);
@@ -72,6 +72,10 @@ public class GameLogic {
 		if (!deleteMode) {
 			if (!movementInProgress) {
 				if (matrix[indexI][indexJ] == getCurrentPlayer().getTag()) {
+					if (playerOne.isActive())
+						gameHint(5);
+					else if (playerTwo.isActive())
+						gameHint(7);
 					selectedPiece = getPosition(source);
 					movementInProgress = true;
 				}
@@ -83,19 +87,23 @@ public class GameLogic {
 					matrix[pieceIndexI][pieceIndexJ] = 0;
 					buttons[pieceIndexI][pieceIndexJ].setIcon(icons.Button);
 					if (getCurrentPlayer().getTag() == 1) {
+						gameHint(6);
 						playerOne.setOldNumberOfMorris(numberOfMorrisOnBoard(playerOne));
 					}
 					if (getCurrentPlayer().getTag() == 2) {
+						gameHint(4);
 						playerTwo.setOldNumberOfMorris(numberOfMorrisOnBoard(playerTwo));
 					}
 					matrix[indexI][indexJ] = getCurrentPlayer().getTag();
 					if (getCurrentPlayer().getTag() == 1 && !deleteMode) {
+						displayRemovalHint(2);
 						if (newMorrisOnTable()) {
 							deleteMode = true;
 						}
 						buttons[indexI][indexJ].setIcon(icons.R);
 					}
 					if (getCurrentPlayer().getTag() == 2 && !deleteMode) {
+						displayRemovalHint(2);
 						if (newMorrisOnTable()) {
 							deleteMode = true;
 						}
@@ -114,18 +122,26 @@ public class GameLogic {
 
 	public void gamePartThree() {
 		if (playerOne.getPlayerPieces() == 2) {
-			serial.account[serial.getFirstPlayerAccountNr()].setScore(serial.account[serial.getFirstPlayerAccountNr()].getScore()-WIN_BONUS);
-			serial.account[serial.getSecondPlayerAccountNr()].setScore(serial.account[serial.getSecondPlayerAccountNr()].getScore()+WIN_BONUS);
-			JOptionPane.showMessageDialog(null, serial.account[serial.getSecondPlayerAccountNr()].getName()+" WINS. Score : " + serial.account[serial.getSecondPlayerAccountNr()].getScore());
-			JOptionPane.showMessageDialog(null, serial.account[serial.getFirstPlayerAccountNr()].getName()+" LOSES. Score : " + serial.account[serial.getFirstPlayerAccountNr()].getScore());
+			serial.account[serial.getFirstPlayerAccountNr()]
+					.setScore(serial.account[serial.getFirstPlayerAccountNr()].getScore() - WIN_BONUS);
+			serial.account[serial.getSecondPlayerAccountNr()]
+					.setScore(serial.account[serial.getSecondPlayerAccountNr()].getScore() + WIN_BONUS);
+			JOptionPane.showMessageDialog(null, serial.account[serial.getSecondPlayerAccountNr()].getName()
+					+ " WINS. Score : " + serial.account[serial.getSecondPlayerAccountNr()].getScore());
+			JOptionPane.showMessageDialog(null, serial.account[serial.getFirstPlayerAccountNr()].getName()
+					+ " LOSES. Score : " + serial.account[serial.getFirstPlayerAccountNr()].getScore());
 			serial.createAccount("onlySave");
 			System.exit(0);
 		}
 		if (playerTwo.getPlayerPieces() == 2) {
-			serial.account[serial.getFirstPlayerAccountNr()].setScore(serial.account[serial.getFirstPlayerAccountNr()].getScore()+WIN_BONUS);
-			serial.account[serial.getSecondPlayerAccountNr()].setScore(serial.account[serial.getSecondPlayerAccountNr()].getScore()-WIN_BONUS);
-			JOptionPane.showMessageDialog(null, serial.account[serial.getFirstPlayerAccountNr()].getName()+" WINS. Score : " + serial.account[serial.getFirstPlayerAccountNr()].getScore());
-			JOptionPane.showMessageDialog(null, serial.account[serial.getSecondPlayerAccountNr()].getName()+" LOSES. Score : " + serial.account[serial.getSecondPlayerAccountNr()].getScore());
+			serial.account[serial.getFirstPlayerAccountNr()]
+					.setScore(serial.account[serial.getFirstPlayerAccountNr()].getScore() + WIN_BONUS);
+			serial.account[serial.getSecondPlayerAccountNr()]
+					.setScore(serial.account[serial.getSecondPlayerAccountNr()].getScore() - WIN_BONUS);
+			JOptionPane.showMessageDialog(null, serial.account[serial.getFirstPlayerAccountNr()].getName()
+					+ " WINS. Score : " + serial.account[serial.getFirstPlayerAccountNr()].getScore());
+			JOptionPane.showMessageDialog(null, serial.account[serial.getSecondPlayerAccountNr()].getName()
+					+ " LOSES. Score : " + serial.account[serial.getSecondPlayerAccountNr()].getScore());
 			serial.createAccount("onlySave");
 			System.exit(0);
 		}
@@ -135,15 +151,49 @@ public class GameLogic {
 		int position = getPosition(source);
 		if (matrix[position / 100][position % 100] == 0) {
 			if (playerOne.isActive() && (playerOne.getPlayerMoves() < MAX_PLAYER_PIECES)) {
+				gameHint(1);
 				source.setIcon(icons.R);
 				playerOne.incrementMoves();
 				switchPlayer();
 				matrix[position / 100][position % 100] = 1;
 			} else if (playerTwo.isActive() && playerTwo.getPlayerMoves() < MAX_PLAYER_PIECES) {
+				gameHint(0);
 				source.setIcon(icons.B);
 				playerTwo.incrementMoves();
 				switchPlayer();
 				matrix[position / 100][position % 100] = 2;
+			}
+		}
+		displayRemovalHint(1);
+		if (playerOne.getPlayerMoves() == MAX_PLAYER_PIECES && playerTwo.getPlayerMoves() == MAX_PLAYER_PIECES) {
+			if (playerOne.isActive())
+				gameHint(4);
+			else if (playerTwo.isActive())
+				gameHint(6);
+		}
+	}
+
+	public void displayRemovalHint(int gamePart) {
+		if (gamePart==1){
+			if (getCurrentPlayer().getTag() == 2) {
+				if (numberOfMorrisOnBoard(playerOne) > playerOne.getOldNumberOfMorris()) {
+					gameHint(2);
+				}
+			} else if (getCurrentPlayer().getTag() == 1) {
+				if (numberOfMorrisOnBoard(playerTwo) > playerTwo.getOldNumberOfMorris()) {
+					gameHint(3);
+				}
+			}
+		}
+		if (gamePart == 2) {
+			if (getCurrentPlayer().getTag() == 1) {
+				if (numberOfMorrisOnBoard(playerOne) > playerOne.getOldNumberOfMorris()) {
+					gameHint(2);
+				}
+			} else if (getCurrentPlayer().getTag() == 2) {
+				if (numberOfMorrisOnBoard(playerTwo) > playerTwo.getOldNumberOfMorris()) {
+					gameHint(3);
+				}
 			}
 		}
 	}
@@ -269,6 +319,17 @@ public class GameLogic {
 		if (matrix[position / 100][position % 100] == 2)
 			playerTwo.decrementPieces();
 		matrix[position / 100][position % 100] = 0;
+		if (playerOne.getPlayerMoves() != MAX_PLAYER_PIECES && playerTwo.getPlayerMoves() != MAX_PLAYER_PIECES) {
+			if (playerOne.isActive())
+				gameHint(0);
+			else if (playerTwo.isActive())
+				gameHint(1);
+		} else if (playerOne.getPlayerMoves() == MAX_PLAYER_PIECES && playerTwo.getPlayerMoves() == MAX_PLAYER_PIECES) {
+			if (playerOne.isActive())
+				gameHint(4);
+			else if (playerTwo.isActive())
+				gameHint(6);
+		}
 	}
 
 	public void switchPlayer() {
@@ -290,11 +351,46 @@ public class GameLogic {
 	public int getPosition(JButton source) {
 		return Integer.parseInt(source.getName());
 	}
+
 	protected Point getPieceIndeces(int position) {
 		Point pieceIndeces = new Point();
 
 		pieceIndeces.x = position / 100;
 		pieceIndeces.y = position % 100;
 		return pieceIndeces;
+	}
+
+	private void gameHint(int hintNumber) {
+		switch (hintNumber) {
+		case 0:
+			hint.setText("Red turn to place");
+			break;
+		case 1:
+			hint.setText("Black turn to place");
+			break;
+
+		case 2:
+			hint.setText("Red turn to remove black piece");
+			break;
+
+		case 3:
+			hint.setText("Black turn to remove red piece");
+			break;
+
+		case 4:
+			hint.setText("Red turn to select piece to move");
+			break;
+
+		case 5:
+			hint.setText("Red turn to select where to move the piece");
+			break;
+		case 6:
+			hint.setText("Black turn to select piece to move");
+			break;
+
+		case 7:
+			hint.setText("Black turn to select where to move the piece");
+			break;
+		}
 	}
 }

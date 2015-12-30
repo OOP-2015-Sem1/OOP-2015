@@ -16,7 +16,7 @@ public class FileSerialization {
 	private static final int NO = 0;
 	public Account account[];
 	private static FileSerialization instance = null;
-	private int numberOfAccounts = 4;
+	private int numberOfAccounts = 6;
 	private JTextField playerName = new JTextField(10);;
 	private int firstPlayerAccountNr = -1;
 	private int secondPlayerAccountNr = -1;

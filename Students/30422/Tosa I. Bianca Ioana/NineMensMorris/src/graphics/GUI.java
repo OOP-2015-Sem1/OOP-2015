@@ -1,5 +1,8 @@
 package graphics;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
@@ -17,13 +20,15 @@ public class GUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel board = new JPanel();
 	private MorrisIcons icons = MorrisIcons.getInstance();
-	PVP playerMovesOnBoard = new PVP();
+	private PVP playerMovesOnBoard = new PVP();
 	private GameLogic logic = GameLogic.getInstance();
-	FileSerialization serial = FileSerialization.getInstance();
-
+	private FileSerialization serial = FileSerialization.getInstance();
+	
 	public GUI() {
 		super("Board");
+		setLayout(new BorderLayout());
 		setBoard();
+		instructionPanel();
 		playerMovesOnBoard.playerVsPlayer();
 		serial.login();
 	}
@@ -133,10 +138,23 @@ public class GUI extends JFrame {
 			}
 		}
 
-		add(board);
+		add(board,BorderLayout.CENTER);
 		setVisible(true);
 		setSize(840, 840);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
+	
+	private void instructionPanel(){
+		JPanel hintPanel = new JPanel();
+		Font myFont = new Font("Calibri", Font.BOLD, 30);
+		logic.hint.setFont(myFont);
+		logic.hint.setBorder(null);
+		logic.hint.setEnabled(false);
+		hintPanel.add(logic.hint);
+		add(hintPanel, BorderLayout.NORTH);
+		hintPanel.setVisible(true);
+		hintPanel.setSize(50,840);	
+	}
+	
 }
