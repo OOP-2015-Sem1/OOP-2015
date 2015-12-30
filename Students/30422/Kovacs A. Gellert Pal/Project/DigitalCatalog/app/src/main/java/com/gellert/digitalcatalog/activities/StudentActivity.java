@@ -31,7 +31,7 @@ public class StudentActivity extends AppCompatActivity {
         student = getStudentInfoFromDatabase(personID);
 
         txtNameAndClass = (TextView)findViewById(R.id.txtNameAndClass);
-        txtNameAndClass.setText(student.getName() + " - " + student.getClassName());
+        txtNameAndClass.setText("Signed in as " + student.getName() + " - " + student.getClassName());
 
         ListAdapter adapter = new MarkListAdapter(this, student.getMarks());
         markList = (ListView) findViewById(R.id.listView);

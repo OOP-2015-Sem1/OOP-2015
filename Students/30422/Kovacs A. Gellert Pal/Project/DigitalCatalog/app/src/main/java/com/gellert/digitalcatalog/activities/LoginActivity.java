@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.gellert.digitalcatalog.R;
+import com.gellert.digitalcatalog.models.Teacher;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -39,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = txtUsername.getText().toString();
                 String password = txtPassword.getText().toString();
+                txtUsername.setText("");
+                txtPassword.setText("");
 
                 if(catalogDB.authenticateUser(username, password)) {
                     personID = catalogDB.getPersonID(username);
@@ -50,7 +53,9 @@ public class LoginActivity extends AppCompatActivity {
 
                 int userType = catalogDB.getUserType(personID);
                 if (userType == USERTYPE_TEACHER) {
-
+                    Intent teacherActivityIntent = new Intent(LoginActivity.this, TeacherActivity.class);
+                    teacherActivityIntent.putExtra("personID", String.valueOf(personID));
+                    startActivity(teacherActivityIntent);
                 }
                 else if (userType == USERTYPE_STUDENT) {
                     Intent studentActivityIntent = new Intent(LoginActivity.this, StudentActivity.class);
@@ -61,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Error while getting USERTYPE.", Toast.LENGTH_SHORT).show();
                 }
 
+                personID = 0;
             }
         });
     }
