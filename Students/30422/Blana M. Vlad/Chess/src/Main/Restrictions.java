@@ -3,6 +3,8 @@ package Main;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import pieces.Colors;
 import pieces.Piece;
 
@@ -15,7 +17,7 @@ public class Restrictions {
 		controller.whiteTurn = !controller.whiteTurn;
 		if (color == Colors.WHITE) {
 			list = controller.movementManager.generateAllMoves(chessBoard,
-					Colors.BLACK, controller);
+					Colors.BLACK, controller, false);
 			for (Movement element : list) {
 				controller.whiteKingPosition.source = element.source;
 
@@ -28,7 +30,7 @@ public class Restrictions {
 
 		} else {
 			list = controller.movementManager.generateAllMoves(chessBoard,
-					Colors.WHITE, controller);
+					Colors.WHITE, controller, false);
 			for (Movement element : list) {
 				controller.blackKingPosition.source = element.source;
 				if (element.equals(controller.blackKingPosition)) {
@@ -40,7 +42,7 @@ public class Restrictions {
 		}
 		controller.whiteTurn = !controller.whiteTurn;
 		controller.board.flipBoard(chessBoard);
-		System.out.println(controller.whiteKingPosition.destination);
+		// System.out.println(controller.whiteKingPosition.destination);
 
 		return true;
 	}
@@ -62,7 +64,7 @@ public class Restrictions {
 		controller.whiteTurn = !controller.whiteTurn;
 		if (color == Colors.WHITE) {
 			list = controller.movementManager.generateAllMoves(chessBoard,
-					Colors.BLACK, controller);
+					Colors.BLACK, controller, false);
 			for (Movement element : list) {
 				if (element.destination.x == row
 						&& element.destination.y == column) {
@@ -78,7 +80,7 @@ public class Restrictions {
 
 		} else {
 			list = controller.movementManager.generateAllMoves(chessBoard,
-					Colors.WHITE, controller);
+					Colors.WHITE, controller, false);
 			for (Movement element : list) {
 				if (element.destination.x == row
 						&& element.destination.y == column) {
@@ -98,8 +100,43 @@ public class Restrictions {
 		controller.enableRightWhiteCastle = temp2;
 		controller.enableLeftBlackCastle = temp3;
 		controller.enableRightBlackCastle = temp4;
-		System.out.println(controller.whiteKingPosition.destination);
 
 		return true;
+	}
+
+	public static void isKingInCheck(Controller controller, Piece[][] chessBoard) {
+		if (controller.whiteTurn == true) {
+			if (kingSafety(chessBoard, Colors.WHITE, controller) == false) {
+				JOptionPane.showMessageDialog(null, "Check!");
+			}
+		} else {
+			if (kingSafety(chessBoard, Colors.BLACK, controller) == false) {
+				JOptionPane.showMessageDialog(null, "Check!");
+			}
+		}
+
+	}
+
+	public static void isCheckMate(Controller controller, Piece[][] chessBoard) {
+		List<Movement> list = new ArrayList<Movement>();
+		if (controller.whiteTurn == false) {
+			if (kingSafety(chessBoard, Colors.BLACK, controller) == false) {
+				list = controller.movementManager.generateAllMoves(chessBoard,
+						Colors.BLACK, controller, true);
+				if (list.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "CheckMate!");
+					System.exit(0);
+				}
+			}
+		} else {
+			if (kingSafety(chessBoard, Colors.WHITE, controller) == false) {
+				list = controller.movementManager.generateAllMoves(chessBoard,
+						Colors.WHITE, controller, true);
+				if (list.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "CheckMate!");
+					System.exit(0);
+				}
+			}
+		}
 	}
 }

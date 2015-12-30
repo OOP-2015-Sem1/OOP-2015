@@ -6,6 +6,8 @@ import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -19,6 +21,7 @@ public class UserInterface extends JPanel implements MouseListener,
 	int mouseX, mouseY, newMouseX, newMouseY, squareSize = 100;
 	private Movement dragMove = new Movement();
 	private Controller controller = MainChess.controller;
+	private boolean moveHighlightMatrix[][] = new boolean[8][8];
 
 	public UserInterface() {
 		this.addMouseListener(this);
@@ -28,6 +31,7 @@ public class UserInterface extends JPanel implements MouseListener,
 	@Override
 	public void paintComponent(Graphics g) {
 		Piece[][] chessBoard = controller.board.getBoard();
+
 		super.paintComponent(g);
 		this.setBackground(new Color(80, 80, 80));
 
@@ -38,6 +42,14 @@ public class UserInterface extends JPanel implements MouseListener,
 			g.setColor(new Color(150, 50, 30));
 			g.fillRect((((i + 1) % 8) - ((i + 1) / 8) % 2) * squareSize,
 					(i / 8) * squareSize, squareSize, squareSize);
+		}
+		for (int i = 0; i < 64; i++) {
+			if (moveHighlightMatrix[i / 8][i % 8] == true) {
+				g.setColor(new Color(12, 200, 12, 100));
+				g.fillRect(i % 8 * squareSize, (i / 8) * squareSize,
+						squareSize, squareSize);
+
+			}
 		}
 		Image chessPieceImage;
 		chessPieceImage = new ImageIcon("ChessPieces.png").getImage();
@@ -119,10 +131,25 @@ public class UserInterface extends JPanel implements MouseListener,
 	}
 
 	public void mousePressed(MouseEvent e) {
+		Piece[][] chessBoard = controller.board.getBoard();
 		if (e.getX() < 8 * squareSize && e.getY() < 8 * squareSize) {
 			// if inside the board
+			for (int i = 0; i <= 7; i++) {
+				for (int j = 0; j <= 7; j++) {
+					moveHighlightMatrix[i][j] = false;
+				}
+			}
 			mouseX = e.getX();
 			mouseY = e.getY();
+			int row, column;
+			row = mouseY / squareSize;
+			column = mouseX / squareSize;
+			List<Movement> list = new ArrayList<Movement>();
+			list = chessBoard[row][column].possibleMove(row, column,
+					chessBoard, true, controller);
+			for (Movement element : list) {
+				moveHighlightMatrix[element.destination.x][element.destination.y] = true;
+			}
 			repaint();
 		}
 	}
@@ -133,6 +160,12 @@ public class UserInterface extends JPanel implements MouseListener,
 			// if inside the board
 			newMouseX = e.getX();
 			newMouseY = e.getY();
+			for (int i = 0; i <= 7; i++) {
+				for (int j = 0; j <= 7; j++) {
+					moveHighlightMatrix[i][j] = false;
+				}
+			}
+			repaint();
 			if (e.getButton() == MouseEvent.BUTTON1) {
 				if (chessBoard[newMouseY / squareSize][newMouseX / squareSize] != controller.emptySpace) {
 					dragMove.setMove(mouseY / squareSize, mouseX / squareSize,
@@ -155,6 +188,7 @@ public class UserInterface extends JPanel implements MouseListener,
 					if (controller.whiteTurn == false) {
 						for (int i = 0; i <= 7; i++) {
 							for (int j = 0; j <= 7; j++) {
+								moveHighlightMatrix[i / 8][i % 8] = false;
 								if (chessBoard[i][j].getType() == Pieces.KING
 										&& chessBoard[i][j].getColor() == Colors.WHITE) {
 									controller.whiteKingPosition.destination.x = i;
@@ -173,9 +207,14 @@ public class UserInterface extends JPanel implements MouseListener,
 							}
 						}
 					}
-					repaint();
-				}
+					//
 
+					repaint();
+
+					//
+				}
+				Restrictions.isCheckMate(controller, chessBoard);
+				Restrictions.isKingInCheck(controller, chessBoard);
 			}
 
 		}

@@ -312,7 +312,7 @@ public class King extends Piece {
 			}
 		}
 		if (currentColor == Colors.WHITE) {
-			System.out.println("pula me");
+
 			if (controller.enableLeftWhiteCastle == true) {
 				try {// castle left white
 					finalCondition = (Restrictions.checkSquareSafety(0, 3,
@@ -322,9 +322,11 @@ public class King extends Piece {
 							&& Restrictions.checkSquareSafety(0, 5,
 									Colors.WHITE, chessBoard, controller)
 							&& Restrictions.checkSquareSafety(0, 6,
-									Colors.WHITE, chessBoard, controller) && Restrictions
-							.checkSquareSafety(0, 7, Colors.WHITE, chessBoard,
-									controller));
+									Colors.WHITE, chessBoard, controller)
+							&& Restrictions.checkSquareSafety(0, 7,
+									Colors.WHITE, chessBoard, controller)
+							&& chessBoard[7][1] == controller.emptySpace
+							&& chessBoard[7][2] == controller.emptySpace && chessBoard[7][3] == controller.emptySpace);
 					if (finalCondition == true) {
 						move = new Movement();
 						move.setMove(row, column, 7, 2, false);
@@ -341,9 +343,10 @@ public class King extends Piece {
 							&& Restrictions.checkSquareSafety(0, 1,
 									Colors.WHITE, chessBoard, controller)
 							&& Restrictions.checkSquareSafety(0, 2,
-									Colors.WHITE, chessBoard, controller) && Restrictions
-							.checkSquareSafety(0, 3, Colors.WHITE, chessBoard,
-									controller));
+									Colors.WHITE, chessBoard, controller)
+							&& Restrictions.checkSquareSafety(0, 3,
+									Colors.WHITE, chessBoard, controller)
+							&& chessBoard[7][5] == controller.emptySpace && chessBoard[7][6] == controller.emptySpace);
 					if (finalCondition == true) {
 						move = new Movement();
 						move.setMove(row, column, 7, 6, false);
@@ -356,7 +359,7 @@ public class King extends Piece {
 
 		}
 		if (currentColor == Colors.BLACK) {
-			System.out.println("pula ta");
+
 			if (controller.enableLeftBlackCastle == true) {
 				try {// castle left black
 
@@ -365,9 +368,10 @@ public class King extends Piece {
 							&& Restrictions.checkSquareSafety(0, 5,
 									Colors.BLACK, chessBoard, controller)
 							&& Restrictions.checkSquareSafety(0, 6,
-									Colors.BLACK, chessBoard, controller) && Restrictions
-							.checkSquareSafety(0, 7, Colors.BLACK, chessBoard,
-									controller));
+									Colors.BLACK, chessBoard, controller)
+							&& Restrictions.checkSquareSafety(0, 7,
+									Colors.BLACK, chessBoard, controller)
+							&& chessBoard[7][1] == controller.emptySpace && chessBoard[7][2] == controller.emptySpace);
 					if (finalCondition == true) {
 						move = new Movement();
 						move.setMove(row, column, 7, 1, false);
@@ -377,25 +381,29 @@ public class King extends Piece {
 				} catch (Exception e) {
 				}
 			}
+			if (controller.enableLeftBlackCastle == true) {
+				try {// castle right black
 
-			try {// castle right black
-				finalCondition = (Restrictions.checkSquareSafety(0, 0,
-						Colors.BLACK, chessBoard, controller)
-						&& Restrictions.checkSquareSafety(0, 1, Colors.BLACK,
-								chessBoard, controller)
-						&& Restrictions.checkSquareSafety(0, 2, Colors.BLACK,
-								chessBoard, controller)
-						&& Restrictions.checkSquareSafety(0, 3, Colors.BLACK,
-								chessBoard, controller) && Restrictions
-						.checkSquareSafety(0, 4, Colors.BLACK, chessBoard,
-								controller));
-				if (finalCondition == true) {
-					move = new Movement();
-					move.setMove(row, column, 7, 6, false);
-					list.add(move);
+					finalCondition = (Restrictions.checkSquareSafety(0, 0,
+							Colors.BLACK, chessBoard, controller)
+							&& Restrictions.checkSquareSafety(0, 1,
+									Colors.BLACK, chessBoard, controller)
+							&& Restrictions.checkSquareSafety(0, 2,
+									Colors.BLACK, chessBoard, controller)
+							&& Restrictions.checkSquareSafety(0, 3,
+									Colors.BLACK, chessBoard, controller)
+							&& Restrictions.checkSquareSafety(0, 4,
+									Colors.BLACK, chessBoard, controller)
+							&& chessBoard[7][4] == controller.emptySpace
+							&& chessBoard[7][5] == controller.emptySpace && chessBoard[7][6] == controller.emptySpace);
+					if (finalCondition == true) {
+						move = new Movement();
+						move.setMove(row, column, 7, 5, false);
+						list.add(move);
+					}
+
+				} catch (Exception e) {
 				}
-
-			} catch (Exception e) {
 			}
 		}
 		return list;
