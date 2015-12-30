@@ -3,8 +3,7 @@ public class GameRunner {
 
 	public static void main(String[] args) {
 		
-		GameController theApp = new GameController();
-		theApp.start();
+		new BigController();
 	}
 
 }
