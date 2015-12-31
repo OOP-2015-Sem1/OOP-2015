@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.jooq</groupId>
+        <artifactId>jooq-parent</artifactId>
+        <version>3.7.1</version>
+    </parent>
+
+    <groupId>org.jooq</groupId>
+    <artifactId>jooq-scala</artifactId>
+    <name>jOOQ Scala</name>
+
+    <properties>
+        <scala.version>2.10.5</scala.version>
+        <org.h2.version>1.4.181</org.h2.version>
+    </properties>
+
+    <build>
+        <sourceDirectory>src/main/scala</sourceDirectory>
+        <testSourceDirectory>src/test/scala</testSourceDirectory>
+        <plugins>
+
+            <!-- [pro] xxx
+            xxxx xxx xx xxxx xxxxxx xx xxxxxx xxxx xxx
+            xxxxxxxx
+                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                xxxxxxxxxxxxxxxxxxxxxx
+
+                xxxxxxxxxxxxxx
+                    xxxxxxxxxxxx
+                        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                        xxxxxxxxxxxxxxxxxxxxxxxxxxx
+                        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                    xxxxxxxxxxxxx
+                xxxxxxxxxxxxxxx
+
+                xxxx xxxxxx xxxxxxxxxxxxx xxxxxx xx xxx xxxxxxxxxx xxx
+                xxxxxxxxxxxxxxx
+                    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                    xxxxxxxxxxxxxxxxxxxxxxx
+                    xxxxxxxxxxxxxxxxxxxxx
+                    xxxxxxx xxxxxxxxxx xxx xxxxxxx xx xxxxxxxxxxxxxxxxxxxxxx xxx
+                    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                xxxxxxxxxxxxxxxx
+
+                xxxxxxxxxxxx
+                    xxxxxxxxxxx
+                        xxxxxxxxxxxxxxxxxxxxxxxx
+                        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                        xxxxxxx
+                            xxxxxxxxxxxxxxxxxxxx
+                        xxxxxxxx
+                        xxxxxxxxxxxxxxx
+                            xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                            xxxxxxxxxx
+                                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                            xxxxxxxxxxx
+                        xxxxxxxxxxxxxxxx
+                    xxxxxxxxxxxx
+                xxxxxxxxxxxxx
+            xxxxxxxxx
+
+            xxxx xxx xxxx xxxx xxxxxxxxx xxxxxx xxx xxxxxxxx x xxxxxx xxx x xxxxx xxx
+            xxxxxxxx
+                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                xxxxxxxxxxxxxxxxxxxxxxxx
+                xxxxxxxxxxxx
+                    xxxxxxxxxxx
+                        xxxxxxxxxxxxxx
+                        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                        xxxxxxx
+                            xxxxxxxxxxxxxxxxxxxxx
+                        xxxxxxxx
+                        xxxxxxxxxxxxxxx
+                            xxxxxx
+                                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                xxxxxxxxxxxxxxx
+                                xxxxxxxxxxxxxxxxxxxxx
+                            xxxxxxx
+                            xxxxxxxxxxx
+                                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                xxxxxxxxxx
+                                    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                xxxxxxxxxxx
+                                xxxxxxxxxx
+                                    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                    xxxxxxxxxxxxxxxxxxx
+                                xxxxxxxxxxx
+                                
+                                xxxx xxxxxxx xxxx xxxxxxxx xxxx xxxxxx xx xxxxxxxx xxx xxxxxxxxxxxxx xxxxx
+                                             xxx xxx xxxxx xxxxxx xx xxxx xxx
+                                xxxxxxxxxx
+                                    xxxxxxxxxx
+                                        xxxxxxxx
+                                            xxxxxxx
+                                                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                            xxxxxxxx
+                                        xxxxxxxxx
+                                    xxxxxxxxxxx
+                                xxxxxxxxxxx
+                                xxxxxxxx
+                                    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                xxxxxxxxx
+                            xxxxxxxxxxxx
+                        xxxxxxxxxxxxxxxx
+                    xxxxxxxxxxxx
+                xxxxxxxxxxxxx
+                
+                xxxxxxxxxxxxxx
+                    xxxxxxxxxxxx
+                        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                        xxxxxxxxxxxxxxxxxxxxxxxxxxx
+                        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                    xxxxxxxxxxxxx
+                xxxxxxxxxxxxxxx
+            xxxxxxxxx
+            xxxx [/pro] -->
+
+            <!-- The Scala compiler plugin -->
+            <plugin>
+                <groupId>org.scala-tools</groupId>
+                <artifactId>maven-scala-plugin</artifactId>
+                <version>2.15.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- The jar plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.3.2</version>
+                <executions>
+                    <execution>
+                        <id>empty-javadoc-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>javadoc</classifier>
+                            <classesDirectory>${basedir}/javadoc</classesDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jooq</groupId>
+            <artifactId>jooq</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>${scala.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-compiler</artifactId>
+            <version>${scala.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${org.h2.version}</version>
+            <type>jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest_2.10</artifactId>
+            <version>2.2.5</version>
+            <type>jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
+            <type>jar</type>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.jooq</groupId>
+        <artifactId>jooq-parent</artifactId>
+        <version>3.7.1</version>
+    </parent>
+
+    <groupId>org.jooq</groupId>
+    <artifactId>jooq</artifactId>
+    <name>jOOQ</name>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.jooq.org/inc/LICENSE.txt</url>
+            <distribution>repo</distribution>
+        </license>
+        <!-- [pro] xxx
+        xxxxxxxxx
+            xxxxxxxxxx xxxxxxx xxx xxxxxxxxxxx xxxxxxxxxxxxxxxx
+            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        xxxxxxxxxx
+        xxxx [/pro] -->
+    </licenses>
+
+    <build>
+        <plugins>
+            <!-- XJC-generate JAXB artefacts. Contribution is the courtesy
+                 of Sergey Epik -->
+            <plugin>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+                <version>0.8.1</version>
+                <executions>
+                    <!-- If this causes trouble in your Eclipse m2e lifecycle configuration, try using
+                         http://m2eclipse.sonatype.org/sites/m2e/, instead of the official m2e Eclipse
+                         plugin
+                      -->
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <extension>true</extension>
+                    <strict>false</strict>
+                    <schemaDirectory>src/main/resources/xsd</schemaDirectory>
+                    <bindingDirectory>src/main/resources/xjb</bindingDirectory>
+                    <schemaIncludes>
+                        <include>jooq-runtime-3.7.0.xsd</include>
+                    </schemaIncludes>
+                    <generatePackage>org.jooq.conf</generatePackage>
+                    <args>
+                        <arg>-Xxew</arg>
+                        <arg>-Xxew:instantiate lazy</arg>
+                        <arg>-Xxew:delete</arg>
+                        <arg>-Xfluent-api</arg>
+                        <arg>-Xdefault-value</arg>
+                        <arg>-Xannotate</arg>
+                        <arg>-Xinheritance</arg>
+                    </args>
+                    <plugins>
+                        <plugin>
+                            <groupId>com.github.jaxb-xew-plugin</groupId>
+                            <artifactId>jaxb-xew-plugin</artifactId>
+                            <version>1.0</version>
+                       </plugin>
+                        <plugin>
+                            <groupId>org.jvnet.jaxb2_commons</groupId>
+                            <artifactId>jaxb2-fluent-api</artifactId>
+                            <version>3.0</version>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.jvnet.jaxb2_commons</groupId>
+                            <artifactId>jaxb2-default-value</artifactId>
+                            <version>1.1</version>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.jvnet.jaxb2_commons</groupId>
+                            <artifactId>jaxb2-basics-annotate</artifactId>
+                            <version>0.6.2</version>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.jvnet.jaxb2_commons</groupId>
+                            <artifactId>jaxb2-basics</artifactId>
+                            <version>0.5.3</version>
+                        </plugin>
+                    </plugins>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.5.4</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <id>bundle-manifest</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>manifest</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <supportedProjectTypes>
+                        <supportedProjectType>jar</supportedProjectType>
+                    </supportedProjectTypes>
+                    <instructions>
+                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                        <Export-Package>*</Export-Package>
+                        <Import-Package>
+                            javax.persistence;resolution:=optional,
+                            org.apache.log4j;resolution:=optional,
+                            *
+                        </Import-Package>
+                        <_versionpolicy>[$(version;==;$(@)),$(version;+;$(@)))</_versionpolicy>
+                    </instructions>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <archive>
+                        <!-- add the generated manifest to the jar -->
+                        <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
+            <type>jar</type>
+            <scope>provided</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>integration</artifactId>
+            <version>1.6.1</version>
+            <type>jar</type>
+            <scope>provided</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>1.0</version>
+            <type>jar</type>
+            <scope>provided</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.1.0.Alpha1</version>
+            <type>jar</type>
+            <scope>provided</scope>
+            <optional>true</optional>
+        </dependency>
+
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <type>jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jmock</groupId>
+            <artifactId>jmock-junit4</artifactId>
+            <version>2.6.0</version>
+            <type>jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.6.1</version>
+            <type>jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
+            <type>jar</type>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
