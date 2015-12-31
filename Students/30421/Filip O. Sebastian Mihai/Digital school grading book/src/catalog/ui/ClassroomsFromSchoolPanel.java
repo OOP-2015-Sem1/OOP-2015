@@ -6,8 +6,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.text.LayoutQueue;
 
-import catalog.brain.Students;
+import catalog.brain.Classroom;
 
 public class ClassroomsFromSchoolPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 0000;
@@ -15,18 +16,18 @@ public class ClassroomsFromSchoolPanel extends JPanel implements ActionListener 
 	private StudentsFromEachGradePanel PanelForGrades = new StudentsFromEachGradePanel();
 	private JButton[] ClassroomsButtons;
 	public JPanel StudentsFromClassrooms = new JPanel();
-
+	public int whatClassroomToShow;
 	public ClassroomsFromSchoolPanel() {
 		// this.RFFLBL = RFFLBL;
 		setLayout(new GridLayout(12, 1));
 		ClassroomsButtons = new JButton[12];
 		setVisible(false);
 		for (int i = 0; i < 12; i++) {
-			ClassroomsButtons[i] = new JButton(Students.Classrooms.get(i));
+			ClassroomsButtons[i] = new JButton(Classroom.Classrooms.get(i));
 			add(ClassroomsButtons[i]);
 			ClassroomsButtons[i].addActionListener(this);
 		}
-		//StudentsFromClassrooms.setLayout();
+		//StudentsFromClassrooms.getLayout();
 		for (int i = 1; i < 13; i++)
 			StudentsFromClassrooms.add(PanelForGrades.StudentsPanelFromClasroom[i]);
 		StudentsFromClassrooms.setVisible(true);
@@ -38,8 +39,11 @@ public class ClassroomsFromSchoolPanel extends JPanel implements ActionListener 
 		for (int j = 0; j < 12; j++) {
 			if (e.getSource() == ClassroomsButtons[j]) {
 				for (int i = 1; i < 13; i++) {
-					if (i == j + 1)
+					if (i == j + 1){
 						PanelForGrades.StudentsPanelFromClasroom[i].setVisible(true);
+						whatClassroomToShow = i;
+						//System.out.println(whatClassroomToShow);
+					}
 					else
 						PanelForGrades.StudentsPanelFromClasroom[i].setVisible(false);
 				}
