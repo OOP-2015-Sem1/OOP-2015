@@ -9,7 +9,6 @@ import java.awt.image.BufferStrategy;
 import display.Menu;
 import display.Score;
 import display.Window;
-import inputDevices.Audio;
 import inputDevices.KeyInput;
 import objects.Ball;
 import objects.ObjectID;
@@ -24,6 +23,7 @@ public class MainGame extends Canvas implements Runnable {
 	public static final int WIDTH = 980;
 	public static final int HEIGHT = 640;
 	public static boolean paused = false;
+	public static boolean soundMute = false;
 
 	private Thread myThread;
 	private Handler handler;
@@ -46,8 +46,6 @@ public class MainGame extends Canvas implements Runnable {
 
 		this.addKeyListener(new KeyInput(handler, this));
 		this.addMouseListener(menu);
-
-		Audio.load();
 
 		score = new Score();
 
@@ -132,6 +130,9 @@ public class MainGame extends Canvas implements Runnable {
 
 		if (gameState == STATE.Game || gameState == STATE.Multiplayer) {
 			drawCenterCircle(graph);
+			if (soundMute) {
+				drawMuteText(graph);
+			}
 			handler.render(graph);
 			score.render(graph);
 		}
@@ -166,6 +167,7 @@ public class MainGame extends Canvas implements Runnable {
 		graph.drawString("Player2:  UP - up, LEFT - left, DOWN - down, RIGHT - right", 30, 60);
 		graph.drawString("Pause game:  press P", 30, 90);
 		graph.drawString("Exit game:  press Exit", 30, 120);
+		graph.drawString("Mute sound:  press M", 30, 150);
 	}
 
 	private void drawPauseText(Graphics graph) {
@@ -174,6 +176,14 @@ public class MainGame extends Canvas implements Runnable {
 		graph.setColor(Color.BLACK);
 		graph.setFont(pausefnt);
 		graph.drawString("PAUSED", 320, 310);
+	}
+
+	private void drawMuteText(Graphics graph) {
+		// TODO Auto-generated method stub
+		// Font pausefnt = new Font("Arial", 1, 15);
+		graph.setColor(Color.BLACK);
+		// graph.setFont(pausefnt);
+		graph.drawString("MUTE", 20, 550);
 	}
 
 	public static float posRelToMargins(float var, float min, float max) {

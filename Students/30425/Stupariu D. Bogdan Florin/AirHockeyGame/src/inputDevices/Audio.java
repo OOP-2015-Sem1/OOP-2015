@@ -1,28 +1,26 @@
 package inputDevices;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.File;
 
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 public class Audio {
-
-	public static Map<String, Sound> soundMap = new HashMap<String, Sound>();
-
-	public static void load() {
-
-		try {
-			soundMap.put("collision_sound", new Sound("res/Laser_Shoot7.ogg"));
-			soundMap.put("scored_sound", new Sound("res/Randomize20.ogg"));
-		} catch (SlickException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public Audio() {
+		File Collision_sound = new File ("res/Laser_Shoot7");
+	}
+	
+	static void PlaySound (File Sound){
+		try{
+			Clip clip =  AudioSystem.getClip();
+			clip.open(AudioSystem.getAudioInputStream(Sound));
+			clip.start();
+			
+			Thread.sleep(clip.getMicrosecondLength()/1000);
+		}catch (Exception e){
+			
 		}
-
 	}
-
-	public static Sound getSound(String key) {
-		return soundMap.get(key);
-	}
+	
+	
 }

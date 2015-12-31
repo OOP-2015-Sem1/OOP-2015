@@ -94,6 +94,11 @@ public class KeyInput extends KeyAdapter {
 
 			}
 		}
+		if (key == KeyEvent.VK_M){
+			if ( mainGame.gameState == STATE.Game || mainGame.gameState == STATE.Multiplayer){
+				muteSound();
+			}
+		}
 	}
 
 	private void pauseGame() {
@@ -102,6 +107,14 @@ public class KeyInput extends KeyAdapter {
 			MainGame.paused = false;
 		} else {
 			MainGame.paused = true;
+		}
+	}
+	
+	private void muteSound(){
+		if(MainGame.soundMute){
+			MainGame.soundMute = false;
+		} else {
+			MainGame.soundMute = true;
 		}
 	}
 
