@@ -11,6 +11,10 @@ import javax.swing.GroupLayout;
  * @author Gergo Szentannai
  */
 public class MainFrame extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public MainFrame() {
 		initComponents();
 	}

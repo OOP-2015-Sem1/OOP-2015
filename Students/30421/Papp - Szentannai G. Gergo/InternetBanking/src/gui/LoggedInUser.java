@@ -12,6 +12,10 @@ import javax.swing.LayoutStyle;
  * @author Gergo Szentannai
  */
 public class LoggedInUser extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public LoggedInUser() {
 		initComponents();
 	}
