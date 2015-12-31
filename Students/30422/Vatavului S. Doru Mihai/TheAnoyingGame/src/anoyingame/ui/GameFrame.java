@@ -1,5 +1,6 @@
 package anoyingame.ui;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -8,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -32,8 +34,15 @@ public class GameFrame extends JFrame implements ActionListener{
 	private int count;
 	private int mode;
 	private int score = 0;
+	private int numberOfQuestions = 0;
 	
-	
+	public void checkIfTimeToStop(){
+		if(numberOfQuestions == 20)
+		{
+			this.dispose();
+			JOptionPane.showMessageDialog(null, "Game Over. Your score is: " + score + " out of 20.");
+		}
+	}
 	public void setCount(int value){
 		switch(value){
 		case 1: count = 6; break;
@@ -59,6 +68,11 @@ public class GameFrame extends JFrame implements ActionListener{
 		answerPanel.add(timerLabel);
 		answerPanel.add(blank);
 		
+		scoreLabel.setForeground(new Color(1,145,156));
+		timerLabel.setForeground(new Color(1,145,156));
+		
+		answerPanel.add(timerLabel);
+		answerPanel.add(blank);
 		answerPanel.add(scoreLabel);
 		answerPanel.add(red);
 		answerPanel.add(blue);
@@ -78,14 +92,22 @@ public class GameFrame extends JFrame implements ActionListener{
 		
 		scoreLabel.setText("0");
 		red.addActionListener(this);
+		setThemeButton(red);
 		blue.addActionListener(this);
+		setThemeButton(blue);
 		yellow.addActionListener(this);
+		setThemeButton(yellow);
 		orange.addActionListener(this);
+		setThemeButton(orange);
 		green.addActionListener(this);
+		setThemeButton(green);
 		pink.addActionListener(this);
-		
+		setThemeButton(pink);
 		}
-	
+	public void setThemeButton(JButton button){
+		button.setBackground(new Color(0,178,192));
+		button.setForeground(new Color(251,233,163));
+	}
 	public void allowTimerStart(boolean permision){
 		if(permision == true){
 			TimeClass tc = new TimeClass(count);
@@ -107,9 +129,11 @@ public class GameFrame extends JFrame implements ActionListener{
 							score+=1;
 							scoreLabel.setText(String.valueOf(score));
 						}
+						checkIfTimeToStop();
 						timer.restart();
 						theRectangle.setRandomText();
 						question.setQuestionNumber();
+						numberOfQuestions++;
 						
 					}
 			
@@ -130,9 +154,9 @@ public class GameFrame extends JFrame implements ActionListener{
 			else{
 				counter = countLimit+1;
 				timerLabel.setText("FAIL");
-				Toolkit.getDefaultToolkit().beep();
 				theRectangle.setRandomText();
 				question.setQuestionNumber();
+				numberOfQuestions++;
 			}
 					
 			}

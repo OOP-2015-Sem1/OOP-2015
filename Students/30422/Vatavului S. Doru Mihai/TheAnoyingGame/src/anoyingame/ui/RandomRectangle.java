@@ -1,6 +1,7 @@
 package anoyingame.ui;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.Random;
 
@@ -27,12 +28,12 @@ public class RandomRectangle extends JPanel {
 				Color.GREEN, Color.ORANGE,Color.MAGENTA
 			};
 	private String[] textArray = new String[]{
-			"\n\n\n                RED", 
-			"\n\n\n                BLUE",
-			"\n\n\n                YELLOW",
-			"\n\n\n                GREEN",
-			"\n\n\n                ORANGE",
-			"\n\n\n                PINK"
+			"\n\n\n              RED", 
+			"\n\n\n              BLUE",
+			"\n\n\n              YELLOW",
+			"\n\n\n              GREEN",
+			"\n\n\n              ORANGE",
+			"\n\n\n              PINK"
 	};
 	
 
@@ -64,6 +65,7 @@ public class RandomRectangle extends JPanel {
 		text.setText(textArray[textRand]);
 		text.setForeground(colorArray[textColorRand]);
 		text.setBackground(colorArray[backColorRand]);
+		text.setFont(text.getFont().deriveFont(Font.BOLD));
 		text.setAlignmentX(CENTER_ALIGNMENT);
 		text.setAlignmentY(CENTER_ALIGNMENT);
 	}

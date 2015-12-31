@@ -26,9 +26,6 @@ public class GameController {
 		timeModeEasy.addActionListener(new MenuListener());
 		timeModeMedium.addActionListener(new MenuListener());
 		timeModeHard.addActionListener(new MenuListener());
-		
-		
-		
 	}
 	
 	private class MenuListener implements ActionListener {
