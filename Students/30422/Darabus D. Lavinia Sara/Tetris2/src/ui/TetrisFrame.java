@@ -47,7 +47,7 @@ public class TetrisFrame extends JFrame{
 	}
 	
 	public void moveTetromino(String direction) {
-		Shape.move(direction, GamePanel.shape);
+		GamePanel.shape.move(direction);
 		updateBoard();
 		requestFocus();
 	}
@@ -56,6 +56,8 @@ public class TetrisFrame extends JFrame{
 		// TODO Auto-generated method stub
 		gamePanel.updateBoard();
 	}
+
+	
 	
 
 }
