@@ -5,11 +5,11 @@ import java.io.FileReader;
 import catalog.ui.CatalogFrame;
 
 public class Main {
-	public static Classroom clasa = new Classroom();
-	public static Students stud = new Students();
-
 	@SuppressWarnings({ "unchecked" })
+	public static int nrOfStudents = 0;
 	public static void main(String[] args) {
+		new Classroom();
+		new Students();
 		for (int i = 0; i < 13; i++) {
 			int j = 0;
 			String fileName = "NULL";
@@ -29,7 +29,7 @@ public class Main {
 				// Read file line by line and print on the console
 				while ((line = bufferReader.readLine()) != null) {
 					if (i == 0) {
-						Students.Classrooms.add(j, line);
+						Classroom.Classrooms.add(j, line);
 					}
 					if (i >= 1) {
 
@@ -40,9 +40,14 @@ public class Main {
 				// Close the buffer reader
 				bufferReader.close();
 			} catch (Exception e) {
-				System.out.println("Error while reading file line by line: " + fileName + e.getMessage());
+				System.out.println("Error while reading file line by line: " + fileName + " " + e.getMessage());
 			}
 		}
+		for (int i = 1; i < 13; i++)
+			//System.out.println(Students.studentsFromGrade[i].get(0));
+			//System.out.println(Integer.valueOf((String) Students.studentsFromGrade[i].get(0)));
+			nrOfStudents = nrOfStudents + Integer.valueOf((String) Students.studentsFromGrade[i].get(0));
+		System.out.println(nrOfStudents);
 		new CatalogFrame();
 	}
 }
