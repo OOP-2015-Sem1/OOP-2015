@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.util.LinkedList;
 
 import display.Score;
-import inputDevices.Audio;
 import objects.Ball;
 import objects.GameObjects;
 import objects.ObjectID;
@@ -50,14 +49,18 @@ public class Handler {
 	private void player2Scored() {
 		// TODO Auto-generated method stub
 		Score.SCORE2++;
-		Audio.getSound("scored_sound").play();
+		//if (MainGame.soundMute == false) {
+			//Audio.getSound("scored_sound").play();
+		//}
 		reset();
 	}
 
 	private void playerScored() {
 		// TODO Auto-generated method stub
 		Score.SCORE1++;
-		Audio.getSound("scored_sound").play();
+		//if (MainGame.soundMute == false) {
+			//Audio.getSound("scored_sound").play();
+		//}
 		reset();
 	}
 
@@ -100,10 +103,12 @@ public class Handler {
 		if (distanceBetCenters < theoreticalDistanceBetCenters) {
 			ball.collided = true;
 
-			Audio.getSound("collision_sound").play();
-			
-			boolean playerNotMoving =player.getSpeedX() == 0 && player.getSpeedY() == 0;
-		
+			//if (MainGame.soundMute == false) {
+				//Audio.getSound("collision_sound").play();
+			//}
+
+			boolean playerNotMoving = player.getSpeedX() == 0 && player.getSpeedY() == 0;
+
 			if (playerNotMoving) {
 				ball.setSpeedX((int) (ball.getSpeedX() * -1 + Math.atan((ball.getx() + 13) - (player.getx() + 25))));
 				ball.setSpeedY((int) (ball.getSpeedY() * -1 + Math.atan((ball.gety() + 13) - (player.gety() + 25))));

@@ -2,15 +2,17 @@ package objects;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.File;
 import java.util.Random;
 
-import inputDevices.Audio;
 import theGame.MainGame;
 
 public class Ball extends GameObjects {
 
 	public boolean collided = false;
 	private boolean collideMargins;
+
+	File Collision_sound = new File ("res/Laser_Shoot7.ogg");
 
 	public Ball(int x, int y, ObjectID identity) {
 		super(x, y, identity);
@@ -48,7 +50,7 @@ public class Ball extends GameObjects {
 		graph.setColor(Color.RED);
 		graph.fillOval((int) getx(), (int) gety(), 49, 49);
 	}
-	
+
 	private void generateRandomDirection() {
 		// TODO Auto-generated method stub
 		Random rand = new Random();
@@ -63,36 +65,42 @@ public class Ball extends GameObjects {
 		setSpeedX(n1);
 		setSpeedY(n2);
 	}
-	
+
 	private void verifyCollisionMargins() {
 		// TODO Auto-generated method stub
 
+		//audio = new Audio();
+		
 		if (gety() <= 0) {
 			setY(1);
 			setSpeedY(getSpeedY() * -1);
-			Audio.getSound("collision_sound").play();
-			;
+			//if (MainGame.soundMute == false) {
+				//Audio.getSound("collision_sound").play();
+			//}
 		}
 
 		if (gety() >= MainGame.HEIGHT - 120) {
 			setY(MainGame.HEIGHT - 121);
 			setSpeedY(getSpeedY() * -1);
-			Audio.getSound("collision_sound").play();
-			;
+			//if (MainGame.soundMute == false) {
+				//Audio.getSound("collision_sound").play();
+			//}
 		}
 
 		if (getx() <= 0) {
 			setX(1);
 			setSpeedX(getSpeedX() * -1);
-			Audio.getSound("collision_sound").play();
-			;
+			//if (MainGame.soundMute == false) {
+				//Audio.getSound("collision_sound").play();
+			//}
 		}
 
 		if (getx() >= MainGame.WIDTH - 90) {
 			setX(MainGame.WIDTH - 89);
 			setSpeedX(getSpeedX() * -1);
-			Audio.getSound("collision_sound").play();
-			;
+			//if (MainGame.soundMute == false) {
+				
+			//}
 		}
 	}
 
