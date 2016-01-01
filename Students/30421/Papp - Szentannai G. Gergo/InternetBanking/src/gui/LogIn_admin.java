@@ -9,18 +9,21 @@ import javax.swing.*;
 import javax.swing.GroupLayout;
 
 import main.Application;
-import main.Main;
 
 /**
  * @author Gergo Szentannai
  */
 public class LogIn_admin extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public LogIn_admin() {
 		initComponents();
 	}
 
 	private void cancelActionPerformed(ActionEvent e) {
-		Application.mainFrame.changePanel(Application.mainFrame.homePanel);
+		Application.mainFrame.changePanel(MainFrame.homePanel);
 	}
 
 	private void initComponents() {

@@ -1,9 +1,5 @@
 package main;
 
-import javax.swing.SwingUtilities;
-
-import gui.MainFrame;
-
 /**
  * Initializes the program and starts the Frame.
  * 
@@ -12,12 +8,10 @@ import gui.MainFrame;
  */
 public class Main {
 
-
 	public static void main(String[] args) {
-		
-		Application application = new Application();
 
-		
+		@SuppressWarnings("unused")
+		Application application = new Application();
 
 	}
 

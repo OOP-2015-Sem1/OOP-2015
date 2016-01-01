@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.*;
 import javax.swing.*;
 
 public class MainFrame extends JFrame {
@@ -8,6 +7,7 @@ public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JFrame MainFrame;
 
+	// Available panels:
 	protected static JPanel homePanel, login_user, login_admin, user_home, admin_home;
 
 	public MainFrame() {
@@ -32,9 +32,8 @@ public class MainFrame extends JFrame {
 		MainFrame.setVisible(true);
 		MainFrame.setSize(500, 300);
 		MainFrame.setTitle("Bank of free Money - Internet banking Management application 2015");
-		Container MainFrameContentPane = MainFrame.getContentPane();
-		//MainFrame.add(login_admin);
-		//MainFrameContentPane.add(homePanel);
+
+		// Set default panel.
 		changePanel(homePanel);
 		
 	}
@@ -43,6 +42,7 @@ public class MainFrame extends JFrame {
 	 * @param panel
 	 */
 	public void changePanel(JPanel panel){
+		
 		MainFrame.getContentPane().removeAll();
 		MainFrame.getContentPane().add(panel);
 		MainFrame.getContentPane().revalidate();

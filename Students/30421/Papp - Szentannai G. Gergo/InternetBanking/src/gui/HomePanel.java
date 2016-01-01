@@ -9,23 +9,26 @@ import javax.swing.*;
 import javax.swing.GroupLayout;
 
 import main.Application;
-import main.Main;
 
 /**
  * @author Gergo Szentannai
  */
 public class HomePanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public HomePanel() {
 		initComponents();
 	}
 
 	private void login_user(ActionEvent e) {
 
-		Application.mainFrame.changePanel(Application.mainFrame.login_user);
+		Application.mainFrame.changePanel(new LogIn_user());
 	}
 
 	private void login_admin(ActionEvent e) {
-		Application.mainFrame.changePanel(Application.mainFrame.login_admin);
+		Application.mainFrame.changePanel(new LogIn_admin());
 	}
 
 	private void settingsActionPerformed(ActionEvent e) {

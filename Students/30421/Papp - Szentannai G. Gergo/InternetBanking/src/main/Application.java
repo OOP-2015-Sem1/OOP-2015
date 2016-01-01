@@ -1,8 +1,6 @@
 package main;
 
 import javax.swing.SwingUtilities;
-
-import db.manager.DatabaseConnect;
 import gui.MainFrame;
 
 public class Application {
@@ -15,7 +13,6 @@ public class Application {
 				mainFrame = new MainFrame();
 			}
 		});
-		DatabaseConnect databaseConnect = new DatabaseConnect();
 	}
 
 }

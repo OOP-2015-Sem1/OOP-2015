@@ -15,12 +15,16 @@ import main.Application;
  * @author Gergo Szentannai
  */
 public class LogIn_user extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public LogIn_user() {
 		initComponents();
 	}
 
 	private void button1ActionPerformed(ActionEvent e) {
-		Application.mainFrame.changePanel(Application.mainFrame.homePanel);
+		Application.mainFrame.changePanel(MainFrame.homePanel);
 	}
 
 	private void initComponents() {

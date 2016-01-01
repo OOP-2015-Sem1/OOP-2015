@@ -11,6 +11,10 @@ import javax.swing.GroupLayout;
  * @author Gergo Szentannai
  */
 public class Admin_home extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public Admin_home() {
 		initComponents();
 	}
