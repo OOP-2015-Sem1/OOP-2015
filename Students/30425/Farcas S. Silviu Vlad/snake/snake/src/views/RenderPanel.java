@@ -1,4 +1,4 @@
-package controllers;
+package views;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -17,7 +17,7 @@ public class RenderPanel extends JPanel {
 	public static final Color BLUEBEE = new Color(65,156,186);
 	public static final Color GREENABEE = new Color(8,69,34);
 	private Dimension dim;
-	public static JFrame jframe;
+	private JFrame jframe;
 	private Snake snake;
 	private GameManagement game;
 
@@ -80,5 +80,12 @@ public class RenderPanel extends JPanel {
 		if (game.getPaused() && !game.getOver()) {
 			g.drawString(string, (int) (getWidth() / 2 - string.length() * 2.5f), (int) dim.getHeight() / 4);
 		}
+	}
+	
+	public JFrame getFrame(){
+		return jframe;
+	}
+	public void setFrame(JFrame jframe){
+		this.jframe=jframe;
 	}
 }
