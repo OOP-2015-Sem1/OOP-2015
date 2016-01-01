@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.Random;
 
 import core.TetrominoController;
+import ui.GamePanel;
 
 public class Shape {
 
@@ -32,18 +33,46 @@ public class Shape {
 	public static int TETROMINO_MATRIX_ROWS = 2, TETROMINO_MATRIX_COLS = 4;
 
 	private int pieceRow, pieceCol, prevPieceRow, prevPieceCol;
+	private int prevMatrixRows, prevMatrixCols;
 	
 	private Color randomPieceColor;
 	private int randomPieceNumber;
-	
-	public boolean[][] fallingPiece;
-	
+	private static int count;
+	public boolean[][] rotatedPiece = new boolean[this.getMatrixRows()][this.getMatrixCols()];
+	public boolean[][] standardPiece;
+	public boolean[][] fallingPiece = new boolean[this.getPieceRow()][this.getPieceCol()];
+	private int matrixRows, matrixCols;
+	private int rotated;
+	private boolean legal;
 	
 	public Shape(){
+		this.setMatrixRows(2);
+		this.setMatrixCols(4);
+		this.setRandomPieceNumber();
 		this.generateNewFallingPiece();
 		this.generatePieceColor();
 		this.setPieceRow(0);
 		this.setPieceCol(7);
+		this.setRotated(0);
+		this.setPrevMatrixRows(2);
+		this.setPrevMatrixCols(4);
+		this.setLegal(true);
+	}
+
+	public int getMatrixCols() {
+		return matrixCols;
+	}
+
+	public void setMatrixCols(int matrixCols) {
+		this.matrixCols = matrixCols;
+	}
+
+	public int getMatrixRows() {
+		return matrixRows;
+	}
+
+	public void setMatrixRows(int matrixRows) {
+		this.matrixRows = matrixRows;
 	}
 
 	public void setPieceRow(int row) {
@@ -87,7 +116,7 @@ public class Shape {
 
 	}
 
-	public void generateNewFallingPiece(){
+	public void setRandomPieceNumber(){
 		
 		 this.randomPieceNumber = generateRandomValue();
 		 
@@ -95,6 +124,16 @@ public class Shape {
 	
 	public int getRandomPieceNumber(){
 		return this.randomPieceNumber;
+	}
+	
+	public void generateNewFallingPiece(){
+		this.standardPiece = new boolean[this.getMatrixRows()][this.getMatrixCols()];
+		for(int i = 0; i < this.getMatrixRows(); i++){
+			for(int j = 0; j < (this.getMatrixCols()); j++){
+							this.standardPiece[i][j] = TETROMINOES[this.getRandomPieceNumber()][i][j];
+						
+			}
+		}
 	}
 
 	public void generatePieceColor(){
@@ -107,24 +146,115 @@ public class Shape {
 		return this.randomPieceColor;
 	}
 
-	public static void move(String direction, Shape shape) {
+	public void move(String direction) {
 		// TODO Auto-generated method stub
+		this.setPrevPieceRow(this.getPieceRow());
+		this.setPrevPieceCol(this.getPieceCol());
 		if(direction.equals("DOWN")){
-			shape.setPrevPieceRow(shape.getPieceRow());
-			shape.setPrevPieceCol(shape.getPieceCol());
-			shape.setPieceRow(shape.getPieceRow() + 1);
-		}
+			this.setPieceRow(this.getPieceRow() + 1);
+			}
 		else if(direction.equals("RIGHT")){
-			shape.setPrevPieceRow(shape.getPieceRow());
-			shape.setPrevPieceCol(shape.getPieceCol());
-			shape.setPieceCol(shape.getPieceCol() + 1);
+			this.setPieceCol(this.getPieceCol() + 1);
 		}
 		else if(direction.equals("LEFT")){
-			shape.setPrevPieceRow(shape.getPieceRow());
-			shape.setPrevPieceCol(shape.getPieceCol());
-			shape.setPieceCol(shape.getPieceCol() -1);
+			this.setPieceCol(this.getPieceCol() - 1);
 		}
 		
+		else if(direction.equals("ROTATE"))
+			this.rotatePiece("ROTATE");
+	}
+	
+	public void rotatePiece(String direction){
+		if(direction.equals("ROTATE")){
+			this.setPrevPieceRow(this.getPieceRow());
+			this.setPrevPieceCol(this.getPieceCol());
+			int aux = this.getMatrixCols();
+			this.setMatrixCols(this.getMatrixRows());
+			this.setMatrixRows(aux);
+			if((this.getMatrixRows() == 2) && (this.getMatrixCols() == 4) && ((this.getRotated() == 0) ||
+					(this.getRotated() == 2))){                           //vertical rotations
+				count = 3;
+				if(this.getRotated() == 2){
+					for(int i = 0; i < this.getMatrixRows(); i++){
+						count = 3;
+						for(int j = 0; j < this.getMatrixCols(); j++){
+							this.rotatedPiece[i][j] = this.rotatedPiece[j][count];
+							count--;
+						}
+					}
+					
+				
+				}
+				else{
+					for(int i = 0; i < this.getMatrixRows(); i++){
+						count = 3;
+						for(int j = 0; j < this.getMatrixCols(); j++){
+							this.rotatedPiece[i][j] = TETROMINOES[this.getRandomPieceNumber()][j][count];
+							count--;
+						}
+					}
+				}
+				this.setRotated(this.getRotated() + 1);
+				this.setPieceRow(this.getPieceRow() - 1);
+				this.setPrevMatrixRows(2);
+				this.setPrevMatrixCols(4);
+			}
+			else if((this.getMatrixRows() == 4) && (this.getMatrixCols() == 2) && ((this.getRotated() == 1) ||
+					(this.getRotated() == 3))){                //horizontal rotations
+				count = 0;
+				for(int i = 0; i < this.getMatrixRows(); i++){
+					count = 0;
+					for(int j = 0; j < this.getMatrixCols(); j++){
+						this.rotatedPiece[i][j] = this.rotatedPiece[count][Math.abs(i - 1)];
+						count++;
+					}
+				}
+				if(this.getRotated() == 1){
+					this.setRotated(this.getRotated() + 1);
+				}
+				else if(this.getRotated() == 3){
+					this.setRotated(0);
+				}
+				
+			}
+			
+			this.setPieceRow(this.getPieceRow() + 1);
+			this.setPrevMatrixRows(4);
+			this.setPrevMatrixCols(2);
+		}
+		
+	}
+
+	public int getRotated() {
+		return rotated;
+	}
+
+	public void setRotated(int rotated) {
+		this.rotated = rotated;
+	}
+
+	public int getPrevMatrixRows() {
+		return prevMatrixRows;
+	}
+
+	public void setPrevMatrixRows(int prevMatrixRows) {
+		this.prevMatrixRows = prevMatrixRows;
+	}
+
+	public int getPrevMatrixCols() {
+		return prevMatrixCols;
+	}
+
+	public void setPrevMatrixCols(int prevMatrixCols) {
+		this.prevMatrixCols = prevMatrixCols;
+	}
+
+	public boolean isLegal() {
+		return legal;
+	}
+
+	public void setLegal(boolean legal) {
+		this.legal = legal;
 	}
 
 }
