@@ -1,5 +1,6 @@
 package com.gellert.digitalcatalog.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,10 +11,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.gellert.digitalcatalog.R;
+import com.gellert.digitalcatalog.database.CatalogDatabaseHelper;
 import com.gellert.digitalcatalog.models.Teacher;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TeacherActivity extends AppCompatActivity {
 
@@ -30,14 +31,14 @@ public class TeacherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher);
 
-        catalogDB = new CatalogDatabaseHelper(this);
+        catalogDB = CatalogDatabaseHelper.getInstance(TeacherActivity.this);
         personID = Integer.valueOf(getIntent().getStringExtra("personID"));
-        teacher = getTeacherInfoFromDatabase(personID);
+        teacher = catalogDB.getTeacherInfoFromDatabase(personID);
 
-        spinnerSubjectSelect = (Spinner)findViewById(R.id.spinnerSubjectSelect);
-        spinnerClassSelect = (Spinner)findViewById(R.id.spinnerClassSelect);
-        studentList = (ListView)findViewById(R.id.studentList);
-        txtName = (TextView)findViewById(R.id.txtName);
+        spinnerSubjectSelect = (Spinner) findViewById(R.id.spinnerSubjectSelect);
+        spinnerClassSelect = (Spinner) findViewById(R.id.spinnerClassSelect);
+        studentList = (ListView) findViewById(R.id.studentList);
+        txtName = (TextView) findViewById(R.id.txtName);
 
 
         txtName.setText("Signed in as " + teacher.getName());
@@ -67,14 +68,22 @@ public class TeacherActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) { }
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
-    }
 
-    private Teacher getTeacherInfoFromDatabase(int personID) {
-        String name = catalogDB.getPersonName(personID);
-        ArrayList<String> subjects = catalogDB.getTeacherSubjects(personID);
-        return new Teacher(personID, name, subjects);
+        studentList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int personID = catalogDB.getPersonIDByName(studentList.getItemAtPosition(position).toString());
+                String subject = spinnerSubjectSelect.getSelectedItem().toString();
+
+                Intent manageMarksActivityIntent = new Intent(TeacherActivity.this, ManageMarksActivity.class);
+                manageMarksActivityIntent.putExtra("personID", String.valueOf(personID));
+                manageMarksActivityIntent.putExtra("subject", subject);
+                startActivity(manageMarksActivityIntent);
+            }
+        });
     }
 
     private void updateStudentList(String[] studentNames) {
