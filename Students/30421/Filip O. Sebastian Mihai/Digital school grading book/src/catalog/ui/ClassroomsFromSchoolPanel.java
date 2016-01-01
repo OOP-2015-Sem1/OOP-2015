@@ -13,8 +13,8 @@ import catalog.brain.Classroom;
 public class ClassroomsFromSchoolPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 0000;
 	public static int WhatGradeToShow = 12;
-	private StudentsFromEachGradePanel PanelForGrades = new StudentsFromEachGradePanel();
-	private JButton[] ClassroomsButtons;
+	public StudentsFromEachGradePanel PanelForGrades = new StudentsFromEachGradePanel();
+	public JButton[] ClassroomsButtons;
 	public JPanel StudentsFromClassrooms = new JPanel();
 	public int whatClassroomToShow;
 	public ClassroomsFromSchoolPanel() {

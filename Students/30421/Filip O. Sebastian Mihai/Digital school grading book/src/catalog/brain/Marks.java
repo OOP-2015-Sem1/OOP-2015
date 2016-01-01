@@ -13,7 +13,6 @@ import javax.swing.JTextField;
 import catalog.ui.StudentsFromEachGradePanel;
 
 public class Marks implements ActionListener {
-	private StudentsFromEachGradePanel faufaufau = new StudentsFromEachGradePanel();
 	public JPanel MarksPanel = new JPanel();
 	public JPanel[] panel = new JPanel[Main.nrOfStudents];
 	private JPanel[] Materii = new JPanel[8];
@@ -41,26 +40,17 @@ public class Marks implements ActionListener {
 				if(i==7)
 					labell = new JLabel("Literatura");
 				if(i==0)
-					labell = new JLabel("matematica"+faufaufau.numar);
+					labell = new JLabel("matematica");
 				Materii[i].add(labell);
 				Plus[i] = new JButton("ADD");
 				Plus[i].addActionListener(this);
 				panel[j].add(Materii[i]);
 				panel[j].add(Plus[i]);
-				panel[j].setVisible(false);
+				/*
 				MarksPanel.setVisible(true);
 				MarksPanel.add(panel[j]);
+				*/
 			}
-		}
-		System.out.println("numar2 = "+faufaufau.numar);
-		create (faufaufau.numar);
-	}
-	public void create(int i) {
-		System.out.println(i);
-		for(int j=0;j<Main.nrOfStudents;j++){
-			panel[j].setVisible(false);
-			if(i==j)
-				panel[j].setVisible(true);
 		}
 	}
 	@Override

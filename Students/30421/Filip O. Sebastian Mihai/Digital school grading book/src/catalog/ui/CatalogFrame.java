@@ -11,7 +11,6 @@ import catalog.brain.Marks;
 public class CatalogFrame {
 	public JFrame CatalogTheRealFrame = new JFrame("Catalog");
 	private ClassroomsFromSchoolPanel ClassroomsPanel = new ClassroomsFromSchoolPanel();
-	private Marks fau = new Marks();
 	public CatalogFrame() {
 		CatalogTheRealFrame.setVisible(true);
 		CatalogTheRealFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,8 +30,9 @@ public class CatalogFrame {
 		CatalogTheRealFrame.add(ClassroomsPanel.StudentsFromClassrooms);
 		// ClassroomsPanel.panel.setVisible(true);
 		// CatalogTheRealFrame.add(ClassroomsPanel.panel);
-		StudentsFromEachGradePanel fauristic = new StudentsFromEachGradePanel();
-		//fau.panel[1].setVisible(true);
-		CatalogTheRealFrame.add(fau.MarksPanel);
+
+		//Marks MARK = new Marks();
+		StudentsFromEachGradePanel SFEGP = new StudentsFromEachGradePanel();
+		CatalogTheRealFrame.add(SFEGP.MAR);
 	}
 }

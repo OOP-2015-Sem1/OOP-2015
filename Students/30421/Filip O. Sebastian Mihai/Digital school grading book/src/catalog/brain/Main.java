@@ -47,7 +47,6 @@ public class Main {
 			//System.out.println(Students.studentsFromGrade[i].get(0));
 			//System.out.println(Integer.valueOf((String) Students.studentsFromGrade[i].get(0)));
 			nrOfStudents = nrOfStudents + Integer.valueOf((String) Students.studentsFromGrade[i].get(0));
-		System.out.println(nrOfStudents);
 		new CatalogFrame();
 	}
 }
