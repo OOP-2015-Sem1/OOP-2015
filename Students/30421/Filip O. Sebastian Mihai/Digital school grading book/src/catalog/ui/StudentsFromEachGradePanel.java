@@ -31,7 +31,7 @@ public class StudentsFromEachGradePanel implements ActionListener {
 		}
 		for (int i = 0; i < Main.nrOfStudents; i++) {
 			panelpanel[i]= new JPanel();
-			panelpanel[i].setBackground(Color.BLACK);
+			panelpanel[i]=fau.panel[j];
 			panelpanel[i].setVisible(false);
 			MAR.add(panelpanel[i]);
 		}

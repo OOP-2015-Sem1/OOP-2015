@@ -46,6 +46,7 @@ public class Marks implements ActionListener {
 				Plus[i].addActionListener(this);
 				panel[j].add(Materii[i]);
 				panel[j].add(Plus[i]);
+				panel[j].setVisible(true);
 				/*
 				MarksPanel.setVisible(true);
 				MarksPanel.add(panel[j]);
