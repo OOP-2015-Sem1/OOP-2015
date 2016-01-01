@@ -9,11 +9,15 @@ import entities.Paddle;
 public abstract class Level {
 
 	// Entities
-	public Paddle paddle;
-	public Ball ball;
-	public Brick[][] brick = new Brick[9][5];
-	public Game game;
+	protected Paddle paddle;
+	protected Ball ball;
+	protected Brick[][] brick = new Brick[9][5];
+	protected Game game;
 
+	
+	protected int score;
+	protected boolean isComplete;
+	
 	// Brick details
 	int brickWidth = 60;
 	int brickX = 100;
@@ -35,4 +39,14 @@ public abstract class Level {
 	public abstract void levelIsComplete(boolean var);
 	
 	public abstract boolean isComplete();
+	
+	public abstract void setComponentsSpeed();
+	
+	public abstract void resetComponentsPosition();
+	
+	public abstract int getLives();
+	
+	public abstract void setLives(int lives);
+	
+	public abstract void resetScore();
 }

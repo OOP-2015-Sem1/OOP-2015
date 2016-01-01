@@ -2,13 +2,19 @@ package breakoutGame;
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics2D;
+
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 import entities.Ball;
 import entities.Brick;
 import entities.Paddle;
@@ -26,7 +32,7 @@ public class Game extends Canvas implements Runnable {
 
 	// Window
 	JFrame frame;
-	public static String WINDOW_TITLE = "Breakout Game";
+	private static String WINDOW_TITLE = "Breakout Game";
 	public static int WINDOW_WIDTH = 800;
 	public static int WINDOW_HEIGHT = 600;
 	public static Dimension GAME_DIMENSION = new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -35,7 +41,7 @@ public class Game extends Canvas implements Runnable {
 	public Canvas canvas;
 	BufferedImage img = new BufferedImage(WINDOW_WIDTH, WINDOW_HEIGHT, BufferedImage.TYPE_INT_RGB);
 	BufferStrategy bs;
-	Graphics2D g;
+	public Graphics2D g;
 
 	// Entities
 	public Paddle paddle = new Paddle(this);
@@ -53,6 +59,12 @@ public class Game extends Canvas implements Runnable {
 	// Levels
 	Level currentLevel = new Level1(this, ball, brick, paddle);
 	int level = 0;
+
+	// Score panel
+	JPanel score = new JPanel();
+	public static Dimension SCORE_PANEL_DIMENSION = new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT / 27);
+	JLabel scoreLabel = new JLabel("Score: 0");
+	JLabel lifeLabel = new JLabel("Left lives: 0");
 
 	@Override
 	public void run() {
@@ -106,6 +118,21 @@ public class Game extends Canvas implements Runnable {
 
 		frame.add(canvas, BorderLayout.CENTER);
 
+		score.setBackground(Color.GRAY);
+		score.setPreferredSize(SCORE_PANEL_DIMENSION);
+		score.setLayout(new BorderLayout());
+		
+		scoreLabel.setFont(new Font("Serif", Font.BOLD, 14));
+		scoreLabel.setForeground(Color.BLACK);
+
+		lifeLabel.setFont(new Font("Serif", Font.BOLD, 14));
+		lifeLabel.setForeground(Color.BLACK);
+
+		score.add(scoreLabel, BorderLayout.WEST);
+		score.add(lifeLabel, BorderLayout.EAST);
+
+		frame.add(score, BorderLayout.SOUTH);
+
 		// Level
 		currentLevel.init();
 
@@ -125,12 +152,16 @@ public class Game extends Canvas implements Runnable {
 		ball.update();
 
 		// Paddle intersection
-		if (ball.entityCollider.intersects(paddle.entityCollider)) {
+		if (ball.surface.intersects(paddle.surface)) {
 			ball.ballYmove = -ball.ballSpeed;
 		}
 
-		// Level
+		// Update level
 		currentLevel.update();
+		
+		//Update score panel
+		scoreLabel.setText("Score: " + currentLevel.getScore());
+		lifeLabel.setText("Left lives: " + currentLevel.getLives());
 
 		if (ball.ballY <= 0)
 			ball.ballYmove = ball.ballSpeed;
@@ -141,8 +172,13 @@ public class Game extends Canvas implements Runnable {
 		if (ball.ballX + ball.ballDiameter >= canvas.getWidth())
 			ball.ballXmove = -ball.ballSpeed;
 
-		if (ball.ballY + ball.ballDiameter >= canvas.getHeight())
-			youLost();
+		if (ball.ballY + ball.ballDiameter >= canvas.getHeight()) {
+			if (currentLevel.getLives() > 0) {
+				tryAgain();
+			} else {
+				youLost();
+			}
+		}
 
 		if (currentLevel.isComplete()) {
 			level++;
@@ -159,10 +195,11 @@ public class Game extends Canvas implements Runnable {
 
 		g.drawImage(img, 0, 0, null);
 
+		// Paint entities
 		paddle.paintComponent(g);
 		ball.paintComponent(g);
 
-		// Level
+		// Paint current level components
 		currentLevel.paintComponents(g);
 
 		bs.show();
@@ -170,9 +207,18 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public void startGame() {
-		JOptionPane.showMessageDialog(this, "Click OK to begin", "Start Game", JOptionPane.CLOSED_OPTION);
-		ball.restartPosition();
-		paddle.restartPosition();
+		JOptionPane.showMessageDialog(this,
+				"You can die " + currentLevel.getLives() + " time(s)." + "Click OK to start!", "Start Game",
+				JOptionPane.CLOSED_OPTION);
+		currentLevel.setComponentsSpeed();
+		currentLevel.resetComponentsPosition();
+		init();
+	}
+
+	public void restartGame() {
+		currentLevel.resetScore();
+		currentLevel.setComponentsSpeed();
+		currentLevel.resetComponentsPosition();
 		init();
 	}
 
@@ -185,6 +231,13 @@ public class Game extends Canvas implements Runnable {
 		JOptionPane.showMessageDialog(this, "You destroyed all the bricks!", "Congratlations",
 				JOptionPane.CLOSED_OPTION);
 		stop();
+	}
+
+	public void tryAgain() {
+		int currentLives = currentLevel.getLives();
+		currentLevel.setLives(--currentLives);
+		JOptionPane.showMessageDialog(this, "Try again", "Ooops", JOptionPane.CLOSED_OPTION);
+		restartGame();
 	}
 
 	public void goToNextLevel() {

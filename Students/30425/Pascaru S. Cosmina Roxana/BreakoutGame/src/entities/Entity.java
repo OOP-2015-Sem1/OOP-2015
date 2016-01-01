@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 
 public abstract class Entity {
 
-	public Rectangle entityCollider;
+	public Rectangle surface;
 
 	public abstract void paintComponent(Graphics g);
 
