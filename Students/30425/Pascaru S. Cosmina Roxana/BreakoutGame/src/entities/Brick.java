@@ -20,7 +20,7 @@ public class Brick extends Entity {
 		brickX = x;
 		brickY = y;
 		brickColor = color;
-		entityCollider = new Rectangle(brickX, brickY, brickWidth, brickHeight);
+		surface = new Rectangle(brickX, brickY, brickWidth, brickHeight);
 	}
 
 	@Override

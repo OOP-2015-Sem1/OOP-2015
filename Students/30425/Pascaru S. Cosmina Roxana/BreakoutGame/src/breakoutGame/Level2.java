@@ -2,22 +2,21 @@ package breakoutGame;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Point;
+import java.awt.Rectangle;
 
 import entities.Ball;
 import entities.Brick;
 import entities.Paddle;
 
 public class Level2 extends Level {
-	private int scoreLevel2 = 0;
-	private boolean isComplete = false;
+	private int lives = 2;
+	private int score;
 
 	public Level2(Game game, Ball ball, Brick[][] brick, Paddle paddle) {
 		this.game = game;
 		this.ball = ball;
 		this.brick = brick;
 		this.paddle = paddle;
-
 	}
 
 	@Override
@@ -66,33 +65,30 @@ public class Level2 extends Level {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 5; j++) {
 
-				if ((ball.entityCollider.intersects(brick[i][j].entityCollider))) {
-
-					int ballLeft = (int) ball.entityCollider.getMinX();
-					int ballHeight = (int) ball.entityCollider.getHeight();
-					int ballWidth = (int) ball.entityCollider.getWidth();
-					int ballTop = (int) ball.entityCollider.getMinY();
-
-					Point pointRight = new Point(ballLeft + ballWidth, ballTop);
-					Point pointLeft = new Point(ballLeft, ballTop);
-					Point pointTop = new Point(ballLeft, ballTop);
-					Point pointBottom = new Point(ballLeft, ballTop + ballHeight);
-
-					if (!brick[i][j].isDestroyed()) {
-						if (brick[i][j].entityCollider.contains(pointRight)) {
+				if ((ball.surface.intersects(brick[i][j].surface))) {
+					
+					Rectangle intersection = ball.surface.intersection(brick[i][j].surface);
+					
+					if(!brick[i][j].isDestroyed()){
+						//hit on left side
+						if((ball.ballX + (ball.ballDiameter/2)) < (intersection.x +(intersection.width/2))){
 							ball.ballXmove = -ball.ballSpeed;
-						} else if (brick[i][j].entityCollider.contains(pointLeft)) {
-							ball.ballXmove = ball.ballSpeed;
 						}
-
-						if (brick[i][j].entityCollider.contains(pointTop)) {
+						//hit on right side
+						if((ball.ballX + (ball.ballDiameter/2)) > (intersection.x + (intersection.width/2))){
+							ball.ballXmove =ball.ballSpeed;
+						}
+						// hit top
+						if((ball.ballY + (ball.ballDiameter/2) < (intersection.y + intersection.height/2))){
+							ball.ballYmove = - ball.ballSpeed;
+						}
+						//hit on bottom
+						if((ball.ballY + (ball.ballDiameter/2) > (intersection.y + intersection.height/2))){
 							ball.ballYmove = ball.ballSpeed;
-						} else if (brick[i][j].entityCollider.contains(pointBottom)) {
-							ball.ballYmove = -ball.ballSpeed;
 						}
-
+						
 						if (brick[i][j].brickColor == Color.WHITE) {
-							scoreLevel2++;
+							score++;
 							brick[i][j].setIsDestroyed(true);
 						}
 						if (brick[i][j].brickColor == Color.LIGHT_GRAY) {
@@ -108,7 +104,7 @@ public class Level2 extends Level {
 				}
 			}
 		}
-		if (scoreLevel2 == Game.TOTAL_SCORE_LEVEL2) {
+		if (score == Game.TOTAL_SCORE_LEVEL2) {
 			levelIsComplete(true);
 		}
 	}
@@ -126,7 +122,7 @@ public class Level2 extends Level {
 
 	@Override
 	public int getScore() {
-		return scoreLevel2;
+		return score;
 	}
 
 	@Override
@@ -138,6 +134,32 @@ public class Level2 extends Level {
 	@Override
 	public boolean isComplete() {
 		return isComplete;
+	}
+
+	@Override
+	public void setComponentsSpeed() {
+		ball.setBallSpeed(6);
+	}
+
+	@Override
+	public void resetComponentsPosition() {
+		ball.restartPosition();
+		paddle.restartPosition();
+	}
+	
+	@Override
+	public int getLives() {
+		return lives;
+	}
+	
+	@Override
+	public void setLives(int life) {
+		lives = life;
+	}
+	
+	@Override
+	public void resetScore(){
+		score = 0;
 	}
 
 }

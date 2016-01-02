@@ -16,7 +16,7 @@ public class Ball extends Entity {
 
 	// constructor
 	public Ball() {
-		entityCollider = new Rectangle(ballX, ballY, ballDiameter, ballDiameter);
+		surface = new Rectangle(ballX, ballY, ballDiameter, ballDiameter);
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class Ball extends Entity {
 	public void update() {
 		ballX += ballXmove;
 		ballY += ballYmove;
-		entityCollider.setLocation(ballX, ballY);
+		surface.setLocation(ballX, ballY);
 	}
 
 	public void setBallSpeed(int speed) {
@@ -38,6 +38,14 @@ public class Ball extends Entity {
 	public void restartPosition(){
 		ballX = 200;
 		ballY = 200;
+		
+		ballXmove = ballSpeed;
+		ballYmove = ballSpeed;
+		
+		ballX += ballXmove;
+		ballY += ballYmove;
+		
+		
 	}
 
 }

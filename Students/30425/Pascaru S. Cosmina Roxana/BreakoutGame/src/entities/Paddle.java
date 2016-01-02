@@ -11,7 +11,7 @@ public class Paddle extends Entity {
 	// paddle details
 	private int paddleX = 450, paddleY = 500;
 	private int paddleWidth = 90, paddleHeight = 13;
-	public int paddleSpeed = 10;
+	public int paddleSpeed = 18;
 	private int distanceToMargin = 20;
 
 	// Game
@@ -20,7 +20,7 @@ public class Paddle extends Entity {
 	// constructor
 	public Paddle(Game game) {
 		this.game = game;
-		entityCollider = new Rectangle(paddleX, paddleY, paddleWidth, paddleHeight);
+		surface = new Rectangle(paddleX, paddleY, paddleWidth, paddleHeight);
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class Paddle extends Entity {
 		if (paddleX + paddleWidth + distanceToMargin >= Game.WINDOW_WIDTH)
 			paddleX = Game.WINDOW_WIDTH - paddleWidth - distanceToMargin;
 
-		entityCollider.setLocation(paddleX, paddleY);
+		surface.setLocation(paddleX, paddleY);
 	}
 
 	public void setPaddleSpeed(int speed) {
