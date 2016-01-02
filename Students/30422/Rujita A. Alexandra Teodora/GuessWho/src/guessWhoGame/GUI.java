@@ -1,3 +1,5 @@
+package guessWhoGame;
+
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -13,12 +15,13 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import others.Reading;
+
 @SuppressWarnings("serial")
 public class GUI extends JFrame {
 
 	private static JButton[] playerCharacterButtons, computerCharacterButtons;
 	private JButton characterChoosing;
-	private JButton guessedCompChr;
 	private static JComboBox<String> questions;
 	private JPanel frameSections[];
 	private final static int noPers = 24;
@@ -38,12 +41,11 @@ public class GUI extends JFrame {
 		playerCharacterButtons = new JButton[noPers];
 		computerCharacterButtons = new JButton[noPers];
 		characterChoosing = new JButton("Choose character");
-		guessedCompChr = new JButton();
 		scor = new JButton();
 		scor.setEnabled(false);
 
 		frameSections = new JPanel[nrOfSections];
-		String titles[] = { "Computer", "Player's character", "Score", " " };
+		String titles[] = { "Player guessing", "Computer guessing", "Score", " " };
 
 		text = new Reading();
 		noOfQuestions = text.noOfQuestions();
@@ -57,15 +59,16 @@ public class GUI extends JFrame {
 			add(frameSections[i]);
 		}
 
-		adaugareButoane(frameSections[0], playerCharacterButtons, false);
-		adaugareButoane(frameSections[1], computerCharacterButtons, true);
+		addingButtons(frameSections[1], computerCharacterButtons, false);
+		addingButtons(frameSections[0], playerCharacterButtons, true);
+
+		frameSections[2].add(scor);
 
 		frameSections[3].setLayout(new BorderLayout());
+		characterChoosing.setBorder(BorderFactory.createTitledBorder("My character"));
 		characterChoosing.setSize(30, 30);
 		frameSections[3].add(questions, BorderLayout.NORTH);
 		frameSections[3].add(characterChoosing, BorderLayout.CENTER);
-		compCharacter();
-		frameSections[3].add(guessedCompChr, BorderLayout.WEST);
 
 		characterChoosing.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -73,15 +76,13 @@ public class GUI extends JFrame {
 			}
 		});
 
-		frameSections[2].add(scor);
-
 		setLayout(new GridLayout(2, 2));
 		setSize(1200, 750);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
-	private void adaugareButoane(JPanel frameSections2, JButton button[], boolean imag) {
+	private void addingButtons(JPanel frameSections2, JButton button[], boolean imag) {
 
 		creatingIcons();
 
@@ -100,14 +101,6 @@ public class GUI extends JFrame {
 			}
 			frameSections2.add(button[i]);
 		}
-	}
-
-	public void compCharacter() throws Exception {
-
-		Game g = new Game();
-		guessedCompChr.setIcon(charactersImag[g.compCharacter()]);
-		guessedCompChr.setEnabled(false);
-		guessedCompChr.setDisabledIcon(charactersImag[g.compCharacter()]);
 	}
 
 	private void buttonAction() {
@@ -130,6 +123,7 @@ public class GUI extends JFrame {
 					characterChoosing.setDisabledIcon(charactersImag[Integer.valueOf(characterChosenButton) + 1]);
 					try {
 						chooseQuestion(characterChosenButton);
+						Game.butoaneTrue = true;
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
@@ -150,6 +144,7 @@ public class GUI extends JFrame {
 				if (e.getStateChange() == ItemEvent.SELECTED)
 					try {
 						rules.checkingCharacters(questions.getSelectedIndex(), chosenPlayerCharacter);
+						Game.compChrCreated = true;
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
@@ -179,7 +174,6 @@ public class GUI extends JFrame {
 	public static void score(int score) {
 
 		scor.setText(String.valueOf(score));
-
 	}
 
 }

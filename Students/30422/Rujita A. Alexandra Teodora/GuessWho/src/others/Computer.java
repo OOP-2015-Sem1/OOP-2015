@@ -1,3 +1,4 @@
+package others;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,15 +17,14 @@ public class Computer {
 
 		List<Integer> askedQuestions = new ArrayList<Integer>();
 		Random randomGenerator = new Random();
-		int randomQuestion = randomGenerator.nextInt(17)+1;
+		int randomQuestion = randomGenerator.nextInt(17) + 1;
 		Iterator<Integer> it = askedQuestions.iterator();
 
 		while (it.hasNext()) {
 			if (it.next() == randomQuestion)
 				askQuestions();
-			else {
+			else
 				askedQuestions.add(randomQuestion);
-			}
 		}
 		return randomQuestion;
 	}

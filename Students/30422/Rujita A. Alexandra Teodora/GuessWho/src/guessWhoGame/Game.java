@@ -1,34 +1,48 @@
+package guessWhoGame;
+
+
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+
+import others.Characteristics;
+import others.Computer;
+import others.Reading;
 
 public class Game {
 
 	private Characteristics pers1[];
 	private final int noPers = 24;
-	private int remainingCompChr, remainingPlayerChr = noPers;
-	private boolean player = true;
-	private boolean computer = false;
-	public boolean[] valButoaneCalc, valButoaneJucator;
+	private int eliminatedCompChr, eliminatedPlayerChr = noPers;
+	private boolean player, computer;
+	private boolean[] valButoaneCalc, valButoaneJucator;
 	private String intrebariText[];
-	private int compChrIndex = 25;
+	public static boolean compChrCreated, butoaneTrue = false;
+	private int playerChr, computerChr;
+	private Computer c = new Computer();
 
 	public Game() throws Exception {
 
 		valButoaneCalc = new boolean[noPers];
 		valButoaneJucator = new boolean[noPers];
 
-		for (int i = 0; i < noPers; i++) {
-			valButoaneCalc[i] = true;
-			valButoaneJucator[i] = true;
-		}
+		if (!butoaneTrue)
+			buttonsValTrue();
 
 		Reading text = new Reading();
 		int count = text.noOfQuestions();
 		intrebariText = new String[count];
 		text.CitireIntrebari(intrebariText, count);
 	}
-	
+
+	private void buttonsValTrue() {
+
+		for (int i = 0; i < noPers; i++) {
+			valButoaneCalc[i] = true;
+			valButoaneJucator[i] = true;
+		}
+	}
+
 	private void settingCharacteristics(Characteristics[] pers) {
 
 		pers[0] = new Characteristics(false, false, false, false, true, false, false, true, true, true, true, false,
@@ -82,7 +96,6 @@ public class Game {
 
 	}
 
-
 	private void settingButtonsValue(int i, boolean prop, boolean areProp, int indexChosenChr, boolean[] chrButtonValue,
 			boolean chrEliminated) {
 
@@ -90,9 +103,9 @@ public class Game {
 			chrButtonValue[i] = !(prop ^ areProp);
 			String val = String.valueOf(chrButtonValue[i]);
 			if (computer)
-				remainingPlayerChr += (val.length() - 4);
+				eliminatedPlayerChr += (val.length() - 4);
 			else if (player)
-				remainingCompChr += (val.length() - 4);
+				eliminatedCompChr += (val.length() - 4);
 		}
 	}
 
@@ -160,57 +173,43 @@ public class Game {
 
 	public void checkingCharacters(int indexIntr, String chosenCharacter) throws Exception {
 
-		Computer c = new Computer();
-		int playerChr = Integer.valueOf(chosenCharacter);
-		int computerChr = c.chooseChr();
-
-		if (remainingCompChr == 1 || remainingPlayerChr == 1) {
-			compChrIndex = computerChr;
+		if (!compChrCreated)
+			computerChr = c.chooseChr();
+		playerChr = Integer.valueOf(chosenCharacter);
+		if (eliminatedCompChr == 23 || eliminatedPlayerChr == 23)
 			newGame();
-		} else
-			while (remainingCompChr > 1 || remainingPlayerChr > 1) {
-				// playerTurn(playerChr,indexIntr, computerChr,
-				compCharacterIndex(25);
-				computerTurn(playerChr, indexIntr, computerChr, chosenCharacter);
-			}
-	}
-
-	private int compCharacterIndex(int computerChr) {
-
-		return computerChr;
-
+		else if (computerChr != 0)
+			playerTurn(playerChr, indexIntr, computerChr, chosenCharacter);
 	}
 
 	private void playerTurn(int playerChr, int indexIntr, int computerChr, String chosenCharacter) throws Exception {
 
+		// System.out.println("jucator " + "calc pers " + computerChr);
+		computer = false;
+		player = true;
 		checkingProp(indexIntr, computerChr, valButoaneCalc, computer);
-		score(remainingCompChr);
+		System.out.println(eliminatedCompChr);
+		score(eliminatedCompChr);
 		GUI.disablingButtons(valButoaneCalc, computer, player);
-		GUI.chooseQuestion(chosenCharacter);
-		computer = true;
-		player = false;
 		computerTurn(playerChr, indexIntr, computerChr, chosenCharacter);
-
 	}
 
 	private void computerTurn(int playerChr, int indexIntr, int computerChr, String chosenCharacter) throws Exception {
 
-		Computer c = new Computer();
+		// System.out.println("calc");
+		computer = true;
+		player = false;
 		int indexIntrCalc = c.askQuestions();
-		System.out.println(intrebariText[indexIntrCalc]);
 		questionDialog(indexIntrCalc);
-		playerTurn(playerChr, indexIntr, computerChr, chosenCharacter);
 		checkingProp(indexIntrCalc, playerChr, valButoaneJucator, player);
 		GUI.disablingButtons(valButoaneJucator, computer, player);
-		computer = false;
-		player = true;
-		playerTurn(playerChr, indexIntr, computerChr, chosenCharacter);
+		GUI.chooseQuestion(chosenCharacter);
 	}
-	
-	private void questionDialog(int indexIntrCalc2) {
+
+	private void questionDialog(int indexIntrCalc) {
 
 		JDialog.setDefaultLookAndFeelDecorated(true);
-		JOptionPane.showConfirmDialog(null, intrebariText[indexIntrCalc2], "Answer", JOptionPane.YES_NO_OPTION);
+		JOptionPane.showConfirmDialog(null, intrebariText[indexIntrCalc], "Answer", JOptionPane.YES_NO_OPTION);
 
 	}
 
@@ -219,17 +218,10 @@ public class Game {
 		GUI.score(persons * 10);
 	}
 
-	public int compCharacter() {
-		return compChrIndex;
-	}
-
 	private void newGame() throws Exception {
 
-		// JOptionPane.showMessageDialog(null, "Congratulation you won! /n Your
-		// score is: " + score);
+		JOptionPane.showMessageDialog(null, "Congratulation you won!");
 		new GUI();
 	}
 
-
-
-	}
+}

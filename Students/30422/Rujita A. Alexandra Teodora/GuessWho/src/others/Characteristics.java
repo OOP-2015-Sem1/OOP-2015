@@ -1,26 +1,27 @@
+package others;
 
 public class Characteristics {
 
-	boolean whiteHair;
-	boolean longHair;
-	boolean blackHair;
-	boolean beard;
-	boolean moustache;
-	boolean earrings;
-	boolean female;
-	boolean pinkHair;
-	boolean blondeHair;
-	boolean brownHair;
-	boolean old;
-	boolean glasses;
-	boolean bunnyEars;
-	boolean curlyHair;
-	boolean naked;
-	boolean africanAmerican;
-	boolean pinkShirt;
-	boolean man;
+	public boolean whiteHair;
+	public boolean longHair;
+	public boolean blackHair;
+	public boolean beard;
+	public boolean moustache;
+	public boolean earrings;
+	public boolean female;
+	public boolean pinkHair;
+	public boolean blondeHair;
+	public boolean brownHair;
+	public boolean old;
+	public boolean glasses;
+	public boolean bunnyEars;
+	public boolean curlyHair;
+	public boolean naked;
+	public boolean africanAmerican;
+	public boolean pinkShirt;
+	public boolean man;
 
-	protected Characteristics(boolean vafricanAmerican, boolean vbeard, boolean vblackHair, boolean vblondeHair,
+	public Characteristics(boolean vafricanAmerican, boolean vbeard, boolean vblackHair, boolean vblondeHair,
 			boolean vbrownHair, boolean vbunnyEars, boolean vcurlyHair, boolean vearrings, boolean vfemale,
 			boolean vglasses, boolean vlongHair, boolean vman, boolean vmoustache, boolean vnaked, boolean vold,
 			boolean vpinkHair, boolean vpinkShirt, boolean vwhiteHair) {
