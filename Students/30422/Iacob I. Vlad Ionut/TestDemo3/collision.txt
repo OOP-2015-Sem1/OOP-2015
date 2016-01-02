@@ -1,0 +1,37 @@
+	int a = 0;
+		int b = 0;
+		boolean checkcollision = false;
+		ball.move(a, b, checkcollision);
+		if ((int)bricksmap.get(a+b)==1) {
+			brick.remove(a, b);
+			checkcollision = true;
+			bricksmap.remove(a + b);
+
+		}
+
+
+
+	newlocationx=x;
+		newlocationy=y;
+		if (checkcollision==true){
+			xv*=-1;
+			yv*=-1;
+		}
+
+
+//System.out.println(ball.getx()+' '+ball.gety());
+		if (bricksmap.get(ball.getx()+ball.gety())!=null){
+			
+			int x=ball.getx();
+			     int y=ball.gety();
+			//brick.remove(ball.getx(), ball.gety());
+			checkcollision=true;
+			 removex=x;
+			 removey=y;
+
+
+if (ball.getx()>0 && ball.gety()>0)
+        if (ball.getx()<=ball.collisionxStatus(ball.getx()) || ball.gety()<=ball.collisionyStatus(ball.gety())){
+        	if (brick.brickdead(ball.collisionxStatus(ball.getx()), ball.collisionyStatus(ball.gety()))==false){
+        		brick.setexistance(ball.getx(),ball.gety(), true);
+        	}
