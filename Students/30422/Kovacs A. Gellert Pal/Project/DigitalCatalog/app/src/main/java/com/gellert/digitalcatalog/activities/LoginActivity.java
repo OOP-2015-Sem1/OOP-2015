@@ -1,6 +1,5 @@
 package com.gellert.digitalcatalog.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,7 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.gellert.digitalcatalog.R;
-import com.gellert.digitalcatalog.models.Teacher;
+import com.gellert.digitalcatalog.database.CatalogDatabaseHelper;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -29,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        catalogDB = new CatalogDatabaseHelper(this);
+        catalogDB = CatalogDatabaseHelper.getInstance(LoginActivity.this);
 
         btnSignIn = (Button)findViewById(R.id. btnSignIn);
         txtUsername = (EditText)findViewById(R.id. txtUsername);
@@ -44,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
                 txtPassword.setText("");
 
                 if(catalogDB.authenticateUser(username, password)) {
-                    personID = catalogDB.getPersonID(username);
+                    personID = catalogDB.getPersonIDByUserName(username);
                     Toast.makeText(LoginActivity.this, "Welcome " + catalogDB.getPersonName(personID) + "!", Toast.LENGTH_SHORT).show();
                 }
                 else {

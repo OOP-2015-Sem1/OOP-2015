@@ -16,8 +16,11 @@ import java.util.ArrayList;
  * Created by Gellért on 2015. 12. 29..
  */
 public class MarkListAdapter extends ArrayAdapter<Mark>{
-    public MarkListAdapter(Context context, ArrayList<Mark> marks) {
+    private boolean showSubject;
+
+    public MarkListAdapter(Context context, ArrayList<Mark> marks, boolean showSubject) {
         super(context, R.layout.mark_row, marks);
+        this.showSubject = showSubject;
     }
 
     @Override
@@ -30,8 +33,12 @@ public class MarkListAdapter extends ArrayAdapter<Mark>{
         TextView txtMidterm = (TextView) customView.findViewById(R.id.txtMidterm);
         TextView txtMark = (TextView) customView.findViewById(R.id.txtMark);
 
-        txtSubject.setText(singleMark.getSubject());
-        txtMidterm.setText(String.valueOf(singleMark.isMidterm()));
+        if (showSubject) txtSubject.setText(singleMark.getSubject());
+        else txtSubject.setText("");
+
+        if (singleMark.isMidterm()) txtMidterm.setText("Midterm");
+        else txtMidterm.setText("");
+
         txtMark.setText(String.valueOf(singleMark.getMark()));
 
         return customView;
