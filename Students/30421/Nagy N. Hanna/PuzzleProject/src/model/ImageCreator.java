@@ -39,8 +39,7 @@ public class ImageCreator extends Component {
 			int height = getNewHeight(originalImage.getWidth(), originalImage.getHeight());
 			resizedImage = resizeImage(originalImage, Constants.DESIRED_WIDTH, height, BufferedImage.TYPE_INT_ARGB);
 		} catch (IOException ex) {
-			// Logger.getLogger(ImageCreator.class.getName()).log(Level.SEVERE,
-			// null, ex);
+			System.out.println("Somtehing went wrong with the images" + ex.getStackTrace());
 
 		}
 
@@ -73,7 +72,7 @@ public class ImageCreator extends Component {
 
 	}
 
-	private static void shuffleButtons(ArrayList<ButtonSegments> buttons, ButtonSegments lastButton) {
+	private void shuffleButtons(ArrayList<ButtonSegments> buttons, ButtonSegments lastButton) {
 		Collections.shuffle(buttons);
 		buttons.add(lastButton);
 

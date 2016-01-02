@@ -18,6 +18,8 @@ public class MenuBar extends JMenuBar{
 	private JMenu changeImage;
 	private JMenuItem[] images;
 	private JMenuItem exit;
+	private JMenu difficulty;
+	private JMenuItem[] difficultyOptions ;
 	
 	public MenuBar(){
 		
@@ -43,6 +45,16 @@ public class MenuBar extends JMenuBar{
 		changeImage.add(images[3]);
 		
 		
+		difficulty= new JMenu("Difficulty");
+		file.add(difficulty);
+		
+		difficultyOptions = new JMenuItem[2];
+		difficultyOptions[0] = new JMenuItem("Easy");
+		difficulty.add(difficultyOptions[0]);
+		
+		difficultyOptions[1] = new JMenuItem("Hard");
+		difficulty.add(difficultyOptions[1]);
+		
 		exit = new JMenuItem("Exit");
 		file.add(exit);
 	
@@ -51,9 +63,17 @@ public class MenuBar extends JMenuBar{
 		add(help);
 		JMenuItem about= new JMenuItem("About");
 		help.add(about);
+		
+		
+		
+		
 	}
 	
-	
+	public void addActionListenerToDifficultyMenuButton(ActionListener actionListener){
+		for(int i=0; i< difficultyOptions.length; i++){
+			difficultyOptions[i].addActionListener(actionListener);
+		}
+	}
 	
 	public void addExitActionListenerToMenuButton(ActionListener actionlistener){
 		exit.addActionListener(actionlistener);
@@ -67,6 +87,10 @@ public class MenuBar extends JMenuBar{
 	
 	public JMenuItem[] getImageOptions(){
 		return this.images;
+	}
+	
+	public JMenuItem[] getDifficultyOptions(){
+		return this.difficultyOptions;
 	}
 	
 }

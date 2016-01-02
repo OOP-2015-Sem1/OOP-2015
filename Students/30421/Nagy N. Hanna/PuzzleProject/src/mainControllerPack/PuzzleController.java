@@ -7,21 +7,43 @@ import java.io.File;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
+import javax.swing.SwingUtilities;
 
 import model.SoundPlayer;
 import userInterfacePack.PuzzleFrame;
 
 public class PuzzleController {
 
+	private String pathImage = "resources/Image.png"; // default
+	private String difficultyLevel = "easy"; // default
 	private PuzzleFrame puzzleFrame;
 
-	public void runPuzzle(String pathImage) {
+	public void runPuzzle() {
 
-		puzzleFrame = new PuzzleFrame(pathImage);
+		puzzleFrame = new PuzzleFrame(pathImage, difficultyLevel);
 		puzzleFrame.addActionListenerToButtons(new RightPanelButtonsActionListener());
 		puzzleFrame.addActionListenerToImageSegments(new ClickAction());
 		puzzleFrame.addExitActionListenerToMenuButton(new ExitAction());
 		puzzleFrame.addChangeImageActionListenertoMenuButton(new ChangeImageAction());
+		puzzleFrame.addActionListenerToDifficultyMenuButton(new DifficultyActionListener());
+
+	}
+
+	private class DifficultyActionListener implements ActionListener {
+		JMenuItem[] difficultyOp = puzzleFrame.getDifficultyOptions();
+
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			if (event.getSource() == difficultyOp[0]) {
+				difficultyLevel = "easy";
+				newGame();
+
+			}
+			if (event.getSource() == difficultyOp[1]) {
+				difficultyLevel = "hard";
+				newGame();
+			}
+		}
 	}
 
 	private class ExitAction implements ActionListener {
@@ -37,17 +59,24 @@ public class PuzzleController {
 		public void actionPerformed(ActionEvent event) {
 
 			if (event.getSource() == images[0]) {
-				newGame("resources/flower.png");
+				pathImage = "resources/flower.png";
+				newGame();
 
 			}
 			if (event.getSource() == images[1]) {
-				newGame("resources/diCaprio.png");
+				pathImage = "resources/diCaprio.png";
+				newGame();
+
 			}
 			if (event.getSource() == images[2]) {
-				newGame("resources/eiffel.png");
+				pathImage = "resources/eiffel.png";
+				newGame();
+
 			}
 			if (event.getSource() == images[3]) {
-				newGame("resources/singapore.png");
+				pathImage = "resources/singapore.png";
+				newGame();
+
 			}
 
 		}
@@ -62,32 +91,35 @@ public class PuzzleController {
 		}
 	}
 
-	
-
 	private class RightPanelButtonsActionListener implements ActionListener {
 
 		JButton newGameButton = puzzleFrame.getNewGameButton();
 		JButton musicButton = puzzleFrame.getMusicButton();
-
+		
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			
+			File music = new File("beeth5th.wav");
+			
+			
 			if (e.getSource() == newGameButton) {
-				newGame("resources/Image.png");
+				newGame();
 			}
 			if (e.getSource() == musicButton) {
-
-				File music = new File("beeth5th.wav");
-				SoundPlayer.PlaySound(music);
+				SoundPlayer.playSound(music,true);
 			}
+			
+			
 		}
 
 	}
-	
-	private void newGame(String pathImage) {
+
+	private void newGame() {
 
 		puzzleFrame.setVisible(false);
 		puzzleFrame.dispose();
 
-		runPuzzle(pathImage);
+		runPuzzle();
 	}
 }
