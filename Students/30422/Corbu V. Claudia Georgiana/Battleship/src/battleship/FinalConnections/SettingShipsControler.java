@@ -20,56 +20,36 @@ public class SettingShipsControler {
 	boolean horizontalPlacement;
 	int length ;
 	BoardPanel mypanel;
-	public boolean placeNewShipButtonIsActive=true;
+	private int nrOfShips=1;
+	private JButton[][] buttons;
 
 	public SettingShipsControler() {
 		battleshipFrame = new BattleshipFrame();
 		myShipMatrix = new ShipMatrix();
-		battleshipFrame.addActionListenerToPlaceNewShipButton(new PlaceNewShipListener());
 		battleshipFrame.addActionListenerToMyButtons(new MouseListenerForMyButtons());
 		mypanel = battleshipFrame.getMyPanel();
-		length = 1;
-		 horizontalPlacement = true;
+		horizontalPlacement= battleshipFrame.isHorizontallyButtonSelected();
+		ship= new Ship(5,horizontalPlacement);
+		 buttons = mypanel.getButtons();
 
 	}
-	public void setNewShipButtonToFalse(){
-		placeNewShipButtonIsActive=false;
+	
+
+	public void addListenerToPLAYButton(MouseListener mouseListener) {
+		battleshipFrame.addActionListenerToPLAYButton(mouseListener);
 	}
 
-	public void addListenerToDonePlaceingShipsButton(MouseListener mouseListener) {
-		battleshipFrame.addActionListenerToDonePlaceingShipsButton(mouseListener);
-	}
-
-	private class PlaceNewShipListener implements MouseListener {
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-
-			if (placeNewShipButtonIsActive) {
-				length = SettingsDialogs.queryForShipSize();
-				horizontalPlacement = SettingsDialogs.queryForHorizontalPlacementOfShip();
-			}
-		}
-		@Override
-		public void mouseEntered(MouseEvent e) {}
-		@Override
-		public void mouseExited(MouseEvent e) {		}
-		@Override
-		public void mousePressed(MouseEvent e) {	}
-		@Override
-		public void mouseReleased(MouseEvent e) {		}
-	}
 
 	private class MouseListenerForMyButtons implements MouseListener {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			JButton[][] b = mypanel.getButtons();
 			Point point = new Point();
-			ship = new Ship(length, horizontalPlacement);
-			if (placeNewShipButtonIsActive) {
+			if (getNrOfShip() <= 5) {
+				horizontalPlacement = battleshipFrame.isHorizontallyButtonSelected();
+				//ship=new Ship(6 - nrOfShips, horizontalPlacement);
 				for (int i = 0; i < 10; i++) {
 					for (int j = 0; j < 10; j++) {
-						if (b[i][j] == e.getSource()) {
+						if (buttons[i][j] == e.getSource()) {
 							point.setLocation(i, j);
 						}
 					}
@@ -77,14 +57,68 @@ public class SettingShipsControler {
 				if (myShipMatrix.isPlacementPermitted(ship, point)) {
 					myShipMatrix.placeShipInMatrix(ship, point);
 					mypanel.updateBoardWithShips(myShipMatrix.returnShipMatrix());
+					nrOfShips = nrOfShips + 1;
+					ship = new Ship(6 - nrOfShips, horizontalPlacement);
+					
 				} else
 					SettingsDialogs.notifyIllegalPlacement();
 			}
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			Point p = new Point();
+			if (getNrOfShip() <= 5) {
+				for (int i = 0; i < 10; i++) {
+					for (int j = 0; j < 10; j++) {
+						if (buttons[i][j] == e.getSource()) {
+							p.setLocation(i,j);						
+						}
+					}
+				}
+
+				if (battleshipFrame.isHorizontallyButtonSelected()) {
+					ship=new Ship(6 - nrOfShips, battleshipFrame.isHorizontallyButtonSelected());
+					if (myShipMatrix.isPlacementPermitted(ship, p)){
+						
+						for (int k = p.y; k <= ship.getLengthOfShip() + p.y - 1; k++) {
+							buttons[p.x][k].setBackground(Color.GRAY);}
+						}
+				} else {
+					ship=new Ship(6 - nrOfShips, battleshipFrame.isHorizontallyButtonSelected());
+					if (myShipMatrix.isPlacementPermitted(ship, p))
+						for (int k = p.x; k <= ship.getLengthOfShip() + p.x - 1; k++) {
+							buttons[k][p.y].setBackground(Color.GRAY);
+						}
+
+				}
+			}
 		}
 		@Override
-		public void mouseEntered(MouseEvent e) {}
-		@Override
-		public void mouseExited(MouseEvent e) {		}
+		public void mouseExited(MouseEvent e) {
+			Point p = new Point();
+			if (getNrOfShip() <= 5) {
+				for (int i = 0; i < 10; i++) {
+					for (int j = 0; j < 10; j++) {
+						if (buttons[i][j] == e.getSource()) {
+							p.setLocation(i,j);							
+						}
+					}
+				}
+				if (myShipMatrix.isPlacementPermitted(ship, p)) {
+					if (battleshipFrame.isHorizontallyButtonSelected()) {
+						for (int k = p.y; k <= ship.getLengthOfShip()+p.y-1; k++) {
+							buttons[p.x][k].setBackground(Color.LIGHT_GRAY);
+						}
+					} else {
+						for (int k = p.x; k <= ship.getLengthOfShip()+p.x-1; k++) {
+							buttons[k][p.y].setBackground(Color.LIGHT_GRAY);
+						}
+					}
+				}
+			}
+		}
 		@Override
 		public void mousePressed(MouseEvent e) {	}
 		@Override
@@ -102,44 +136,14 @@ public class SettingShipsControler {
 	public ShipMatrix getMyShipMatrix() {
 		return myShipMatrix;
 	}
-	public JButton getDonePlacingShipsButton(){
-		return battleshipFrame.getDonePlacingShipsButton();
+	public JButton getPlayButton(){
+		return battleshipFrame.getPlayButton();
 	}
 
 	public void addListenerToOponentButtons(MouseListener mouseListener){
 		battleshipFrame.getOponentPanel().addActionListenerToButtons(mouseListener );
 	}
-	public void addListenerToDonePlacingShips(MouseListener mouseListener){
-		battleshipFrame.addActionListenerToDonePlaceingShipsButton(mouseListener);
+	public int getNrOfShip(){
+		return this.nrOfShips;
 	}
-	/*
-	 * private class DonePlacingShipsListener implements MouseListener{
-	 * 
-	 * @Override public void mouseClicked(MouseEvent e) {
-	 * placeNewShipButtonIsActive=false;
-	 * battleshipFrame.addActionListenerToOponentButtons(new
-	 * HitMouseLsitener()); }
-	 * 
-	 * @Override public void mouseEntered(MouseEvent e) {}
-	 * 
-	 * @Override public void mouseExited(MouseEvent e) {}
-	 * 
-	 * @Override public void mousePressed(MouseEvent e) {}
-	 * 
-	 * @Override public void mouseReleased(MouseEvent e) {} } private class
-	 * HitMouseLsitener implements MouseListener{
-	 * 
-	 * @Override public void mouseClicked(MouseEvent e) { JButton[][] b=
-	 * oponentPanel.getButtons(); if (!placeNewShipButtonIsActive){ for ( int i
-	 * = 0; i < 10; i++) { for (int j = 0; j < 10; j++) { if( b[i][j] ==
-	 * e.getSource()){ b[i][j].setBackground(new Color(0, 100, 150));}}} } }
-	 * 
-	 * @Override public void mouseEntered(MouseEvent e) {}
-	 * 
-	 * @Override public void mouseExited(MouseEvent e) {}
-	 * 
-	 * @Override public void mousePressed(MouseEvent e) {}
-	 * 
-	 * @Override public void mouseReleased(MouseEvent e) {} }
-	 */
 }

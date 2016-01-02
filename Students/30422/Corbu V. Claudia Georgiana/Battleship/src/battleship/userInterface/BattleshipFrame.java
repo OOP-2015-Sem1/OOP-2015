@@ -11,9 +11,10 @@ public class BattleshipFrame extends JFrame {
 
 	private BoardPanel myPanel;
 	private BoardPanel oponentPanel;
-	private JButton donePlaceingShipsButton;
-	private JButton placeNewShipButton;
+	private JButton playButton;
 	private JLabel text1, text2;
+	private JRadioButton horizontal, vertical;
+	private ButtonGroup radiosGroup;
 
 	public BattleshipFrame() {
 
@@ -26,17 +27,26 @@ public class BattleshipFrame extends JFrame {
 		this.add(myPanel);
 		this.add(oponentPanel);
 
-		donePlaceingShipsButton = new JButton("Done placing ships");
-		donePlaceingShipsButton.setBackground(Color.ORANGE);
-		donePlaceingShipsButton.setForeground(Color.WHITE);
-		donePlaceingShipsButton.setBounds(300, 380, 150, 150);
-		this.add(donePlaceingShipsButton);
-
-		placeNewShipButton = new JButton("Place a new ship");
-		placeNewShipButton.setBackground(Color.ORANGE);
-		placeNewShipButton.setForeground(Color.WHITE);
-		placeNewShipButton.setBounds(300, 50, 150, 150);
-		this.add(placeNewShipButton);
+		playButton = new JButton("PLAY AGAiNST COMPUTER");
+		playButton.setBackground(Color.ORANGE);
+		playButton.setForeground(Color.WHITE);
+		playButton.setBounds(300, 380, 150, 150);
+		this.add(playButton);
+		
+		horizontal= new JRadioButton("horizontally");
+		horizontal.setForeground(Color.WHITE);
+		horizontal.setBackground(Color.ORANGE);
+		horizontal.setSelected(true);
+		horizontal.setBounds(300, 50, 150, 50);
+		vertical= new JRadioButton("vertically");
+		vertical.setForeground(Color.WHITE);
+		vertical.setBackground(Color.ORANGE);
+		vertical.setBounds(300, 120, 150, 50);
+		radiosGroup= new ButtonGroup();
+		radiosGroup.add(horizontal);
+		radiosGroup.add(vertical);
+		this.add(horizontal);
+		this.add(vertical);
 		
 		text1 = new JLabel("MY BOARD");
 		text1.setBounds(100, 20, 250, 30);
@@ -62,8 +72,8 @@ public class BattleshipFrame extends JFrame {
 	public BoardPanel getOponentPanel() {
 		return this.oponentPanel;
 	}
-	public JButton getDonePlacingShipsButton(){
-		return this.donePlaceingShipsButton;
+	public JButton getPlayButton(){
+		return this.playButton;
 	}
 	public void addActionListenerToMyButtons(MouseListener actionListener) {
 		myPanel.addActionListenerToButtons(actionListener);
@@ -73,12 +83,12 @@ public class BattleshipFrame extends JFrame {
 		oponentPanel.addActionListenerToButtons(actionListener);
 	}
 
-	public void addActionListenerToPlaceNewShipButton(MouseListener actionListener) {
-		placeNewShipButton.addMouseListener(actionListener);
+	public boolean isHorizontallyButtonSelected() {
+		return horizontal.isSelected();
 	}
 
-	public void addActionListenerToDonePlaceingShipsButton(MouseListener actionListener) {
-		donePlaceingShipsButton.addMouseListener(actionListener);
+	public void addActionListenerToPLAYButton(MouseListener actionListener) {
+		playButton.addMouseListener(actionListener);
 	}
 
 }

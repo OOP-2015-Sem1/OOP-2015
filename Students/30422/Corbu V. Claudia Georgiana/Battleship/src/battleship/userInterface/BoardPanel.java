@@ -8,13 +8,11 @@ import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
-
 public class BoardPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
 	private JButton[][] buttons;
-
 
 	public BoardPanel(int x, int y) {
 		setLayout(new GridLayout(10, 10));
@@ -31,7 +29,6 @@ public class BoardPanel extends JPanel {
 		this.setBounds(x, y, 250, 250);
 
 	}
-	
 
 	public JButton[][] getButtons() {
 		return this.buttons;
@@ -55,17 +52,26 @@ public class BoardPanel extends JPanel {
 		}
 
 	}
-	public void updateBoardWithHits(int i, int j){
-		if (buttons[i][j].getBackground()== new Color(100, 30, 30)){
+
+	public void updateBoardWithHits(int i, int j) {
+		if (buttons[i][j].getBackground() == new Color(100, 30, 30)) {
 			buttons[i][j].setBackground(Color.RED);
-		}else {buttons[i][j].setBackground(new Color(0, 100, 150));}
+		} else {
+			buttons[i][j].setBackground(new Color(0, 100, 150));
+		}
 	}
 
 	public JButton getSpecificButton(int i, int j) {
 		return buttons[i][j];
 	}
 
-
-
+	public void EnableButtons(boolean isEnabled) {
+		
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 10; j++) {
+				buttons[i][j].setEnabled(isEnabled);
+			}
+		}
+	}
 
 }
