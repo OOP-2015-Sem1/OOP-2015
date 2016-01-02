@@ -90,11 +90,12 @@ public class OthelloFrame {
 			labelForTurn.setText("WHITE's TURN");
 		else if (currentTurn == BoardConfiguration.BLACK)
 			labelForTurn.setText("BLACK's TURN");
-		else
+		else if (currentTurn == BoardConfiguration.GAME_OVER)
 			labelForTurn.setText("GAME OVER");
 	}
 
 	public void writeTheResultOnFrame(int nrGreen, int scoreWhite, int scoreBlack) {
+		setLabelForTurn(BoardConfiguration.GAME_OVER);
 		if (nrGreen == 0) {
 			if (scoreWhite > scoreBlack) {
 				buttonsForGame[3][1].setText("W");
