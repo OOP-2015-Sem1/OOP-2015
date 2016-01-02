@@ -1,7 +1,6 @@
 package com.alexasapps.multiplecardsflippingdemo;
 
-import android.animation.AnimatorInflater;
-import android.animation.AnimatorSet;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,51 +8,56 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.ImageView;
+
+import com.alexasapps.controller.CardFlipping;
+import com.alexasapps.controller.EasyCardFlipping;
+import com.alexasapps.controller.MediumCardFlipping;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static Context mainContext;
 
-    Button portalForNewActivity;
+    Button easyLevel;
+    Button mediumLevel;
+    Button hardLevel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.first_layout);
 
-        portalForNewActivity = (Button) findViewById(R.id.button);
+        easyLevel = (Button) findViewById(R.id.button);
+        mediumLevel = (Button) findViewById(R.id.button2);
+        hardLevel = (Button) findViewById(R.id.button3);
 
-        portalForNewActivity.setOnClickListener(new View.OnClickListener() {
+        mainContext = getApplicationContext();
+
+        easyLevel.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-               // Intent i = new Intent(getApplicationContext(),CardFlipping.class);
+                // Intent i = new Intent(getApplicationContext(),CardFlipping.class);
                 //startActivity(i);
-                startActivity(new Intent(MainActivity.this, CardFlipping.class));
+                startActivity(new Intent(MainActivity.this, EasyCardFlipping.class));
             }
         });
-        /*
 
-            frontImages[i].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (!isBackVisible) {
-                        setRightOut.setTarget(frontImages[index]);
-                        setLeftIn.setTarget(backImages[index]);
-                        setRightOut.start();
-                        setLeftIn.start();
-                        isBackVisible = true;
-                    } else {
-                        setRightOut.setTarget(backImages[index]);
-                        setLeftIn.setTarget(frontImages[index]);
-                        setRightOut.start();
-                        setLeftIn.start();
-                        isBackVisible = false;
-                    }
-                }
-            });
-        }*/
+        mediumLevel.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, MediumCardFlipping.class));
+            }
+        });
+
+        hardLevel.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
     }
 
