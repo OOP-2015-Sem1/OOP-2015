@@ -3,6 +3,8 @@ package catalog.ui;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
@@ -33,6 +35,8 @@ public class CatalogFrame {
 		// CatalogTheRealFrame.add(ClassroomsPanel.panel);
 
 		//Marks MARK = new Marks();
+		//SFEGP.panelpanel[1].setVisible(true);
+		
 		CatalogTheRealFrame.add(SFEGP.MAR);
 	}
 }

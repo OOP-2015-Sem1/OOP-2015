@@ -6,6 +6,7 @@ import catalog.ui.CatalogFrame;
 
 public class Main {
 	@SuppressWarnings({ "unchecked" })
+	public static int numar;
 	public static int nrOfStudents = 0;
 	public static void main(String[] args) {
 		new Classroom();

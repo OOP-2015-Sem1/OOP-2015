@@ -18,9 +18,8 @@ public class StudentsFromEachGradePanel implements ActionListener {
 	public Marks fau = new Marks();
 	public JPanel[] panelpanel = new JPanel[Main.nrOfStudents];
 	public JPanel[] StudentsPanelFromClasroom = new JPanel[13];
-	public int numar;
-	private JButton[] StudentButtons;
-	private int j = 1;
+	public JButton[] StudentButtons;
+	public int nrOfStudentButtons = 1;
 
 	@SuppressWarnings({ "unchecked" })
 	public StudentsFromEachGradePanel() {
@@ -29,12 +28,14 @@ public class StudentsFromEachGradePanel implements ActionListener {
 			StudentsPanelFromClasroom[i] = new JPanel();
 			ToGetButtonsOutOfArrayLists(StudentsPanelFromClasroom[i], Students.studentsFromGrade[i]);
 		}
+		//MAR.setLayout(new GridLayout(10,10));
 		for (int i = 0; i < Main.nrOfStudents; i++) {
 			panelpanel[i]= new JPanel();
-			panelpanel[i]=fau.panel[j];
+			panelpanel[i]=fau.panel[i];
 			panelpanel[i].setVisible(false);
 			MAR.add(panelpanel[i]);
 		}
+		panelpanel[1].setVisible(true);
 		MAR.setVisible(true);
 	}
 
@@ -43,22 +44,28 @@ public class StudentsFromEachGradePanel implements ActionListener {
 		PanelForClassroom.setLayout(new GridLayout(StringToSize - 1, 1));
 		int i = 1;
 		while (i != StringToSize) {
-			StudentButtons[j] = new JButton(grade.get(i));
-			StudentButtons[j].addActionListener(this);
-			PanelForClassroom.add(StudentButtons[j]);
+			StudentButtons[nrOfStudentButtons] = new JButton(grade.get(i));
+			StudentButtons[nrOfStudentButtons].addActionListener(this);
+			PanelForClassroom.add(StudentButtons[nrOfStudentButtons]);
 			PanelForClassroom.setVisible(false);
 			i++;
-			j++;
+			nrOfStudentButtons++;
 		}
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		panelpanel[1].setVisible(true);
 		for (int i = 0; i < Main.nrOfStudents; i++){
 			if (e.getSource() == StudentButtons[i]) {
 				for (int j = 0; j < Main.nrOfStudents; j++) {
 					if (j == i) {
 						panelpanel[j].setVisible(true);
-						System.out.println("button " + i);
+						// Nu intleg de ce nu merge partea asta cu ActionListener
+						// In clasa ClassroomFroom... imi merge ok si am facut exact aceeasi chestie.
+						// nu inteleg ce gresesc sau ce fac diferit
+						System.out.println("button " + j);
+						Main.numar = i;
 					} else{
 						panelpanel[j].setVisible(false);
 					}
