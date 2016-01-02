@@ -9,6 +9,7 @@ public class ChessFrame {
 		UserInterface ui = new UserInterface();
 		f.add(ui);
 		f.setSize(1000, 1000);
+		f.setLocationRelativeTo(null);
 		f.setVisible(true);
 
 	}

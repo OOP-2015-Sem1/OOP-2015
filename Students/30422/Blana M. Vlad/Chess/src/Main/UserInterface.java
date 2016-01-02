@@ -20,7 +20,7 @@ public class UserInterface extends JPanel implements MouseListener,
 		MouseMotionListener {
 	int mouseX, mouseY, newMouseX, newMouseY, squareSize = 100;
 	private Movement dragMove = new Movement();
-	private Controller controller = MainChess.controller;
+	private Controller controller = new Controller();
 	private boolean moveHighlightMatrix[][] = new boolean[8][8];
 
 	public UserInterface() {
