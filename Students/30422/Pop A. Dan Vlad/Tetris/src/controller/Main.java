@@ -6,7 +6,7 @@ import java.util.TimerTask;
 
 import gui.Game;
 import gui.Login;
-import gui.gameOver;
+import gui.GameOverFrame;
 import shapes.LShape;
 import shapes.LineShape;
 import shapes.Shape;
@@ -32,7 +32,7 @@ public class Main {
 		}
 	};
 
-	public static void start() {
+	public static void start(Game game) {
 		timer.scheduleAtFixedRate(task, 1000, 1000);
 		stoped = true;
 		Move.init();
@@ -58,17 +58,18 @@ public class Main {
 			score++;
 			for (int i = 0; i < 3; i++) {
 				for (int j = 0; j < 3; j++) {
-					if (matrice[i][j + 6] + shapeObj.forma[i][j] < 120) {
-						matrice[i][j + 6] = shapeObj.forma[i][j];
-					} else {
-						if (gameOver == false) {
+					if (shapeObj.forma[i][j] > 10 && shapeObj.forma[i][j] < 20) {
+
+						if (matrice[i][j + 6] + shapeObj.forma[i][j] < 120) {
+							matrice[i][j + 6] = shapeObj.forma[i][j];
+
+						} else {
 							System.out.println("GAME OVER!");
 							gameOver = true;
-							readFile.updateFile();
-							new gameOver();
+							ScoreFileReader.updateFile();
+							new GameOverFrame();
 						}
 					}
-
 				}
 			}
 			stoped = false;
@@ -78,7 +79,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		new Login();
-		new TetrisController();
-		start();
+		TetrisController controller = new TetrisController();
+		start(controller.game);
 	}
 }
