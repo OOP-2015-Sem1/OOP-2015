@@ -7,8 +7,6 @@ import java.awt.Canvas;
 @SuppressWarnings("serial")
 public class Game extends Canvas {
 
-	public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
-
 	private Board b;
 	private MainMenu m;
 	private DifficultyMenu d;
@@ -18,24 +16,24 @@ public class Game extends Canvas {
 	// CONSTRUCTOR
 	public Game() {
 
-		m = new MainMenu(WIDTH, HEIGHT, this);
+		m = new MainMenu(Constants.WIDTH, Constants.HEIGHT, this);
 	}
 
 	// difficuly menu
 	public void enterDifficultyMenu() {
-		d = new DifficultyMenu(WIDTH, HEIGHT, this);
+		d = new DifficultyMenu(Constants.WIDTH, Constants.HEIGHT, this);
 		m.setVisible(false);
 	}
 
 	// starts the game with different board
 	public void enterGame(int pairs) {
-		b = new Board(WIDTH, HEIGHT, this, pairs);
+		b = new Board(Constants.WIDTH,Constants.HEIGHT, this, pairs);
 		d.setVisible(false);
 	}
 
 	// starts the win menu
 	public void enterWinMenu() {
-		w = new WinMenu(WIDTH, HEIGHT, this);
+		w = new WinMenu(Constants.WIDTH, Constants.HEIGHT, this);
 		b.setVisible(false);
 	}
 
