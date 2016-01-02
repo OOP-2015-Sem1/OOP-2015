@@ -1,7 +1,7 @@
 package game;
 
 public class ThereExists {
-
+/*
 	protected boolean thereExistsAtLeastOnePossibleMoveForRandomColor(BoardConfiguration boardConfiguration) {
 		for (int i = 0; i < BoardConfiguration.ROWS; i++) {
 			for (int j = 0; j < BoardConfiguration.COLS; j++) {
@@ -15,7 +15,7 @@ public class ThereExists {
 		}
 		return false;
 	}
-
+*/
 	protected boolean thereExistsAtLeastOnePossibleMoveForThisColor(BoardConfiguration boardConfiguration, int color) {
 		for (int i = 0; i < BoardConfiguration.ROWS; i++) {
 			for (int j = 0; j < BoardConfiguration.COLS; j++) {
