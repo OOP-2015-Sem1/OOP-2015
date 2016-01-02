@@ -56,7 +56,7 @@ public class Board extends JPanel implements ActionListener, Commons {
 		addKeyListener(new TAdapter());
 		setFocusable(true);
 		setBackground(Color.BLACK);
-		gameRunning = true;
+		gameRunning = true;		
 
 		setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
 
@@ -181,7 +181,7 @@ public class Board extends JPanel implements ActionListener, Commons {
 		g.setColor(Color.white);
 		g.drawRect(190, BOARD_WIDTH / 2 - 30, BOARD_HEIGHT - 100, 50);
 
-		String s = "Press S to play again.";
+		String s = "Press S to exit.";
 		Font small = new Font("Helvetica", Font.BOLD, 14);
 		FontMetrics metr = this.getFontMetrics(small);
 
@@ -335,11 +335,9 @@ public class Board extends JPanel implements ActionListener, Commons {
 			int key = e.getKeyCode();
 			hero.keyReleased(e);
 
-			hero.keyReleased(e);
-
 			if ((!gameRunning) && ((key == 's') || (key == 'S'))) {
 
-				initializeBoard();
+				System.exit(0);
 			}
 		}
 
