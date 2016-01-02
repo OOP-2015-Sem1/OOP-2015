@@ -4,6 +4,7 @@
 
 package gui;
 
+import java.awt.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
@@ -35,6 +36,9 @@ public class Admin_home extends JPanel {
 		panel3 = new JPanel();
 
 		//======== this ========
+		setPreferredSize(new Dimension(780, 480));
+		setMaximumSize(new Dimension(780, 480));
+		setMinimumSize(new Dimension(780, 480));
 
 		// JFormDesigner evaluation mark
 		setBorder(new javax.swing.border.CompoundBorder(
@@ -78,7 +82,7 @@ public class Admin_home extends JPanel {
 					panel1Layout.createParallelGroup()
 						.addGroup(panel1Layout.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(menuBar1, GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
+							.addComponent(menuBar1, GroupLayout.DEFAULT_SIZE, 735, Short.MAX_VALUE)
 							.addContainerGap())
 				);
 				panel1Layout.setVerticalGroup(
@@ -86,7 +90,7 @@ public class Admin_home extends JPanel {
 						.addGroup(panel1Layout.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(menuBar1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(218, Short.MAX_VALUE))
+							.addContainerGap(398, Short.MAX_VALUE))
 				);
 			}
 			tabbedPane1.addTab("Users", panel1);
@@ -116,7 +120,7 @@ public class Admin_home extends JPanel {
 					panel2Layout.createParallelGroup()
 						.addGroup(panel2Layout.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(menuBar2, GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
+							.addComponent(menuBar2, GroupLayout.DEFAULT_SIZE, 735, Short.MAX_VALUE)
 							.addContainerGap())
 				);
 				panel2Layout.setVerticalGroup(
@@ -124,7 +128,7 @@ public class Admin_home extends JPanel {
 						.addGroup(panel2Layout.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(menuBar2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(218, Short.MAX_VALUE))
+							.addContainerGap(398, Short.MAX_VALUE))
 				);
 			}
 			tabbedPane1.addTab("Accounts", panel2);
@@ -136,11 +140,11 @@ public class Admin_home extends JPanel {
 				panel3.setLayout(panel3Layout);
 				panel3Layout.setHorizontalGroup(
 					panel3Layout.createParallelGroup()
-						.addGap(0, 375, Short.MAX_VALUE)
+						.addGap(0, 755, Short.MAX_VALUE)
 				);
 				panel3Layout.setVerticalGroup(
 					panel3Layout.createParallelGroup()
-						.addGap(0, 250, Short.MAX_VALUE)
+						.addGap(0, 430, Short.MAX_VALUE)
 				);
 			}
 			tabbedPane1.addTab("Others", panel3);

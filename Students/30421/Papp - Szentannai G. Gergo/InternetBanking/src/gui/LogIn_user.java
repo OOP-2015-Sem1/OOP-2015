@@ -76,12 +76,10 @@ public class LogIn_user extends JPanel {
 		layout.setHorizontalGroup(
 			layout.createParallelGroup()
 				.addGroup(layout.createSequentialGroup()
+					.addGap(238, 238, 238)
 					.addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-						.addGroup(layout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 254, GroupLayout.PREFERRED_SIZE))
+						.addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 254, GroupLayout.PREFERRED_SIZE)
 						.addGroup(GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-							.addGap(81, 81, 81)
 							.addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
 								.addComponent(textPane1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addComponent(textPane2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -92,14 +90,14 @@ public class LogIn_user extends JPanel {
 									.addGap(18, 18, 18)
 									.addComponent(button1))
 								.addGroup(GroupLayout.Alignment.LEADING, layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-									.addComponent(textField2, GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-									.addComponent(passwordField1, GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)))))
-					.addGap(41, 80, Short.MAX_VALUE))
+									.addComponent(textField2)
+									.addComponent(passwordField1, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)))))
+					.addContainerGap(288, Short.MAX_VALUE))
 		);
 		layout.setVerticalGroup(
 			layout.createParallelGroup()
-				.addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-					.addContainerGap(108, Short.MAX_VALUE)
+				.addGroup(layout.createSequentialGroup()
+					.addGap(170, 170, 170)
 					.addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
 						.addComponent(textPane1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(textField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -113,7 +111,7 @@ public class LogIn_user extends JPanel {
 						.addComponent(button1))
 					.addGap(15, 15, 15)
 					.addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(48, 48, 48))
+					.addContainerGap(181, Short.MAX_VALUE))
 		);
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
 	}

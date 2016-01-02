@@ -4,6 +4,7 @@
 
 package gui;
 
+import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
@@ -18,21 +19,28 @@ public class HomePanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 	public HomePanel() {
 		initComponents();
 	}
 
 	private void login_user(ActionEvent e) {
-
-		Application.mainFrame.changePanel(new LogIn_user());
+		// The login_user has to be reinitialized, so the stored user ID and
+		// passwords are lost for security reasons.
+		MainFrame.login_user = new LogIn_user();
+		Application.mainFrame.changePanel(MainFrame.login_user);
 	}
 
 	private void login_admin(ActionEvent e) {
-		Application.mainFrame.changePanel(new LogIn_admin());
+		// The login_user has to be reinitialized, so the stored user ID and
+		// passwords are lost for security reasons.
+		MainFrame.login_admin = new LogIn_admin();
+		Application.mainFrame.changePanel(MainFrame.login_admin);
 	}
 
 	private void settingsActionPerformed(ActionEvent e) {
-		// TODO add your code here
+		// Application.mainFrame.changePanel(MainFrame.settings);
+		// TODO: add settings panel, then enable the statement above
 	}
 
 	private void initComponents() {
@@ -46,6 +54,9 @@ public class HomePanel extends JPanel {
 		textPane2 = new JTextPane();
 
 		//======== this ========
+		setPreferredSize(new Dimension(900, 650));
+		setMinimumSize(new Dimension(780, 480));
+		setMaximumSize(new Dimension(780, 480));
 
 		// JFormDesigner evaluation mark
 		setBorder(new javax.swing.border.CompoundBorder(
@@ -78,7 +89,7 @@ public class HomePanel extends JPanel {
 		layout.setHorizontalGroup(
 			layout.createParallelGroup()
 				.addGroup(layout.createSequentialGroup()
-					.addGap(28, 28, 28)
+					.addGap(212, 212, 212)
 					.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
 						.addComponent(textPane1)
 						.addGroup(layout.createSequentialGroup()
@@ -87,13 +98,13 @@ public class HomePanel extends JPanel {
 							.addComponent(button2)
 							.addGap(44, 44, 44)
 							.addComponent(button3))
-						.addComponent(textPane2, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
-					.addContainerGap(21, Short.MAX_VALUE))
+						.addComponent(textPane2, GroupLayout.PREFERRED_SIZE, 351, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(217, Short.MAX_VALUE))
 		);
 		layout.setVerticalGroup(
 			layout.createParallelGroup()
 				.addGroup(layout.createSequentialGroup()
-					.addGap(48, 48, 48)
+					.addGap(168, 168, 168)
 					.addComponent(textPane1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 					.addComponent(textPane2, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
@@ -102,7 +113,7 @@ public class HomePanel extends JPanel {
 						.addComponent(button1)
 						.addComponent(button2)
 						.addComponent(button3))
-					.addContainerGap(140, Short.MAX_VALUE))
+					.addContainerGap(200, Short.MAX_VALUE))
 		);
 		// //GEN-END:initComponents
 	}

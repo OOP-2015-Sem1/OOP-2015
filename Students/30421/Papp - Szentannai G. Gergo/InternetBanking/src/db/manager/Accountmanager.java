@@ -9,11 +9,11 @@ public class Accountmanager {
 
 	};
 
-	public void newAccount() {
+	public void newAccount(int accountId, int userId) {
 
 	};
 
-	public void deleteAccount() {
+	public void deleteAccount(int accountId) {
 
 	};
 

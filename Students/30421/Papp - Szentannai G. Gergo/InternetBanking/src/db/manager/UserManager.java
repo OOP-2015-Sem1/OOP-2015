@@ -5,19 +5,23 @@ public class UserManager {
 
 	};
 
+	public void getUser(String name) {
+
+	}
+
 	public void getAllUsers() {
 
 	};
 
-	public void newUser() {
+	public void newUser(int id, String name) {
 
 	};
 
-	public void deleteUser() {
+	public void deleteUser(int id) {
 
 	};
 
-	public void updateUser() {
+	public void updateUser(int id) {
 
 	};
 

@@ -8,12 +8,12 @@ public class MainFrame extends JFrame {
 	private JFrame MainFrame;
 
 	// Available panels:
-	protected static JPanel homePanel, login_user, login_admin, user_home, admin_home;
+	protected static JPanel homePanel, login_user, login_admin, user_home, admin_home, settings;
 
 	public MainFrame() {
 		initPanels();
 		initComponents();
-		
+
 	}
 
 	private void initPanels() {
@@ -22,6 +22,7 @@ public class MainFrame extends JFrame {
 		login_admin = new LogIn_admin();
 		user_home = new User_home();
 		admin_home = new Admin_home();
+		settings = new Settings(); // Not yet finished.
 
 	}
 
@@ -30,19 +31,21 @@ public class MainFrame extends JFrame {
 		MainFrame = new JFrame();
 
 		MainFrame.setVisible(true);
-		MainFrame.setSize(500, 300);
+		MainFrame.setSize(800, 500);
 		MainFrame.setTitle("Bank of free Money - Internet banking Management application 2015");
 
 		// Set default panel.
 		changePanel(homePanel);
-		
+
 	}
+
 	/**
 	 * This method should be accessed to change the panel.
+	 * 
 	 * @param panel
 	 */
-	public void changePanel(JPanel panel){
-		
+	public void changePanel(JPanel panel) {
+
 		MainFrame.getContentPane().removeAll();
 		MainFrame.getContentPane().add(panel);
 		MainFrame.getContentPane().revalidate();
