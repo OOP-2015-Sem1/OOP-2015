@@ -2,7 +2,6 @@ package anoyingame.ui;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.Random;
-
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -16,6 +15,7 @@ public class QuestionPanel extends JPanel{
 	};
 	private Random rand = new Random();
 	private int questionNumber = rand.nextInt(3);
+	
 	public QuestionPanel(){
 		
 		question = new JTextArea();
@@ -33,16 +33,9 @@ public class QuestionPanel extends JPanel{
 		question.setFont(question.getFont().deriveFont(Font.BOLD));
 		
 	}
+	
 	public int getQuestionNumber(){
 		return questionNumber;
 	}
-	
-	public void printNumber() {
-		System.out.println(questionNumber);
-	}
-	
-	public void resetQuestion(){
-		new QuestionPanel();
-		
-	}
+
 }

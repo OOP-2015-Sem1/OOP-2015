@@ -2,10 +2,8 @@ package anoyingame.ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,12 +11,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class GameFrame extends JFrame implements ActionListener{
-	RandomRectangle theRectangle = new RandomRectangle();
+public class ColorGameFrame extends JFrame implements ActionListener{
 	
-	QuestionPanel question = new QuestionPanel();
-	
-	boolean rightAnswer;
+	private boolean rightAnswer;
+	private int count;
+	private int score = 0;
+	private int numberOfQuestions = 0;
+	private RandomRectangle theRectangle = new RandomRectangle();
+	private QuestionPanel question = new QuestionPanel();
 	private JButton red = new JButton("RED");
 	private JButton blue = new JButton("BLUE");
 	private JButton yellow = new JButton("YELLOW");
@@ -31,11 +31,7 @@ public class GameFrame extends JFrame implements ActionListener{
 	private String userAnswer;
 	private JPanel answerPanel;
 	private Timer timer = null;
-	private int count;
-	private int mode;
-	private int score = 0;
-	private int numberOfQuestions = 0;
-	
+
 	public void checkIfTimeToStop(){
 		if(numberOfQuestions == 20)
 		{
@@ -43,6 +39,7 @@ public class GameFrame extends JFrame implements ActionListener{
 			JOptionPane.showMessageDialog(null, "Game Over. Your score is: " + score + " out of 20.");
 		}
 	}
+	
 	public void setCount(int value){
 		switch(value){
 		case 1: count = 6; break;
@@ -50,6 +47,7 @@ public class GameFrame extends JFrame implements ActionListener{
 		case 3: count = 2; break;
 		}
 	}
+	
 	public void updateScore(int theScore){
 		if(this.playerIsRight()== true)
 			score = theScore +1;
@@ -61,7 +59,7 @@ public class GameFrame extends JFrame implements ActionListener{
 		return score;
 	}
 	
-	public GameFrame(){
+	public ColorGameFrame(){
 		
 		answerPanel = new JPanel();
 		answerPanel.setLayout(new GridLayout(3,3));
@@ -92,22 +90,24 @@ public class GameFrame extends JFrame implements ActionListener{
 		
 		scoreLabel.setText("0");
 		red.addActionListener(this);
-		setThemeButton(red);
+		colorButtonToFitTheme(red);
 		blue.addActionListener(this);
-		setThemeButton(blue);
+		colorButtonToFitTheme(blue);
 		yellow.addActionListener(this);
-		setThemeButton(yellow);
+		colorButtonToFitTheme(yellow);
 		orange.addActionListener(this);
-		setThemeButton(orange);
+		colorButtonToFitTheme(orange);
 		green.addActionListener(this);
-		setThemeButton(green);
+		colorButtonToFitTheme(green);
 		pink.addActionListener(this);
-		setThemeButton(pink);
+		colorButtonToFitTheme(pink);
+		
 		}
-	public void setThemeButton(JButton button){
+	public void colorButtonToFitTheme(JButton button){
 		button.setBackground(new Color(0,178,192));
 		button.setForeground(new Color(251,233,163));
 	}
+	
 	public void allowTimerStart(boolean permision){
 		if(permision == true){
 			TimeClass tc = new TimeClass(count);
@@ -115,6 +115,7 @@ public class GameFrame extends JFrame implements ActionListener{
 			timer.start();
 		}
 	}
+	
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			userAnswer = event.getActionCommand();
@@ -184,7 +185,7 @@ public class GameFrame extends JFrame implements ActionListener{
 	}
 
 	public boolean playerIsRight (){
-		question.printNumber();
+		
 		if(getQuestion()==0)
 			if(getCorrectRectangleColor().equals(getAnswer()))
 				rightAnswer = true;

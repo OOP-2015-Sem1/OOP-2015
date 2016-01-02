@@ -11,49 +11,58 @@ import javax.swing.JPanel;
 public class GameChooser extends JFrame {
 
 	private JPanel blankPanel = new JPanel();
-	private JButton game1 = new JButton("The Anoying Color Game");
-	private JButton game2 = new JButton("The Even More Anoying Memory Game");
+	private JButton colorGameButton = new JButton("The Anoying Color Game");
+	private JButton memoryGameButton = new JButton("The Even More Anoying Memory Game");
 	private JLabel imageLabel;
-	private ImageIcon image;
+	private ImageIcon gameLogo;
 	
 	public GameChooser(){
-		this.setLayout(new GridLayout(2,1));
-		image = new ImageIcon(getClass().getResource("GameLogo.png"));
-		imageLabel = new JLabel(image);
+		
+		
+		gameLogo = new ImageIcon(getClass().getResource("GameLogo.png"));
+		imageLabel = new JLabel(gameLogo);
 		imageLabel.setBackground(Color.WHITE);
+		
+		this.setLayout(new GridLayout(2,1));
 		this.setBackground(Color.WHITE);
 		this.add(imageLabel);
+		
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new GridLayout(5,1));
-		blankPanel = new JPanel();
-		buttonPanel.add(blankPanel);
-		blankPanel.setBackground(Color.WHITE);		
-		game1.setBackground(new Color(0,178,192));
-		game1.setForeground(new Color(251,233,163));
-		game2.setBackground(new Color(0,178,192));
-		game2.setForeground(new Color(251,233,163));
-		game1.setFont(game1.getFont().deriveFont(Font.BOLD));
-		game2.setFont(game2.getFont().deriveFont(Font.BOLD));
-		buttonPanel.add(game1);
-		buttonPanel.add(game2);
-		blankPanel = new JPanel();
-		buttonPanel.add(blankPanel);
-		blankPanel.setBackground(Color.WHITE);
-		blankPanel = new JPanel();
-		buttonPanel.add(blankPanel);
-		blankPanel.setBackground(Color.WHITE);
 		
+		addBlankPanel(buttonPanel);
+		
+		colorButtonToFitTheme(colorGameButton);
+		buttonPanel.add(colorGameButton);
+		
+		colorButtonToFitTheme(memoryGameButton);
+		buttonPanel.add(memoryGameButton);
+		
+		addBlankPanel(buttonPanel);
+		addBlankPanel(buttonPanel);
+
 		this.add(buttonPanel);
 		this.setSize(400,500);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
 	
+	public void addBlankPanel(JPanel mainPanel){
+		blankPanel = new JPanel();
+		blankPanel.setBackground(Color.WHITE);
+		mainPanel.add(blankPanel);
+	}
+	public void colorButtonToFitTheme(JButton button){
+		button.setBackground(new Color(0,178,192));
+		button.setForeground(new Color(251,233,163));
+		button.setFont(button.getFont().deriveFont(Font.BOLD));
+	}
+	
 	public JButton getButton1(){
-		return game1;
+		return colorGameButton;
 	}
 	
 	public JButton getButton2(){
-		return game2;
+		return memoryGameButton;
 	}
 }
