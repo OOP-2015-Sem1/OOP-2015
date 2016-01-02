@@ -9,6 +9,7 @@ import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
 
+import db.manager.Authentification;
 import main.Application;
 
 /**
@@ -23,8 +24,17 @@ public class LogIn_user extends JPanel {
 		initComponents();
 	}
 
-	private void button1ActionPerformed(ActionEvent e) {
+	private void cancelActionPerformed(ActionEvent e) {
 		Application.mainFrame.changePanel(MainFrame.homePanel);
+	}
+
+	private void authentificateActionPerformed(ActionEvent e) {
+		Authentification authentification = new Authentification();
+		authentification.attemptUserLogin(userTextField.getText(), passwordField1.getPassword().toString());
+	}
+
+	private void button1ActionPerformed(ActionEvent e) {
+		// TODO add your code here
 	}
 
 	private void initComponents() {
@@ -32,7 +42,7 @@ public class LogIn_user extends JPanel {
 		// Generated using JFormDesigner Evaluation license - Gergo Szentannai
 		button2 = new JButton();
 		passwordField1 = new JPasswordField();
-		textField2 = new JTextField();
+		userTextField = new JTextField();
 		textPane1 = new JTextPane();
 		textPane2 = new JTextPane();
 		scrollPane1 = new JScrollPane();
@@ -51,6 +61,7 @@ public class LogIn_user extends JPanel {
 
 		//---- button2 ----
 		button2.setText("Authentificate");
+		button2.addActionListener(e -> authentificateActionPerformed(e));
 
 		//---- textPane1 ----
 		textPane1.setText("UserID");
@@ -69,7 +80,10 @@ public class LogIn_user extends JPanel {
 
 		//---- button1 ----
 		button1.setText("Cancel");
-		button1.addActionListener(e -> button1ActionPerformed(e));
+		button1.addActionListener(e -> {
+			button1ActionPerformed(e);
+			cancelActionPerformed(e);
+		});
 
 		GroupLayout layout = new GroupLayout(this);
 		setLayout(layout);
@@ -90,7 +104,7 @@ public class LogIn_user extends JPanel {
 									.addGap(18, 18, 18)
 									.addComponent(button1))
 								.addGroup(GroupLayout.Alignment.LEADING, layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-									.addComponent(textField2)
+									.addComponent(userTextField)
 									.addComponent(passwordField1, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)))))
 					.addContainerGap(288, Short.MAX_VALUE))
 		);
@@ -100,7 +114,7 @@ public class LogIn_user extends JPanel {
 					.addGap(170, 170, 170)
 					.addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
 						.addComponent(textPane1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(userTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 					.addGroup(layout.createParallelGroup()
 						.addComponent(passwordField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -120,7 +134,7 @@ public class LogIn_user extends JPanel {
 	// Generated using JFormDesigner Evaluation license - Gergo Szentannai
 	private JButton button2;
 	private JPasswordField passwordField1;
-	private JTextField textField2;
+	private JTextField userTextField;
 	private JTextPane textPane1;
 	private JTextPane textPane2;
 	private JScrollPane scrollPane1;

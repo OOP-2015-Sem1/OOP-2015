@@ -5,8 +5,11 @@
 package gui;
 
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
+
+import main.Application;
 
 /**
  * @author Gergo Szentannai
@@ -18,6 +21,13 @@ public class Admin_home extends JPanel {
 	private static final long serialVersionUID = 1L;
 	public Admin_home() {
 		initComponents();
+	}
+
+	private void logoutButtonActionPerformed(ActionEvent e) {
+		Application.mainFrame.changePanel(MainFrame.homePanel);
+		// Reset login page (and also delete user ID and password:
+		MainFrame.login_admin = new LogIn_admin();
+		MainFrame.admin_home = new Admin_home();
 	}
 
 	private void initComponents() {
@@ -34,6 +44,7 @@ public class Admin_home extends JPanel {
 		menu5 = new JMenu();
 		menu6 = new JMenu();
 		panel3 = new JPanel();
+		logoutButton = new JButton();
 
 		//======== this ========
 		setPreferredSize(new Dimension(780, 480));
@@ -136,15 +147,25 @@ public class Admin_home extends JPanel {
 			//======== panel3 ========
 			{
 
+				//---- logoutButton ----
+				logoutButton.setText("Log out");
+				logoutButton.addActionListener(e -> logoutButtonActionPerformed(e));
+
 				GroupLayout panel3Layout = new GroupLayout(panel3);
 				panel3.setLayout(panel3Layout);
 				panel3Layout.setHorizontalGroup(
 					panel3Layout.createParallelGroup()
-						.addGap(0, 755, Short.MAX_VALUE)
+						.addGroup(panel3Layout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(logoutButton)
+							.addContainerGap(676, Short.MAX_VALUE))
 				);
 				panel3Layout.setVerticalGroup(
 					panel3Layout.createParallelGroup()
-						.addGap(0, 430, Short.MAX_VALUE)
+						.addGroup(panel3Layout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(logoutButton)
+							.addContainerGap(396, Short.MAX_VALUE))
 				);
 			}
 			tabbedPane1.addTab("Others", panel3);
@@ -182,5 +203,6 @@ public class Admin_home extends JPanel {
 	private JMenu menu5;
 	private JMenu menu6;
 	private JPanel panel3;
+	private JButton logoutButton;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 }

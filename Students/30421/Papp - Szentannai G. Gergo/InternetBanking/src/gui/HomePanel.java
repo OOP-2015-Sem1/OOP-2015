@@ -54,7 +54,7 @@ public class HomePanel extends JPanel {
 		textPane2 = new JTextPane();
 
 		//======== this ========
-		setPreferredSize(new Dimension(900, 650));
+		setPreferredSize(new Dimension(780, 480));
 		setMinimumSize(new Dimension(780, 480));
 		setMaximumSize(new Dimension(780, 480));
 

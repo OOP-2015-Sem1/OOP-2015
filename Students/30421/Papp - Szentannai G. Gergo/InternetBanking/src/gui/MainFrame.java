@@ -13,9 +13,11 @@ public class MainFrame extends JFrame {
 	public MainFrame() {
 		initPanels();
 		initComponents();
-
 	}
 
+	/**
+	 * Initializes all the panels that will be displayed inside the frame.
+	 */
 	private void initPanels() {
 		homePanel = new HomePanel();
 		login_user = new LogIn_user();
@@ -42,12 +44,12 @@ public class MainFrame extends JFrame {
 	/**
 	 * This method should be accessed to change the panel.
 	 * 
-	 * @param panel
+	 * @param newPanel
 	 */
-	public void changePanel(JPanel panel) {
+	public void changePanel(JPanel newPanel) {
 
 		MainFrame.getContentPane().removeAll();
-		MainFrame.getContentPane().add(panel);
+		MainFrame.getContentPane().add(newPanel);
 		MainFrame.getContentPane().revalidate();
 		MainFrame.getContentPane().repaint();
 	}

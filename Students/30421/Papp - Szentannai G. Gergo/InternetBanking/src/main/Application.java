@@ -9,12 +9,20 @@ public class Application {
 
 	public static MainFrame mainFrame;
 
-	public Application() throws Exception {
+	public Application() {
+
+		// I could have put tis inside the Main class too...
+
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				mainFrame = new MainFrame();
 			}
 		});
+
+		// Connect to database:
+		// Reconnection/changing connection will be possible using the Settings
+		// panel (not yet finished)
+		@SuppressWarnings("unused")
 		DatabaseConnect databaseConnect = new DatabaseConnect();
 	}
 

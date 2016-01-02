@@ -56,10 +56,15 @@ new FormModel {
 					"title": "Accounts"
 				} )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {space :0:755:x}"
-					"$verticalGroup": "par l {space :0:430:x}"
+					"$horizontalGroup": "par l {seq l {space :::p, comp logoutButton:::p::p, space ::676:x}}"
+					"$verticalGroup": "par l {seq l {space :::p, comp logoutButton:::p::p, space ::396:x}}"
 				} ) {
 					name: "panel3"
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "logoutButton"
+						"text": "Log out"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "logoutButtonActionPerformed", true ) )
+					} )
 				}, new FormLayoutConstraints( null ) {
 					"title": "Others"
 				} )
