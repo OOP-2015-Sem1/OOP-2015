@@ -19,11 +19,9 @@ public class Hero extends Sprite implements Commons {
 	}
 
 	public void setLife(int life) {
-		if (life < 150) {
+		
 			this.life = life;
-		} else {
-			this.life = 150;
-		}
+	
 
 	}
 
