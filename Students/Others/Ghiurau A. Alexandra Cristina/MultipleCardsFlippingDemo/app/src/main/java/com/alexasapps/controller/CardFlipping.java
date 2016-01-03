@@ -108,7 +108,7 @@ public abstract class CardFlipping extends Activity {
         }
         if (this.isGameWon()) {
 
-            Toast toast = Toast.makeText(getApplicationContext(), "YOU WON! "+"NR OF TRIES: " + nrOfTries + " LOGOS: " +cards.size(), Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(getApplicationContext(), "YOU WON", Toast.LENGTH_SHORT);
             toast.show();
         }
     }

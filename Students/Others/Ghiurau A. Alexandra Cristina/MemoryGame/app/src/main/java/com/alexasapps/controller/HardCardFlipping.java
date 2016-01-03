@@ -7,22 +7,21 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.alexasapps.multiplecardsflippingdemo.MainActivity;
 import com.alexasapps.multiplecardsflippingdemo.R;
 
-public class MediumCardFlipping extends CardFlipping{
+public class HardCardFlipping extends CardFlipping {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.medium_layout);
+        setContentView(R.layout.hard_layout);
 
         Resources res = getResources();
-        frontImages = new ImageView[20];
-        backImages = new ImageView[20];
+        frontImages = new ImageView[30];
+        backImages = new ImageView[30];
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 30; i++) {
             int idFrontImage = res.getIdentifier("imgBack" + (i + 1), "id", getApplicationContext().getPackageName());
             int idBackImage = res.getIdentifier("img" + (i + 1), "id", getApplicationContext().getPackageName());
 
@@ -31,7 +30,8 @@ public class MediumCardFlipping extends CardFlipping{
 
         }
 
-        setCards(frontImages, backImages, "cartoon");
+        setCards(frontImages, backImages, "peng");
+
         setFrontImagesClickListeners();
 
     }
