@@ -78,7 +78,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		new Login();
+		Login login = new Login();
 		TetrisController controller = new TetrisController();
 		start(controller.game);
 	}
