@@ -1,6 +1,5 @@
 package catalog.ui;
 
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,9 +13,9 @@ import catalog.brain.Marks;
 import catalog.brain.Students;
 
 public class StudentsFromEachGradePanel implements ActionListener {
-	public JPanel MAR = new JPanel();
-	public Marks fau = new Marks();
-	public JPanel[] panelpanel = new JPanel[Main.nrOfStudents];
+	public JPanel marksPanel = new JPanel();
+	public Marks marksMarks = new Marks();
+	public JPanel[] panelForEachStudentGrades = new JPanel[Main.nrOfStudents];
 	public JPanel[] StudentsPanelFromClasroom = new JPanel[13];
 	public JButton[] StudentButtons;
 	public int nrOfStudentButtons = 1;
@@ -30,13 +29,13 @@ public class StudentsFromEachGradePanel implements ActionListener {
 		}
 		//MAR.setLayout(new GridLayout(10,10));
 		for (int i = 0; i < Main.nrOfStudents; i++) {
-			panelpanel[i]= new JPanel();
-			panelpanel[i]=fau.panel[i];
-			panelpanel[i].setVisible(false);
-			MAR.add(panelpanel[i]);
+			panelForEachStudentGrades[i]= new JPanel();
+			panelForEachStudentGrades[i]=marksMarks.panel[i];
+			panelForEachStudentGrades[i].setVisible(false);
+			marksPanel.add(panelForEachStudentGrades[i]);
 		}
-		panelpanel[1].setVisible(true);
-		MAR.setVisible(true);
+		panelForEachStudentGrades[1].setVisible(true); // pentru test 
+		marksPanel.setVisible(true);
 	}
 
 	private void ToGetButtonsOutOfArrayLists(JPanel PanelForClassroom, ArrayList<String> grade) {
@@ -54,20 +53,15 @@ public class StudentsFromEachGradePanel implements ActionListener {
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-		panelpanel[1].setVisible(true);
 		for (int i = 0; i < Main.nrOfStudents; i++){
 			if (e.getSource() == StudentButtons[i]) {
 				for (int j = 0; j < Main.nrOfStudents; j++) {
 					if (j == i) {
-						panelpanel[j].setVisible(true);
-						// Nu intleg de ce nu merge partea asta cu ActionListener
-						// In clasa ClassroomFroom... imi merge ok si am facut exact aceeasi chestie.
-						// nu inteleg ce gresesc sau ce fac diferit
+						panelForEachStudentGrades[j].setVisible(true);
 						System.out.println("button " + j);
-						Main.numar = i;
+						Main.whichStudentButtonIsPressed = i;
 					} else{
-						panelpanel[j].setVisible(false);
+						panelForEachStudentGrades[j].setVisible(false);
 					}
 				}
 			}

@@ -5,9 +5,10 @@ import java.io.FileReader;
 import catalog.ui.CatalogFrame;
 
 public class Main {
-	@SuppressWarnings({ "unchecked" })
-	public static int numar;
+	@SuppressWarnings({ })
+	public static int whichStudentButtonIsPressed;
 	public static int nrOfStudents = 0;
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		new Classroom();
 		new Students();

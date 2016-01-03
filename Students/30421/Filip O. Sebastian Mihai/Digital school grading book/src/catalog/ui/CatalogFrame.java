@@ -3,12 +3,7 @@ package catalog.ui;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JFrame;
-
-import catalog.brain.Marks;
 
 public class CatalogFrame {
 	public JFrame CatalogTheRealFrame = new JFrame("Catalog");
@@ -31,12 +26,7 @@ public class CatalogFrame {
 		ClassroomsPanel.setVisible(true);
 		CatalogTheRealFrame.add(ClassroomsPanel);
 		CatalogTheRealFrame.add(ClassroomsPanel.StudentsFromClassrooms);
-		// ClassroomsPanel.panel.setVisible(true);
-		// CatalogTheRealFrame.add(ClassroomsPanel.panel);
-
-		//Marks MARK = new Marks();
-		//SFEGP.panelpanel[1].setVisible(true);
-		
-		CatalogTheRealFrame.add(SFEGP.MAR);
+		//adding marks panel
+		CatalogTheRealFrame.add(SFEGP.marksPanel);
 	}
 }
