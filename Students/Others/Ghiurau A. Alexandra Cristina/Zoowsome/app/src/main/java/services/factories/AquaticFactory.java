@@ -1,0 +1,24 @@
+package services.factories;
+
+
+import models.animals.Animal;
+import models.animals.MoonJellyfish;
+import models.animals.SeaHorse;
+import models.animals.SeaTurtle;
+
+public class AquaticFactory extends SpeciesFactory {
+
+    @Override
+    public Animal getAnimal(String type) throws Exception {
+        if (Constants.Animals.Aquatics.MoonJellyfish.equals(type)) {
+            return new MoonJellyfish();
+        } else if (Constants.Animals.Aquatics.SeaHorse.equals(type)) {
+            return new SeaHorse();
+        } else if (Constants.Animals.Aquatics.SeaTurtle.equals(type)) {
+            return new SeaTurtle();
+        } else {
+            throw new Exception("Invalid animal exception!");
+        }
+    }
+
+}

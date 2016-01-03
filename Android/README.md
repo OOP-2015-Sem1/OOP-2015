@@ -11,4 +11,9 @@
 [Chapter 2: Controls](https://github.com/OOP-2015-Sem1/OOP-2015/tree/master/Android/Chapter%202%20-%20Controls)
 </pre>
 
+ <pre>
+[Chapter 3: SQLite](https://github.com/OOP-2015-Sem1/OOP-2015/tree/master/Android/Chapter%203%20-%20SQLite)
+</pre>
+
+
 ##
