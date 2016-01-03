@@ -1,0 +1,240 @@
+<img src="http://proghammer.files.wordpress.com/2010/09/chessgame_72.jpg" alt="chess icon 72" title="chessgame_72" width="72" height="72" class="alignleft size-full wp-image-102" /> In this article we will have a look at how we can use the previously implemented MoveValidator to highlight valid target locations when the user starts dragging game pieces. We will also add some functionality to highlight the last executed move.
+<!--more-->
+<blockquote>
+This is the sixth part in a series of articles about programming a chess game in Java using Swing. As all articles build upon each other, I encourage you to also have a look at the previous articles in this series (<a href="http://proghammer.wordpress.com/2010/08/10/chess01-dragging-game-pieces/">Chess01: Dragging game pieces</a>, <a href="http://proghammer.wordpress.com/2010/08/16/chess02-introducing-game-state/">Chess02: Introducing game state</a>, <a href="http://proghammer.wordpress.com/2010/09/10/chess03-separating-game-logic-from-user-interface-logic/">Chess03: Separating view and logic</a>, <a href="http://proghammer.wordpress.com/2010/09/16/chess04-implementing-an-alternative-user-interface/">Chess04: Implementing an alternative user interface</a>, <a href="http://proghammer.wordpress.com/2010/09/22/chess05-enforcing-game-rules/">Chess05: Enforcing game rules</a>).
+</blockquote>
+
+With the MoveValidator that we implemented in the <a href="http://proghammer.wordpress.com/2010/09/22/chess05-enforcing-game-rules/">previous article</a>, it is quite easy to improve the user experience by highlighting the valid target locations for a selected chess piece.
+All the drawing is currently done in the paintComponent() method of the ChessGui class. To be able to draw the location highlights, we need to have access to the currently selected game piece and the MoveValidator class.
+
+To highlight the last executed move, we also need to make it accessible from the ChessGui class.
+
+Let's start by encapsulating all "chess move" related parameters into a single class called Move.
+
+[sourcecode language="java"]
+public class Move {
+	public int sourceRow;
+	public int sourceColumn;
+	public int targetRow;
+	public int targetColumn;
+	
+	public Move(int sourceRow, int sourceColumn, int targetRow, int targetColumn) {
+		this.sourceRow = sourceRow;
+		this.sourceColumn = sourceColumn;
+		this.targetRow = targetRow;
+		this.targetColumn = targetColumn;
+	}
+}
+[/sourcecode]
+
+The Move class makes it easier to store move related information. With this class, we could easily record a complete game, by storing a list of move objects. For now we will simply add a lastMove variable to the chessGui, so that we can set it when a move was successfully executed and read it when we draw the user interface.
+
+[sourcecode language="java"]
+public class ChessGui extends JPanel {
+	..
+	private Move lastMove;
+	..
+	/**
+	 * change location of given piece, if the location is valid.
+	 * If the location is not valid, move the piece back to its original
+	 * position.
+	 * @param dragPiece
+	 * @param x
+	 * @param y
+	 */
+	public void setNewPieceLocation(GuiPiece dragPiece, int x, int y) {
+		
+		..
+			
+			// if the last move was successfully executed, we remember it for
+			// highlighting it in the user interface
+			if( wasMoveSuccessfull ){
+				this.lastMove = move;
+			}
+			
+		..
+	}
+	..
+	@Override
+	protected void paintComponent(Graphics g) {
+
+		// draw background
+		..
+
+		// draw pieces
+		..
+		
+		// draw last move, if user is not dragging game piece
+		if( !isUserDraggingPiece() && this.lastMove != null ){
+			int highlightSourceX = convertColumnToX(this.lastMove.sourceColumn);
+			int highlightSourceY = convertRowToY(this.lastMove.sourceRow);
+			int highlightTargetX = convertColumnToX(this.lastMove.targetColumn);
+			int highlightTargetY = convertRowToY(this.lastMove.targetRow);
+			
+			g.setColor(Color.YELLOW);
+			g.drawRoundRect( highlightSourceX+4, highlightSourceY+4, SQUARE_WIDTH-8, SQUARE_HEIGHT-8,10,10);
+			g.drawRoundRect( highlightTargetX+4, highlightTargetY+4, SQUARE_WIDTH-8, SQUARE_HEIGHT-8,10,10);
+		}
+		
+		// draw valid target locations, if user is dragging a game piece
+		..
+		
+		
+		// draw game state label
+		..
+	}
+}
+[/sourcecode]
+
+Along the way we can also change the method parameters for all "move" related methods.
+
+[sourcecode language="java"]
+public class ChessGame {
+	..
+	
+	/**
+	 * Move piece to the specified location. If the target location is occupied
+	 * by an opponent piece, that piece is marked as 'captured'. If the move
+	 * could not be executed successfully, 'false' is returned and the game
+	 * state does not change.
+	 * 
+	 * @param move to execute
+	 * @return true, if piece was moved successfully
+	 */
+	public boolean movePiece(Move move) {
+		..
+	}
+	..
+}
+[/sourcecode]
+
+[sourcecode language="java"]
+public class MoveValidator {
+	..
+	/**
+	 * Checks if the specified move is valid
+	 * @param move to validate
+	 * @return true if move is valid, false if move is invalid
+	 */
+	public boolean isMoveValid(Move move) {
+		..
+	}
+	..
+}
+[/sourcecode]
+
+To prepare our code for highlighting possible target locations, we have to do two changes. First we move the dragPiece variable from the PiecesDragAndDropListener class to the chessGui class. This is quite easy, as we already have a reference to the ChessGui in the PiecesDragAndDropListener.
+
+[sourcecode language="java"]
+public class ChessGui extends JPanel {
+	..
+	private GuiPiece dragPiece;
+	..
+	private boolean isUserDraggingPiece() {
+		return this.dragPiece != null;
+	}
+	..
+}
+[/sourcecode]
+
+[sourcecode language="java"]
+public class PiecesDragAndDropListener implements MouseListener, MouseMotionListener {
+	..
+	@Override
+	public void mousePressed(MouseEvent evt) {
+		..
+		this.chessGui.setDragPiece(guiPiece);
+		..
+	}
+	
+	@Override
+	public void mouseReleased(MouseEvent evt) {
+		..
+		this.chessGui.setDragPiece(null);
+		..
+	}
+	..
+}
+[/sourcecode]
+
+In the second step we add a getter-method for the MoveValidator to the ChessGame class.
+
+[sourcecode language="java"]
+public class ChessGame {
+	..
+	public MoveValidator getMoveValidator(){
+		return this.moveValidator;
+	}
+	..
+}
+[/sourcecode]
+
+Now, while drawing the board, we can simply iterate over all board locations and check whether they are valid target locations for the current drag piece or not.
+
+[sourcecode language="java"]
+public class ChessGui extends JPanel {
+	..
+	
+	@Override
+	protected void paintComponent(Graphics g) {
+
+		// draw background
+		..
+
+		// draw pieces
+		..
+		
+		// draw last move, if user is not dragging game piece
+		..
+		
+		// draw valid target locations, if user is dragging a game piece
+		if( isUserDraggingPiece() ){
+			
+			MoveValidator moveValidator = this.chessGame.getMoveValidatior();
+			
+			// iterate the complete board to check if target locations are valid
+			for (int column = Piece.COLUMN_A; column <= Piece.COLUMN_H; column++) {
+				for (int row = Piece.ROW_1; row <= Piece.ROW_8; row++) {
+					int sourceRow = this.dragPiece.getPiece().getRow();
+					int sourceColumn = this.dragPiece.getPiece().getColumn();
+					
+					// check if target location is valid
+					if( moveValidator.isMoveValid( new Move(sourceRow, sourceColumn, row, column)) ){
+						
+						int highlightX = convertColumnToX(column);
+						int highlightY = convertRowToY(row);
+						
+						// draw a black drop shadow by drawing a black rectangle with an offset of 1 pixel
+						g.setColor(Color.BLACK);
+						g.drawRoundRect( highlightX+5, highlightY+5, SQUARE_WIDTH-8, SQUARE_HEIGHT-8,10,10);
+						// draw the highlight
+						g.setColor(Color.GREEN);
+						g.drawRoundRect( highlightX+4, highlightY+4, SQUARE_WIDTH-8, SQUARE_HEIGHT-8,10,10);
+					}
+				}
+			}
+		}
+		
+		
+		// draw game state label
+		..
+	}
+	..
+}
+[/sourcecode]
+
+The approach above is not very efficient, as the validation is executed each time the mouse is moved while dragging a game piece and every time new Move objects are created. Anyway, for now (and for many other board games) this approach is fast enough and it's easy to read and understand. You can use it as an exercise to come up with a more efficient way for doing the highlighting :-)
+
+<table style="border:solid 2px #ffffff;">
+<tr>
+<td>
+[caption id="attachment_143" align="alignnone" width="256" caption="Highlighting the previous move"]<a href="http://proghammer.files.wordpress.com/2010/10/chessgame_highlight_old_move.jpg"><img src="http://proghammer.files.wordpress.com/2010/10/chessgame_highlight_old_move.jpg" alt="Highlighting the previous move" title="chessgame_highlight_old_move" width="256" height="255" class="size-full wp-image-143" /></a>[/caption]
+</td><td>[caption id="attachment_144" align="alignnone" width="256" caption="Highlighting valid target locations"]<a href="http://proghammer.files.wordpress.com/2010/10/chessgame_highlight_valid_targets.jpg"><img src="http://proghammer.files.wordpress.com/2010/10/chessgame_highlight_valid_targets.jpg" alt="Highlighting valid target locations" title="chessgame_highlight_valid_targets" width="256" height="255" class="size-full wp-image-144" /></a>[/caption]
+</td></tr></table>
+
+Well, that's it, again. Happy coding!
+
+Resources:
+
+The source code (eclipse project): coming soon
+The chess icons come from: <a href="http://ixian.com/chess/jin-piece-sets/">http://ixian.com/chess/jin-piece-sets/</a>
