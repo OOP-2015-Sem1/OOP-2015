@@ -18,6 +18,7 @@ public class BattleshipGame {
 	BoardPanel oponentPanel, myPanel;
 	boolean ButtonsAreEnabled = true;
 	JButton[][] oponentButtons;
+	Color niceBlue= new Color(0,100,150);
 	Point currentPoint, previousPoint, point, rPoint, auxPoint;
 	String currentDirection;
 	ArrayList<Point> positions = new ArrayList<Point>();
@@ -25,7 +26,6 @@ public class BattleshipGame {
 	public static void main(String[] args) {
 		BattleshipGame game = new BattleshipGame();
 		game.run();
-
 	}
 
 	public void run() {
@@ -56,33 +56,16 @@ public class BattleshipGame {
 				SettingsDialogs.notifyShipsLeftToPlace();
 			}
 		}
-
 		@Override
-		public void mouseEntered(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-
-		}
-
+		public void mouseEntered(MouseEvent arg0) {}
 		@Override
-		public void mouseExited(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-
-		}
-
+		public void mouseExited(MouseEvent arg0) {}
 		@Override
-		public void mousePressed(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-
-		}
-
+		public void mousePressed(MouseEvent arg0) {}
 		@Override
-		public void mouseReleased(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-
-		}
-
+		public void mouseReleased(MouseEvent arg0) {}
 	}
-
+	
 	public class ListenerForOponentsButtons implements MouseListener {
 
 		@Override
@@ -92,54 +75,52 @@ public class BattleshipGame {
 				for (int i = 0; i < 10; i++) {
 					for (int j = 0; j < 10; j++) {
 						if (oponentButtons[i][j] == e.getSource()) {
-							// oponentButtons[i][j].setEnabled(false); TRY LATER
-
 							if (oponentShipMatrix.checkIfTrue(i, j)) {
 								oponentButtons[i][j].setBackground(Color.RED);
 								oponentShipMatrix.updateShipMatrixWithHits(i, j);
 
 							} else {
-								oponentButtons[i][j].setBackground(new Color(0, 100, 150));
+								oponentButtons[i][j].setBackground(niceBlue);
 							}
 						}
 					}
 				}
 				if (oponentShipMatrix.checkForWin()) {
 					SettingsDialogs.notifyWin();
-
 				}
 				ButtonsAreEnabled = false;
-
 				oponentCanHitMe();
 			}
 		}
-
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-
+			for (int i = 0; i < 10; i++) {
+				for (int j = 0; j < 10; j++) {
+					if (oponentButtons[i][j] == e.getSource()) {
+						if (oponentButtons[i][j].getBackground() != niceBlue
+								&& oponentButtons[i][j].getBackground() != Color.RED){
+							oponentButtons[i][j].setBackground(Color.GRAY);}
+					}
+				}
+			}
 		}
-
 		@Override
 		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-
+			for (int i = 0; i < 10; i++) {
+				for (int j = 0; j < 10; j++) {
+					if (oponentButtons[i][j] == e.getSource()) {
+						if (oponentButtons[i][j].getBackground()!= niceBlue
+								&& oponentButtons[i][j].getBackground() != Color.RED){
+							oponentButtons[i][j].setBackground(Color.LIGHT_GRAY);}
+					}
+				}
+			}
 		}
-
 		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
+		public void mousePressed(MouseEvent e) {}
 		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
+		public void mouseReleased(MouseEvent e) {}
 	}
-
 	public void oponentCanHitMe() {
 		while (!ButtonsAreEnabled ) {
 			if (positions.size() == 0) {
@@ -147,11 +128,9 @@ public class BattleshipGame {
 				matrixOfHitsOnly.updateHitsMatrixWithHits(rPoint.x, rPoint.y);
 				if (myShipMatrix.checkIfTrue(rPoint.x, rPoint.y)) {
 					actionForHitShip(rPoint);
-					positions.add(rPoint);
-					System.out.println("MyFirst good hit"+ rPoint.x+" "+rPoint.y+"  size "+positions.size());					
+					positions.add(rPoint);					
 				} else {
 					actionForHitWater(rPoint);
-					System.out.println("missed that");
 				}
 			}
 			else if (positions.size() == 1) {
@@ -161,19 +140,16 @@ public class BattleshipGame {
 					if (myShipMatrix.checkIfTrue(positions.get(0).x - 1, positions.get(0).y)) {
 						actionForHitShip(new Point(positions.get(0).x - 1, positions.get(0).y));
 						positions.add(1,new Point(positions.get(0).x - 1, positions.get(0).y));
-						System.out.println("hit 2 good");
-						
 					} else {
 						actionForHitWater(new Point(positions.get(0).x - 1, positions.get(0).y));
-						System.out.println("hit 2 baad");
 					}
 				}
 				// hit down
 				else if (positions.get(0).x != 9
 						&& !matrixOfHitsOnly.checkIfTrue(positions.get(0).x + 1, positions.get(0).y)) {
 					if (myShipMatrix.checkIfTrue(positions.get(0).x + 1, positions.get(0).y)) {
-						positions.add(1,new Point(positions.get(0).x + 1, positions.get(0).y));
 						actionForHitShip(new Point(positions.get(0).x + 1, positions.get(0).y));
+						positions.add(1,new Point(positions.get(0).x + 1, positions.get(0).y));
 						
 					} else {
 						actionForHitWater(new Point(positions.get(0).x + 1, positions.get(0).y));
@@ -183,8 +159,8 @@ public class BattleshipGame {
 				else if (positions.get(0).y != 9
 						&& !matrixOfHitsOnly.checkIfTrue(positions.get(0).x, positions.get(0).y + 1)) {
 					if (myShipMatrix.checkIfTrue(positions.get(0).x, positions.get(0).y + 1)) {
-						positions.add(1,new Point(positions.get(0).x, positions.get(0).y + 1));
 						actionForHitShip(new Point(positions.get(0).x, positions.get(0).y + 1));
+						positions.add(1,new Point(positions.get(0).x, positions.get(0).y + 1));
 						
 					} else {
 						actionForHitWater(new Point(positions.get(0).x, positions.get(0).y + 1));
@@ -194,15 +170,14 @@ public class BattleshipGame {
 				else if (positions.get(0).y != 0
 						&& !matrixOfHitsOnly.checkIfTrue(positions.get(0).x, positions.get(0).y - 1)) {
 					if (myShipMatrix.checkIfTrue(positions.get(0).x, positions.get(0).y - 1)) {
-						positions.add(1,new Point(positions.get(0).x, positions.get(0).y - 1));
-						actionForHitShip(new Point(positions.get(0).x, positions.get(0).y - 1));			
+						actionForHitShip(new Point(positions.get(0).x, positions.get(0).y - 1));
+						positions.add(1,new Point(positions.get(0).x, positions.get(0).y - 1));			
 					} else {
 						actionForHitWater(new Point(positions.get(0).x, positions.get(0).y - 1));
 					}
 				} else {
 					positions.remove(0);
 				}
-				System.out.println("size is+"+positions.size());
 			}
 			else	
 				if (positions.size() == 2) {
@@ -210,7 +185,6 @@ public class BattleshipGame {
 				if (positions.get(0).x == positions.get(1).x) {
 					if (positions.get(0).y > positions.get(1).y) {						
 						changePositionOfPointsInPositions();
-						System.out.println("after changing pos:"+positions.get(0).y+" "+positions.get(1).y);
 					}
 					// hit right
 					if (positions.get(1).y == 9) {
@@ -220,8 +194,8 @@ public class BattleshipGame {
 							positions.add(2,point);
 						} else {
 							if (myShipMatrix.checkIfTrue(positions.get(1).x, positions.get(1).y + 1)) {
-								positions.set(1, new Point(positions.get(1).x, positions.get(1).y + 1));
 								actionForHitShip(new Point(positions.get(1).x, positions.get(1).y + 1));
+								positions.set(1, new Point(positions.get(1).x, positions.get(1).y + 1));
 							} else {								
 								actionForHitWater(new Point(positions.get(1).x, positions.get(1).y + 1));
 								positions.add(2,new Point(positions.get(1).x, positions.get(1).y + 1));
@@ -244,12 +218,10 @@ public class BattleshipGame {
 							if (myShipMatrix.checkIfTrue(positions.get(1).x-1, positions.get(1).y )) {
 								actionForHitShip(new Point(positions.get(1).x-1, positions.get(1).y));
 								positions.set(1, new Point(positions.get(1).x-1, positions.get(1).y ));
-								System.out.println("just hit that 3 times +size "+positions.size()+"coordonate"+(positions.get(1).x-1)+""+ positions.get(1).y );
 
 							} else {
-								positions.add(new Point(positions.get(1).x-1, positions.get(1).y ));
 								actionForHitWater(new Point(positions.get(1).x-1, positions.get(1).y ));
-								System.out.println(" DIDNOT hit that 3 times +size "+positions.size());
+								positions.add(new Point(positions.get(1).x-1, positions.get(1).y ));
 							}
 						}
 					}
@@ -267,12 +239,12 @@ public class BattleshipGame {
 							positions.add(3,point);
 						} else {
 							if (myShipMatrix.checkIfTrue(positions.get(0).x, positions.get(0).y -1)) {
-								positions.set(0, new Point(positions.get(0).x, positions.get(0).y - 1));
 								actionForHitShip(new Point(positions.get(0).x, positions.get(0).y - 1));
+								positions.set(0, new Point(positions.get(0).x, positions.get(0).y - 1));
 
 							} else {
-								positions.add(3,new Point(positions.get(0).x, positions.get(0).y - 1));
 								actionForHitWater(new Point(positions.get(0).x, positions.get(0).y - 1));
+								positions.add(3,new Point(positions.get(0).x, positions.get(0).y - 1));
 
 							}
 						}
@@ -281,7 +253,6 @@ public class BattleshipGame {
 				// if the 2 hits are on the same column -hit down
 				else if (positions.get(0).y == positions.get(1).y) {
 					if (positions.get(0).x == 9) {
-						System.out.println(positions.get(0).x);
 						positions.add(3,point);
 						ButtonsAreEnabled=true;
 					} else {
@@ -290,27 +261,18 @@ public class BattleshipGame {
 							ButtonsAreEnabled=true;
 						} else {
 							if (myShipMatrix.checkIfTrue(positions.get(0).x+1, positions.get(0).y )) {
-								positions.set(0, new Point(positions.get(0).x+1, positions.get(0).y ));
-								System.out.println(positions.get(0).x);
 								actionForHitShip(new Point(positions.get(0).x+1, positions.get(0).y));
-
+								positions.set(0, new Point(positions.get(0).x+1, positions.get(0).y ));
 							} else {
-								positions.add(3,new Point(positions.get(0).x+1, positions.get(0).y ));
 								actionForHitWater(new Point(positions.get(0).x+1, positions.get(0).y ));
-
+								positions.add(3,new Point(positions.get(0).x+1, positions.get(0).y ));
 							}
 						}
 					}
 				}
 			}
-			else if (positions.size()==4){
-				int i=3;
-				System.out.println(positions.size());
-				while (positions.size()!=0)
-				System.out.println(positions.size());
-				positions.remove(i);
-				System.out.println(positions.size());
-				i--;
+			else if (positions.size()==4||positions.size()==5){
+				positions.clear();
 				}
 		}
 	}
@@ -333,19 +295,15 @@ public class BattleshipGame {
 		myPanel.getSpecificButton(rPoint.x, rPoint.y).setBackground(Color.RED);
 		myShipMatrix.updateShipMatrixWithHits(rPoint.x, rPoint.y);
 		matrixOfHitsOnly.updateHitsMatrixWithHits(rPoint.x, rPoint.y);
-		// positions.add(rPoint);
-		// positions.add(1, rPoint);
 		if (myShipMatrix.checkForWin()) {
 			SettingsDialogs.notifyLoss();
 		}
 		ButtonsAreEnabled = true;
 	}
-
 	public void actionForHitWater(Point rPoint) {
+		if(myPanel.getSpecificButton(rPoint.x, rPoint.y).getBackground()!=Color.RED)
 		myPanel.getSpecificButton(rPoint.x, rPoint.y).setBackground(new Color(0, 100, 150));
 		matrixOfHitsOnly.updateHitsMatrixWithHits(rPoint.x, rPoint.y);
-		// --
-		// positions.add(2, rPoint);
 		ButtonsAreEnabled = true;
 	}
 
