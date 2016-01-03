@@ -95,17 +95,12 @@ public final class UnoPanel extends JPanel {
 
 		unoButton = new JButton();
 		colorButton = new JButton();
-		// JButton testButton = new JButton();
 		setLayout(null);
 
 		this.setBorder(new EtchedBorder(EtchedBorder.RAISED));
 		setBackground(new Color(0, 153, 51));
 		setPreferredSize(new Dimension(610, 450));
 		setMinimumSize(new Dimension(610, 450));
-
-		// testButton.setText("Start !");
-		// testButton.setBounds(10, 120, 70, 30);
-		// add(testButton);
 
 		unoButton.setText("UNO!");
 		unoButton.setBounds(10, 160, 70, 30);
