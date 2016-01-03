@@ -6,6 +6,7 @@ import catalog.ui.CatalogFrame;
 
 public class Main {
 	@SuppressWarnings({ "unchecked" })
+	public static int numar;
 	public static int nrOfStudents = 0;
 	public static void main(String[] args) {
 		new Classroom();
@@ -47,7 +48,6 @@ public class Main {
 			//System.out.println(Students.studentsFromGrade[i].get(0));
 			//System.out.println(Integer.valueOf((String) Students.studentsFromGrade[i].get(0)));
 			nrOfStudents = nrOfStudents + Integer.valueOf((String) Students.studentsFromGrade[i].get(0));
-		System.out.println(nrOfStudents);
 		new CatalogFrame();
 	}
 }

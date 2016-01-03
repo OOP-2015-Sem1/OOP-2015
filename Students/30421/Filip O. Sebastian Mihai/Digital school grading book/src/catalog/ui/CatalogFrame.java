@@ -3,6 +3,8 @@ package catalog.ui;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
@@ -11,7 +13,7 @@ import catalog.brain.Marks;
 public class CatalogFrame {
 	public JFrame CatalogTheRealFrame = new JFrame("Catalog");
 	private ClassroomsFromSchoolPanel ClassroomsPanel = new ClassroomsFromSchoolPanel();
-	private Marks fau = new Marks();
+	public StudentsFromEachGradePanel SFEGP = new StudentsFromEachGradePanel();
 	public CatalogFrame() {
 		CatalogTheRealFrame.setVisible(true);
 		CatalogTheRealFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,8 +33,10 @@ public class CatalogFrame {
 		CatalogTheRealFrame.add(ClassroomsPanel.StudentsFromClassrooms);
 		// ClassroomsPanel.panel.setVisible(true);
 		// CatalogTheRealFrame.add(ClassroomsPanel.panel);
-		StudentsFromEachGradePanel fauristic = new StudentsFromEachGradePanel();
-		//fau.panel[1].setVisible(true);
-		CatalogTheRealFrame.add(fau.MarksPanel);
+
+		//Marks MARK = new Marks();
+		//SFEGP.panelpanel[1].setVisible(true);
+		
+		CatalogTheRealFrame.add(SFEGP.MAR);
 	}
 }

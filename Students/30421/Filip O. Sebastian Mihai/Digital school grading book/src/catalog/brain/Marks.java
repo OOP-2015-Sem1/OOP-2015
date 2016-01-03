@@ -1,71 +1,81 @@
 package catalog.brain;
 
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
-import catalog.ui.StudentsFromEachGradePanel;
-
-public class Marks implements ActionListener {
-	private StudentsFromEachGradePanel faufaufau = new StudentsFromEachGradePanel();
-	public JPanel MarksPanel = new JPanel();
+public class Marks implements ActionListener{
 	public JPanel[] panel = new JPanel[Main.nrOfStudents];
-	private JPanel[] Materii = new JPanel[8];
-	private JButton[] Plus = new JButton[8];
+	public JFrame frame = new JFrame();
+	public JLabel Materii = new JLabel();
+	public JButton[] Plus = new JButton[8];
+	// StudentsFromEachGradePanel stud = new StudentsFromEachGradePanel();
+	
+
 	public Marks() {
-		JLabel labell = null;
-		for (int j = 0; j < Main.nrOfStudents; j++) {
-			panel[j]= new JPanel();
-			panel[j].setLayout(new GridLayout(8, 3));
-			for (int i = 0; i <8; i++) {
-				Materii[i] = new JPanel();
-				Materii[i].setLayout(new GridLayout(1,1));
-				if(i==1)
-					labell = new JLabel("Romana");
-				if(i==2)
-					labell = new JLabel("Istorie");
-				if(i==3)
-					labell = new JLabel("Geografie");
-				if(i==4)
-					labell = new JLabel("Diregentie");
-				if(i==5)
-					labell = new JLabel("Fizica");
-				if(i==6)
-					labell = new JLabel("Biologie");
-				if(i==7)
-					labell = new JLabel("Literatura");
-				if(i==0)
-					labell = new JLabel("matematica"+faufaufau.numar);
-				Materii[i].add(labell);
-				Plus[i] = new JButton("ADD");
-				Plus[i].addActionListener(this);
-				panel[j].add(Materii[i]);
-				panel[j].add(Plus[i]);
-				panel[j].setVisible(false);
-				MarksPanel.setVisible(true);
-				MarksPanel.add(panel[j]);
+		for(int i=0;i<Main.nrOfStudents;i++){
+			panel[i]=new JPanel();
+			panel[i].setLayout(new GridLayout(8,2));
+			for(int j =0;j<8;j++){
+				if(j==1){
+					Materii = new JLabel("Romanian Language");
+					Plus[j]=new JButton("Add Romanian Language Marks");
+				}
+				if(j==2){
+					Materii = new JLabel("History");
+					Plus[j]=new JButton("Add History Marks");
+				}	
+				if(j==3){
+					Materii = new JLabel("Geography");
+					Plus[j]=new JButton("Add Geography Marks");
+				}	
+				if(j==4){
+					Materii = new JLabel("Sport");
+					Plus[j]=new JButton("Add Sport Marks");
+				}
+				if(j==5){
+					Materii = new JLabel("Physics");
+					Plus[j]=new JButton("Add Physics Marks");
+				}	
+				if(j==6){
+					Materii = new JLabel("Biology");
+					Plus[j]=new JButton("Add Biology Marks");
+				}
+				if(j==7){
+					Materii = new JLabel("English");
+					Plus[j]=new JButton("Add English Marks");
+				}	
+				if(j==0){
+					Materii = new JLabel("Math");
+					Plus[j]=new JButton("Add Math Marks");
+				}		
+				Materii.setVisible(true);
+				panel[i].add(Materii);
+				Plus[j].addActionListener(this);
+				Plus[j].setVisible(true);
+				panel[i].add(Plus[j]);
 			}
-		}
-		System.out.println("numar2 = "+faufaufau.numar);
-		create (faufaufau.numar);
-	}
-	public void create(int i) {
-		System.out.println(i);
-		for(int j=0;j<Main.nrOfStudents;j++){
-			panel[j].setVisible(false);
-			if(i==j)
-				panel[j].setVisible(true);
+			panel[i].setVisible(true);
 		}
 	}
+
+
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent a) {
 		// TODO Auto-generated method stub
-		new AllDataGUI();
+		
+		for(int i=0;i<8;i++)
+		if(a.getSource() == Plus[1]){
+			new AllDataGUI(Main.numar, i);
+			System.out.println("aici");
+		}
+		//new AllDataGUI(1, 0);    Daca decomentez asta imi merge dar doar pentru
+		//elevul numarul 1 la materia matematica. Nu inteleg de ce nu merge si
+		// cu action listner
 	}
 }
