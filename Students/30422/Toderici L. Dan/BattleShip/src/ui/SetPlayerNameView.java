@@ -20,6 +20,8 @@ public class SetPlayerNameView extends JFrame
 	public SetPlayerNameView(ActionListener actionListener) 
 	{
 		super("SettupView");
+		
+		setLocationRelativeTo(null);
 
 		setBackground(Color.lightGray);
 		setLayout(null);

@@ -1,7 +1,10 @@
 package controllers;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -9,7 +12,7 @@ import javax.swing.JOptionPane;
 import models.Ai;
 import ui.ShipPlacementView;
 
-public class PlacementController implements ActionListener
+public class PlacementController implements ActionListener,MouseListener
 {
 	private ShipPlacementView shipPlacementView;
 	private Ai player;
@@ -22,7 +25,7 @@ public class PlacementController implements ActionListener
 	public PlacementController(Ai player) 
 	{
 
-		shipPlacementView = new ShipPlacementView(this,player.getName());
+		shipPlacementView = new ShipPlacementView(this,this,player.getName());
 		this.player = player;
 		shipPlacementView.setVisible(true);
 
@@ -42,8 +45,9 @@ public class PlacementController implements ActionListener
 			{
 				//System.out.println("intra");
 				player.getPlacementBoard().setIsBoardReady(true);
-				JOptionPane.showMessageDialog(shipPlacementView,player.getName()+" finished placing ships");
 				shipPlacementView.setVisible(false);
+				JOptionPane.showMessageDialog(shipPlacementView,player.getName()+" finished placing ships");
+				
 			}
 		}
 		else if(buttonSource.getText().equals("Done"))
@@ -72,6 +76,7 @@ public class PlacementController implements ActionListener
 			{
 				//System.out.println("intra");
 				player.getPlacementBoard().setIsBoardReady(true);
+				
 				JOptionPane.showMessageDialog(shipPlacementView,player.getName()+" finished placing ships");
 				shipPlacementView.setVisible(false);
 			}
@@ -125,6 +130,68 @@ public class PlacementController implements ActionListener
 	public void setVisibilityOfView(boolean choice)
 	{
 		shipPlacementView.setVisible(choice);
+	}
+
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseEntered(MouseEvent e)
+	{
+		JButton buttonSource = (JButton) e.getSource();
+		
+		String[] parts = buttonSource.getActionCommand().split("-");
+		
+		int row = Integer.parseInt(parts[1]);
+		int column = Integer.parseInt(parts[0]);
+		
+		Ai playerAux = new Ai("s");
+		
+		String inputStringForPlacementBoard;
+		
+		String location = "";
+		location =""+(char)(row+65);
+		location = location+(column+1);
+		
+		inputStringForPlacementBoard =typeOfShipToBePlaced+" "+location+" "+orientationOfShip;
+		
+		
+		playerAux.placementMadeByPlayer(inputStringForPlacementBoard);
+		
+		shipPlacementView.putPossibleShipOnBoard(playerAux.getPlacementBoard().getBoard());
+
+		
+		if(!buttonSource.getBackground().equals(Color.orange))
+		{
+			buttonSource.setBackground(Color.GREEN);
+
+		}
+	}
+
+
+	@Override
+	public void mouseExited(MouseEvent e) 
+	{
+		shipPlacementView.deleteGreenBackground();
+	}
+
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

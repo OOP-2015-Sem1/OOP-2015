@@ -22,6 +22,7 @@ public class HuntingView extends JFrame
 	public HuntingView(String player,ActionListener actionListener,BoardPiece[][] board)
 	{
 		this.actionListener = actionListener;
+		setLocationRelativeTo(null);
 
 		setBackground(Color.lightGray);
 		setLayout(null);
@@ -127,7 +128,7 @@ public class HuntingView extends JFrame
 			{
 				if(board[i][j].getPiece().equals("_X_|"))
 				{
-					System.out.println("C:"+i+"-"+j);
+					//System.out.println("C:"+i+"-"+j);
 					playerBoard[j][i].setBackground(Color.red);
 				}
 				if(board[i][j].getPiece().equals("_O_|"))

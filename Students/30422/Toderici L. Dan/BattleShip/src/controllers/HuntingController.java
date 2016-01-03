@@ -52,13 +52,16 @@ public class HuntingController implements ActionListener{
 		if(buttonSource.getActionCommand().equals("N"))
 		{
 
-			System.out.println("");
+			
+			
 			if(isPlayerAi)
 			{
-				System.out.println("ADMMMMM");
+
 				String location = player1.generateHitByAi();
 				//System.out.println(location);
+				
 
+				
 				rowToHit =((int)location.charAt(0))-65;
 				if(location.length()==3)
 				{
@@ -66,19 +69,18 @@ public class HuntingController implements ActionListener{
 				}
 				else
 				{
-					columnToHit=Integer.parseInt(""+location.charAt(1));
+					columnToHit = Integer.parseInt(""+location.charAt(1));
 				}
-				System.out.println(rowToHit+"#"+columnToHit);
+
 
 				setHitWasSubmitted(true);
 				setIsValidHit(false);
+				
+				columnToHit = columnToHit-1;
 
 			}
-			else
-			{
-				setHitWasSubmitted(true);
-				setIsValidHit(false);
-			}
+		
+			takeAHit();
 
 		}
 		else
@@ -90,7 +92,7 @@ public class HuntingController implements ActionListener{
 
 		}
 
-		takeAHit();
+		
 
 	}
 
@@ -103,48 +105,56 @@ public class HuntingController implements ActionListener{
 
 		huntingView.setLocationLabelText("Hit location: "+location);
 		String coordinates = player1.getHuntingBoard().hitCell(location);
-		int type =	player2.getPlacementBoard().markAsHitOrMiss(rowToHit, columnToHit);
 
-		//
-		JOptionPane.showMessageDialog(huntingView,player2.getPlacementBoard().getMessageToTheEnemy());
-		//
-		//if(player1.getHuntingBoard().getHuntingBoardMatrix()[rowToHit][columnToHit].getPiece().equals("_X_|"))
-		if(type ==0)
+		int type = -1;
+
+		if(!coordinates.equals("N"))
 		{
-			setDidPlayerHit(false);
-			
-			if(player1.getDidHitSomething() == 1)
-			{
-				player1.setCoordinatesOfLastHitPart(player1.getCoordinatesOfInitialHit());
-			}
-			
+			type = player2.getPlacementBoard().markAsHitOrMiss(rowToHit, columnToHit);
+			JOptionPane.showMessageDialog(huntingView,player2.getPlacementBoard().getMessageToTheEnemy());
 		}
 		else
 		{
 
+		}
+
+
+		if(type ==0 )
+		{
+			setDidPlayerHit(false);
+
+			if(player1.getDidHitSomething() == 1)
+			{
+				player1.setCoordinatesOfLastHitPart(player1.getCoordinatesOfInitialHit());
+			}
+
+		}
+		else if(type !=-1)
+		{
+
 			setDidPlayerHit(true);
-			//
+
 			if(player1.getDidHitSomething() == 0)
 			{
-				
+
 				player1.setCoordinatesOfInitialHit(new Point(rowToHit, columnToHit));
-				
+
 				System.out.println("initial:"+
 						player1.getCoordinatesOfInitialHit().getX()+"-"+
 						player1.getCoordinatesOfInitialHit().getY());
-				
-			    player1.setCoordinatesOfLastHitPart(new Point(rowToHit, columnToHit));
-			    
-			    System.out.println("last:"+
+
+				player1.setCoordinatesOfLastHitPart(new Point(rowToHit, columnToHit));
+
+				System.out.println("last:"+
 						player1.getCoordinatesOfLastHitPart().getX()+"-"+
 						player1.getCoordinatesOfLastHitPart().getY());
 			}
-			else
+			else 
 			{
 				player1.setCoordinatesOfLastHitPart(new Point(rowToHit, columnToHit));
-				  System.out.println("last:"+
-							player1.getCoordinatesOfLastHitPart().getX()+"-"+
-							player1.getCoordinatesOfLastHitPart().getY());
+				System.out.println("last:"+
+						player1.getCoordinatesOfLastHitPart().getX()+"-"+
+						player1.getCoordinatesOfLastHitPart().getY());
 			}
 
 			player1.setDidHitSomething(1);
@@ -167,7 +177,15 @@ public class HuntingController implements ActionListener{
 
 
 		}
-		
+		else
+		{
+			setIsValidHit(false);
+			if(!isPlayerAi)
+			{
+			JOptionPane.showMessageDialog(huntingView,"Already hit that cell!");
+			}
+		}
+
 
 		System.out.println(coordinates);
 
@@ -186,7 +204,9 @@ public class HuntingController implements ActionListener{
 		if(getIsValidHit()&& !getDidPlayerHit())
 		{
 			setIsPlayerTurn(false);
+
 		}
+
 	}
 
 	public void updateBoard()

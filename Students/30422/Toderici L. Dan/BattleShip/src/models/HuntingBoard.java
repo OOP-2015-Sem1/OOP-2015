@@ -36,8 +36,13 @@ public class HuntingBoard {
 
 			if(!verifyIfHuntInputIsDuplicated(rowToHit,columnToHit))
 			{
+			
+				
 				if(checkBoard[rowToHit][columnToHit].getPiece().equals("_@_|"))
 				{
+					
+					
+					
 					huntingBoard[rowToHit][columnToHit].setPiece("_X_|");
 					returnCoordinates = rowToHit +"-"+ columnToHit;
 					this.printHuntingBoard();
@@ -114,7 +119,8 @@ public class HuntingBoard {
 
 	public boolean verifyIfHuntInputIsDuplicated(int row, int column)
 	{
-		if(huntingBoard[row][column].getPiece()!="___|")
+
+		if(!huntingBoard[row][column].getPiece().equals("___|"))
 		{
 			System.out.println("Already hit that place! Try again");
 			return true;

@@ -2,10 +2,13 @@ package ui;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+
 import models.BoardPiece;
 
 
@@ -27,12 +30,15 @@ public class ShipPlacementView extends JFrame  {
 	private JButton doneButton;
 	private JButton randomButton;
 	private ActionListener actionListener;
+	private MouseListener mouseListener;
 
 
-	public ShipPlacementView(ActionListener actionListener,String player)
+	public ShipPlacementView(MouseListener mouseListener,ActionListener actionListener,String player)
 	{
 		super(player+"'s Placement");
+		setLocationRelativeTo(null);
 		this.actionListener = actionListener;
+		this.mouseListener = mouseListener;
 
 		setBackground(Color.lightGray);
 		setLayout(null);
@@ -70,14 +76,14 @@ public class ShipPlacementView extends JFrame  {
 		horizontalOrientationButton.setActionCommand("N");
 		//
 		add(horizontalOrientationButton);
-		
+
 		randomButton = new JButton("Random Placement");
 		randomButton.setBounds(20, 350,150,30);
 		randomButton.addActionListener(actionListener);
 		randomButton.setActionCommand("N");
 		add(randomButton);
-		
-		
+
+
 
 		placementBoardLabel = new JLabel(player+"'s Placement Board");
 		placementBoardLabel.setForeground(Color.blue);
@@ -97,8 +103,8 @@ public class ShipPlacementView extends JFrame  {
 		doneButton.setActionCommand("N");
 		doneButton.addActionListener(actionListener);
 		add(doneButton);
-		
-		
+
+
 
 	}
 
@@ -110,9 +116,13 @@ public class ShipPlacementView extends JFrame  {
 				placementBoard[i][j] = new JButton();
 				placementBoard[i][j].setBackground(Color.LIGHT_GRAY);
 				placementBoard[i][j].setBounds(350+((i)*30),50+(j*30), 30, 30);
-				//System.out.println(i+""+j);
+
 				placementBoard[i][j].setActionCommand(i+"-"+j);
+
+
 				placementBoard[i][j].addActionListener(actionListener);
+				placementBoard[i][j].addMouseListener(mouseListener);
+				
 
 				this.add(placementBoard[i][j]);
 			}
@@ -146,8 +156,8 @@ public class ShipPlacementView extends JFrame  {
 	{
 		placementStringLabel.setText(text);
 	}
-	
-	
+
+
 	public void putShipOnBoard(BoardPiece[][] board)
 	{
 		for(int i=0;i<=9;i++)
@@ -162,5 +172,38 @@ public class ShipPlacementView extends JFrame  {
 		}
 	}
 
+
+	public void putPossibleShipOnBoard(BoardPiece[][] board)
+	{
+		for(int i=0;i<=9;i++)
+		{
+			for(int j=0;j<=9;j++)
+			{
+
+				if(board[i][j].getPiece().equals("_@_|"))
+				{
+					if(!placementBoard[j][i].getBackground().equals(Color.orange))
+					{
+						placementBoard[j][i].setBackground(Color.GREEN);
+					}
+				}
+			}
+		}
+	}
+	
+	public void deleteGreenBackground()
+	{
+		for(int i=0;i<=9;i++)
+		{
+			for(int j=0;j<=9;j++)
+			{
+				if(placementBoard[j][i].getBackground().equals(Color.GREEN))
+				{
+					placementBoard[j][i].setBackground(Color.LIGHT_GRAY);
+				}
+
+			}
+		}
+	}
 
 }

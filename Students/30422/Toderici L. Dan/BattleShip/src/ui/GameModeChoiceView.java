@@ -26,6 +26,8 @@ public class GameModeChoiceView extends JFrame  {
 	public GameModeChoiceView() 
 	{
 		super();
+		setLocationRelativeTo(null);
+		
 		setBackground(Color.lightGray);
 		setLayout(null);
 		setSize (400,400);
