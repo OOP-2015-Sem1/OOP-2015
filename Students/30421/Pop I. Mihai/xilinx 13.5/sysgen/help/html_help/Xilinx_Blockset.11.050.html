@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>FDATool</title>
+    <link rel="StyleSheet" href="css/Xilinx_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Blockset.11.001.html#271130">Xilinx Blockset</a> : FDATool</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="271130">FDATool</a></div>
+      <div class="Body"><span class="Italic"><a name="275870">This block is listed in the following Xilinx Blockset libraries: DSP, Tools, and Index</a></span></div>
+      <div class="OneLiner"><a name="398783"><img class="Default" src="images/Xilinx_Blockset.11.050.1.jpg" width="45" height="48" style="display: block; float: none; left: 0.0; top: 0.0" alt="" />The Xilinx FDATool block provides an interface to the FDATool software </a>available as part of the MATLAB Signal Processing Toolbox. </div>
+      <div class="Body"><a name="1101222">The block does not function properly and should not be used if the Signal </a>Processing Toolbox is not installed. This block provides a means of defining an FDATool object and storing it as part of a System Generator model. FDATool provides a powerful means for defining digital filters with a graphical user interface.</div>
+      <div class="Heading2"><a name="400249">Example of Use</a></div>
+      <div class="Body"><a name="400252">Copy an FDATool block into a subsystem where you would like to define a filter. Double-</a>clicking the block icon opens up an FDATool session and graphical user interface. The filter is stored in an data structure internal to the FDATool interface block, and the coefficients can be extracted using MATLAB helper functions provided as part of System Generator. The function call <span class="Filename">xlfda_numerator('FDATool')</span> returns the numerator of the transfer function (e.g., the impulse response of a finite impulse response filter) of the FDATool block named <span class="Filename">'FDATool'</span>. Similarly, the helper function <span class="Filename">xlfda_denominator('FDATool')</span> retrieves the denominator for a non-FIR filter. </div>
+      <div class="Body"><a name="400246">A typical use of the FDATool block is as a companion to an FIR filter block, where the </a>Coefficients field of the filter block is set to <span class="Filename">xlfda_numerator('FDATool')</span>. An example is shown in the following diagram:</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="553995"><img class="Default" src="images/Xilinx_Blockset.11.050.2.jpg" width="314" height="170" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="400539">Note that</a><span class="Filename"> xlfda_numerator()</span> can equally well be used to initialize a memory block or a <span class="Filename">'coefficient' </span>variable for a masked subsystem containing an FIR filter. </div>
+      <div class="Body"><a name="400527">This block does not use any hardware resources</a></div>
+      <div class="Heading2"><a name="275874">FDA Tool Interface</a></div>
+      <div class="Body"><a name="1866878">Double-clicking the icon in your Simulink model opens up an FDATool session and its </a>graphical user interface. Upon closing the FDATool session, the underlying FDATool object is stored in the UserData parameter of the Xilinx FDATool block. Use the <span class="Filename">xlfda_numerator()</span> helper function and<span class="Filename"> get_param()</span> to extract information from the object as desired.</div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

@@ -1,0 +1,72 @@
+<!--   *  Copyright (c) 2009, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="_hwcosim" block_type="networkethernet_cosim">
+  <initialization file="xlnetworkethernet_cosim_init.m"/>
+  <icon width="106" height="103" wmark_color="white" bg_color="gray" file="networkethernet_cosim_icon.m"/>
+  <dll name="sysgen" entry_point="hwcosim_block_config"/>
+  <handlers enablement="xlEthernetCosimGuiEnablement" action="xlEthernetCosimGuiAction"/>
+  <libraries>
+    <library name="NetworkEthernetRuntimeCosim_r4"/>
+  </libraries>
+  <doc htmlname="Network-based Ethernet Co-Simulation"/>
+  <blockgui label="Xilinx Network-based Ethernet Hardware Co-simulation">
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <etch label="Clocking">
+          <radiogroup name="clkSrc" default="Single Stepped" evaluate="true" label="Clock source" ctype="Int">
+            <item value="Single Stepped" label="Single stepped"/>
+            <item value="Free Running" label="Free running"/>
+          </radiogroup>
+        </etch>
+        <checkbox name="hasCombinationalPath" default="on" evaluate="true" label="Has combinational path" ctype="Int"/>
+        <glayout cols="2">
+          <editbox name="bitfileName" default="example.bit" evaluate="false" label="Bitstream file" ctype="String"/>
+          <browsebutton name="bitfiledialog" label="..." filter="Configuraton Bitstream (*.bit)"/>
+        </glayout>
+      </tab>
+      <tab name="networktab" label="Network">
+        <editbox name="fpgaIPAddr" default="192.168.8.1" evaluate="false" label="FPGA IP address" ctype="String"/>
+        <editbox name="timeout" default="100" evaluate="true" label="Timeout (ms)" ctype="Double"/>
+        <listbox name="numRetries" default="50" evaluate="true" label="Number of retries" ctype="Int">
+          <item value="10"/>
+          <item value="50"/>
+          <item value="100"/>
+          <item value="200"/>
+        </listbox>
+      </tab>
+      <tab name="configtab" label="Configuration">
+        <listbox name="configProfile" default="Default settings" evaluate="false" label="Configuration profile" ctype="String">
+          <item value="Default settings"/>
+        </listbox>
+      </tab>
+      <tab name="sharedmemories" label="Shared Memories">
+        <editbox name="treeview" read_only="true" top_label="false" evaluate="false" multi_line="true"/>
+      </tab>
+      <tab name="software" label="Software">
+          <etch label="Xilinx Platform Studio (XPS)">
+              <editbox name="xmp" evaluate="false" label="Project file" ctype="String"/>
+              <editbox name="bmm" evaluate="false" label="BMM file"/>
+          </etch>
+          <etch label="Software Development Kit (SDK)">
+              <glayout cols="2">
+                  <editbox name="elffileName" default="" evaluate="false" label="ELF file" ctype="String"/>
+                  <browsebutton name="elffiledialog" label="..." filter="Executable (*.elf)"/>
+              </glayout>
+              <button name="edit_software" label="Launch Xilinx SDK"/>
+          </etch>
+        <button name="compile" label="Compile and update bitstream"/>
+      </tab>
+    </tabpane>
+    <workspacevar name="engineDll" ctype="String"/>
+    <workspacevar name="binDir" ctype="String"/>
+    <hiddenvar name="design_xtable" default="{'clocksGcd' =&gt; 1, 'ports' =&gt; { }}" evaluate="false" ctype="String"/>
+    <hiddenvar name="cosim_xtable" default="" evaluate="false" ctype="String"/>
+    <hiddenvar name="bscanPos" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="useWaitBox" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="prgClkFreq" default="10" evaluate="true" ctype="Double"/>
+    <hiddenvar name="Scheme" default="Cosim" evaluate="true"/>
+    <hiddenvar name="memxtable" default="" evaluate="false"/>
+    <hiddenvar name="hasProc" default="0" evaluate="true" ctype="Bool"/>
+  </blockgui>
+</sysgenblock>

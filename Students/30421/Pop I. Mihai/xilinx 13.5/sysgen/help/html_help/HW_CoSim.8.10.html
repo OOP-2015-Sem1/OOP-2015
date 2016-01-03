@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Frame-Based Acceleration using Hardware Co-Simulation</title>
+    <link rel="StyleSheet" href="css/HW_CoSim.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="HW_CoSim.8.1.html#286763">Using Hardware Co-Simulation</a> : Frame-Based Acceleration using Hardware Co-Simulation</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="286763">Frame-Based Acceleration using Hardware Co-Simulation</a></div>
+      <div class="Body"><a name="286764">With the tremendous growth in programmable device size and computational power, </a>lengthy simulation times have become an expected, yet undesirable part of life for most engineers. Depending on the design size and complexity, the required simulation time can be quite large, sometimes on the order of days to run to completion. This problem is exacerbated by the fact that most systems must be simulated many times before the design is considered functional and ready for deployment. Fortunately, System Generator for DSP provides hardware co-simulation interfaces that allow you to dramatically accelerate simulation speeds of your FPGA designs. </div>
+      <div class="Body"><a name="286765">There are several factors that influence exactly how much acceleration can be gained by </a>using hardware co-simulation. These considerations include the size of the design, the number of ports on the model, and the hardware over-sampling rate. Under normal operation, the PC communicates with the FPGA during each Simulink simulation cycle. These software / hardware transactions often involve significant overhead and can end up being the limiting factor in simulation performance. Also of importance is the co-simulation interface being used. Some interfaces (e.g., PCI) are faster than others (e.g., JTAG). For a reasonably large design, the typical simulation is accelerated by an order of magnitude when co-simulated in hardware. </div>
+      <div class="Body"><a name="286766">Keeping the above points in mind, there are ways to further bolster simulation </a>performance. Remember that every time the PC interacts with hardware, there is an overhead cost that impacts simulation performance. One of the ways the number of FPGA transactions can be mitigated is by utilizing Simulink vector and frame signal types. Here and throughout the rest of this tutorial, FPGA transactions involving Simulink vector and frame signals as simply referred to as <span class="Filename">vector transfers</span>. This idea is straightforward – bundle as many input data samples together as possible and have the FPGA process the data in a single transaction. Fewer transactions with the FPGA results in better simulation performance. </div>
+      <div class="Body"><a name="286767">In this tutorial, Simulink vector and frame signals are used to increase simulation </a>performance beyond what is traditionally possible with hardware co-simulation. A step-by-step example filter design is presented to help illustrate these concepts.</div>
+      <div class="Body"><a name="286768">Before diving into the details, it is worth exploring exactly what you are trying to </a>accomplish from a high-level perspective. In summary, you will do the following during a Simulink simulation cycle: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="286769">Buffer a series of scalar input data values into a Simulink vector; </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="286770">Transfer the vector data to a buffer residing on the FPGA using a burst transfer; </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="286771">Use the FPGA, in free-running clock mode, to sequentially process the entire input </a>buffer; </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="286772">Use the FPGA to write the data into an output buffer; </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="286773">Transfer the contents of the output buffer back into Simulink and reconstruct the data </a>as a Simulink vector; </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="286774">Unbuffer the vector into a series of output scalar values. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="286775">Shared Memories</a></div>
+      <div class="Body"><a name="286776">Before a System Generator design can support vector transfers, it must be augmented with </a>appropriate input and output buffers. In hardware, these buffers are implemented using internal memory (e.g., BRAMs) and are used to store vectors of simulation data that are written to and read from the FPGA by the PC. This means that the maximum size of the buffers is limited by the amount of internal memory available on the target device. In System Generator, shared memory blocks provide interfaces that implement such buffers. </div>
+      <div class="Body"><a name="286777">A question that quickly comes to mind is why not use standard FIFO or memory blocks? </a>The buffers required for hardware co-simulation differ from traditional FIFOs and memories in that they must be controllable by both the PC and FPGA user design logic. The standard FIFO and memory blocks provided by System Generator can only interface with user design logic. </div>
+      <div class="Body"><a name="286778">There are two types of shared memories that provide this control: lockable shared </a>memories and shared FIFOs. These blocks provide different buffering styles; each with their own handshaking protocols that determine when and how burst transactions with the FPGA occur. In this tutorial, primary attention is focused on shared FIFO buffers. For an example on how to use lockable shared memories, please refer to the tutorial entitled <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.11.html#286973', '');" title="Real-Time Signal Processing using Hardware Co-Simulation">Real-Time Signal Processing using Hardware Co-Simulation</a></span>. You may find the lockable shared memory and FIFO blocks in the Shared Memory library of the Xilinx Blockset. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="286787"><img class="Default" src="images/HW_CoSim.8.10.1.jpg" width="426" height="121" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="286788">Because shared FIFOs play a central role in enabling vector transfers, it is worth a brief </a>aside to discuss their behavior. A shared FIFO pair is comprised of a To FIFO block and a From FIFO block that specify the same name (e.g., Bar in the figure above). The To FIFO block provides the "write side" control signals, while the From FIFO block provides the "read side" control signals. When used together, a shared FIFO pair is conceptually the same thing as a single FIFO – only the control signals for the two sides are graphically disjoint. This means that a shared FIFO pair shares the same FIFO memory space. For example, if you write data into a To FIFO block, you may retrieve the same data by reading from the From FIFO block. The connection between these two blocks is implicit; shared FIFOs are associated with one another by name and not by explicit Simulink wires. </div>
+      <div class="Body"><a name="286789">Shared FIFOs and shared memories in general may be compiled for hardware co-</a>simulation. Note that although this tutorial touches briefly on how shared FIFOs are co-simulated, it is useful to refer to the topic titled <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.8.html#292187', '');" title="Shared Memory Support">Co-Simulating Shared FIFOs</a></span> for more in-depth information. When one-half of a shared FIFO block is compiled for hardware co-simulation, a full FIFO block is embedded in the FPGA using the FIFO Generator core. One side of the FIFO connects to user design logic (i.e., the System Generator logic that connected to the shared FIFO block). The other half connects to interface logic that allows it to be controlled by the PC. This side of the FIFO may be controlled by other System Generator software model logic (e.g., the half of the shared FIFO), by a C program or software executable, or by a MATLAB program. By compiling shared FIFOs for hardware co-simulation, you create embedded FIFO-style buffers in the FPGA that can be controlled directly by a PC. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="286798"><img class="Default" src="images/HW_CoSim.8.10.2.jpg" width="527" height="239" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="286799">There are several ways to communicate with a shared FIFO that is embedded inside the </a>FPGA. The most common approach is to include the other half of the shared FIFO in the System Generator design. It is also possible to communicate with the shared FIFO using a C program or MATLAB program. System Generator provides additional blocks that support vector transfers to and from the FIFO. These blocks will be touched on later in the tutorial as they play a key role in supporting burst transfers to and from the FPGA. </div>
+      <div class="Heading2"><a name="286800">Adding Buffers to a Design</a></div>
+      <div class="Body"><a name="286801">Having gained an understanding of how shared FIFOs work in hardware, you will now </a>turn you attention towards building designs that can utilize these buffers for high-speed vector processing in the FPGA. </div>
+      <div class="Body"><a name="286802">Consider the scenario in which you have an FPGA data path that you would like to </a>accelerate using vector transfers. You need to include input buffer storage in the FPGA that can store data input samples that are written by the PC. An output buffer is also required so that the processed data values can be stored while the FPGA waits for the PC to retrieve them. With these requirements in mind, a From FIFO block is used to implement the input data buffer and a To FIFO block is used to implement the output data buffer. In the model shown below, data is written into the data path as soon as it shows up in the input FIFO. Note that the data path block contains new data (nd) and data valid (vld) flow control ports. These ports support a simple flow control scheme that determines when new data enters and valid data leaves the data path. The nd signal is asserted whenever there is data available in the input FIFO. Conversely, data is written into the output FIFO whenever valid data is present on the data path. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="286808"><img class="Default" src="images/HW_CoSim.8.10.3.jpg" width="527" height="171" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="286809">To gain a better understanding of how the Shared FIFOs are used, you will now take a look </a>at an example design that uses vector transfers to accelerate a MAC filter design. </div>
+      <div class="Numbered_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="286810">From the MATLAB console, change directory to </a><span class="Filename">&lt;ISE_Design_Suite_tree&gt;/sysgen/examples/shared_memory/hardware_</span><span class="Filename">cosim/frame_acc</span>. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="286818">Open </a><span class="Filename">macfir_sw_w_fifos.mdl</span> from the MATLAB console. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="286817"><img class="Default" src="images/HW_CoSim.8.10.4.jpg" width="527" height="235" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="286819">The example design implements a 32-tap MAC FIR filter that removes additive white noise </a>from a sinusoid input source. The amount of white noise can be adjusted interactively by moving the Slider Gain control bar before or during simulation. An output scope compares the filtered output data against the unfiltered input data. The MAC filter itself is contained inside a subsystem named hw_cosim. This subsystem contains all of the logic that will be compiled into the FPGA for hardware co-simulation. You consider everything else in the design (i.e., all blocks in the top-level) as the design test bench.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="286825"><img class="Default" src="images/HW_CoSim.8.10.5.jpg" width="527" height="287" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="286826">Pushing into the hw_cosim subsystem, you have an n-tap MAC FIR Filter block that </a>implements the design data path. Wrapping the filter are From FIFO and To FIFO blocks that provide the input and output buffers, respectively. The MAC filter in the example design is a modified version of the n-tap MAC filter available in the System Generator DSP Reference Blockset library. In the example, the filter is modified to include valid in and valid out ports in order to support the FIFO flow control scheme. </div>
+      <div class="Body"><a name="286827">In total, there are four shared memory blocks in the design that define the CA and VA </a>shared FIFO pairs. In truth, you only need the shared FIFO blocks contained inside the hw_cosim subsystem to successfully compile the design for hardware co-simulation. Because you would like to simulate the complete design, including FPGA hardware, you include a CA To FIFO block and VA From FIFO block in the test bench logic. These shared FIFO blocks are responsible for writing and reading test data from the shared FIFOs in the hw_cosim subsystem. </div>
+      <div class="Body"><a name="286828">Unfiltered data from the din Gateway In block is written into the CA To FIFO block. At this </a>point, the CA From FIFO block in the hw_cosim subsystem reads data from the FIFO and writes it into the MAC filter. The MAC filter in turn processes the data and writes it into the output buffer, represented by the VA To FIFO block. Lastly, the VA From FIFO block in the top-level reads the data and sends it to the Scope block for visualization. </div>
+      <div class="Body"><a name="286829">For this example, you have chosen a maximum buffer size of 4K. This parameter is set by </a>specifying 4K for the Depth parameter on the CA From FIFO and VA To FIFO block dialog boxes. Note that because shared FIFOs are implemented using asynchronous FIFO Generator cores, the actual depth of the hardware FIFO is n-1 words, where n is the depth specified on the dialog box.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="286835"><img class="Default" src="images/HW_CoSim.8.10.6.jpg" width="527" height="272" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="286836">You will now have a chance to simulate the design to see how fast it runs in software. </a></div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="286837">Press the Simulink </a><span class="Bold">Start</span> button to simulate the design in software. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="286838">Record the time required to simulate the design for 10000 cycles. To get an accurate </a>measurement, it is preferable to leave the scope block closed since the graphic updates may affect simulation performance. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="286839">You may adjust the Slider Gain bar during simulation to see how the presence of additional </a>noise affects the filter performance. You may view the filtered and unfiltered data in the output scope block. The top axis shows the unfiltered input data. The bottom axis shows the filtered data results.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="286845"><img class="Default" src="images/HW_CoSim.8.10.7.jpg" width="527" height="275" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="286846">Compiling for Hardware Co-simulation</a></div>
+      <div class="Body"><a name="286847">You will now compile the design for hardware co-simulation. Before performing the </a>following steps, ensure that you have an appropriate hardware co-simulation board installed in System Generator and attached to your PC. In this example, you only want to compile the portion of the design that resides inside the hw_cosim subsystem. This is because you want the CA To FIFO and VA From FIFO blocks to remain in software as part of the design test bench (while their partner shared FIFOs are compiled into FPGA logic). </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">5.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="286848">Double-click on the System Generator block in the hw_cosim subsystem to open the </a>System Generator dialog box. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">6.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="286849">From the Compilation submenu, choose an appropriate hardware co-simulation </a>target. Note that although you use the Point-to-point Ethernet hardware co-simulation interface in this example, any installed hardware co-simulation board (e.g., a board that supports JTAG co-simulation) will suffice.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="286855"><img class="Default" src="images/HW_CoSim.8.10.8.jpg" width="527" height="211" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">7.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="286856">Press the </a><span class="Bold">Generate</span> button on the System Generator dialog box to generate the design. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="286857">A new hardware co-simulation library and block are created once System Generator </a>finishes compiling the design. Note that the new hardware co-simulation block does not have any input or output ports. This is because the subsystem that was compiled did not contain gateway blocks or Simulink ports. Instead, all connections to other Simulink blocks are handled implicitly through shared memories that were compiled into the FPGA. Because you left the To FIFO and From FIFO blocks as part of the software testbench, the software FIFOs will automatically attach to the FIFOs in hardware at the beginning of simulation. </div>
+      <div class="Body"><a name="286858">It is often necessary to examine the type and configuration of a shared memory that was </a>compiled for hardware co-simulation. The information about each shared memory is available in a Shared Memories tab on the hardware co-simulation block dialog box. This tab contains a tree view of information about each shared memory embedded in the design. </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">8.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="286859">Double-click on the hardware co-simulation block to open the parameters dialog box. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">9.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="286860">Select the </a><span class="Bold">Shared Memories</span> tab in the hardware co-simulation block dialog box. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="286861">The tree-view contains information about the CA and VA shared FIFO blocks that were </a>compiled. If your co-simulation design contains other shared memory blocks, information about these blocks will also be displayed here. You may expand or collapse shared memory information by clicking on the (+) or (-) icons located adjacent to the shared memory icons.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="286867"><img class="Default" src="images/HW_CoSim.8.10.9.jpg" width="527" height="286" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">10.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="286868">Close the parameters dialog box. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="286869">You are now ready to insert the hardware co-simulation block in the original design. Before </a>continuing on with the next steps, it is worthwhile to either rename the design or create a backup of the original since you will be making modifications. </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">11.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="286870">Remove the </a><span class="Filename">hw_cosim</span> subsystem from the design. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">12.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="286877">Insert the hardware co-simulation block in place of the</a><span class="Filename"> hw_cosim</span> subsystem.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="286876"><img class="Default" src="images/HW_CoSim.8.10.10.jpg" width="527" height="308" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">13.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="286878">Configure the hardware co-simulation block with any settings necessary to co-</a>simulate using single-step clock mode. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">14.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="328145">Press the Simulink </a><span class="Bold">Start</span> button to start the design. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">15.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="328146">Record the amount of time required to simulate the design for 10000 cycles. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="328150">___________________________________________________________________</a></div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">16.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="328147">Close the design, but leave the hardware co-simulation library open since you will </a>need it in the next topic.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="286882">In the simulation above, hardware co-simulation uses single word transfers. That is, </a>whenever there is a new simulation value to be read or written to the hardware co-simulation, the PC initiates a transaction with the FPGA. The next topic describes how vector transfers may be used to increase simulation speed by making more efficient use of the available hardware co-simulation bandwidth. </div>
+      <div class="Heading2"><a name="286883">Using Vector Transfers</a></div>
+      <div class="Body"><a name="286884">The System Generate Shared Memory Read and Write blocks allow you to use vector </a>transfers with hardware co-simulation. These blocks may be found in the Shared Memory library in the Xilinx Blockset.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="286890"><img class="Default" src="images/HW_CoSim.8.10.11.jpg" width="527" height="75" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="286891">The Shared Memory Write block accepts a Simulink scalar, vector, matrix or frame data </a>type and writes the data sequentially into a shared memory. The complete contents of the Simulink signal are written into the shared memory in a single simulation cycle. As is the case with all shared memory blocks, an association is made between a Shared Memory Read or Write block and another shared memory by specifying the same shared memory name. </div>
+      <div class="Body"><a name="286892">Matrix types are treated as having a</a><span class="Filename"> column-major</span> order. That is, when data is written sequentially into a shared memory, the elements in a column are written first before advancing to the next column. For example, assume you have the matrix of data shown below. During simulation, this matrix data is written into the FIFO (or shared memory) in the following order: </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="286898"><img class="Default" src="images/HW_CoSim.8.10.12.jpg" width="527" height="96" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="286899">Using these blocks, it is possible to read or write full vector, frame, or matrix signals into </a>shared memories, provided the following conditions are met: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="286900">The input signal driven to a shared memory write block is an 8-bit, 16-bit, or 32-bit </a>signed or unsigned integer; </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="286901">The number of elements in the vector or matrix does not exceed the depth of the </a>shared memory or FIFO. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="286902">The data width of the Shared Memory Read or Write block (i.e., the bitwidth of the </a>scalar, or vector or matrix element) equals the shared memory or FIFO data width. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="286903">You can use these blocks in the example design to read and write vectors of data samples </a>to the MAC filter in a single software / hardware transaction. </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">17.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="286904">Open </a><span class="Filename">macfir_hw_w_frames_tb.mdl</span> from the MATLAB console. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="286905">This design is a very similar to the previous design, with a few modifications made to </a>support the Shared Memory Read and Write blocks. Before simulating the design, you consider each of these modifications. Most importantly, Shared Memory Read and Write blocks have been substituted in place of the To and From FIFO testbench blocks in the previous design. By specifying CA and VA as the Write and Read shared memory names, respectively, an association is automatically made to the input and output FIFO buffers in the FPGA hardware during simulation. </div>
+      <div class="Body"><a name="286906">A Simulink Buffer block builds a frame of scalar input samples by sequentially buffering </a>the unfiltered input data. A simple analogy is that the Buffer block is performing a serial to parallel conversion. Recalling that you compiled the FIFO buffers with a depth of 4K, you choose a frame size of 4095. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="286912"><img class="Default" src="images/HW_CoSim.8.10.13.jpg" width="527" height="78" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="286913">Note that the buffer block introduces a sample rate change in the design. For every 4095 </a>inputs, there is only one output. Thus if the data input sample period is 1, the buffer data output sample period is 4095. This means that the Shared Memory Write block need only send a new frame of data to the FPGA on every 4095th simulation cycle (which is considerably more efficient than initiating a hardware transaction during every simulation cycle). </div>
+      <div class="Body"><a name="286914">Because the Buffer block introduces a rate change, you must adjust the downstream blocks </a>to accommodate the slower sample period. You begin by telling the Shared Memory Read block to read a frame of data every 4095th simulation cycle. </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">18.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="286921">Double-click on the Shared Memory Read block to open its parameters dialog box. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="286920"><img class="Default" src="images/HW_CoSim.8.10.14.jpg" width="527" height="195" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="286922">On the </a><span class="Bold">Type</span> field under the <span class="Bold">Basic</span> tab, you have configured the block to use shared FIFOs. To ensure a new frame is read at the appropriate time, you configure the Shared Memory Read block with a Sample time value of 4095. </div>
+      <div class="Body"><a name="286923">The Shared Memory Read block allows you to specify the output data type and </a>dimensions. </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">19.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="286930">On the parameters dialog box, switch to the</a><span class="Bold"> Output Type</span> tab.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="286929"><img class="Default" src="images/HW_CoSim.8.10.15.jpg" width="527" height="192" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="286931">There are several things of interest on this tab. First, you set the output data type as an int32 </a>to match the filter data path output width of 32-bits. Note the design will not simulate unless these widths match. Secondly, you choose an output dimension that is 4095 words deep in the Output dimensions field. Finally, you tell the block to generate frame-based output since frame data types are required by the downstream Unbuffer block. </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">20.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="286932">Close the parameters dialog box. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="286933">The Simulink Unbuffer block takes the frame data from the Shared Memory Read block </a>and deserializes it into sequential scalar values. The Simulink Unbuffer block also introduces a sample rate change in the diagram. Because the input sample period to the block is 4095, and the frame size is 4095 words, the Unbuffer block output sample period is 1. This works out nicely since you have data moving through the overall system at an effective sample period of 1.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="286939"><img class="Default" src="images/HW_CoSim.8.10.16.jpg" width="527" height="80" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="286940">Because the Shared Memory Write and Read block operate on integer values, you must </a>insert Simulink type conversion blocks into the diagram so that the data is interpreted correctly in various portions of the model. The in_data_conv subsystem converts the Simulink doubles into 16-bit integer values that can be interpreted appropriately by the FPGA hardware. On the output side, the out_data_conv subsystem converts the 32-bit integers into 32-bit Simulink fixed-precision values. </div>
+      <div class="Body"><a name="286941">Before simulating the design, you must add the hardware co-simulation block you created </a>from the previous design. </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">21.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="286948">Add the hardware co-simulation block to the design as shown below.</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="286947"><img class="Default" src="images/HW_CoSim.8.10.17.jpg" width="527" height="291" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="286949">As mentioned before, the Shared Memory Write block writes a new input frame of 4095 </a>words to the FPGA on every 4095th clock cycle. Likewise, the Shared Memory Read block reads an output frame of 4095 words from the FPGA on every 4095th clock cycle. This means that the FPGA must process the entire frame in a single-cycle. How exactly is this accomplished? </div>
+      <div class="Body"><a name="286950">The first step is to configure the FPGA in free-running clock mode. In doing so, you allow </a>the FPGA to process data considerably faster than if it were otherwise kept in lockstep with the Simulink simulation. Whereas in single-step mode the FPGA can only process one data per Simulink cycle, the FPGA processing speed is limited only by the system clock frequency when operating in free-running clock mode. Even so, if the buffer is large enough, the FPGA may not have time to process the complete buffer before the next block in the design is woken up. You still need a way to stall the rest of the simulation while the FPGA processes the entire buffer. </div>
+      <div class="Body"><a name="286951">The Shared Memory Read block checks the number of FIFO words available in the output </a>buffer before trying to read a frame. If the number of words in the buffer is insufficient, the Read block waits for a small amount of time, and then checks again to determine if the words have become available. It only reads the frame once all of the words are available in the output buffer, in this case 4095. In this manner, the Shared Memory Read block can stall the simulation until the complete frame has been processed by the FPGA. </div>
+      <div class="Body"><a name="286958">The simulation flow of data through the diagram is shown below.</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="286957"><img class="Default" src="images/HW_CoSim.8.10.18.jpg" width="527" height="291" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="286959">Two steps necessary to run the simulation using Simulink frames signals are provided </a>below: </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">22.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="286960">Double-click on the hardware co-simulation block to bring up the parameters dialog </a>box. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">23.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="286967">Select Free running clock mode as shown below.</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="286966"><img class="Default" src="images/HW_CoSim.8.10.19.jpg" width="527" height="210" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">24.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="286968">Configure the hardware co-simulation block with any additional settings necessary for </a>simulation according to the requirements of your co-simulation board. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">25.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="286969">Press the Simulink </a><span class="Bold">Start</span> button to start the design. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">26.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="328155">Record the amount of time required to simulate the design for 10000 cycles. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="286970">___________________________________________________________________</a></div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">27.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="328167">What is the simulation speed increase over the time recorded in step 15? </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="328162">___________________________________________________________________</a></div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

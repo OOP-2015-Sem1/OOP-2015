@@ -1,0 +1,124 @@
+; Program:     sysgenQAMExt.psm
+; Date:        03/05/10
+;
+; Description: This code controls the PicoBlaze 3 microcontroller block
+;              in the sysgenQAMExt demo design.  In the demo, the
+;              microcontroller is used to perform the following tasks:
+;
+;              - Quadrant adjustments of the de-mapped symbols;
+;              - ASM detection;
+;              - 'start' signal generation for the RS Decoder;
+;              - Outputs byte index of the received Codeblock;
+;
+;              Program execution is as follows:  the PicoBlaze begins
+;              by waiting for an assertion of the ASM match signal that
+;              is driving its input port.  If the ASM has not been
+;              detected after 512 input samples, the program increments
+;              the quadrant select signal.  The quadrant select signal
+;              determines how the hard decisions in the receiver are
+;              de-mapped relative to the 16-QAM constellation points.
+;              This process continues until the ASM is detected.
+;
+;              Once the 4-byte ASM is detected, the program generates a
+;              a start pulse for the RS decoder signifying the start of
+;              a new code block.  The code block size in this demo is
+;              255 bytes.  The program outputs the index of each code
+;              block byte as it is received.
+;
+;              After the full code block is received, the PicoBlaze
+;              checks the status of the ASM match signal.  If the match
+;              signal is not asserted on the fourth byteh of the ASM,
+;              the receiver assumes a loss of synchronization, adjusts
+;              the quadrant select signal, and jumps to the start of the
+;              program.  If a match is detected, the program produces
+;              a start pulse and waits for the code block to be received.
+;
+; Timing:      In the sysgenQAMExt demo, input signals into the PicoBlaze
+;              block have a sample period of 16.  A Simulink system
+;              period of 1 gives a constraint of 8 instructions per
+;              input sample.
+;
+; NAMEREG directives:
+;
+                NAMEREG s0, lsb_smpl_count      ; least signifcant byte of sample count
+                NAMEREG s1, msb_smpl_count      ; most signficant byte of sample count
+                NAMEREG s2, quad_select         ; symbol de-map quadrant select (0-3)
+                NAMEREG s3, temp_store          ; temporary storage
+                NAMEREG s4, codeblk_indx        ; Codeblock byte index
+                NAMEREG s5, const_zero          ; stores a zero
+                NAMEREG s6, const_one           ; stores a one
+                NAMEREG s7, match_input         ; stores the ASM match signal
+                NAMEREG s8, match_dly_cnt       ; fixed delay before we check the match
+                                                ; status
+;
+; CONSTANT directives:
+;
+                CONSTANT quad_port,   01        ; output port for quadrant select
+                CONSTANT rsdec_port,  02        ; output port for RS decoder start
+                CONSTANT indx_port,   04        ; output port for the Codeblock index
+                CONSTANT match_delay, 05        ; loop iterations before checking match status
+;
+initialize:     LOAD lsb_smpl_count, 00         ; initial register values
+                LOAD msb_smpl_count, 00
+                LOAD codeblk_indx, 00
+                OUTPUT codeblk_indx, indx_port  ; output initial code block index
+                LOAD const_zero, 00
+                LOAD const_one, 01
+                LOAD quad_select, 00
+                OUTPUT quad_select, quad_port   ; output initial quad select
+;
+wait_for_match: INPUT match_input, 00           ; grab match signal from ASM matcher
+                AND match_input, 01             ; have we matched the ASM?
+                JUMP NZ, found_match            ;
+                ADD lsb_smpl_count, 01          ; increment lsb sample count
+                ADDCY msb_smpl_count, 00        ; increment msb count if necessary
+                LOAD temp_store, msb_smpl_count ; load temp reg before comparing
+                SUB temp_store, 02              ; have we reached 512?
+                JUMP NZ, wait_for_match         ; if not, continue waiting
+;
+quad_adjust:    ADD quad_select, 01             ; increment quad select counter
+                AND quad_select, 03             ; quad_select mod 4
+                OUTPUT quad_select, quad_port   ; output updated quadrant select
+                LOAD lsb_smpl_count, 00         ; reset sample counters
+                LOAD msb_smpl_count, 00
+                ADD temp_store, 00              ; no-op
+                ADD temp_store, 00              ; no-op
+                JUMP wait_for_match             ; continue searching for ASM
+;
+found_match:    LOAD lsb_smpl_count, 00         ; reset sample counters
+                LOAD msb_smpl_count, 00         ;
+                ADD temp_store, 00              ; no-op
+start_pulse:    OUTPUT const_one, rsdec_port    ; generate a start pulse for RS decoder
+                OUTPUT const_zero, rsdec_port   ; just before 1st byte of Codeblock
+                                                ; down sample block with a latency of 1
+                                                ; will capture this and adjust it so that
+                                                ; the start is asserted during the 1st
+                                                ; byte frame of the Codeblock
+;
+code_blk_loop:  OUTPUT codeblk_indx, indx_port  ; output code block index
+                ADD codeblk_indx, 01            ; increment codeblk index
+                ADD temp_store, 00              ; no-op
+                ADD temp_store, 00              ; no-op
+                ADD temp_store, 00              ; no-op
+                LOAD temp_store, codeblk_indx   ;
+                SUB temp_store, FF              ;
+                JUMP NZ, code_blk_loop          ; loop through all 255 bytes of Codeblock
+;
+                LOAD match_dly_cnt, 00          ; reset asm delay count
+                ADD temp_store, 00              ; no-op
+                ADD temp_store, 00              ; no-op
+                ADD temp_store, 00              ; no-op
+chk_asm_loop:   ADD match_dly_cnt, 01           ; increment match_dly_cnt
+                LOAD temp_store, match_dly_cnt  ; we must wait certain number of cycles
+                SUB temp_store, match_delay     ; before we check the match signal
+                JUMP NZ, chk_asm_loop           ; continue loop
+;
+                INPUT match_input, 00           ; grab match signal from ASM matcher
+                LOAD codeblk_indx, 00           ; reset codeblk index
+                ADD temp_store, 00              ; no-op
+                ADD temp_store, 00              ; no-op
+                AND match_input, 01             ; check match signal status
+                JUMP NZ, start_pulse            ; start a new Codeblock
+                ADD temp_store, 00              ; no-op
+                JUMP quad_adjust                ; no match, adjust quadrant
+;

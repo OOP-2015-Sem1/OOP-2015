@@ -1,0 +1,57 @@
+#################################################################
+#
+#   Initialisation Section
+#
+#   Initialise all XCO parameters and Symbol pins (optional).
+#
+#################################################################
+
+set IpModel [Sim::IpModelInit]
+$IpModel SetVersion 2
+set debug 1
+puts $IpModel
+
+#Set IP specific variables
+set ipkey [lindex [file split [file dirname [file dirname [info script]]]] end]
+
+set ipDir [file dirname [file dirname [info script]]]
+
+set ipGuiDir [file join $ipDir gui]
+
+set ipUtil [file join $ipGuiDir ${ipkey}_util.tcl]
+
+set ipLibDir [file join [file join $ipDir lib] nt]
+
+set ipMeta [file join $ipGuiDir ${ipkey}_meta.tcl]
+
+source $ipUtil
+
+source $ipMeta
+
+#Verify SYSGEN Installation on nt machine
+set sysgeninstalldir_or_err_msg [standardSysgenSetup]
+set sysgeninstalldir [lindex $sysgeninstalldir_or_err_msg 0]
+set err_msg [lindex $sysgeninstalldir_or_err_msg 1]
+if { $err_msg != "" } {
+	proc validate_IpModel {} {
+		global Component_Name
+		global err_msg
+		$Component_Name SetErrorMessage $err_msg
+		return FALSE
+	} ;# end validate_IpModel
+	set Component_Name [$IpModel AddParam STRING  "Component_Name" $err_msg]
+	return
+}
+
+#Set sysgen specific variables
+set sysgen_script_dir [file join $sysgeninstalldir sysgen coregen util]
+
+set sysgen_coregen_gui_util_tcl [file join $sysgen_script_dir sysgen_coregen_gui_util.tcl]
+
+if { [file exists $sysgen_coregen_gui_util_tcl] } { 
+	source $sysgen_coregen_gui_util_tcl
+} 
+#################################################################
+
+
+

@@ -1,0 +1,40 @@
+<html>
+<body>
+<h3><font size=+1 color="#990000">A/D and delta-sigma D/A conversion</font></h3>
+<p>
+This model implements a 14-bit analog to digital converter (ADC) and a digital
+to analog converter (DAC) for Virtex and Virtex derivative devices.  The model
+is based on the delta-sigma DAC and ADC implementations described, 
+respectively, in Xilinx App. Notes 154 and 155 by John Logue.  Both 
+documents can be found at 
+</p>
+<p>
+http://www.xilinx.com/apps/appsweb.htm
+</p>
+<p>
+The ADC requires feedback from the DAC to compute output samples.  The DAC
+output is a pulse 
+string whose duty cycle is proportional to the amplitude of the desired output
+voltage.  XAPP154 
+describes a low-pass filter on the DAC output implemented with an RC network.
+Here the RC network
+is simulated using a transfer function block.  XAPP155 specifies an op-amp
+circuit on the input of
+the ADC.  In this model, the op-amp is replaced by a relational block.
+</p>
+<p>
+When simulating this model, the behavior is best viewed with the simulation
+duration set to Inf.  The 
+DAC input display shows the a binary representation of the DAC input and
+illustrates the binary search
+used by the ADC to constructs a digital sample of the input voltage (in this
+case .73).  
+</p>
+<p>
+This design occupies 50 LUTs (13%), 63 flip-flops (16%), and 43 slices (22%)
+of an xc2s15-6 part and runs at 183.89 MHz 
+(Device speed data version: PRODUCTION 1.27 2005-11-04, ISE 8.1i software, 
+VHDL synthesized with XST).
+</p>
+</body>
+</html> 

@@ -1,0 +1,23 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Concat" block_type="concat">
+  <initialization file="xlconcat_init.m"/>
+  <icon width="60" height="60" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="Concat_config"/>
+  <handlers enablement="xlmagicenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsBasic"/>
+    <library name="xbsTypes"/>
+  </libraries>
+  <blockgui label="Xilinx Bus Concatenator">
+    <editbox name="infoedit" default="Concatenates two or more inputs.  Output will be cast to an unsigned value with the binary point at zero." read_only="true" evaluate="false" multi_line="true"/>
+    <editbox name="num_inputs" default="2" evaluate="true" label="Number of inputs" ctype="Int"/>
+    <etch label="Simulation">
+      <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+    </etch>
+    <workspacevar name="sysgen_root" ctype="String"/>
+    <workspacevar name="sim_engine" ctype="Int"/>
+  </blockgui>
+</sysgenblock>

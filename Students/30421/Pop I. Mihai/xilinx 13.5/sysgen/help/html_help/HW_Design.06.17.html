@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>AXI Interface</title>
+    <link rel="StyleSheet" href="css/HW_Design.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="HW_Design.06.01.html#541389">Hardware Design Using System Generator</a> : AXI Interface</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="541389">AXI Interface</a></div>
+      <div class="Heading2"><a name="541477">Introduction</a></div>
+      <div class="Body"><a name="542293">AMBA® AXI™4 (Advanced eXtensible Interface 4) is the fourth generation of the AMBA </a>interface defined and controlled by ARM®, and has been adopted by Xilinx as the next-generation interconnect for FPGA designs. Xilinx and ARM worked closely to ensure that the AXI4 specification addresses the needs of FPGAs.</div>
+      <div class="Body"><a name="541412">AXI is an open interface standard that is widely used by many 3rd-party IP vendors since </a>it is public, royalty-free and an industry standard.</div>
+      <div class="Body"><a name="541414">The AMBA AXI4 interface connections are point-to-point and come in three different </a>flavors: AXI4, AXI4-Lite and AXI4-Stream.</div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="541416">AXI4 is a memory-mapped interface which support burst transactions</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="541417">AXI4-Lite is a lightweight version of AXI4 and has a non-bursting interface</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="541418">AXI4-Stream is a high-performance streaming interface for unidirectional data </a>transfers (from master to slave) with reduced signaling requirements (compared to AXI4). AXI4-Stream supports multiple channels of data on the same set of wires.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="541420">In the following documentation, AXI4 refers to the AXI4 memory map interface, and AXI4-</a>Lite and AXI4-Stream each refer to their respective flavor of the AMBA AXI4 interface. When referring to the collection of interfaces, the term AMBA AXI4 shall be used.</div>
+      <div class="Body"><a name="541423">The purpose of this section is to provide an introduction to AMBA AXI4 and to draw </a>attention to AMBA AXI4 details with respect to System Generator. For more detailed information on the AMBA AXI4 specification please refer to the Xilinx AMBA-AXI4 documents found in <span class="URL"><a href="http://www.xilinx.com/ipcenter/axi4.htm" target="external_window">http://www.xilinx.com/ipcenter/axi4.htm</a></span>. </div>
+      <div class="Heading2"><a name="541407">AXI4 Support in System Generator</a></div>
+      <div class="Body"><a name="541496">AXI4 (memory-mapped) support in System Generator is available through the EDK </a>Processor block found in the System Generator block set. The EDK Processor block allows users to connect hardware circuits created in System Generator to a Xilinx Microblaze processor; users have the option to connect to the processor via a PLB46 or AXI4 interface. </div>
+      <div class="Body"><a name="541498">Users need not be fluent in AXI4 nomenclature when using this flow because the EDK </a>Processor block presents to the users a bus-agnostic interface that is memory centric. Users need only create hardware that utilize Shared Registers, Shared FIFOs and Shared Memories and The EDK Processor block will take care of connecting these memories to the chosen interface.</div>
+      <div class="Body"><a name="541500">Please refer to the System Generator documentation for more information on Hardware </a>and Software Co-design refer to the topic titled <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_SW_CoDesign.07.3.html#270830', '');" title="Integrating a Processor with Custom Logic">Integrating a Processor with Custom Logic</a></span> and <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.046.html#398634', '');" title="EDK Processor">EDK Processor</a></span>  block.</div>
+      <div class="Heading2"><a name="541481">AXI4-Stream Support in System Generator</a></div>
+      <div class="Body"><a name="541551">The 3 most common AXI4-Stream signals are TVALID, TREADY and TDATA. Of all the </a>AXI4-Stream signals, only TVALID is denoted as mandatory, all other signals are optional. All information-carrying signals propagate in the same direction as TVALID; only TREADY propagates in the opposite direction. </div>
+      <div class="Body"><a name="541555">Since AXI4-Steam is a point-to-point interface, the concept of master and slave interface is </a>pertinent to describe the direction of data flow. A master produces data and a slave consumes data.</div>
+      <div class="Heading3"><a name="541572">Naming conventions</a></div>
+      <div class="Body"><a name="541574">AXI4-Stream signals are named in the following manner:</a></div>
+      <div class="Body" style="color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: normal; text-transform: none; vertical-align: baseline"><span class="Filename"><a name="541575">&lt;Role&gt;_&lt;ClassName&gt;[_&lt;BusName&gt;]_[&lt;ChannelName&gt;]&lt;SignalName&gt;</a></span></div>
+      <div class="Body"><a name="541577">For instance:</a></div>
+      <div class="Body" style="color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: normal; text-transform: none; vertical-align: baseline"><span class="Filename"><a name="541578">m_axis_tvalid</a></span></div>
+      <div class="Body"><a name="541579">Here </a><span class="Filename">m</span> denotes the Role (master), <span class="Filename">axis</span> the ClassName (AXI4-Stream) and <span class="Filename">tvalid</span> the SignalName</div>
+      <div class="Body" style="color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: normal; text-transform: none; vertical-align: baseline"><span class="Filename"><a name="541581">s_axis_control_tdata</a></span></div>
+      <div class="Body"><a name="541582">Here </a><span class="Filename">s</span> denotes the Role (slave), <span class="Filename">axis</span> the ClassName, <span class="Filename">control</span> the BusName which distinguishes between multiple instances of the same class on a particular IP, and <span class="Filename">tdata</span> the SignalName.</div>
+      <div class="Heading3"><a name="541608">Notes on TREADY/TVALID handshaking</a></div>
+      <div class="Body"><a name="542312">The TREADY/TVALID handshake is a fundamental concept in AXI to control how data is </a>exchanged between the master and slave allowing for bidirectional flow control. TDATA, and all the other AXI-Streaming signals (TSTRB, TUSER, TLAST, TID, and TDEST) are all qualified by the TREADY/TVALID handshake. The master indicates a valid beat of data by the assertion of TVALID and must hold the data beat until TREADY is asserted. TVALID once asserted cannot be de-asserted until TREADY is asserted in response (this behavior is referred to as a “sticky” TVALID). <span class="Bold">AXI also adds the rule that TREADY can </span><span class="Bold">depend on TVALID, but the assertion of TVALID cannot depend on TREADY</span>. This rule prevents circular timing loops. The timing diagram below provides an example of the TREADY/TVALID handshake.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="542329"><img class="Default" src="images/HW_Design.06.17.1.jpg" width="337" height="86" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading4"><a name="542308">Handshaking Key Points</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="541610">A transfer on any given channel occurs when both TREADY and TVALID are high in </a>the same cycle.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="541611">TVALID once asserted, may only be de-asserted after a transfer has completed </a>(TREADY is sampled high). Transfers may not be retracted or aborted.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="541612">Once TVALID is asserted, no other signals in the same channel (except TREADY) may </a>change value until the transfer completes (the cycle after TREADY is asserted).</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="541613">TREADY may be asserted before, during or after the cycle in which TVALID is </a>asserted.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="541614">The assertion of TVALID may not be dependent on the value of TREADY. But the </a>assertion of TREADY may be dependent on the value of TVALID.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="541615">There must be no combinatorial paths between input and output signals on both </a>master and slave interfaces:</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="541616">Applied to AXI4-Stream IP, this means that the TREADY slave output cannot be </a>combinatorially generated from the TVALID slave input. A slave that can immediately accept data qualified by TVALID, should pre-assert its TREADY signal until data is received. Alternatively TREADY can be registered and driven the cycle following TVALID assertion.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="541617">The default design convention is that a slave should drive TREADY </a>independently or pre-assert TREADY to minimize latency.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="541618">Note that combinatorial paths between input and output signals are permitted </a>across separate AXI4-Stream channels. It is however a recommendation that multiple channels belonging to the same interface (related group of channels that operate together) should not have any combinatorial paths between input and output signals.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="541619">For any given channel, all signals propagate from the source (typically master) to the </a>destination (typically slave) except for TREADY. Any other information-carrying or control signals that need to propagate in the opposite direction must either be part of a separate channel (“back-channel” with separate TREADY/TVALID handshake) or be an out-of-band signal (no handshake). TREADY should not be used as a mechanism to transfer opposite direction information from a slave to a master.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="541620">AXI4-Stream allows TREADY to be omitted which defaults its value to 1. This may </a>limit interoperability with IP that generates TREADY. It is possible to connect an AXI4-Stream master with only forward flow control (TVALID only)</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="541482">AXI-Stream Blocks in System Generator</a></div>
+      <div class="Body"><a name="541657">System Generator blocks that present an AXI4-Stream interface can be found in the Xilinx </a>Blockset Library entitled AXI4. Blocks in this library are drawn slightly differently from regular (non AXI4-Stream) blocks.</div>
+      <div class="Heading3"><a name="541493">Port Groupings</a></div>
+      <div class="Body"><a name="541667">&nbsp;</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="541801"><img class="Default" src="images/HW_Design.06.17.2.jpg" width="134" height="117" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="541794">Blocks that proffer AXI4-Stream interfaces have AXI4-Stream channels grouped together </a>and color coded. For example, on the DDS Compiler 5.0 block shown above, the top-most input port<span class="Bold"> data_tready</span> and the top two output ports, <span class="Bold">data_tvalid</span> and <span class="Bold">data_tdata</span> belong in the same AXI4-Stream channel. As does <span class="Bold">phase_tready</span>, <span class="Bold">phase_tvalid</span> and<span class="Bold"> phase_tdata</span>.</div>
+      <div class="Body"><a name="541668">Signals that are not part of any AXI4-Stream channels are given the same background color </a>as the block; <span class="Bold">rst</span> is an example.</div>
+      <div class="Heading3"><a name="541670">Port Name Shortening</a></div>
+      <div class="Body"><a name="541776">In the example shown below, the AXI4-Stream signal names have been shortened to </a>improve readability on the block. Name shortening is purely cosmetic and when netlisting occurs, the full AXI4-Stream name is used. Name shorting is turned on by default; you can uncheck the <span class="Bold">Display shortened port names</span> option in the block parameter dialog box to reveal the full name.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="541779"><img class="Default" src="images/HW_Design.06.17.3.jpg" width="178" height="239" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="541664">Breaking Out Multi-Channel TDATA</a></div>
+      <div class="Body"><a name="541859">In AXI4-Stream, TDATA can contain multiple channels of data. In System Generator, the </a>individual channels for TDATA are broken out. So for example, the TDATA of port <span class="Bold">dout</span> below contains both real and imaginary components.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="541873"><img class="Default" src="images/HW_Design.06.17.4.jpg" width="130" height="95" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="541878">The breaking out of multi-channel TDATA does not add additional logic to the design and </a>is done in System Generator as a convenience to the users. The data in each broken out TDATA port is also correctly byte-aligned.</div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

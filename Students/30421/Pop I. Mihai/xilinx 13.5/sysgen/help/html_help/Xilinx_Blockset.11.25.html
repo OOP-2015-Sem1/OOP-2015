@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>DAFIR v9_0</title>
+    <link rel="StyleSheet" href="css/Xilinx_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Blockset.11.1.html#638862">Xilinx Blockset</a> : DAFIR v9_0</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="638862">DAFIR v9_0</a></div>
+      <div class="Body"><span class="Italic"><a name="638863">This block is listed in the following Xilinx Blockset libraries: DSP and Index.</a></span></div>
+      <div class="OneLiner"><a name="481960"><img class="Default" src="images/Xilinx_Blockset.11.25.1.jpg" width="61" height="69" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" />The Xilinx DAFIR filter block implements a distributed arithmetic finite-</a>impulse response (FIR) digital filter, or a bank of identical FIR filters (multichannel mode). </div>
+      <div class="Body"><a name="1101142">An N-tap filter is defined by N filter coefficients (or taps) h(0), h(1), ....,h(n-1). </a>Here each h(i) is a Xilinx fixed-point number. The filter block accepts a stream of Xilinx fixed-point data samples x(0), x(1), ..., and at time n computes the output.</div>
+      <div class="Heading2"><a name="481980">Block Interface</a></div>
+      <div class="Body"><a name="481983">The FIR block can be configured to have one to eight data channels as well as several </a>optional ports. </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="481985">vin</a></span>: marks each <span class="Filename">xn</span> symbol as valid or invalid. For a decimating FIR filter, the state of the vin port must match for every group of samples to be decimated, i.e. the groupings of N vin samples, where N is the decimation factor, must all be either 1 or 0. The sample groupings are aligned from the start of the simulation (t=0). </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="481987">vout</a></span>: marks each symbol produced on yn as valid or invalid. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="481989">rfd</a></span>: indicates whether the block is ready to accept new data. This port drives a Boolean signal at the same data rate as the input port, xn. This signal is asserted at the start of simulation and remains asserted (true) until a reload cycle is initiated. The rfd signal will go low on the cycle immediately following an assertion of the load signal. The rfd signal is reasserted once the block has completed the reload sequence. Available when reloading coefficients or when serial input is selected. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="481991">sel_in</a></span>: indicates current filter input channel number when serial input is selected. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="484496">sel_out</a></span>: indicates current filter output channel number when serial input is selected.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="484495"><img class="Default" src="images/Xilinx_Blockset.11.25.2.jpg" width="472" height="123" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="484503">Reloading Coefficients</a></div>
+      <div class="Body"><a name="484497">The DA FIR filter provides optional ports for coefficient reloading. When a reload </a>sequence is initiated, the filter stops accepting new data input samples and begins accepting new filter coefficients. Once all of the new coefficients have been written, the filter processes the coefficients and initializes the necessary internal data structures. The amount of time required for the filter to reload is a function of the filter length and type. After the reloading sequence has completed, the filter comes back online and continues to accept new input data samples. For more information about the reload sequence and filter reload time, please refer to the FIR core data sheet. An example reload sequence timing diagram is shown below: </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="484524"><img class="Default" src="images/Xilinx_Blockset.11.25.3.jpg" width="528" height="166" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="484696">Optional Ports for Reloading Coefficients</a></div>
+      <div class="Body"><span class="Bold"><a name="484699">coef</a></span>: new filter coefficients are written to the block through this port. The number of bits and binary point position of the coef port must match the number of coefficient bits and coefficient binary point position specified in the block mask. This port must run at the same data rate as the input port, xn. </div>
+      <div class="Body"><span class="Bold"><a name="484701">coef_we</a></span>: a write enable signal that controls when the coef port data is written to the block. This port can be used to stagger the time at which new coefficients are written into the filter once a reload cycle has started. The first new coefficient can be written to the filter on the cycle following the assertion of the load signal. This port should be driven by a Boolean signal with a data rate equal to the data rate of the input port, xn. </div>
+      <div class="Body"><span class="Bold"><a name="484693">load</a></span>: an assertion (true) of the load port initiates a coefficient reload sequence. The load signal should be pulsed for one cycle; subsequent assertions during a reload sequence will restart the reloading process. This port should be driven by a Boolean signal with a data rate equal to the data rate of the input port, xn.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="484736"><img class="Default" src="images/Xilinx_Blockset.11.25.4.jpg" width="472" height="100" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="484916">Block Parameters Dialog Box</a></div>
+      <div class="Body"><a name="532136">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model. </div>
+      <div class="Heading3"><a name="533251">Basic tab</a></div>
+      <div class="Body"><a name="532145">Parameters specific to the Basic tab are as follows: </a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="487409">Coefficients</a></span>: vector of filter coefficients; note that these can be evaluated from a MATLAB workspace variable and may in turn be computed by MATLAB. You can also refer to examples in the System Generator Tutorial. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="487411">Structure</a></span>: the Xilinx Smart-IPÔ FIR core's preferred implementation depends on the structure of the sequence of filter taps. You can choose one of these: inferred from coefficients, none, symmetric, negative symmetric, half band, and interpolate fir. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="487413">Number of bits (always signed)</a></span>: Number of bits to use for representing the filter coefficients. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="487415">Binary Point</a></span>: Number of fractional bits to use for representing the filter coefficients. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><span class="Bold"><a name="532108">Hardware over-sampling rate</a></span>: The hardware over sampling rate determines the degree of parallelism.  A rate of one produces a fully parallel filter.  A rate of n (resp., n+1) for an n-bit input signal produces a fully serial implementation for a non-symmetric (resp., symmetric) impulse response.  Intermediate values produce implementations with intermediate levels of parallelism.</div>
+      <div class="Body"><a name="2045697">Optional Ports</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2045698">Provide coefficient reload ports</a></span>: adds a coefficient reload interface to the block.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2045702">Provide valid ports</a></span>: Adds a vin (valid input) and vout (valid output) port to the block.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2045703">Provide reset port</a></span>: Adds a rst port to the block.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><span class="Bold"><a name="2045713">Latency</a></span>:</div>
+      <div class="Heading3"><a name="2043232">Advanced tab</a></div>
+      <div class="Body"><a name="532109">Parameters specific to the Advanced tab are as follows:</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="487417">Number of channels</a></span>: one to eight, inclusive. For multichannel filters, polyphase behavior is not supported, i.e. the filter must be single rate. The core, which processes the channels serially, will be over-clocked by the System Generator by a factor equaling the number of channels so as to provide the necessary throughput. To reduce control logic overhead, the block requires that the valid bits match on all inputs. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="487419">Serial input</a></span>: when the number of channels is greater than one, the input to the filter can be either serial (time division multiplexed) or parallel. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="487421">Polyphase behavior</a></span>: Decimation, Interpolation, Single rate. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="1282532">Other parameters used by this block are explained in the topic</a><br /><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.3.html#271277', '');" title="Common Options in Block Parameter Dialog Boxes">Common Options in Block Parameter Dialog Boxes</a></span>. </div>
+      <div class="Body"><a name="2020112">&nbsp;</a></div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

@@ -1,0 +1,83 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Mult" block_type="mult">
+  <icon width="55" height="53" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="Mult_config"/>
+  <handlers enablement="multenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsMath"/>
+    <library name="xbsFloatingPoint"/>
+  </libraries>
+  <blockgui label="Xilinx Multiplier">
+    <editbox name="infoedit" default="Hardware notes: To check for the optimum internal pipeline stages of the dedicated multiplier you must select 'Test for optimum pipelining'.&lt;br&gt;&lt;br&gt;Optimization Goal: For implementation into device fabric (LUTs), the Speed or Area optimization will take effect only if it's supported by IP for the particular device family. Otherwise, the results will be identical regardless of the selection." read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="basictab" label="Basic">
+      <etch name="outputetch" label="Output Type">
+        <radiogroup name="precision" default="Full" label="Precision" ctype="Int">
+          <item value="Full" label="Full"/>
+          <item value="User Defined" label="User defined"/>
+        </radiogroup>
+        <etch name="userprecisionetch" label="Fixed-point Output Type">
+          <radiogroup name="arith_type" default="Signed  (2's comp)" label="Arithmetic type" ctype="Int">
+            <item value="Signed  (2's comp)" label="Signed  (2's comp)"/>
+            <item value="Unsigned" label="Unsigned"/>
+          </radiogroup>
+          <etch name="fixed_type_p" label="Fixed-point Precision">
+            <glayout cols="2">
+              <editbox name="n_bits" default="16" label="Number of bits" ctype="Int"/>
+              <editbox name="bin_pt" default="14" label="Binary point" ctype="Int"/>
+            </glayout>
+          </etch>
+          <radiogroup name="quantization" default="Truncate" evaluate="true" label="Quantization" ctype="Int">
+            <item value="Truncate" label="Truncate"/>
+            <item value="Round  (unbiased: +/- Inf)" label="Round  (unbiased: +/- Inf)"/>
+          </radiogroup>
+          <radiogroup name="overflow" default="Wrap" evaluate="true" label="Overflow" ctype="Int">
+            <item value="Wrap" label="Wrap"/>
+            <item value="Saturate" label="Saturate"/>
+            <item value="Flag as error" label="Flag as error"/>
+          </radiogroup>
+        </etch>
+      </etch>
+        <etch name="oportetch" label="Optional Port">
+          <checkbox name="en" default="off" evaluate="true" label="Provide enable port" ctype="Int"/>
+        </etch>
+        <editbox name="latency" default="3" evaluate="true" label="Latency" ctype="Int"/>
+      </tab>
+      <tab name="advancedtab" label="Advanced">
+        <etch name="simetch" label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+        </etch>
+      </tab>
+      <tab name="implementationtab" label="Implementation">
+        <checkbox name="use_behavioral_HDL" evaluate="true" label="Use behavioral HDL (otherwise use core)" ctype="Int"/>
+        <etch name="coreparams" label="Core Parameters">
+          <radiogroup name="opt" default="Speed" evaluate="true" label="Optimize for" ctype="Int">
+            <item value="Speed" label="Speed"/>
+            <item value="Area" label="Area"/>
+          </radiogroup>
+          <checkbox name="use_embedded" default="on" evaluate="true" label="Use embedded multipliers" ctype="Int"/>
+          <!-- <radiogroup name="opt" default="Speed" evaluate="true" label="Optimize for" ctype="Int">
+            <item value="Speed" label="Speed"/>
+            <item value="Area" label="Area"/>
+          </radiogroup> -->
+          <checkbox name="optimum_pipeline" default="off" evaluate="true" label="Test for optimum pipelining" ctype="Int"/>
+          <!-- <checkbox name="use_rpm" default="on" evaluate="true" label="Use pre-defined core placement information" ctype="Int"/>
+          <radiogroup name="placement_style" default="Rectangular shape" evaluate="true" label="Placement style" ctype="Int">
+            <item value="Rectangular shape" label="Rectangular shape"/>
+            <item value="Triangular packing" label="Triangular packing"/>
+          </radiogroup> -->
+        </etch>
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <hiddenvar name="pipeline" default="on" evaluate="false"/>
+    <hiddenvar name="use_rpm" default="on" evaluate="false"/>
+    <hiddenvar name="placement_style" default="Triangular" evaluate="false"/>
+  </blockgui>
+</sysgenblock>

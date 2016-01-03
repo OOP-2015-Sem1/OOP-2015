@@ -1,0 +1,234 @@
+<?xml version="1.0"?>
+
+<sysgenblock simulinkname="Interleaver//De-interleaver 7.0 " block_type="sid_v7_0">
+   <icon width="215" height="201" wmark_color="white" bg_color="green">
+   </icon>
+   <dll name="sysgen" entry_point="coregenimport_config">
+   </dll>
+   <handlers enablement="sid_v6_0_enablement" action="sid_v6_0_action">
+   </handlers>
+   <libraries>
+        <library name="xbsIndex"/>
+        <library name="xbsComm"/>
+        <library name="xbsAXI4"/>
+   </libraries>
+   <blockgui label="Xilinx Interleaver De-interleaver 7.0 ">
+      <editbox name="infoedit" default="Forney Information : The Forney type is composed of a user-defined number of delay-line shift registers. The length of each of the delay-line shift registers can be specified using a COE file, or by setting the difference in the length of consecutive delay line shift registers to a fixed, user-defined value. &lt;br&gt; Rectangular Information : The Rectangular Block type is composed of a rectangular array of memory elements, where the number of rows and columns in the array is user-defined. The number of rows and columns can be constant or run-time configurable. The elements are written to row-wise, and read out column-wise, or vice versa, depending on which mode is selected. This type supports user-defined inter-row and inter-column permutations. It also supports pruning - cases where the block size is less than the product of the number of rows and columns. " evaluate="false" read_only="true" multi_line="true">
+      </editbox>
+      <tabpane>
+         <tab name="Page1" label="Basic Parameters">
+            <radiogroup name="memory_style" label="Memory style" default="automatic" top_label="false" allow_advanced="false" evaluate="false" ctype="String">
+               <item value="automatic"/>
+	       <item value="block"/>
+	       <item value="distributed"/>
+	    </radiogroup>
+            <editbox name="symbol_width" label="Symbol Width" default="1" evaluate="true" ctype="Int" top_label="false">
+	    </editbox>
+            <etch label="Type">
+               <radiogroup label="" name="sid_type" default="forney" evaluate="false" ctype="String">
+                  <item label="Forney Convolutional" value="forney">
+                  </item>
+                  <item label="Rectangular Block" value="rectangular">
+                  </item>
+               </radiogroup>
+            </etch>
+            <etch label="Mode">
+               <radiogroup label="" name="mode" default="interleaver" evaluate="false" ctype="String">
+                  <item label="Interleaver" value="interleaver">
+                  </item>
+                  <item label="Deinterleaver" value="deinterleaver">
+                  </item>
+               </radiogroup>
+            </etch>
+            <etch label="Symbol memory">
+               <editbox name="external_memory_latency" label="External Symbol Memory Latency " default="0" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+               <radiogroup label="" name="symbol_memory" default="internal" evaluate="false" ctype="String">
+                  <item label="Internal" value="internal">
+                  </item>
+                  <item label="External" value="external">
+                  </item>
+               </radiogroup>
+            </etch>
+         </tab>
+         <tab name="Page2" label="Forney Parameters">
+            <etch label="Dimensions">
+               <editbox name="number_of_branches" label="Number of branches" default="16" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+            </etch>
+            <etch label="Architecture">
+               <radiogroup label="" name="architecture" default="rom_based" evaluate="false" ctype="String">
+                  <item label="ROM-based" value="rom_based">
+                  </item>
+                  <item label="Logic-based" value="logic_based">
+                  </item>
+               </radiogroup>
+            </etch>
+            <etch label="Configurations">
+               <editbox name="number_of_configurations" label="Number of configurations" default="1" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+            </etch>
+	    <etch label="Length of Branches">
+               <listbox label="Branch length descriptions for Forney SID" name="branch_length_type" default="constant_difference_between_consecutive_branches" evaluate="false" ctype="String">
+                  <item value="constant_difference_between_consecutive_branches">
+                  </item>
+                  <item value="use_coe_file_to_define_branch_lengths">
+                  </item>
+                  <item value="coe_file_defines_branch_length_constant_for_each_configuration">
+                  </item>
+                  <item value="coe_file_defines_individual_branch_lengths_for_every_branch_in_each_configuration">
+                  </item>
+               </listbox>
+               <hlayout>
+                  <editbox name="branch_length_constant" label="Value   " default="1" evaluate="true" ctype="Int" top_label="false">
+                  </editbox>
+                  <editbox name="branch_length_coe_file_name" label="COE File " default="'no_coe_file_loaded'" evaluate="true" ctype="String" top_label="false">
+		  </editbox>
+		  <browsebutton name="bl_coe_button" label="..." filter="COE files(*.coe)" caption="Specify COE File"/>
+               </hlayout>
+            </etch>
+         </tab>
+         <tab name="Page3" label="Rectangular Parameters #1">
+            <etch label="Number of Rows">
+               <editbox name="number_of_rows_constant_value" label="Value" default="15" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+               <editbox name="row_port_width" label="Row Port Width" default="4" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+               <editbox name="minimum_rows" label="Minimum Number of Rows" default="15" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+               <editbox name="number_of_rows_selectable_value" label="Number of Values" default="4" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+               <radiogroup label="" name="number_of_rows" default="constant" evaluate="false" ctype="String">
+                  <item label="Constant" value="constant">
+                  </item>
+                  <item label="Variable" value="variable">
+                  </item>
+                  <item label="Selectable" value="selectable">
+                  </item>
+               </radiogroup>
+            </etch>
+            <etch label="Number of Columns">
+               <editbox name="number_of_columns_constant_value" label="Value" default="15" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+               <editbox name="col_port_width" label="COL Port Width" default="4" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+               <editbox name="minimum_columns" label="Minimum Number of Columns" default="15" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+               <editbox name="number_of_columns_selectable_value" label="Number of Values" default="4" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+               <radiogroup label="" name="number_of_columns" default="constant" evaluate="false" ctype="String">
+                  <item label="Constant" value="constant">
+                  </item>
+                  <item label="Variable" value="variable">
+                  </item>
+                  <item label="Selectable" value="selectable">
+                  </item>
+               </radiogroup>
+            </etch>
+         </tab>
+         <tab name="Page4" label="Rectangular Parameters #2">
+            <etch label="Permutations Configuration">
+               <radiogroup label="Row Permutations" name="row_permutations" default="none" evaluate="false" ctype="String">
+                  <item label="None" value="none">
+                  </item>
+                  <item label="Use COE file" value="use_coe_file_to_define_row_permutations">
+                  </item>
+               </radiogroup>
+               <radiogroup label="Column Permutations" name="column_permutations" default="none" evaluate="false" ctype="String">
+                  <item label="None" value="none">
+                  </item>
+                  <item label="Use COE file" value="use_coe_file_to_define_column_permutations">
+                  </item>
+               </radiogroup>
+               <hlayout>
+                  <editbox name="coe_file" label="COE File " default="'no_coe_file_loaded'" evaluate="true" ctype="String" top_label="false">
+                  </editbox>
+                  <browsebutton name="coe_button" label="..." filter="COE files(*.coe)" caption="Specify COE File"/>
+               </hlayout>
+            </etch>
+            <etch label="Block Size">
+               <editbox name="block_size_constant_value" label="Value" default="225" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+               <editbox name="block_size_port_width" label="BLOCK_SIZE Port Width" default="8" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+               <radiogroup label="" name="block_size_type" default="rows_columns" evaluate="false" ctype="String">
+                  <item label="Constant" value="constant">
+                  </item>
+                  <item label="Rows*Columns" value="rows_columns">
+                  </item>
+                  <item label="Variable" value="variable">
+                  </item>
+               </radiogroup>
+            </etch>
+         </tab>
+         <tab name="Page5" label="Port Parameters #1">
+            <etch label="Control Signals">
+               <checkbox name="has_aclken" default="off" evaluate="true" ctype="Bool" label="ACLKEN">
+               </checkbox>
+	       <checkbox name="has_aresetn" default="off" evaluate="true" ctype="Bool" label="ARESETn (Active Low).  ">
+               </checkbox>
+               <editbox name="infoeditControl" read_only="true" multi_line="true" default="ARESETn must be asserted for a minmum of 2 cycles" evaluate="false"/>
+            </etch>
+            <etch label="Status Signals">
+               <checkbox name="has_col_valid" default="off" evaluate="true" ctype="Bool" label="COL_VALID">
+               </checkbox>
+               <checkbox name="has_col_sel_valid" default="off" evaluate="true" ctype="Bool" label="COL_SEL_VALID">
+               </checkbox>
+               <checkbox name="has_row_valid" default="off" evaluate="true" ctype="Bool" label="ROW_VALID">
+               </checkbox>
+               <checkbox name="has_row_sel_valid" default="off" evaluate="true" ctype="Bool" label="ROW_SEL_VALID">
+               </checkbox>
+               <checkbox name="has_block_size_valid" default="off" evaluate="true" ctype="Bool" label="BLOCK_SIZE_VALID">
+               </checkbox>
+            </etch>
+         </tab>
+         <tab name="Page6" label="Port Parameters #2">
+            <etch label="Data Output Channel Options">
+               <checkbox name="has_dout_tready" default="off" evaluate="true" ctype="Bool" label="TREADY">
+               </checkbox>
+               <checkbox name="has_fdo" default="off" evaluate="true" ctype="Bool" label="FDO">
+               </checkbox>
+               <checkbox name="has_rdy" default="off" evaluate="true" ctype="Bool" label="RDY">
+               </checkbox>
+               <checkbox name="has_block_start" default="off" evaluate="true" ctype="Bool" label="BLOCK_START">
+               </checkbox>
+               <checkbox name="has_block_end" default="off" evaluate="true" ctype="Bool" label="BLOCK_END">
+               </checkbox>
+            </etch>
+            <etch label="Pipelining">
+               <radiogroup label="" name="pipelining" default="maximum" evaluate="false" ctype="String">
+                  <item label="Minimum" value="minimum">
+                  </item>
+                  <item label="Medium" value="medium">
+                  </item>
+                  <item label="Maximum" value="maximum">
+                  </item>
+               </radiogroup>
+            </etch>
+            <etch label="Block Icon Display">
+               <checkbox name="trim_axipin_name" default="on" label="Display shortened port names" ctype="Int" evaluate="true" allow_advanced="false"/>
+            </etch>
+         </tab>
+      </tabpane>
+      <hiddenvar name="ip_name" default="Interleaver/De-interleaver" evaluate="false" ctype="String">
+      </hiddenvar>
+      <hiddenvar name="ip_version" default="7.0" evaluate="false" ctype="String">
+      </hiddenvar>
+      <hiddenvar name="dsptool_ready" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="ipcore_usecache" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="ipcore_useipmodelcache" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="wrapper_available" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="port_translation_map" default="{ 'aclken' => 'en', 'aresetn' => 'rst'}" evaluate="false" ctype="String">
+      </hiddenvar>
+      <hiddenvar name="structural_sim" default="false" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="ipcore_verbose" default="false" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="ipcore_do_not_force_period" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+   </blockgui>
+</sysgenblock>

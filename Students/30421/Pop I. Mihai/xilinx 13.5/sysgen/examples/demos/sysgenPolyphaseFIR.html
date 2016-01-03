@@ -1,0 +1,38 @@
+<html>
+<body>
+<h3><font size=+1 color="#990000">Polyphase 1:8 filter using SRL16Es</font></h3>
+<p>
+This design shows how a 128-tap 1:8 polyphase FIR filter can be can be
+realized efficiently inside System Generator.  Three tricks are employed 
+to make best use of hardware:
+</p>
+<p>
+<li>Even coefficient symmetry reduces the number of MAC engines to 4;</li>
+<li>Engines are built from SRL16E shift registers;</li>
+<li>Virtex II 18x18 dedicated multipliers are used.</li>
+</ul>
+</p>
+<p>
+The impulse response of the filter is displayed in the output scope
+during simulation.
+</p>
+<p>
+The Simulink system sample period is set to 1 in the System Generator
+token, and the sample period of the 'filter in' gateway is 32.  This means 
+a new sample is presented to the filter every 32 system clock cycles.  
+The filter interpolates 8 to 1, so a new filter output is produced every 4 
+system clock cycles.
+</p>
+<p>
+The registers that precede and follow the RRC Filter subsystem are
+mapped into IOBs, and are used to obtain accurate performance numbers.
+</p>
+<p>
+The design occupies 370 LUTs (12%), 421 flip-flops (13%), 272 slices (17%), 
+and 4 dedicated multipliers (16%) of a Xilinx xc2v250-6 part.  
+The maximum clock frequency is approximately 244.56 MHz 
+(Device speed data version: PRODUCTION 1.121 2005-11-04, ISE 8.1i software, 
+VHDL synthesized with XST).
+</p>
+</body>
+</html> 

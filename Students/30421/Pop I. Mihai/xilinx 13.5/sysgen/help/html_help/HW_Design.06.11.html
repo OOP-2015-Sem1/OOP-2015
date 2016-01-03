@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Processing a System Generator Design with FPGA Physical Design Tools</title>
+    <link rel="StyleSheet" href="css/HW_Design.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="HW_Design.06.01.html#331134">Hardware Design Using System Generator</a> : Processing a System Generator Design with FPGA Physical Design Tools</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="331134">Processing a System Generator Design with FPGA Physical </a>Design Tools</div>
+      <div class="Heading2"><a name="270795">HDL Simulation </a></div>
+      <div class="Body"><a name="281180">System Generator creates custom .do files for use with your generated project and a </a>ModelSim simulator. To use these files, you must have ModelSim. You may run your simulations from the standalone ModelSim tool, or you may associate it with the Xilinx ISE® Project Navigator, and run your simulations from within Project Navigator as part of the full software implementation flow.</div>
+      <div class="Heading3"><a name="281182">Compiling Your IP</a></div>
+      <div class="Body"><a name="281183">Before you can simulate your design, you must compile your IP (cores) libraries with </a>ModelSim. </div>
+      <div class="Heading3"><a name="281185">ModelSim SE</a></div>
+      <div class="CellBodyCenterMid"><span style="font-size: 10.0pt"><a name="484069">There are multiple ways to compile your IP libraries. Complete instructions for running </a></span><span style="font-size: 10.0pt">compxlib can be found in the chapter titled COMPXLIB in the Command Line Tools User </span><span style="font-size: 10.0pt">Guide. </span><a href="javascript:void(0);" onClick="WWHFrame.WWHBrowser.fXilinxLink('doc/useenglish/books/docs/dev/ dev.pdf','')">(Click Here to Open)</a></div>
+      <div class="Body"><a name="281190">From the Windows command line you can compile the necessary HDL libraries using the </a>compxlib program. For example, the following command can be used to compile all the HDL libraries with ModelSim SE:</div>
+      <div class="Code"><span class="Bold"><a name="281192">compxlib -s mti_se -f all -l all </a></span></div>
+      <div class="Heading3"><a name="281201">Simulation using ModelSim within Project Navigator</a></div>
+      <div class="Body"><a name="281388">Before you can launch ModelSim from Project Navigator you must specify the location of </a>your installed version of ModelSim. To do so, open Project Navigator and choose the main menu <span class="Bold">Edit &gt; Preferences</span>. This brings up a dialog box. Choose the <span class="Bold">ISE General &gt; </span><span class="Bold">Integrated Tools</span> category in the dialog box. Enter the full path to the version of ModelSim on your PC in the Model Tech Simulator edit box. You must include the name of the executable file in this field.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="281387"><img class="Default" src="images/HW_Design.06.11.1.jpg" width="389" height="313" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="281207">The Project Navigator project is already set up to run simulations at four different stages of </a>implementation. System Generator creates four different ModelSim .do files when the Create Testbench option is selected on the System Generator token. The ModelSim do files created by System Generator are:</div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Filename"><a name="281209">pn_behavioral.do</a></span> - for a behavioral (HDL) simulation on the HDL files in the project, before any synthesis or implementation.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Filename"><a name="281210">pn_posttranslate.do</a></span> - this file runs a simulation on the output of the Xilinx translation (ngdbuild) step, the first step of implementation.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Filename"><a name="281211">pn_postmap.do</a></span> - to run a simulation after your design has been mapped. This file also includes a back-annotated simulation on the post-mapped design.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Filename"><a name="281212">pn_postpar.do</a></span> - to run a simulation after your design has been placed and routed. This file also includes a back-annotated simulation step.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="281511">In the Project Navigator </a><span class="Bold">Design Simulation </span>view, you can use the pull-down menu to select Behavioral Simulation, Post-Translate Simulation, Post-Map Simulation, or Post-Route Simulation (corresponding to pn_behavioral.do, pn_posttranslate.do, pn_postmap.do, and pn_postpar.do respectively).</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="281510"><img class="Default" src="images/HW_Design.06.11.2.jpg" width="251" height="83" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="281521">If you select the </a><span class="Filename">&lt;your design&gt;_tb.vhd/.v</span> file in the Project Navigator <span class="Bold">Design </span><span class="Bold">Simulation </span>view, the ModelSim Simulator will become available in the <span class="Bold">Processes</span> view. Expand the ModelSim Simulator process by clicking on the plus button to the left of it. A simulation process associated with the ModelSim Simulator will appear (in the image below the process is labeled Simulate Behavioral Model).</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="281520"><img class="Default" src="images/HW_Design.06.11.3.jpg" width="251" height="233" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="281562">The </a><span class="Bold">Process Properties</span> dialog box shows that the System Generator<span class="Filename">.do</span> file is already associated as a custom file for this process.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="281561"><img class="Default" src="images/HW_Design.06.11.4.jpg" width="392" height="205" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="281226">Now if you double-click on the simulation process, the ModelSim console opens, and the </a>associated custom do file is used to compile and run your System Generator testbench. The testbench uses the same input stimuli that was generated in Simulink, and compares the HDL simulation results with the Simulink results. Provided that your design was error free, ModelSim reports that the simulation finished without errors. </div>
+      <div class="Heading2"><a name="270796">Generating an FPGA Bitstream</a></div>
+      <div class="Heading3"><a name="281581">Xilinx ISE Project Navigator</a></div>
+      <div class="Body"><a name="281582">During code generation, the System Generator creates several project files for use in Xilinx </a>and partner software tools. One of these project files is for the Xilinx ISE® Project Navigator tool. By opening this project file, you can import your System Generator design into the Project Navigator, and from there, you can synthesize, simulate, and implement the design. This file is called <span class="Filename">&lt;design_name&gt;_cw.ise</span> and it is created in the target directory specified in the System Generator token.</div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><span class="Filename"><a name="281584">my_project_cw.ise</a></span> is used in the following discussion.</div>
+      <div class="Heading3"><a name="281586">Opening a System Generator Project</a></div>
+      <div class="Body"><a name="281587">You may double-click on your </a><span class="Filename">.ise</span> file in Windows Explorer. The Project Navigator file association with .ise causes Project Navigator to launch, opening your <span class="Filename">my_project_cw.ise </span>System Generator design project. You may also open the Project Navigator tool directly, then choose <span class="Bold">File &gt; Open Project</span> from the top-level pull down menu. Browse to the location of your System Generator <span class="Filename">my_project_cw.ise</span> and open it.</div>
+      <div class="Heading3"><a name="281588">Customizing your System Generator Project</a></div>
+      <div class="Body"><a name="281676">When first opening your System Generator project, you will see that it has been set up with </a>the synthesis tool, device, package, and speed grade that you specified in the System Generator token. To change these settings, right-click on <span class="Bold">top_leve</span>l in the Design Implementation View and select <span class="Bold">Design Properties...</span></div>
+      <div class="Body"><a name="281802">This brings up the </a><span class="Bold">Design Properties</span> dialog box. From this dialog box, you can change your Device, Package, Speed, and Synthesis Tool. Note that if you change the device family, the Xilinx IP cores that were produced by System Generator must be regenerated. In such a case, it is better if you return to the System Generator and re-generate your project.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="281801"><img class="Default" src="images/HW_Design.06.11.5.jpg" width="302" height="299" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="281595">Implementing Your Design</a></div>
+      <div class="Body"><a name="281860">You have many options within Project Navigator for working on your project. You can </a>open any of the Xilinx software tools such as the Constraints Editor, report viewers, etc. To implement your design, you can simply instruct Project Navigator to run your design all the way from synthesis to bitstream. In the <span class="Bold">Sources</span> window, select the top- level HDL module in your design. In our example the top-level HDL module is named <span class="Filename">my_project_cw - structural</span>. The <span class="Bold">Processes</span> window shows the processes that can be run on the top-level HDL module.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="281859"><img class="Default" src="images/HW_Design.06.11.6.jpg" width="216" height="395" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="281606">In the </a><span class="Bold">Processes</span> window, if you right-click on Generate Programming File and select Run, you are instructing Project Navigator to run through whatever processes are necessary to produce a programming file (FPGA bitstream) from the selected HDL source. In the messages console window, you see that Project Navigator is synthesizing, translating, mapping, routing, and generating a bitstream for your design.</div>
+      <div class="Body"><a name="281607">Now that you have generated a bitstream for your design, you have access to all the files </a>that were produced on the way to bitstream creation.</div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

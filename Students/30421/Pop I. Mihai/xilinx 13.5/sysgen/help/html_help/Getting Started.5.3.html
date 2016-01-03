@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Lesson 2 - Fixed Point and Bit Operations</title>
+    <link rel="StyleSheet" href="css/Getting%20Started.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Getting%20Started.5.1.html#275076">Getting Started</a> : Lesson 2 - Fixed Point and Bit Operations</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="275076">Lesson 2 - Fixed Point and Bit Operations</a></div>
+      <div class="Heading2"><a name="275077">Fixed-Point Numeric Precision</a></div>
+      <div class="BodyWide"><a name="275355">System Generator supports three data types, </a><span class="Bold">Unsigned</span> for positive only DSP operations, <span class="Bold">Signed</span> which is two’s complement used for DSP operations that involve negative numbers and <span class="Bold">Boolean</span> for 1-bit control signals. Each block will typically have quantization parameters. The initial quantization is defined by the Gateway In blocks.</div>
+      <div class="BodyWide"><a name="275256">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="275255"><img class="Default" src="images/Getting%20Started.5.3.1.jpg" width="656" height="456" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="275083">System Generator Fixed-Point Quantization</a></div>
+      <div class="BodyWide"><a name="275587">Xilinx fixed-point data types are defined by specifying the total number of bits then specifying the location of the </a>binary point. The difference, which represents the number of bits to the left of the binary point, are the integer bits for ufixed numbers and the integer bits plus sign bit for signed numbers. Xilinx FPGAs do not require that fixed-point numbers fall in pre-defined 8 bit boundaries as is the case with DSP processors. The logic can grow bit-by-bit to accommodate the required fixed-point precision. </div>
+      <div class="BodyWide"><a name="275584">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="275596"><img class="Default" src="images/Getting%20Started.5.3.2.jpg" width="664" height="470" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="275084">Overflow and Round Modes</a></div>
+      <div class="BodyWide"><a name="275611">System Generator supports the overflow modes </a><span class="Bold">Wrap</span>, <span class="Bold">Saturate</span> and <span class="Bold">Flag as error</span>. <span class="Bold">Wrap</span> is the default because it has the least cost in hardware. <span class="Bold">Saturate</span> requires System Generator to insert logic to perform that operation and therefore should only be used when necessary for the application</div>
+      <div class="BodyWide"><a name="275613">System Generator supports </a><span class="Bold">Truncate</span> and <span class="Bold">Round</span> of the LSB during the quantization process. Similar to the <span class="Bold">Wrap</span> mode for overflow mode, <span class="Bold">Truncate</span> has minimal hardware cost and is the default. Specifying the <span class="Bold">Round</span> mode requires System Generator to insert extra logic and should be used when only necessary for the application.</div>
+      <div class="BodyWide"><a name="275604">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="275624"><img class="Default" src="images/Getting%20Started.5.3.3.jpg" width="670" height="508" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="275085">Bit-Level Operations</a></div>
+      <div class="BodyWide"><a name="275727">In a real DSP hardware system, not all operations can be expressed mathematically. Often a signal must be accessed </a>by its individual bits. System Generator supports a set of bit-level operations that allow the reinterpret, combining, conversion and extraction of the individual bits of a signal. This can be used to pad, unpad and slice off the bits of a signal with a high degree of control. These blocks do not use any hardware resources</div>
+      <div class="BodyWide"><a name="275639">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="275645"><img class="Default" src="images/Getting%20Started.5.3.4.jpg" width="661" height="431" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="275086">The Reinterpret Block</a></div>
+      <div class="BodyWide"><a name="275734">The Reinterpret block forces the bits of a signal to a new type without regard for the numerical value or location of </a>the decimal point. This block does not change the number of bits of a signal but simply reinterprets the data type.   For example if the number 4 is represented as an unsigned [4 1] it is 1000. If this number is reinterpreted to be unsigned [4 0], the 1000 is now 8.</div>
+      <div class="BodyWide"><a name="275658">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="275657"><img class="Default" src="images/Getting%20Started.5.3.5.jpg" width="658" height="455" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="275087">The Convert Block</a></div>
+      <div class="BodyWide"><a name="275743">The Convert block changes the quantization of a number but not the value. This block can alter the number of bits </a>used to represent a number. It can be used to convert a signed type to an unsigned type and visa versa. Often the Convert block is used to truncate the output fractional bits after a multiplication operation.</div>
+      <div class="BodyWide"><a name="275673">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="275672"><img class="Default" src="images/Getting%20Started.5.3.6.jpg" width="663" height="447" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="275088">The Concat Block</a></div>
+      <div class="BodyWide"><a name="275750">The Concat block concatenates two inputs into a single output at the bit level. This block has two input ports that </a>are labeled <span class="Filename">hi</span> and <span class="Filename">lo</span>. The <span class="Filename">hi</span> port occupies the MSB’s and the <span class="Filename">lo</span> input occupies the LSB’s of the output signal. This block is useful for zero padding the MSBs or LSBs of a signal.</div>
+      <div class="BodyWide"><a name="275688">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="275687"><img class="Default" src="images/Getting%20Started.5.3.7.jpg" width="658" height="461" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="275089">Slice Block</a></div>
+      <div class="BodyWide"><a name="275757">The Slice block is used to access individual bits of a quantized number. This block provides several mechanisms by </a>which the sequence of bits can be specified. If the input type is known at the time of parameterization, the various mechanisms do not offer any gain in functionality. If, however, a Slice block is used in a design where the input data width or binary point position are subject to change, the variety of mechanisms becomes useful. For example, the block can be configured to always extract only the top bit of the input, or only the integer bits, or only the first three fractional bits. </div>
+      <div class="BodyWide"><a name="275703">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="275702"><img class="Default" src="images/Getting%20Started.5.3.8.jpg" width="656" height="454" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="275090">The BitBasher Block</a></div>
+      <div class="BodyWide"><a name="275768">The BitBasher block provides a textual method, based on Verilog syntax, for working with the signals at the bit </a>level. This block supports concatenation and slicing if the input signal to create an output. It also allows for augmentation with constants. The BitBasher block supports up to 4 outputs that are inferred by the expressions</div>
+      <div class="BodyWide"><a name="275721">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="275720"><img class="Default" src="images/Getting%20Started.5.3.9.jpg" width="664" height="463" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="275713">Lesson 2 Summary</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="275426">Quantization and overflow options are available when the output of a block is user </a>defined</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="275427">Quantization occurs when the number of fractional bits is insufficient to represent the </a>fractional portion of a value</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="275428">Overflow occurs when a value lies outside the representable range</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="275429">Bit picking blocks allow combining of multiple buses into a single bus, force a </a>conversion of data type without changing the number of bits, extract bits, and convert the number into different format</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="275430">The BitBasher block allows bit manipulation and augmentation through textual </a>specification based in Verilog</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="275431">Lab Exercise: Signal Routing</a></div>
+      <div class="Body"><a name="275793">In this lab you will design and verify padding and unpadding logic using the System </a>Generator signal routing blocks</div>
+      <div class="Body"><a name="275433">The lab instructions are located in the System Generator software tree at the following </a>pathname:</div>
+      <div class="Body" style="color: #000000; font-size: 9.0pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 5.0pt; margin-top: 5.0pt; text-transform: none; vertical-align: baseline;"><span class="Filename"><a name="286408">&lt;ISE_Design_Suite_tree&gt;/sysgen/examples/getting_started_training/lab3/lab</a></span><span class="Filename">3.pdf</span></div>
+      <div class="Body"><a name="291276">&nbsp;</a></div><a href="javascript:void();" onClick="WWHFrame.WWHBrowser.fMLProtocol(&quot;cd(xilinx.environment.getpath(\'sysgen\'));cd examples/getting_started_training/lab3;open ('lab3.pdf')&quot;)">(Open Lab Instructions)</a><script type="text/javascript" language="JavaScript1.2"><!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // --></script></blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

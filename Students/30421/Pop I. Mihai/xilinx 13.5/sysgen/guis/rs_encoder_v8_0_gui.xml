@@ -1,0 +1,125 @@
+<sysgenblock simulinkname="Reed-Solomon Encoder 8.0 " block_type="rs_encoder_v8_0">
+   <icon width="215" height="221" wmark_color="white" bg_color="green">
+   </icon>
+   <dll name="sysgen" entry_point="coregenimport_config">
+   </dll>
+   <handlers enablement="xlipmagiccallback_pass_evaluate_params" action="xlipmagicaction">
+   </handlers>
+   <libraries>
+        <library name="xbsIndex"/>
+        <library name="xbsComm"/>
+        <library name="xbsAXI4"/>
+
+    
+   </libraries>
+   <blockgui label="Xilinx Reed-Solomon Encoder 8.0 ">
+      <tabpane>
+         <tab name="page_0" label="Attributes">
+            <etch label="Code Block Specification">
+               <listbox name="code_specification" label="Code Specification" default="Custom" allow_advanced="false" evaluate="false" ctype="String">
+		<item value="Custom"/>
+<item value="DVB"/>
+<item value="ATSC"/>
+<item value="G_709"/>
+<item value="ETSI_BRAN"/>
+<item value="CCSDS"/>
+<item value="ITU_J_83_Annex_B"/>
+<item value="IESS_308_126"/>
+<item value="IESS_308_194"/>
+<item value="IESS_308_208"/>
+<item value="IESS_308_219"/>
+<item value="IESS_308_225"/>
+
+    
+               </listbox>
+               <checkbox name="variable_number_of_check_symbols" default="off" evaluate="true" ctype="Bool" label="Variable Number Of Check Symbols (r)">
+               </checkbox>
+               <checkbox name="variable_block_length" default="off" evaluate="true" ctype="Bool" label="Variable Block Length">
+               </checkbox>
+               <listbox name="symbol_width" label="Symbol Width" default="8" allow_advanced="false" evaluate="false" ctype="String">
+		<item value="3"/>
+<item value="4"/>
+<item value="5"/>
+<item value="6"/>
+<item value="7"/>
+<item value="8"/>
+<item value="9"/>
+<item value="10"/>
+<item value="11"/>
+<item value="12"/>
+
+    
+               </listbox>
+               <editbox name="field_polynomial" label="Field Polynomial" default="0" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+               <editbox name="scaling_factor" label="Scaling Factor (h)" default="1" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+               <editbox name="generator_start" label="Generator Start" default="0" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+               <editbox name="symbol_per_block" label="Symbols Per Block (n)" default="255" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+               <editbox name="data_symbols" label="Data Symbols (k)" default="239" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+            </etch>
+         </tab>
+         <tab name="page_1" label="Detailed Implementation">
+            <etch label="Implementation">
+               <etch label="Check Symbol Generator Optimization">
+                  <radiogroup label="" name="check_symbol_generator" default="Fixed_Architecture" evaluate="false" ctype="String">
+                     <item label="Fixed Architecture" value="Fixed_Architecture">
+                     </item>
+                     <item label="Area" value="Optimized_For_Area">
+                     </item>
+                     <item label="Flexibility" value="Optimized_For_Flexibility">
+                     </item>
+                  </radiogroup>
+               </etch>
+               <listbox name="memory_style" label="Memory Style" default="Automatic" allow_advanced="false" evaluate="false" ctype="String">
+		<item value="Automatic"/>
+<item value="Block"/>
+<item value="Distributed"/>
+
+    
+               </listbox>
+               <editbox name="number_of_channels" label="Number Of Channels" default="1" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+            </etch>
+            <etch label="Optional Pins">
+               <checkbox name="aclken" default="off" evaluate="true" ctype="Bool" label="ACLKEN">
+               </checkbox>
+               <checkbox name="output_has_tready" default="off" evaluate="true" ctype="Bool" label="Output TREADY">
+               </checkbox>
+               <checkbox name="aresetn" default="off" evaluate="true" ctype="Bool" label="ARESETn">
+               </checkbox>
+               <checkbox name="info" default="off" evaluate="true" ctype="Bool" label="Info bit">
+               </checkbox>
+               <checkbox name="marker_bits" default="off" evaluate="true" ctype="Bool" label="Marker Bits">
+               </checkbox>
+               <editbox name="number_of_marker_bits" label="Number Of Marker Bits" default="1" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+            </etch>
+            <etch label="Block Icon Display">
+              <checkbox name="trim_axipin_name" default="on" label="Display shortened port names" ctype="Int" evaluate="true" allow_advanced="false"/>
+            </etch>
+         </tab>
+      </tabpane>
+      <hiddenvar name="ip_name" default="Reed-Solomon Encoder" evaluate="false" ctype="String">
+      </hiddenvar>
+      <hiddenvar name="ip_version" default="8.0" evaluate="false" ctype="String">
+      </hiddenvar>
+      <hiddenvar name="dsptool_ready" default="false" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="ipcore_usecache" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="ipcore_useipmodelcache" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="wrapper_available" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="port_translation_map" default="{ 'aclken' => 'en', 'aresetn' => 'rst'}" evaluate="false" ctype="String">
+      </hiddenvar>
+      <hiddenvar name="structural_sim" default="false" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="ipcore_do_not_force_period" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+   </blockgui>
+</sysgenblock>

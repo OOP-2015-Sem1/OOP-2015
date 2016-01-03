@@ -1,0 +1,42 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Black Box" block_type="blackbox2">
+  <initialization file="xlblackbox2_init.m"/>
+  <icon width="57" height="56" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="black_box_config"/>
+  <callbacks CopyFcn="%s;xlbbCopyCallback;" merge_defaults="true"/>
+  <handlers enablement="blackbox2enablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsBasic"/>
+    <library name="xbsControl"/>
+    <library name="xbsFloatingPoint"/>
+  </libraries>
+  <blockgui label="Xilinx Black Box">
+    <editbox name="infoedit" default=" Incorporates black box HDL and simulation model into a System Generator design.&lt;br&gt;&lt;br&gt;You must supply a Black Box with certain information about the HDL component you would like to bring into System Generator. This information is provided through a Matlab function.&lt;br&gt;&lt;br&gt;When &quot;Simulation mode&quot; is set to &quot;Inactive&quot;, you will typically want to provide a separate simulation model by using a Simulation Multiplexer.&lt;br&gt;When &quot;Simulation mode&quot; is set to &quot;External co-simulator&quot;, you must include a ModelSim block in the design." read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <editbox name="init_code" default="" top_label="true" evaluate="false" label="Block configuration m-function" ctype="String"/>
+        <listbox name="sim_method" default="Inactive" evaluate="true" label="Simulation mode" ctype="Int">
+          <item value="Inactive"/>
+          <item value="ISE Simulator"/>
+          <item value="External co-simulator"/>
+        </listbox>
+        <editbox name="engine_block" default="" top_label="true" evaluate="false" label="HDL co-simulator to use  (specify helper block by name)" ctype="String"/>
+        <checkbox name="verbose" default="off" label="Verbose" ctype="Bool" allow_advanced="false"/>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <workspacevar name="validEngineBlock" ctype="Int"/>
+    <workspacevar name="mdlPath" ctype="String"/>
+    <workspacevar name="engineWorkDir" ctype="String"/>
+    <workspacevar name="engine_handle" ctype="Double"/>
+    <workspacevar name="srcPath" ctype="String"/>
+  </blockgui>
+</sysgenblock>

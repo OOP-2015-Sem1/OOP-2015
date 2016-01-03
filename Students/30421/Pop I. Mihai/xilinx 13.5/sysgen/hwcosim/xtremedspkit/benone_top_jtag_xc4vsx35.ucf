@@ -1,0 +1,177 @@
+# xc4vsx35 - clka and clkb
+net clka loc = af12;
+
+#Generated Clock Signals feeding to xc2v80
+net gen_clka  loc = b13;
+
+# gen_clka Feedback signals from xc2v80
+net clk1_fb   loc = b15;
+
+#
+#----------------------------------------------------------------------------
+#
+# Constraints following this point should only be used provided the
+# corresponding port is used.  The trailing comments are used by the hw cosim
+# wrapper builder to decide which constraints to keep.
+#
+
+################
+## ADC Signals
+################
+
+#ADC Channel 1
+net adc1_d(0) loc = C17;                       # adc1_d contingent
+net adc1_d(1) loc = D19;                       # adc1_d contingent
+net adc1_d(2) loc = D20;                       # adc1_d contingent
+net adc1_d(3) loc = C21;                       # adc1_d contingent
+net adc1_d(4) loc = B18;                       # adc1_d contingent
+net adc1_d(5) loc = D18;                       # adc1_d contingent
+net adc1_d(6) loc = C19;                       # adc1_d contingent
+net adc1_d(7) loc = C20;                       # adc1_d contingent
+net adc1_d(8) loc = B20;                       # adc1_d contingent
+net adc1_d(9) loc = B17;                       # adc1_d contingent
+net adc1_d(10) loc = A17;                       # adc1_d contingent
+net adc1_d(11) loc = A18;                       # adc1_d contingent
+net adc1_d(12) loc = A19;                       # adc1_d contingent
+net adc1_d(13) loc = A20;                       # adc1_d contingent
+net adc1_d(*) offset = in 3ns after clk1_fb;    # adc1_d contingent
+
+#ADC Channel 2
+net adc2_d(0) loc = A24;	# adc2_d contingent	
+net adc2_d(1) loc = D25;	# adc2_d contingent	
+net adc2_d(2) loc = C26;	# adc2_d contingent	
+net adc2_d(3) loc = B23;	# adc2_d contingent
+net adc2_d(4) loc = B24;	# adc2_d contingent
+net adc2_d(5) loc = C25;	# adc2_d contingent
+net adc2_d(6) loc = D22;	# adc2_d contingent
+net adc2_d(7) loc = C24;	# adc2_d contingent
+net adc2_d(8) loc = A21;	# adc2_d contingent
+net adc2_d(9) loc = D24;	# adc2_d contingent
+net adc2_d(10) loc = C23;	# adc2_d contingent
+net adc2_d(11) loc = D23;	# adc2_d contingent
+net adc2_d(12) loc = A22;	# adc2_d contingent
+net adc2_d(13) loc = C22;	# adc2_d contingent
+net adc2_d(*) offset = in 3ns after clk1_fb;   # adc2_d contingent
+
+################
+## DAC Signals
+################
+
+# DAC Channel 1
+net dac1_d(0) loc = A7;
+net dac1_d(1) loc = C7;
+net dac1_d(2) loc = B7;
+net dac1_d(3) loc = C5;
+net dac1_d(4) loc = D4;
+net dac1_d(5) loc = C4;
+net dac1_d(6) loc = A4;
+net dac1_d(7) loc = B3;
+net dac1_d(8) loc = B6;
+net dac1_d(9) loc = E6;
+net dac1_d(10) loc = D6;
+net dac1_d(11) loc = A6;
+net dac1_d(12) loc = A5;
+net dac1_d(13) loc = B4;
+net dac1_div0 loc = F4;
+net dac1_div1 loc = D5;
+net dac1_mod0 loc = A3;
+net dac1_mod1 loc = E4;
+net dac1_reset loc = E5;
+net dac1_d(*) offset = out 4ns before clk1_fb;   # dac1_d contingent
+
+# DAC Channel 2
+net dac2_d(0) loc = D10;
+net dac2_d(1) loc = F10;
+net dac2_d(2) loc = C10;
+net dac2_d(3) loc = E10;
+net dac2_d(4) loc = D9;
+net dac2_d(5) loc = F9;
+net dac2_d(6) loc = E9;
+net dac2_d(7) loc = A9;
+net dac2_d(8) loc = D8;
+net dac2_d(9) loc = C8;
+net dac2_d(10) loc = E7;
+net dac2_d(11) loc = D7;
+net dac2_d(12) loc = B9;
+net dac2_d(13) loc = F7;
+net dac2_div0 loc = C12;
+net dac2_div1 loc = C13;
+net dac2_mod0 loc = A8;
+net dac2_mod1 loc = F8;
+net dac2_reset loc = A10;
+net dac2_d(*) offset = out 4ns before clk1_fb;   # dac2_d contingent
+
+# LEDs
+net led1_green loc = E26;                       
+net led2_green loc = D3;                      
+net led1_red loc = D26;                         
+net led2_red loc = F3;
+
+# ZBT RAMs
+
+# ZBT SRAM BANK A
+net zbt_clk loc = AB10;                          
+net zbt_oe loc = AA11;                           
+net zbt_ce0 loc = AB14;                          
+net zbt_ce1 loc = AC14;                          
+net zbt_adv_ld loc = AB13;                       
+net zbt_rd_wr loc = AD11;
+net zbt_rd_wr fast;
+net zbt_cen loc = AA14;                          
+
+#ZBT Address signals
+NET "zbt_addr(0)" LOC = AD2;
+NET "zbt_addr(1)" LOC = Y3;
+NET "zbt_addr(2)" LOC = AD13;
+NET "zbt_addr(3)" LOC = Y2;
+NET "zbt_addr(4)" LOC = AA13;
+NET "zbt_addr(5)" LOC = AD12;
+NET "zbt_addr(6)" LOC = AF3;
+NET "zbt_addr(7)" LOC = AA12;
+NET "zbt_addr(8)" LOC = AB4;
+NET "zbt_addr(9)" LOC = AF4;
+NET "zbt_addr(10)" LOC = AD3;
+NET "zbt_addr(11)" LOC = AE3;
+NET "zbt_addr(12)" LOC = AC4;
+NET "zbt_addr(13)" LOC = AB3;
+NET "zbt_addr(14)" LOC = AC3;
+NET "zbt_addr(15)" LOC = AD1;
+NET "zbt_addr(16)" LOC = AC2;
+NET "zbt_addr(17)" LOC = AE13;
+NET "zbt_addr(18)" LOC = AC12;
+#NET "zbt_addr(19)" LOC = AB2;
+net zbt_addr(*) fast;
+
+net zbt_data(0) loc = AC7;                      # zbt_data contingent	
+net zbt_data(1) loc = AC6;                      # zbt_data contingent	
+net zbt_data(2) loc = Y5;                       # zbt_data contingent	
+net zbt_data(3) loc = AE4;                      # zbt_data contingent	
+net zbt_data(4) loc = AB7;                      # zbt_data contingent	
+net zbt_data(5) loc = AB6;                      # zbt_data contingent	
+net zbt_data(6) loc = AF6;                      # zbt_data contingent	
+net zbt_data(7) loc = AD4;                      # zbt_data contingent	
+net zbt_data(8) loc = AE10;                     # zbt_data contingent	
+net zbt_data(9) loc = Y9;                       # zbt_data contingent	
+net zbt_data(10) loc = AE9;                     # zbt_data contingent	
+net zbt_data(11) loc = AC8;                     # zbt_data contingent	
+net zbt_data(12) loc = AF10;                    # zbt_data contingent	
+net zbt_data(13) loc = AC9;                     # zbt_data contingent	
+net zbt_data(14) loc = AA8;                     # zbt_data contingent	
+net zbt_data(15) loc = Y7;                      # zbt_data contingent	
+net zbt_data(16) loc = AB9;                     # zbt_data contingent	
+net zbt_data(17) loc = Y8;                      # zbt_data contingent	
+net zbt_data(18) loc = AF8;                     # zbt_data contingent	
+net zbt_data(19) loc = AA7;                     # zbt_data contingent	
+net zbt_data(20) loc = Y10;                     # zbt_data contingent	
+net zbt_data(21) loc = AA9;                     # zbt_data contingent	
+net zbt_data(22) loc = AF9;                     # zbt_data contingent	
+net zbt_data(23) loc = AD8;                     # zbt_data contingent	
+net zbt_data(24) loc = Y6;                      # zbt_data contingent	
+net zbt_data(25) loc = AE6;                     # zbt_data contingent	
+net zbt_data(26) loc = AB5;                     # zbt_data contingent	
+net zbt_data(27) loc = AD5;                     # zbt_data contingent	
+net zbt_data(28) loc = AF7;                     # zbt_data contingent	
+net zbt_data(29) loc = AD6;                     # zbt_data contingent	
+net zbt_data(30) loc = AF5;                     # zbt_data contingent	
+net zbt_data(31) loc = AC5;                     # zbt_data contingent	
+net zbt_data(*) fast;                           # zbt_data contingent

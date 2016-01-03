@@ -1,0 +1,20 @@
+<!--   *  Copyright (c) 2006, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Clock Enable Probe" block_type="ceprobe">
+  <initialization file="xlceprobe_init.m"/>
+  <icon width="45" height="28" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="CEProbe_config"/> 
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsBasic"/>
+  </libraries>
+  <blockgui label="Xilinx Clock Enable Probe">
+    <editbox name="infoedit" default="Clock enable extractor.  Produces a Boolean output that mirrors the hardware clock enable associated with the input sample rate.&lt;br&gt;&lt;br&gt;Hardware notes: in hardware this block costs nothing." read_only="true" evaluate="false" multi_line="true"/>
+    <checkbox name="inherit_constraints" default="on" evaluate="true" label="Use clock enable signal without Multi-Cycle path constraints" ctype="Int"/>
+    <workspacevar name="block_fullname" ctype="String"/>
+    <workspacevar name="enable_debug" ctype="Int"/>
+    <workspacevar name="enable_stdout" ctype="Int"/>
+    <workspacevar name="period" ctype="Double"/>
+  </blockgui>
+</sysgenblock>

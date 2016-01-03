@@ -1,0 +1,37 @@
+;  PicoBlaze(Tm) Microcontroller Example #1
+;
+
+CONSTANT INIT,  01	        ;set the constant INIT to contain the value 01
+
+ENABLE INTERRUPT
+start:	CALL initreg         ; load all the registers 
+start1: 
+	COMPARE s2, 01	     ; if s2 equals 01 set the zero flag to 1 (carry flag remains 0)
+	; ADD CODE HERE TO CALL THE ROUTINE output_s0 when s2 contains the value 01
+	JUMP start1
+
+; --------------------- End Main routine ---------------------
+	
+
+initreg:	       ; initialize the registers
+    LOAD s0, INIT   ; load 01 into register s0
+	LOAD s1, 00
+	LOAD s2, 01
+	RETURN
+
+output_s0:                     ;output all the register values
+	DISABLE INTERRUPT
+	; ADD CODE HERE TO OUTPUT REGISTER s0 to PORT_ID 01
+	
+	; ADD CODE HERE TO SET REGISTER s2 TO THE VALUE 00
+	ENABLE INTERRUPT
+	RETURN                  ; return to program location before last jump
+
+int_routine:
+	DISABLE INTERRUPT
+    ; ADD CODE HERE TO ADD 01 to register s0
+	LOAD s2, 01             ; load 01 into register s2 to indicate an interrupt occurred
+	RETURNI ENABLE          ; return from interrupt and enable interrupts
+
+	ADDRESS 3FF ; set interrupt vector
+	JUMP int_routine        ;jump to int_routing

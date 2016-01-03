@@ -1,0 +1,24 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Shared Memory Write" block_type="toshmem">
+  <initialization file="xltoshmem_init.m"/>
+  <icon width="80" height="52" wmark_color="yellow" bg_color="white" caption_format="&lt;&lt; %&lt;shmem_name&gt; &gt;&gt;" file="toshmem_icon.m"/>
+  <sfunction name="xltoshmem" parameters="shmem_name, shmem_type, skip_check"/>
+  <handlers enablement="toshmemenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsShared"/>
+  </libraries>
+  <blockgui label="Xilinx Shared Memory Write">
+    <editbox name="infoedit" default="Writes scalar, vector, matrix, or frame data into a shared memory." read_only="true" evaluate="false" multi_line="true"/>
+    <editbox name="shmem_name" default="'Bar'" evaluate="true" label="Shared memory name"/>
+    <radiogroup name="shmem_type" default="FIFO" evaluate="true" label="Type">
+      <item value="FIFO" label="FIFO"/>
+      <item value="Lockable memory" label="Lockable memory"/>
+    </radiogroup>
+    <hiddenvar name="skip_check" default="0" evaluate="true"/>
+    <hiddenvar name="shmem_word" default="0" evaluate="true"/>
+    <hiddenvar name="shmem_depth" default="0" evaluate="true"/>
+  </blockgui>
+</sysgenblock>

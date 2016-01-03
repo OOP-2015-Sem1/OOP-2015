@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Convolutional Encoder</title>
+    <link rel="StyleSheet" href="css/Xilinx_Reference_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Reference_Blockset.12.01.html#632260">Xilinx Reference Blockset</a> : Convolutional Encoder</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="632260">Convolutional Encoder</a></div>
+      <div class="Body"><a name="632264"><img class="Default" src="images/Xilinx_Reference_Blockset.12.11.1.jpg" width="58" height="64" style="display: block; float: none; left: 0.0; top: 0.0" alt="" />The Xilinx Convolutional Encoder Model block implements an encoder for </a>convolutional codes. Ordinarily used in tandem with a Viterbi decoder, this block performs forward error correction (FEC) in digital communication systems.</div>
+      <div class="Body"><a name="632265">Values are encoded using a linear feed forward shift register which </a>computes modulo-two sums over a sliding window of input data, as shown in the figure below. The length of the shift register is specified by the constraint length. The convolution codes specify which bits in the data window contribute to the modulo-two sum. Resetting the block will set the shift register to zero. The encoder rate is the ratio of input to output bit length; thus, for example a rate 1/2 encoder outputs two bits for each input bit. Similarly, a rate 1/ 3 encoder outputs three bits for each input bit.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="632271"><img class="Default" src="images/Xilinx_Reference_Blockset.12.11.2.jpg" width="307" height="129" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="632272">Implementation</a></div>
+      <div class="Body"><a name="632273">The block is implemented using a form of parameterizable mux-based collapsing. In this </a>method constants drive logic blocks. Here the constant is the convolution code which is used to determine which register in the linear feed forward shift register is to be used in computing the output. All logic driven by a constant will be optimized away by the down stream logic synthesis tool.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="632279"><img class="Default" src="images/Xilinx_Reference_Blockset.12.11.3.jpg" width="387" height="239" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="632280">Block Interface</a></div>
+      <div class="Body"><a name="632281">The block currently has three input ports and three output ports. The </a><span class="Filename">din</span> port must have type UFix1_0. It accepts the values to be encoded. The <span class="Filename">vin</span> port indicates that the values presented on <span class="Filename">din</span> are valid. Only valid values are encoded. The <span class="Filename">rst</span> port will reset the convolution encoder when high. To add an enable port, you can open the subsystem and change the constant "Enable" to an input port. The output ports <span class="Filename">dout1</span> and <span class="Filename">dout2</span> output the encoded data. The port <span class="Filename">dout1</span> corresponds to the first code in the array, <span class="Filename">dout2</span> to the second, and so on. To add additional output ports, open the subsystem and follow the directions in the model. The output port <span class="Filename">vout</span> indicates the validity of output values.</div>
+      <div class="Heading2"><a name="632282">Block Parameters</a></div>
+      <div class="Body"><a name="632283">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model. </div>
+      <div class="Body"><a name="632284">Parameters specific to this reference block are as follows:</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632285">Constraint Length</a></span>: Equals n+1, where n is the length of the constraint register in the encoder </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632286">Convolutional code array (octal)</a></span>: Array of octal convolution codes. Output rate is derived from the array length. Between 2 and 7 (inclusive) codes may be entered </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

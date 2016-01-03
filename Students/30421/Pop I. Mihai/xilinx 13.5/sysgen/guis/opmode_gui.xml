@@ -1,0 +1,165 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Opmode" block_type="opmode">
+  <icon width="55" height="26" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="Opmode_config"/>
+  <handlers enablement="opmodeenablement" action="opmodeaction"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsDSP"/>
+  </libraries>
+  <blockgui label="Xilinx Instruction Block">
+    <tabpane>
+      <tab name="Opmode" label="Opmode">
+        <etch name="opmodeetch" label="Instruction">
+      <listbox name="device" default="DSP48E" evaluate="true" label="Device" ctype="Int">
+        <item value="DSP48E1"/>
+        <item value="DSP48E"/>
+        <item value="DSP48"/>
+        <item value="DSP48A"/>
+      </listbox>
+        </etch>
+	<etch name="dsp48etch" label="DSP48 Instruction">
+	  <editbox name="equ" default="P=C" read_only="true" evaluate="false" label="Operation" ctype="String"/>
+          <label name="infolbl" text="A2 and B2 are the available registers if the associated DSP-48-E1 block has pipeline length set as 0 or 1"/>
+          <listbox name="operation" default="C" evaluate="false" label="Operation select" ctype="String">
+            <item value="C + A*B"/>
+            <item value="PCIN + A*B"/>
+            <item value="P + A*B"/>
+            <item value="A * B"/>
+            <item value="C + A:B"/>
+            <item value="C - A:B"/>
+            <item value="C"/>
+            <item value="Custom"/>
+            <item value="C + D:A:B"/>
+            <item value="C - D:A:B"/>
+          </listbox>
+          <listbox name="inmode_0_3" default="D+A2" evaluate="false" label="Preadder output" ctype="String">
+            <item value="Zero"/>
+            <item value="A2"/>
+            <item value="A1"/>
+            <item value="D+A2"/>
+            <item value="D+A1"/>
+            <item value="D"/>
+            <item value="-A2"/>
+            <item value="-A1"/>
+            <item value="D-A2"/>
+            <item value="D-A1"/>
+          </listbox>
+          <radiogroup name="inmode_4" default="B2" evaluate="true" label="&lt;tt&gt;B&lt;/tt&gt; register configuration" ctype="Int">
+            <item value="B1"/>
+            <item value="B2"/>
+          </radiogroup>
+      <!--   The listbox is different for the DSP48A.  Must change the xlopmodeenalbment function if change this list
+      <listbox name="operation" default="C" evaluate="true" label="Operation select" ctype="Int">
+
+            <item value="C + A*B"/>
+            <item value="PCIN + A*B"/>
+            <item value="P + A*B"/>
+            <item value="A * B"/>
+            <item value="C + D:A:B"/>
+            <item value="C - D:A:B"/>
+            <item value="C"/>
+            <item value="Custom"/>
+    </listbox> -->
+        </etch>
+
+        <etch name="instructionetch" label="Custom Instruction">
+          <listbox name="logicinstr" default="X + Z" evaluate="true" label="Instruction" ctype="Int">
+            <item value="X + Z"/>
+            <item value="X + NOT(Z)"/>
+            <item value="NOT(X + Z)"/>
+            <item value="Z - X"/>
+            <item value="X XOR Z"/>
+            <item value="X XNOR Z"/>
+            <item value="X AND Z"/>
+            <item value="X OR Z"/>
+            <item value="X AND NOT(Z)"/>
+            <item value="X OR NOT(Z)"/>
+            <item value="X NAND Z"/>
+            <item value="X NOR Z"/>
+            <item value="NOT(X) OR Z"/>
+            <item value="NOT(X) AND Z"/>
+          </listbox>
+<!-- Note:  if you change these options, you will need to update the opmodeenablement function as well -->
+          <listbox name="z_mux" default="PCIN&gt;&gt;17" evaluate="false" label="Z mux" ctype="String">
+            <item value="0"/>
+            <item value="PCIN"/>
+            <item value="P"/>
+            <item value="C"/>
+            <item value="PCIN&gt;&gt;17"/>
+            <item value="P&gt;&gt;17"/>
+          </listbox>
+ <!-- Note: if you change these options you will need to update opmodeenablement function : These are the options for DSP48A
+      <listbox name="z_mux" default="PCIN&gt;&gt;17" evaluate="true" label="Z mux" ctype="Int">
+            <item value="0"/>
+            <item value="PCIN"/>
+            <item value="P"/>
+            <item value="C"/>
+          </listbox> -->
+          <radiogroup name="operand" default="+" evaluate="true" label="Operand" ctype="Int">
+            <item value="+"/>
+            <item value="-"/>
+          </radiogroup>
+          <listbox name="xy_mux" default="P" evaluate="true" label="XY muxes" ctype="Int">
+            <item value="0"/>
+            <item value="P"/>
+            <item value="A:B"/>
+            <item value="A*B"/>
+            <item value="C"/>
+            <item value="P+C"/>
+            <item value="A:B+C"/>
+          </listbox>
+<!--The x_mux is for DSP48A-->
+      <listbox name="x_mux" default="P" evaluate="true" label="X mux" ctype="Int">
+            <item value="0"/>
+            <item value="P"/>
+            <item value="A*B"/>
+            <item value="A*(D+B)"/>
+            <item value="A*(D-B)"/>
+            <item value="D:A:B"/>
+            <item value="D:A:(D+B)"/>
+            <item value="D:A:(D-B)"/>
+          </listbox>
+<!-- Note:  if you change these options, you will need to update the opmodeenablement function as well -->
+          <listbox name="carry" default="CIN" evaluate="false" label="Carry input" ctype="String">
+            <item value="0"/>
+            <item value="1"/>
+            <item value="CIN"/>
+            <item value="Round PCIN towards infinity"/>
+            <item value="Round PCIN towards zero"/>
+            <item value="Round P towards infinity"/>
+            <item value="Round P towards zero"/>
+            <item value="Larger add/sub/acc (parallel operation)"/>
+            <item value="Larger add/sub/acc (sequential operation)"/>
+            <item value="Round A*B"/>
+          </listbox>
+
+<!--These are the dsp48 carry in options
+          <listbox name="carry" default="CIN" evaluate="true" label="Carry input" ctype="Int">
+            <item value="0"/>
+            <item value="1"/>
+            <item value="CIN"/>
+            <item value="~SIGN(P or PCIN)"/>
+            <item value="~SIGN(A*B or A:B)"/>
+            <item value="~SIGND(A*B or A:B)"/>
+          </listbox> -->
+
+<!--These are the dsp48A carry in options
+          <listbox name="carry" default="CIN" evaluate="true" label="Carry input" ctype="Int">
+            <item value="0"/>
+            <item value="1"/>
+            <item value="CIN"/>
+          </listbox> -->
+
+        </etch>
+      </tab>
+      <tab name="advtab" label="Advanced">
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles" ctype="Int"/>
+        </etch>
+      </tab>
+    </tabpane>
+  </blockgui>
+</sysgenblock>

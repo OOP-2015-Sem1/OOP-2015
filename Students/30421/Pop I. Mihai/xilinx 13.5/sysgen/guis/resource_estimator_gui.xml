@@ -1,0 +1,37 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Resource Estimator" tag="resEstTag" block_type="resource_estimator">
+  <initialization file="xlresource_estimator_init.m"/>
+  <icon width="53" height="53" wmark_color="blue" bg_color="white" caption_format="Resource\nEstimator"/>
+  <sfunction name="xlpermissive"/>
+  <handlers enablement="resourceestimatorenablement" action="resourceestimatoraction"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsTools"/>
+  </libraries>
+  <blockgui label="Xilinx Resource Estimator">
+    <editbox name="Slices" default="0" evaluate="true" label="Slices"/>
+    <editbox name="FFs" default="0" evaluate="true" label="FFs"/>
+    <editbox name="BRAMs" default="0" evaluate="true" label="BRAMs"/>
+    <editbox name="LUTs" default="0" evaluate="true" label="LUTs"/>
+    <editbox name="IOBs" default="0" evaluate="true" label="IOBs"/>
+    <editbox name="EBMs" default="0" evaluate="true" label="Mults/DSP48s"/>
+    <editbox name="TBUFs" default="0" evaluate="true" label="TBUFs"/>
+    <checkbox name="xl_use_estimator_area" default="off" evaluate="true" label="Use area above"/>
+    <hlayout>
+      <listbox name="est_options" label="Estimate options">
+        <item value="Estimate"/>
+        <item value="Quick"/>
+        <item value="Post Map"/>
+        <item value="Read Mrp"/>
+      </listbox>
+      <button name="estimate_button" label="Estimate"/>
+    </hlayout>
+    <hiddenvar name="xl_estimator_area" evaluate="true"/>
+    <hiddenvar name="mrp_directory" evaluate="true"/>
+    <hiddenvar name="simulink_period" evaluate="true"/>
+
+     <hiddenvar name="ShowPortLabels"/>
+  </blockgui>
+</sysgenblock>

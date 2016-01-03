@@ -1,0 +1,85 @@
+<!--   *  Copyright (c) 2009, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="EDK Processor" block_type="edkprocessor" block_version="2.7">
+  <initialization file="xledkprocessor_init.m"/> 
+  <icon width="62" height="64" wmark_color="white" bg_color="blue"/>
+  <callbacks CopyFcn="xlProcBlockCopyCallback(gcbh);%s" OpenFcn="bh=gcbh;xlProcBlockCallbacks('populatesharedmemorylistbox',bh);xlOpenGui(bh, 'edkprocessor_gui.xml', @xlProcBlockEnablement, @xlProcBlockAction);" merge_defaults="true"/>
+  <handlers enablement="xlProcBlockEnablement" action="xlProcBlockAction"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsControl"/>
+  </libraries>
+  <subsystem_model file="edkprocessor_subsystem.mdl"/>
+  <blockgui label="Xilinx EDK Processor">
+    <tabpane>
+      <tab name="basic" label="Basic">
+        <etch label="Processor Options">
+          <listbox name="mode" default="EDK pcore generation" allow_advanced="false" top_label="false" evaluate="false" label="Configure Processor for">
+            <item value="EDK pcore generation"/>
+            <item value="HDL netlisting"/>
+          </listbox>
+          <glayout cols="2">
+	        <editbox name="xmp" read_only="true" evaluate="false" multi_line="false" label="XPS Project"/>
+            <browsebutton name="Import" label="Import..." associate="xmp" filter="*.xmp" caption="Import XPS Project"/>
+	      </glayout>
+        </etch>
+        <etch label="Memory Map">
+          <editbox name="MemVisToProc" read_only="true" top_label="false" evaluate="false" multi_line="true"/>
+          <hlayout>
+            <listbox name="AvailableMemories" allow_advanced="false" top_label="false" evaluate="false" label="Available Memories" dynamic="true"/>
+            <button name="AddToMemoryMap" label="Add"/>
+            <button name="SyncMemoryMap" label="Sync"/>
+          </hlayout>
+        </etch>
+      </tab>
+      <tab name="advanced" label="Advanced">
+        <etch label="Port Interface">
+	      <table name="portInterfaceTable"> 
+	        <editbox name="portdir" label="Direction" read_only="true"/>
+	        <editbox name="portname" label="Port name" read_only="true"/>
+	        <editbox name="shortname" label="Display name" read_only="false"/>
+	        <checkbox name="exposed" label="Exposed" />
+	      </table>
+        </etch>
+      </tab>
+      <tab name="implementation" label="Implementation">
+        <etch label="Memory Map Interface">
+          <radiogroup label="Bus Type" name="bus_type" default="AXI" evaluate="false">
+            <item label="AXI4" value="AXI"/>
+            <item label="PLB v4.6 (Processor Local Bus)" value="PLB"/>
+          </radiogroup>
+          <glayout cols="2">
+            <editbox name="baseaddr" evaluate="false" multi_line="false" default="0x80000000" label="Base Address"/>
+	        <checkbox label="Lock" name="baseaddr_lock" default="off"/>
+          </glayout>
+	      <checkbox label="Dual Clocks" name="dual_clock" default="on"/>
+	      <checkbox label="Register Read-Back" name="reg_readback" default="off"/>
+        </etch>
+        <etch label="Constraints">
+          <glayout cols="2">
+            <editbox name="ucf_file" read_only="true" evaluate="false" multi_line="false" label="Constraint File"/>
+            <button name="ucf_edit" label="View"/>
+          </glayout>
+        </etch>
+	    <checkbox label="Inherit Device Type" name="inheritDeviceType" default="off"/>
+      </tab>
+      <tab name="software" label="Software">
+        <glayout cols="2">
+          <editbox name="elf_file" read_only="false" evaluate="false" multi_line="false" label="Initial Program"/>
+          <button name="elf_browse" label="Browse"/>
+        </glayout>
+	    <checkbox label="Enable Co-Debug with Xilinx SDK (Beta)" name="codebug" default="on"/>
+      </tab>
+    </tabpane>
+    <hiddenvar name="clock_name" default="plb" evaluate="false"/>
+    <hiddenvar name="internalPortList" default="{}" evaluate="false"/>
+    <hiddenvar name="resetPolarity" default="0" evaluate="false"/>
+    <hiddenvar name="memxtable" default="" evaluate="false"/>
+    <hiddenvar name="procinfo" default="{}" evaluate="false"/>
+    <hiddenvar name="memmapdirty" default="" evaluate="false"/>
+    <hiddenvar name="blockname" default="" evaluate="false"/>
+    <hiddenvar name="xpsintstyle" default="default" evaluate="false"/>
+  </blockgui>
+</sysgenblock>
+

@@ -1,0 +1,80 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Shared Memory" block_type="shmem">
+  <icon width="80" height="90" wmark_color="white" bg_color="blue" caption_format="&lt;&lt; %&lt;shared_memory_name&gt; &gt;&gt;"/>
+  <dll name="sysgen_blockset" entry_point="shmem_config"/>
+  <handlers enablement="shmemenablement" action="xlDatatypeAction"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsMemory"/>
+    <library name="xbsShared"/>
+    <library name="xbsFloatingPoint"/>
+  </libraries>
+  <blockgui label="Xilinx Shared Memory Random Access Memory">
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <editbox name="shared_memory_name" default="'Bar'" evaluate="true" label="Shared memory name" ctype="String"/>
+        <editbox name="depth" default="16" evaluate="true" label="Depth" ctype="Int"/>
+        <radiogroup name="ownership" default="Locally Owned and Initialized" evaluate="true" label="Ownership and initialization" ctype="Int">
+          <item value="Locally Owned and Initialized" label="Locally owned and initialized"/>
+          <item value="Owned and Initialized Elsewhere" label="Owned and initialized elsewhere"/>
+        </radiogroup>
+        <editbox name="initVector" default="sin(pi*(0:15)/16)" evaluate="true" label="Initial value vector" ctype="DoubleVector"/>
+        <checkbox name="en" default="off" evaluate="true" label="Provide enable port" ctype="Int"/>
+        <etch label="Access Options">
+            <radiogroup name="mutex" default="Unprotected" evaluate="true" label="Access protection" ctype="Int">
+              <item value="Lockable" label="Lockable"/>
+              <item value="Unprotected" label="Unprotected"/>
+            </radiogroup>
+            <radiogroup name="mode" default="Read and Write" evaluate="true" label="Access mode" ctype="Int">
+              <item value="Read and Write" label="Read and write"/>
+              <item value="Read Only" label="Read only"/>
+              <item value="Write Only" label="Write only"/>
+            </radiogroup>
+            <radiogroup name="write_mode" default="Read After Write" evaluate="true" label="Write mode" ctype="Int">
+              <item value="Read After Write" label="Read after write"/>
+              <item value="Read Before Write" label="Read before write"/>
+              <item value="No Read On Write" label="No read on write"/>
+            </radiogroup>
+            <editbox name="time_out" default="0" evaluate="true" label="Memory access timeout (sec)" ctype="Double"/>
+        </etch>
+        <editbox name="latency" default="1" evaluate="true" label="Latency" ctype="Int"/>
+      </tab>
+      <tab name="typetab" label="Output">
+        <checkbox name="explicit_data_type" default="off" evaluate="true" label="Specify explicit output type" ctype="Int"/>
+        <etch name="typeetch" label="Output Type">
+          <radiogroup name="gui_display_data_type" default="Fixed-point" evaluate="true" label="" ctype="Int" allow_advanced="false">
+            <item value="Fixed-point" label="Fixed-point"/>
+            <item value="Floating-point" label="Floating-point"/>
+          </radiogroup>
+          <listbox name="arith_type" default="Signed  (2's comp)" evaluate="true" label="Arithmetic type" ctype="Int">
+            <item value="Signed  (2's comp)"/>
+            <item value="Unsigned"/>
+            <item value="Floating-point"/>
+          </listbox>
+          <etch name="fixed_type_p" label="Fixed-point Precision">
+            <glayout cols="2">
+              <editbox name="n_bits" default="16" evaluate="true" label="Number of bits" ctype="Int"/>
+              <editbox name="bin_pt" default="14" evaluate="true" label="Binary point" ctype="Int"/>
+            </glayout>
+          </etch>
+          <etch name="preci_type_p" label="Floating-point Precision">
+            <radiogroup name="preci_type" default="Single" evaluate="true" label="" ctype="Int">
+              <item value="Single" label="Single"/>
+            </radiogroup>
+          </etch>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <hiddenvar name="implementation" default="Block RAM" evaluate="true"/>
+    <hiddenvar name="use_rpm" default="off" evaluate="true"/>
+    <workspacevar name="dbl_ovrd" ctype="Int"/>
+  </blockgui>
+</sysgenblock>

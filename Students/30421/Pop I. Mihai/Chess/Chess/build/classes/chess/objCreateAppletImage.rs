@@ -1,0 +1,1 @@
+objCreateAppletImage

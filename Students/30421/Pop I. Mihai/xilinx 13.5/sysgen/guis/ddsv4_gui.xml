@@ -1,0 +1,84 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="DDS v4_0 " block_type="ddsv4">
+  <initialization file="xlddsv4_init.m"/>
+  <icon width="55" height="60" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen" entry_point="legacy_block_config:xldds"/>
+  <handlers enablement="ddsenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+  </libraries>
+  <blockgui label="Xilinx Direct Digital Synthesizer v4_0">
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <radiogroup name="mode" default="Sine" evaluate="true" label="Function" ctype="Int">
+          <item value="Sine" label="Sine"/>
+          <item value="Cosine" label="Cosine"/>
+          <item value="Sine and Cosine" label="Sine and cosine"/>
+        </radiogroup>
+        <checkbox name="neg_sin" default="off" evaluate="true" label="Negative sine" ctype="Int"/>
+        <checkbox name="neg_cos" default="off" evaluate="true" label="Negative cosine" ctype="Int"/>
+        <editbox name="n_bits" default="32" evaluate="true" label="Output width" ctype="Int"/>
+        <etch label="Phase Increment">
+          <radiogroup name="phase_increment_type" default="Constant" evaluate="true" label="Type" ctype="Int">
+            <item value="Constant" label="Constant"/>
+            <item value="Register" label="Register"/>
+          </radiogroup>
+          <editbox name="phase_increment" default="1/10" evaluate="true" label="Normalized phase increment  (cycles per sample)"/>
+        </etch>
+        <etch label="Phase Offset">
+          <radiogroup name="phase_offset_type" default="None" evaluate="true" label="Type" ctype="Int">
+            <item value="Constant" label="Constant"/>
+            <item value="Register" label="Register"/>
+            <item value="None" label="None"/>
+          </radiogroup>
+          <editbox name="phase_offset" default="1/4" evaluate="true" label="Normalized phase offset  (cycles per sample)" ctype="Double"/>
+        </etch>
+        <etch label="Optional Ports">
+          <checkbox name="rst" default="off" evaluate="true" label="Provide synchronous reset port"/>
+          <checkbox name="en" default="on" evaluate="true" label="Provide enable port"/>
+        </etch>
+      </tab>
+      <tab name="advancedtab" label="Advanced">
+        <editbox name="lut_addr_bits" default="10" evaluate="true" label="Lookup table input width" ctype="Int"/>
+        <radiogroup name="acc_latency" default="One Cycle" evaluate="true" label="Accumulator latency" ctype="Int">
+          <item value="Zero Cycle" label="Zero cycle"/>
+          <item value="One Cycle" label="One cycle"/>
+        </radiogroup>
+        <editbox name="acc_n_bits" default="32" evaluate="true" label="Accumulator width" ctype="Int"/>
+        <checkbox name="phase_dithering" default="off" evaluate="true" label="Use phase dithering"/>
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+        </etch>
+        <etch name="periodetch" label="Explicit Sample Period">
+          <checkbox name="explicit_period" default="off" label="Specify explicit sample period"/>
+          <editbox name="period" default="1" top_label="true" label="" ctype="Double"/>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <etch label="Core Parameters">
+          <radiogroup name="mem_type" default="Distributed Memory" evaluate="true" label="Memory type">
+            <item value="Distributed Memory" label="Distributed memory"/>
+            <item value="Block RAM" label="Block RAM"/>
+          </radiogroup>
+          <checkbox name="pipeline" default="off" evaluate="true" label="Pipeline for maximum performance"/>
+          <checkbox name="use_rpm" default="off" evaluate="true" label="Use core placement information" ctype="Int"/>
+        </etch>
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <workspacevar name="phase_angle_width" ctype="Int"/>
+    <workspacevar name="accwidth" ctype="Int"/>
+    <workspacevar name="pd" ctype="Int"/>
+    <workspacevar name="memtype" ctype="Int"/>
+    <workspacevar name="pitype" ctype="Int"/>
+    <workspacevar name="potype" ctype="Int"/>
+    <workspacevar name="phase_inc" ctype="Double"/>
+    <workspacevar name="pipelined" ctype="Int"/>
+    <workspacevar name="bin_pt" ctype="Int"/>
+  </blockgui>
+</sysgenblock>

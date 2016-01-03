@@ -1,0 +1,55 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="FFT v1_0 " block_type="fft">
+  <initialization file="xlfft_init.m"/>
+  <icon width="60" height="88" wmark_color="white" bg_color="blue"/>
+  <dll name="Sysgen" entry_point="legacy_block_config:xlfft"/>
+  <handlers enablement="xlmagicenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+  </libraries>
+  <blockgui label="Xilinx Fast Fourier Transform v1_0">
+    <editbox name="infoedit" default="Radix-4 Cooley-Tukey fast Fourier transform (FFT).  Supports 16, 64, 256, and 1024 point transforms on 16-bit data.&lt;br&gt;&lt;br&gt;Devices Supported: Virtex" read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <radiogroup name="n" default="64" evaluate="false" label="Number of sample points (N)">
+          <item value="16" label="16"/>
+          <item value="64" label="64"/>
+          <item value="256" label="256"/>
+          <item value="1024" label="1024"/>
+        </radiogroup>
+        <radiogroup name="mem" default="Triple" evaluate="true" label="Memory usage">
+          <item value="Single" label="Single"/>
+          <item value="Double" label="Double"/>
+          <item value="Triple" label="Triple"/>
+        </radiogroup>
+        <radiogroup name="scale_mode" default="1/N" evaluate="true" label="Scale output by" ctype="Int">
+          <item value="1/N" label="1/N"/>
+          <item value="1/(2N)" label="1/(2N)"/>
+        </radiogroup>
+        <checkbox name="oflw_inv" default="on" evaluate="true" label="Invalidate transform on overflow" ctype="Int"/>
+        <etch label="Optional Ports">
+          <checkbox name="rst" default="off" evaluate="true" label="Provide synchronous reset port"/>
+        </etch>
+      </tab>
+      <tab name="advtab" label="Advanced">
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+        </etch>
+        <etch name="periodetch" label="Explicit Sample Period">
+          <checkbox name="explicit_period" default="off" label="Specify explicit sample period"/>
+          <editbox name="period" default="1" top_label="true" label="" ctype="Double"/>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <workspacevar name="npts" ctype="Int"/>
+    <workspacevar name="memory_usage" ctype="Int"/>
+  </blockgui>
+</sysgenblock>

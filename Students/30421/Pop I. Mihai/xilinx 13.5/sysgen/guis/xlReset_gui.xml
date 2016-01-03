@@ -1,0 +1,18 @@
+<!--   *  Copyright (c) 2006, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Reset Generator" block_type="resetgenerator" block_version="1.0">
+  <initialization file="xlReset_init.m"/>
+  <icon width="55" height="49" wmark_color="white" bg_color="blue"/>
+  <callbacks CopyFcn="tmp_gcbh = gcbh;set_param(tmp_gcbh,'linkstatus','none');%s" merge_defaults="true"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsBasic"/>
+  </libraries>
+  <subsystem_model file="xlReset_subsystem.mdl" label_ports_on_icon="false"/>
+  <blockgui label="Xilinx Reset Generator">
+    <editbox name="infoedit" default="Captures the user's reset signal that is running at the system sample rate, and produces a downsampled reset signal running at the rates specified on the block.  The downsampled reset signals are synchronized in the same way as they are during startup.  The RDY output signal indicates when the downsampled resets are no longer asserted after the input reset is detected." read_only="true" evaluate="false" multi_line="true"/>
+    <editbox name="rates" default="[2 5]" label="Specify design sample rates in MATLAB vector format, e.g. [2  4 16]" top_label="true"/>
+    <hiddenvar name="previous_rates" evaluate="false"/>
+  </blockgui>
+</sysgenblock>

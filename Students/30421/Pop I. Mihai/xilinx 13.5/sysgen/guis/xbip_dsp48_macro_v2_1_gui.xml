@@ -1,0 +1,240 @@
+<sysgenblock simulinkname="DSP48 Macro 2.1 " block_type="xbip_dsp48_macro_v2_1">
+   <icon width="95" height="142" wmark_color="white" bg_color="blue">
+   </icon>
+   <initialization file="xlxbip_dsp48_macro_v2_1_init.m"/>
+   <dll name="sysgen" entry_point="coregenimport_config">
+   </dll>
+   <handlers enablement="xlxbip_dsp48_macro_v2_1_enablement" action="xlxbip_dsp48_macro_v2_1_action"/>
+   <libraries>
+        <library name="xbsIndex"/>
+        <library name="xbsDSP"/>
+   </libraries>
+   <blockgui label="Xilinx DSP48 Macro 2.1 ">
+      <tabpane>
+         <tab name="Page1" label="Instructions">
+            <!-- <etch label="Available Instructions">
+              <editbox name="opmodes" default="here" read_only="true" evaluate="false" multi_line="true"/>
+            </etch> -->
+            <editbox name="infoedit" default="&lt;html&gt;Valid operands: CONCAT, P, C, PCIN, P>>17, PCIN>>17, CARRYIN, CARRYCASCIN, ACIN, A, BCIN,B&lt;br&gt;&lt;br&gt;Valid operators: +, -, *, ()&lt;br&gt;&lt;br&gt;Valid functions: RNDSIMPLE, RNDSYM&lt;br&gt;&lt;br&gt;Instructions are case insensitive and tolerate spaces.&lt;/html&gt;" read_only="true" evaluate="false" multi_line="true"/>
+            <editbox name="dsptype" default="" read_only="true" evaluate="false" multi_line="false"/>
+            <!-- <hlayout> -->
+            <glayout cols="2">
+                <etch label="Instructions">
+                    <!-- <editbox name="instruction1" label="0" default="A*B+C" evaluate="false" ctype="String" top_label="false">
+               </editbox>
+               <editbox name="instruction2" label="1" default="#" evaluate="false" ctype="String" top_label="false">
+               </editbox>
+               <editbox name="instruction3" label="2" default="#" evaluate="false" ctype="String" top_label="false">
+               </editbox>
+               <editbox name="instruction4" label="3" default="#" evaluate="false" ctype="String" top_label="false">
+               </editbox>
+               <editbox name="instruction5" label="4" default="#" evaluate="false" ctype="String" top_label="false">
+               </editbox>
+               <editbox name="instruction6" label="5" default="#" evaluate="false" ctype="String" top_label="false">
+               </editbox>
+               <editbox name="instruction7" label="6" default="#" evaluate="false" ctype="String" top_label="false">
+               </editbox>
+               <editbox name="instruction8" label="7" default="#" evaluate="false" ctype="String" top_label="false">
+               </editbox> -->
+                    <!-- <editbox name="instruction_list" label="8 - 64" default="#" evaluate="false" ctype="String" top_label="false">
+               </editbox> -->
+                    <!-- Comment in below for single line instruction box and comment out all of above -->
+		    <!-- <editbox name="instruction_list" default="A*B+C" top_label="true" evaluate="false" label="" multi_line="true" ctype="String" richtext="false" highlight_on_hover="true" textchanged_on_lostfocus="enqueue"/> -->
+                    <editbox name="instruction_list" default="A*B+C" top_label="true" evaluate="false" label="" multi_line="true" ctype="String" richtext="false" textchanged_on_lostfocus="enqueue"/>
+                </etch>
+                <etch label="Available Instructions">
+			<!-- <editbox name="AvailableInstructions" default="A*B+C" top_label="true" evaluate="false" label="" multi_line="true" ctype="String" richtext="false" read_only="true" highlight_on_hover="true"/> -->
+                    <editbox name="AvailableInstructions" default="A*B+C" top_label="true" evaluate="false" label="" multi_line="true" ctype="String" richtext="false" read_only="true"/>
+                    <checkbox name="show_filtered" default="off" label="Show Filtered Instructions" ctype="Bool" allow_advanced="false"/>
+                </etch>
+            <!-- </hlayout> -->
+            </glayout>
+        </tab>
+        <tab name="page_tab" label="Pipeline Options">
+        <listbox name="pipeline_options" default="Automatic" evaluate="false" label="Pipeline Options" ctype="String" allow_advanced="false">
+          <item value="Automatic"/>
+          <item value="By_Tier"/>
+          <item value="Expert"/>
+        </listbox>
+        <etch label="Custom Pipeline options">
+          <editbox name="dspimage" default="&lt;html&gt;&lt;img src=&quot;xbip_dsp48_macro_v2_1_regimag.png&quot;&gt;&lt;/html&gt;" read_only="true" evaluate="false" multi_line="true"/>
+          <glayout cols="6">
+          <!-- <hlayout>
+          </hlayout> -->
+          <etch>
+            <checkbox name="tier_1" default="off" label="Tier 1" ctype="Bool" allow_advanced="false"/>
+          </etch>
+          <etch>
+            <checkbox name="tier_2" default="off" label="Tier 2" ctype="Bool" allow_advanced="false"/>
+          </etch>
+          <etch>
+            <checkbox name="tier_3" default="off" label="Tier 3" ctype="Bool" allow_advanced="false"/>
+          </etch>
+          <etch>
+            <checkbox name="tier_4" default="off" label="Tier 4" ctype="Bool" allow_advanced="false"/>
+          </etch>
+          <etch>
+            <checkbox name="tier_5" default="off" label="Tier 5" ctype="Bool" allow_advanced="false"/>
+          </etch>
+          <etch>
+            <checkbox name="tier_6" default="off" label="Tier 6" ctype="Bool" allow_advanced="false"/>
+          </etch>
+
+          <!-- <editbox name="infoeditd" default="D" read_only="true" evaluate="false" multi_line="true"/> -->
+          <checkbox name="dreg_1" default="off" label="D" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="dreg_2" default="off" label="D" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="dreg_3" default="off" label="D" ctype="Bool" allow_advanced="false"/>
+          <hlayout>
+          </hlayout>
+          <hlayout>
+          </hlayout>
+          <hlayout>
+          </hlayout>
+
+          <!-- <editbox name="infoedita" default="A" read_only="true" evaluate="false" multi_line="true"/> -->
+          <checkbox name="areg_1" default="off" label="A" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="areg_2" default="off" label="A" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="areg_3" default="off" label="A" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="areg_4" default="off" label="A" ctype="Bool" allow_advanced="false"/>
+          <hlayout>
+          </hlayout>
+          <hlayout>
+          </hlayout>
+
+          <!-- <editbox name="infoeditb" default="B" read_only="true" evaluate="false" multi_line="true"/> -->
+          <checkbox name="breg_1" default="off" label="B" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="breg_2" default="off" label="B" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="breg_3" default="off" label="B" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="breg_4" default="off" label="B" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="mreg_5" default="off" label="M" ctype="Bool" allow_advanced="false"/>
+          <hlayout>
+          </hlayout>
+
+          <!-- <editbox name="infoeditconcat" default="CONCAT" read_only="true" evaluate="false" multi_line="true"/> -->
+          <hlayout>
+          </hlayout>
+          <hlayout>
+          </hlayout>
+          <checkbox name="concatreg_3" default="off" label="CONCAT" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="concatreg_4" default="off" label="CONCAT" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="concatreg_5" default="off" label="CONCAT" ctype="Bool" allow_advanced="false"/>
+          <hlayout>
+          </hlayout>
+
+          <!-- <editbox name="infoeditc" default="C" read_only="true" evaluate="false" multi_line="true"/> -->
+          <checkbox name="creg_1" default="off" label="C" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="creg_2" default="off" label="C" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="creg_3" default="off" label="C" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="creg_4" default="off" label="C" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="creg_5" default="off" label="C" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="preg_6" default="off" label="P" ctype="Bool" allow_advanced="false"/>
+
+          <!-- <editbox name="infoeditcin" default="CARRYIN" read_only="true" evaluate="false" multi_line="true"/> -->
+          <checkbox name="cinreg_1" default="off" label="CARRYIN" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="cinreg_2" default="off" label="CARRYIN" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="cinreg_3" default="off" label="CARRYIN" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="cinreg_4" default="off" label="CARRYIN" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="cinreg_5" default="off" label="CARRYIN" ctype="Bool" allow_advanced="false"/>
+          <hlayout>
+          </hlayout>
+
+          <!-- <editbox name="infoeditop" default="CONTROL" read_only="true" evaluate="false" multi_line="true"/> -->
+          <checkbox name="opreg_1" default="off" label="CONTROL" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="opreg_2" default="off" label="CONTROL" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="opreg_3" default="off" label="CONTROL" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="opreg_4" default="off" label="CONTROL" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="opreg_5" default="off" label="CONTROL" ctype="Bool" allow_advanced="false"/>
+          <hlayout>
+          </hlayout>
+
+          </glayout>
+        </etch>
+      </tab>
+         <tab name="page_2" label="Implementation">
+            <etch label="Output Port Properties">
+               <radiogroup name="output_properties" label="" default="Full_Precision" allow_advanced="false" evaluate="false" ctype="String">
+                  <item value="Full_Precision"/>
+                  <!-- <item value="Reduced_Precision"/> -->
+                  <item value="User_Defined"/>
+               </radiogroup>
+               <!-- <editbox name="p_full_width" label="Full Precision" default="48" evaluate="true" ctype="Int" top_label="false">
+               </editbox> -->
+               <editbox name="p_width" label="Width" default="48" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+               <editbox name="p_binarywidth" label="Binary Point" default="0" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+            </etch>
+            <etch label="Additional ports">
+              <glayout cols="3">
+
+               <checkbox name="has_acout" default="off" evaluate="true" ctype="Bool" label="Use ACOUT" allow_advanced="false">
+               </checkbox>
+               <checkbox name="has_bcout" default="off" evaluate="true" ctype="Bool" label="Use BCOUT" allow_advanced="false">
+               </checkbox>
+               <checkbox name="has_pcout" default="off" evaluate="true" ctype="Bool" label="Use PCOUT" allow_advanced="false">
+               </checkbox>
+
+               <checkbox name="has_carryout" default="off" evaluate="true" ctype="Bool" label="Use CARRYOUT" allow_advanced="false">
+               </checkbox>
+               <checkbox name="has_carrycascout" default="off" evaluate="true" ctype="Bool" label="Use CARRYCASCOUT" allow_advanced="false">
+               </checkbox>
+               <hlayout>
+               </hlayout>
+
+              </glayout>
+            </etch>
+            <etch label="Control ports">
+              <glayout cols="10">
+
+               <label name="ce" text="ce"/>
+               <checkbox name="has_ce" default="off" evaluate="true" ctype="Bool" label="Global" allow_advanced="false"/>
+               <checkbox name="has_d_ce" default="off" evaluate="true" ctype="Bool" label="D" allow_advanced="false"/>
+               <checkbox name="has_a_ce" default="off" evaluate="true" ctype="Bool" label="A" allow_advanced="false"/>
+               <checkbox name="has_b_ce" default="off" evaluate="true" ctype="Bool" label="B" allow_advanced="false"/>
+               <checkbox name="has_concat_ce" default="off" evaluate="true" ctype="Bool" label="CONCAT" allow_advanced="false"/>
+               <checkbox name="has_c_ce" default="off" evaluate="true" ctype="Bool" label="C" allow_advanced="false"/>
+               <checkbox name="has_m_ce" default="off" evaluate="true" ctype="Bool" label="M" allow_advanced="false"/>
+               <checkbox name="has_p_ce" default="off" evaluate="true" ctype="Bool" label="P" allow_advanced="false"/>
+               <checkbox name="has_sel_ce" default="off" evaluate="true" ctype="Bool" label="SEL/CARRYIN" allow_advanced="false"/>
+
+               <label name="rst" text="rst"/>
+               <checkbox name="has_sclr" default="off" evaluate="true" ctype="Bool" label="Global" allow_advanced="false"/>
+               <checkbox name="has_d_sclr" default="off" evaluate="true" ctype="Bool" label="D" allow_advanced="false"/>
+               <checkbox name="has_a_sclr" default="off" evaluate="true" ctype="Bool" label="A" allow_advanced="false"/>
+               <checkbox name="has_b_sclr" default="off" evaluate="true" ctype="Bool" label="B" allow_advanced="false"/>
+               <checkbox name="has_concat_sclr" default="off" evaluate="true" ctype="Bool" label="CONCAT" allow_advanced="false"/>
+               <checkbox name="has_c_sclr" default="off" evaluate="true" ctype="Bool" label="C" allow_advanced="false"/>
+               <checkbox name="has_m_sclr" default="off" evaluate="true" ctype="Bool" label="M" allow_advanced="false"/>
+               <checkbox name="has_p_sclr" default="off" evaluate="true" ctype="Bool" label="P" allow_advanced="false"/>
+               <checkbox name="has_sel_sclr" default="off" evaluate="true" ctype="Bool" label="SEL/CARRYIN" allow_advanced="false"/>
+
+              </glayout>
+            </etch>
+            <etch label="Implementation">
+               <checkbox name="use_dsp48" default="on" evaluate="true" ctype="Bool" label="Use XtremeDSP Slice">
+               </checkbox>
+            </etch>
+         </tab>
+      </tabpane>
+      <!-- Defaults -->
+      <!-- Comment in below when switching to a single multi-line instruction box -->
+      <hiddenvar name="gui_behaviour" default="Sysgen" evaluate="false" ctype="String"/>
+      <hiddenvar name="instruction1" default="#" evaluate="false" ctype="String"/>
+      <!-- Conguration Params -->
+      <hiddenvar name="ip_name" default="DSP48 Macro" evaluate="false" ctype="String"/>
+      <hiddenvar name="ip_version" default="2.1" evaluate="false" ctype="String"/>
+      <hiddenvar name="dsptool_ready" default="true" evaluate="true" ctype="Bool"/>
+      <hiddenvar name="ipcore_usecache" default="true" evaluate="true" ctype="Bool"/>
+      <hiddenvar name="ipcore_useipmodelcache" default="true" evaluate="true" ctype="Bool"/>
+      <hiddenvar name="wrapper_available" default="true" evaluate="true" ctype="Bool"/>
+      <hiddenvar name="port_translation_map" default="{ 'ce' => 'en', 'sclr' => 'rst'}" evaluate="false" ctype="String"/>
+      <!-- Core needs to know family, ipcode_fgpa_part is causing an error when I try to import the core -->
+      <hiddenvar name="ipcore_xco_need_fpga_part" default="true" evaluate="true" ctype="Bool" />
+      <hiddenvar name="ipcore_fpga_part" default="xlipgetpartsetting(gcb, {'virtex6', 'xc6vlx75t', '-3', 'ff784'})" evaluate="true" ctype="StringVector" />
+      <hiddenvar name="ipcore_latency_function" default="'has_combinational'" evaluate="true" ctype="String" />
+      <!-- Temp values -->
+      <hiddenvar name="structural_sim" default="false" evaluate="true" ctype="Bool"/>
+      <hiddenvar name="ipcore_verbose" default="false" evaluate="true" ctype="Bool"/>
+      <hiddenvar name="ipcore_port_config" default="{ 'carryin' => { 'arith' => 'ufix', 'binpt' => 0.00000000000, 'width' => 1.00000000000}, 'carrycascin' => { 'arith' => 'ufix', 'binpt' => 0.00000000000, 'width' => 1.00000000000}, 'carrycascout' => { 'arith' => 'ufix', 'binpt' => 0.00000000000, 'width' => 1.00000000000}, 'carryout' => { 'arith' => 'ufix', 'binpt' => 0.00000000000, 'width' => 1.00000000000}}" evaluate="false" ctype="String"/>
+   </blockgui>
+</sysgenblock>

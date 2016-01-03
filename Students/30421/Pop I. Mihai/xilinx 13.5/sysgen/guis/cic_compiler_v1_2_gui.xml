@@ -1,0 +1,84 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="CIC Compiler 1.2 " block_type="cic_compiler_v1_2">
+  <icon width="95" height="142" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen" entry_point="coregenimport_config"/>
+  <handlers enablement="xlipmagiccallback" action="xlipmagicaction"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsDSP"/>
+  </libraries>
+  <blockgui label="Xilinx CIC Compiler 1.2">
+    <editbox name="infoedit" default="Provides the ability to design and implement Cascaded Integrator-Comb (CIC) filters for a variety of Xilinx FPGA devices.&lt;br&gt;&lt;br&gt;Hardware  notes: Optional mapping to DSP48/E/A primitives." read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="Page_1_tab" label="Basic">
+        <etch label="Filter Specification">
+          <radiogroup name="filter_type" default="Interpolation" evaluate="false" label="Filter type" ctype="String" allow_advanced="false">
+            <item value="Interpolation"/>
+            <item value="Decimation"/>
+          </radiogroup>
+          <listbox name="number_of_stages" default="3" evaluate="false" label="Number of stages" ctype="String" allow_advanced="false">
+            <item value="3"/>
+            <item value="4"/>
+            <item value="5"/>
+            <item value="6"/>
+          </listbox>
+          <radiogroup name="differential_delay" default="1" evaluate="false" label="Differential delay" ctype="String" allow_advanced="false">
+            <item value="1"/>
+            <item value="2"/>
+          </radiogroup>
+          <listbox name="number_of_channels" default="1" evaluate="false" label="Number of channels" ctype="String" allow_advanced="false">
+            <item value="1"/>
+            <item value="2"/>
+            <item value="3"/>
+            <item value="4"/>
+            <item value="5"/>
+            <item value="6"/>
+            <item value="7"/>
+            <item value="8"/>
+            <item value="9"/>
+            <item value="10"/>
+            <item value="11"/>
+            <item value="12"/>
+            <item value="13"/>
+            <item value="14"/>
+            <item value="15"/>
+            <item value="16"/>
+          </listbox>
+        </etch>
+        <etch label="Precision">
+          <editbox name="input_data_width" default="18" top_label="true" evaluate="true" label="Input data width" ctype="Int"/>
+          <editbox name="output_data_width" default="18" top_label="true" evaluate="true" label="Output data width" ctype="Int"/>
+        </etch>
+        <etch label="Sample Rate Change">
+          <radiogroup name="sample_rate_changes" default="Fixed" evaluate="false" label="Sample rate changes" ctype="String" allow_advanced="false">
+            <item value="Fixed"/>
+            <item value="Programmable"/>
+          </radiogroup>
+          <editbox name="fixed_or_initial_rate" default="4" top_label="true" evaluate="true" label="Fixed or initial rate (ir)" ctype="Int"/>
+          <editbox name="minimum_rate" default="4" top_label="true" evaluate="true" label="Minimum rate (Range: 4..ir)" ctype="Int"/>
+          <editbox name="maximum_rate" default="4" top_label="true" evaluate="true" label="Maximum rate (Range: ir..8192)" ctype="Int"/>
+        </etch>
+        <etch label="Optional Ports">
+          <checkbox name="ce" default="off" label="CE" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="sclr" default="off" label="SCLR" ctype="Bool" allow_advanced="false"/>
+        </etch>
+      </tab>
+      <tab name="Implementation_tab" label="Implementation">
+        <etch label="Implementation Options">
+          <checkbox name="use_xtreme_dsp_slice" default="off" label="Use Xtreme DSP slice" ctype="Bool" allow_advanced="false"/>
+        </etch>
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation" ctype="Bool" allow_advanced="false"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" evaluate="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]" />
+        </etch>
+      </tab>
+    </tabpane>
+    <hiddenvar name="ip_name" default="CIC Compiler" evaluate="false" ctype="String"/>
+    <hiddenvar name="ip_version" default="1.2" evaluate="false" ctype="String"/>
+    <hiddenvar name="dsptool_ready" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="structural_sim" default="false" evaluate="true" ctype="Bool"/>
+  </blockgui>
+</sysgenblock>
+

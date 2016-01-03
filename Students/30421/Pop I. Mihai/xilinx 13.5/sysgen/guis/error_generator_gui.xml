@@ -1,0 +1,47 @@
+<sysgenblock simulinkname="Error Generator" block_type="error_generator">
+  <dll name="Sysgen" entry_point="ErrorGenerator_config"/>
+<!--   <sfunction name="xlpermissive"/> -->
+  <icon width="120" height="50" wmark_color="white" bg_color="orange"/>
+  <libraries>
+    <library name="xbsTest"/>
+  </libraries>
+  <blockgui label="Xilinx Error Generator Block">
+    <editbox name="infoedit" 
+             default="Generates error of specified type during specified phase.  
+                      If Pass Through Mode is enabled the block will expose input 
+                      and output ports. In this mode the block can be connected
+                      specifically for testing rate and type propagation
+                      in designs with feedback." 
+             read_only="true" 
+             evaluate="false" 
+             multi_line="true"/> 
+    <checkbox name="passthrough" default="off" label="Pass Through Mode" evaluate="true" ctype="Bool"/>
+    <listbox name="errorphase" default="None" evaluate="false" label="Phase" ctype="String">
+      <item value="None"/>
+      <item value="configureInterface (sizes only)"/>
+      <item value="configureInterface"/>
+      <item value="configureRateAndType"/>
+      <item value="configurePostRateAndType"/>
+      <item value="configureSimulation"/>
+      <item value="configureNetlistInterface"/>
+      <item value="configureNetlist"/>
+      <item value="initialize"/>
+      <item value="update_state"/>
+      <item value="update_outputs"/>
+      <item value="terminate"/>
+    </listbox>
+    <listbox name="errortype" default="addError" evaluate="false" label="Error Type" ctype="String">
+      <item value="addError"/>
+      <item value="duplicate addError"/>
+      <item value="multiple addError"/>
+      <item value="addErrorAndThrow"/>
+      <item value="throwConfigError"/>
+      <item value="addError then throwConfigError"/>
+      <item value="fatalError"/>            
+      <item value="Sysgen::Error"/>
+      <item value="std::exception"/>
+      <item value="std::bad_exception"/>
+      <item value="Unknown Exception"/>
+    </listbox>
+  </blockgui>
+</sysgenblock>

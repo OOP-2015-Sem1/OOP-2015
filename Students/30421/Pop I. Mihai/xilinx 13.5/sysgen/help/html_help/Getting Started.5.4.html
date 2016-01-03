@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Lesson 3 - System Control</title>
+    <link rel="StyleSheet" href="css/Getting%20Started.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Getting%20Started.5.1.html#273816">Getting Started</a> : Lesson 3 - System Control</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="273816">Lesson 3 - System Control</a></div>
+      <div class="Heading2"><a name="275801">Controlling a DSP System</a></div>
+      <div class="BodyWide"><a name="276066">When you develop a DSP system in hardware, some level of control is usually required. This may include state </a>dependent behavior or simply performing operations such as filter coefficient updating. System-level control may also be needed for controlling bursty data such as non-streaming FFTs.</div>
+      <div class="BodyWide"><a name="275948">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="275947"><img class="Default" src="images/Getting%20Started.5.4.1.jpg" width="669" height="450" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="275803">The MCode Block</a></div>
+      <div class="BodyWide"><a name="276073">The MCode block supports the use of MATLAB for implementing state dependent and branch conditional control </a>operations. This block is not suitable for MATLAB that describes an algorithmic operation such as a FIR filter or Matrix inverse. The MCode block provides a convenient and efficient method for implementing state machines and complex muxing conditions. This is the recommended way to implement a finite state machine in System Generator.</div>
+      <div class="BodyWide"><a name="275961">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="275960"><img class="Default" src="images/Getting%20Started.5.4.2.jpg" width="662" height="467" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="275804">The Xilinx “xl_state” Data Type</a></div>
+      <div class="BodyWide"><a name="276080">When implementing a state machine using the MCode block, a Xilinx-provided MATLAB function called “xl_state” </a>must be used to initialize a persistent variable. This function has two arguments, the first is the initial condition, the second is the quantization of the assigned variable. For example, if your state machine has 6 states, you need a quantization of 4-bits unsigned.</div>
+      <div class="BodyWide"><a name="275980">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="275979"><img class="Default" src="images/Getting%20Started.5.4.3.jpg" width="654" height="412" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="275805">State Machine Example</a></div>
+      <div class="BodyWide"><a name="276087">The figure below shows a simple 2-state FSM. This can be easily extended to more states. Notice that a variable </a>called “state” is declared to be persistent and is initialized to 2 bits, unsigned using the “xl_state” function. A switch-case statement is then used to decode the inputs, branch to the next state and assign the outputs. </div>
+      <div class="BodyWide"><a name="275996">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="275995"><img class="Default" src="images/Getting%20Started.5.4.4.jpg" width="658" height="469" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="275806">The Expression Block</a></div>
+      <div class="BodyWide"><a name="276095">The Expression block performs a bitwise not, and, or &amp; xor on two input signals. The inputs can have a word length </a>greater than 1. In cases where the two inputs have different word lengths, the binary points are matched up and then an element-by-element boolean operation is performed. This block provides a useful way to implement logical control in a DSP system</div>
+      <div class="BodyWide"><a name="276012">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="276011"><img class="Default" src="images/Getting%20Started.5.4.5.jpg" width="662" height="466" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="275807">Reset and Enable Ports</a></div>
+      <div class="BodyWide"><a name="276102">Most System Generator blocks that include memory or storage provide options to expose the reset and clock enable </a>ports. If un-selected, these ports are automatically connected to the final hardware's global reset and clock enable or DCM schemes. Exposing these ports on the System Generator block creates a condition where the block is reset or enabled when either the global signals or the local signals assert <span class="Filename">TRUE</span>. You should use these ports if greater control over these functions is required in the DSP system.</div>
+      <div class="BodyWide"><a name="276028">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="276027"><img class="Default" src="images/Getting%20Started.5.4.6.jpg" width="667" height="447" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="275808">Bursty Data</a></div>
+      <div class="BodyWide"><a name="276109">Several of the more complex DSP blocks offered in the Xilinx DSP blockset result in “bursty” data. For example, the </a>non-streaming FFT requires several clock cycles to process the input data prior to generating valid output data. In these cases, these blocks include data flow control ports that must be used in the DSP system. These ports provide basic push mode dataflow control. They consist of a <span class="Filename">vin</span> port which indicates that valid data is available at the inputs and <span class="Filename">vout</span> which indicates that valid data is available at the outputs. </div>
+      <div class="BodyWide"><a name="276044">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="276043"><img class="Default" src="images/Getting%20Started.5.4.7.jpg" width="667" height="422" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="275809">Lesson 3 Summary</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="276053">Use the MCode block for state machines and branch conditional logic</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="276054">Use the Expression block to implement logical control at the bit level</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="276055">Storage elements have the ability to include optional reset and clock enable pins that </a>can be connected in System Generator</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="276056">Blocks that operate on bursty data include data flow control pins called </a><span class="Filename">vin</span> and <span class="Filename">vout</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="273934">Lab Exercise: System Control</a></div>
+      <div class="Body"><a name="276418">In this lab you will be creating a simple state machine using the MCode block to detect a </a>sequence of binary values “1011”. The FSM needs to be able to detect multiple transmissions as well, i.e., “10111011”</div>
+      <div class="Body"><a name="291416">The lab data and instructions are located in the System Generator software tree at the </a>following pathname:</div>
+      <div class="Body" style="color: #000000; font-size: 9.0pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 5.0pt; margin-top: 5.0pt; text-transform: none; vertical-align: baseline;"><span class="Filename"><a name="291453">&lt;ISE_Design_Suite_tree&gt;/sysgen/examples/getting_started_training/lab4/</a></span></div>Lab Instructions<a href="javascript:void();" onClick="WWHFrame.WWHBrowser.fMLProtocol(&quot;cd(xilinx.environment.getpath(\'sysgen\'));cd examples/getting_started_training/lab4;open ('lab4.pdf')&quot;)">(Open Lab Instructions)</a>Lab Data<a href="javascript:void();" onClick="WWHFrame.WWHBrowser.fMLProtocol('cd(xilinx.environment.getpath(\'sysgen\'));cd examples/getting_started_training/lab4;open lab4.mdl')">(Open Lab Design)</a><script type="text/javascript" language="JavaScript1.2"><!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // --></script></blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

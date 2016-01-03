@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Lesson 5 - Using Memories</title>
+    <link rel="StyleSheet" href="css/Getting%20Started.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Getting%20Started.5.1.html#273850">Getting Started</a> : Lesson 5 - Using Memories</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="273850">Lesson 5 - Using Memories</a></div>
+      <div class="Heading2"><a name="276792">Block vs. Distributed RAM</a></div>
+      <div class="BodyWide"><a name="276942">Xilinx FPGAs offer two distinct memory options, Block RAM and Distributed RAM. Block RAM uses dedicated, on-</a>chip, hardware resources and represents the most area-efficient RAM implementation. Block RAMs offer high performance but due to their fixed location on the chip, may incur slightly larger routing delays. Distributed RAM uses the lookup tables in the FPGA slices to implement memory and in doing so will subtract from the slices available for logical operations. Because Distributed RAM can be located anywhere throughout the chip, routing delays can be minimized and slightly higher performance can be achieved. Distributed RAM is an excellent option for small FIFOs.</div>
+      <div class="BodyWide"><a name="276860">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="276859"><img class="Default" src="images/Getting%20Started.5.6.1.jpg" width="667" height="470" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="276794">Initializing RAMs and ROMs</a></div>
+      <div class="BodyWide"><a name="276949">The RAM and ROM blocks can be initialized to a 1xn vector that matches the depth of the RAM. MATLAB is used </a>to set the initial value vector. Any MATLAB statement can be used that results in a 1xn vector including the file reading commands such as <span class="Filename">imread</span>, <span class="Filename">auread</span>, <span class="Filename">wavread</span>, and <span class="Filename">load</span>.</div>
+      <div class="BodyWide"><a name="276875">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="276874"><img class="Default" src="images/Getting%20Started.5.6.2.jpg" width="668" height="399" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="276960">System Generator RAM Blocks</a></div>
+      <div class="BodyWide"><a name="276971">System Generator provides both a single- and dual-port RAM block. Depths up to 64K are supported. Both </a>Distributed RAM and Block RAM implementation options are available. System Generator calls the Xilinx memory compiler to create an efficient memory structure in hardware for the given parameters, bit widths and depths. You don’t need to be concerned with the hardware details of the specific Virtex® block or Distributed RAM structure. Both the single- and dual-port RAM blocks support initialization. The signal connected to the address port of a RAM must be unsigned with no fractional bits. </div>
+      <div class="BodyWide"><a name="276967">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="276966"><img class="Default" src="images/Getting%20Started.5.6.3.jpg" width="669" height="439" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="276990">System Generator ROM Blocks</a></div>
+      <div class="BodyWide"><a name="277001">The ROM block supports an implementation in either Block- or Distributed RAM and is initialized through a </a>MATLAB command. The signal connected to the address port must be unsigned with no fractional bits</div>
+      <div class="BodyWide"><a name="276997">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="276996"><img class="Default" src="images/Getting%20Started.5.6.4.jpg" width="669" height="414" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="277012">The Delay Block</a></div>
+      <div class="BodyWide"><a name="277023">The Delay block is used to synchronize dataflow through the FPGA. This block maps to a highly-efficient shift </a>register structure built from a slice lookup table called an SRL16 that is 85% smaller than using registers.</div>
+      <div class="BodyWide"><a name="277019">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="277018"><img class="Default" src="images/Getting%20Started.5.6.5.jpg" width="666" height="468" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="277034">The FIFO Block</a></div>
+      <div class="BodyWide"><a name="277045">The FIFO block supports both Block RAM and Distributed RAM implementations. Depths up to 64K are supported. </a>Three output flags are supported, <span class="Filename">empty,</span> <span class="Filename">full</span> and <span class="Filename">%full</span>. The <span class="Filename">%full</span> flag is set depending on a bit width specification. One bit will be zero until the FIFO is 50% full, then it will set to.5.  Two bits will be zero until 20% full, then .25, .5 and .75. </div>
+      <div class="BodyWide"><a name="277041">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="277040"><img class="Default" src="images/Getting%20Started.5.6.6.jpg" width="662" height="431" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="301782">Shared Memory Block</a></div>
+      <div class="BodyWide"><a name="301843">System Generator provides a simple abstraction for easily adding custom logic into a processor. The basic idea is to </a>allow memories in custom logic to be easily mapped into the processor's memory address space. System Generator enables this through the use of Shared-Memory blocks provided in the System Generator block set.</div>
+      <div class="BodyWide"><a name="301789">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="301788"><img class="Default" src="images/Getting%20Started.5.6.7.jpg" width="667" height="431" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="BodyWide"><a name="301780">&nbsp;</a></div>
+      <div class="Heading2"><a name="274067">Lab Exercise: Using Memories</a></div>
+      <div class="Body"><a name="277154">In this lab you will learn how to use a Xilinx ROM block to implement a LUT-based </a>operation such as an Arcsin using Block RAM or Distributed RAM. This provides an efficient implementation for trig and math functions with inputs that can be quantized to 10 bits or less.</div>
+      <div class="Body"><a name="286367">The lab instructions and lab design are located in the System Generator software tree at the </a>following pathname:</div>
+      <div class="Body" style="color: #000000; font-size: 9.0pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 5.0pt; margin-top: 5.0pt; text-transform: none; vertical-align: baseline;"><span class="Filename"><a name="291318">&lt;ISE_Design_Suite_tree&gt;/sysgen/examples/getting_started_training/lab6/</a></span></div>Lab Instructions<a href="javascript:void();" onClick="WWHFrame.WWHBrowser.fMLProtocol(&quot;cd(xilinx.environment.getpath(\'sysgen\'));cd examples/getting_started_training/lab6;open ('lab6.pdf')&quot;)">(Open Lab Instructions)</a>Lab Design<a href="javascript:void();" onClick="WWHFrame.WWHBrowser.fMLProtocol('cd(xilinx.environment.getpath(\'sysgen\'));cd examples/getting_started_training/lab6;open lab6.mdl')">(Open Lab Design)</a><script type="text/javascript" language="JavaScript1.2"><!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // --></script></blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

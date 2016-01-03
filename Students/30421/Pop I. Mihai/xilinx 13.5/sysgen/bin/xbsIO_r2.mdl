@@ -1,0 +1,654 @@
+Library {
+  Name			  "xbsIO_r2"
+  Version		  5.0
+  SaveDefaultBlockParams  on
+  LibraryLinkDisplay	  "none"
+  ShowLoopsOnError	  on
+  IgnoreBidirectionalLines off
+  CovSaveName		  "covdata"
+  CovMetricSettings	  "dw"
+  CovNameIncrementing	  off
+  CovHtmlReporting	  on
+  covSaveCumulativeToWorkspaceVar on
+  CovSaveSingleToWorkspaceVar on
+  CovCumulativeReport	  off
+  BlockNameDataTip	  off
+  BlockParametersDataTip  on
+  BlockDescriptionStringDataTip	on
+  ToolBar		  on
+  StatusBar		  on
+  BrowserShowLibraryLinks off
+  BrowserLookUnderMasks	  off
+  Created		  "Tue Aug 25 11:58:34 1998"
+  Creator		  "administrator"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "singhj"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Mon Feb 10 13:34:39 2003"
+  ModelVersionFormat	  "1.%<AutoIncrement:413>"
+  ConfigurationManager	  "none"
+  SimParamPage		  "Solver"
+  LinearizationMsg	  "none"
+  Profile		  off
+  ParamWorkspaceSource	  "MATLABWorkspace"
+  ExtModeMexFile	  "ext_comm"
+  ExtModeBatchMode	  off
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "normal"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  on
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  on
+  ExtModeAutoUpdateStatusClock on
+  SimulationMode	  "normal"
+  ConsistencyChecking	  "none"
+  ArrayBoundsChecking	  "none"
+  AlgebraicLoopMsg	  "warning"
+  BlockPriorityViolationMsg "warning"
+  MinStepSizeMsg	  "warning"
+  InheritedTsInSrcMsg	  "warning"
+  DiscreteInheritContinuousMsg "warning"
+  MultiTaskRateTransMsg	  "error"
+  SingleTaskRateTransMsg  "none"
+  CheckForMatrixSingularity "none"
+  IntegerOverflowMsg	  "warning"
+  Int32ToFloatConvMsg	  "warning"
+  ParameterDowncastMsg	  "error"
+  ParameterOverflowMsg	  "error"
+  ParameterPrecisionLossMsg "warning"
+  UnderSpecifiedDataTypeMsg "none"
+  UnnecessaryDatatypeConvMsg "none"
+  VectorMatrixConversionMsg "none"
+  InvalidFcnCallConnMsg	  "error"
+  SignalLabelMismatchMsg  "none"
+  UnconnectedInputMsg	  "warning"
+  UnconnectedOutputMsg	  "warning"
+  UnconnectedLineMsg	  "warning"
+  SfunCompatibilityCheckMsg "none"
+  ProdHWDeviceType	  "Microprocessor"
+  ProdHWWordLengths	  "8,16,32,32"
+  RTWMakeCommand	  "make_rtw"
+  RTWGenerateCodeOnly	  off
+  RTWRetainRTWFile	  off
+  TLCProfiler		  off
+  TLCDebug		  off
+  TLCCoverage		  off
+  TLCAssertion		  off
+  BlockDefaults {
+    Orientation		    "right"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+  }
+  BlockParameterDefaults {
+    Block {
+      BlockType		      Constant
+      Value		      "1"
+      VectorParams1D	      on
+      ShowAdditionalParam     off
+      OutDataTypeMode	      "Inherit from 'Constant value'"
+      OutDataType	      "sfix(16)"
+      ConRadixGroup	      "Use specified scaling"
+      OutScaling	      "2^0"
+    }
+    Block {
+      BlockType		      Display
+      Format		      "short"
+      Decimation	      "10"
+      Floating		      off
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      Inport
+      Port		      "1"
+      PortDimensions	      "-1"
+      SampleTime	      "-1"
+      ShowAdditionalParam     off
+      LatchInput	      off
+      DataType		      "auto"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      Interpolate	      on
+    }
+    Block {
+      BlockType		      Outport
+      Port		      "1"
+      OutputWhenDisabled      "held"
+      InitialOutput	      "[]"
+    }
+    Block {
+      BlockType		      RelationalOperator
+      Operator		      ">="
+      ShowAdditionalParam     off
+      InputSameDT	      on
+      LogicOutDataTypeMode    "Logical (see Advanced Sim. Parameters)"
+      LogicDataType	      "uint(8)"
+      ZeroCross		      on
+    }
+    Block {
+      BlockType		      "S-Function"
+      FunctionName	      "system"
+      PortCounts	      "[]"
+      SFunctionModules	      "''"
+    }
+    Block {
+      BlockType		      SubSystem
+      ShowPortLabels	      on
+      Permissions	      "ReadWrite"
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      SimViewingDevice	      off
+      DataTypeOverride	      "UseLocalSettings"
+      MinMaxOverflowLogging   "UseLocalSettings"
+    }
+    Block {
+      BlockType		      Switch
+      Criteria		      "u2 >= Threshold"
+      Threshold		      "0"
+      ShowAdditionalParam     off
+      InputSameDT	      on
+      OutDataTypeMode	      "Inherit via internal rule"
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	on
+      ZeroCross		      on
+    }
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  System {
+    Name		    "xbsIO_r2"
+    Location		    [77, 123, 581, 733]
+    Open		    on
+    ModelBrowserVisibility  off
+    ModelBrowserWidth	    212
+    ScreenColor		    "white"
+    PaperOrientation	    "landscape"
+    PaperPositionMode	    "auto"
+    PaperType		    "usletter"
+    PaperUnits		    "inches"
+    ZoomFactor		    "100"
+    ReportName		    "simulink-default.rpt"
+    Block {
+      BlockType		      "S-Function"
+      Name		      "Clear Quantization Error"
+      Ports		      [1, 1]
+      Position		      [300, 271, 330, 299]
+      ShowName		      off
+      FunctionName	      "xldeprecated"
+      Parameters	      "num_inports num_outports"
+      MaskType		      "Xilinx Clear Quantization Error Block"
+      MaskDescription	      "Clear the quantization error tracking mechanism"
+" on a trace. Inserting this block has no effect on the computation outside of"
+" error analysis sections. Clearing can be controlled through an optional enab"
+"le port.\n\nHardware notes: In hardware this block costs nothing."
+      MaskHelp		      "web(xldoclink('Clear Quantization Error'));"
+      MaskPromptString	      "Add Optional Clear Port"
+      MaskStyleString	      "checkbox"
+      MaskTunableValueString  "on"
+      MaskEnableString	      "on"
+      MaskVisibilityString    "on"
+      MaskToolTipString	      "on"
+      MaskVariables	      "opt_port=@1;"
+      MaskInitialization      "[designRoot, family, part, speed, package, simu"
+"linkPeriod, sysclkPeriod, dbl_ovrd, trimVbit] = xlSysgenSettings(gcb,0,2);\n["
+"bg,fg] = xlcmap('XBlock',1);\niPos = get_param(gcb,'Position');\niWidth=iPos("
+"3)-iPos(1); iHeight=iPos(4)-iPos(2);\niCx=iWidth/2;\niCy=iHeight/2;\nif (opt_"
+"port==0)\n  bg = [1 1 1];\n  shapeX = iCx* (1 + cos(0:pi/6:2*pi));\n  shapeY "
+"= iCy* (1 + sin(0:pi/6:2*pi));\n  borderX = [];\n  borderY = [];\n  bgX = [];"
+"\n  bgY = [];\n  pnum=1;\n  pstr='';\nelse\n  pnum=2;\n  pstr='*clrE';\n  sha"
+"peX = .8*iCx* (1.25 + cos(0:pi/6:2*pi));\n  shapeY = .5*iCy* (2.5 + sin(0:pi/"
+"6:2*pi));\n  borderX = [0 0 iWidth iWidth 0 0 iWidth];\n  borderY = [0 iHeigh"
+"t iHeight 0 0 0.75*iHeight 0.5*iHeight];\n  bgX=[0 iWidth iWidth 0];  bgY=[0 "
+"0 iHeight iHeight];\nend\n\n% one time added for param list\nprecision0 = 1;"
+"\nhas_clr_pin = opt_port;\ndblOvrd = dbl_ovrd;\n\n% just pass everything to s"
+"-function\nsfcn_mwsv__ = get_param(gcb, 'MaskWSVariables');\n\nnum_inports = "
+"1 + opt_port;\nnum_outports = 1;\n\n[bg,fg] = xlcmap('XBlock',1);\niPos = get"
+"_param(gcb,'Position');\niWidth=iPos(3)-iPos(1); iHeight=iPos(4)-iPos(2);\niC"
+"x=iWidth/2;\niCy=iHeight/2;\nif (opt_port==0)\n  bg = [1 1 1];\n  shapeX = iC"
+"x* (1 + cos(0:pi/6:2*pi));\n  shapeY = iCy* (1 + sin(0:pi/6:2*pi));\n  border"
+"X = [];\n  borderY = [];\n  bgX = [];\n  bgY = [];\n  pnum=1;\n  pstr='';\nel"
+"se\n  pnum=2;\n  pstr='*clrE';\n  shapeX = .8*iCx* (1.25 + cos(0:pi/6:2*pi));"
+"\n  shapeY = .5*iCy* (2.5 + sin(0:pi/6:2*pi));\n  borderX = [0 0 iWidth iWidt"
+"h 0 0 iWidth];\n  borderY = [0 iHeight iHeight 0 0 0.75*iHeight 0.5*iHeight];"
+"\n  bgX=[0 iWidth iWidth 0];  bgY=[0 0 iHeight iHeight];\nend\n"
+      MaskDisplay	      "patch(bgX,bgY,bg);\npatch(shapeX,shapeY, [.2 .5"
+" .3]);\nplot(shapeX,shapeY);\nplot(borderX, borderY);\nport_label('input',pnu"
+"m,pstr);"
+      MaskSelfModifiable      on
+      MaskIconFrame	      off
+      MaskIconOpaque	      off
+      MaskIconRotate	      "port"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "off"
+    }
+    Block {
+      BlockType		      "S-Function"
+      Name		      "Clock Probe"
+      Ports		      [1, 1]
+      Position		      [300, 452, 325, 478]
+      ShowName		      off
+      FontName		      "Arial"
+      FontSize		      8
+      FunctionName	      "xldeprecated"
+      Parameters	      "-1 -1"
+      MaskType		      "Xilinx Clock Probe"
+      MaskDescription	      "Clock probe.  Produces an output of type double"
+" that mirrors the hardware system clock.\n\nHardware notes:  This block is ig"
+"nored when hardware is generated."
+      MaskHelp		      "web(xldoclink('Clock Probe'));"
+      MaskInitialization      "[designRoot, family, part, speed, package, simu"
+"linkPeriod, sysclkPeriod, dbl_ovrd, trimVbit] = xlSysgenSettings(gcb,0,0);\n"
+"\n[bg,fg] = xlcmap('IO');\niPos = get_param(gcb,'Position');\niWidth=iPos(3)-"
+"iPos(1); iHeight=iPos(4)-iPos(2);\niCx=iWidth/2;\niCy=iHeight/2;\nshapeX = iC"
+"x* (1 + cos(0:pi/6:2*pi));\nshapeY = iCy* (1 + sin(0:pi/6:2*pi));\n\n% just p"
+"ass everything to s-function\nsfcn_mwsv__ = get_param(gcb, 'MaskWSVariables')"
+";\n"
+      MaskDisplay	      "patch(shapeX,shapeY, bg);\nplot(shapeX,shapeY);"
+"\ndisp('CLK');"
+      MaskIconFrame	      off
+      MaskIconOpaque	      off
+      MaskIconRotate	      "port"
+      MaskIconUnits	      "autoscale"
+    }
+    Block {
+      BlockType		      Display
+      Name		      "Display"
+      Ports		      [1]
+      Position		      [350, 363, 430, 387]
+      ShowName		      off
+      Decimation	      "1"
+      MaskHelp		      "web(xldoclink('Display'));"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+    }
+    Block {
+      BlockType		      "S-Function"
+      Name		      "Gateway In"
+      Ports		      [1, 1]
+      Position		      [285, 149, 340, 171]
+      FunctionName	      "xldeprecated"
+      Parameters	      "-1 -1"
+      MaskType		      "Xilinx Gateway In"
+      MaskDescription	      "Gateway in block.  Converts inputs of type doub"
+"le to  Xilinx fixed point type.\n\nHardware notes:  In hardware these blocks "
+"become top level input ports."
+      MaskHelp		      "web(xldoclink('Gateway In'));"
+      MaskPromptString	      "Output Data Type|Number of Bits|Binary Point|Qu"
+"antization|Overflow|Sample Period|IOB Timing Constraint|Specify IOB Location "
+"Constraints|IOB Pad Locations (specify as cell array {'MSB', ..., 'LSB'})|Do "
+"not Prepend Hierarchy to Port Name|Override with Double"
+      MaskStyleString	      "popup(Boolean|Unsigned|Signed  (2's comp)),edit"
+",edit,popup(Truncate|Round  (unbiased: +/- Inf)),popup(Wrap|Saturate|Flag as "
+"Error),edit,popup(None|Data Rate|Data Rate;  Set 'FAST' Attribute),checkbox,e"
+"dit,checkbox,checkbox"
+      MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on"
+      MaskCallbackString      "||||||||||"
+      MaskEnableString	      "on,on,on,on,on,on,on,on,on,on,on"
+      MaskVisibilityString    "on,on,on,on,on,on,on,on,off,on,on"
+      MaskToolTipString	      "on,on,on,on,on,on,on,on,on,on,on"
+      MaskVarAliasString      ",,,,,,,,,,"
+      MaskVariables	      "arith_type=@1;n_bits=@2;bin_pt=@3;quantization="
+"@4;overflow=@5;period=@6;timing_constraint=@7;locs_specified=@8;LOCs=@9;needs"
+"_fixed_name=@10;dbl_ovrd=@11;"
+      MaskInitialization      "[designRoot, family, part, speed, package, simu"
+"linkPeriod, sysclkPeriod, dbl_ovrd, trimVbit] = xlSysgenSettings(gcb,1,0);\nt"
+"rimVbit = 1;\n[bg,fg] = xlcmap('IO',dbl_ovrd);\niPos = get_param(gcb,'Positio"
+"n');\niWidth=iPos(3)-iPos(1); iHeight=iPos(4)-iPos(2);\niCx=iWidth/2;\niCy=iH"
+"eight/2;\n[logoX, logoY] = xlogo(iPos);\n\n"
+      MaskDisplay	      "patch([0 iWidth iWidth 0],[0 0 iHeight iHeight]"
+" , bg);\npatch(logoX,logoY , fg);\nport_label('input',1,'dbl');\nport_label('"
+"output',1,'fpt');\n\n;plot([0 0 iWidth iWidth 0], [0 iHeight iHeight 0 0]);\n"
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "Signed  (2's comp)|8|6|Truncate|Wrap|1|None|off"
+"|{}|off|off"
+    }
+    Block {
+      BlockType		      "S-Function"
+      Name		      "Gateway Out"
+      Ports		      [1, 1]
+      Position		      [385, 149, 440, 171]
+      FunctionName	      "xldeprecated"
+      Parameters	      "-1 -1"
+      MaskType		      "Xilinx Gateway Out"
+      MaskDescription	      "Gateway out block.  Converts Xilinx fixed point"
+" inputs into ouputs of type double.\n\nHardware notes:  In hardware these blo"
+"cks become top level output ports or are discarded, depending on how they are"
+" configured."
+      MaskHelp		      "web(xldoclink('Gateway Out'));"
+      MaskPromptString	      "Translate into Output Port|IOB Timing Constrain"
+"t|Specify IOB Location Constraints|IOB Pad Locations (cell array {'MSB', ...,"
+" 'LSB'})|Do not Prepend Hierarchy to Port Name"
+      MaskStyleString	      "checkbox,popup(None|Data Rate|Data Rate;  Set '"
+"FAST' Attribute),checkbox,edit,checkbox"
+      MaskTunableValueString  "on,on,on,on,on"
+      MaskCallbackString      "||||"
+      MaskEnableString	      "on,on,on,on,on"
+      MaskVisibilityString    "on,on,on,off,on"
+      MaskToolTipString	      "on,on,on,on,on"
+      MaskVarAliasString      ",,,,"
+      MaskVariables	      "hdl_port=@1;timing_constraint=@2;locs_specified"
+"=@3;LOCs=@4;needs_fixed_name=@5;"
+      MaskInitialization      "[designRoot, family, part, speed, package, simu"
+"linkPeriod, sysclkPeriod, dbl_ovrd, trimVbit] = xlSysgenSettings(gcb,0,2);\n["
+"bg,fg] = xlcmap('IO');\nif (~hdl_port)\n  [bg,fg]=xlcmap('XBlock',1);\nend\ni"
+"Pos = get_param(gcb,'Position');\niWidth=iPos(3)-iPos(1); iHeight=iPos(4)-iPo"
+"s(2);\niCx=iWidth/2;\niCy=iHeight/2;\n[logoX, logoY] = xlogo(iPos);\n"
+      MaskDisplay	      "patch([0 iWidth iWidth 0],[0 0 iHeight iHeight]"
+" , bg);\npatch(logoX,logoY , fg);\nport_label('input',1,'fpt');\nport_label('"
+"output',1,'dbl');\n\n;plot([0 0 iWidth iWidth 0], [0 iHeight iHeight 0 0]);\n"
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "on|None|off|{}|off"
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Indeterminate Probe"
+      Ports		      [1, 1]
+      Position		      [300, 547, 325, 573]
+      ShowName		      off
+      FontName		      "Arial"
+      FontSize		      9
+      TreatAsAtomicUnit	      off
+      MaskType		      "Xilinx Indeterminate Probe"
+      MaskDescription	      "Indeterminate Probe.  Produces an output of typ"
+"e double that is 1 when input data is indeterminate.  Output is 0 otherwise."
+"\n\nHardware notes:  This block is ignored when hardware is generated."
+      MaskHelp		      "web(xldoclink('Indeterminate Probe'));"
+      MaskInitialization      "[designRoot, family, part, speed, package, simu"
+"linkPeriod, sysclkPeriod, dbl_ovrd, trimVbit] = xlSysgenSettings(gcb,0,0);\n"
+"\n[bg,fg] = xlcmap('IO');\niPos = get_param(gcb,'Position');\niWidth=iPos(3)-"
+"iPos(1); iHeight=iPos(4)-iPos(2);\niCx=iWidth/2;\niCy=iHeight/2;\nshapeX = iC"
+"x* (1 + cos(0:pi/6:2*pi));\nshapeY = iCy* (1 + sin(0:pi/6:2*pi));\n"
+      MaskDisplay	      "patch(shapeX,shapeY, bg);\nplot(shapeX,shapeY);"
+"\ndisp('!def');"
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      System {
+	Name			"Indeterminate Probe"
+	Location		[213, 587, 641, 723]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "din"
+	  Position		  [50, 48, 80, 62]
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant"
+	  Position		  [215, 78, 245, 92]
+	  ShowName		  off
+	  Value			  "0"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant2"
+	  Position		  [215, 38, 245, 52]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  RelationalOperator
+	  Name			  "Relational\nOperator"
+	  Position		  [175, 47, 210, 83]
+	  ShowName		  off
+	  Operator		  "<"
+	}
+	Block {
+	  BlockType		  Switch
+	  Name			  "Switch1"
+	  Position		  [270, 36, 300, 94]
+	  ShowName		  off
+	  Threshold		  ".5"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "gwout"
+	  Ports			  [1, 1]
+	  Position		  [110, 48, 140, 62]
+	  BackgroundColor	  "yellow"
+	  ShowName		  off
+	  SourceBlock		  "xbsIO_r2/Gateway Out"
+	  SourceType		  "Xilinx Gateway Out"
+	  hdl_port		  off
+	  timing_constraint	  "None"
+	  locs_specified	  off
+	  LOCs			  "{}"
+	  needs_fixed_name	  off
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "dout"
+	  Position		  [330, 58, 360, 72]
+	}
+	Line {
+	  SrcBlock		  "din"
+	  SrcPort		  1
+	  DstBlock		  "gwout"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Relational\nOperator"
+	  SrcPort		  1
+	  DstBlock		  "Switch1"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "gwout"
+	  SrcPort		  1
+	  Points		  [5, 0]
+	  Branch {
+	    DstBlock		    "Relational\nOperator"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 20]
+	    DstBlock		    "Relational\nOperator"
+	    DstPort		    2
+	  }
+	}
+	Line {
+	  SrcBlock		  "Constant2"
+	  SrcPort		  1
+	  DstBlock		  "Switch1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Constant"
+	  SrcPort		  1
+	  DstBlock		  "Switch1"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "Switch1"
+	  SrcPort		  1
+	  DstBlock		  "dout"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      "S-Function"
+      Name		      "Quantization Error"
+      Ports		      [1, 1]
+      Position		      [395, 268, 435, 292]
+      ShowName		      off
+      FunctionName	      "xldeprecated"
+      Parameters	      "-1 -1"
+      MaskType		      "Xilinx Quantization Error Block"
+      MaskDescription	      "Extracts the quantization error from a Xilinx f"
+"ixed point signal, or extracts a double value corrected for quantization erro"
+"r. The quantization error is tracked as the difference between the actual val"
+"ue, as represented by the fixed point data, and the expected value, as would "
+"be computed under double precision arithmetic.  \n\nThe block can be configur"
+"ed to extract either the quantization error or the expected value (which equa"
+"ls the fixed point value minus the quantization error).\n\nHardware notes:  T"
+"his block is ignored when hardware is generated."
+      MaskHelp		      "web(xldoclink('Quantization Error'));"
+      MaskPromptString	      "Extract"
+      MaskStyleString	      "popup(Quantization Error|Expected Value)"
+      MaskTunableValueString  "on"
+      MaskEnableString	      "on"
+      MaskVisibilityString    "on"
+      MaskToolTipString	      "on"
+      MaskVariables	      "extraction=@1;"
+      MaskInitialization      "if (extraction==1)\n  plabel = 'err';\nelse\n  "
+"plabel = 'exp';\nend\n\n[bg,fg] = xlcmap('IO');\niPos = get_param(gcb,'Positi"
+"on');\niWidth=iPos(3)-iPos(1); iHeight=iPos(4)-iPos(2);\niCx=iWidth/2;\niCy=i"
+"Height/2;\n[logoX, logoY] = xlogo(iPos);\n"
+      MaskDisplay	      "patch([0 iWidth iWidth 0],[0 0 iHeight iHeight]"
+" , bg);\npatch(logoX,logoY , fg);\nport_label('output',1,plabel);\n\nplot([0 "
+"0 iWidth iWidth 0], [0 iHeight iHeight 0 0]);\n"
+      MaskIconFrame	      off
+      MaskIconOpaque	      off
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "Quantization Error"
+    }
+    Block {
+      BlockType		      "S-Function"
+      Name		      "Sample Time"
+      Ports		      [1, 1]
+      Position		      [300, 362, 325, 388]
+      ShowName		      off
+      FunctionName	      "xldeprecated"
+      Parameters	      "-1 -1"
+      MaskType		      "Xilinx Sample Time Reporter"
+      MaskDescription	      "Reports the input sample time as an output of t"
+"ype double.\n\nHardware notes: This block is ignored when hardware is generra"
+"ted."
+      MaskHelp		      "web(xldoclink('Sample Time'));"
+      MaskInitialization      "[designRoot, family, part, speed, package, simu"
+"linkPeriod, sysclkPeriod, dbl_ovrd, trimVbit] = xlSysgenSettings(gcb,0,0);\n["
+"bg,fg] = xlcmap('IO');\niPos = get_param(gcb,'Position');\niWidth=iPos(3)-iPo"
+"s(1); iHeight=iPos(4)-iPos(2);\niCx=iWidth/2;\niCy=iHeight/2;\nshapeX = iCx* "
+"(1 + cos(0:pi/6:2*pi));\nshapeY = iCy* (1 + sin(0:pi/6:2*pi));\n\n\n\n% one t"
+"ime added for param list\n\n\n% just pass everything to s-function\nsfcn_mwsv"
+"__ = get_param(gcb, 'MaskWSVariables');\n"
+      MaskDisplay	      "patch(shapeX,shapeY, bg);\nplot(shapeX,shapeY);"
+"\ndisp('ST');"
+      MaskIconFrame	      off
+      MaskIconOpaque	      off
+      MaskIconRotate	      "port"
+      MaskIconUnits	      "autoscale"
+    }
+    Line {
+      SrcBlock		      "Sample Time"
+      SrcPort		      1
+      DstBlock		      "Display"
+      DstPort		      1
+    }
+    Annotation {
+      Name		      "Xilinx Blockset v2.3\n(c) 2002 Xilinx, Inc.\n\n"
+"I/O Library"
+      Position		      [312, 44]
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      Name		      "Quantization Error Analysis Blocks:"
+      Position		      [147, 239]
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      Name		      "Error or \nExpected Value"
+      Position		      [417, 239]
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      Name		      "Gateway Blocks:"
+      Position		      [197, 124]
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      Name		      "In"
+      Position		      [307, 124]
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      Name		      "Out"
+      Position		      [412, 124]
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      Name		      "Report Sample Time:"
+      Position		      [182, 349]
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      Name		      "Clear"
+      Position		      [307, 239]
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      Name		      "Clock Probe:"
+      Position		      [207, 444]
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      Name		      "Indeterminate Probe:"
+      Position		      [187, 534]
+      FontName		      "Arial"
+      FontSize		      12
+    }
+  }
+}

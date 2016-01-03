@@ -1,0 +1,156 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta http-equiv="Content-Style-Type" content="text/css">
+   <meta name="GENERATOR" content="Mozilla/4.79 [en]C-CCK-MCD   (Windows NT 5.0; U) [Netscape]">
+   <title>Cosimulation</title>
+<link REL="STYLESHEET" HREF="sysgen.css" CHARSET="ISO-8859-1" TYPE="text/css">
+</head>
+<body bgcolor="#FFFFFF">
+&nbsp;
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="100%" >
+<tr>
+<td WIDTH="10"></td>
+
+<td BGCOLOR="#F0E0B0">&nbsp;<b>Xilinx XtremeDSP Development Kit</b></td>
+
+<td ALIGN=RIGHT WIDTH="150" BGCOLOR="#F0E0B0"></td>
+
+<td WIDTH="10"></td>
+</tr>
+</table>
+
+<h5 CLASS="Section2">
+<font size=+2>XtremeDSP Co-Simulation</font></h5>
+
+<table BORDER=0 CELLSPACING=8 CELLPADDING=2 >
+<tr>
+<td VALIGN=TOP><img SRC="images/cosimulation_icon.gif" height=185 width=169></td>
+
+<td>
+<blockquote CLASS="Body">The Xilinx XtremeDSP Co-Simulation block can be
+used in place of a Simulink subsystem that was compiled for XtremeDSP co-simulation.&nbsp;
+During simulation, the block behaves exactly as the subsystem from which
+it originated, except that the simulation data is processed in hardware
+instead of software.&nbsp;
+<p>The port interface of the co-simulation block will vary.&nbsp; When
+a model is implemented for co-simulation, a new library is created that
+contains a custom XtremeDSP hardware co-simulation block with ports that
+match the gateway names (or port names if the subsystem is not the top
+level) from the original model.&nbsp;
+<p>The hardware co-simulation block interacts with the XtremeDSP development
+kit board during a Simulink simulation.&nbsp; Simulation data that is written
+to the input ports of the block are passed to the hardware by the block.&nbsp;
+Conversely, when data is read from the co-simulation block's output ports,
+the block reads the appropriate values from the hardware and drives them
+on the output ports so they can be interpreted in Simulink.&nbsp; In addition,
+the block automatically opens, configures, steps, and closes the development
+kit board.&nbsp;</blockquote>
+</td>
+</tr>
+</table>
+
+<h6 CLASS="Section3">
+<font size=+0>Block Parameters Dialog Box</font></h6>
+
+<blockquote CLASS="Body">The block parameters dialog box can be invoked
+by double-clicking the icon in your Simulink model.</blockquote>
+
+<center><img SRC="images/cosimulation_gui.gif" height=356 width=377>
+<p><b><font face="Arial,Helvetica"><font size=-1>XtremeDSP Hardware Co-Simulation
+block parameters dialog box</font></font></b></center>
+
+<h6 CLASS="FigureHTML">
+<font size=+0>XtremeDSP Hardware Co-Simulation block parameters dialog
+box</font></h6>
+
+<ul>
+<li CLASS="Bulleted">
+Bit File Name: specifies the co-simulation FPGA configuration file for
+the XtremeDSP development kit board.&nbsp; When a new co-simulation block
+is instantiated during compilation, this parameter is automatically set
+so that it points to the appropriate configuration file.&nbsp; You need
+only adjust this parameter if the location of the configuration file changes.</li>
+</ul>
+
+<ul>
+<li CLASS="Bulleted">
+Bus Type: allows you to choose the interface in which the Co-simulation
+block communicates with the XtremeDSP development kit board during a Simulink
+simulation.&nbsp; You may select between <i>PCI</i> and <i>USB</i> interfaces.</li>
+</ul>
+
+<ul>
+<li CLASS="Bulleted">
+Clock: users can select between <i>Single Stepped</i> and <i>Free Running</i>
+clock sources.&nbsp; Selecting a <i>Single Stepped</i> clock allows the
+block to step the board one clock cycle at a time.&nbsp; Each clock cycle
+step corresponds to some duration of time in Simulink&nbsp;&nbsp; Using
+this clock source ensures the behavior of the co-simulation hardware during
+simulation will be bit and cycle accurate when compared to the simulation
+behavior of the subsystem from which it originated.&nbsp; Sometimes single
+stepping is not necessary and the board can be run with a <i>Free Running</i>
+clock.&nbsp; In this case, the board will operate asynchronously to the
+Simulink simulation. Users can also select <i>Select from Inport</i> to
+expose an optional port on the co-simulation block that allows selection
+of the clocking mode during simulation. This port must be driven by a Boolean
+signal, where a 0 selects single-step clock mode, and 1 selects free-running
+mode.</li>
+</ul>
+
+<ul>
+<li CLASS="Bulleted">
+Free Running Clock Frequency (MHz): if <i>Free Running</i> clock is selected,
+you may specify the operating frequency that the free running clock should
+be programmed to run at during simulation.&nbsp; The selected clock frequency
+will be rounded to the nearest valid frequency available from the programmable
+oscillator.&nbsp; <i>Note:&nbsp; You must take care to specify a frequency
+that does not exceed the maximum operating frequency of the model's FPGA
+implementation</i>.&nbsp;&nbsp; The valid operating frequencies of the
+programmable oscillator are listed below:</li>
+
+<div CLASS="Bulleted">&nbsp;
+<br>20 MHz; 25 MHz; 30 MHz; 33.33 MHz; 40 MHz; 45 MHz; 50 MHz; 60 MHz;
+66.66 MHz; 70 MHz; 75 MHz; 80 MHz; 90 MHz; 100 MHz; 120 MHz.</div>
+</ul>
+
+<ul>
+<li CLASS="Bulleted">
+Internal Block Period: specifies the duration of Simulink time that corresponds
+to one clock cycle in the co-simulation hardware.&nbsp; Normally, the block
+will automatically compute this time by analyzing the sample periods of
+its input ports.&nbsp; When a co-simulation block is created during compilation,
+this parameter is set to the <i>Simulink System Period</i> value from the
+System Generator GUI in the model from which the co-simulation block was
+derived.&nbsp; This value will normally be sufficient, however, you can
+adjust the parameter if necessary if the block is used in a model with
+port rates different from those in the original model.&nbsp; This parameter
+is only visible when the block has no input ports.</li>
+</ul>
+
+<ul>
+<li CLASS="Bulleted">
+Port Signal Type: specifies the output signal type of the block's output
+ports, either <i>Double</i> or the Xilinx fixed-point type, <i>XFIX</i>,
+if the block has no input ports.&nbsp; If the block has at least one input
+port, the block automatically sets its output port signal types to match
+the input type (i.e., if the input ports are driven by <i>Doubles</i> the
+output types will all be <i>Doubles</i>.&nbsp; This parameter is only visible
+when the block has no input ports.</li>
+</ul>
+
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="100%" >
+<tr>
+<td WIDTH="10"></td>
+
+<td BGCOLOR="#F0E0B0">&nbsp;<b>Xilinx XtremeDSP Development Kit</b></td>
+
+<td ALIGN=RIGHT WIDTH="150" BGCOLOR="#F0E0B0"></td>
+
+<td WIDTH="10"></td>
+</tr>
+</table>
+
+</body>
+</html>

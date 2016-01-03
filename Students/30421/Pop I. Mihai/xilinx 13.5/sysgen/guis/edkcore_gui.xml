@@ -1,0 +1,41 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="EDK Core" block_type="edkcore">
+  <icon width="57" height="56" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="edkcore_config"/>
+  <libraries> 
+    <library name="xbsEDKLib"/>
+  </libraries>
+  <blockgui label="Xilinx EDK Core">
+    <editbox name="infoedit" default="For use with EDK Processor block." read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <editbox name="init_code" default="" top_label="true" evaluate="false" label="Block configuration m-function"/>
+        <listbox name="sim_method" default="Inactive" evaluate="true" label="Simulation mode">
+          <item value="Inactive"/>
+          <item value="ISE Simulator"/>
+          <item value="External co-simulator"/>
+        </listbox>
+        <editbox name="engine_block" default="" top_label="true" evaluate="false" label="HDL co-simulator to use  (specify helper block by name)"/>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+
+    <hiddenvar name="xmp" default="''" evaluate="true" ctype="String"/>       
+    <hiddenvar name="blockname" default="''" evaluate="true" ctype="String"/>
+    <hiddenvar name="dual_clock" default="0" evaluate="true" ctype="Int"/>
+    <hiddenvar name="procinfo" default="''" evaluate="true" ctype="String"/>
+    <hiddenvar name="bus_type" default="''" evaluate="true" ctype="String"/>
+    <hiddenvar name="memxtable" default="''" evaluate="true" ctype="String"/>
+    <hiddenvar name="memmap_hdlcontent" default="" evaluate="false" ctype="String"/>
+    <hiddenvar name="config" default="" evaluate="false" ctype="String"/>
+    <hiddenvar name="inheritDeviceType" default="0" evaluate="true" ctype="Int"/>
+
+  </blockgui>
+</sysgenblock>

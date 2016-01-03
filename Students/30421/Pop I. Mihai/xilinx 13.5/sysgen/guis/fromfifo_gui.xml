@@ -1,0 +1,109 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="From FIFO" block_type="fromfifo">
+  <icon width="80" height="90" wmark_color="white" bg_color="blue" caption_format="&lt;&lt; %&lt;shared_memory_name&gt; &gt;&gt;"/>
+  <dll name="sysgen_blockset" entry_point="fromfifo_config"/>
+  <handlers enablement="fromfifoenablement" action="xlDatatypeAction"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsShared"/>
+    <library name="xbsFloatingPoint"/>
+  </libraries>
+  <blockgui label="Xilinx Shared Memory Based From FIFO">
+    <editbox name="infoedit" default="First-in-first-out (FIFO) block that reads FIFO data from shared memory storage." read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <editbox name="shared_memory_name" default="'Bar'" evaluate="true" label="Shared memory name" ctype="String"/>
+        <radiogroup name="ownership" default="Owned elsewhere" evaluate="true" label="Ownership" ctype="Int">
+          <item value="Locally owned"/>
+          <item value="Owned elsewhere"/>
+        </radiogroup>
+        <radiogroup name="performance_options" default="Standard_FIFO" evaluate="true" label="Performance Options" ctype="Int">
+          <item value="Standard_FIFO" label="Standard FIFO"/>
+          <item value="First_Word_Fall_Through" label="First Word Fall Through"/>
+        </radiogroup>
+        <listbox name="depth" default="16" evaluate="true" label="Depth" ctype="Int">
+          <item value="16"/>
+          <item value="32"/>
+          <item value="64"/>
+          <item value="128"/>
+          <item value="256"/>
+          <item value="512"/>
+          <item value="1K"/>
+          <item value="2K"/>
+          <item value="4K"/>
+          <item value="8K"/>
+          <item value="16K"/>
+          <item value="32K"/>
+          <item value="64K"/>
+          <item value="128K"/>
+          <item value="256K"/>
+        </listbox>
+        <listbox name="percent_nbits" default="1" evaluate="true" label="Bits of precision to use for &lt;tt&gt;%full&lt;/tt&gt; port" ctype="Int">
+          <item value="1"/>
+          <item value="2"/>
+          <item value="3"/>
+          <item value="4"/>
+          <item value="5"/>
+          <item value="6"/>
+          <item value="7"/>
+          <item value="8"/>
+          <item value="9"/>
+          <item value="10"/>
+          <item value="11"/>
+          <item value="12"/>
+          <item value="13"/>
+          <item value="14"/>
+          <item value="15"/>
+          <item value="16"/>
+          <item value="17"/>
+          <item value="18"/>
+        </listbox>
+        <etch label="Optional Ports">
+		<checkbox name="has_arst" default="off" evaluate="true" label="Provide asynchronous reset port" ctype="Int"/>
+		<checkbox name="use_percent_full_port" default="on" evaluate="true" label="Provide percent full port" ctype="Int"/>
+        </etch>
+      </tab>
+      <tab name="typetab" label="Output">
+        <etch label="Output Type">
+          <radiogroup name="gui_display_data_type" default="Fixed-point" evaluate="true" label="" ctype="Int" allow_advanced="false">
+            <item value="Fixed-point" label="Fixed-point"/>
+            <item value="Floating-point" label="Floating-point"/>
+          </radiogroup>
+          <listbox name="arith_type" default="Signed  (2's comp)" evaluate="true" label="Arithmetic type" ctype="Int">
+            <item value="Signed  (2's comp)"/>
+            <item value="Unsigned"/>
+            <item value="Floating-point"/>
+          </listbox>
+          <etch name="fixed_type_p" label="Fixed-point Precision">
+            <glayout cols="2">
+              <editbox name="n_bits" default="16" evaluate="true" label="Number of bits" ctype="Int"/>
+              <editbox name="bin_pt" default="14" evaluate="true" label="Binary point" ctype="Int"/>
+            </glayout>
+          </etch>
+          <etch name="preci_type_p" label="Floating-point Precision">
+            <radiogroup name="preci_type" default="Single" evaluate="true" label="" ctype="Int">
+              <item value="Single" label="Single"/>
+            </radiogroup>
+          </etch>
+        </etch>
+      </tab>
+      <tab name="advtab" label="Advanced">
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles" ctype="Int"/>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <radiogroup name="mem_type" default="Block RAM" evaluate="true" label="Memory Type" ctype="Int">
+          <item value="Block RAM" label="Block RAM"/>
+          <item value="Distributed RAM" label="Distributed RAM"/>
+        </radiogroup>
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+  </blockgui>
+</sysgenblock>

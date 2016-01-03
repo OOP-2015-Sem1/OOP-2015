@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Specifying Xilinx Tool Flow Settings</title>
+    <link rel="StyleSheet" href="css/HW_CoSim.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="HW_CoSim.08.01.html#270750">Using Hardware Co-Simulation</a> : Specifying Xilinx Tool Flow Settings</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="270750">Specifying Xilinx Tool Flow Settings</a></div>
+      <div class="Body"><a name="280751">When a design is compiled for System Generator hardware co-simulation, the command </a>line tool, XFLOW, is used to implement and configure your design for the selected FPGA board. XFLOW defines various flows that determine the sequence of programs that should be run on your design during compilation. There are typically multiple flows that must be run in order to achieve the desired output results, which in the case of hardware co-simulation targets, is a configuration bitstream. </div>
+      <div class="Body"><a name="280755">System Generator uses two flows, </a><span class="Italic">implementation</span> and <span class="Italic">configuration</span>, in order to produce a configuration bitstream. The implementation flow is responsible for compiling the synthesis tool netlist output (e.g., EDIF or NGC) into a placed and routed NCD file. To accomplish this, it runs the Xilinx tools NGDBuild, MAP, and PAR. The implementation flow can also execute TRACE (for timing analysis purposes), although this program is typically omitted in order to expedite the compilation process. The configuration flow runs the tools necessary to create an FPGA bitstream, using the fully elaborated NCD file as input. </div>
+      <div class="Body"><a name="280759">The implementation and configuration flow types have separate XFLOW options files </a>associated with them. An XFLOW options file declares the programs that should be run for a particular flow, and defines the command line options that are used by these tools. Each hardware co-simulation compilation target provides options files that define the default configuration options for these tools. Sometimes you may want to use options files that use settings that differ (e.g., to specify a higher placer effort level in PAR) from the default options provided by the target. In this case, you may create your own options files, or edit the default options files to include your desired settings. </div>
+      <div class="Body"><a name="280763">The Hardware Co-Simulation Settings dialog box, shown below, allows you to specify </a>options files other than the default options files provided by the compilation target. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="280884"><img class="Default" src="images/HW_CoSim.08.09.1.jpg" width="264" height="281" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="280773">Parameters available on the Hardware Co-Simulation Settings GUI are: </a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="280777">Implementation Flow</a></span>: Specifies the options file that is used by the implement flow type. By default, System Generator will use the implement options file that is specified by the compilation target. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="280779">Configuration Flow</a></span>: Specifies the options file that is used by the config flow type. By default, System Generator will use the config options file that is specified by the compilation target. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="280783">The Xilinx ISE® software includes several example XFLOW options files. From the base </a>directory of your Xilinx ISE software tree, these files are located under the directory <span class="Filename">sysgen/plugins/compilation/Bitstream</span>. Commonly used implementation options files include: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Filename"><a name="280787">balanced.opt</a></span> </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Filename"><a name="280789">bitgen.opt</a></span> </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="280795">It is possible to define options files that may cause errors in the System Generator hardware </a>co-simulation flow. As a result, it is typically a good idea to make backup copies of the default options files before modifying them. In addition, the configuration options file should be edited with caution, as most FPGA hardware boards have specific configuration parameter requirements. </div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

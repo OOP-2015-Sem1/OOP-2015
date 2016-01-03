@@ -1,0 +1,124 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="FIR Compiler v3_1 " block_type="Fir_compiler_v3_1">  
+  <initialization file="xlFir_compiler_v3_0_init.m"/>
+  <icon width="90" height="134" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="Fir_compiler_v3_1_config"/> 
+  <handlers enablement="xlFir_compiler_v3_0_enablement" action="xlFir_compiler_v3_0_action"/> 
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsDSP"/>
+  </libraries>
+  <blockgui label="Xilinx FIR Compiler v3_1">
+    <editbox name="infoedit" default="Implements a high-speed multi-channel FIR filter.&lt;br&gt;&lt;br&gt;Hardware  notes: Implemented using DSP48s hence only Virtex 4, Virtex 5 and SpartanDSP devices are supported." read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab label="Basic">
+        <etch name="Mode" label="Mode">
+          <listbox name="Filter_Type" default="Single_Rate" evaluate="true" label="Filter type" ctype="Int">
+            <item value="Single_Rate"/>
+            <item value="Decimation"/>
+            <item value="Interpolation"/>
+            <item value="Interpolated"/>
+          </listbox>
+          <editbox name="Rate_Change" default="1" evaluate="true" label="Sample rate change" ctype="Int"/>
+          <editbox name="Zero_Pack_Factor" default="1" evaluate="true" label="Zero Packing Factor" ctype="Int"/>
+        </etch>
+        <editbox name="Number_Channels" default="1" evaluate="true" label="Number of channels" ctype="Int"/>
+        <editbox name="Hardware_Oversampling" default="1" evaluate="true" label="Hardware over-sampling rate" ctype="Int"/>
+        <etch label="Coefficients">
+          <editbox name="Coefficients" default="[1 2 3]" evaluate="true" label="Coefficient vector" ctype="DoubleVector"/>
+          <radiogroup name="Coefficient_Sign" default="Signed" evaluate="true" label="Arithmetic type" ctype="Int">
+            <item value="Signed" label="Signed"/>
+            <item value="Unsigned" label="Unsigned"/>
+          </radiogroup>
+          <editbox name="Coefficient_Width" default="16" evaluate="true" label="Number of bits" ctype="Int"/>
+          <editbox name="Coefficient_Binary_Point" default="8" evaluate="true" label="Binary point" ctype="Int"/>
+          <listbox name="Coefficient_Structure" default="Inferred" evaluate="true" label="Structure" ctype="Int">
+            <item value="Inferred"/>
+            <item value="Non_Symmetric"/>
+            <item value="Symmetric"/>
+            <item value="Negative_Symmetric"/>
+            <item value="Half_Band"/>
+          </listbox>
+          <checkbox name="Coefficient_Reload" default="off" evaluate="true" label="Use reloadable coefficients" ctype="Int"/>
+        </etch>
+        <checkbox name="Display_Block_Info" default="off" evaluate="true" label="Display filter information on block icon" ctype="Int"/>
+      </tab>
+      <tab label="Ports">
+        <checkbox name="Valid_Ports" default="off" evaluate="true" label="Provide valid ports" ctype="Int"/>
+        <checkbox name="Enable_Port" default="off" evaluate="true" label="Provide &lt;tt&gt;en&lt;/tt&gt; port" ctype="Int"/>
+        <checkbox name="Rst_Rfd_Port" default="off" evaluate="true" label="Provide &lt;tt&gt;rst&lt;/tt&gt; port" ctype="Int"/>
+      </tab>
+      <tab label="Advanced">
+        <etch label="Rounding Options">
+          <listbox name="Output_Rounding_Mode" default="Full_Precision" evaluate="true" label="Rounding mode" ctype="Int">
+            <item value="Full_Precision"/>
+            <item value="Truncated_LSBs"/>
+            <item value="Symmetric_Rounding_to_Zero"/>
+            <item value="Symmetric_Rounding_to_Infinity"/>
+            <item value="Convergent_Rounding_to_Even"/>
+            <item value="Convergent_Rounding_to_Odd"/>
+            <item value="Non_Symmetric_Rounding_Down"/>
+            <item value="Non_Symmetric_Rounding_Up"/>
+           </listbox>
+          <editbox name="Output_Width" default="48" evaluate="true" label="Output width" ctype="Int"/>
+          <checkbox name="Allow_Rounding_Approximation" default="off" evaluate="true" label="Allow rounding approximation" ctype="Int"/>
+        </etch>
+        <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+      </tab>
+      <tab label="Implementation">
+        <etch name="storage" label="Storage options">
+          <listbox name="Storage" default="Automatic" evaluate="true" ctype="Int">
+            <item value="Automatic"/>
+            <item value="Custom"/>
+          </listbox>
+          <radiogroup name="Data_Buffer_Type" default="Distributed" evaluate="true" label="Data buffer" ctype="Int">
+            <item value="Distributed" label="Distributed Memory"/>
+            <item value="Block" label="Block Memory"/>
+          </radiogroup>
+          <radiogroup name="Coefficient_Buffer_Type" default="Distributed" evaluate="true" label="Coefficient buffer" ctype="Int">
+            <item value="Distributed" label="Distributed Memory"/>
+            <item value="Block" label="Block Memory"/>
+          </radiogroup>
+        </etch>
+        <etch name="v4_options" label="Multiple DSP48 column support">
+          <listbox name="Multiple_Column_Support" default="Disabled" evaluate="true" ctype="Int">
+            <item value="Disabled"/>
+            <item value="Custom"/>
+          </listbox>
+          <listbox name="Inter_Column_Pipe_Length" default="4" evaluate="true" label="Cross column pipelining" ctype="Int">
+            <item value="1"/>
+            <item value="2"/>
+            <item value="3"/>
+            <item value="4"/>
+            <item value="5"/>
+            <item value="6"/>
+            <item value="7"/>
+            <item value="8"/>
+            <item value="9"/>
+            <item value="10"/>
+            <item value="11"/>
+            <item value="12"/>
+            <item value="13"/>
+            <item value="14"/>
+            <item value="15"/>
+            <item value="16"/>
+          </listbox>
+          <editbox name="First_Column_Length" default="32" evaluate="true" label="First column length" ctype="Int"/>
+          <editbox name="Column_Wrap_Length" default="32" evaluate="true" label="Column wrap length" ctype="Int"/>
+        </etch>
+        <etch label="FPGA area estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <hiddenvar name="u_coef_rows" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="u_coef_cols" default="3" evaluate="true" ctype="Int"/>
+    <hiddenvar name="u_coef_sets" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="u_coef_type" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="u_latency" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="enable_debug" default="0" evaluate="true" ctype="Int"/>
+  </blockgui>
+</sysgenblock>

@@ -1,0 +1,37 @@
+FLOWTYPE = FPGA;
+###############################################################
+## Filename: ngc_only.opt
+##
+## Option File For Xilinx FPGA Implementation Flow
+## 
+## Version: 6.3.1
+###############################################################
+#
+# Options for Translator
+#
+# Type "ngdbuild -h" for a detailed list of ngdbuild command line options
+#
+Program ngdbuild 
+-p <partname>;        		# Partname to use - picked from xflow commandline
+-nt timestamp;        		# NGO File generation. Regenerate only when
+                      		# source netlist is newer than existing 
+                      		# NGO file (default)
+-intstyle xflow;                # Message Reporting Style: ise, xflow, or silent
+#-insert_keep_hierarchy; 	# Retain hierarchy identified by individual source input netlists
+<userdesign>;         		# User design - pick from xflow command line
+<design>.ngd;         		# Name of NGD file. Filebase same as design filebase
+End Program ngdbuild
+
+#
+# Options for Netgen 
+#
+# Type "netgen -h" for a detailed list of netgen command line options
+#
+Program netgen 
+-ofmt verilog;                        # Output Format
+-sim;                                 # Simulation Netlist
+-w;                                   # Overwrite output Verilog file
+-intstyle xflow;                      # Message Reporting Style: ise, xflow, or silent
+<design>.ngd;                         # Input NCD, NGD or NGA file
+<design>.v;                           # Output Verilog file
+End Program netgen

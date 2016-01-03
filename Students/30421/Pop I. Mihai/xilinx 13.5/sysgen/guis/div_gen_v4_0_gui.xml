@@ -1,0 +1,120 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Divider Generator 4.0 " block_type="div_gen_v4_0">
+  <icon width="95" height="142" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen" entry_point="coregenimport_config"/>
+  <handlers enablement="xlipmagiccallback"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsMath"/>
+    <library name="xbsDSP"/>  
+    <library name="xbsAXI4"/>	
+  </libraries>
+  <blockgui label="Xilinx Divider Generator 4.0">
+    <editbox name="infoedit" default="Divider Generator 4.0" read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="Basic_Parameters_tab" label="Basic">
+        <etch name="common_opt" label="Common options">
+        <radiogroup name="algorithm_type" default="Radix2" top_label="false" evaluate="false" label="Algorithm Type" ctype="String" allow_advanced="false">
+          <item value="Radix2"/>
+          <item value="High_Radix"/>
+        </radiogroup>
+		</etch>
+        <etch name="output_channel" label="Output channel">
+        <radiogroup name="remainder_type" default="Remainder" top_label="false" evaluate="false" label="Remainder Type" ctype="String" allow_advanced="false">
+          <item value="Remainder"/>
+          <item value="Fractional"/>
+        </radiogroup>
+        <editbox name="fractional_width" default="16" top_label="false" evaluate="true" label="Fractional width" ctype="Int"/>
+		</etch>
+		<glayout cols="2">
+        <etch name="radix2_opt" label="Radix2 Options">
+        <listbox name="clocks_per_division" default="1" top_label="false" evaluate="false" label="Radix2 throughput" ctype="String" allow_advanced="false">
+          <item value="1"/>
+          <item value="2"/>
+          <item value="4"/>
+          <item value="8"/>
+        </listbox>
+		</etch>
+        <etch name="high_radix_opt" label="High Radix Options">
+  	    	<checkbox name="divide_by_zero_detect" default="off" label="Detect Divide-by-Zero" ctype="Bool" allow_advanced="false"/>
+		</etch>
+		</glayout>
+        <etch name="axi_ports" label="AXI Interface">
+        <radiogroup name="flowcontrol" default="NonBlocking" top_label="false" evaluate="false" label="AXI behaviour" ctype="String" allow_advanced="false">
+          <item value="NonBlocking"/>
+          <item value="Blocking"/>
+        </radiogroup>
+        <radiogroup name="optimizegoal" default="Resources" top_label="false" evaluate="false" label="AXI implementation emphasis" ctype="String" allow_advanced="false">
+          <item value="Resources"/>
+          <item value="Performance"/>
+        </radiogroup>
+		</etch>
+		<etch name="latency_value_etch" label="Latency Options">
+        <radiogroup name="latency_configuration" default="Automatic" top_label="false" evaluate="false" label="Latency Configuration" ctype="String" allow_advanced="false">
+          <item value="Automatic"/>
+          <item value="Manual"/>
+        </radiogroup>
+        <editbox name="latency" default="20" top_label="false" evaluate="true" label="Latency" ctype="Int"/>
+		</etch>
+	  </tab>
+      <tab name="Optional_Parameters_tab" label="Optional ports">
+        <etch name="optional_ports" label="Optional Ports">
+        <etch name="dividend_ports" label="Dividend Channel Ports">
+			<glayout cols="2">
+				<checkbox name="dividend_has_tuser" default="off" label="Has TUSER" ctype="Bool" allow_advanced="false"/>
+				<checkbox name="dividend_has_tlast" default="off" label="Has TLAST" ctype="Bool" allow_advanced="false"/>
+			</glayout>
+		</etch>
+        <etch name="divisor_ports" label="Divisor Channel Ports">
+			<glayout cols="2">
+			<checkbox name="divisor_has_tuser" default="off" label="Has TUSER" ctype="Bool" allow_advanced="false"/>
+			<checkbox name="divisor_has_tlast" default="off" label="Has TLAST" ctype="Bool" allow_advanced="false"/>
+			</glayout>
+		</etch>
+			<glayout cols="2">
+        	<checkbox name="aclken" default="off" label="ACLKEN" ctype="Bool" allow_advanced="false"/>
+	        <checkbox name="aresetn" default="off" label="ARESETn" ctype="Bool" allow_advanced="false"/>
+    	    <checkbox name="outtready" default="off" label="m_axis_dout_tready" ctype="Bool" allow_advanced="false"/>
+			</glayout>
+		</etch>
+        <listbox name="outtlastbehv" default="Null" top_label="false" evaluate="false" label="Input TLAST combination for output" ctype="String" allow_advanced="false">
+   	      <item value="Null"/>
+       	  <item value="Pass_Dividend_TLAST"/>
+          <item value="Pass_Divisor_TLAST"/>
+   	      <item value="OR_all_TLASTs"/>
+       	  <item value="AND_all_TLASTs"/>
+        </listbox>
+        <etch label="Block Icon Display">
+          <checkbox name="trim_axipin_name" default="on" label="Display shortened port names" ctype="Int" evaluate="true" allow_advanced="false"/>
+        </etch>	
+      </tab>
+	  <tab name="Implementation_tab" label="Implementation">
+         <etch label="FPGA Area Estimation">
+      	  <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation" ctype="Bool" allow_advanced="false"/>
+	      <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" evaluate="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]" />
+         </etch>
+	  </tab>
+    </tabpane>
+    <!-- Values set by the uUPP -->
+    <hiddenvar name="dividend_tuser_width" default="1" evaluate="true" ctype="Int"/>	
+    <hiddenvar name="divisor_tuser_width" default="1" evaluate="true" ctype="Int"/>	
+    <hiddenvar name="operand_sign" default="Signed" evaluate="false" ctype="String"/>	
+    <hiddenvar name="dividend_and_quotient_width" default="16" evaluate="true" ctype="Int"/>	
+    <hiddenvar name="divisor_width" default="16" evaluate="true" ctype="Int"/>	
+    <!-- IP Import Specific Parameters -->
+    <hiddenvar name="ip_name" default="Divider Generator" evaluate="false" ctype="String"/>
+    <hiddenvar name="ip_version" default="4.0" evaluate="false" ctype="String"/>
+    <hiddenvar name="dsptool_ready" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="ipcore_usecache" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="ipcore_useipmodelcache" default="true" evaluate="true" ctype="Bool"/>
+    <!-- IP Import Wrapper Specific Parameters -->
+    <hiddenvar name="wrapper_available" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="port_translation_map" default="{'aclken' => 'en','aresetn' => 'rst'}" evaluate="false" ctype="String">
+    </hiddenvar>	
+    <hiddenvar name="ipcore_fpga_part" default="xlipgetpartsetting(gcb, {'virtex7', 'xc7v1500t', '-2', 'fhg1157'})" evaluate="true" ctype="StringVector" />
+    <hiddenvar name="ipcore_verbose" default="false" evaluate="true" ctype="Bool"/>	
+  </blockgui>
+</sysgenblock>
+

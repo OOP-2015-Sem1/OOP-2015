@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Lesson 6 - Designing Filters</title>
+    <link rel="StyleSheet" href="css/Getting%20Started.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Getting%20Started.05.1.html#286370">Getting Started</a> : Lesson 6 - Designing Filters</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="286370">Lesson 6 - Designing Filters</a></div>
+      <div class="Heading2"><a name="277177">Introduction</a></div>
+      <div class="BodyWide"><a name="277326">Digital filters are a common DSP operation and especially well suited to implementation in FPGAs. High-</a>performance applications benefit greatly from parallel filters that can return a results on every clock cycle. The Virtex®- 5 device includes up to 550 parallel multipliers. The FIR Compiler is designed to use these multipliers in the most efficient manner for creating commonly used FIR filters. An alternative implementation is available called “distributed arithmetic” that creates FIR filters without using multipliers by employing a shift-add technique. This can be used for smaller devices when the available multipliers have been allocated to other functions.</div>
+      <div class="BodyWide"><a name="277244">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504.0pt">
+            <div class="Anchor"><a name="277243"><img class="Default" src="images/Getting%20Started.05.7.1.jpg" width="486" height="330" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="277187">The Virtex DSP48 Math Slice</a></div>
+      <div class="BodyWide"><a name="277333">The Virtex® family introduces a high-performance arithmetic unit along with a multiplier: the low-power DSP48 </a>slice. The following figure is a detailed diagram of the DSP48 structure. The DSP48 slice consists of four main sections: (1) I/O registers, (2) signed multiplier, (3) three-input adder/subtractor, and (4) OPMODE multiplexers.</div>
+      <div class="BodyWide"><a name="277258">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504.0pt">
+            <div class="Anchor"><a name="277257"><img class="Default" src="images/Getting%20Started.05.7.2.jpg" width="485" height="342" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="277250">FIR Compiler Block</a></div>
+      <div class="BodyWide"><a name="277372">The Xilinx Fir Compiler block implements a high speed MAC based FIR filter. It accepts a stream of input data and </a>computes filtered output with a fixed delay, based on the filter configuration. The FIR Compiler supports generation of resource shared or parallel FIR structures and polyphase decimation and interpolation structures. Also supported is oversampling. Coefficients are specified using MATLAB commands. </div>
+      <div class="BodyWide"><a name="277270">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504.0pt">
+            <div class="Anchor"><a name="277269"><img class="Default" src="images/Getting%20Started.05.7.3.jpg" width="485" height="345" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="277189">Creating Coefficients with FDATool</a></div>
+      <div class="BodyWide"><a name="277380">The MathWorks FDATool is a graphical filter design program that can be used to generate coefficients for the FIR </a>Compiler block. The Xilinx FDATool block provides an interface to the FDATool software available as part of the MATLAB Signal Processing Toolbox. In order for this block to function properly, the Signal Processing Toolbox must be installed.</div>
+      <div class="BodyWide"><a name="277285">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504.0pt">
+            <div class="Anchor"><a name="277284"><img class="Default" src="images/Getting%20Started.05.7.4.jpg" width="499" height="343" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="277190">Using FDA Tool Coefficients</a></div>
+      <div class="BodyWide"><a name="277388">Once a suitable filter response has been designed, you simply export the coefficients to the workspace using the</a><br /><span class="Bold">File &gt; Export</span> command. The workspace variable can then be referenced in the FIR Compiler properties editor</div>
+      <div class="BodyWide"><a name="277304">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504.0pt">
+            <div class="Anchor"><a name="277303"><img class="Default" src="images/Getting%20Started.05.7.5.jpg" width="484" height="325" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="274093">Lab Exercise: Designing Filters</a></div>
+      <div class="Body"><a name="277409">In this lab you will be using the Filter Compiler block to generate optimized filters for the </a>Virtex®-5 architecture.</div>
+      <div class="Body"><a name="277416">The lab instructions and lab design are located in the System Generator software tree at the </a>following pathname:</div>
+      <div class="Body" style="color: #000000; font-size: 9.0pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 5.0pt; margin-top: 5.0pt; text-transform: none; vertical-align: baseline"><span class="Filename"><a name="286434">&lt;ISE_Design_Suite_tree&gt;/sysgen/examples/getting_started_training/lab7/</a></span></div>Lab Instructions<a href="javascript:void();" onClick="WWHFrame.WWHBrowser.fMLProtocol(&quot;cd(xilinx.environment.getpath(\'sysgen\'));cd examples/getting_started_training/lab7;open ('lab7.pdf')&quot;)">(Open Lab Instructions)</a>Lab Design<a href="javascript:void();" onClick="WWHFrame.WWHBrowser.fMLProtocol('cd(xilinx.environment.getpath(\'sysgen\'));cd examples/getting_started_training/lab7;open lab7.mdl')">(Open Lab Design)</a><script type="text/javascript" language="JavaScript1.2"><!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // --></script></blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

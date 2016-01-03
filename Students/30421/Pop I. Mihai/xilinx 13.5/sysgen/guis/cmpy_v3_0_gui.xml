@@ -1,0 +1,66 @@
+<!--   *  Copyright (c) 2009, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Complex Multiplier 3.0 " block_type="cmpy_v3_0">
+  <icon width="95" height="142" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen" entry_point="coregenimport_config"/>
+  <handlers enablement="xlipmagiccallback_pass_evaluate_params" action="xlipmagicaction"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsDSP"/>
+    <library name="xbsMath"/>
+  </libraries>
+  <blockgui label="Xilinx Complex Multiplier 3.0">
+    <!-- <editbox name="infoedit" default="Complex Multiplier 3.0" read_only="true" evaluate="false" multi_line="true"/> -->
+    <tabpane>
+      <tab name="Coregen_Parameters_tab" label="Page 1">
+        <etch label="Multiplier Construction Options">
+          <radiogroup name="multtype" default="Use_Mults" evaluate="false" label="" ctype="String" allow_advanced="false">
+            <item value="Use_LUTs"/>
+            <item value="Use_Mults"/>
+          </radiogroup>
+        </etch>
+        <etch label="Optimization Goal">
+          <radiogroup name="optimizegoal" default="Resources" evaluate="false" label="" ctype="String" allow_advanced="false">
+            <item value="Resources"/>
+            <item value="Performance"/>
+          </radiogroup>
+        </etch>
+        <etch label="Output Product Range">
+          <editbox name="outputwidthhigh" default="32" top_label="true" evaluate="true" label="Output MSB" ctype="Int"/>
+          <editbox name="outputwidthlow" default="0" top_label="true" evaluate="true" label="Output LSB" ctype="Int"/>
+        </etch>                
+      </tab>
+      <tab name="Coregen_Parameters_tab2" label="Page 2">
+        <etch label="Output Rounding">          
+          <radiogroup name="roundmode" default="Truncate" evaluate="false" label="" ctype="String" allow_advanced="false">
+            <item value="Truncate"/>
+            <item value="Random_Rounding"/>
+          </radiogroup>
+        </etch>
+        <etch label="Control Signals">
+        <checkbox name="clockenable" default="off" label="en" ctype="Bool" allow_advanced="false"/>
+        <checkbox name="syncclear" default="off" label="rst" ctype="Bool" allow_advanced="false"/>
+        </etch>        
+      </tab>
+      <tab name="Implementation_tab" label="Implementation">
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation" ctype="Bool" allow_advanced="false"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" evaluate="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]" />
+        </etch>
+      </tab>
+    </tabpane>
+    <!-- <hiddenvar name="sclrcepriority" default="CE_overrides_SCLR"  evaluate="false" ctype="String"/> -->
+    <hiddenvar name="ip_name" default="Complex Multiplier" evaluate="false" ctype="String"/>
+    <hiddenvar name="ip_version" default="3.0" evaluate="false" ctype="String"/>
+    <hiddenvar name="dsptool_ready" default="true" evaluate="true" ctype="Bool"/>
+    <!-- <hiddenvar name="ip_wrap_arbitrary_binary_point" default="true" evaluate="true" ctype="Bool"/> -->    
+    <hiddenvar name="ipcore_usecache" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="ipcore_useipmodelcache" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="ipcore_verbose" default="false" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="wrapper_available" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="port_translation_map" default="{ 'ce' => 'en', 'sclr' => 'rst' }" evaluate="false" ctype="String"/>
+    <hiddenvar name="structural_sim" default="false" evaluate="true" ctype="Bool"/>    
+  </blockgui>
+</sysgenblock>
+

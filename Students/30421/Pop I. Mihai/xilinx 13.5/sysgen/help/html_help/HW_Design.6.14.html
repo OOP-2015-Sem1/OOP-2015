@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Generating Multiple Cycle-True Islands for Distinct Clocks</title>
+    <link rel="StyleSheet" href="css/HW_Design.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="HW_Design.6.1.html#312886">Hardware Design Using System Generator</a> : Generating Multiple Cycle-True Islands for Distinct Clocks</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="312886">Generating Multiple Cycle-True Islands for Distinct Clocks</a></div>
+      <div class="Body"><a name="312887">System Generator's shared memory interfaces allow you to implement designs that are </a>driven by multiple-clock sources. These multi-clock designs may employ a combination of distinct clocks and derived clock enables to implement advanced clocking strategies completely within a single design environment. This topic describes how to implement multi-clock designs in System Generator through discussions of the following topics: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="312888">Applications that benefit from multiple clocks; </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="312889">Using hierarchy to partition a System Generator model into two or more clock </a>domains; </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="312890">Using shared memories to cross clock domains; </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="312891">Simulating and netlisting multiple clock designs; </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="312894">Wiring multiple clock domains together using the Xilinx </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.61.html#573408', '');" title="Multiple Subsystem Generator">Multiple Subsystem Generator</a></span>  block. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="312896">A step-by-step example is provided to help clarify the topics listed above. Although the </a>example uses two clocks, the concepts presented here can be extended so that System Generator designs requiring any number of clock sources can be constructed using similar techniques. </div>
+      <div class="Body"><a name="312897">Before continuing with the example, you may want to familiarize yourself with standard </a>System Generator clocking terminology and implementation methodologies. This information is covered in-depth in the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.6.4.html#270824', '');" title="System-Level Modeling in System Generator">Timing and Clocking</a></span>. In general, System Generator designs are driven by a single, system clock source. Multirate design portions are handled using clock enables derived from the system clock source. It is possible, however, to use System Generator to implement designs that are driven by distinct clock sources. </div>
+      <div class="Body"><a name="312901">Broadly speaking, the approach is the following: </a></div>
+      <div class="Body"><a name="312902">Divide the design into several subsystems, each of which is to be driven by a different </a>clock. In the example, you call these subsystems <span class="Italic">asynchronous clock islands</span>. Xilinx shared memory blocks should be used as bridges that communicate between these clock islands. Once the design is partitioned, the Xilinx Multiple Subsystem Generator block may be used to translate the design into hardware that uses multiple distinct clock sources. </div>
+      <div class="Heading2"><a name="312903">Multiple Clock Applications</a></div>
+      <div class="Body"><a name="312904">A common application for multiple clock domains is for interfacing different pieces of </a>external hardware that operate at different clock rates. For example, you may need to provide a set of I/O registers to a microprocessor, and the processor must be able to read and write these registers synchronous to its own clock. You may get data from a clock/data recovery unit and need to re-synchronize the data to your local clock domain. You may need to feed data to a digital-to-analog converter that must be running at a precise sample rate which is different from your system clock. </div>
+      <div class="Body"><a name="312905">Another important application for multiple clock domains is in employing a high-speed </a>processing unit. Let us take an example of an interpolating FIR filter. The filter gets symbol data from an external unit, and the filter needs to take the symbols and perform a 4X interpolation that creates four output samples for each input symbol. The output samples are fed to a digital-to-analog converter (DAC) that is clocked at the sample rate. </div>
+      <div class="Body"><a name="312906">The FIR filter may be clocked at any of several rates. It may be clocked at the symbol rate, </a>and on each cycle it must create four samples which will then be fed to the DAC at the sample rate. This highly parallel implementation has large hardware resource requirements and would only be employed if the sample rate were very fast. An alternative approach is to clock the FIR filter at the sample rate, creating one sample per cycle. This scenario takes an intermediate amount of hardware and would be used for intermediate sample rates. If the sample rate is slow, the FIR filter may be clocked at a rate several times faster than the sample rate, perhaps by means of a DCM that multiplies the sample-rate clock. In this way the multiplier-accumulator units of the FIR filter may be reused several times during the calculation of each sample output, requiring the least amount of hardware. This last method would use a symbol-rate clock domain, a high-speed processing clock domain, and a sample-rate clock domain. </div>
+      <div class="Body"><a name="312907">A good FPGA design practice is to have each resource in the FPGA device operating at the </a>highest possible rate to optimize hardware usage. In general, it is best to use a single clock domain when possible and to use clock enables to gate slower circuitry, creating multicycle paths. The drawback to this technique is that it increases power consumption and may make it difficult to route the high-speed clock enable. As a result, separate domains for high-speed processing are preferable in some instances. Also, it may not be possible to avoid dealing with different clock domains when dealing with asynchronous data inputs and outputs. </div>
+      <div class="Heading2"><a name="312908">Clock Domain Partitioning</a></div>
+      <div class="Body"><a name="312909">Partitioning a multiple-clock design into multiple domains is an important aspect of FPGA </a>design. System Generator uses design hierarchy to support clock domain partitioning. More specifically, when a design uses multiple clock domains, the logic associated with each distinct clock domain should be grouped together in a Simulink subsystem. </div>
+      <div class="Body"><a name="312910">The subsystems, or in this case, synchronous islands, are cycle-true in the sense that the </a>hardware that is generated for an island is faithful to the Simulink behavior of the island model. The notion of bit and cycle accuracy is preserved only within the individual synchronous islands. The end model containing the synchronous islands is not necessarily cycle-true, because it drives the islands with asynchronous clocks. Although System Generator and Simulink are able to simulate the design using ideal clock sources, the complexities involved with asynchronous clocking systems can result in discrepancies between the software simulations and hardware realizations. </div>
+      <div class="Body"><a name="312911">The advantages to partitioning a design using subsystems are manifold: </a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="312912">The physical clock lines are abstracted away from the block diagram; </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="312913">Cross-domain transfers are well-defined and can be handled with metastable-safe </a>blocks from the Xilinx Blockset; </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="312914">Because the domains are well-defined, System Generator can accurately produce </a>timing constraints for the synchronous islands. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="312915">The abstraction level of System Generator reduces the risk that users will perpetrate some </a>of the more common design errors. These include: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="312916">Gated Clocks</a></span>: because the clocks in System Generator are inferred during hardware generation, it is not possible to connect non-clock lines to clock inputs (i.e., gated clocks). </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="312917">Asynchronous Clears</a></span>: because the asynchronous resets in System Generator are inferred during hardware generation, it is not possible to explicitly clear synchronous logic using the asynchronous reset, which often results in timing problems. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="312918">Inferred Latches</a></span>: latches will not be generated from System Generator designs. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="312919">Crossing Clock Domains</a></div>
+      <div class="Body"><a name="312920">System Generator shared memory blocks should be used whenever it is necessary to cross </a>clock domains. The tool provides several blocks for transferring data across clock domains, each of which is available in the Xilinx Shared Memory library: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.83.html#271171', '');" title="Shared Memory" name="312924">Shared Memory</a></span> </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.95.html#271184', '');" title="To FIFO" name="312931">To FIFO</a></span>  / <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.47.html#686664', '');" title="From FIFO">From FIFO</a></span> </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.96.html#271185', '');" title="To Register" name="312938">To Register</a></span>  / <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.48.html#271537', '');" title="From Register">From Register</a></span> </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="312939">When these shared memory blocks are used to cross clock domains, each set should be </a>split into a matched pair. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="312945"><img class="Default" src="images/HW_Design.6.14.1.jpg" width="527" height="525" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="312946">The </a><span class="Filename">To FIFO</span> block is put in the domain in which it is to be written. The <span class="Filename">From FIFO</span> is put in the domain in which it is to be read. The two blocks are linked by the name of the<span class="Filename"> </span><span class="Filename">Shared memory name</span> parameter. The FIFO is implemented in hardware using the Xilinx FIFO Generator core. Using FIFO blocks is the safest and easiest-to-use of the three blocks which cross domains and is the best for high-bandwidth, sequential data transfers. </div>
+      <div class="Body"><a name="312947">A pair of </a><span class="Filename">Shared Memory</span> blocks is implemented as embedded Xilinx dual-port block RAM core. The two blocks are linked by the name of the shared memory object. Each member of the pair resides in a different domain. Because the RAM is a true dual-port, each domain may write to the RAM. Care must be taken, by means of semaphores or other logic, to ensure that two writes or a read and a write to the same address do not happen simultaneously. For example, if domain A writes to a memory location at the same time that domain B is reading from it, the data read may not be valid. The shared memory is implemented as a using Xilinx Dual Port Block Memory core to ensure that large memories are efficiently mapped across multiple BRAMs. </div>
+      <div class="Body"><a name="312948">The </a><span class="Filename">To Register</span> is put in the domain in which it is to be written, and the <span class="Filename">From </span><span class="Filename">Register</span> in the domain from which it is to be read. The two blocks are linked by the name of the shared memory. The <span class="Filename">To Register</span> may also be read synchronously in its own domain. The register may be of variable width and will synthesize as flip-flops. A 1-bit <span class="Filename">To/From Register</span> pair will synthesize as a single flop. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="312949">Crossing domains in this manner can be unsafe, and requires the use of metastability-</a>reducing synchronization flops and semaphores for multiple-bit transfers. This technique should only be used when the hardware pitfalls are well-understood. </div>
+      <div class="Heading2"><a name="312950">Netlisting Multiple Clock Designs</a></div>
+      <div class="Body"><a name="312951">Each clock domain should have its own subsystem in a System Generator design. The </a>diagram below shows a two-domain design. The top-level block contains the Multiple Subsystem Generator block and two subsystems which each comprise a clock domain. Each subsystem has a System Generator block that sets the system clock period for that clock domain. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="312957"><img class="Default" src="images/HW_Design.6.14.2.jpg" width="527" height="384" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="489108">The Multiple Subsystem Generator block does not support designs that include an EDK </a>Processor block</div>
+      <div class="Body"><a name="312958">The diagram below illustrates the concept of putting domain-crossing blocks into their </a>own subsystem. When a multiple-domain design is netlisted, System Generator does the following: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="312959">Creates an HDL file for Domain 0 (on the left), excluding the To FIFO block, and calls </a>the netlister to create a black-box netlist delivered as an NGC file; </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="312960">Creates an HDL file for Domain 1 (on the right), excluding the From FIFO block, and </a>calls the netlister to create a black-box netlist delivered as an NGC file; </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="312961">Invokes the Xilinx CORE Generator™ to produce a core for the FIFO block (middle); </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="312968">Creates a top-level HDL wrapper that instantiates three block components. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="312967"><img class="Default" src="images/HW_Design.6.14.3.jpg" width="527" height="226" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="312969">Step-by-Step Example </a></div>
+      <div class="Body"><a name="312970">This example shows how design hierarchy can be used to partition a System Generator </a>design into multiple asynchronous clock islands. The example also demonstrates how Xilinx Shared Memory blocks may be used to communicate between these islands. Lastly, the example describes how the Multiple Subsystem Generator block can be used to netlist the complete multi-clock design. </div>
+      <div class="Numbered_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="312971">From the MATLAB window, change directory to the following:</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Code"><span class="Filename"><a name="312972">&lt;ISE_Design_Suite_tree&gt;/sysgen/examples/multiple_clocks/</a></span>. </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="312973">Open the </a><span class="Filename">two_async_clks</span> model from the MATLAB command window, and save it into a temporary directory of your choosing. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="312974">Subsystem hierarchy is used in the example to partition the design into two synchronous </a>clock domains, to which you refer as domains A and B, that are internally synchronous to a single clock, but asynchronous relative to each other. The design includes two subsystems named <span class="Filename">ss_clk_domainA</span> and <span class="Filename">ss_clk_domainB</span>, which include logic associated with clock domains, A and B, respectively. The blocks inside the <span class="Filename">ss_clk_domainA</span> subsystem operate in clock domain A while all blocks inside the <span class="Filename">ss_clk_domainB</span> subsystem operate in a second clock domain, B. </div>
+      <div class="Body"><a name="312975">The asynchronous islands in the example communicate with one another via a shared </a>memory interface implemented using a pair of Xilinx <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.83.html#271171', '');" title="Shared Memory">Shared Memory</a></span>  blocks. The two Shared Memory blocks are distributed so that one block resides in domain <span class="Filename">ss_clk_domainA</span> and the other resides in domain <span class="Filename">ss_clk_domainB</span>. Both blocks specify the same shared memory object name, <span class="Filename">bram_iface</span>. This allows the Shared Memory blocks to access a common address space during simulation. Note that in the diagram there is no physical connection shown between the two shared memory halves. This is because the connection is implicitly defined by the fact that the two Shared Memory blocks specify the same shared memory object name and therefore, share an address space. When the two subsystems are wired together and translated into hardware, the shared memory blocks are moved from their respective subsystems and merged into a block RAM core. For more information on how this works, refer to the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.61.html#573408', '');" title="Multiple Subsystem Generator">Multiple Subsystem Generator</a></span> . </div>
+      <div class="Body"><a name="312982">The synchronous islands sample different input sources. Island ss_clk_domainA samples a </a>sinusoid input, while ss_clk_domainB samples a saw-tooth wave input. Each subsystem writes its samples into opposite halves of the shared memory. Once an island has filled its half of memory, it reads samples from the other island's half. You can simulate the design to visualize of the model's behavior. </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="312983">Press the Simulink </a><span class="Bold">Start</span> button to simulate the design. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="312984">Open the scope to visualize the output signals. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="312985">Also shown in the output scope are the two clocks, clk_A and clk_B. At the default time </a>scale, it is difficult to distinguish the two. Zoom in to get a more detailed view.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="312991"><img class="Default" src="images/HW_Design.6.14.4.jpg" width="527" height="362" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="312992">Notice that </a><span class="Filename">clk_A</span> and <span class="Filename">clk_B</span> have different periods and are out of phase with one another. Earlier, it was claimed that System Generator uses a single clock source per design. In the scope, you clearly see two different clocks. How is this possible? </div>
+      <div class="Body"><a name="312993">The answer is in the hierarchical construction of the design. All blocks are buried in at least </a>one level of hierarchy using subsystems. Because there is no System Generator block at the top level, you can consider each subsystem as a completely separate System Generator design (at least for the time being). In this model, you have effectively defined two clock domains by giving the <span class="Filename">ss_clk_domainA</span> and <span class="Filename">ss_clk_domainB</span> subsystems different Simulink system periods. This is allowed since you are treating these subsystems as separate System Generator designs. The clock probes in the <span class="Filename">ss_clk_domainA</span> and <span class="Filename">ss_clk_domainB</span> subsystems use the Simulink system periods in their respective subsystems to determine their output, hence different system periods yield different system clocks. </div>
+      <div class="Body"><a name="312994">Now consider the clocks defined by the System Generator block in the </a><span class="Filename">ss_clk_domainA</span> and <span class="Filename">ss_clk_domainB</span> subsystems. </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">5.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="312995">Open the System Generator block parameter dialog boxes inside the </a><span class="Filename">ss_clk_domainA</span> and <span class="Filename">ss_clk_domainB</span> subsystems.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="313001"><img class="Default" src="images/HW_Design.6.14.5.jpg" width="527" height="329" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="313002">The System Generator block dialog box in the </a><span class="Filename">ss_clk_domainA</span> subsystem defines an FPGA clock period of 10ns (i.e., a frequency of 100MHz). To simplify the sample period values in the model, the 10 ns clock is normalized to a Simulink system period value of 2 sec. In the <span class="Filename">ss_clk_domainB</span> subsystem, an FPGA clock period of 15ns (i.e., a frequency 66.7 MHz) is defined. Normalizing this clock period gives us a Simulink system period value of 3 sec. </div>
+      <div class="Body"><a name="313003">Because the two subsystems in this example implement multiple, synchronous, System </a>Generator domains, you will use the Multiple Subsystem Generator block to wire the subsystems together into a single HDL top-level component that exposes two clock ports. When the Multiple Subsystem Generator translates a design into hardware, it generates each subsystem individually as an NGC netlist file. It also creates a top-level VHDL component or Verilog module that instantiates the subsystem netlist files as black boxes, and wires them together using shared memory cores as clock domain bridges. </div>
+      <div class="Body"><a name="313004">You begin by using the Multiple Subsystem Generator block to netlist subsystems </a><span class="Filename">ss_clk_domainA</span> and <span class="Filename">ss_clk_domainB</span>. </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">6.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="313005">Open the Multiple Subsystem Generator dialog box by double clicking on the Multiple </a>Subsystem Generator block included in the top-level of the <span class="Filename">two_async_clks</span> model. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">7.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="313006">Pick a suitable target directory inside the Multiple Subsystem Generator dialog box. </a>The default directory is <span class="Filename">netlist</span>. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">8.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="313007">Press the </a><span class="Bold">Generate</span> button. You may leave the <span class="Bold">Part</span>, <span class="Bold">Synthesis Tool</span>, and <span class="Bold">Hardware </span><span class="Bold">Description Language</span> fields as they are. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="313013"><img class="Default" src="images/HW_Design.6.14.6.jpg" width="527" height="223" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="313014">Once the Multiple Subsystem Generator block is finished running, it will display a </a>message box indicating that generation is complete. It is worthwhile to take a look at the generated results. </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">9.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><span class="Filename"><a name="313015">cd</a></span> into the design's target directory, <span class="Filename">netlist</span>. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="313016">There are two NGC files in this directory: </a><span class="Filename">ss_clk_domaina_cw.ngc</span> and <span class="Filename">ss_clk_domainb_cw.ngc</span>. These files store the netlist and constraints information corresponding to the subsystems <span class="Filename">ss_clk_domaina</span> and <span class="Filename">ss_clk_domainb</span>. Note that these NGC files include the clock wrapper layer logic associated with each subsystem. This is necessary to ensure that any clock enable logic required by a multirate design is included in netlist file. By using the clock wrapper layer of a design, the corresponding clock driver components are automatically included in the netlist. </div>
+      <div class="Body"><a name="313017">Also in this directory is a dual port memory core netlist file named </a><span class="Filename">dual_port_block_memory_virtex2_6_1_ef64ec122427b7be.edn</span>. This core provides the hardware implementation for the Shared Memory blocks used in the original design. The width and depth of the memory are based on values used in the Shared Memory block configurations. </div>
+      <div class="Body"><a name="313018">You will now take a look at the top-level HDL component that the Multiple Subsystem </a>Generator block produced for the design. </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">10.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="313019">Open the two_async_clks.vhd file in a text editor. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="313020">This component defines the HDL top-level for the </a><span class="Filename">two_async_clks</span> model. </div>
+      <div class="Code"><a name="313021">entity two_async_clks is </a></div>
+      <div class="Code"><a name="313022">&nbsp;</a>&nbsp;port ( </div>
+      <div class="Code"><a name="313023">&nbsp;</a>&nbsp;din_a: in std_logic_vector(7 downto 0); </div>
+      <div class="Code"><a name="406289">&nbsp;</a>&nbsp;din_b: in std_logic_vector(7 downto 0); </div>
+      <div class="Code"><a name="406290">&nbsp;</a>&nbsp;ss_clk_domaina_cw_ce: in std_logic := '1'; </div>
+      <div class="Code"><span class="Bold"><a name="406291">&nbsp;</a></span><span class="Bold">&nbsp;</span><span class="Bold">ss_clk_domaina_cw_clk: in std_logic; </span></div>
+      <div class="Code"><a name="313027">&nbsp;</a>&nbsp;ss_clk_domainb_cw_ce: in std_logic := '1'; </div>
+      <div class="Code"><span class="Bold"><a name="313028">&nbsp;</a></span><span class="Bold">&nbsp;</span><span class="Bold">ss_clk_domainb_cw_clk: in std_logic; </span></div>
+      <div class="Code"><a name="313029">&nbsp;</a>&nbsp;dout_a: out std_logic_vector(7 downto 0); </div>
+      <div class="Code"><a name="406322">&nbsp;</a>&nbsp;dout_b: out std_logic_vector(7 downto 0) </div>
+      <div class="Code"><a name="406323">&nbsp;</a>&nbsp;); </div>
+      <div class="Code"><a name="406324">end two_async_clks; </a></div>
+      <div class="Body"><a name="313033">There are several interesting things to notice about the port interface. First, the component </a>exposes two clock ports (shown in <span class="Bold">bold</span> text). The two clock ports are named after the subsystems from which they are derived (e.g., <span class="Filename">ss_clk_domaina</span>), and are wired to their respective subsystem NGC netlist files. Also note that the top-level ports of each subsystem (e.g., <span class="Filename">din_a</span> and <span class="Filename">dout_a</span>) appear as top-level ports in the port interface. </div>
+      <div class="Body"><a name="313034">The Multiple Subsystem Generator block does not generate circuitry (e.g., a DCM) to </a>generate multiple clock sources. You may modify the top-level HDL component to include the circuitry, or instantiate the top-level HDL as a component in a separate wrapper that includes the clocking circuitry. </div>
+      <div class="Heading2"><a name="313035">Creating a Top-Level Wrapper</a></div>
+      <div class="Body"><a name="313036">If you decide to create a top-level HDL wrapper for your multi-clock System Generator </a>design, it should perform the following tasks at a minimum: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="313037">Instantiate the System Generator top-level component along with other wrapper logic </a>(e.g., a DCM); </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="313038">Wire the System generator component to the other logic; </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="313039">Create a new top-level port map which supersedes that from the System Generator </a>component. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="313040">The following is an example of making a top-level HDL component to instantiate clocking </a>circuitry. In this example, you take the output created when the example from the previous topic is generated using the Multiple Subsystem Generator block. The resulting System Generator design is called <span class="Filename">two_async_clks</span> and the top-level HDL component is called <span class="Filename">top_wrapper</span> (for the case of VHDL synthesis). </div>
+      <div class="Body"><a name="313041">Because the clock lines and main clock enables are inferred, the names of the clocks and </a>clock enables (with the <span class="Filename">_ce</span> and <span class="Filename">_clk</span> suffixes above) are generated automatically by putting suffixes on the subsystem names from which the clocks are inferred. The other port names, such as <span class="Filename">dout_a</span>, are taken directly from the names given to the gateway blocks in the System Generator design. </div>
+      <div class="Body"><a name="313042">An example VHDL top-level wrapper to instantiate the entity </a><span class="Filename">two_async_clks</span>, with deletions made for clarity, is provided below. Note that the wrapper uses a DCM component to generate the two clocks required by the System Generator design. </div>
+      <div class="Code"><span class="XBlueLink"><a name="313043">----------------------------------------------------------------------</a></span><span class="XBlueLink">------- </span></div>
+      <div class="Code"><span class="XBlueLink"><a name="313044">-- top_wrapper.vhd </a></span></div>
+      <div class="Code"><span class="XBlueLink"><a name="313045">-- Example Top Level Wrapper </a></span></div>
+      <div class="Code"><span class="XBlueLink"><a name="313046">-- </a></span></div>
+      <div class="Code"><span class="XBlueLink"><a name="313047">-- This is an example top-level wrapper for instantiating a System </a></span><span class="XBlueLink">Generator </span></div>
+      <div class="Code"><span class="XBlueLink"><a name="313048">-- design along with a DCM. In this example, the DCM connects the two </a></span><span class="XBlueLink">clock </span></div>
+      <div class="Code"><span class="XBlueLink"><a name="313049">-- inputs of the System Generator block ('two_async_clks') to two </a></span><span class="XBlueLink">buffered </span></div>
+      <div class="Code"><span class="XBlueLink"><a name="313050">-- outputs of the DCM, namely, CLK0 and CLKFX. CLK0 is the same </a></span><span class="XBlueLink">frequency </span></div>
+      <div class="Code"><span class="XBlueLink"><a name="313051">-- and phase as the input clock, and CLKFX is configured to be twice the </a></span></div>
+      <div class="Code"><span class="XBlueLink"><a name="313052">-- frequency of the input clock. </a></span></div>
+      <div class="Code"><span class="XBlueLink"><a name="313053">----------------------------------------------------------------------</a></span><span class="XBlueLink">--------- </span></div>
+      <div class="Code"><a name="313054">library IEEE; </a></div>
+      <div class="Code"><a name="313055">library unisim; </a></div>
+      <div class="Code"><a name="313056">use IEEE.std_logic_1164.all; </a></div>
+      <div class="Code"><a name="313057">use unisim.vcomponents.all; </a></div>
+      <div class="Code"><a name="313058">entity top_wrapper is </a></div>
+      <div class="Code"><a name="313059">&nbsp;</a>&nbsp;port ( </div>
+      <div class="Code"><a name="313060">&nbsp;</a>&nbsp;&nbsp;&nbsp;clk  : in  std_logic; </div>
+      <div class="Code"><a name="313061">&nbsp;</a>&nbsp;&nbsp;&nbsp;din_a  : in  std_logic_vector(7 downto 0); </div>
+      <div class="Code"><a name="313062">&nbsp;</a>&nbsp;&nbsp;&nbsp;din_b  : in  std_logic_vector(7 downto 0); </div>
+      <div class="Code"><a name="313063">&nbsp;</a>&nbsp;&nbsp;&nbsp;dout_a  : out std_logic_vector(7 downto 0); </div>
+      <div class="Code"><a name="313064">&nbsp;</a>&nbsp;&nbsp;&nbsp;dout_b  : out std_logic_vector(7 downto 0) </div>
+      <div class="Code"><a name="313065">&nbsp;</a>&nbsp;); </div>
+      <div class="Code"><a name="313066">end top_wrapper;</a></div>
+      <div class="Code"><a name="313067">&nbsp;</a></div>
+      <div class="Code"><a name="313068">architecture structural of top_wrapper is </a></div>
+      <div class="Code"><a name="313069">&nbsp;</a>&nbsp;<span class="XBlueLink">-------------------------------------- </span></div>
+      <div class="Code"><a name="313070">&nbsp;</a>&nbsp;<span class="XBlueLink">-- SysGen Model Component Declaration </span></div>
+      <div class="Code"><a name="313071">&nbsp;</a>&nbsp;<span class="XBlueLink">-------------------------------------- </span></div>
+      <div class="Code"><a name="313072">&nbsp;</a>&nbsp;component two_async_clks </div>
+      <div class="Code"><a name="313073">&nbsp;</a>&nbsp;&nbsp;&nbsp;port ( </div>
+      <div class="Code"><a name="313074">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;din_a: in std_logic_vector(7 downto 0); </div>
+      <div class="Code"><a name="313075">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;din_b: in std_logic_vector(7 downto 0); </div>
+      <div class="Code"><a name="313076">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ss_clk_domaina_cw_ce: in std_logic := '1'; </div>
+      <div class="Code"><a name="313077">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ss_clk_domaina_cw_clk: in std_logic; </div>
+      <div class="Code"><a name="313078">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ss_clk_domainb_cw_ce: in std_logic := '1'; </div>
+      <div class="Code"><a name="313079">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ss_clk_domainb_cw_clk: in std_logic; </div>
+      <div class="Code"><a name="313080">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dout_a: out std_logic_vector(7 downto 0); </div>
+      <div class="Code"><a name="313081">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dout_b: out std_logic_vector(7 downto 0) </div>
+      <div class="Code"><a name="313082">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;); </div>
+      <div class="Code"><a name="313083">  end component; </a></div>
+      <div class="Code"><a name="313084">  component bufg </a></div>
+      <div class="Code"><a name="313085">&nbsp;</a>&nbsp;port(i: in std_logic; </div>
+      <div class="Code"><a name="313086">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o: out std_logic); </div>
+      <div class="Code"><a name="313087">&nbsp;</a>&nbsp;end component; </div>
+      <div class="Code"><a name="313088">  </a><span class="XBlueLink">-------------------------------------- </span></div>
+      <div class="Code"><span class="XBlueLink"><a name="313089">  -- DCM Component Declaration</a></span></div>
+      <div class="Code"><span class="XBlueLink"><a name="313090">  -------------------------------------- </a></span></div>
+      <div class="Code"><a name="313091">  component dcm </a></div>
+      <div class="Code"><a name="313092">&nbsp;</a>&nbsp;-- synopsys translate_off </div>
+      <div class="Code"><a name="313093">&nbsp;</a>&nbsp;generic (clkout_phase_shift  : string := "fixed"; </div>
+      <div class="Code"><a name="313094">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dll_frequency_mode  : string := "low"; </div>
+      <div class="Code"><a name="313095">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;duty_cycle_correction : boolean := true; </div>
+      <div class="Code"><a name="313096">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clkdv_divide  : real := 3; </div>
+      <div class="Code"><a name="313097">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clkfx_multiply  : integer := 2; </div>
+      <div class="Code"><a name="313098">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clkfx_divide  : integer := 1); </div>
+      <div class="Code"><a name="406512">&nbsp;</a>&nbsp;-- synopsys translate_on </div>
+      <div class="Code"><a name="406513">&nbsp;</a>&nbsp;port (clkin  : in  std_logic; </div>
+      <div class="Code"><a name="406514">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clkfb  : in  std_logic; </div>
+      <div class="Code"><a name="313102">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dssen  : in  std_logic; </div>
+      <div class="Code"><a name="313103">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;psincdec : in  std_logic; </div>
+      <div class="Code"><a name="313104">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;psen  : in  std_logic; </div>
+      <div class="Code"><a name="313105">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;psclk  : in  std_logic; </div>
+      <div class="Code"><a name="313106">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rst  : in  std_logic; </div>
+      <div class="Code"><a name="313107">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clk0  : out std_logic; </div>
+      <div class="Code"><a name="313108">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clk90  : out std_logic; </div>
+      <div class="Code"><a name="313109">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clk180  : out std_logic; </div>
+      <div class="Code"><a name="313110">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clk270  : out std_logic; </div>
+      <div class="Code"><a name="313111">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clk2x  : out std_logic; </div>
+      <div class="Code"><a name="313112">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clk2x180 : out std_logic; </div>
+      <div class="Code"><a name="313113">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clkdv  : out std_logic; </div>
+      <div class="Code"><a name="313114">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clkfx  : out std_logic; </div>
+      <div class="Code"><a name="313115">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clkfx180 : out std_logic; </div>
+      <div class="Code"><a name="313116">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;locked  : out std_logic; </div>
+      <div class="Code"><a name="313117">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;psdone  : out std_logic; </div>
+      <div class="Code"><a name="313118">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;status  : out std_ulogic_vector(7 downto 0)); </div>
+      <div class="Code"><a name="313119">&nbsp;</a>&nbsp;end component; </div>
+      <div class="Code"><a name="313120">&nbsp;</a>&nbsp;<span class="XBlueLink">-------------------------------------- </span></div>
+      <div class="Code"><a name="313121">&nbsp;</a>&nbsp;<span class="XBlueLink">-- DCM Attributes </span></div>
+      <div class="Code"><a name="313122">&nbsp;</a>&nbsp;<span class="XBlueLink">-------------------------------------- </span></div>
+      <div class="Code"><a name="313123">&nbsp;</a>&nbsp;attribute dll_frequency_mode  : string; </div>
+      <div class="Code"><a name="313124">&nbsp;</a>&nbsp;attribute duty_cycle_correction  : string; </div>
+      <div class="Code"><a name="313125">&nbsp;</a>&nbsp;attribute startup_wait  : string; </div>
+      <div class="Code"><a name="313126">&nbsp;</a>&nbsp;attribute clkdv_divide  : string; </div>
+      <div class="Code"><a name="313127">&nbsp;</a>&nbsp;attribute clkfx_multiply  : string; </div>
+      <div class="Code"><a name="313128">&nbsp;</a>&nbsp;attribute clkfx_divide  : string; </div>
+      <div class="Code"><a name="313129">&nbsp;</a>&nbsp;attribute clkin_period  : string; </div>
+      <div class="Code"><a name="313130">&nbsp;</a></div>
+      <div class="Code"><a name="313131">&nbsp;</a>&nbsp;attribute duty_cycle_correction of dcm0 : label is "true"; </div>
+      <div class="Code"><a name="313132">&nbsp;</a>&nbsp;attribute startup_wait of dcm0  : label is "false"; </div>
+      <div class="Code"><a name="313133">&nbsp;</a>&nbsp;attribute dll_frequency_mode of dcm0  : label is "low"; </div>
+      <div class="Code"><a name="313134">&nbsp;</a>&nbsp;attribute clkdv_divide of dcm0  : label is "3"; </div>
+      <div class="Code"><a name="313135">&nbsp;</a>&nbsp;attribute clkfx_multiply of dcm0  : label is "2"; </div>
+      <div class="Code"><a name="313136">&nbsp;</a>&nbsp;attribute clkfx_divide of dcm0  : label is "1"; </div>
+      <div class="Code"><a name="313137">&nbsp;</a>&nbsp;attribute clkin_period of dcm0  : label is "10"; </div>
+      <div class="Code"><a name="313138">&nbsp;</a></div>
+      <div class="Code"><a name="313139">&nbsp;</a>&nbsp;signal clk0unbuf  : std_logic; </div>
+      <div class="Code"><a name="313140">&nbsp;</a>&nbsp;signal clk0buf  : std_logic; </div>
+      <div class="Code"><a name="313141">&nbsp;</a>&nbsp;signal clkfxbuf  : std_logic; </div>
+      <div class="Code"><a name="313142">&nbsp;</a>&nbsp;signal clk2xunbuf  : std_logic; </div>
+      <div class="Code"><a name="313143">&nbsp;</a>&nbsp;signal clkfxunbuf  : std_logic; </div>
+      <div class="Code"><a name="313144">&nbsp;</a>&nbsp;signal clkdvunbuf  : std_logic; </div>
+      <div class="Code"><a name="313145">&nbsp;</a>&nbsp;signal clkdvbuf  : std_logic; </div>
+      <div class="Code"><a name="313146">&nbsp;</a>&nbsp;signal ff1,ff2,ff3,ff4  : std_logic; </div>
+      <div class="Code"><a name="313147">&nbsp;</a>&nbsp;signal dcm_rst  : std_logic; </div>
+      <div class="Code"><a name="313148">&nbsp;</a>&nbsp;signal intlock  : std_logic; </div>
+      <div class="Code"><a name="313149">&nbsp;</a></div>
+      <div class="Code"><span class="XBlueLink"><a name="313150">----------------------------------------------------------------------</a></span><span class="XBlueLink">--------- </span></div>
+      <div class="Code"><span class="XBlueLink"><a name="313151">-- The top level instantiates the SysGen design, a DCM, and two BUFGs. </a></span></div>
+      <div class="Code"><span class="XBlueLink"><a name="313152">-- The DCM generates two clocks of different frequencies. </a></span></div>
+      <div class="Code"><span class="XBlueLink"><a name="313153">-- These two clocks are used to drive the two different clock domains </a></span></div>
+      <div class="Code"><span class="XBlueLink"><a name="313154">-- in the SysGen block. </a></span></div>
+      <div class="Code"><span class="XBlueLink"><a name="313155">----------------------------------------------------------------------</a></span><span class="XBlueLink">--------- </span></div>
+      <div class="Code"><a name="313156">begin </a></div>
+      <div class="Code"><a name="313157">&nbsp;</a>&nbsp;dcm0: dcm </div>
+      <div class="Code"><a name="313158">&nbsp;</a>&nbsp;-- synopsys translate_off </div>
+      <div class="Code"><a name="313159">&nbsp;</a>&nbsp;generic map (dll_frequency_mode =&gt; frequency_mode, </div>
+      <div class="Code"><a name="313160">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clkdv_divide  =&gt; clkdv_divide_generic, </div>
+      <div class="Code"><a name="313161">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clkfx_multiply  =&gt; clkfx_multiply_generic, </div>
+      <div class="Code"><a name="313162">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clkfx_divide  =&gt; clkfx_divide_generic) </div>
+      <div class="Code"><a name="313163">&nbsp;</a>&nbsp;-- synopsys translate_on </div>
+      <div class="Code"><a name="313164">&nbsp;</a>&nbsp;port map (clkin  =&gt; clk, </div>
+      <div class="Code"><a name="313165">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clkfb  =&gt; clk0buf, </div>
+      <div class="Code"><a name="313166">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dssen  =&gt; '0', </div>
+      <div class="Code"><a name="313167">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;psincdec =&gt; '0', </div>
+      <div class="Code"><a name="313168">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;psen  =&gt; '0', </div>
+      <div class="Code"><a name="313169">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;psclk  =&gt; '0', </div>
+      <div class="Code"><a name="313170">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rst  =&gt; dcm_rst, </div>
+      <div class="Code"><a name="313171">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clk0  =&gt; clk0unbuf, </div>
+      <div class="Code"><a name="313172">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clk2x  =&gt; clk2xunbuf, </div>
+      <div class="Code"><a name="313173">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clkfx  =&gt; clkfxunbuf, </div>
+      <div class="Code"><a name="313174">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clkdv  =&gt; clkdvunbuf, </div>
+      <div class="Code"><a name="313175">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;locked  =&gt; intlock); </div>
+      <div class="Code"><a name="313176">&nbsp;</a>&nbsp;bufg_clk0: bufg </div>
+      <div class="Code"><a name="313177">&nbsp;</a>&nbsp;port map (i =&gt; clk0unbuf, </div>
+      <div class="Code"><a name="313178">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o  =&gt; clk0buf); </div>
+      <div class="Code"><a name="313179">&nbsp;</a>&nbsp;bufg_clkfx: bufg </div>
+      <div class="Code"><a name="313180">&nbsp;</a>&nbsp;port map (i =&gt; clkfxunbuf, </div>
+      <div class="Code"><a name="313181">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o  =&gt; clkfxbuf); </div>
+      <div class="Code"><a name="313182">&nbsp;</a></div>
+      <div class="Code"><a name="313183">&nbsp;</a></div>
+      <div class="Code"><a name="313184">&nbsp;</a>&nbsp;<span class="XBlueLink">-------------------------------------------------------------------- </span><span class="XBlueLink">	</span>&nbsp;&nbsp;<span class="XBlueLink">-- This is the DCM reset. It is a four-cycle shift register used to </span></div>
+      <div class="Code"><a name="313185">&nbsp;</a>&nbsp;<span class="XBlueLink">-- hold the DCM in reset for a few cycles after programming. </span></div>
+      <div class="Code"><a name="313186">&nbsp;</a>&nbsp;<span class="XBlueLink">--------------------------------------------------------------------</span></div>
+      <div class="Code"><a name="313187">&nbsp;</a>&nbsp;flop1: FDS port map (D =&gt; '0', C =&gt; clk, Q =&gt; ff1, S =&gt; '0'); </div>
+      <div class="Code"><a name="313188">&nbsp;</a>&nbsp;flop2: FD port map  (D =&gt; ff1, C =&gt; clk, Q =&gt; ff2); </div>
+      <div class="Code"><a name="313189">&nbsp;</a>&nbsp;flop3: FD port map  (D =&gt; ff2, C =&gt; clk, Q =&gt; ff3); </div>
+      <div class="Code"><a name="313190">&nbsp;</a>&nbsp;flop4: FD port map  (D =&gt; ff3, C =&gt; clk, Q =&gt; ff4); </div>
+      <div class="Code"><a name="313191">&nbsp;</a>&nbsp;dcm_rst &lt;= ff2 or ff3 or ff4; </div>
+      <div class="Code"><a name="313192">&nbsp;</a></div>
+      <div class="Code"><a name="313193">&nbsp;</a>&nbsp;------------------------------------------------------------ </div>
+      <div class="Code"><a name="313194">&nbsp;</a>&nbsp;-- SysGen Component Port Mapping </div>
+      <div class="Code"><a name="313195">&nbsp;</a>&nbsp;-- One clock input is being connected to clk0 of the DCM, </div>
+      <div class="Code"><a name="313196">&nbsp;</a>&nbsp;-- and the other clock is being connected to clkfx. </div>
+      <div class="Code"><a name="313197">&nbsp;</a>&nbsp;------------------------------------------------------------ </div>
+      <div class="Code"><a name="313198">&nbsp;</a>&nbsp;two_async_clks: two_async_clks </div>
+      <div class="Code"><a name="313199">&nbsp;</a>&nbsp;port map ( </div>
+      <div class="Code"><a name="313200">&nbsp;</a>&nbsp;&nbsp;&nbsp;din_a  =&gt; din_a, </div>
+      <div class="Code"><a name="313201">&nbsp;</a>&nbsp;&nbsp;&nbsp;din_b  =&gt; din_b, </div>
+      <div class="Code"><a name="313202">&nbsp;</a>&nbsp;&nbsp;&nbsp;ss_clk_domaina_cw_ce  =&gt; '1', </div>
+      <div class="Code"><a name="313203">&nbsp;</a>&nbsp;&nbsp;&nbsp;ss_clk_domaina_cw_clk =&gt; clk0buf, </div>
+      <div class="Code"><a name="313204">&nbsp;</a>&nbsp;&nbsp;&nbsp;ss_clk_domainb_cw_ce  =&gt; '1', </div>
+      <div class="Code"><a name="406745">&nbsp;</a>&nbsp;&nbsp;&nbsp;ss_clk_domainb_cw_clk =&gt; clkfxbuf, </div>
+      <div class="Code"><a name="406746">&nbsp;</a>&nbsp;&nbsp;&nbsp;dout_b  =&gt; dout_b); </div>
+      <div class="Code"><a name="406747">end structural;</a></div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

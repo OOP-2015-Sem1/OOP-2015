@@ -1,0 +1,42 @@
+<html>
+<body>
+<h3><font size=+1 color="#990000">Matrix inversion using Squared Givens Rotations</font></h3>
+<p>
+Matrix inversion is used in a variety of scenarious including adaptiove estimation,
+beamforming etc. This design implements matrix inversion using floating point capability
+in SysGen. Matrix inversion is realized by first triangularizing the input matrix
+and then computing the inverse using backsubstition. Computation of matrix inversion
+can therefore, be posed as follows:
+<br>
+<br>
+A*X = I - (i)
+<br>
+<br>
+T*A*X = TI -(ii)
+<br>
+<br>
+Here we determine T such that T*A becomes an upper triangular matrix(U). 
+The above equation therefore simplifies to :<br>
+<br>
+UX = TI - (iii)
+<br>    
+<br>    
+Using (iii) it is possible to compute X using back substitution. This method of computing
+the inverse is generally more stable than using the direct adjacent matrix approach. Many 
+algorithms exist to find T including Givens Rotations. In this example we have adopted 
+Squared Givens Rotations, a variation of Givens Rotation as described by R. Dohler, to 
+perform triangularization of matrix A.
+</p>
+<p>
+The model provided in this design consists of two Subsystems. SquaredGivensRotations performs
+triangularization of the input matrix using the algorithm described in Reference 2.(See below).
+This particular subsystem is programmatically generated using 
+<b>sysgenMatrixInversSGRGeneration</b> script provided with this design. 
+For more details on programmatic generation please refer to the section on 
+<b>System Generator API for Programmatic Generation</b>
+</p>
+<p>References:</p>
+<p>1. “Squared Givens Rotation,” IMA Journal of Numerical Analysis, no. 11, pp. 1–5, 1991</p>
+<p>2. "FPGA Implementation of Matrix Inversion Using QRD-RLS Algorithm",Signals, Systems and Computers, 2005. Conference</p>
+</body>
+</html> 

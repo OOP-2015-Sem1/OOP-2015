@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Configurable Subsystem Manager</title>
+    <link rel="StyleSheet" href="css/Xilinx_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Blockset.11.001.html#271114">Xilinx Blockset</a> : Configurable Subsystem Manager</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="271114">Configurable Subsystem Manager</a></div>
+      <div class="Body"><span class="Italic"><a name="275486">This block is listed in the following Xilinx Blockset libraries: Tools and Index.</a></span></div>
+      <div class="OneLiner"><a name="367705"><img class="Default" src="images/Xilinx_Blockset.11.021.1.jpg" width="68" height="57" style="display: block; float: none; left: 0.0; top: 0.0" alt="" />The Xilinx Configurable Subsystem Manager extends Simulink's </a>configurable subsystem capabilities to allow a subsystem configurations to be selected for hardware generation as well as for simulation. </div>
+      <div class="Body"><a name="1101109">This block can be used to create Simulink library blocks (subsystems) that </a>have special capabilities when used with the System Generator software. For details on how configurable subsystems, refer to the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.06.09.html#415518', '');" title="Configurable Subsystems and System Generator">Configurable Subsystems and System Generator</a></span> .</div>
+      <div class="Body"><a name="369889">System Generator will automatically insert Configurable Subsystem Manager blocks into </a>library subsystems that it generates through its “Import as Configurable Subsystem” capability. It is also possible to hand-build library subsystems that take advantage of the Simulink and System Generator configurable subsystem capabilities. </div>
+      <div class="Body"><a name="368015">Recall that a configurable subsystem consists of a collection of sub-blocks, exactly one of </a>which "represents" the subsystem at any given time. (The so-called "block choice" for the subsystem specifies which sub-block should be the representative.) The representative is the sub-block used to produce results for the subsystem when simulating. </div>
+      <div class="Body"><a name="368019">System Generator designs can be simulated, but can also be translated into hardware, and </a>it is often useful to identify a second block to be used as a configurable subsystem's "hardware representative". The hardware representative is the sub-block used to translating the configurable subsystem into hardware. For example, suppose a configurable subsystem consists of two sub-blocks, namely a black box whose HDL implements a filter, and a subsystem that implements the same filter using ordinary System Generator blocks. Then it is natural to use the subsystem as the representative and the black box as the hardware representative, i.e., to use the subsystem in simulations, and the black box HDL to generate hardware. </div>
+      <div class="Body"><a name="368023">The configurable subsystem manager specifies which sub-block in a System Generator </a>configurable subsystem should be the hardware representative. To specify the hardware representative, do the following: 1) Place a manager inside one of the sub-blocks, and 2) Use the manager's <span class="Bold">When generating, use</span> parameter to select the hardware representative. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="368029">It is only possible to use a configurable subsystem manager by placing it inside a sub-block of </a>a configurable subsystem. This means that at least one sub-block must be a subsystem. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="367708">When several sub-blocks contain managers, the managers automatically synchronize so they </a>agree on the choice of hardware representative.</div>
+      <div class="Heading2"><a name="275492">Block Parameters</a></div>
+      <div class="Body"><a name="275493">The dialog box for a configurable subsystem manager is shown below: </a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="275498"><img class="Default" src="images/Xilinx_Blockset.11.021.2.jpg" width="227" height="114" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="322983">This block has one parameter, labeled </a><span class="Bold">When generating, use</span>. The parameter specifies which sub-block to use as the hardware representative. An example list of choices is shown below.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="370013"><img class="Default" src="images/Xilinx_Blockset.11.021.3.jpg" width="157" height="45" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="371826">When </a><span class="Bold">Configurable Subsystem Block Choice</span> is selected, the sub-block specified as the representative for the configurable subsystem is also used for generating hardware. Otherwise, the sub-block selected from the list is used as the hardware representative.</div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

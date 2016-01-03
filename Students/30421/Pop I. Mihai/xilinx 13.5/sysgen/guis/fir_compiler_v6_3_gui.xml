@@ -1,0 +1,236 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="FIR Compiler 6.3 " block_type="fir_compiler_v6_3">
+  <icon width="240" height="206" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen" entry_point="coregenimport_config"/>
+  <handlers enablement="xlipmagiccallback_pass_evaluate_params" action="fir_compiler_v6_3_action"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsAXI4"/>
+    <library name="xbsDSP"/>
+  </libraries>
+  <blockgui label="Xilinx FIR Compiler 6.3">
+    <tabpane>
+     <tab name="Page1_tab" label="Filter Specification">
+        <etch label="Filter Coefficients">
+          <editbox name="coefficientvector" default="[6,0,-4,-3,5,6,-6,-13,7,44,64,44,7,-13,-6,6,5,-3,-4,0,6]" top_label="true" evaluate="true" label="Coefficient Vector :" ctype="DoubleVector"/>
+          <editbox name="coefficient_sets" default="1" top_label="false" evaluate="true" label="Number of Coefficient Sets :" ctype="Int"/>
+          <checkbox name="coefficient_reload" default="off" label="Use Reloadable Coefficients" ctype="Bool" allow_advanced="false"/>
+        </etch>
+        <etch label="Filter Specification">
+          <listbox name="filter_type" default="Single_Rate" evaluate="false" label="Filter Type :" ctype="String" allow_advanced="false">
+            <item value="Single_Rate"/>
+            <item value="Interpolation"/>
+            <item value="Decimation"/>
+            <item value="Hilbert"/>
+            <item value="Interpolated"/>
+          </listbox>
+          <listbox name="rate_change_type" default="Integer" evaluate="false" label="Rate Change Type :" ctype="String" allow_advanced="false">
+            <item value="Integer"/>
+            <item value="Fixed_Fractional"/>
+          </listbox>
+          <editbox name="interpolation_rate" default="1" top_label="false" evaluate="true" label="Interpolation Rate Value :" ctype="Int"/>
+          <editbox name="decimation_rate" default="1" top_label="false" evaluate="true" label="Decimation Rate Value :" ctype="Int"/> 
+          <editbox name="zero_pack_factor" default="1" top_label="false" evaluate="true" label="Zero Pack Factor :" ctype="Int"/>
+        </etch>
+      </tab>
+      <tab name="Page2_tab" label="Channel Specification">
+        <etch label="Interleaved Channel Specification"> 
+          <listbox name="channel_sequence" default="Basic" evaluate="false" label="Channel Sequence :" ctype="String" allow_advanced="false">
+            <item value="Basic"/>
+            <item value="Advanced"/> 
+          </listbox>
+         <editbox name="number_channels" default="1" top_label="false" evaluate="true" label="Number of Channels :" ctype="Int"/>
+          <editbox name="pattern_list" default="'P4-0,P4-1,P4-2,P4-3,P4-4'" top_label="false" evaluate="true" label="Sequence ID List :" ctype="String"/>
+        </etch>
+        <etch label="Parallel Channel Specification">
+          <editbox name="number_paths" default="1" top_label="false" evaluate="true" label="Number of Paths :" ctype="Int"/>
+        </etch>
+        <etch label="Hardware Oversampling Specification">
+          <editbox name="infoedit" read_only="true" multi_line="true" default="Maximum Possible : Maximizes oversampling rate. Abstracted input handshake (no s_data_tvalid) and automatic rate propagation.&lt;br&gt;Hardware Oversampling Rate : Specifies oversampling rate relative to the input sample period. Abstracted input handshake (no s_data_tvalid) and automatic rate propagation.&lt;br&gt;Sample Period : Specifies absolute oversampling rate. No input handshake abstraction (exposes s_data_tvalid) and no rate propagation." evaluate="false"/>
+          <listbox name="ratespecification" default="Maximum_Possible" evaluate="false" label="Select format :" ctype="String" allow_advanced="false">
+            <item value="Maximum_Possible"/>
+            <item value="Sample_Period"/>
+            <item value="Hardware_Oversampling_Rate"/>
+          </listbox>
+          <editbox name="sampleperiod" default="1" top_label="false" evaluate="true" label="Sample period :" ctype="Int"/>
+          <editbox name="hardwareoversamplingrate" default="1" top_label="false" evaluate="true" label="Hardware Oversampling Rate :" ctype="Int"/>
+        </etch>
+      </tab> 
+     <tab name="Page3_tab" label="Implementation">
+        <etch label="Coefficient Options">
+          <listbox name="coefficient_sign" default="Signed" evaluate="false" label="Coefficient Type :" ctype="String" allow_advanced="false">
+            <item value="Signed"/>
+            <item value="Unsigned"/>
+          </listbox>
+          <listbox name="quantization" default="Integer_Coefficients" evaluate="false" label="Quantization :" ctype="String" allow_advanced="false">
+            <item value="Integer_Coefficients"/>
+            <item value="Quantize_Only"/>
+            <item value="Maximize_Dynamic_Range"/>
+          </listbox>
+          <editbox name="coefficient_width" default="16" top_label="false" evaluate="true" label="Coefficient Width :" ctype="Int"/>
+          <checkbox name="bestprecision" default="on" label="Best Precision Fraction Length" ctype="Bool" allow_advanced="false"/>
+          <editbox name="coefficient_fractional_bits" default="0" top_label="false" evaluate="true" label="Coefficient Fractional Bits :" ctype="Int"/>
+          <listbox name="coefficient_structure" default="Inferred" evaluate="false" label="Coefficient Structure :" ctype="String" allow_advanced="false">
+            <item value="Inferred"/>
+            <item value="Non_Symmetric"/>
+            <item value="Symmetric"/>
+            <item value="Negative_Symmetric"/>
+            <item value="Half_Band"/>
+            <item value="Hilbert"/>
+          </listbox>
+        </etch>
+        <etch label="Datapath Options">
+          <listbox name="output_rounding_mode" default="Full_Precision" evaluate="false" label="Output Rounding Mode :" ctype="String" allow_advanced="false">
+            <item value="Full_Precision"/>
+            <item value="Truncate_LSBs"/>
+            <item value="Non_Symmetric_Rounding_Down"/>
+            <item value="Non_Symmetric_Rounding_Up"/>
+            <item value="Symmetric_Rounding_to_Zero"/>
+            <item value="Symmetric_Rounding_to_Infinity"/>
+            <item value="Convergent_Rounding_to_Even"/>
+            <item value="Convergent_Rounding_to_Odd"/>
+          </listbox>
+          <editbox name="output_width" default="24" top_label="false" evaluate="true" label="Output Width :" ctype="Int"/>
+        </etch>
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation" ctype="Bool" allow_advanced="false"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" evaluate="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]" />
+        </etch>
+      </tab>
+      <tab name="Page4_tab" label="Detailed Implementation">
+        <listbox name="filter_architecture" default="Systolic_Multiply_Accumulate" evaluate="false" label="Filter Architecture :" ctype="String" allow_advanced="false">
+          <item value="Systolic_Multiply_Accumulate"/>
+          <item value="Transpose_Multiply_Accumulate"/>
+        </listbox>
+        <listbox name="optimization_goal" default="Area" evaluate="false" label="Optimization Goal" ctype="String" allow_advanced="false">
+          <item value="Area"/>
+          <item value="Speed"/>
+          <item value="Speed_(Control_only)"/>
+          <item value="Speed_(Data_only)"/>
+        </listbox>
+        <etch label="Memory Options">
+          <listbox name="data_buffer_type" default="Automatic" evaluate="false" label="Data Buffer Type :" ctype="String" allow_advanced="false">
+            <item value="Automatic"/>
+            <item value="Block"/>
+            <item value="Distributed"/>
+            <item value="Not_Applicable"/>
+          </listbox>
+          <listbox name="coefficient_buffer_type" default="Automatic" evaluate="false" label="Coefficient Buffer Type :" ctype="String" allow_advanced="false">
+            <item value="Automatic"/>
+            <item value="Block"/>
+            <item value="Distributed"/>
+            <item value="Not_Applicable"/>
+          </listbox>
+          <listbox name="input_buffer_type" default="Automatic" evaluate="false" label="Input Buffer Type :" ctype="String" allow_advanced="false">
+            <item value="Automatic"/>
+            <item value="Block"/>
+            <item value="Distributed"/>
+            <item value="Not_Applicable"/>
+          </listbox>
+          <listbox name="output_buffer_type" default="Automatic" evaluate="false" label="Output Buffer Type :" ctype="String" allow_advanced="false">
+            <item value="Automatic"/>
+            <item value="Block"/>
+            <item value="Distributed"/>
+            <item value="Not_Applicable"/>
+          </listbox>
+          <listbox name="preference_for_other_storage" default="Automatic" evaluate="false" label="Preference for other storage :" ctype="String" allow_advanced="false">
+            <item value="Automatic"/>
+            <item value="Block"/>
+            <item value="Distributed"/>
+            <item value="Not_Applicable"/>
+          </listbox>
+        </etch>
+        <etch label="DSP Slice Column Options">
+          <listbox name="multi_column_support" default="Automatic" evaluate="false" label="Multi-Column Support :" ctype="String" allow_advanced="false">
+            <item value="Automatic"/>
+            <item value="Custom"/>
+          </listbox>
+          <editbox name="columnconfig" default="'1'" top_label="false" evaluate="true" label="Column Configuration :" ctype="String"/>
+          <editbox name="inter_column_pipe_length" default="4" top_label="false" evaluate="true" label="Inter-Column Pipe Length :" ctype="Int"/>
+        </etch>
+      </tab> 
+     <tab name="Page5_tab" label="Interface">
+        <etch label="Data Channel Options">
+            <listbox name="data_has_tlast" default="Not_Required" evaluate="false" label="TLAST" ctype="String" allow_advanced="false">
+              <item value="Not_Required"/>
+              <item value="Vector_Framing"/>
+              <item value="Packet_Framing"/>
+            </listbox>
+            <checkbox name="m_data_has_tready" default="off" label="Output TREADY" ctype="Bool" allow_advanced="false"/>
+            <checkbox name="s_data_has_fifo" default="off" label="Input FIFO" ctype="Bool" allow_advanced="false"/>
+          <etch label="TUSER">
+            <listbox name="s_data_has_tuser" default="Not_Required" evaluate="false" label="Input : " ctype="String" allow_advanced="false">
+              <item value="Not_Required"/>
+              <item value="User_Field"/>
+              <item value="Chan_ID_Field"/>
+              <item value="User_and_Chan_ID_Field"/>
+            </listbox>
+            <listbox name="m_data_has_tuser" default="Not_Required" evaluate="false" label="Output : " ctype="String" allow_advanced="false">
+              <item value="Not_Required"/>
+              <item value="User_Field"/>
+              <item value="Chan_ID_Field"/>
+              <item value="User_and_Chan_ID_Field"/>
+            </listbox>
+            <!-- <editbox name="data_tuser_width" default="1" top_label="false" evaluate="true" label="Data tuser width" ctype="Int"/> -->
+           </etch>
+        </etch>
+        <etch label="Configuration Channel Options">
+          <listbox name="s_config_sync_mode" default="On_Vector" evaluate="false" label="Synchronization Mode : " ctype="String" allow_advanced="false">
+            <item value="On_Vector"/>
+            <item value="On_Packet"/>
+          </listbox>
+          <listbox name="s_config_method" default="Single" evaluate="false" label="Configuration Method : " ctype="String" allow_advanced="false">
+            <item value="Single"/>
+            <item value="By_Channel"/>
+          </listbox>
+        </etch>
+        <etch label="Reload Channel Options">
+          <editbox name="num_reload_slots" default="1" evaluate="true" label="Reload Slots" ctype="Int"/>
+        </etch>
+        <etch label="Control Options">
+          <checkbox name="has_aclken" default="off" label="ACLKEN" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="has_aresetn" default="off" label="ARESETn (active low)" ctype="Bool" allow_advanced="false"/>
+		  <editbox name="infoeditControl" read_only="true" multi_line="true" default="ARESETn must be asserted for a minmum of 2 cycles" evaluate="false"/>
+        </etch>
+      </tab> 
+      <tab name="Advanced_tab" label="Advanced">
+        <etch label="Block Icon Display">
+          <checkbox name="trim_axipin_name" default="on" label="Display shortened port names" ctype="Int" evaluate="true" allow_advanced="false"/>
+        </etch>
+      </tab> 
+    </tabpane>
+    <!-- Unused GUI parameters for analyzing filter -->
+    <hiddenvar name="passband_min" default="0.0" evaluate="true" ctype="Double"/>
+    <hiddenvar name="passband_max" default="0.5" evaluate="true" ctype="Double"/>
+    <hiddenvar name="stopband_min" default="0.5" evaluate="true" ctype="Double"/>
+    <hiddenvar name="stopband_max" default="1.0" evaluate="true" ctype="Double"/>
+    <hiddenvar name="filter_selection" default="1" evaluate="true" ctype="Int"/>    
+    <!-- Parameters with fixed values-->
+    <hiddenvar name="gui_behaviour" default="Sysgen_GUI"  evaluate="false" ctype="String"/>
+    <!-- Values set by the uUPP -->
+    <hiddenvar name="data_sign" default="Signed" evaluate="false" ctype="String"/>
+    <hiddenvar name="data_width" default="16" evaluate="true" ctype="Int"/>
+    <hiddenvar name="data_fractional_bits" default="0" evaluate="true" ctype="Int"/>
+    <hiddenvar name="data_tuser_width" default="1" evaluate="true" ctype="Int"/>
+    <!-- core import specific parameters -->   
+    <hiddenvar name="wrapper_available" default="true" evaluate="true" ctype="Bool"/> 
+    <hiddenvar name="ip_wrap_arbitrary_binary_point" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="simulation_type" default="external_xfix" evaluate="false" ctype="String"/>
+    <hiddenvar name="simulation_model" default="firv6_3_CModel:firv6_3_cmodel" evaluate="false" ctype="String"/>
+    <hiddenvar name="ip_name" default="FIR Compiler" evaluate="false" ctype="String"/>
+    <hiddenvar name="ip_version" default="6.3" evaluate="false" ctype="String"/>
+    <hiddenvar name="dsptool_ready" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="ipcore_usecache" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="ipcore_useipmodelcache" default="true" evaluate="true" ctype="Bool"/>
+    <!-- <hiddenvar name="ipcore_verbose" default="true" evaluate="true" ctype="Bool"/> -->
+    <hiddenvar name="ipcore_xco_need_fpga_part" default="true" evaluate="true" ctype="Bool" />
+    <hiddenvar name="port_translation_map" default="{ 'aclken' => 'en', 'aresetn' => 'rst' }" evaluate="false" ctype="String"/>
+    <hiddenvar name="run_core_at_system_period" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="ipcore_fpga_part" default="xlipgetpartsetting(gcb, {'virtex6', 'xc6vlx75t', '-3', 'ff784'})" evaluate="true" ctype="StringVector" />
+    <!-- <hiddenvar name="structural_sim" default="false" evaluate="true" ctype="Bool"/> -->
+  </blockgui>
+</sysgenblock>
+
+

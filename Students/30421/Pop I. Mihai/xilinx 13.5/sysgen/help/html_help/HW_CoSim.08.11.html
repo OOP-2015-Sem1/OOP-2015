@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Real-Time Signal Processing using Hardware Co-Simulation</title>
+    <link rel="StyleSheet" href="css/HW_CoSim.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="HW_CoSim.08.01.html#286973">Using Hardware Co-Simulation</a> : Real-Time Signal Processing using Hardware Co-Simulation</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="286973">Real-Time Signal Processing using Hardware Co-Simulation</a></div>
+      <div class="Body"><a name="286974">The shared memory interfaces available in System Generator allow signal processing </a>designs with high bandwidth and memory requirements to be co-simulated using FPGA hardware. When used in conjunction with the Xilinx Shared Memory Read and Write blocks, it is possible for hardware co-simulation designs to process complete Simulink vector and matrix signals in a single simulation cycle. These large data transactions between Simulink and the FPGA are realized using burst transfers, and depending on the co-simulation interface, often provide sufficient throughput for real-time signal processing applications. </div>
+      <div class="Body"><a name="286975">There are two types of System Generator interfaces that support burst transfers when </a>compiled into FPGA hardware. These interfaces include lockable shared memories and shared FIFO blocks. Both blocks provide different handshaking protocols that determine how and when transactions between the FPGA and host PC occur. Before using these blocks, it is useful to understand how they work in relation to hardware co-simulation. For more information, please refer to the following topics: </div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.08.08.html#286614', '');" title="Shared Memory Support" name="286979">Co-Simulating Lockable Shared Memories</a></span></div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.08.08.html#292187', '');" title="Shared Memory Support" name="286983">Co-Simulating Shared FIFOs</a></span> </div>
+      <div class="Body"><a name="286984">In this document, a high-speed co-simulation buffering interface implemented as a System </a>Generator model is presented. The example interface uses lockable-shared memories to implement the required buffer storage. Note that it is relatively straightforward to modify the flow control logic so that shared FIFOs may be used in place of the shared memories. </div>
+      <div class="Body"><a name="286985">The high-speed buffering interface is discussed first, followed by an example in which the </a>interface is used to support real-time processing of a video stream using a 5x5 filter kernel. Described last is how an additional unprotected shared memory is applied to the system to support dynamic reloading of the image kernel during co-simulation.   </div>
+      <div class="Heading2"><a name="286986">Shared Memory I/O Buffering Example</a></div>
+      <div class="Body"><a name="286987">When a lockable shared memory is compiled for hardware co-simulation, additional </a>circuitry is included in the FPGA to the handle the mutual exclusion. Part of this circuitry includes logic to enable high-speed transfers of the memory image when the FPGA acquires or releases lock of the memory. It takes advantage of the lockable shared memory mutual exclusion semantics to implement a high-speed I/O buffering interface for hardware co-simulation. This topic describes this interface, which is included as an example model in your System Generator software installation. </div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="286988">From the MATLAB console, change directory to </a><span class="Filename">&lt;ISE_Design_Suite_tree&gt;/sysgen/examples/shared_memory/hardware_</span><span class="Filename">cosim/io_bufferin</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="286989">Open </a><span class="Filename">highspeed_iobuf_ex.mdl</span> from the MATLAB console. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="286990">The I/O buffering interface allows you to easily buffer and stream data through a System </a>Generator signal processing data path during hardware co-simulation. The example design is comprised of two subsystems that implement input and output buffer storage, named Input Buffer and Output Buffer, respectively. The turquoise block in the center of the diagram is a placeholder for the signal processing data path which you will substitute into the design. </div>
+      <div class="Body"><a name="286991">At the heart of each buffering subsystem is a lockable shared memory block that provides </a>the buffer storage. Each shared memory is wrapped by logic that controls the flow of data from the host PC, through the interface, and back to the host PC. Operation of the I/O buffering interface is shown in the flow chart below:</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="286997"><img class="Default" src="images/HW_CoSim.08.11.01.jpg" width="266" height="490" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="286998">Notice that the buffering interface design includes several </a><span class="Italic">data valid</span> ports. These ports are used for data flow control. A "true" output from the <span class="Filename">Input Buffer dout_valid</span> port indicates new data is ready to be processed by the data path. Likewise, when the data path is finished processing the data, it should drive the <span class="Filename">Output Buffer</span> subsystem's <span class="Filename">din_valid</span> port to "true" to indicate valid output data (the din_valid port is analogous to a write enable control signal). </div>
+      <div class="Body"><a name="286999">The example includes a placeholder that should be replaced by a System Generator data </a>path. You may insert any data path in the buffer interface provided that it works within the valid signal semantics described above. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="293276">The output buffer shared memory does not release lock until the output buffer is full. To avoid </a>deadlock, the number of valid assertions by the data path should equal the output memory buffer size for a given processing cycle. </div>
+      <div class="Heading2"><a name="293277">Applying a 5x5 Filter Kernel Data Path</a></div>
+      <div class="Body"><a name="293278">You will now apply a data path to the I/O buffering interface to demonstrate a complete </a>system capable of processing a 128x128 8-bit grayscale video stream in real-time. You have chosen to use a 5x5 image processing kernel to implement the data path portion of the high-speed buffering interface. For more information about the filter kernel, refer to the System Generator demo entitled <span class="Filename">sysgenConv5x5</span>. You begin by considering various aspects of the design implementation. </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="287003">From the MATLAB console, change directory to </a><span class="Filename">$SYSGEN/examples/shared_memory/hardware_cosim/conv5x5_video</span>. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="287004">Open </a><span class="Filename">conv5x5_video_ex.mdl</span> from the MATLAB console. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading3"><a name="287005">Buffer and Data Path Configuration </a></div>
+      <div class="Body"><a name="287006">With the frame and pixel constraints in mind, the input and output buffer parameter </a>dialog boxes are configured with a depth of 128x128 (16K) words and a word width of 8-bits. This depth allows the interface to process a complete frame in a single simulation cycle. Note that these configuration parameters are propagated automatically to the lockable shared memories that implement the buffer storage. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="287012"><img class="Default" src="images/HW_CoSim.08.11.02.jpg" width="216" height="175" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="287013">The data path uses line buffers to properly align data samples in the filter kernel. The size </a>of these line buffers can be parameterized to accommodate different frame sizes. In this example, the line buffers are implemented in the <span class="Filename">Virtex2 5 Line Buffer</span> block in the <span class="Filename">conv5x5_video_ex/5x5_filter</span> subsystem, and are pre-configured with a line size of 128. If you decide to process a different size frame, the <span class="Filename">Line Size</span> parameter should be updated accordingly.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="287019"><img class="Default" src="images/HW_CoSim.08.11.03.jpg" width="264" height="175" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="287020">Valid Bit Generation</a></div>
+      <div class="Body"><a name="287021">The data path includes a subsystem named </a><span class="Filename">valid_generator</span> that is responsible for driving the <span class="Filename">din_valid</span> port of the output buffer block. The subsystem has two inputs, <span class="Filename">valid_in</span> and offset. The <span class="Filename">valid_in</span> port is driven by the <span class="Filename">dout_valid</span> signal from the input buffer block, which is delayed by a variable number of cycles before it is driven to the <span class="Filename">valid_out</span> port. The logic associated with the <span class="Filename">valid_generator</span> subsystem is shown below. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="287027"><img class="Default" src="images/HW_CoSim.08.11.04.jpg" width="245" height="97" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="287028">An addressable shift register block (ASR) is used to delay the valid bit. The </a><span class="Filename">offset</span> port is used to control the address of the ASR block, which in turn controls the amount of latency the valid bit incurs. By simply delaying the valid bit generated by the input buffer block, You ensure the number of words written to the output buffer is always equal to the buffer size. Note that when the design is run in hardware, a change in the offset value will cause the vertical alignment of the filtered images to change.</div>
+      <div class="Heading3"><a name="287029">Support for Coefficient Reloading</a></div>
+      <div class="Body"><a name="287030">An interesting characteristic of the kernel data path is that its coefficients can be </a>dynamically reloaded at run-time. The 5x5 filter block includes <span class="Filename">Load</span> and <span class="Filename">Coef</span> control ports, which are driven by the <span class="Filename">coefficient_memory</span> subsystem. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="287036"><img class="Default" src="images/HW_CoSim.08.11.05.jpg" width="186" height="108" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="287037">The </a><span class="Filename">coefficient_memory</span> contains a copy of the most recently loaded filter coefficients, which are stored in an <span class="Italic">unprotected</span> shared memory named <span class="Filename">coef_buffer</span>. During run-time, the subsystem monitors the shared memory contents, and initiates a reload sequence if detects a change. By co-simulating the unprotected shared memory, any process on the host PC may write new kernel coefficients simply by writing to a shared memory object named <span class="Filename">coef_buffer</span>. This interface is convenient, as communication with the FPGA hardware is completely abstracted through the Shared Memory API. </div>
+      <div class="Heading3"><a name="287038">Compiling for Hardware Co-simulation</a></div>
+      <div class="Body"><a name="287039">The full filter kernel design must be compiled for hardware co-simulation before it can be </a>simulated. </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">5.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="287040">Double click on the System Generator token located at the top of the </a><span class="Filename">conv5x5_video_ex</span> model. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">6.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="287041">Select an appropriate hardware co-simulation target. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">7.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="287042">Press the </a><span class="Bold">Generate</span> button to compile the design for hardware co-simulation. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="287049">A hardware co-simulation block is created once the design finishes compiling.</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="287048"><img class="Default" src="images/HW_CoSim.08.11.06.jpg" width="56" height="66" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="287050">Hardware co-simulation blocks include information about any shared memories, registers, </a>or FIFOs that were compiled as part of the design. You may view this information by double-clicking on the hardware co-simulation block to open the parameters dialog box. Once the dialog box is open, selecting the <span class="Filename">Shared Memories</span> tab reveals information about each shared memory in the compiled design. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="287056"><img class="Default" src="images/HW_CoSim.08.11.07.jpg" width="217" height="216" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="287057">Go ahead and leave the hardware co-simulation library open. In the next topic you will </a>include the hardware co-simulation block in a video processing testbench design. </div>
+      <div class="Heading2"><a name="287058">5x5 Filter Kernel Test Bench</a></div>
+      <div class="Body"><a name="287059">Included with the example files is a Simulink test bench model that uses the hardware co-</a>simulation block to filter a looped video sequence. </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">8.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="287060">From the </a><span class="Filename">...sysgen/examples/shared_memory/hardware_cosim/conv5x5_video</span> directory, open <span class="Filename">conv5x5_video_testbench.mdl</span>. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="287061">The testbench model uses a From Workspace block to produce the looped video sequence. </a>Each frame of the video sequence is represented as a 128x128 <span class="Filename">uint8</span> Simulink matrix (a pre-load function loads and initializes the video sequence automatically when the model is opened). Video frames are written into the FPGA Processing subsystem where they are filtered at the rate of one frame per simulation cycle. The filtered output is then written to a Matrix Viewer block for analysis. </div>
+      <div class="Body"><a name="287062">The </a><span class="Filename">FPGA Processing</span> subsystem contains a stub for the hardware co-simulation block, as well as Shared Memory Read and Write blocks. In this example, the Shared Memory Read and Write blocks are responsible for managing video frame I/O to and from the shared memories operating inside the FPGA. The operation of these blocks is described below: </div>
+      <div class="NumberedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedSub_inner" style="width: 18pt; white-space: nowrap;">a.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedSub_inner"><a name="287063">The Shared Memory Write block wakes up and requests lock of the input buffer </a>lockable shared memory Foo. Once lock is granted, the block writes the video frame data input into the lockable shared memory and releases lock. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedSubCont_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedSubCont_inner" style="width: 18pt; white-space: nowrap;">b.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedSubCont_inner"><a name="287064">The hardware co-simulation block wakes up and requests lock of the input and </a>output buffer shared memories Foo and Bar. The host PC shared memory images are transferred to the FPGA and lock is granted. The FPGA processes the input buffer data and writes the output into the output buffer. Lastly the FPGA releases lock of Foo and Bar, causing the FPGA shared memory images to be transferred back to the host PC. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedSubCont_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedSubCont_inner" style="width: 18pt; white-space: nowrap;">c.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedSubCont_inner"><a name="287065">The Shared Memory Read block wakes up and requests lock of the output buffer </a>lockable shared memory Bar. The block reads a video from the output buffer and drives its output port with the processed video frame data.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="287071"><img class="Default" src="images/HW_CoSim.08.11.08.jpg" width="273" height="219" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="287072">Note that the three steps listed above assume a specific sequencing of the hardware co-</a>simulation and Shared Memory Read and Write blocks. To ensure these blocks are properly sequenced, you can set block priorities, where a lower priority block is woken up first during simulation. </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">9.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="287073">Add the hardware co-simulation block to the testbench model in place of the turquoise </a>placeholder residing in the <span class="Filename">FPGA Processing</span> subsystem.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="287079"><img class="Default" src="images/HW_CoSim.08.11.09.jpg" width="302" height="279" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="287080">The Shared Memory Write block in the testbench is pre-configured with a priority of 1, and </a>the Shared Memory Read block is pre-configured with a priority of 3. Since you want the hardware co-simulation block to wake up second in the simulation sequence, you must set the hardware co-simulation block priority to 2. </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">10.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="287087">Right-click on the hardware co-simulation block, and select Block Properties.</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="287086"><img class="Default" src="images/HW_CoSim.08.11.10.jpg" width="177" height="191" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">11.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="287094">Specify a Priority of 2 in the </a><span class="Filename">Block Properties</span> dialog box.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="287093"><img class="Default" src="images/HW_CoSim.08.11.11.jpg" width="196" height="30" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="287095">For high-speed processing applications, the hardware co-simulation block should be </a>configured to operate in <span class="Filename">Free Running</span> clock mode. When this mode is used, the synchronization between the FPGA and Simulink are handled entirely by the lockable shared memories. By running the FPGA in free-running mode, you allow it to run fast enough to process a complete video frame in a single Simulink cycle. Keep in mind that the hardware co-simulation block circuitry waits to acquire lock before processing data. Since the lock cannot be granted until the hardware co-simulation block is woken up, the FPGA sits idle until new data is presented in the input buffer. </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">12.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="287096">Double-click on the hardware co-simulation block and choose a </a><span class="Filename">Free Running </span><span class="Filename">Clock</span> under the<span class="Filename"> Basic Tab</span>.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="287102"><img class="Default" src="images/HW_CoSim.08.11.12.jpg" width="217" height="215" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="287103">You are now ready to simulate the design. </a></div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">13.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="287104">Press the Simulink </a><span class="Bold">Start</span> button to start simulation. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="287111">Two windows will appear showing the original and filtered video streams.</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="287110"><img class="Default" src="images/HW_CoSim.08.11.13.jpg" width="276" height="126" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="287112">The left image is the original video frame. The image on the right is the same frame that has </a>been processed using the "smooth" filter kernel. Note that the smoothing filter is just one of several filters that can be applied to the video source. </div>
+      <div class="Heading2"><a name="287113">Reloading the Kernel</a></div>
+      <div class="Body"><a name="287114">The filter data path is designed so that the filter kernel can be reloaded dynamically while </a>hardware co-simulation is running. Once the simulation is running, you may use the <span class="Filename">xlReloadFilterCoef</span> function to load a new kernel. The function accepts a string kernel identifier (e.g., <span class="Filename">sobelxy)</span> as an input parameter. A list of available filter kernels can be viewed by typing help <span class="Filename">xlReloadFilterCoef</span> in the MATLAB console. The function is supplied as a MATLAB source file and can be found in the <span class="Filename">$SYGEN/examples/shared_memory/hardware_cosim/conv5x5_video </span><span class="Filename">directory</span>. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="287115">Once you have reloaded the filter, you may choose to adjust the coefficient gain. The gain can </a>be adjusted using the Coefficient Adjust slider control at the top-level of the testbench model. This also demonstrates how System Generator's traditional, port-based, hardware co-simulation interfacing can be used in conjunction with the shared memory hardware co-simulation interfaces. </div>
+      <div class="Body"><a name="287116">It is worthwhile to note that System Generator provides a MATLAB object interface to </a>shared memory objects. The <span class="Filename">xlReloadFilterCoef</span> function uses this object interface to write new coefficients into the unprotected shared memory named coef_buffer running in the FPGA. The function is fully annotated with comments that explain how the shared memory object is created, written to, and released when the operation is complete. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="287117">The source code for the MATLAB object interface is supplied with the System Generator </a>software installation, and can be found in the $SYGEN/examples/shared_memory/mex_function directory. Also included in this directory is MATLAB M-code that demonstrates how the mex-function source code was built. </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">14.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="287118">After ensuring the testbench design is running, load the SobelXY filter kernel into the </a>FPGA by typing <span class="Filename">xlReloadFilterCoef('sobelxy')</span> from the MATLAB command window. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="287125">You will now see the video output generated using the SobelX-Y kernel. </a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="287124"><img class="Default" src="images/HW_CoSim.08.11.14.jpg" width="280" height="123" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+<!--  *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.            -->
+<!--  *  Reproduction or reuse, in any form, without the explicit written  -->
+<!--  *  consent of Xilinx, Inc., is strictly prohibited.                  -->
+<sysgenblock simulinkname="WaveScope" block_type="wavescope" has_userdata="true">
+  <initialization file="xlwavescope_init.m"/>
+  <icon width="71" height="62"  wmark_color="blue" bg_color="white" file="wavescope_icon.m"/>
+  <sfunction name="xlpermissive"/>
+  <callbacks StopFcn="userdata=get_param(gcbh,'userdata');\nif(isfield(userdata,'RunAtEndOfSim')&amp;&amp;strcmp(userdata.RunAtEndOfSim,'on'))\n  xlWaveScope(gcbh);\nend" InitFcn="xlRegisterHandles(gcbh);" DeleteFcn="fig_name = [ get_param(gcbh,'Parent') , '/', get_param(gcbh,'Name') ];\nscopehandle = findobj('Name',fig_name);\nif scopehandle\n  close(scopehandle);\nend" DestroyFcn="fig_name = [ get_param(gcbh,'Parent') , '/', get_param(gcbh,'Name') ];\nscopehandle = findobj('Name',fig_name);\nif scopehandle\n  close(scopehandle);\nend" ModelCloseFcn="fig_name = [ get_param(gcbh,'Parent') , '/', get_param(gcbh,'Name') ];\nscopehandle = findobj('Name',fig_name);\nif scopehandle\n  close(scopehandle);\nend" OpenFcn="xlWaveScope(gcbh);" CopyFcn="xlWaveScopeCopyFcn(gcbh);\n" PreSaveFcn="xlRegisterHandles(gcbh);\n"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsTools"/>
+    <library name="xbsFloatingPoint"/>
+  </libraries>
+  <blockgui label="Xilinx WaveScope">
+    <editbox name="infoedit" default="WaveScope" read_only="true" multi_line="true" evaluate="false"/>
+    <hiddenvar name="ShowPortLabels"/>
+  </blockgui>
+
+</sysgenblock>

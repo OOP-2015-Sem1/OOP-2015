@@ -1,0 +1,124 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="FFT v4_1 " block_type="fftv41">
+  <initialization file="xlfftv41_init.m"/>
+  <icon width="100" height="146" wmark_color="white" bg_color="blue"/>
+  <dll name="fftv41" entry_point="fftv41_config"/>
+  <handlers enablement="fftv41enablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsDSP"/>
+  </libraries>
+  <blockgui label="Xilinx Fast Fourier Transform v4_1">
+    <editbox name="infoedit" default="Devices Supported: Virtex-5, Virtex-4, Virtex-IIPro, Spartan-3, Spartan-3A and Spartan-3E" read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <listbox name="arch" default="Pipelined Streaming I/O" evaluate="true" label="Implementation" ctype="Int">
+          <item value="Radix-4 Burst I/O"/>
+          <item value="Radix-2 Burst I/O"/>
+          <item value="Pipelined Streaming I/O"/>
+          <item value="Radix-2 Lite Burst I/O"/>
+        </listbox>
+        <listbox name="npts" default="1024" evaluate="true" label="Number of sample points" ctype="Int">
+          <item value="8"/>
+          <item value="16"/>
+          <item value="32"/>
+          <item value="64"/>
+          <item value="128"/>
+          <item value="256"/>
+          <item value="512"/>
+          <item value="1024"/>
+          <item value="2048"/>
+          <item value="4096"/>
+          <item value="8192"/>
+          <item value="16384"/>
+          <item value="32768"/>
+          <item value="65536"/>
+        </listbox>
+        <radiogroup name="op_order" default="Natural Order" evaluate="true" label="Output ordering" ctype="Int">
+          <item value="Bit Reversed Order"/>
+          <item value="Natural Order"/>
+        </radiogroup>
+        <radiogroup name="scaling" default="Unscaled" evaluate="true" label="Scaling" ctype="Int">
+          <item value="Unscaled" label="Unscaled"/>
+          <item value="Scaled" label="Scaled"/>
+          <item value="Block Floating Point" label="Block floating point"/>
+        </radiogroup>
+        <radiogroup name="rounding" default="Truncation" evaluate="true" label="Rounding mode" ctype="Int">
+          <item value="Truncation" label="Truncation"/>
+          <item value="Convergent Rounding" label="Convergent rounding"/>
+        </radiogroup>
+        <listbox name="tf_width" default="8" evaluate="true" label="Phase factor bit width" ctype="Int">
+          <item value="8"/>
+          <item value="9"/>
+          <item value="10"/>
+          <item value="11"/>
+          <item value="12"/>
+          <item value="13"/>
+          <item value="14"/>
+          <item value="15"/>
+          <item value="16"/>
+          <item value="17"/>
+          <item value="18"/>
+          <item value="19"/>
+          <item value="20"/>
+          <item value="21"/>
+          <item value="22"/>
+          <item value="23"/>
+          <item value="24"/>
+        </listbox>
+        <etch label="Optional Ports">
+          <checkbox name="en_n" default="off" evaluate="true" label="Enable dynamic transform size" ctype="Int"/>
+          <checkbox name="has_ovflo" default="off" evaluate="true" label="Provide overflow port" ctype="Int"/>
+          <checkbox name="rst" default="off" evaluate="true" label="Provide synchronous reset port" ctype="Int"/>
+          <checkbox name="en" default="off" evaluate="true" label="Provide enable port" ctype="Int"/>
+        </etch>
+      </tab>
+      <tab name="advtab" label="Advanced">
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <etch label="Optimize for speed using DSP48">
+          <checkbox name="use_dsp48_bfly" default="off" evaluate="true" label="Butterfly arithmetic" ctype="Int"/>
+          <checkbox name="use_dsp48_cmpy" default="off" evaluate="true" label="Complex multiplication" ctype="Int"/>
+        </etch>
+        <radiogroup name="twiddle_mem_type" default="Block RAM" evaluate="true" label="Phase factor memory type" ctype="Int">
+          <item value="Block RAM" label="Block RAM"/>
+          <item value="Distributed RAM" label="Distributed RAM"/>
+        </radiogroup>
+        <radiogroup name="data_mem_type" default="Block RAM" evaluate="true" label="Data memory type" ctype="Int">
+          <item value="Block RAM" label="Block RAM"/>
+          <item value="Distributed RAM" label="Distributed RAM"/>
+        </radiogroup>
+        <listbox name="num_bram_stages" default="3" evaluate="true" label="Number of stages using block RAM" ctype="Int">
+          <item value="0"/>
+          <item value="1"/>
+          <item value="2"/>
+          <item value="3"/>
+          <item value="4"/>
+          <item value="5"/>
+          <item value="6"/>
+          <item value="7"/>
+          <item value="8"/>
+          <item value="9"/>
+          <item value="10"/>
+          <item value="11"/>
+          <item value="12"/>
+          <item value="13"/>
+        </listbox>
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <hiddenvar name="explicit_period" default="" evaluate="true"/>
+    <hiddenvar name="period" default="1" evaluate="true"/>
+    <workspacevar name="xlISEVer" ctype="String"/>
+    <workspacevar name="c_family" ctype="Int"/>
+    <workspacevar name="xlv4fft_dll" ctype="String"/>
+  </blockgui>
+</sysgenblock>

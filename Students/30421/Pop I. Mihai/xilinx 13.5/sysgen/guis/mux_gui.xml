@@ -1,0 +1,100 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Mux" block_type="mux">
+  <initialization file="xlmux_init.m"/>
+  <icon width="45" height="104" shape="mux" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="Mux_config"/>
+  <handlers enablement="muxenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsBasic"/>
+    <library name="xbsControl"/>
+    <library name="xbsFloatingPoint"/>
+  </libraries>
+  <blockgui label="Xilinx Bus Multiplexer">
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <listbox name="inputs" default="2" label="Number of inputs" ctype="Int">
+          <item value="2"/>
+          <item value="3"/>
+          <item value="4"/>
+          <item value="5"/>
+          <item value="6"/>
+          <item value="7"/>
+          <item value="8"/>
+          <item value="9"/>
+          <item value="10"/>
+          <item value="11"/>
+          <item value="12"/>
+          <item value="13"/>
+          <item value="14"/>
+          <item value="15"/>
+          <item value="16"/>
+          <item value="17"/>
+          <item value="18"/>
+          <item value="19"/>
+          <item value="20"/>
+          <item value="21"/>
+          <item value="22"/>
+          <item value="23"/>
+          <item value="24"/>
+          <item value="25"/>
+          <item value="26"/>
+          <item value="27"/>
+          <item value="28"/>
+          <item value="29"/>
+          <item value="30"/>
+          <item value="31"/>
+          <item value="32"/>
+        </listbox>
+        <etch name="oportetch" label="Optional Ports">
+          <checkbox name="en" default="off" evaluate="true" label="Provide enable port" ctype="Int"/>
+        </etch>
+        <editbox name="latency" default="0" evaluate="true" label="Latency" ctype="Int"/>
+      </tab>
+      <tab name="otype" label="Output">
+        <radiogroup name="precision" default="Full" label="Precision" ctype="Int">
+          <item value="Full" label="Full"/>
+          <item value="User Defined" label="User defined"/>
+        </radiogroup>
+        <etch name="userprecisionetch" label="Fixed-point Output Type">
+            <radiogroup name="arith_type" default="Unsigned" label="Arithmetic type" ctype="Int">
+              <item value="Signed  (2's comp)" label="Signed  (2's comp)"/>
+              <item value="Unsigned" label="Unsigned"/>
+            </radiogroup>
+            <etch name="fixedprecetch" label="Fixed-point Precision">
+              <glayout cols="2">
+                <editbox name="n_bits" default="16" label="Number of bits" ctype="Int"/>
+	            <editbox name="bin_pt" default="14" label="Binary point" ctype="Int"/>
+              </glayout>
+            </etch>
+            <radiogroup name="quantization" default="Truncate" evaluate="true" label="Quantization" ctype="Int">
+              <item value="Truncate" label="Truncate"/>
+              <item value="Round  (unbiased: +/- Inf)" label="Round  (unbiased: +/- Inf)"/>
+            </radiogroup>
+            <radiogroup name="overflow" default="Wrap" evaluate="true" label="Overflow" ctype="Int">
+              <item value="Wrap" label="Wrap"/>
+              <item value="Saturate" label="Saturate"/>
+              <item value="Flag as error" label="Flag as error"/>
+            </radiogroup>
+        </etch>
+      </tab>
+      <tab name="advancedtab" label="Advanced">
+        <etch name="simetch" label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles" ctype="Int"/>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <workspacevar name="period" ctype="Double"/>
+    <workspacevar name="sysgen_root" ctype="String"/>
+    <workspacevar name="sim_engine" ctype="Int"/>
+    <hiddenvar name="infoedit"/>
+  </blockgui>
+</sysgenblock>

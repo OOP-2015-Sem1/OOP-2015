@@ -1,0 +1,871 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Using ChipScope Pro Analyzer for Real-Time Hardware Debugging</title>
+    <link rel="StyleSheet" href="css/HW_Design.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="HW_Design.6.1.html#313210">Hardware Design Using System Generator</a> : Using ChipScope Pro Analyzer for Real-Time Hardware Debugging</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="313210">Using ChipScope Pro Analyzer for Real-Time Hardware Debugging</a></div>
+      <div class="Body"><a name="313211">The integration of ChipScope™ Pro in the System Generator flow allows real-time </a>debugging at system speed. By inserting a ChipScope block into your System generator design, you can debug and verify all the internal signals and nodes within your FPGA. </div>
+      <div class="Heading2"><a name="313222">ChipScope Pro Overview</a></div>
+      <div class="Body"><a name="313223">The increasing density of FPGA devices has rendered attaching test probes to these devices </a>impractical. The ChipScope™ Pro tools integrate key logic analyzer hardware components with the target design inside of a Xilinx device. The ChipScope Pro tools communicate with these components during system operation and in effect provide the designer with a logic analyzer for nodes inside the Xilinx FPGA. ChipScope gives you a deep trace memory, fast clock speeds and multiple trigger options, which can vary in complexity. You can easily capture and view signal activity inside your FPGA without having to dedicate critical logic space, come up with complex capture schemes, or allocate additional I/O pins. Data samples are captured based on user-defined trigger conditions and stored in internal block memory. All control and data transfer is done via the JTAG port eliminating the need to drive data off-chip using I/O pins.</div>
+      <div class="Body"><a name="313224">Please refer to the following Web page for further details on ChipScope Pro:</a></div>
+      <div class="Body"><span class="URL"><a href="http://www.xilinx.com/ise/optional_prod/cspro.htm" target="external_window" name="313226">http://www.xilinx.com/ise/optional_prod/cspro.htm</a></span></div>
+      <div class="Heading2"><a name="486885">Tutorial Example: Using ChipScope in System Generator</a></div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="486021">This tutorial assumes that you have already installed and configured both the hardware and </a>software required to run an ML506 platform. For installation and configuration information, refer to the ML506 documents located at the following web address: <span class="URL"><a href="http://www.xilinx.com/products/boards/ml506/docs.htm" target="external_window">http://www.xilinx.com/products/boards/ml506/docs.htm</a></span></div>
+      <div class="Body"><a name="313228">This tutorial shows how to modify a Simulink model to integrate the ChipScope™ block </a>and how to select the data to be captured and viewed for debugging. The steps are as follows:</div>
+      <div class="Numbered_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="313229">From the MATLAB console, change the directory to </a>&lt;sysgen_path&gt;/examples/chipscope/example1. The following files are located in this directory: </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Filename"><a name="313230">chipscope_ex1.mdl</a></span> – Your working model. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Filename"><a name="313231">chipscope_ex1_soln.mdl</a></span> – Solution model, including the ChipScope block. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="486085">Open the </a><span class="Filename">chip_ex1.mdl</span> model from the MATLAB console. This model represents a simple usage model of a DDS Compiler block that will produce sine and cosine output waveforms. Both sine and cosine output waveforms will later be connected to a Chipscope block, enabling you to debug and verify the Systen Generator block by probing and plotting the waveforms.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="486086">The 8-bit Counter is used to trigger ChipScope. The most significant bit is extracted </a>with a slice block and can be used for a variety of purposes such as driving an LED on the ML506 Platform for this exercise. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="486092"><img class="Default" src="images/HW_Design.6.15.1.jpg" width="527" height="244" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="486096">Simulate the model by clicking on the </a><span class="Bold">Start simulation</span> Icon <img class="Default" src="images/HW_Design.6.15.2.jpg" width="20" height="19" style="display: inline; float: none; left: 0.0; top: 0.0;" alt="" />. At this point, without modifying the model, you should be able to see the following plot. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="486102"><img class="Default" src="images/HW_Design.6.15.3.jpg" width="527" height="397" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="313251">The first plot represents the most significant bit of the 8-bit counter. The MSB </a>becomes 1 when the counter output is within the range of 128 through 255. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="313252">The second plot represents the full output of the counter. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="486122">The third and forth plots show the output sine and cosine respectively.</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">5.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="486124">Integrate ChipScope into the Simulink model. The ChipScope block can be found in </a>the Simulink Library Browser in the Xilinx Blockset, under the Tools library. While holding down the left mouse button, select the ChipScope block and drag it into the open area in the lower-right corner of the Simulink model. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">6.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="313256">Double click on the ChipScope block in order to set the following parameters: </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="313257">Number of trigger ports</a></span>: Multiple trigger ports allow a larger range of events to be detected and can reduce the number of values that must be stored. Up to 16 trigger ports can be selected. In this example, only one is used. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="313258">Display settings for trigger port</a></span>: For each trigger port, the number of match units and the match type need to be set. The pulldown menu displays options for a particular trigger port. For N ports, the display options for trigger port 0 to N-1 can be shown. In this example, there is one Trigger port named Trig0. This option should therefore be set to 0. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="313259">Number of match units</a></span>: Using multiple match units per trigger port increases the flexibility of event detection. One to four match units can be used in conjunction to test for a trigger event. In this example, this option should be set to 1 since you are only checking for one condition (i.e., the 8-bit counter value). You will set the trigger value at run-time in the ChipScope Pro Analyzer. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="313260">Match type</a></span>: This option can be set to one of the following six types: </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body3"><a name="313261">1.  </a><span class="Bold">Basic</span>: performs = or &lt;&gt; comparisons </div>
+      <div class="Body3"><a name="313262">2.  </a><span class="Bold">Basic With Edges</span>: in addition to the basic operations high/low, low/high transitions can also be detected </div>
+      <div class="Body3"><a name="313263">3.  </a><span class="Bold">Extended</span>: performs =, &lt;&gt;,&gt;,&lt;, &lt;=, &gt;= comparisons </div>
+      <div class="Body3"><a name="313264">4.  </a><span class="Bold">Extended With Edges</span>: in addition to the extended operations, high/low, low/high transitions can also be detected.</div>
+      <div class="Body3"><a name="313265">5. </a><span class="Bold"> Range</span>: performs =, &lt;&gt;, &gt;, &gt;=, &lt;, &lt;=, in range, not in range comparisons </div>
+      <div class="Body3"><a name="313266">6.  </a><span class="Bold">Range With Edges</span>: in addition to the range operations, high/low, low/high transitions can also be detected. In this example, set the Match Type to <span class="Bold">Basic with </span><span class="Bold">Edges</span>.</div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="313268">Number of data ports</a></span>: Up to 256 bits can be captured per sample. This means that the sum over all ports of the bits used per port must be less than or equal to 256. System Generator propagates the data width automatically; therefore, only the number of data ports needs to be specified. In this example, you want to view the sine and cosine and trig_counter, hence you enter 3. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="313269">Depth of capture buffer</a></span>: The depth of the capture buffer is a power of 2, up to 16384 samples. In this example, set the depth to 1024 (min value required for V5). </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="313276">After parameterization the ChipScope™ GUI should look like the following: </a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="313275"><img class="Default" src="images/HW_Design.6.15.4.jpg" width="527" height="428" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">7.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="313277">Connecting the ChipScope Block</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="313278">The signal used to trigger ChipScope is the counter output. The two buses that you </a>want to probe are the sine and cosine from the Sine/Cosine table. Connect the signals appropriately as shown on the following figure:</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="313284"><img class="Default" src="images/HW_Design.6.15.5.jpg" width="527" height="316" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body2"><a name="486155">Note that the names of the ports on the ChipScope block are specified by names given </a>to the signals connected to the block, e.g. Sine and Cosine. </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">8.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="486156">Location Constraints</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="313287">Now that the design is fully implemented and simulates correctly, the next step is to </a>prepare it for connection to the hardware target. Although it can work on any hardware platform, the process is described for the ML506. </div>
+      <div class="Body2"><a name="313288">Two pins need to be locked down in this design: The LED and the clock pin. </a></div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="313289">LED Pin</a></span>: Double click on the Gateway Out1 block, select Specify IOB Location constraints and type in {'AE24'} (note the need for single quotes).</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="313295"><img class="Default" src="images/HW_Design.6.15.6.jpg" width="527" height="64" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="313296">Clock Pin</a></span>: Double click on the System Generator block, set the clock period to 10ns and the clock pin location to AH15.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="313302"><img class="Default" src="images/HW_Design.6.15.7.jpg" width="527" height="58" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body2"><a name="313303">If you are using a different board, the pin locations should be modified appropriately. </a></div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">9.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="313304">System Generator GUI settings </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="313305">The last two parameters that should be updated before generating a bitstream are the </a>target device and the compilation target. </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="486167">Double click on the System Generator token and verify the parameter settings as </a>follows:</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="486172"><img class="Default" src="images/HW_Design.6.15.8.jpg" width="522" height="407" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">10.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="313321">Bitstream Generation</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="313322">Xilinx System Generator software automatically calls both the Core Generator™ and </a>ChipScope generator to create the netlist and cores. In addition, when the <span class="Bold">Bitstream</span> target is selected, a configuration bitstream is created. </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="313323">Create a bitstream by pressing the </a><span class="Bold">Generate</span> button. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="313324">The Core Generator is automatically called to generate the Sine/Cosine table and </a>Counter netlists. ChipScope generator is called to create an Integrated Logic Analyzer (ILA) core and an ICON core to communicate with the ChipScope Pro software via the JTAG port. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="313325">Real-Time Debug</a></div>
+      <div class="Body"><a name="313326">The next step is to run the design on the ML506 platform and view the probed outputs with </a>the ChipScope™ Pro Analyzer. </div>
+      <div class="Numbered_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="313327">Connect one end of the Parallel Cable IV or Platform USB cable to the General JTAG </a>connector (J1) on the ML506 board. Connect the other end to your computer.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="313333"><img class="Default" src="images/HW_Design.6.15.9.jpg" width="527" height="239" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="313334">Launch ChipScope Pro Analyzer</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="313336">Open the JTAG Chain by clicking on the following icon <img class="Default" src="images/HW_Design.6.15.10.jpg" width="25" height="22" style="display: inline; float: none; left: 0.0; top: 0.0;" alt="" />, or by selecting </a><span class="Bold">JTAG </span><span class="Bold">Chain</span> &gt; <span class="Bold">Xilinx Platform USB Cable</span>. You should see the following table of the JTAG Chain Device Order. After observing the order, click <span class="Bold">OK</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="313343"><img class="Default" src="images/HW_Design.6.15.11.jpg" width="527" height="189" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="313354">Configure the FPGA</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="313355">Under the New Project Window, right click on </a><span class="Bold">Device 4 &gt;</span> <span class="Bold">Configure &gt; Select </span><span class="Bold">New File</span>. At this point, you need to look for the bitstream which was generated in step 10 of the previous section ( ./bitstream/chip_cw.bit). After configuration, you should see an INFO message at the bottom of the ChipScope Analyzer window “Found 1 Core Unit in the JTAG chain”.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="313357">Import ChipScope Project File</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="313358">System Generator creates a project file for ChipScope in order to group data signals </a>into buses. A bus is created for each data port so that it can be viewed in the same manner (sign and precision) in which it was viewed in the Simulink environment.</div>
+      <div class="Body2"><a name="313359">Load this project file by going under</a><span class="Bold"> File &gt; Import &gt; Select New File</span>, and select <span class="Filename">&lt;ISE_Design_Suite_tree&gt;/sysgen/examples/chipscope/netlist/temp/</span><span class="Filename">chip_chipscope.cdc</span>. </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">5.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="313360">Plot the Sine Waves</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="313361">In the New Project window, under </a><span class="Bold">Device 4</span>, double click on <span class="Bold">Trigger Setup</span> to bring up the setup window but do not set it yet at this step.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="486400">In the New Project window, under Device $ &gt; Unit 0 MyILA0 (ILA), double click </a>on <span class="Bold" style="font-size: 11.0pt;">Bus Plot</span>.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="313362">A Bus Plot window appears. Select cosine and sine in the Bus Selection section, and </a>then arm the trigger by clicking the <img class="Default" src="images/HW_Design.6.15.12.jpg" width="20" height="19" style="display: inline; float: none; left: 0.0; top: 0.0;" alt="" /> button. Since you have not yet set any trigger conditions, values are captured immediately. Both the sine and cosine appear as shown below. You can change the display option to represent the waveforms with points, lines, or both.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="313371"><img class="Default" src="images/HW_Design.6.15.13.jpg" width="527" height="299" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">6.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="313372">Setup Trigger</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="486471">In the Trigger Setup window, change the current X value with all 1s. A low-to-high </a>pulse is used for this trigger and can be manually triggered by pushing the center PB SW as shown below.  ChipScope starts capturing data when it detects a low-to-high pulse. Earlier, you setup the buffer to 1024 so that up to 1024 data points can be captured and visualized in ChipScope.</div>
+      <div class="Body2"><a name="486472">Re-capture the data by clicking on the <img class="Default" src="images/HW_Design.6.15.14.jpg" width="20" height="19" style="display: inline; float: none; left: 0.0; top: 0.0;" alt="" /> button and you should see this screen below </a>indicating that the ChipScope is waiting for a qualified trigger signal before capturing and displaying data. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="486496"><img class="Default" src="images/HW_Design.6.15.15.jpg" width="527" height="189" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body2"><a name="486487">This method of triggering is useful if you want a full control of when you like to </a>capture the data. This is accomplished by connecting one of the PB switches to a single shot (Rising Edge Detector) circuit. The center PB switch (AJ6, SW14) is used for this exercise.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="486463"><img class="Default" src="images/HW_Design.6.15.16.jpg" width="527" height="344" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="539040">Importing Data Into the MATLAB Workspace From ChipScope</a></div>
+      <div class="Body"><a name="313392">Now you can export the data captured by ChipScope™ back into the MATLAB workspace. </a></div>
+      <div class="Numbered_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="313393">Export data from ChipScope Pro Analyzer </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="486524"> </a><span class="Bold">Select File &gt; Export</span> option from within ChipScope Pro Analyzer. Select ASCII format and choose <span class="Bold">Bus Plot Buses</span> to export. Press the <span class="Bold">Export</span> button and save the file as<span class="Filename"> sinecos.prn</span>.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="486525">Start MATLAB and change the current working directory to the location where you </a>saved <span class="Filename">sinecos.prn</span>. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="313402">Type </a><span class="Filename">xlLoadChipScopeData('sinecos.prn');</span> This loads the data from the <span class="Filename">.prn</span> file into the MATLAB workspace. In the workspace there are two new arrays named Sin and Cos. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="313403">You can plot the values using the MATLAB plot function. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="313410">Type: </a><span class="Filename">plot(1:1024, sine, 1:1024, cosine)</span> and the following plot is generated:</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="313409"><img class="Default" src="images/HW_Design.6.15.17.jpg" width="527" height="431" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="539079">Tutorial Example: Using ChipScope Pro Analyzer with JTAG Hardware </a>Co-Simulation</div>
+      <div class="Heading3"><a name="539080">Design Description</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="539087"><img class="Default" src="images/HW_Design.6.15.18.jpg" width="527" height="221" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="539107">Setup the SP601 Hardware Co-Simulation Platform</a></div>
+      <div class="Body"><a name="539455">Setup the SP601 Platform for JTAG Hardware Co-Simulation as described in the topic </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.13.html#329846', '');" title="Installing Your Board for JTAG Hardware Co-Simulation">Installing an SP601/SP605 Board for JTAG Hardware Co-Simulation</a></span>.</div>
+      <div class="Heading3"><a name="539451">Generate a Bitstream File</a></div>
+      <div class="Numbered_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="539115">Open &lt;sysgen_path&gt;/examples/chipscope/example2/</a><span class="Filename">chipscope_ex2.mdl</span> and generate a netlist targeting SP601 JTAG </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="539116">Save the current Simulink model as </a><span class="Filename">chipscope_ex2_hwcs.mdl</span> </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="539117">Replace all the Simulink blocks with the JTAG HWCS block that you just generated </a>except for input and output gateways</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="539118">Add a Simulink Slider Gain block to attenuate phase inc/dec changes and your model </a>should look similar to the figure below:</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="539134"><img class="Default" src="images/HW_Design.6.15.19.jpg" width="527" height="121" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="539112">Benefits</a></div>
+      <div class="Body"><a name="539143">One of the main benefits for this feature is the ability capture and examine the System </a>Generator data in real time. The data can be captured directly from external IO pins via non-memory-mapped IO such as Analog to Digital without having to capture the data onto Shared Memory of FIFO and then read it onto Simulink. In this particular example, ChipScope captures data at real time rates when using Free Running, HW Co-simulation mode.</div>
+      <div class="Heading3"><a name="539162">How to Iterate a Design between System Generator for DSP and ChipScope </a>Pro Analyzer</div>
+      <div class="Heading4"><a name="539164">In Simulink</a></div>
+      <div class="Body"><a name="539165">Press play on the Simulink model to start hardware co-simulation to download the </a>bitstream</div>
+      <div class="Heading4"><a name="539168">In ChipScope Pro Analyzer</a></div>
+      <div class="Numbered_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="539169">Start the ChipScope Pro Analyzer from the Windows </a><span class="Bold">Start</span> menu</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="539170">From the pulldown menu: </a><span class="Bold">File &gt; Open Project...</span> and select <span class="Filename">chipscope_ex2_chipscope.cpj</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="539171">From the pulldown menu: </a><span class="Bold">JTAG Chain &gt; Xilinx Platform USB Cable...</span> then press <span class="Bold">OK</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="539172">From the toolbar: Press the </a><span class="Bold">Trigger Now</span> button (i.e. T! button)</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="539173">You should be able to observe the following output waveform from the Bus Plot</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="539234"><img class="Default" src="images/HW_Design.6.15.20.jpg" width="527" height="210" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading4"><a name="539239">In Simulink</a></div>
+      <div class="Numbered_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="539240">Press </a><span class="Bold">Play</span> and change the Slider Gain setting to change the frequency of the DDS</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="539241">Press </a><span class="Bold">Pause</span> in Simulink</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading4"><a name="539243">In ChipScope Pro Analyzer</a></div>
+      <div class="Numbered_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="539244">Press the </a><span class="Bold">Trigger Now</span> button again to capture the new Sine and Cosine waves that are running at a different frequency</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

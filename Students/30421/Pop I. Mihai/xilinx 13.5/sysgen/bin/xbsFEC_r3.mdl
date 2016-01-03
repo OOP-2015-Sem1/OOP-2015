@@ -1,0 +1,299 @@
+Library {
+  Name			  "xbsFEC_r3"
+  Version		  5.0
+  SaveDefaultBlockParams  on
+  LibraryLinkDisplay	  "none"
+  ShowLoopsOnError	  on
+  IgnoreBidirectionalLines off
+  CovSaveName		  "covdata"
+  CovMetricSettings	  "dw"
+  CovNameIncrementing	  off
+  CovHtmlReporting	  on
+  covSaveCumulativeToWorkspaceVar on
+  CovSaveSingleToWorkspaceVar on
+  CovCumulativeReport	  off
+  BlockNameDataTip	  off
+  BlockParametersDataTip  on
+  BlockDescriptionStringDataTip	on
+  ToolBar		  on
+  StatusBar		  on
+  BrowserShowLibraryLinks off
+  BrowserLookUnderMasks	  off
+  Created		  "Tue Aug 25 11:58:34 1998"
+  Creator		  "annr"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "mcmillan"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Fri Aug 06 10:49:44 2004"
+  ModelVersionFormat	  "1.%<AutoIncrement:769>"
+  ConfigurationManager	  "none"
+  SimParamPage		  "Solver"
+  LinearizationMsg	  "none"
+  Profile		  off
+  ParamWorkspaceSource	  "MATLABWorkspace"
+  ExtModeMexFile	  "ext_comm"
+  ExtModeBatchMode	  off
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "normal"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  on
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  on
+  ExtModeAutoUpdateStatusClock on
+  SimulationMode	  "normal"
+  ConsistencyChecking	  "none"
+  ArrayBoundsChecking	  "none"
+  AlgebraicLoopMsg	  "warning"
+  BlockPriorityViolationMsg "warning"
+  MinStepSizeMsg	  "warning"
+  InheritedTsInSrcMsg	  "warning"
+  DiscreteInheritContinuousMsg "warning"
+  MultiTaskRateTransMsg	  "error"
+  SingleTaskRateTransMsg  "none"
+  CheckForMatrixSingularity "none"
+  IntegerOverflowMsg	  "warning"
+  Int32ToFloatConvMsg	  "warning"
+  ParameterDowncastMsg	  "error"
+  ParameterOverflowMsg	  "error"
+  ParameterPrecisionLossMsg "warning"
+  UnderSpecifiedDataTypeMsg "none"
+  UnnecessaryDatatypeConvMsg "none"
+  VectorMatrixConversionMsg "none"
+  InvalidFcnCallConnMsg	  "error"
+  SignalLabelMismatchMsg  "none"
+  UnconnectedInputMsg	  "warning"
+  UnconnectedOutputMsg	  "warning"
+  UnconnectedLineMsg	  "warning"
+  SfunCompatibilityCheckMsg "none"
+  ProdHWDeviceType	  "Microprocessor"
+  ProdHWWordLengths	  "8,16,32,32"
+  RTWMakeCommand	  "make_rtw"
+  RTWGenerateCodeOnly	  off
+  RTWRetainRTWFile	  off
+  TLCProfiler		  off
+  TLCDebug		  off
+  TLCCoverage		  off
+  TLCAssertion		  off
+  BlockDefaults {
+    Orientation		    "right"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+  }
+  BlockParameterDefaults {
+    Block {
+      BlockType		      "S-Function"
+      FunctionName	      "system"
+      PortCounts	      "[]"
+      SFunctionModules	      "''"
+    }
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  System {
+    Name		    "xbsFEC_r3"
+    Location		    [585, 83, 979, 559]
+    Open		    on
+    ModelBrowserVisibility  off
+    ModelBrowserWidth	    212
+    ScreenColor		    "white"
+    PaperOrientation	    "landscape"
+    PaperPositionMode	    "auto"
+    PaperType		    "usletter"
+    PaperUnits		    "inches"
+    ZoomFactor		    "100"
+    ReportName		    "simulink-default.rpt"
+    Block {
+      BlockType		      Reference
+      Name		      "Convolutional Encoder"
+      Ports		      [2, 4]
+      Position		      [20, 128, 95, 187]
+      SourceBlock	      "xbsIndex_r3/Convolutional Encoder"
+      SourceType	      "Xilinx Convolutional Encoder"
+      clength		      "3"
+      conv_codes	      "[7 5 6]"
+      explicit_period	      off
+      period		      "1"
+      rst		      off
+      en		      off
+      dbl_ovrd		      off
+      show_param	      off
+      use_rpm		      on
+      gen_core		      on
+      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+      xl_use_area	      off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Depuncture"
+      Ports		      [1, 1]
+      Position		      [155, 144, 220, 176]
+      SourceBlock	      "xbsIndex_r3/Depuncture"
+      SourceType	      "Xilinx Depuncture Block"
+      insert_char	      "[1 0 0]"
+      insert_string	      "'100'"
+      explicit_period	      off
+      period		      "1"
+      dbl_ovrd		      off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Interleaver Deinterleaver"
+      Ports		      [2, 2]
+      Position		      [290, 131, 345, 184]
+      SourceBlock	      "xbsIndex_r3/Interleaver Deinterleaver"
+      SourceType	      "Xilinx Interleaver/Deinterleaver"
+      mode		      "Interleaver"
+      num_branches	      "3"
+      branch_length	      "[2 4 5]"
+      explicit_period	      off
+      period		      "1"
+      rst		      off
+      en		      off
+      dbl_ovrd		      off
+      show_param	      off
+      mem_type		      "Automatically Chosen"
+      pipeline		      off
+      use_rpm		      on
+      gen_core		      on
+      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+      xl_use_area	      off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Puncture"
+      Ports		      [1, 1]
+      Position		      [30, 264, 85, 296]
+      SourceBlock	      "xbsIndex_r3/Puncture"
+      SourceType	      "Xilinx Puncture Block"
+      punc_char		      "[1 0 0]"
+      explicit_period	      off
+      period		      "1"
+      dbl_ovrd		      off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "RS Decoder"
+      Ports		      [2, 5]
+      Position		      [150, 243, 230, 317]
+      SourceBlock	      "xbsIndex_r3/RS Decoder"
+      SourceType	      "Xilinx Reed-Solomon Decoder"
+      code_spec		      "Custom"
+      sym_width		      "8"
+      nn		      "204"
+      kk		      "188"
+      poly_char		      "[ 1 0 0 0 1 1 1 0 1]"
+      gen_start		      "0"
+      scale		      "1"
+      hasStart		      off
+      hasErase		      off
+      explicit_period	      off
+      period		      "1"
+      rst		      off
+      dbl_ovrd		      off
+      show_param	      off
+      use_rpm		      on
+      gen_core		      on
+      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+      xl_use_area	      off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "RS Encoder"
+      Ports		      [2, 4]
+      Position		      [280, 243, 360, 317]
+      SourceBlock	      "xbsIndex_r3/RS Encoder"
+      SourceType	      "Xilinx Reed-Solomon Encoder"
+      code_spec		      "Custom"
+      sym_width		      "8"
+      nn		      "204"
+      kk		      "188"
+      poly_char		      "[ 1 0 0 0 1 1 1 0 1]"
+      gen_start		      "0"
+      scale		      "1"
+      hasStart		      off
+      explicit_period	      off
+      period		      "1"
+      rst		      off
+      dbl_ovrd		      off
+      show_param	      off
+      use_rpm		      on
+      gen_core		      on
+      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+      xl_use_area	      off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Viterbi Decoder"
+      Ports		      [3, 2]
+      Position		      [30, 360, 90, 440]
+      SourceBlock	      "xbsIndex_r3/Viterbi Decoder"
+      SourceType	      "Xilinx Viterbi Decoder"
+      clength		      "7"
+      dual_decoding	      off
+      conv_codes	      "[117 127]"
+      conv_codes2	      "[117 127]"
+      tb_length		      "100"
+      coding		      "Hard"
+      data_format	      "Signed Magnitude"
+      puncturing	      off
+      best_state	      off
+      best_state_wr	      "0"
+      red_latency	      off
+      explicit_period	      off
+      period		      "1"
+      has_ber		      off
+      ber_rate		      "20"
+      has_norm		      off
+      rst		      off
+      en		      off
+      dbl_ovrd		      off
+      show_param	      off
+      architecture	      "Parallel"
+      optimization	      "Area"
+      use_rpm		      on
+      gen_core		      on
+      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+      xl_use_area	      off
+    }
+    Annotation {
+      Name		      "Xilinx Blockset v6.3\n(c) 2004  Xilinx, Inc.\n"
+"\nFEC Library"
+      Position		      [192, 64]
+      FontSize		      12
+    }
+  }
+}

@@ -1,0 +1,686 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Integrating a Processor with Custom Logic</title>
+    <link rel="StyleSheet" href="css/HW_SW_CoDesign.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="HW_SW_CoDesign.07.1.html#270830">Hardware/Software Co-Design</a> : Integrating a Processor with Custom Logic</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="270830">Integrating a Processor with Custom Logic</a></div>
+      <div class="Body"><a name="270856">Integrating a processor with a piece of user-defined logic is typically a fairly involved </a>process. The communications between a processor and a custom piece of hardware often occurs over a shared bus. Additionally, the information conveyed frequently consists of different types of data; for example data for processing, data denoting the status of the hardware or data affecting the mode of operation. Organizing how this data is transferred between the processor and custom logic is a tedious and error prone process that would benefit from automation. Furthermore, connectivity is only half of the problem, writing software to communicate with custom logic can also be challenging.</div>
+      <div class="Body"><a name="270860">The EDK Processor block provides a solution to both these problems through automation. </a>The EDK Processor block encourages the interface between the processor and the custom logic to be specified via shared-memories. Shared-memories are used to provide storage locations that can be referenced by name. This allows a memory map and the associated software drivers to be generated.</div>
+      <div class="Body"><a name="270864">Please refer to the </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.046.html#398634', '');" title="EDK Processor">EDK Processor</a></span> block documentation regarding information on the use of the block. The topics that follow describe the automatic memory map creation, hardware generation in different compilation flows, and the use of the associated software drivers, and the two clock wiring schemes provided by the EDK Processor block. </div>
+      <table class="ColumnNoTitleNoLines" style="text-align: left; width: 358.7694pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top; width: 149.6863pt">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_SW_CoDesign.07.3.html#270890', '');" title="Integrating a Processor with Custom Logic" name="292961">Memory Map Creation</a></span></div>
+          </td>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top; width: 209.0831pt">
+            <div class="CellBody"><a name="292963">Explains the memory map generated when </a>shared memories are added to a processor.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_SW_CoDesign.07.3.html#270914', '');" title="Integrating a Processor with Custom Logic" name="292968">Hardware Generation</a></span></div>
+          </td>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="292970">Documents the different hardware generation </a>options in different compilation flows.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_SW_CoDesign.07.3.html#270948', '');" title="Integrating a Processor with Custom Logic" name="292975">Hardware Co-Simulation</a></span></div>
+          </td>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="292977">Explains how to create a hardware co-</a>simulation model for the EDK Processor block.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_SW_CoDesign.07.3.html#270968', '');" title="Integrating a Processor with Custom Logic" name="292982">The Software Driver</a></span></div>
+          </td>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="292984">Documents how a software driver is created and </a>how to writing software using the software driver to perform read/write operations to the memory-mapped interface.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_SW_CoDesign.07.3.html#270982', '');" title="Integrating a Processor with Custom Logic" name="292988">Writing a Software Program</a></span></div>
+          </td>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="292991">Documents the process of writing software to </a>control hardware created in System Generator.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_SW_CoDesign.07.3.html#327963', '');" title="Integrating a Processor with Custom Logic" name="293001">Asynchronous Support</a></span></div>
+          </td>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="293003">Documents the capability in System Generator, </a>in both import and export mode, to allow the processor and the System Generator design to run with different clocks.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_SW_CoDesign.07.3.html#314183', '');" title="Integrating a Processor with Custom Logic" name="328667">Clock Wiring in the Hardware Co-Simulation Flow</a></span></div>
+          </td>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="328669">Documents the dual clock wiring and single </a>clock wiring scheme offered by the EDK Processor block in the hardware co-simulation flow.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_SW_CoDesign.07.3.html#325850', '');" title="Integrating a Processor with Custom Logic" name="325831">Troubleshooting</a></span></div>
+          </td>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="325833">Describes how to resolve issues such as how to </a>update outdated netlists that are cashed inside XPS.</div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="270890">Memory Map Creation</a></div>
+      <div class="Body"><a name="270897">&nbsp;</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="272308"><img class="Default" src="images/HW_SW_CoDesign.07.3.01.jpg" width="391" height="256" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="270901">A System Generator model is shown on the bottom-right of the figure above. The System </a>Generator model corresponds to custom logic that will be integrated with the MicroBlaze™ processor. In the construction of the model, shared-memories are used in locations where software access is required. For example, the status of the hardware might be kept in a register. To make that status information visible in the processor, the register is replaced by a named shared-register. Naming the shared-register "status" gives the name of the memory context that will be useful later on during software development. </div>
+      <div class="Body"><a name="270905">The block GUI of the EDK Processor block allows these shared-memories to be added to </a>the memory map of the processor (bottom-left of the figure). The block diagram at the top of the figure above shows the flow of data. When a shared memory is added to the memory map of the processor, the EDK Processor block creates the corresponding matching shared memory. This shared memory is attached to the memory map that is generated for that EDK Processor block. Next, a bus adaptor is used to connect that memory map to the MicroBlaze processor. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="330312">The EDK Processor block does not support Shared Memory blocks with spaces in their </a>names.</div>
+      <div class="Body"><a name="270909">When hardware is generated, each shared memory pair is implemented with a single </a>physical memory. The implementation for each class of shared memory is documented in the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.08.08.html#270899', '');" title="Shared Memory Support">Shared Memory Support</a></span>, found under the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.08.01.html#321096', '');" title="Using Hardware Co-Simulation">Using Hardware Co-Simulation</a></span>.</div>
+      <div class="Heading2"><a name="270914">Hardware Generation</a></div>
+      <div class="Body"><a name="270917">The EDK Processor block supports two modes of operation: EDK pcore generation and </a>HDL netlisting. The different modes of operation are illustrated below and can be chosen from a list-box in the EDK Processor block's GUI. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="272322"><img class="Default" src="images/HW_SW_CoDesign.07.3.02.jpg" width="385" height="120" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="270929">EDK pcore Generation Mode</a></div>
+      <div class="Body"><a name="270933">The Xilinx Embedded Development Kit (EDK) allows peripherals to be attached to </a>processors created within the EDK. These peripherals can be packaged as pcores. Each pcore contains a collection of files describing the peripheral's hardware description, software drivers, bus connectivity and documentation. </div>
+      <div class="Body"><a name="270937">When set in EDK-pcore-generation mode and used with the </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Compilation_Types.10.5.html#279433', '');" title="EDK Export Tool">EDK Export Tool</a></span> (selected via the System Generator token), System Generator is able to create a pcore from the given System Generator model. The figure above shows the part of the model that is created as a pcore. When set in this mode, the assumption is that the MicroBlaze™ processor added to the model is just a place-holder. Its actual implementation will be filled in by the EDK when the peripheral is finally added into an EDK project. As such, the pcore that is created consists of the custom logic, the generated memory map and virtual connections to the custom logic, and the bus adaptor. </div>
+      <div class="Heading3"><a name="270941">HDL Netlist Mode</a></div>
+      <div class="Body"><a name="270945">An EDK processor can also be brought into a System Generator model when HDL </a>netlisting mode is selected. The EDK Processor block can be set to HDL netlisting mode only when an EDK project is supplied to the block. When in HDL netlisting mode, the processor described in the EDK project will be imported into System Generator as a black box. The supplied EDK project is also augmented with the bus interfaces necessary to connect the System Generator memory map to the processor. During netlisting, the MicroBlaze™ processor and the generated memory-map hardware are both netlisted into hardware. </div>
+      <div class="Heading2"><a name="270948">Hardware Co-Simulation</a></div>
+      <div class="Body"><a name="270951">Currently the EDK Processor block provides hardware-based simulation through </a>hardware co-simulation. The creation of a Hardware Co-Simulation block follows the standard co-simulation flow described in the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.08.01.html#321096', '');" title="Using Hardware Co-Simulation">Using Hardware Co-Simulation</a></span>. The only difference is how top-level ports of the imported XPS project are treated. </div>
+      <div class="Body"><a name="297641">When an XPS project is imported into System Generator, the import wizard assumes that </a>all the ports are well constrained and applies that given constraint on the ports during the creation of the Hardware Co-Simulation block. That is to say, if the top-level entity of the XPS system contains ports that connect to pads on the FPGA, when compiling a Hardware Co-Simulation block, these ports will still connect to the pads on the FPGA and will not appear as ports on the Hardware Co-Simulation block. Similarly, the bitstream flow constraints specified on top-level ports in the imported XPS system will be honored. </div>
+      <div class="Body"><a name="297646">Should there be top-level ports that do not connect to pads, or are not constrained, these </a>ports can be made visible in System Generator by exposing the ports using the Processor Port Interface table in the Advanced tab of the EDK Processor block. See the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_SW_CoDesign.07.4.html#270811', '');" title="EDK Support">Exposing Processor Ports to System Generator</a></span> for details.</div>
+      <div class="Body"><a name="270959">You may use the EDK's XPS tool to write and compile your software. However before </a>simulation can begin, the <span class="Bold">Compile and update bitstream</span> button in the co-simulation block's <span class="Bold">Software</span> tab must be used to put the compiled C-code into the bitstream.</div>
+      <div class="Body"><a name="270963">When used in conjunction with a hardware-board supported by network-based hardware </a>co-simulation, it is possible to free up the JTAG port on the FPGA and use that for software debug with XMD.</div>
+      <div class="Heading2"><a name="270968">The Software Driver</a></div>
+      <div class="Body"><a name="325931">For both the EDK pcore generation mode and the HDL netlist mode, the EDK Processor </a>block automatically generates a custom software driver, which can be used to drive the memory map which is automatically generated by the block.</div>
+      <div class="Heading3"><a name="325932">Location of the Software Driver</a></div>
+      <div class="Body"><a name="325933">In the EDK pcore generation mode, the software driver is located at pathname </a><span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">&lt;pcores&gt;/&lt;sysgen_pcore_dir&gt;/src.&lt;sysgen_pcore_dir&gt; </span>which is the directory where System Generator places the exported pcore. Normally, this is under the netlist directory specified by the System Generator token. </div>
+      <div class="Body"><a name="325935">In the HDL netlist mode, when the XPS project is imported into System Generator, the </a>software driver is placed at <span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">&lt;xps_project_dir&gt;/pcores/sg_plbiface_v1_00_a/src</span>, where <span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">&lt;xps_project_dir&gt;</span> is the location of the imported XPS project. After going through the HDL netlist, NGC netlist, Bitstream, or other hardware co-simulation compilation flows as provided by the System Generator token, the software driver and the associated API documentation are placed under the directory <span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">&lt;netlist_dir&gt;/SDK_Export/sysgen_repos/drivers/sg_plbiface_v1_00_a/src</span> along with other SDK export files. By doing so, the generated software driver can be used in the Xilinx SDK (Software Development Kit).</div>
+      <div class="Heading3"><a name="325936">Launching Xilinx SDK from System Generator</a></div>
+      <div class="Body"><a name="325937">In the HDL netlist mode, the EDK Processor automatically invokes the </a><span class="Bold">Export to SDK</span> utility provided by XPS (Xilinx Platform Studio) to export the imported XPS project to <span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">&lt;netlist_dir&gt;/SDK_Export</span>. For the Bitstream compilation flow, this directory also contains the bit file and the back-annotation BMM file generated from the compilation flow. Thus, for the Bitstream compilation flow, the <span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">SDK_Export</span> directory is the only directory required to be handed off to a software developer for software development. </div>
+      <div class="Body"><a name="325939">As shown in the following figure, you can click on the </a><span class="Bold">Launch Xilinx SDK</span> button on the Software tab of a Hardware Co-Simulation block GUI to launch the Xilinx SDK. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="326146"><img class="Default" src="images/HW_SW_CoDesign.07.3.03.jpg" width="295" height="140" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="326157">When Xilinx SDK is launched from System Generator, the following items are </a>automatically set up by System Generator.</div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="326159">The workspace is set to the one as specified on the above Hardware Co-Simulation </a>block GUI. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="326160">A Xilinx Hardware Platform Specification is automatically created and points to </a><span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">&lt;netlist_dir&gt;/SDK_Export/hw/&lt;edk_project_name&gt;.xml</span>. This XML file is generated by XPS through the <span class="Bold">Export to SDK</span> utility. It contains information from the hardware specification MHS file and software specification MSS file in the original XPS project. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="326161">System Generator automatically adds </a><span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">&lt;netlist_dir&gt;/SDK_Export/sysgen_repos</span> to local software repositories. You can verify this by going to <span class="Bold">Xilinx Tools &gt; Repositories </span><span class="Bold">&gt; Local Repositories</span> as shown in the following figure. By doing so, Xilinx SDK can locate the software driver generated by System Generator. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="326273"><img class="Default" src="images/HW_SW_CoDesign.07.3.04.jpg" width="385" height="133" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="326387">If you launch Xilinx SDK standalone, rather than through System Generator as mentioned </a>above, you need to specify the Workspace directory and manually add the folder <span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">&lt;netlist_dir&gt;/SDK_Export/sysgen_repos</span> to the local repositories.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="326417"><img class="Default" src="images/HW_SW_CoDesign.07.3.05.jpg" width="312" height="304" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="326434">API Documentation</a></div>
+      <div class="Body"><a name="326470">There is API documention associated with the software driver, which you can find by </a>clicking the Documentation link shown in the above the figure. </div>
+      <div class="Body"><a name="326472">In order to utilize these functions, the following two header files need to be included in </a>your C code. </div>
+      <div class="Code"><a name="326474">#include "xparameters.h"</a></div>
+      <div class="Code"><a name="326475">#include "sg_plbiface.h" </a></div>
+      <div class="Body"><a name="326477">The hardware settings of the shared memories inside the System Generator pcore can be </a>found in the header file <span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">xparameters.h</span>. For example, absolute memory-mapped addresses, data bit widths (n_bits) and binary point positions (bin_pt), depths of the "To FIFO" shared memories on the processor memory map can be found in this header file. The header file <span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">sg_plbiface.h</span> defines the basic data types and software driver functions for accessing the shared memories.</div>
+      <div class="Body"><a name="326479">There is a </a><span class="Italic">Shared Memory Setting</span>s session in the API documentation, which lists the settings of the available shared memories contained by the System Generator peripheral as shown in the following figure.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="326606"><img class="Default" src="images/HW_SW_CoDesign.07.3.06.jpg" width="385" height="73" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="270982">Writing a Software Program</a></div>
+      <div class="Body"><a name="327062">You should follow the Xilinx SDK flow to create a software application project and write </a>software to drive the System Generator peripheral. In the HDL netlist mode, you can choose a sample application to customize for the System Generator peripheral as shown in the figure below. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="327068"><img class="Default" src="images/HW_SW_CoDesign.07.3.07.jpg" width="331" height="232" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="327077">In the API documentation, a number of example code snippets are provided to perform </a>read/write operations. These code snippets are detailed in the following text.</div>
+      <div class="Heading3"><a name="327078">Accessing "From Register" and "To Register" shared memories</a></div>
+      <div class="Heading4"><a name="327079">Single-Word Writes</a></div>
+      <div class="Body"><a name="327081">The following code snippet writes a value to the "To Register" shared memory named </a>"toreg".</div>
+      <div class="Code"><a name="327083">uint32_t value;</a></div>
+      <div class="Code"><a name="327084">xc_iface_t *iface;</a></div>
+      <div class="Code"><a name="327085">xc_to_reg_t *toreg;</a></div>
+      <div class="Code"><a name="327086">&nbsp;</a></div>
+      <div class="Code"><a name="327087">// initialize the software driver, assuming the Pcore device ID is 0</a></div>
+      <div class="Code"><a name="327088">xc_create(&amp;iface, &amp;SG_PLBIFACE_ConfigTable[0]);</a></div>
+      <div class="Code"><a name="327089">&nbsp;</a></div>
+      <div class="Code"><a name="327090">// obtain the memory location for storing the settings of shared memory </a>"t"</div>
+      <div class="Code"><a name="327091">xc_get_shmem(iface, "toreg", &amp;toreg);</a></div>
+      <div class="Code"><a name="327092">// write value to the "din" port of shared memory "toreg"</a></div>
+      <div class="Code"><a name="327093">xc_write(iface, toreg-&gt;din, (const unsigned) value);</a></div>
+      <div class="Heading4"><a name="327095">Single-Word Reads</a></div>
+      <div class="Body"><a name="327237">The following code snippet reads data stored in the "From Register" shared memory </a>named "fromreg" into "value".</div>
+      <div class="Code"><a name="327239">uint32_t value;</a></div>
+      <div class="Code"><a name="327240">xc_iface_t *iface;</a></div>
+      <div class="Code"><a name="327241">xc_from_reg_t *fromreg;</a></div>
+      <div class="Code"><a name="327243">// initialize the software driver, assuming the Pcore device ID is 0</a></div>
+      <div class="Code"><a name="327244">xc_create(&amp;iface, &amp;SG_PLBIFACE_ConfigTable[0]);</a></div>
+      <div class="Code"><a name="327245">&nbsp;</a></div>
+      <div class="Code"><a name="327246">// obtain the memory location for storing the settings of shared memory </a>"fromreg"</div>
+      <div class="Code"><a name="327247">xc_get_shmem(iface, "fromreg", (void **) &amp;fromreg);</a></div>
+      <div class="Code"><a name="327248">// read data from the "dout" port of shared memory "fromreg" and store </a>at value</div>
+      <div class="Code"><a name="327249">xc_read(iface, fromreg-&gt;dout, &amp;value);</a></div>
+      <div class="Heading3"><a name="327250">Accessing "From FIFO" and "To FIFO" shared memories</a></div>
+      <div class="Heading4"><a name="327251">Single-Word Writes</a></div>
+      <div class="Body"><a name="327253">The following code snippet writes value to the "To FIFO" shared memory named "tofifo".</a></div>
+      <div class="Code"><a name="327273">uint32_t full;</a></div>
+      <div class="Code"><a name="327274">uint32_t value;</a></div>
+      <div class="Code"><a name="327275">xc_iface_t *iface;</a></div>
+      <div class="Code"><a name="327276">xc_to_fifo_t *tofifo;</a></div>
+      <div class="Code"><a name="327278">// initialize the software driver, assuming the Pcore device ID is 0</a></div>
+      <div class="Code"><a name="327279">xc_create(&amp;iface, &amp;SG_PLBIFACE_ConfigTable[0]);</a></div>
+      <div class="Code"><a name="327280">&nbsp;</a></div>
+      <div class="Code"><a name="327281">// obtain the memory location for storing the settings of shared memory </a>"t"</div>
+      <div class="Code"><a name="327282">xc_get_shmem(iface, "tofifo", (void **) &amp;tofifo);</a></div>
+      <div class="Code"><a name="327283">// check the "full" port of shared memory "tofifo"</a></div>
+      <div class="Code"><a name="327284">do {</a></div>
+      <div class="Code"><a name="327285">    xc_read(iface, tofifo-&gt;full, &amp;full);</a></div>
+      <div class="Code"><a name="327286">} while (full == 1);</a></div>
+      <div class="Code"><a name="327287">// write value to the "din" port of shared memory "tofifo"</a></div>
+      <div class="Code"><a name="327288">value = 100;</a></div>
+      <div class="Code"><a name="327289">xc_write(iface, tofifo-&gt;din, value);</a></div>
+      <div class="Code"><a name="327290">&nbsp;</a></div>
+      <div class="Heading4"><a name="327291">Single-Word Reads</a></div>
+      <div class="Body"><a name="327293">The following code snippet reads data stored in the "From Register" shared memory </a>named "fromreg" into "value".</div>
+      <div class="Code"><a name="327873">uint32_t empty;</a></div>
+      <div class="Code"><a name="327874">uint32_t value;</a></div>
+      <div class="Code"><a name="327875">xc_iface_t *iface;</a></div>
+      <div class="Code"><a name="327876">xc_from_fifo_t *fromfifo;</a></div>
+      <div class="Code"><a name="327878">// initialize the software driver, assuming the Pcore device ID is 0</a></div>
+      <div class="Code"><a name="327879">xc_create(&amp;iface, &amp;SG_PLBIFACE_ConfigTable[0]);</a></div>
+      <div class="Code"><a name="327880">&nbsp;</a></div>
+      <div class="Code"><a name="327881">// obtain the memory location for storing the settings of shared memory </a>"fromfifo"</div>
+      <div class="Code"><a name="327882">xc_get_shmem(iface, "fromreg", (void **) &amp;fromfifo);</a></div>
+      <div class="Code"><a name="327883">// check the "empty" port of shared memory "fromfifo"</a></div>
+      <div class="Code"><a name="327884">do {</a></div>
+      <div class="Code"><a name="327885">    xc_read(iface, fromfifo-&gt;empty, Ø);</a></div>
+      <div class="Code"><a name="327886">} while (empty == 1);</a></div>
+      <div class="Code"><a name="327887">// read data from the "dout" port of shared memory "fromfifo" and store </a>at value</div>
+      <div class="Code"><a name="327888">xc_read(iface, fromfifo-&gt;dout, &amp;value);</a></div>
+      <div class="Heading3"><a name="327889">Accessing "Shared Memory" Shared Memories</a></div>
+      <div class="Heading4"><a name="327890">Single-Word Writes</a></div>
+      <div class="Body"><a name="327915">The following code snippet writes "value" to the shared memory named "shram1".</a></div>
+      <div class="Code"><a name="327921">uint32_t value;</a></div>
+      <div class="Code"><a name="327922">xc_iface_t *iface;</a></div>
+      <div class="Code"><a name="327923">xc_shram_t *shram;</a></div>
+      <div class="Code"><a name="327925">// initialize the software driver, assuming the Pcore device ID is 0</a></div>
+      <div class="Code"><a name="327926">xc_create(&amp;iface, &amp;SG_PLBIFACE_ConfigTable[0]);</a></div>
+      <div class="Code"><a name="327927">&nbsp;</a></div>
+      <div class="Code"><a name="327928">// obtain the memory location for storing the settings of shared memory </a>"shram1"</div>
+      <div class="Code"><a name="327929">xc_get_shmem(iface, "shram1", (void **) &amp;shram);</a></div>
+      <div class="Code"><a name="327930">// write value to the shared memory "shram1"</a></div>
+      <div class="Code"><a name="327931">xc_write(iface, xc_get_addr(shram-&gt;addr, 2), (const unsigned) value);</a></div>
+      <div class="Heading4"><a name="327933">Single-Word Reads</a></div>
+      <div class="Body"><a name="327960">The following code snippet reads data stored in the shared memory named "shram2" into </a>"value".</div>
+      <div class="Code"><a name="327967">uint32_t value;</a></div>
+      <div class="Code"><a name="327968">xc_iface_t *iface;</a></div>
+      <div class="Code"><a name="327969">xc_shram_t *shram;</a></div>
+      <div class="Code"><a name="327971">// initialize the software driver, assuming the Pcore device ID is 0</a></div>
+      <div class="Code"><a name="327972">xc_create(&amp;iface, &amp;SG_PLBIFACE_ConfigTable[0]);</a></div>
+      <div class="Code"><a name="327973">&nbsp;</a></div>
+      <div class="Code"><a name="327974">// obtain the memory location for storing the settings of shared memory </a>"fromfifo"</div>
+      <div class="Code"><a name="327975">xc_get_shmem(iface, "shram2", (void **) &amp;shram);</a></div>
+      <div class="Code"><a name="327976">// read data from the shared memory "shram2" and store at value</a></div>
+      <div class="Code"><a name="327977">xc_read(iface, xc_get_addr(shram-&gt;addr, 2), &amp;value);</a></div>
+      <div class="Heading2"><a name="327963">Asynchronous Support</a></div>
+      <div class="Body"><a name="296005">Asynchronous support for processors allow for the processor and the accelerator hardware </a>hanging off the processor to be clocked with different clocks. This allows the hardware accelerator to run at the fastest possible clock rate, or at a clock rate that is necessary for its correct functioning, for example when it is required to interface with an external peripheral. </div>
+      <div class="Body"><a name="296007">This feature is enabled when the </a><span class="Bold">Dual Clock</span> check box is selected in the EDK Processor block GUI's Implementation tab. The figure below shows how clocks will be connected for the import and export flow; in the export flow, the MicroBlaze ™(MB) block is not present. Basically, the custom logic design in System Generator is driven with the clk clock and the processor system is driven with the xps_clk clock. The clock source that drives the PLB bus in the MicroBlaze processor system is extracted to drive the bus adaptor, the memory map, and halves of the shared memories. Shared memories straddle between these two domains (e.g. the clk domain and the plb_clock domain) and are driven by both these clocks. In the import flow where an XPS project is imported into System Generator, the PLB bus on the processor must be driven with the same clock as the xps_clk signal.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="296023"><img class="Default" src="images/HW_SW_CoDesign.07.3.08.jpg" width="388" height="108" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="293034">When </a><span class="Bold">Dual Clock</span> is enabled and a design is netlisted for hardware co-simulation, a slightly different clock wiring topology is used. This is shown in the figure below. The clock source from the board is bifurcated with one branch going into the Hardware Co-simulation module before being connected to the clk clock (depicted in the figure above). The other branch is routed through a clock buffer and connected to the xps_clk clock signal.</div>
+      <div class="Body"><a name="293036">This topology allows for the custom logic designed in System Generator to be single-</a>stepped, while allowing the MicroBlaze processor to continue in free-running mode. This allows for clock-sensitive peripherals (such as the RS232 UARTS) to work when the Hardware Co-Simulation token is set to single-step.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="293153"><img class="Default" src="images/HW_SW_CoDesign.07.3.09.jpg" width="387" height="139" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="293040">In hardware co-simulation, the processor subsystem is driven by the board clock directly. </a>This means that the processor subsystem must be able to meet the requirements set by this clock. In hardware co-simulation, it is possible for users to select different ratios of clock frequencies based of the input board frequency. Note that this hardware co-simulation clock is generated in the hardware co-simulation module and is not available to the processor subsystem. </div>
+      <div class="Body"><a name="293031">For exmaple, if the input board frequency is 125MHz, and the hardware co-simulation </a>frequency is set to 33 Mhz, only the custom logic portion of the design will be constrained to 33 MHz, the MicroBlaze processor must still run at 125 MHz. If the MicroBlaze processor cannot meet timing at this speed, you need to instantiate a clock generator pheripheral in your XPS project and slow down the clock in that way.</div>
+      <div class="Heading2"><a name="314183">Clock Wiring in the Hardware Co-Simulation Flow</a></div>
+      <div class="Body"><a name="314405">When a Xilinx Platform Studio (XPS) project is imported into System Generator using the </a>EDK Processor block, you can generate a Hardware Co-Simulation block for the imported XPS project. The Hardware Co-Simulation block allows you to run the XPS system on the hardware while simulating the System Generator design in Simulink on the host PC.</div>
+      <div class="Body"><a name="314407">In a typical hardware co-simulation session, a portion of the System Generator design runs </a>on hardware, while the rest of the design is simulated in software. The design portion running in hardware is driven with a clock generated by a clock control module. This clock control module is a piece of hardware automatically inserted by System Generator hardware co-simulation to ensure that the hardware and the Simulink simulation are synchronized. The hardware co-simulation flow allows you to select the clock frequency used to drive the hardware. For example, in the hardware co-simulation settings dialog box for the ML506 board shown below, a 100 MHz clock frequency is selected. The Design Under Test (DUT) running on hardware is then driven by a 100 MHz clock output from the hardware co-simulation clock control module. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="314422"><img class="Default" src="images/HW_SW_CoDesign.07.3.10.jpg" width="323" height="182" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="314823">When participating in hardware co-simulation, the EDK Processor block provides two </a>clocking schemes to suit different simulation and runtime requirements: <span class="Italic">dual</span>-clock wiring and <span class="Italic">single</span>-clock wiring. In dual-clock wiring, the EDK Processor and the System Generator design are driven by two asynchronous clocks; in single-clock wiring, the EDK Processor and the rest of the System Generator design are driven by the same clock.</div>
+      <div class="Body"><a name="314825">As a rule of thumb, if you want the processor to free-run at the board rate, you should </a>choose the dual-clock wiring scheme. In case you want to single-step the processor for debug or profiling purposes, you should choose the single-clock wiring scheme.</div>
+      <div class="Body"><a name="314936">Starting with Release 12.1, the dual-clock wiring scheme is turned on by default. You can </a>change the wiring scheme to single-clock wiring through the Implementation tab on the EDK Processor block GUI. </div>
+      <div class="Heading3"><a name="314938">Dual Clock Wiring Scheme </a></div>
+      <div class="Body"><a name="314939">There are three key advantages of the dual-clock wiring scheme. The first advantage is to </a>allow the imported XPS project (processor) to run at full speed. This allows peripherals interfacing with external I/Os such as UART and memory controller to function correctly during simulation.</div>
+      <div class="Body"><a name="314941">The second advantage is to speed up the simulation time by having an asynchronous </a>communication interface between the XPS project with the DUT. In fact, the DUT and the imported XPS project run asynchronously. The DUT is controlled by the clock control module automatically added by System Generator hardware co-simulation. This clock control module ensures that the DUT is synchronized with the Simulink software simulation during single-stepped hardware co-simulation. Allowing the imported XPS project and the processor inside it to run asynchronously from the DUT eliminates the need to simulate though thousands of lines of boot-loading code before meaningful data shows up in Simulink.</div>
+      <div class="Body"><a name="315082">The dual-clock wiring scheme is shown in the figure below. The main difference compared </a>with the single-clock wiring scheme is that the board input clock directly drives the hardware co-simulation module and the imported XPS project.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="315088"><img class="Default" src="images/HW_SW_CoDesign.07.3.11.jpg" width="359" height="272" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="315113">The third advantage is that designs compiled with the dual-clock wiring scheme tend to </a>meet timing more easily compared with the single-clock wiring scheme. With the dual-clock wiring scheme, the DCM in the hardware co-simulation clock control module and the clock generator in the imported XPS project are not cascaded (as is the case when single-clock wiring is used). This greatly improves the chances of meeting timing when generating the Hardware Co-Simulation block with the imported XPS project.</div>
+      <div class="Heading4"><a name="315115">Limitations for Boards with Multiple-Input Clocks</a></div>
+      <div class="Body"><a name="315116">In the dual-clock wiring scheme, both the hardware co-simulation clock control module </a>and the imported XPS project are driven by the board input clock specified by the hardware co-simulation compilation target. For FPGA boards with multiple clock sources, it is possible that the imported XPS project uses a different board input clock than the System Generator hardware co-simulation compilation target. </div>
+      <div class="Body"><a name="315118">An example is the ML506 FPGA board. The ML506 FPGA board has two input clock </a>sources, one crystal 100 MHz input clock and one LVDS 200 MHz input clock. The XPS project generated by Base System Builder uses the 100 MHz input clock, while the System Generator ML506 hardware co-simulation compilation target uses the LVDS 200 MHz input clock.</div>
+      <div class="Body"><a name="315132">The following procedure uses the ML506 board to illustrate how to change the clock </a>sources in an XPS project in order to match the input clock source used by System Generator hardware co-simulation. </div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="324622">Find out the frequency of the board input clock used by the System Generator </a>hardware co-simulation target. For the JTAG ML506 hardware co-simulation compilation target, you can look at the file <span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">&lt;sysgen&gt;/plugins/compilation/Hardware Co-Simulation/ML506/JTAG/ </span><span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">ML506_JTAG.ucf</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="324627">Verify that the board input clock frequency is 200 MHz. Another way to find out the </a>board input clock source is to run the hardware co-simulation compilation target once and look at the file <span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">&lt;netlist_dir&gt;/jtagcosim_top.ucf</span>. In the following snippet of the file <span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">ML506_JTAG.ucf</span>, you can see that the System Generator hardware co-simulation uses a 200 MHz LVDS board input clock source. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Code"><a name="315136">NET "sys_clk_p" LOC = "L19";</a></div>
+      <div class="Code"><a name="315137">NET "sys_clk_n" LOC = "K19";</a></div>
+      <div class="Code"><a name="315138">NET "sys_clk_p" TNM_NET = "hwcosim_sys_clk";</a></div>
+      <div class="Code"><a name="315139">NET "sys_clk_n" TNM_NET = "hwcosim_sys_clk";</a></div>
+      <div class="Code"><a name="315140">TIMESPEC "TS_hwcosim_sys_clk" = PERIOD "hwcosim_sys_clk" </a><span class="XRedLink">200 MHz</span> HIGH 50%;</div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="315142">In the </a><span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">system.mhs</span> file found in the XPS project, change the input clock frequency from 100 MHz to 200 MHz, which is the frequency of the clock source used by the System Generator hardware co-simulation compilation target. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Code"><a name="315144">PORT fpga_0_clk_1_sys_clk_pin = dcm_clk_s, DIR = I, SIGIS = CLK, </a>CLK_FREQ = <span class="XRedLink">200000000</span></div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="315146">Change the input clock frequency of the clock generator in the imported XPS project. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Code"><a name="315148">BEGIN clock_generator</a></div>
+      <div class="Code"><a name="315149"> PARAMETER INSTANCE = clock_generator_0</a></div>
+      <div class="Code"><a name="315150"> PARAMETER C_CLKIN_FREQ = </a><span class="XRedLink">200000000</span></div>
+      <div class="Code"><a name="315151"> PARAMETER C_CLKOUT0_FREQ = 125000000</a></div>
+      <div class="Code"><a name="315152"> PARAMETER C_CLKOUT0_PHASE = 0</a></div>
+      <div class="Code"><a name="315153"> PARAMETER C_CLKOUT0_GROUP = NONE</a></div>
+      <div class="Code"><a name="315154"> PARAMETER C_CLKOUT0_BUF = TRUE</a></div>
+      <div class="Code"><a name="315155"> PARAMETER C_EXT_RESET_HIGH = 0</a></div>
+      <div class="Code"><a name="315156"> PARAMETER HW_VER = 4.00.a</a></div>
+      <div class="Code"><a name="315157"> PORT CLKIN = dcm_clk_s</a></div>
+      <div class="Code"><a name="315158"> PORT CLKOUT0 = clk_125_0000MHz</a></div>
+      <div class="Code"><a name="315159"> PORT RST = sys_rst_s</a></div>
+      <div class="Code"><a name="315160"> PORT LOCKED = Dcm_all_locked</a></div>
+      <div class="Code"><a name="315161">END</a></div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">5.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="315163">After this, you can import the modified XPS project through the EDK Processor block </a>and generate a Hardware Co-Simulation block for this project. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading3"><a name="315165">Single Clock Wiring Scheme </a></div>
+      <div class="Body"><a name="315089">The System Generator hardware co-simulation module can use the DCM (Digital Clock </a>Manager), the MMCM (Mix-Mode Clock Manager), or the PLL (Phase Lock Loop) to convert the board input clock to the clock frequency requested by you. The clock generated by hardware co-simulation is used to drive all blocks in the DUT.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="315342"><img class="Default" src="images/HW_SW_CoDesign.07.3.12.jpg" width="361" height="179" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="315347">When a System Generator model contains an XPS project imported through the EDK </a>Processor block in single clock mode, the XPS project is driven by the clock generated by the Hardware Co-Simulation module. This allows the processor to be simulated in lock-step with the rest of the DUT and the Simulink simulation. This kind of simulation can be very helpful when you are debugging transactions over a custom bus or when you are profiling code. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="315358"><img class="Default" src="images/HW_SW_CoDesign.07.3.13.jpg" width="359" height="205" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading4"><a name="315473">Limitations with the XPS Clock Generator</a></div>
+      <div class="Body"><a name="315474">An XPS project created using BSB (Base System Builder) usually includes a clock generator, </a>which is used to generate clock signals with requested frequencies to drive the MicroBlaze processor and other peripherals such as DDR3 external memory and Ethernet MAC. Similar to the hardware co-simulation module, the clock generator generates the requested clock frequencies using DCM/MMCM/PLL. </div>
+      <div class="Body"><a name="315476">In the single-clock wiring scheme depicted in the previous figure, the DCM inside the </a>hardware co-simulation clock control module and the clock generator from the imported XPS project are cascaded. For some FPGA boards such as ML506 and SP601, cascading DCM/PLLs prevents the design from achieving timing closure.</div>
+      <div class="Body"><a name="324991">Additionally, in single-step hardware co-simulation, the output clock from the hardware </a>co-simulation module is synchronized with the Simulink simulation. The XPS clock generator simply stops working in single-stepped hardware co-simulation.</div>
+      <div class="Heading4"><a name="324992">One Solution to the Single-Clock Wiring Limitations</a></div>
+      <div class="Body"><a name="324993">One solution to the limitation described above is to take out the clock generator in the XPS </a>project and re-import it into System Generator. The following procedure illustrates how to take out the clock generator using a ML506-based project generated using BSB. While you can do this through the XPS GUI, this procedure shows you how to modify the MHS (Microprocessor Hardware Specification) file and MSS (Microprocessor Software Specification) file directly to remove clock generator.</div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="323334">The original </a><span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">system.mhs</span> file created using BSB is shown below. Observe that the input board clock <span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">fpga_0_clk_1_sys_clk_pin</span> is connected to the <span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">CLKIN</span> pin of the clock generator instance. The output clock pin <span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">CLKOUT0</span> is then used to drive the processor and the other hardware peripherals.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Code"><a name="323352">PORT fpga_0_clk_1_sys_clk_pin = </a><span class="XRedLink">dcm_clk_s</span>, DIR = I, SIGIS = CLK, CLK_FREQ = 100000000</div>
+      <div class="Code"><a name="325034">&nbsp;</a></div>
+      <div class="Code"><a name="323354">BEGIN clock_generator</a></div>
+      <div class="Code"><a name="323355"> PARAMETER INSTANCE = clock_generator_0</a></div>
+      <div class="Code"><a name="323356"> PARAMETER C_CLKIN_FREQ = 100000000</a></div>
+      <div class="Code"><a name="323357"> PARAMETER C_CLKOUT0_FREQ = 125000000</a></div>
+      <div class="Code"><a name="323358"> PARAMETER C_CLKOUT0_PHASE = 0</a></div>
+      <div class="Code"><a name="323359"> PARAMETER C_CLKOUT0_GROUP = NONE</a></div>
+      <div class="Code"><a name="323360"> PARAMETER C_CLKOUT0_BUF = TRUE</a></div>
+      <div class="Code"><a name="323361"> PARAMETER C_EXT_RESET_HIGH = 0</a></div>
+      <div class="Code"><a name="323362"> PARAMETER HW_VER = 4.00.a</a></div>
+      <div class="Code"><a name="323363"> PORT CLKIN = </a><span class="XRedLink">dcm_clk_s</span>          # input clock</div>
+      <div class="Code"><a name="323364"> PORT CLKOUT0 = </a><span class="XRedLink">clk_125_0000MHz</span>  # output clock</div>
+      <div class="Code"><a name="323365"> PORT RST = sys_rst_s</a></div>
+      <div class="Code"><a name="323366"> PORT LOCKED = Dcm_all_locked</a></div>
+      <div class="Code"><a name="323367">END</a></div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="323369">Next, you should simply comment out the clock generator. The output clock is directly </a>attached to the board input clock. The modified <span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">system.mhs</span> file is like the following:</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Code"><a name="323371">PORT fpga_0_clk_1_sys_clk_pin = </a><span class="XRedLink">clk_125_0000MHz</span>, DIR = I, SIGIS = CLK, CLK_FREQ = 100000000</div>
+      <div class="Code"><span class="XRedLink"><a name="323373">#</a></span> BEGIN clock_generator</div>
+      <div class="Code"><span class="XRedLink"><a name="323374">#</a></span>  PARAMETER INSTANCE = clock_generator_0</div>
+      <div class="Code"><span class="XRedLink"><a name="323375">#</a></span>  PARAMETER C_CLKIN_FREQ = 100000000</div>
+      <div class="Code"><span class="XRedLink"><a name="323376">#</a></span>  PARAMETER C_CLKOUT0_FREQ = 125000000</div>
+      <div class="Code"><span class="XRedLink"><a name="323377">#</a></span>  PARAMETER C_CLKOUT0_PHASE = 0</div>
+      <div class="Code"><span class="XRedLink"><a name="323378">#</a></span>  PARAMETER C_CLKOUT0_GROUP = NONE</div>
+      <div class="Code"><span class="XRedLink"><a name="323379">#</a></span>  PARAMETER C_CLKOUT0_BUF = TRUE</div>
+      <div class="Code"><span class="XRedLink"><a name="323380">#</a></span>  PARAMETER C_EXT_RESET_HIGH = 0</div>
+      <div class="Code"><span class="XRedLink"><a name="323381">#</a></span>  PARAMETER HW_VER = 4.00.a</div>
+      <div class="Code"><span class="XRedLink"><a name="323382">#</a></span>  PORT CLKIN = <span class="XRedLink">dcm_clk_s</span>          # input clock</div>
+      <div class="Code"><span class="XRedLink"><a name="323383">#</a></span>  PORT CLKOUT0 = <span class="XRedLink">clk_125_0000MHz</span>  # output clock</div>
+      <div class="Code"><span class="XRedLink"><a name="323384">#</a></span>  PORT RST = sys_rst_s</div>
+      <div class="Code"><span class="XRedLink"><a name="323385">#</a></span>  PORT LOCKED = Dcm_all_locked</div>
+      <div class="Code"><span class="XRedLink"><a name="323386">#</a></span> END</div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="323388">The </a><span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">Dcm_all_locked</span> pin on the clock generator is used to indicate whether the output clock signal is locked with the input clock signal. Replace the input pins driven by this signal with<span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;"> net_vcc</span>. These kind of changes can be tricky in some design scenarios. So far, no abnormality has been observed for the hardware peripherals generated from BSB.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Code"><a name="323390">BEGIN proc_sys_reset</a></div>
+      <div class="Code"><a name="323391"> PARAMETER INSTANCE = proc_sys_reset_0</a></div>
+      <div class="Code"><a name="323392"> PARAMETER C_EXT_RESET_HIGH = 0</a></div>
+      <div class="Code"><a name="323393"> PARAMETER HW_VER = 2.00.a</a></div>
+      <div class="Code"><a name="323394"> PORT Slowest_sync_clk = clk_125_0000MHz</a></div>
+      <div class="Code"><a name="323395"> PORT Ext_Reset_In = sys_rst_s</a></div>
+      <div class="Code"><a name="323560">PORT MB_Debug_Sys_Rst = Debug_SYS_Rst</a></div>
+      <div class="Code"><a name="323561"> PORT Dcm_locked = </a><span class="XRedLink">net_vcc</span>              # changed from Dcm_all_locked</div>
+      <div class="Code"><a name="323562"> PORT MB_Reset = mb_reset</a></div>
+      <div class="Code"><a name="323563"> PORT Bus_Struct_Reset = sys_bus_reset</a></div>
+      <div class="Code"><a name="323564"> PORT Peripheral_Reset = sys_periph_reset</a></div>
+      <div class="Code"><a name="323565">END</a></div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="323567">Comment out the software driver for the clock generator in the </a><span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">system.mss</span> file</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Code"><span class="XRedLink"><a name="323569">#</a></span> BEGIN DRIVER</div>
+      <div class="Code"><span class="XRedLink"><a name="323570">#</a></span>  PARAMETER DRIVER_NAME = generic</div>
+      <div class="Code"><span class="XRedLink"><a name="323571">#</a></span>  PARAMETER DRIVER_VER = 1.00.a</div>
+      <div class="Code"><span class="XRedLink"><a name="323572">#</a></span>  PARAMETER HW_INSTANCE = clock_generator_0</div>
+      <div class="Code"><span class="XRedLink"><a name="323573">#</a></span> END</div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">5.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="323575">After the modification, the clock generator is safely removed from the XPS project. You </a>can import this modified XPS project into System Generator through the single-clock wiring scheme.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading3"><a name="323576">Caveats with Peripherals like UART and MDM</a></div>
+      <div class="Body"><a name="323577">Peripherals like UART and MDM (microprocessor debugger module) do not work in the </a>single-stepped hardware co-simulation mode. </div>
+      <div class="Body"><a name="323579">The UART peripheral needs to be driven by a specific input clock source in order to </a>communicate properly through the serial ports. If you choose a hardware co-simulation frequency on the hardware co-simulation dialog box which is different from the clock frequency with the original XPS project, you will see invalid output on the serial port console. </div>
+      <div class="Body"><a name="323581">For MDM, its connection with </a><span class="Italic">gdb</span> will time out if its input clock frequency is too slow. In this case, the debug session in SDK (Software Development Kit) or XMD (Xilinx Microprocessor Debugger) will run into errors such as “Unable to stop MicroBlaze processor.”</div>
+      <div class="Heading3"><a name="325850">Troubleshooting</a></div>
+      <div class="Heading4"><a name="328825">Limitations on the Imported XPS Project</a></div>
+      <div class="Body"><a name="328826">In theory, any XPS project can be imported into System Generator through the EDK </a>Processor block. However, you may need to modify the XPS project in some situations to avoid resource conflicts and to allow the EDK Processor block to properly interpret the project.</div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="328828">Input clock port</a></span>: XPS uses <span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">SIGIS = CLK</span> to tag an external port as a clock port. The EDK Processor block only recognizes a single input clock to implement the single clock and dual clock wiring described above. In this case, you need to remove the <span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">SIGIS = CLK</span> tag on other clock ports. The following XPS project example has two input clock ports, <span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">sys_clk_pin</span> and <span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">fpga_0_PCIe_Diff_Clk_IBUF_DS</span>. In order to import this project into System Generator, you need to ensure that <span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">SIGIS = CLK</span> is removed from the PCI input clock ports. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Code"><a name="328830">PORT sys_clk_pin = dcm_clk_s, DIR = I, </a><span class="XRedLink">SIGIS = CLK</span>, CLK_FREQ = 100000000</div>
+      <div class="Code"><a name="328831">PORT fpga_0_PCIe_Diff_Clk_IBUF_DS_P_pin = PCIe_Diff_Clk, DIR = I, </a>DIFFERENTIAL_POLARITY = P  <span class="XRedLink"># need to remove SIGIS = CLK</span></div>
+      <div class="Code"><a name="328832"> PORT fpga_0_PCIe_Diff_Clk_IBUF_DS_N_pin = PCIe_Diff_Clk, DIR = I, </a>DIFFERENTIAL_POLARITY = N <span class="XRedLink"># need to remove SIGIS = CLK</span></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="328834">Resource conflict</a></span>: You need to ensure that there is no resource conflict between the imported XPS project and the rest of the System Generator design. For example, if you use the Point-to-Point Ethernet-Based Hardware Co-Simulation flow and the target hardware board has only one Ethernet MAC component (e.g., the Xilinx ML506, SP601, and SP605 evaluation boards), the XPS project can contain peripherals that use the Ethernet MAC (e.g., xps_ethernetlite). You should consider changing to the JTAG- Based Hardware Co-Simulation flow in this case. Another example is when the target hardware board only has a single BSCAN module (e.g., the Spartan 3A DSP 1800 Starter board). You have to remove the JTAG-Based MDM (Microprocessor Debug Module) peripheral from the imported XPS project. Otherwise, you need to switch to the Point-to-Point Ethernet-Based Hardware Co-Simulation flow and use the Ethernet for downloading the bitstream.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="328836">Constraint handling</a></span>: The EDK Processor block automatically modifies the UCF (user constraint file) file from the imported XPS based on the compilation flow that is used. Upon importing an XPS project, a copy of the modified UCF file is placed under <span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">&lt;xps_project_dir&gt;/data/sg_&lt;xps_project_name&gt;.ucf</span>. The snippet of a modified UCF file is shown below. Constraints that belong to certain external ports of the imported XPS are commented/uncommented depending on whether or not the port is exposed on the EDK Processor block. The input clock ports are commented out in the hardware co-simulation flow automatically. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Code"><a name="328838"># constraints for pin 'fpga_0_RS232_Uart_1_RX_pin' (not exposed)</a></div>
+      <div class="Code"><a name="328839">Net fpga_0_RS232_Uart_1_RX_pin LOC = AG15  |  IOSTANDARD=LVCMOS33;</a></div>
+      <div class="Code"><a name="328840">&nbsp;</a></div>
+      <div class="Code"><a name="328841"># constraints for pin 'fpga_0_RS232_Uart_1_TX_pin' (not exposed)</a></div>
+      <div class="Code"><a name="328842">Net fpga_0_RS232_Uart_1_TX_pin LOC = AG20  |  IOSTANDARD=LVCMOS33;</a></div>
+      <div class="Code"><a name="328843">&nbsp;</a></div>
+      <div class="Code"><a name="328844"># constraints for pin 'fpga_0_clk_1_sys_clk_pin' (exposed, clock port)</a></div>
+      <div class="Code"><a name="328845"># Net fpga_0_clk_1_sys_clk_pin TNM_NET = sys_clk_pin;</a></div>
+      <div class="Code"><a name="328846"># TIMESPEC TS_sys_clk_pin = PERIOD sys_clk_pin 100000 kHz;</a></div>
+      <div class="Code"><a name="328847"># Net fpga_0_clk_1_sys_clk_pin LOC = AH15  |  IOSTANDARD=LVCMOS33;</a></div>
+      <div class="Body2"><a name="328849">In case where you do not want the EDK Processor block to make automatic </a>modifications, you can put the line #### SYSGEN VERBATIM ### in the original XPS project UCF file. All the lines after this commented line will be untouched. See the explanation found from the beginning of the modified UCF file, which is also shown in the code snippet below.</div>
+      <div class="Code"><a name="328851"># This file is generated automatically by System Generator for DSP from </a></div>
+      <div class="Code"><a name="328852"># the following file:</a></div>
+      <div class="Code"><a name="328853">#</a></div>
+      <div class="Code"><a name="328854"># C:\dev\trunk\test\edk\edkplbimport\EDKPrj\data\system.ucf </a></div>
+      <div class="Code"><a name="329828"># Do NOT modify this file directly. Instead, change the above original </a></div>
+      <div class="Code"><a name="328855"># file. Synchronize the processor memory map, or re-import the XPS </a></div>
+      <div class="Code"><a name="328856"># project to apply the changes. # # In case that the automatic changes </a>by System Generator for DSP are </div>
+      <div class="Code"><a name="328857"># undesired, put the following comment in the above original file. All </a></div>
+      <div class="Code"><a name="328858"># the contents after this comment will be copied verbatim. </a></div>
+      <div class="Code"><a name="329361">&nbsp;</a></div>
+      <div class="Code"><a name="329362"># #### SYSGEN VERBATIM ###</a></div>
+      <div class="Body"><a name="329814">&nbsp;</a></div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

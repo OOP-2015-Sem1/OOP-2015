@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>CORDIC LOG</title>
+    <link rel="StyleSheet" href="css/Xilinx_Reference_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Reference_Blockset.12.01.html#632338">Xilinx Reference Blockset</a> : CORDIC LOG</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="632338">CORDIC LOG</a></div>
+      <div class="Body"><a name="632342"><img class="Default" src="images/Xilinx_Reference_Blockset.12.14.1.jpg" width="65" height="72" style="display: block; float: none; left: 0.0; top: 0.0" alt="" />The Xilinx CORDIC LOG reference block implements a natural logarithm </a>circuit using a fully parallel CORDIC  (COordinate Rotation DIgital Computer) algorithm in Hyperbolic Vectoring mode. </div>
+      <div class="Body"><a name="744090">That is, given a input x, it computes the output log (x) and also provides a </a>flag for adding complex pi value to the output if a complex output is desired. The CORDIC processor is implemented using building blocks from the Xilinx blockset.</div>
+      <div class="Body"><a name="744092">The natural logarithm is calculated indirectly by the CORDIC algorithm by applying the </a>identities listed below.</div>
+      <div class="Body"><a name="744094">log (w) = 2 x tanh</a><span class="Superscript">-1</span>[(w-1) / (w+1)]</div>
+      <div class="Body"><a name="744095">log ( w  x 2</a><span class="Superscript">E</span> ) = log (w) + E x log (2)</div>
+      <div class="Body"><a name="632344">The CORDIC LOG algorithm is implemented in the following 4 steps: </a></div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><span class="Bold"><a name="744219">Co-ordinate Rotation</a></span>:  The CORDIC algorithm converges only for positive values of x. If x &lt; zero, the input data is converted to a non-negative number. If x = 0, a zero detect flag is passed along to the last stage which can be exposed at the output stage. The log circuit has been designed to converge for all values of x, except for the most negative value.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><span class="Bold"><a name="744220">Normalization</a></span>:  The CORDIC algorithm converges only for x, between the values 0.5 (inclusive) and 1. During normalization, the input X is shifted to the left till it has a 1 in the most significant bit. The log output is derived using the identity log(w) = 2 x tanh-1{ (w-l) / (w+1) }. Based on this identity, the input w gets mapped to, x = w + 1 and y = w - 1.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><span class="Bold"><a name="744221">Linear Rotations</a></span>:  For tanh-1{(w-l) / (w+1)} calculation, the resulting vector is rotated through progressively smaller angles, such that y goes to zero.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><span class="Bold"><a name="744222">Co-ordinate Correction</a></span>: If the input was negative a CMPLX_PI flag is provided at the output for adding PI if a complex output is desired. If a left shift was applied to X, this step adjusts the output by using the equation log (w x 2E) = log (w) + E x log (2).</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="632348">Block Parameters</a></div>
+      <div class="Body"><a name="632349">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model. </div>
+      <div class="Body"><a name="632350">Parameters specific to this reference block are as follows:</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632351">Number of Processing Elements (integer value starting from 1)</a></span>: specifies the number of iterative stages used for hyperbolic rotation. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632352">Input Data Width</a></span>: specifies the width of input x. The inputs x should be signed data type having the same data width. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632353">Input Binary Point Position</a></span>: specifies the binary point position for input x. The input x should be signed data type with the same binary point position. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632354">Latency for each Processing Element [1001]</a></span>: This parameter sets the pipeline latency after each circular rotation stage. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="632355">The latency of the CORDIC LOG block is calculated based on the formula specified as </a>follows: Latency = 2+ Data Width+sum (latency of Processing Elements). </div>
+      <div class="Heading2"><a name="632356">Reference</a></div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="632357">J. E. Volder, </a><span class="Italic">The CORDIC Trigonometric Computing Technique</span>, IRE Trans. On Electronic Computers, Vol. EC-8, 1959, pp. 330-334. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="632358">J. S. Walther, A</a><span class="Italic"> Unified Algorithm for Elementary Functions</span>, Spring Joint Computer Conference (1971) pp. 379-385. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="639686">Yu Hen Hu, </a><span class="Italic">CORDIC-Based VLSI Architectures for Digital Signal Processing</span>, IEEE Signal Processing Magazine, pp. 17-34, July 1992.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

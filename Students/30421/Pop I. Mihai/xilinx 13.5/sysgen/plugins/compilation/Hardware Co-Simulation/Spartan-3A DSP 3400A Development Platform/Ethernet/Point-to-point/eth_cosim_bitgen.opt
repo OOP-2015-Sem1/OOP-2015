@@ -1,0 +1,37 @@
+FLOWTYPE = CONFIG;
+##############################################################################
+#                                                                            #
+#  Filename   : eth_cosim_bitgen.opt                                         #
+#                                                                            #
+#  Description: Defines the FPGA bitstream generation flow options for the   #
+#               Ethernet co-simulation compilation.                          #
+#                                                                            #
+##############################################################################
+
+#
+# Options for bitgen
+#
+# Type "bitgen -h <arch>" for a detailed list of command line options
+#
+Program bitgen
+<inputdir><design>.ncd;   # Input ncd file
+-intstyle xflow;          # Message Reporting Style: ise, xflow, or silent
+-w;                       # Overwrite existing output file
+-g StartUpClk:JtagClk;    # Use JTAG clk as startup clock
+-g CclkPin:PULLUP;
+-g TdoPin:PULLNONE;
+-g DonePin:PULLUP;
+-g DriveDone:Yes;
+-g DONE_cycle:4;
+-g GTS_cycle:5;
+-g ProgPin:PULLUP;
+-g TckPin:PULLUP;
+-g TdiPin:PULLUP;
+-g TmsPin:PULLUP;
+-g DonePipe:No;
+-g GWE_cycle:6;
+-g LCK_cycle:NoWait;
+-g Security:NONE;
+-g Persist:No;
+-g UnusedPin:PULLNONE;
+END Program bitgen

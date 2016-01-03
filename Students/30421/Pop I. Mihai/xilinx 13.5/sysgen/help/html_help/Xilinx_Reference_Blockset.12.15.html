@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>CORDIC SINCOS</title>
+    <link rel="StyleSheet" href="css/Xilinx_Reference_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Reference_Blockset.12.01.html#639690">Xilinx Reference Blockset</a> : CORDIC SINCOS</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="639690">CORDIC SINCOS</a></div>
+      <div class="Body"><a name="639694"><img class="Default" src="images/Xilinx_Reference_Blockset.12.15.1.jpg" width="58" height="77" style="display: block; float: none; left: 0.0; top: 0.0" alt="" />The Xilinx CORDIC SINCOS reference block implements Sine and Cosine </a>generator circuit using a fully parallel CORDIC (COordinate Rotation DIgital Computer) algorithm in Circular Rotation mode. </div>
+      <div class="Body"><a name="632367">That is, given input angle z, it computes the output cosine (z) and sine (z). </a>The CORDIC processor is implemented using building blocks from the Xilinx blockset. The CORDIC sine cosine algorithm is implemented in the following 3 steps: </div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><span class="Bold"><a name="632368">Coarse Angle Rotation</a></span>. The algorithm converges only for angles between -pi/2 and pi/2. If z &gt; pi/2, the input angle is reflected to the 1st quadrant by subtracting pi/2 from the input angle. When z &lt; -pi/2, the input angle is reflected back to the 3rd quadrant by adding pi/2 to the input angle. The sine cosine circuit has been designed to converge for all values of z, except for the most negative value. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><span class="Bold"><a name="632369">Fine Angle Rotation</a></span>. By setting x equal to 1/1.646760 and y equal to 0, the rotational mode CORDIC processor yields cosine and sine of the input angle z. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><span class="Bold"><a name="632370">Co-ordinate Correction</a></span>. If there was a reflection applied in Step 1, this step applies the appropriate correction. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="632371">For z &gt; pi/2: using z = t + pi/2, then </a><br />	sin (z ) = sin(t).cos(pi/2) + cos(t).sin(pi/2) = cos(t) <br />	cos (z ) = cos(t).cos(pi/2) - sin(t).sin(pi/2) = -sin(t)<br />For z &lt; pi/2: using z = t - pi/2, then <br />	sin (z ) = sin(t).cos(-pi/2) + cos(t).sin(-pi/2) = -cos(t) <br />	cos (z ) = cos(t).cos(-pi/2) - sin(t).sin(-pi/2) = sin(t)</div>
+      <div class="Heading2"><a name="632372">Block Parameters</a></div>
+      <div class="Body"><a name="632373">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model. </div>
+      <div class="Body"><a name="632374">Parameters specific to this reference block are as follows:</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632375">Number of Processing Elements</a></span>: specifies the number of iterative stages used for linear rotation. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632376">Input Data Width</a></span>: specifies the width of the input z. The input z should be signed data type with the same data width as specified. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632377">Input Binary Point Position</a></span>: specifies the binary point position for input z. The input z should be signed data type with the same binary point position. The binary point should be chosen to provide enough bits for representing pi/2. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632378">Latency for each Processing element</a></span>: This parameter sets the pipeline latency after each iterative circular rotation stage. The latency of the CORDIC SINCOS block is calculated based on the formula specified as follows: Latency = 3 + sum (latency of Processing Elements) </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="632379">Reference</a></div>
+      <div class="Body"><a name="632380">1) J. E. Volder, </a><span class="Italic">The CORDIC Trigonometric Computing Technique</span>, IRE Trans. On Electronic Computers, Vol. EC-8, 1959, pp. 330-334. 2) J. S. Walther, <span class="Italic">A Unified Algorithm for Elementary </span><span class="Italic">Functions</span>, Spring Joint Computer Conference (1971) pp. 379-385. 3) Yu Hen Hu, <span class="Italic">CORDIC-</span><span class="Italic">Based VLSI Architectures for Digital Signal Processing</span>, IEEE Signal Processing Magazine, pp. 17-34, July 1992.</div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

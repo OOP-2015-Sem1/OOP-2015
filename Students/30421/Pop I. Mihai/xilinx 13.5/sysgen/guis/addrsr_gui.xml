@@ -1,0 +1,47 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Addressable Shift Register" block_type="addrsr">
+  <icon width="60" height="58" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="Addrsr_config"/>
+  <handlers enablement="addrsrenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsBasic"/>
+    <library name="xbsMemory"/>
+    <library name="xbsFloatingPoint"/>
+  </libraries>
+  <blockgui label="Xilinx Addressable Shift Register">
+    <editbox name="infoedit" default="Delay of configurable length.  Any element in the delay line can be addressed and driven onto the output port.&lt;br&gt;&lt;br&gt;Hardware notes: This block is implemented using SRL16s. If Virtex-4 or Spartan-3 device is used, multiple SRLC16s are cascaded together." read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <checkbox name="infer_latency" default="off" evaluate="true" label="Infer maximum latency (depth) using address port width" ctype="Int"/>
+        <editbox name="depth" default="2" evaluate="true" label="Maximum latency (depth)" ctype="Int"/>
+        <editbox name="initVector" default="[0]" evaluate="true" label="Initial value vector" ctype="DoubleVector"/>
+        <etch name="oportetch" label="Optional Ports">
+          <checkbox name="en" default="off" evaluate="true" label="Provide enable port" ctype="Int"/>
+        </etch>
+      </tab>
+      <tab name="advancedtab" label="Advanced">
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <checkbox name="use_behavioral_HDL" evaluate="true" label="Use behavioral HDL (otherwise use core)" ctype="Int"/>
+        <radiogroup name="Optimization" default="Resource" evaluate="true" label="Optimization" ctype="Int">
+          <item value="Resource" label="Resource"/>
+          <item value="Speed" label="Speed"/>
+        </radiogroup>
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <workspacevar name="rpm" ctype="Int"/>
+    <workspacevar name="rst" ctype="Int"/>
+    <hiddenvar name="use_rpm" default="" evaluate="false" ctype="String"/>
+    <hiddenvar name="xlcconfig" default="" evaluate="false" ctype="String"/>    
+  </blockgui>
+</sysgenblock>

@@ -1,0 +1,838 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Supporting New Boards through JTAG Hardware Co-Simulation</title>
+    <link rel="StyleSheet" href="css/HW_CoSim.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="HW_CoSim.8.1.html#315368">Using Hardware Co-Simulation</a> : Supporting New Boards through JTAG Hardware Co-Simulation</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="315368">Supporting New Boards through JTAG Hardware Co-Simulation</a></div>
+      <div class="Body"><a name="315370">System Generator provides a generic interface that uses JTAG and a Xilinx programming </a>cable (e.g., Parallel Cable IV or Platform Cable USB) to communicate with FPGA hardware. This takes advantage of the ability of JTAG to extend System Generator's hardware in the simulation loop capability to numerous other FPGA boards.</div>
+      <div class="Heading2"><a name="315374">Hardware Requirements</a></div>
+      <div class="Body"><a name="315375">An FPGA board can support the JTAG hardware co-simulation interface, provided it </a>includes the following hardware components: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="315376">A Xilinx FPGA part that is available in System Generator as a supported device (i.e., a </a>device that can be chosen in the <span class="Bold">Part</span> field of the System Generator block dialog box); </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="315377">An on-board oscillator that supplies the FPGA with a free-running clock source; </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="315378">A JTAG header that provides access to the FPGA.</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="315382">Supporting New Boards</a></div>
+      <div class="Body"><a name="315383">Although the JTAG hardware co-simulation interface is generic, an FPGA board must </a>provide its own board support package before it can be supported in System Generator. A board support package is comprised of four files that provide information about the board, or board. A number of FPGA boards already have board support packages available. You may have an FPGA board that does not have a hardware co-simulation board support package. In this case, you can create your own, assuming your board meets the specified <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.14.html#315374', '');" title="Supporting New Boards through JTAG Hardware Co-Simulation">Hardware Requirements</a></span>. Creating a new board support package for a board is a straightforward process. System Generator provides a utility, called the System Generator Board Description Builder (SBDBuilder), that allows you to create new board support packages in a graphical environment. It is also possible to define board support packages manually by editing a series of template files that are included in the System Generator software tree.</div>
+      <div class="Body"><a name="320935">SBDBuilder can be launched by using the command </a><span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;;">xlSBDBuilder</span> in the MATLAB console. Alternatively, SBDBuilder can also be launched from the System Generator Token by double-clicking on the System Generator token; under <span class="Bold">Compilation</span> select <span class="Bold">Hardware </span><span class="Bold">Co-Simulation &gt; New Compilation Target ...</span></div>
+      <div class="Heading4"><a name="315351">SBDBuilder Dialog Box</a></div>
+      <div class="Body"><a name="310073">After invoking SBDBuilder, the main dialog box will appear as shown below:</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="310072"><img class="Default" src="images/HW_CoSim.8.14.1.jpg" width="445" height="437" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="310074">Once the main dialog box is open, you may create a board support package by filling in the </a>required fields described below: </div>
+      <div class="Body"><span class="Bold"><a name="310075">Board Name</a></span>: Tells a descriptive name of the board. This is the name that will be listed in System Generator when selecting your JTAG hardware co-simulation board for compilation. </div>
+      <div class="Body"><span class="Bold"><a name="310076">System Clock</a></span>: JTAG hardware co-simulation requires an on-board clock to drive the System Generator design. The fields described below specify information about the board's system clock: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="310077">Frequency (MHz)</a></span>: Specifies the frequency of the on-board system clock in MHz. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Note3">
+        <span class="XNote">Note:&nbsp;</span><a name="328338">You should use a clock frequency between 10 MHz and 100 MHz. Depending on the </a>target FPGA device and your design, the design compiled for hardware co-simulation may not meet timing constraints at a higher clock frequency after the hardware co-simulation logic is added.</div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="310078">Pin Location</a></span>: Specifies the FPGA input pin to which the system clock is connected. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><span class="Bold"><a name="310079">JTAG Options</a></span>: System Generator needs to know several things about the FPGA board's JTAG chain to be able to program the FPGA for hardware co-simulation. The topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.14.html#310185', '');" title="Supporting New Boards through JTAG Hardware Co-Simulation">Obtaining Platform Information</a></span> describes how and where to find the information required for these fields. If you are unsure of the specifications of your board, please refer to the manufacturer's documentation. The fields specific to JTAG Options are described below: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="310083">Boundary Scan Position</a></span>: Specifies the position of the target FPGA on the JTAG chain. This value should be indexed from 1. (e.g. the first device in the chain has an index of 1, the second device has an index of 2, etc.) </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="310084">IR Lengths</a></span>: Specifies the lengths of the instruction registers for all of the devices on the JTAG chain. This list may be delimited by spaces, commas, or semicolons. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="310085">Detect</a></span>: This action attempts to identify the IR Lengths automatically by querying the FPGA board. The board must be powered and connected to a Parallel Cable IV for this to function properly. Any unknown devices on the JTAG chain will be represented with a "?" in the list, and must be specified manually. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><span class="Bold"><a name="310086">Targetable Devices</a></span>: This table displays a list of available FPGAs on the board for programming. This is not a description of all of the devices on the JTAG chain, but rather a description of the possible devices that may exist at the aforementioned boundary scan position. For most boards, only one device needs to be specified, but some boards may have alternate, e.g., a choice between an xcv1000 or an xcv2000 in the same socket. Use the <span class="Bold">Add</span> and <span class="Bold">Delete</span> buttons described below to build the device list: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="310087">Add</a></span>: Brings up a menu to select a new device for the board. As shown in the figure below, devices are organized by family, then part name, then speed, and finally the package type. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="310094">Delete</a></span>: Remove the selected device from the list. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="310093"><img class="Default" src="images/HW_CoSim.8.14.2.jpg" width="261" height="161" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><span class="Bold"><a name="310095">Non-Memory-Mapped Ports</a></span>: You can add support for your own board-specific ports when creating a board support package. Board-specific ports are useful when you have on-board components (e.g., external memories, DACs, or ADCs) that you would like the FPGA to interface to during hardware co-simulation. Board specific ports are also referred to as non-memory-mapped because when the design is compiled for hardware co-simulation, these ports will be mapped to their physical locations, rather than creating Simulink ports. See <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.14.html#310116', '');" title="Supporting New Boards through JTAG Hardware Co-Simulation">Specifying Non-Memory Mapped Ports</a></span> for more information. The <span class="Bold">Add</span>, <span class="Bold">Edit</span>, and <span class="Bold">Delete</span> buttons provide the controls needed for configuring non-memory mapped ports. </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="310099">Add</a></span>: Brings up the dialog to enter information about the new port. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="310100">Edit</a></span>: Make changes to the selected port. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="310101">Delete</a></span>: Remove the selected port from the list. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><span class="Bold"><a name="310102">Help</a></span>: Displays this documentation. </div>
+      <div class="Body"><span class="Bold"><a name="310103">Load</a></span>: Fill in the form with values stored in an SBDBuilder <span class="Filename">Saved Description XML</span> file. This file is automatically saved with every plugin that you create, so it is useful for reloading old plugin files for easy modification. </div>
+      <div class="Body"><span class="Bold"><a name="310104">Save Zip</a></span>: Prompts you for a filename and a target pathname. This will create a zip file with all of the plugin files for System Generator. The zip will be in a suitable format for passing to the System Generator <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'SysGen_Utilities.14.11.html#271088', '');" title="xlInstallPlugin">xlInstallPlugin</a></span><span class="URL"> </span> function. </div>
+      <div class="Body"><span class="Bold"><a name="310113">Exit</a></span>: Quit the application. </div>
+      <div class="Heading4"><a name="310116">Specifying Non-Memory Mapped Ports </a></div>
+      <div class="Body"><a name="310117">You may use SBDBuilder to specify the non-memory mapped ports for your FPGA board. </a>When you choose to Add or Edit a non-memory mapped port from the main dialog, the port editor dialog will come up as shown below.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="310123"><img class="Default" src="images/HW_CoSim.8.14.3.jpg" width="308" height="274" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="310124">The port editor dialog presents the following controls for port configuration: </a></div>
+      <div class="Body"><span class="Bold"><a name="310125">Port Options</a></span>: Specifies the options that will affect the entire port. </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="310126">Port Name</a></span>: This is the name that will describe the port in System Generator. It should be a MATLAB-compatible name (begins with a letter, followed by only letters, numbers, and underscores). </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="310127">Input/Output</a></span>: Specifies the direction of the port. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><span class="Bold"><a name="310128">New Pin</a></span>: This is the entry point to add pins to a port. Ports may consist of a single pin for a Boolean value, or multiple pins for a vector or bus. </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="310129">Pin LOC</a></span>: Defines the absolute placement of the pin within the FPGA by specifying a location constraint. It is necessary to define this for every pin to make sure that the FPGA programming corresponds to the actual hardware connections. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="310130">PULLUP</a></span>: A constraint that can be applied to each pin. It guarantees a logic High level to allow 3-stated nets to avoid floating when not being driven. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="310131">FAST</a></span>: A constraint that can be applied to each pin. It increases the speed of an IOB output. FAST produces a faster output but may increase noise and power consumption. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="310132">Add Pin</a></span>: Add a pin to the port. Note that the pin is not part of the port until this button is selected.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Note2">
+        <span class="XNote">Note:&nbsp;</span><a name="310133">Pressing 'enter' while the cursor is in the Pin LOC field is equivalent to pressing this </a>button. </div>
+      <div class="Body"><span class="Bold"><a name="310134">Pin List</a></span>: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="310135">Index</a></span>: (Cannot edit directly) Since a port can be more than one bit, it is represented as a vector of pins. The index indicates which bit position a particular pin represents in the port. Zero is the least-significant bit. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="310136">Move Up/Down</a></span>: Move the selected pin up or down in the pin list. This is useful to correct the vector bit-ordering of the port. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="310137">Delete Pin</a></span>: Removes the selected pin from the list. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><span class="Bold"><a name="310138">Save and Start New</a></span>: Save the port to the board support package. The form will then be cleared so that you may enter a new port. </div>
+      <div class="Body"><span class="Bold"><a name="310139">Save and Close</a></span>: Save the port to the board support package and return to the main screen. </div>
+      <div class="Body"><span class="Bold"><a name="310140">Cancel</a></span>: Discard changes to the current port and return to the main screen. </div>
+      <div class="Body"><a name="310147">When you are finished entering a port, it will look similar to the dialog box shown below:</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="310146"><img class="Default" src="images/HW_CoSim.8.14.4.jpg" width="311" height="276" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="310150">Saving Plugin Files</a></div>
+      <div class="Body"><a name="310151">Once you have filled out the dialog box with information about your board, it should </a>resemble the dialog box shown below:</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="310157"><img class="Default" src="images/HW_CoSim.8.14.5.jpg" width="358" height="401" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="310158">At this point, you can save the board support package into a System Generator plugin zip </a>file or as the raw board support package files described in the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.14.html#310173', '');" title="Supporting New Boards through JTAG Hardware Co-Simulation">Board Support Package Files</a></span>, plus the additional SBDBuilder files described below: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="310162">yourboard.xml</a></span>: This is the SBDBuilder Saved Description, which allows SBDBuilder to reload plugins you have previously created. The name you select for this file ('yourboard') will propagate into the names of the other files as well. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="310163">yourboard_libgen.m</a></span>: Automates the process of creating the gateways for the non-memory-mapped ports on this device. Running this script results in the creation a library like that shown below:</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="310169"><img class="Default" src="images/HW_CoSim.8.14.6.jpg" width="305" height="194" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="310173">Board Support Package Files</a></div>
+      <div class="Body"><a name="310174">An FPGA board that supports JTAG hardware co-simulation is defined in System </a>Generator by its board support package. This package tells System Generator useful information about the board, such as the appropriate part settings and additional information related to the JTAG and Boundary Scan interface provided by the board. A board support package is comprised of the files listed below: </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="310175">In this document, three of the filenames are prefixed by the name </a><span class="Filename">'yourboard'</span>. This prefix should be replaced with a moniker suitable for 'your board' (e.g., xtremedspkit, mblazedemo). </div>
+      <div class="Numbered_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><span class="Bold"><a name="310176">xltarget.m</a></span> – Tells System Generator that your FPGA board is a compilation target. There is a unique xltarget.m file for each compilation target. This function tells the tool the name of the compilation target (this name is shown in the compilation target field of the System Generator block dialog box) and also the name of the function where it can look for information about the particular board. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><span class="Bold"><a name="310177">yourboard_target.m</a></span> – Configures the System Generator block dialog box with information about the FPGA board, including device and part information, clock frequency, and the location of the clock pin. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><span class="Bold"><a name="310178">yourboard_postgeneration.m</a></span> – Tells System Generator the scripts to run after HDL netlist generation in order to produce an FPGA configuration file that is suitable for your board. It also specifies non-System Generator block dialog box related information, including the position of the device in the board's Boundary Scan chain and the instruction register lengths of each device. This function is referred to as a post-generation function. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><span class="Bold"><a name="310179">yourboard.ucf</a></span> – User Constraints File (UCF) for the FPGA board. Specifies clock pin location and frequency, and optionally constrains any board-specific ports. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="310180">Included in the System Generator software tree are templates for the files listed above. If </a>you would like to manually support a new board, you may customize each of the four template files with information that is specific to your board. You must also rename the files by substituting a suitable name in place of the <span class="Filename">'yourboard'</span> prefix. </div>
+      <div class="Body"><a name="310181">Each template is fully annotated with step-by-step instructions that indicate which fields </a>should be modified, and the types of values that should be given to these fields. The fields that must be modified are underlined using "~~~" notation. The template files can be found in the <span class="Filename">sysgen/hwcosim/jtag/templates</span> directory of your System Generator install tree.</div>
+      <div class="Heading3"><a name="310185">Obtaining Platform Information</a></div>
+      <div class="Body"><a name="310186">SBDBuilder (or alternatively, the board support package template files) require certain </a>information about your FPGA board. The table below lists the information you need. </div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 394.1907pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 103.38pt;">
+            <div class="CellHeading"><a name="310189">Information</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 290.8107pt;">
+            <div class="CellHeading"><a name="310191">Description</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="310193">Clock pin location</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="310195">Pin location constraint for the FPGA system clock source.</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="310197">Clock period</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="310199">Period constraint for the FPGA system clock source.</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="310201">Device position in the </a>Boundary Scan Chain</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="310203">Tells the position of the target FPGA in the board's Boundary Scan </a>Chain. Indexing begins at 1, with device 1 being the first device in the chain.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="310205">Instruction register </a>lengths</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="310207">Instruction register length of every device in the Boundary Scan </a>Chain.</div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="310208">You may obtain the clock pin location and period from any number of possible sources, </a>including the vendor documentation, existing constraints files, or vendor online documentation/support. </div>
+      <div class="Body"><a name="310209">If you do not know which devices are in your board's boundary scan chain, you may use </a>iMPACT to assist you in finding this information. iMPACT is a tool that is included with the Xilinx ISE® software that allows you to perform device configuration and file generation functions. When the tool is invoked, it automatically detects the contents of your board's boundary scan chain, and displays these contents graphically, as shown below.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="310215"><img class="Default" src="images/HW_CoSim.8.14.7.jpg" width="529" height="428" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="310216">Once you have determined which devices are in the Boundary Scan Chain, you must </a>determine the instruction register lengths for each device. The table below specifies the instruction register lengths for various Xilinx families. You may use the auto detection capability of SBDBuilder to determine the instruction register lengths. If this utility does not work, you may use the following table to find the instruction register lengths for a particular part family.</div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 348.9259pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 232.6034pt;">
+            <div class="CellHeading"><a name="310219">Family</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 116.3225pt;">
+            <div class="CellHeading"><a name="310221">IR Length</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="310239">System_ACE</a><span style="font-size: 10.0pt;">™</span>-CF</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBodyCenter"><a name="310241">8</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="310255">Spartan®-3, 3E, 3A, 3AN, 3A DSP</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBodyCenter"><a name="310257">6</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="351542">Spartan-6 LX, LXT</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBodyCenter"><a name="351544">6</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="310283">Virtex®-4 LX, SX</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBodyCenter"><a name="310285">10</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="310291">Virtex®-4 FX 12, 20</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBodyCenter"><a name="310293">10</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="310295">Virtex®-4 FX 40, 60, 100, 140</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBodyCenter"><a name="310297">14</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="310299">Virtex®-5 LX, LXT, SXT</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBodyCenter"><a name="310301">10</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="351413">Virtex®-5 FX 30T, 70T</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBodyCenter"><a name="351415">10</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="351409">Virtex®-5 FX 100T, 130T, 200T</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBodyCenter"><a name="351411">14</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="351550">Virtex®-6 LX, LXT</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBodyCenter"><a name="351548">10</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="310323">Platform Flash XCFxxS</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBodyCenter"><a name="310325">8</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="310327">Platform Flash XCFxxP</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBodyCenter"><a name="310329">16</a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="310332">Manual Specification of Board-Specific Ports</a></div>
+      <div class="Body"><a name="310333">You can manually specify your own board-specific ports when creating a board support </a>package. To define board-specific ports for your FPGA board, you must do the following: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="310334">Add all board-specific ports to the </a><span class="Filename">yourboard.ucf</span> template file. Each constraint should be accompanied by a special comment, <span class="Filename">&lt;port&gt; contingent</span>, where <span class="Filename">&lt;port&gt;</span> is the name of the board specific port. When System Generator compiles a model for hardware, it creates a custom UCF file. Constraints associated with signals that aren't used in the model are removed from the custom UCF file.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="310335">Example constraints for ports </a><span class="Filename">adc1_d(0)</span> and <span class="Filename">adc1_d(1)</span>: </div>
+      <div class="Code"><a name="310336">net adc1_d(0) loc = af20; # adc1_d contingent </a></div>
+      <div class="Code"><a name="310337">net adc1_d(1) loc = ad18; # adc1_d contingent</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="310377">Declare all board-specific ports in the </a><span class="Filename">yourboard_postgeneration.m</span> function.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="310376"><img class="Default" src="images/HW_CoSim.8.14.8.jpg" width="476" height="159" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="310378">Bi-directional ports are currently not supported. </a></div>
+      <div class="Body"><a name="310379">Include this line in </a><span class="Filename">yourboard_postgeneration.m</span> function: </div>
+      <div class="Code"><span class="Filename"><a name="310380">params.('non_memory_mapped_ports') = non_mm_ports; </a></span></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="310381">Customize a gateway with the board-specific port information: </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="310382">Create a library and add a gateway </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="310383">Name the Gateway with the name of your board specific port (this name must </a>match the port name used in the post-generation function and UCF file) </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="310389"><img class="Default" src="images/HW_CoSim.8.14.9.jpg" width="86" height="49" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="310390">Select the Gateway by clicking on it </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="310391">In the MATLAB command window, type the following</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body3"><span class="Filename"><a name="310392">&gt; xlSetNonMemMap(gcb, 'Xilinx', 'jtaghwcosim')</a></span></div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="310393">Save the library</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="310394">You are now ready to use your board-specific gateway in System Generator. When you </a>include the gateway in your model, you must make sure the signals that drive (or are driven by) the gateway have widths that match the widths of the ports in hardware. You can force the width of a signal driving a gateway out by preceding it with a convert block. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="310395">A subsystem (as shown below) is a convenient place to store the gateway out and convert </a>block pairs.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="310401"><img class="Default" src="images/HW_CoSim.8.14.10.jpg" width="302" height="182" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="310404">Providing Your Own Top Level</a></div>
+      <div class="Body"><a name="310405">When a model is compiled for JTAG hardware co-simulation, System Generator produces </a>a generic top-level HDL entity for the design. This entity instantiates the logic required by the model and the interfacing logic required for JTAG hardware co-simulation. </div>
+      <div class="Body"><a name="310406">Sometimes your board may have a special requirement that precludes you from using this </a>generic top level. For example, your board may have components that rely on clocks that are generated by a DCM that resides in the board's FPGA. In these situations, System Generator allows you to use your own top-level netlist when it compiles the model into hardware. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="310407">If you choose to use your own top-level component, you must provide a previously </a>synthesized version (.ngc, .edf, .edn) to System Generator. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="310408">Your top-level component must instantiate the generic JTAG hardware co-simulation top-level </a>component. The component instantiation must include the required clocking signals, plus any board-specific I/O ports your board may support. An example component instantiation is provided below: </div>
+      <div class="Code"><a name="310409">component jtagcosim_top port ( </a></div>
+      <div class="Code"><a name="310410">&nbsp;</a>&nbsp;-- required clocking ports </div>
+      <div class="Code"><a name="310411">&nbsp;</a>&nbsp;sys_clk  : in std_logic; </div>
+      <div class="Code"><a name="310412">&nbsp;</a>&nbsp;cosim_clk  : out std_logic; </div>
+      <div class="Code"><a name="310413">&nbsp;</a>&nbsp;sys_clk_buf : out std_logic; </div>
+      <div class="Code"><a name="310414">&nbsp;</a>&nbsp;-- board specific ports </div>
+      <div class="Code"><a name="310415">&nbsp;</a>&nbsp;adc1_d  : in std_logic_vector(13 downto 0); </div>
+      <div class="Code"><a name="310416">&nbsp;</a>&nbsp;dac1_d  : out std_logic_vector(13 downto 0); </div>
+      <div class="Code"><a name="310417">&nbsp;</a>&nbsp;dac1_div0  : out std_logic; </div>
+      <div class="Code"><a name="310418">&nbsp;</a>&nbsp;dac1_div1  : out std_logic; </div>
+      <div class="Code"><a name="310419">&nbsp;</a>&nbsp;dac1_mod0  : out std_logic; </div>
+      <div class="Code"><a name="310420">&nbsp;</a>&nbsp;dac1_mod1  : out std_logic; </div>
+      <div class="Code"><a name="310421">&nbsp;</a>&nbsp;dac1_reset  : out std_logic </div>
+      <div class="Code"><a name="310422">&nbsp;</a>&nbsp;); </div>
+      <div class="Code"><a name="310423">end component; </a></div>
+      <div class="Body"><a name="310424">You may specify your own top-level netlist in </a><span class="Filename">yourboard_postgeneration.m</span> as follows: </div>
+      <div class="Code"><a name="310425">params.vendor_toplevel = 'yourboard_toplevel'; </a></div>
+      <div class="Body"><a name="310426">Here </a><span class="Filename">yourboard_toplevel</span> is the name of the pre-compiled, top-level netlist component you would like System Generator to use for the top level. You must also tell System Generator the netlist file names that are associated with the top-level component. These files are specified as shown below in <span class="Filename">yourboard_postgeneration.m</span>. </div>
+      <div class="Code"><a name="310427">params.vendor_netlists = {'yourboard_toplevel.ngc','foo.edf'}; </a></div>
+      <div class="Heading3"><a name="310430">Installing Board-Support Packages</a></div>
+      <div class="Body"><a name="310431">SBDBuilder can generate a plugin zip file for your board support package that may be </a>installed automatically using the <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'SysGen_Utilities.14.11.html#271088', '');" title="xlInstallPlugin">xlInstallPlugin</a></span><span class="URL"> </span> utility provided with System Generator. You may manually install the board support package files if an appropriate plugin zip file is not provided. This topic describes how to install the files manually in your System Generator software tree. </div>
+      <div class="Heading4"><a name="310436">Plugins Directory</a></div>
+      <div class="Body"><a name="310437">The System Generator software provides a special directory in which the board support </a>package files for new compilation targets can be added. This directory, <span class="Filename">plugins/compilation</span>, provides a repository for System Generator compilation target plugins, and has unique properties that are discussed later in this topic. Your System Generator software tree should resemble the tree hierarchy shown below.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="310443"><img class="Default" src="images/HW_CoSim.8.14.11.jpg" width="182" height="264" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="310444">The board support package files for you board should be saved in a subdirectory, or series </a>of subdirectories, under the plugins/compilation directory. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="310445">All configuration files associated with a board support package must be saved in the same </a>directory. </div>
+      <div class="Body"><a name="310446">System Generator searches this directory (and subdirectories) for compilation targets. </a>Recall that the <span class="Filename">xltarget.m</span> file tells System Generator the board should be used as a compilation target. When the tool searches the <span class="Filename">plugins/compilation</span> directory, it adds a compilation target to the System Generator block dialog box for every <span class="Filename">xltarget.m</span> file that it encounters. </div>
+      <div class="Body"><a name="310447">The System Generator block dialog box </a><span class="Bold">Compilation</span> submenus mirror the directory structure under the <span class="Filename">plugins/compilation</span> directory. When you create a new directory, or directory hierarchy, for a board support package, the names of the directories define the taxonomy of the compilation target submenus.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="310453"><img class="Default" src="images/HW_CoSim.8.14.12.jpg" width="443" height="166" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading4"><a name="310455">Detecting New Packages</a></div>
+      <div class="Body"><a name="310456">In order for System Generator to recognize the new target, you must tell it to search for </a>new compilation targets by entering the following command in the MATLAB command window: </div>
+      <div class="Code"><a name="310457"> xlrehash_xltarget_cache </a></div>
+      <div class="Body"><a name="310458">You can now select the FPGA board from the list of compilation targets in the System </a>Generator block dialog box. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="310459">If you have a System Generator block dialog box open when you enter this command, it will </a>not show up until you close and re-open the dialog box. </div>
+      <div class="Body"><a name="310023">&nbsp;</a></div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

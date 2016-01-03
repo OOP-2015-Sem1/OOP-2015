@@ -1,0 +1,524 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"  http-equiv="content-type">
+  <link rel="stylesheet" href="sgdocstyle.css" type="text/css">
+  <title>$T.pcoreName$ API documentation</title>
+</head>
+<body><h1 style="background: url(sgdocbanner.jpg) no-repeat">
+EDK Processor - $T.pcoreName$ API</h1>
+
+<div><p>
+
+This software API is provided to allow easy access of the shared memories added
+to the System Generator <i>EDK Processor</i> block via an automatically
+generated memory-mapped interface. Only single-word read and write operations
+are supported at this time. 
+
+<br><br>
+
+In order to utilize these functions, the following two header files need to be
+included in the user C code. 
+
+<br><br><code>
+#include "xparameters.h"<br>
+#include "$T.pcoreName$.h"
+</code><br><br>
+
+The hardware settings of the shared memories inside the System Generator Pcore
+can be found in the header file <code>"xparameters.h"</code>. For example,
+absolute memory-mapped addresses, data bit widths (<code>n_bits</code>) and
+binary point positions (<code>bin_pt</code>), depths of the "To FIFO" shared
+memories on the processor memory map can be found in this header file. The
+header file <code>"$T.pcoreName$.h"</code> defines the basic data types and
+software driver functions for accessing the shared memories. <br><br>
+
+Refer to the <a href="#basic_data_type">Basic Data Types</a> section for
+information on the System Generator basic data types. Refer to the <a
+href="#software_driver_functions">Software Driver Functions</a> section for
+information on the software driver functions. The section <a
+href="#driver_performance_optimization">Driver Performance Optimization</a>
+contains information on how to improve the shared memory access time using
+pointer arithmatics. Code snippets showing how to use the different software
+driver functions can be found in the <a href="#examples">Examples</a> section
+of this document.
+
+</p></div>
+
+<h2><a name="basic_data_type">Basic Data Types</a></h2>
+
+<div><p>
+
+The basic data types of the software driver is defined at
+<code>"xcope.h"</code>. All the System Generator Pcore specific data types and
+function names are prefixed with "<code>xc_</code>". <br><br>
+
+Three types of shared memory addresses are defined according to the read-write
+accessibility of the shared memory ports: <code>xc_r_addr_t</code> for
+read-only addresses, <code>xc_w_addr_t</code> for write-only addresses, and
+<code>xc_addr_t</code> for read-write addresses. For example, the address of
+the <code>din</code> port of a "To Register" shared memory is a write-only
+<code>xc_w_addr_t</code> data type. The address of the <code>dout</code> port
+of a "From Register" shared memory is a read-only <code>xc_r_addr_t</code> data
+type. The address of the <code>addr</code> port of a "Shared Memory" shared
+memory is a <code>xc_addr_t</code>, meaning that you can both read from and
+write to this shared memory. While these three address data types are
+essentially the same <code>xc_raw_addr_t</code> data type, and are
+interchangeable. They help users to easily find out the read and write
+accessibility of a specific port on a shared memory by just looking at its data
+structure. <br><br>
+
+Each type of shared memories has its own hardware implementation and interface.
+Accordingly, the following software driver has corresponding data structures
+for storing the shared memory information:
+
+<UL>
+<LI>"From Register":<br><br>
+<code>
+typedef struct {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;xc_r_addr_t dout;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u32 n_bits;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u32 bin_pt;<br>
+} xc_from_reg_t;<br>
+</code><br>
+
+<LI>"To Register":<br><br>
+<code>
+typedef struct {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;xc_w_addr_t din;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u32 n_bits;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u32 bin_pt;<br>
+} xc_to_reg_t;<br>
+</code><br>
+
+<LI>"From FIFO":<br><br>
+<code>
+typedef struct {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;xc_r_addr_t dout;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;xc_r_addr_t percentfull;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;xc_r_addr_t empty;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u32 n_bits;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u32 bin_pt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u32 depth;<br>
+} xc_from_fifo_t;<br>
+</code><br>
+
+<LI>"To FIFO":<br><br>
+<code>
+typedef struct {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;xc_w_addr_t din;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;xc_r_addr_t percentfull;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;xc_r_addr_t full;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u32 n_bits;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u32 bin_pt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u32 depth;<br>
+} xc_to_fifo_t;<br>
+</code><br>
+
+<LI>"Shared Memory":<br><br>
+<code>
+typedef struct {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;xc_addr_t addr;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u32 n_bits;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u32 bin_pt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u32 depth;<br>
+} xc_shram_t;<br>
+</code><br>
+</UL>
+
+</p></div>
+
+<h2><a name="sms">Shared Memory Settings</a></h2>
+<div>
+<table style="width: 100%;" cellspacing="0"><tbody>
+<tr><th>Shared Memory Name</th><th>Memory type</th><th>Access Data Type</th><th>Native Precision*</th></tr>
+$T.memmap_info.fromregs:{<tr><td class="odd"><b><a href="#sm_$it.name$">$it.name$</a></b></td><td class="odd">From Register</td><td class="odd"><code>xc_from_reg_t</code></td><td class="odd">$it.type_str$</td></tr>};separator="\n"$
+$T.memmap_info.toregs:{<tr><td class="even"><b><a href="#sm_$it.name$">$it.name$</a></b></td><td class="even">To Register</td><td class="even"><code>xc_to_reg_t</code></td><td class="even">$it.type_str$</td></tr>};separator="\n"$
+$T.memmap_info.fromfifos:{<tr><td class="odd"><b><a href="#sm_$it.name$">$it.name$</a></b></td><td class="odd">From FIFO</td><td class="odd"><code>xc_from_fifo_t</code></td><td class="odd">$it.type_str$</td></tr>};separator="\n"$
+$T.memmap_info.tofifos:{<tr><td class="even"><b><a href="#sm_$it.name$">$it.name$</a></b></td><td class="even">To FIFO</td><td class="even"><code>xc_to_fifo_t</code></td><td class="even">$it.type_str$</td></tr>};separator="\n"$
+$T.memmap_info.shmems:{<tr><td class="odd"><b><a href="#sm_$it.name$">$it.name$</a></b></td><td class="odd">Shared Memory</td><td class="odd"><code>xc_shram_t</code></td><td class="odd">$it.type_str$</td></tr>};separator="\n"$
+</tbody></table>
+
+<p>
+* Native precision here refers to the bit widths and binary point positions of the shared memories in the original System Generator model. 
+
+Data reading from or writing to the shared memories are always treated as a C
+<code>u32</code> data type by the processor. When reading from a shared
+memory, a data is first converted to <code>UFix_32_0</code> data type following
+the System Generator fix-point data conversion rules, and then interpreted as a
+C <code>u32</code> value by the processor. Vise verse, when writing to a
+shared memory, a C <code>u32</code> data is first interpreted as
+<code>UFix_32_0</code> data type, and then converted to the native precision of
+the target shared memory following the System Generator fix-point data
+conversion rules.  
+
+</p></div>
+
+<h2><a name="software_driver_functions">Software Driver Functions</a></h2>
+<div>
+<table style="width: 100%;" cellspacing="0">
+  <tbody>
+    <tr>
+      <td class="odd">xc_status_t</td>
+      <td class="odd"> <code><a href="#XC_CfgInitialize">XC_CfgInitialize</a>(xc_iface_t **iface, void *config_table)</code></td>
+    </tr>
+    <tr>
+      <td class="even">xc_status_t</td>
+      <td class="even"> <code><a href="#xc_get_id">XC_GetShMem</a>(xc_iface_t *iface, const char *name, void **shmem)</code></td>
+    </tr>
+    <tr>
+      <td class="odd">xc_status_t</td>
+      <td class="odd"> <code><a href="#XC_Read">XC_Read</a>(xc_iface_t *iface, xc_r_addr_t r_addr, u32 *data)</code></td>
+    </tr>
+    <tr>
+      <td class="even">xc_status_t</td>
+      <td class="even"> <code><a href="#XC_Write">XC_Write</a>(xc_iface_t *iface, xc_w_addr_t w_addr, const u32 data)</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+</div>
+
+<div>
+<h3><a name="XC_CfgInitialize">Create</a></h3>
+<div class="tt">
+xc_status_t XC_CfgInitialize(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;xc_ifact_t *iface,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;void *config_table);
+</div>
+<p>
+<b>Parameters:</b><br>
+<code>iface</code> - interface parameters.<br>
+<code>config_table</code> - pointer pointing an entry of the Pcore configurable table.
+</p>
+<p>
+<b>Returns:</b><br>
+Returns <code>XC_SUCCESS</code> if created succeeded. Returns <code>XC_FAILURE</code> upon error.<br>
+</p>
+<p>
+
+<b>Notes:</b><br>
+
+<code>XC_CfgInitialize</code> is used to initialize the software driver, and should be
+called before any other software driver function is called. <br><br>
+
+<code>XC_CfgInitialize</code> accepts a pointer pointing to an entry of the
+configuration table <code>$T.pcoreName;format="toUpper"$_ConfigTable</code>.  A
+configurable table is a specific C <code>struct</code> array, which contains
+the hardware and software settings of the System Generator Pcore instances.
+The configurable table is automatically created by EDK during library
+generation. Each System Generator Pcore instance has an entry on the
+configuration table that stores its specific settings. The position of a Pcore
+on the configurable table is its device ID, which is defined in
+<code>"xparameters.h"</code> as
+<code>XPAR_&lt;PCORE_INSTANCE_NAME&gt;_DEVICE_ID</code>. <br><br>
+
+<code>XC_CfgInitialize</code> uses the information stored in the configurable table to
+initialize <code>iface</code>. <code>iface</code> stores the settings of the
+automatically generated bus interface connecting the System Generator shared
+memories to the processor. The settings includes the software driver version
+number, low-level implementations of the read/write operations, etc.
+<code>iface</code> also stores the shared memory settings, such as absolute
+memory-mapped addresses, data bit width (<code>n_bit</code>), binary position
+(<code>bin_pt</code>), etc. Once initialized by <code>XC_CfgInitialize</code>, users
+can provide <code>iface</code> to other software driver functions to perform
+various operations. <br><br>
+
+Note that the memory space for <code>iface</code> needs to be allocated before
+calling <code>XC_CfgInitialize</code>. One way of allocating the memory space is shown
+in below:<br>
+
+<br><code>
+xc_iface_t *iface;<br>
+XC_CfgInitialize(&iface, &$T.pcoreName;format="toUpper"$_ConfigTable[XPAR_&lt;PCORE_INSTANCE_NAME&gt;_DEVICE_ID]);<br>
+</code>
+</p>
+</div>
+
+<div>
+<h3><a name="XC_GetShMem">Get Shared Memory</a></h3>
+<div class="tt">
+xc_status_t XC_GetShMem(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;xc_iface_t *iface,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;const char *name,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;void **shmem);
+</div>
+<p>
+
+<b>Parameters:</b><br>
+<code>iface</code> - interface parameters.<br>
+<code>name</code> - name of the shared memory.<br>
+<code>shmem</code> - the pointer pointing to the corresponding shared memory data structure.<br>
+</p>
+<p>
+<b>Returns:</b><br>
+Returns <code>XC_SUCCESS</code> if created succeeded. Returns <code>XC_FAILURE</code> upon error.<br>
+</p>
+
+<p><b>Notes:</b><br> 
+
+<code>XC_GetShMem</code> accepts the <code>iface</code> of a System Generator
+Pcore, and the name of a shared memory <code>name</code>. It returns a pointer
+<code>shmem</code> pointing to the memory locations for storing the
+corresponding shared memory settings. <code>shmeme</code> can then be passed to
+<code>XC_Read</code> and <code>XC_Write</code> for read/write operations on the
+specific shared memory. <br><br>
+
+This function is provided for better code portability. The shared memory names
+and the corresponding data structures are listed in the <a href="#sms">Shared
+Memory Settings</a> table. Note that while <code>"xparameters.h"</code>
+converts all shared memory names into caps, <code>XC_GetShMem</code> preserves
+the cases of shared memory names and is case-sensitive during search. <br><br>
+
+For performance consideraion, it is recommended to cache the
+<code>shmem</code> returned by <code>XC_GetShMem</code> to avoid unnecessary
+searching.
+
+</p></div>
+
+<div>
+<h3><a name="XC_Read">Read</a></h3>
+<div class="tt">
+xc_status_t XC_Read(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;xc_iface_t *iface,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;xc_r_addr_t r_addr,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;const u32 *data);
+</div>
+<p>
+<b>Parameters:</b><br>
+<code>iface</code> - interface parameters.<br>
+<code>r_addr</code> - the address to read from. <br>
+<code>data</code> - the place to store the read-back data.
+</p>
+<p>
+<b>Returns:</b><br>
+Returns <code>XC_SUCCESS</code> if created succeeded. Returns <code>XC_FAILURE</code> upon error.<br>
+</p>
+</div>
+
+<div>
+<h3><a name="XC_Write">Write</a></h3>
+<div class="tt">
+xc_status_t XC_Write(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;xc_iface_t *iface,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;xc_w_addr_t w_addr,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;const u32 data);
+</div>
+<p>
+
+<b>Parameters:</b><br>
+<code>iface</code> - interface parameters.<br>
+<code>w_addr</code> - the address to write to. <br>
+<code>data</code> - the data to write.
+</p>
+<p>
+<b>Returns:</b><br>
+Returns <code>XC_SUCCESS</code> if created succeeded. Returns <code>XC_FAILURE</code> upon error.<br>
+</p>
+</div>
+
+<div>
+<h3><a name="helper_functions">Helper Functions</a></h3>
+<div class="tt">
+xc_raw_addr_t XC_GetAddr(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;xc_raw_addr_t addr,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;const u32 offset);
+</div>
+<p>
+
+<b>Parameters:</b><br>
+<code>addr</code> - base address (e.g., the base address of a "Shared Memory" shared memory.<br>
+<code>offset</code> - offset to the base address.
+</p>
+<p>
+<b>Returns:</b><br>
+Returns the absolute address with the specified <code>offset</code> relative to <code>addr</code>.<br>
+</p>
+<p><b>Notes:</b><br> 
+<code>XC_GetAddr</code> is a helper function that is useful in accessing a 
+random location of the "Shared Memory" shared memories. See <a 
+href="#example_shram">Accessing "Shared Memory" shared memories</a> for example 
+usage of this helper function.</p>
+</div>
+
+<h2><a name="driver_performance_optimization">Driver Performance Optimization</a></h2>
+
+<div>
+The System Generator software driver improves user code portability. On the
+other hand, it introduces overhead for shared memory access. In cases that the
+software driver performance is a concern, users may want to perform read/write
+operations of the shared memories directly through pointer arithmetics. The
+addresses of the shared memories can be found at "xparameters.h". <br><br>
+
+In the following code snippet, users can read data from a "From Register"
+shared memory named "FROMREG1" and write it to a "To Register" shared memory
+named "TOREG1": </div>
+
+<div class="tt">
+volatile unsigned value;<br>
+unsigned *fromreg_plb_data;<br>
+unsigned *toreg_plb_data;<br>
+<br>
+// get the absolute shared memory addresses from "xparameters.h"<br>
+fromreg_plb_data = XPAR_SG_PLBIFACE_0_MEMMAP_FROMREG1;<br>
+toreg_plb_data = XPAR_SG_PLBIFACE_0_MEMMAP_TOREG1;<br>
+<br>
+// read data from shared memory "FROMREG1"<br>
+value = *fromreg_plb_data;<br>
+// write data to shared memory "TOREG1"<br>
+*toreg_plb_data = value;
+</div>
+
+<div>Even though the software driver does not support array operations, the
+following code snippet shows how to use pointer arithmetics to write a array of
+data to the "Shared Memory" shared memories. Array read can be realized
+similarly. </div>
+
+<div class="tt">
+int i; <br>
+int *plb_addr;<br>
+u32 value;<br>
+xc_iface_t *iface;<br>
+xc_shram_t *shram;<br>
+<br>
+// initialize the software driver, assuming the Pcore device ID is 0<br>
+XC_CfgInitialize(&iface, &$T.pcoreName;format="toUpper"$_ConfigTable[0]);<br>
+// obtain the memory location for storing the settings of shared memory "shram1"<br>
+XC_GetShMem(iface, "shram1", (void **) &shram);<br>
+// obtain the base address of shared memory "shram1" <br>
+plb_addr = (int *) shram->addr; <br>
+// write the data stored at <i>array</i> to the shared memory "shram1"<br>
+for (i = 0; i < ARRAY_SIZE; i++) { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;*(plb_addr++) = array[i];<br>
+}
+</div>
+
+<h2><a name="examples">Examples</a></h2>
+<div>
+<h3><a name="example_reg">Accessing "From Register" and "To Register" shared memories </a></h3>
+<div class="boxed">
+<h4>Single-word writes</h4>
+<div>The following code snippet write <i>value</i> to the "To Register" shared memory named "toreg". See also: <a href="#XC_Write">Write</a></div>
+<div class="tt">
+u32 value;<br>
+xc_iface_t *iface;<br>
+xc_to_reg_t *toreg;<br>
+<br>
+// initialize the software driver, assuming the Pcore device ID is 0<br>
+XC_CfgInitialize(&iface, &$T.pcoreName;format="toUpper"$_ConfigTable[0]);<br>
+<br>
+// obtain the memory location for storing the settings of shared memory "t"<br>
+XC_GetShMem(iface, "toreg", &toreg);<br>
+// write <i>value</i> to the "din" port of shared memory "toreg"<br>
+XC_Write(iface, toreg->din, (const unsigned) value);
+</div>
+</div>
+<div class="boxed">
+<h4>Single-word reads</h4>
+<div>The following code snippet reads data stored in the "From Register" shared memory named "fromreg" into <i>value</i>. See also: <a href="#XC_Read">Read</a></div>
+<div class="tt">
+u32 value;<br>
+xc_iface_t *iface;<br>
+xc_from_reg_t *fromreg;<br>
+<br>
+// initialize the software driver, assuming the Pcore device ID is 0<br>
+XC_CfgInitialize(&iface, &$T.pcoreName;format="toUpper"$_ConfigTable[0]);<br>
+<br>
+// obtain the memory location for storing the settings of shared memory "fromreg"<br>
+XC_GetShMem(iface, "fromreg", (void **) &fromreg);<br>
+// read data from the "dout" port of shared memory "fromreg" and store at <i>value</i><br>
+XC_Read(iface, fromreg->dout, &value);
+</div>
+</div>
+
+<h3><a name="example_fifo">Accessing "From FIFO" and "To FIFO" shared memories </a></h3>
+<div class="boxed">
+<h4>Single-word writes</h4>
+<div>The following code snippet write <i>value</i> to the "To FIFO" shared memory named "tofifo". See also: <a href="#XC_Write">Write</a></div>
+<div class="tt">
+u32 full;<br>
+u32 value;<br>
+xc_iface_t *iface;<br>
+xc_to_fifo_t *tofifo;<br>
+<br>
+// initialize the software driver, assuming the Pcore device ID is 0<br>
+XC_CfgInitialize(&iface, &$T.pcoreName;format="toUpper"$_ConfigTable[0]);<br>
+<br>
+// obtain the memory location for storing the settings of shared memory "t"<br>
+XC_GetShMem(iface, "tofifo", (void **) &tofifo);<br>
+// check the "full" port of shared memory "tofifo"<br>
+do {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;XC_Read(iface, tofifo->full, &#38;full);<br>
+} while (full == 1);<br>
+// write <i>value</i> to the "din" port of shared memory "tofifo"<br>
+value = 100;<br>
+XC_Write(iface, tofifo->din, value);
+</div>
+</div>
+<div class="boxed">
+<h4>Single-word reads</h4>
+<div>The following code snippet reads data stored in the "From Register" shared memory named "fromreg" into <i>value</i>. See also: <a href="#XC_Read">Read</a></div>
+<div class="tt">
+u32 empty;<br>
+u32 value;<br>
+xc_iface_t *iface;<br>
+xc_from_fifo_t *fromfifo;<br>
+<br>
+// initialize the software driver, assuming the Pcore device ID is 0<br>
+XC_CfgInitialize(&iface, &$T.pcoreName;format="toUpper"$_ConfigTable[0]);<br>
+<br>
+// obtain the memory location for storing the settings of shared memory "fromfifo"<br>
+XC_GetShMem(iface, "fromreg", (void **) &fromfifo);<br>
+// check the "empty" port of shared memory "fromfifo"<br>
+do {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;XC_Read(iface, fromfifo->empty, &#38;empty);<br>
+} while (empty == 1);<br>
+// read data from the "dout" port of shared memory "fromfifo" and store at <i>value</i><br>
+XC_Read(iface, fromfifo->dout, &value);
+</div>
+</div>
+
+<h3><a name="example_shram">Accessing "Shared Memory" shared memories</a></h3>
+<div class="boxed">
+<h4>Single-word writes</h4>
+<div>The following code snippet write <i>value</i> to the "Shared Memory" shared memory named "shram1". See also: <a href="#XC_Write">Write</a></div>
+<div class="tt">
+u32 value;<br>
+xc_iface_t *iface;<br>
+xc_shram_t *shram;<br>
+<br>
+// initialize the software driver, assuming the Pcore device ID is 0<br>
+XC_CfgInitialize(&iface, &$T.pcoreName;format="toUpper"$_ConfigTable[0]);<br>
+<br>
+// obtain the memory location for storing the settings of shared memory "shram1"<br>
+XC_GetShMem(iface, "shram1", (void **) &shram);<br>
+// write <i>value</i> to the shared memory "shram1"<br>
+XC_Write(iface, XC_GetAddr(shram->addr, 2), (const unsigned) value);
+</div>
+</div>
+<div class="boxed">
+<h4>Single-word reads</h4>
+<div>The following code snippet reads data stored in the "Shared Memory" shared memory named "shram2" into <i>value</i>. See also: <a href="#XC_Read">Read</a></div>
+<div class="tt">
+u32 value;<br>
+xc_iface_t *iface;<br>
+xc_shram_t *shram;<br>
+<br>
+// initialize the software driver, assuming the Pcore device ID is 0<br>
+XC_CfgInitialize(&iface, &$T.pcoreName;format="toUpper"$_ConfigTable[0]);<br>
+<br>
+// obtain the memory location for storing the settings of shared memory "fromfifo"<br>
+XC_GetShMem(iface, "shram2", (void **) &shram);<br>
+// read data from the shared memory "shram2" and store at <i>value</i><br>
+XC_Read(iface, XC_GetAddr(shram->addr, 2), &value);
+</div>
+</div>
+
+</div>
+
+<h6>
+<center>Generated by Xilinx System Generator</center>
+</h6>
+</body>
+</html>

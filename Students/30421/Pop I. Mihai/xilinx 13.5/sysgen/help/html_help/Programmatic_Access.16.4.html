@@ -1,0 +1,1060 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>M-Code Access to Hardware Co-Simulation</title>
+    <link rel="StyleSheet" href="css/Programmatic_Access.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Programmatic_Access.16.1.html#287669">Programmatic Access</a> : M-Code Access to Hardware Co-Simulation</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="287669">M-Code Access to Hardware Co-Simulation</a></div>
+      <div class="Body"><a name="287827">Hardware co-simulation in System Generator brings on-chip acceleration and verification </a>capabilities into the Simulink simulation environment. In the typical System Generator flow, a System Generator model is first compiled for a hardware co-simulation platform, during which a hardware implementation (bitstream) of the design is generated and associated to a hardware co-simulation block. The block is inserted into a Simulink model and its ports are connected with appropriate source and sink blocks. The whole model is simulated while the compiled System Generator design is executed on an FPGA device.</div>
+      <div class="Body"><a name="287829">Alternatively, it is possible to programmatically control the hardware created through the </a>System Generator hardware co-simulation flow using MATLAB M-code (M-Hwcosim). The M-Hwcosim interfaces allow for MATLAB objects that correspond to the hardware to be created in pure M-code, independent of the Simulink framework. These objects can then be used to read and write data into hardware. </div>
+      <div class="Body"><a name="287831">This capability is useful for providing a scripting interface to hardware co-simulation, </a>allowing for the hardware to be used in a scripted test-bench or deployed as hardware acceleration in M-code. Apart from supporting the scheduling semantics of a System Generator simulation, M-Hwcosim also gives the flexibility for any arbitrary schedule to be used. This flexibility can be exploited to improve the performance of a simulation, if the user has apriori knowledge of how the design works. Additionally, the M-Hwcosim objects provide accessibility to the hardware from the MATLAB console, allowing for the hardware internal state to be introspected interactively.</div>
+      <div class="Heading2"><a name="287833">Compiling Hardware for Use with M-Hwcosim</a></div>
+      <div class="Body"><a name="287835">Compiling hardware for use in M-Hwcosim follows the same flow as the typical System </a>Generator hardware co-simulation flow. You start off with a System Generator model in Simulink, select a hardware co-simulation target in the System Generator token and click "Generate". At the end of the generation, a hardware co-simulation library will be created. </div>
+      <div class="Body"><a name="287837">Among other files in the netlist directory, a bit file and an hwc file can be found. The bit file </a>corresponds to the FPGA implementation, and the hwc file contains information required for M-Hwcosim. Both bit file and hwc file will be paired by name, e.g. mydesign_cw.bit and mydesign_cw.hwc.</div>
+      <div class="Body"><a name="287839">The hwc file specifies additional meta information for describing the design and the </a>chosen hardware co-simulation interface. With the meta information, a hardware co-simulation instance can be instantiated using M-Hwcosim, through which a user can interact with the co-simulation engine. </div>
+      <div class="Body"><a name="287841">M-Hwcosim inherits the same concepts of ports, shared memories, and fixed point </a>notations as found in the existing co-simulation block. Every design exposes its top-level ports and embedded shared memories for external access. </div>
+      <div class="Heading2"><a name="287843">M-Hwcosim Simulation Semantics</a></div>
+      <div class="Body"><a name="287845">The simulation semantics for M-Hwcosim differs from that used during hardware co-</a>simulation in a System Generator block diagram; the M-Hwcosim simulation semantics is more flexible and is capable of emulating the simulation semantics used in the block-based hardware co-simulation.</div>
+      <div class="Body"><a name="287847">In the block-based hardware co-simulation, a rigid simulation semantic is imposed; before </a>advancing a clock cycle, all the input ports of the hardware co-simulation are written to. Next all the output ports are read and the clock is advanced. In M-Hwcosim the scheduling of when ports are read or written to, is left to the user. For instance it would be possible to create a program that would only write data to certain ports on every other cycle, or to only read the outputs after a certain number of clock cycles. This flexibility allows users to optimize the transfer of data for better performance. </div>
+      <div class="Heading2"><a name="287849">Data Representation</a></div>
+      <div class="Body"><a name="287851">M-Hwcosim uses fixed point data types internally, while it consumes and produces double </a>precision floating point values to external entities. All data samples passing through a port or a memory location in a shared memory are fixed point numbers. Each sample has a preset data width and an implicit binary point position that are fixed at the compilation time. Data conversions (from double precision to fixed point) happen on the boundary of M-Hwcosim. In the current implementation, quantization of the input data is handled by rounding, and overflow is handled by saturation.</div>
+      <div class="Heading2"><a name="287854">Interfacing to Hardware from M-Code</a></div>
+      <div class="Body"><a name="287856">When a model has been compiled for hardware co-simulation, the generated bitstream can </a>be used in both a model-based Simulink flow, or in M-code executed in MATLAB. The general sequence of operations to access a bitstream in hardware typically follows the sequence described below.</div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="287858">Configure the hardware co-simulation interface. Note that the hardware co-simulation </a>configuration is persistent and is saved in the hwc file. If the co-simulation interface is not changed, there is no need to re-run  this step.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="287859">Create a M-Hwcosim instance for a particular design</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="287860">Open the M-Hwcosim interface</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="287861">Repeatedly run the following sub-steps until the simulation ends</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedSub_inner" style="width: 18pt; white-space: nowrap;">a.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedSub_inner"><a name="287862">Write simulation data to input ports</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedSubCont_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedSubCont_inner" style="width: 18pt; white-space: nowrap;">b.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedSubCont_inner"><a name="287863">Read simulation data from output ports</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedSubCont_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedSubCont_inner" style="width: 18pt; white-space: nowrap;">c.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedSubCont_inner"><a name="287864">Advance the design clock by one cycle</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">5.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="287865">Close the M-Hwcosim interface</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">6.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="288014">Release the M-Hwcosim instance</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="312028">M-Hwcosim Examples</a></div>
+      <div class="Heading3"><a name="312029">Tutorial Example: Using MATLAB Hardware Co-Simulation (M-Hwcosim)</a></div>
+      <div class="Body"><a name="312030">The following step-by-step tutorial will show you how to perform MATLAB hardware co-</a>simulation using a simple AddSub model that is comprised of two inputs and one output -- two operands (x1, x2) and one summation output (y).</div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="309578">This step-by-step tutorial assumes that you have already installed and configured both the </a>hardware and software required to run on an ML506 platform for Ethernet Hardware Co-Simulation. Refer to the topic <span class="Bold">Installing an ML506 Platform for Ethernet Hardware Co-Simulation</span> for more information of how to install and configure this platform.</div>
+      <div class="Body"><a name="309580">The AddSubExample design is located at the following pathname:</a></div>
+      <div class="Code"><a name="309581">&lt;ISE_Design_Suite_tree&gt;/sysgen/examples/mhwcosim/AddSubExample.mdl</a></div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="310413">1.</a>	Open the model in MATLAB and observe the following blocks:</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="310412"><img class="Default" src="images/Programmatic_Access.16.4.1.jpg" width="344" height="128" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="310414">Double-click on the System Generator token to bring up the following dialog box.</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="310430"><img class="Default" src="images/Programmatic_Access.16.4.2.jpg" width="280" height="295" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body2"><a name="310477">As shown above, the </a><span class="Bold">Create testbench</span> checkbox is checked to tell the hardware co-simulation compilation flow to auto generate an M-code script <span class="Filename">&lt;design&gt;_</span><span class="Filename"><br /></span><span class="Filename">hwcosim_test.m</span> and golden test data files <span class="Filename">&lt;design&gt;_&lt;port&gt;_hwcosim_</span><span class="Filename"><br /></span><span class="Filename">test.dat</span> for each gateway based on the Simulink simulation. After a few moments, a sub-directory named netlist is created in the current working directory containing the generated files. For more information about the auto testbench generation, refer to the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Programmatic_Access.16.4.html#289249', '');" title="M-Code Access to Hardware Co-Simulation">Automatic Generation of M-Hwcosim Testbench</a></span>.</div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="310465">Click </a><span class="Bold">Generate</span> to begin generating the hardware co-simulation netlist. So far, the design flows are exactly the same as those for the Simulink hardware co-simulation.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="310717">Once netlist generation is complete, you are now ready to perform MATLAB </a>Hardware Co-simulation. Run the provided M-code script at pathname<br /><span class="Filename">./examples/mhwcosim/AddSubExample/AddSubExample.mdl/mhcosim.m</span> by either typing <span class="Bold">mhwcosim</span> in the MATLAB console or right-clicking on the file and selecting the <span class="Bold">Run</span> as shown below:</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="310723"><img class="Default" src="images/Programmatic_Access.16.4.3.jpg" width="394" height="111" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="310724">This M-code script is created by slightly modifying the auto-generated M-code script to print </a>out some simulation results.</div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">5.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="310892">The first time the model is simulated, you should see the following configuration </a>dialog box pop up.  Set parameters according to your computer and cable type as shown below and click OK.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="310898"><img class="Default" src="images/Programmatic_Access.16.4.4.jpg" width="394" height="271" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">6.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="310899">After about 30 seconds, you should observe the simulation results in the MATLAB </a>console as shown below:</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="310913"><img class="Default" src="images/Programmatic_Access.16.4.5.jpg" width="394" height="271" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><span class="Bold"><a name="310936">Summary</a></span></div>
+      <div class="Body"><a name="310945">In addition to the Simulink hardware co-simulation, System Generator provides another </a>methodology to perform hardware co-simulation by offering MATLAB hardware co-simulation. This feature enables you to programmatically control the hardware, created through the System Generator hardware co-simulation flow, using MATLAB M-code (M-Hwcosim). The M-Hwcosim interfaces allow for MATLAB objects that correspond to the hardware to be created in pure M-code, independent of the Simulink framework. These objects can then be used to read and write data into hardware. For more details on how to use Read and Write and other supported functions, refer to the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Programmatic_Access.16.4.html#290927', '');" title="M-Code Access to Hardware Co-Simulation">M-Hwcosim MATLAB Class</a></span>.</div>
+      <div class="Body"><a name="310947">This capability is also useful for providing a scripting interface to hardware co-simulation </a>that allows the hardware to be used in a scripted test-bench or deployed as hardware acceleration in M-code. In certain design applications, you may find some improvement in performance using this method of hardware co-simulation.</div>
+      <div class="Heading3"><a name="310900">Example 2</a></div>
+      <div class="Body"><a name="289089">This M-code uses an alternative form of syntax to perform the simulation described in the </a>previous example. This form uses the exec instruction and provides better simulation performance by reducing the number of name-based lookups required to identify ports on a block, and also by folding the execution of code in an M-code for-loop into a single instruction, which reduces the over-head associated with interpreting the M-code.</div>
+      <div class="Code"><a name="289090">&nbsp;</a></div>
+      <div class="Code"><a name="289091">% Configure the co-simulation interface. Note: This needs only to be</a></div>
+      <div class="Code"><a name="289092">% done once, since the configuration is stored back into the hwc file</a></div>
+      <div class="Code"><a name="289093">% This will launch a configuration GUI.</a></div>
+      <div class="Code"><a name="289094">xlHwcosimConfig('mydesign.hwc');</a></div>
+      <div class="Code"><a name="289095">&nbsp;</a></div>
+      <div class="Code"><a name="289096">% Define the number of simulation cycles.</a></div>
+      <div class="Code"><a name="289097">nCycles = 1000;</a></div>
+      <div class="Code"><a name="289098">&nbsp;</a></div>
+      <div class="Code"><a name="289099">% Creates a hardware co-simulation instance from the project </a></div>
+      <div class="Code"><a name="289100">% 'mydesign.hwc'.</a></div>
+      <div class="Code"><a name="289101">h = Hwcosim('mydesign.hwc');</a></div>
+      <div class="Code"><a name="289102">&nbsp;</a></div>
+      <div class="Code"><a name="289103">% Opens and configures the hardware co-simulation interface.</a></div>
+      <div class="Code"><a name="289104">open(h);</a></div>
+      <div class="Code"><a name="289105">&nbsp;</a></div>
+      <div class="Code"><a name="289106">% Initializes the 'op' input port with a constant value zero.</a></div>
+      <div class="Code"><a name="289107">write(h, 'op', 0);</a></div>
+      <div class="Code"><a name="289108">&nbsp;</a></div>
+      <div class="Code"><a name="289109">% Initializes an execution definition that covers the input ports,</a></div>
+      <div class="Code"><a name="289110">% x1 and x2, and the output ports y.  It returns an execution </a></div>
+      <div class="Code"><a name="289111">% identifier for use in subsequent exec instructions. </a></div>
+      <div class="Code"><a name="289112">execId = initExec(h, {'x1', 'x2'}, {'y'});</a></div>
+      <div class="Code"><a name="289113">&nbsp;</a></div>
+      <div class="Code"><a name="289114">% Simulate the design using the exec instruction.</a></div>
+      <div class="Code"><a name="289115">% The input data are given as a 2-D matrix. Each row of the matrix</a></div>
+      <div class="Code"><a name="289116">% gives the simulation data of an input port for all the cycles.</a></div>
+      <div class="Code"><a name="289117">% For example, row i column j stores the data for the i-th port at</a></div>
+      <div class="Code"><a name="289118">% (j-1)th cycle.</a></div>
+      <div class="Code"><a name="289119">result = exec(h, execId, nCycles, rand(2, nCycles));</a></div>
+      <div class="Code"><a name="289120">&nbsp;</a></div>
+      <div class="Code"><a name="289121">% Releases the hardware co-simulation instance.</a></div>
+      <div class="Code"><a name="289122">% The hardware co-simulation interface is closed implicitly.</a></div>
+      <div class="Code"><a name="289123">release(h);</a></div>
+      <div class="Heading3"><a name="289086">Example 3</a></div>
+      <div class="Body"><a name="289254">This example shows how M-code is used to access Shared Memories in an M-Hwcosim </a>flow. The example assumes that a System Generator model, with a Shared Memory called 'MyMem', and two SharedFifos called 'WriteFofo' and 'ReadFifo', has been compiled into a hardware co-simulation block. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="307709">The model and source code for this example can be found at pathname </a>&lt;ISE_Design_Suite_tree&gt;/sysgen/examples/mhwcosim/ShMemExample</div>
+      <div class="Code"><a name="289256">% Creates a hardware co-simulation instance from the project </a>'shmem.hwc'.</div>
+      <div class="Code"><a name="289257">h = Hwcosim('shmem.hwc');</a></div>
+      <div class="Code"><a name="289258">&nbsp;</a></div>
+      <div class="Code"><a name="289259">% Opens and configures the hardware co-simulation interface.</a></div>
+      <div class="Code"><a name="289260">open(h);</a></div>
+      <div class="Code"><a name="289261">&nbsp;</a></div>
+      <div class="Code"><a name="289262">% Creates a shared memory instance 'MyMem'. It connects the </a>corresponding </div>
+      <div class="Code"><a name="289263">% shared memory running in hardware.</a></div>
+      <div class="Code"><a name="289264">m = Shmem('MyMem');</a></div>
+      <div class="Code"><a name="289265">&nbsp;</a></div>
+      <div class="Code"><a name="289266">% Creates a shared FIFO instance 'WriteFifo' for writing data to the </a></div>
+      <div class="Code"><a name="289267">% hardware. Similarly, creates another shared FIFO instance 'ReadFifo' </a>for </div>
+      <div class="Code"><a name="289268">% reading data from the hardware. </a></div>
+      <div class="Code"><a name="289269">wf = Shfifo('WriteFifo');</a></div>
+      <div class="Code"><a name="289270">rf = Shfifo('ReadFifo');</a></div>
+      <div class="Code"><a name="289271">&nbsp;</a></div>
+      <div class="Code"><a name="289272">% Writes random numbers to memory address 0 to 49 of MyMem.</a></div>
+      <div class="Code"><a name="289273">m(0:49) = rand(1, 50);</a></div>
+      <div class="Code"><a name="289274">&nbsp;</a></div>
+      <div class="Code"><a name="289275">% Read the value at memory address 100 of MyMem.</a></div>
+      <div class="Code"><a name="289276">y = m(100);</a></div>
+      <div class="Code"><a name="289277">&nbsp;</a></div>
+      <div class="Code"><a name="289278">% Writes 10 random numbers to WriteFifo if it has 10 or more empty </a>space.</div>
+      <div class="Code"><a name="289279">if wf.Available &gt;= 10 </a></div>
+      <div class="Code"><a name="289280">    write(wf, 10, rand(1, 10));</a></div>
+      <div class="Code"><a name="289281">end</a></div>
+      <div class="Code"><a name="289282">&nbsp;</a></div>
+      <div class="Code"><a name="289283">% Reads 5 values from ReadFifo if it has 5 or more data.</a></div>
+      <div class="Code"><a name="289284">if rf.Available &gt;= 5</a></div>
+      <div class="Code"><a name="289285">    d = read(rf, 5);</a></div>
+      <div class="Code"><a name="289286">end</a></div>
+      <div class="Code"><a name="289287">&nbsp;</a></div>
+      <div class="Code"><a name="289288">% Releases the shared memory instances.</a></div>
+      <div class="Code"><a name="289289">release(m);</a></div>
+      <div class="Code"><a name="289290">release(wf);</a></div>
+      <div class="Code"><a name="289291">release(rf);</a></div>
+      <div class="Code"><a name="289292">&nbsp;</a></div>
+      <div class="Code"><a name="289293">% Releases the hardware co-simulation instance.</a></div>
+      <div class="Code"><a name="289294">release(h);</a></div>
+      <div class="Code"><a name="289295">&nbsp;</a></div>
+      <div class="Heading2"><a name="289249">Automatic Generation of M-Hwcosim Testbench</a></div>
+      <div class="Body"><a name="290930">M-Hwcosim enables the testbench generation for hardware co-simulation. When the </a><span class="Bold">Create testbench</span> option is checked in the System Generator GUI, the hardware co-simulation compilation flow generates an M-code script (<span class="Filename">&lt;design&gt;_hwcosim_test.m</span>) and golden test data files (<span class="Filename">&lt;design&gt;_&lt;port&gt;_hwcosim_test.dat</span>)  for each gateway based on the Simulink simulation. The M-code script uses the M-Hwcosim API to implement a testbench that simulates the design in hardware and verifies the results against the golden test data. Any simulation mismatch is reported in a result file (<span class="Filename">&lt;design&gt;_hwcosim_test.results</span>). </div>
+      <div class="Body"><a name="307747">As shown below in Example 4, the testbench code generated is easily readable and can be </a>used as a basis for your own simulation code.</div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="307748">The model for this example can be found at pathname </a>&lt;ISE_Design_Suite_tree&gt;/sysgen/examples/mhwcosim/MultiRatesExample</div>
+      <div class="Heading3"><a name="307749">Example 4 </a></div>
+      <div class="Code"><a name="290936">function multi_rates_cw_hwcosim_test</a></div>
+      <div class="Code"><a name="290937">  try</a></div>
+      <div class="Code"><a name="290938">    % Define the number of hardware cycles for the simulation.</a></div>
+      <div class="Code"><a name="290939">    ncycles = 10;</a></div>
+      <div class="Code"><a name="292029">&nbsp;</a></div>
+      <div class="Code"><a name="290941">    % Load input and output test reference data.</a></div>
+      <div class="Code"><a name="290942">    testdata_in2 = load('multi_rates_cw_in2_hwcosim_test.dat');</a></div>
+      <div class="Code"><a name="290943">    testdata_in3 = load('multi_rates_cw_in3_hwcosim_test.dat');</a></div>
+      <div class="Code"><a name="290944">    testdata_in7 = load('multi_rates_cw_in7_hwcosim_test.dat');</a></div>
+      <div class="Code"><a name="290945">    testdata_pb00 = load('multi_rates_cw_pb00_hwcosim_test.dat');</a></div>
+      <div class="Code"><a name="290946">    testdata_pb01 = load('multi_rates_cw_pb01_hwcosim_test.dat');</a></div>
+      <div class="Code"><a name="290947">    testdata_pb02 = load('multi_rates_cw_pb02_hwcosim_test.dat');</a></div>
+      <div class="Code"><a name="290948">    testdata_pb03 = load('multi_rates_cw_pb03_hwcosim_test.dat');</a></div>
+      <div class="Code"><a name="290949">    testdata_pb04 = load('multi_rates_cw_pb04_hwcosim_test.dat');</a></div>
+      <div class="Code"><a name="290950"> </a></div>
+      <div class="Code"><a name="290951">    % Pre-allocate memory for test results.</a></div>
+      <div class="Code"><a name="290952">    result_pb00 = zeros(size(testdata_pb00));</a></div>
+      <div class="Code"><a name="290953">    result_pb01 = zeros(size(testdata_pb01));</a></div>
+      <div class="Code"><a name="290954">    result_pb02 = zeros(size(testdata_pb02));</a></div>
+      <div class="Code"><a name="290955">    result_pb03 = zeros(size(testdata_pb03));</a></div>
+      <div class="Code"><a name="290956">    result_pb04 = zeros(size(testdata_pb04));</a></div>
+      <div class="Code"><a name="290957"> </a></div>
+      <div class="Code"><a name="290958">    % Initialize sample index counter for each sample period to be </a></div>
+      <div class="Code"><a name="290959">    % scheduled.</a></div>
+      <div class="Code"><a name="290960">    insp_2 = 1;</a></div>
+      <div class="Code"><a name="290961">    insp_3 = 1;</a></div>
+      <div class="Code"><a name="290962">    insp_7 = 1;</a></div>
+      <div class="Code"><a name="290963">    outsp_1 = 1;</a></div>
+      <div class="Code"><a name="290964">    outsp_2 = 1;</a></div>
+      <div class="Code"><a name="290965">    outsp_3 = 1;</a></div>
+      <div class="Code"><a name="290966">    outsp_7 = 1;</a></div>
+      <div class="Code"><a name="290967"> </a></div>
+      <div class="Code"><a name="290968">    % Define hardware co-simulation project file.</a></div>
+      <div class="Code"><a name="290969">    project = 'multi_rates_cw.hwc';</a></div>
+      <div class="Code"><a name="290970"> </a></div>
+      <div class="Code"><a name="290971">    % Create a hardware co-simulation instance.</a></div>
+      <div class="Code"><a name="290972">    h = Hwcosim(project);</a></div>
+      <div class="Code"><a name="290973"> </a></div>
+      <div class="Code"><a name="290974">    % Open the co-simulation interface and configure the hardware.</a></div>
+      <div class="Code"><a name="290975">    try</a></div>
+      <div class="Code"><a name="290976">      open(h);</a></div>
+      <div class="Code"><a name="290977">    catch</a></div>
+      <div class="Code"><a name="290978">      % If an error occurs, launch the configuration GUI for the user</a></div>
+      <div class="Code"><a name="290979">      % to change interface settings, and then retry the process again.</a></div>
+      <div class="Code"><a name="290980">      release(h);</a></div>
+      <div class="Code"><a name="290981">      xlHwcosimConfig(project, true);</a></div>
+      <div class="Code"><a name="290982">      drawnow;</a></div>
+      <div class="Code"><a name="290983">      h = Hwcosim(project);</a></div>
+      <div class="Code"><a name="290984">      open(h);</a></div>
+      <div class="Code"><a name="290985">    end</a></div>
+      <div class="Code"><a name="290986"> </a></div>
+      <div class="Code"><a name="290987">    % Simulate for the specified number of cycles.</a></div>
+      <div class="Code"><a name="290988">    for i = 0:(ncycles-1)</a></div>
+      <div class="Code"><a name="290989"> </a></div>
+      <div class="Code"><a name="290990">      % Write data to input ports based their sample period.</a></div>
+      <div class="Code"><a name="290991">      if mod(i, 2) == 0</a></div>
+      <div class="Code"><a name="290992">        h('in2') = testdata_in2(insp_2);</a></div>
+      <div class="Code"><a name="290993">        insp_2 = insp_2 + 1;</a></div>
+      <div class="Code"><a name="290994">      end</a></div>
+      <div class="Code"><a name="290995">      if mod(i, 3) == 0</a></div>
+      <div class="Code"><a name="290996">        h('in3') = testdata_in3(insp_3);</a></div>
+      <div class="Code"><a name="290997">        insp_3 = insp_3 + 1;</a></div>
+      <div class="Code"><a name="290998">      end</a></div>
+      <div class="Code"><a name="290999">      if mod(i, 7) == 0</a></div>
+      <div class="Code"><a name="291000">        h('in7') = testdata_in7(insp_7);</a></div>
+      <div class="Code"><a name="291001">        insp_7 = insp_7 + 1;</a></div>
+      <div class="Code"><a name="291002">      end</a></div>
+      <div class="Code"><a name="291003"> </a></div>
+      <div class="Code"><a name="291004">      % Read data from output ports based their sample period.</a></div>
+      <div class="Code"><a name="291005">      result_pb00(outsp_1) = h('pb00');</a></div>
+      <div class="Code"><a name="291006">      result_pb04(outsp_1) = h('pb04');</a></div>
+      <div class="Code"><a name="291007">      outsp_1 = outsp_1 + 1;</a></div>
+      <div class="Code"><a name="291008">      if mod(i, 2) == 0</a></div>
+      <div class="Code"><a name="291009">        result_pb01(outsp_2) = h('pb01');</a></div>
+      <div class="Code"><a name="291010">        outsp_2 = outsp_2 + 1;</a></div>
+      <div class="Code"><a name="291011">      end</a></div>
+      <div class="Code"><a name="291012">      if mod(i, 3) == 0</a></div>
+      <div class="Code"><a name="291013">        result_pb02(outsp_3) = h('pb02');</a></div>
+      <div class="Code"><a name="291014">        outsp_3 = outsp_3 + 1;</a></div>
+      <div class="Code"><a name="291015">      end</a></div>
+      <div class="Code"><a name="291016">      if mod(i, 7) == 0</a></div>
+      <div class="Code"><a name="291017">        result_pb03(outsp_7) = h('pb03');</a></div>
+      <div class="Code"><a name="291018">        outsp_7 = outsp_7 + 1;</a></div>
+      <div class="Code"><a name="291019">      end</a></div>
+      <div class="Code"><a name="291020"> </a></div>
+      <div class="Code"><a name="291021">      % Advance the hardware clock for one cycle.</a></div>
+      <div class="Code"><a name="291022">      run(h);</a></div>
+      <div class="Code"><a name="291023"> </a></div>
+      <div class="Code"><a name="291024">    end</a></div>
+      <div class="Code"><a name="291025"> </a></div>
+      <div class="Code"><a name="291026">    % Release the hardware co-simulation instance.</a></div>
+      <div class="Code"><a name="291027">    release(h);</a></div>
+      <div class="Code"><a name="291028"> </a></div>
+      <div class="Code"><a name="291029">    % Check simulation result for each output port.</a></div>
+      <div class="Code"><a name="291030">    logfile = 'multi_rates_cw_hwcosim_test.results';</a></div>
+      <div class="Code"><a name="291031">    logfd = fopen(logfile, 'w');</a></div>
+      <div class="Code"><a name="291032">    sim_ok = true;</a></div>
+      <div class="Code"><a name="291033">    sim_ok = sim_ok &amp; check_result(logfd, 'pb00', testdata_pb00, </a>result_pb00);</div>
+      <div class="Code"><a name="291034">    sim_ok = sim_ok &amp; check_result(logfd, 'pb01', testdata_pb01, </a>result_pb01);</div>
+      <div class="Code"><a name="291035">    sim_ok = sim_ok &amp; check_result(logfd, 'pb02', testdata_pb02, </a>result_pb02);</div>
+      <div class="Code"><a name="291036">    sim_ok = sim_ok &amp; check_result(logfd, 'pb03', testdata_pb03, </a>result_pb03);</div>
+      <div class="Code"><a name="291037">    sim_ok = sim_ok &amp; check_result(logfd, 'pb04', testdata_pb04, </a>result_pb04);</div>
+      <div class="Code"><a name="291038">    fclose(logfd);</a></div>
+      <div class="Code"><a name="291039">    if ~sim_ok</a></div>
+      <div class="Code"><a name="291040">      error('Found errors in simulation results. Please refer to ''%s'' </a>for details.', logfile);</div>
+      <div class="Code"><a name="291041">    end</a></div>
+      <div class="Code"><a name="291042"> </a></div>
+      <div class="Code"><a name="291043">  catch</a></div>
+      <div class="Code"><a name="291044">    err = lasterr;</a></div>
+      <div class="Code"><a name="291045">    try release(h); end</a></div>
+      <div class="Code"><a name="291046">    error('Error running hardware co-simulation testbench. %s', err);</a></div>
+      <div class="Code"><a name="291047">  end</a></div>
+      <div class="Code"><a name="291048"> </a></div>
+      <div class="Code"><a name="291049">%---------------------------------------------------------------------</a></div>
+      <div class="Code"><a name="291050"> </a></div>
+      <div class="Code"><a name="291051">function ok = check_result(fd, portname, expected, actual)</a></div>
+      <div class="Code"><a name="291052">  ok = false;</a></div>
+      <div class="Code"><a name="291053"> </a></div>
+      <div class="Code"><a name="291054">  fprintf(fd, ['\n' repmat('=', 1, 95), '\n']);</a></div>
+      <div class="Code"><a name="291055">  fprintf(fd, 'Output: %s\n\n', portname);</a></div>
+      <div class="Code"><a name="291056"> </a></div>
+      <div class="Code"><a name="291057">  % Check the number of data values.</a></div>
+      <div class="Code"><a name="291058">  nvals_expected = numel(expected);</a></div>
+      <div class="Code"><a name="291059">  nvals_actual = numel(actual);</a></div>
+      <div class="Code"><a name="291060">  if nvals_expected ~= nvals_actual</a></div>
+      <div class="Code"><a name="291061">    fprintf(fd, ['The number of simulation output values (%d) differs ' </a>...</div>
+      <div class="Code"><a name="291062">                 'from the number of reference values (%d).\n'], ...</a></div>
+      <div class="Code"><a name="291063">                 nvals_actual, nvals_expected);</a></div>
+      <div class="Code"><a name="291064">    return;</a></div>
+      <div class="Code"><a name="291065">  end</a></div>
+      <div class="Code"><a name="291066"> </a></div>
+      <div class="Code"><a name="291067">  % Check for simulation mismatches.</a></div>
+      <div class="Code"><a name="291068">  mismatches = find(expected ~= actual);</a></div>
+      <div class="Code"><a name="291069">  num_mismatches = numel(mismatches);</a></div>
+      <div class="Code"><a name="291070">  if num_mismatches &gt; 0</a></div>
+      <div class="Code"><a name="291071">    fprintf(fd, 'Number of simulation mismatches = %d\n', </a>num_mismatches);</div>
+      <div class="Code"><a name="291072">    fprintf(fd, '\n');</a></div>
+      <div class="Code"><a name="291073">    fprintf(fd, 'Simulation mismatches:\n');</a></div>
+      <div class="Code"><a name="291074">    fprintf(fd, '----------------------\n');</a></div>
+      <div class="Code"><a name="291075">    fprintf(fd, '%10s %40s %40s\n', 'Cycle', 'Expected values', 'Actual </a>values');</div>
+      <div class="Code"><a name="291076">    fprintf(fd, '%10d %40.16f %40.16f\n', ...</a></div>
+      <div class="Code"><a name="291077">            [mismatches-1; expected(mismatches); actual(mismatches)]);</a></div>
+      <div class="Code"><a name="291078">    return;</a></div>
+      <div class="Code"><a name="291079">  end</a></div>
+      <div class="Code"><a name="291080"> </a></div>
+      <div class="Code"><a name="291081">  ok = true;</a></div>
+      <div class="Code"><a name="291082">  fprintf(fd, 'Simulation OK\n');</a></div>
+      <div class="Code"><a name="291083">&nbsp;</a></div>
+      <div class="Heading2"><a name="291084">Resource Management</a></div>
+      <div class="Body"><a name="292031">M-Hwcosim manages resources that it holds for an hardware co-simulation instance. It </a>releases the held resources upon the invocation of the release instruction or when MATLAB exits. However, it is recommended to perform an explicit cleanup of resources when the simulation finishes or throws an error. To allow proper cleanup in case of errors, it is suggested to enclose M-Hwcosim instructions in a MATLAB try-catch block as illustrated below.</div>
+      <div class="Code"><a name="292032">&nbsp;</a></div>
+      <div class="Code"><a name="292033"> try</a></div>
+      <div class="Code"><a name="292034">    % M-Hwcosim instructions here</a></div>
+      <div class="Code"><a name="292035"> catch</a></div>
+      <div class="Code"><a name="292036">    err = lasterror;</a></div>
+      <div class="Code"><a name="292037">    % Release any Hwcosim, Shmem, or Shfifo instances</a></div>
+      <div class="Code"><a name="292038">    try release(hwcosim_instance); end</a></div>
+      <div class="Code"><a name="292039">    try release(shmem_instance); end</a></div>
+      <div class="Code"><a name="292040">    try release(shfifo_instance); end</a></div>
+      <div class="Code"><a name="292041">    rethrow(err);</a></div>
+      <div class="Code"><a name="292042">  end</a></div>
+      <div class="Code"><a name="292043">&nbsp;</a></div>
+      <div class="Body"><a name="292044">The following commands can be used to release all hardware co-simulation or shared </a>memory instances.</div>
+      <div class="Code"><a name="292045">&nbsp;</a></div>
+      <div class="Code"><a name="292046">xlHwcosim('release');       % Release all Hwcosim instances</a></div>
+      <div class="Code"><a name="292047">xlHwcosim('releaseMem');    % Release all Shmem instances</a></div>
+      <div class="Code"><a name="292048">xlHwcosim('releaseFifo');   % Release all Shfifo instances</a></div>
+      <div class="Code"><a name="292049">&nbsp;</a></div>
+      <div class="Heading2"><a name="290927">M-Hwcosim MATLAB Class</a></div>
+      <div class="Heading3"><a name="292075">Hwcosim</a></div>
+      <div class="Body"><a name="292084">The Hwcosim MATLAB class provides a higher level abstraction of the hardware co-</a>simulation engine. Each instantiated Hwcosim object represents a hardware co-simulation instance. It encapsulates the properties, such as the unique identifier, associated with the instance. Most of the instruction invocations take the Hwcosim object as an input argument. For further convenience, alternative shorthand is provided for certain operations. Similarly, the Shmem and Shfifo class are provided for accessing shared memory and shared FIFO related operations, respectively.</div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 388.8865pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 112.8999pt">
+            <div class="CellHeadingLeft"><a name="292289">Actions</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 275.9866pt">
+            <div class="CellHeadingLeft"><a name="292291">Syntax</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="292293">Constructor</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="292295">h = Hwcosim(project)</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="292297">Destructor</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="292299">release(h)</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="292301">Open hardware</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="292303">open(h)</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="292305">Close hardware</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="292307">close(h)</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="292309">Write data</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="292311">write(h, inPorts, inData)</a></span></div>
+            <div class="CellBody"><span class="Filename"><a name="292312">h(inPorts) = inData</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="292314">Read data</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="292316">outData = read(h, outPorts)</a></span></div>
+            <div class="CellBody"><span class="Filename"><a name="292317">outData = h(outPorts)</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="292319">Run</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="292321">run(h)</a></span></div>
+            <div class="CellBody"><span class="Filename"><a name="292322">run(h, n)</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="292324">Vectorized Execution</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="292326">outData = exec(h, execId, nCycles, inData)</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="292328">Get properties</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="292330">data = get(h, prop)</a></span></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading4"><a name="292386">Constructor</a></div>
+      <div class="Body"><span class="Bold"><a name="292387">Syntax</a></span></div>
+      <div class="Body"><span class="Filename"><a name="292408">h = Hwcosim(project);</a></span></div>
+      <div class="Body"><span class="Size9Type"><a name="292409">Description</a></span></div>
+      <div class="Body"><a name="292492">Creates an Hwcosim instance. Note that an instance is a reference to the hardware co-</a>simulation project and does not signify an explicit link to hardware; creating a Hwcosim object informs the Hwcosim engine where to locate the FPGA bitstream, it does not download the bitstream into the FPGA. The bitstream is only downloaded to the hardware after an open command is issued.</div>
+      <div class="Body"><a name="292494">The project argument should point to the hwc file that describes the hardware co-</a>simulation.</div>
+      <div class="Heading4"><a name="292505">Destructor</a></div>
+      <div class="Body"><span class="Bold"><a name="292506">Syntax</a></span></div>
+      <div class="Body"><span class="Filename"><a name="292507">release(h);</a></span></div>
+      <div class="Body"><span class="Size9Type"><a name="292508">Description</a></span></div>
+      <div class="Body"><a name="292522">Releases the resources used by the Hwcosim object h. If a link to hardware is still open, </a>release will first close the hardware. </div>
+      <div class="Heading4"><a name="292528">Open hardware</a></div>
+      <div class="Body"><span class="Bold"><a name="292529">Syntax</a></span></div>
+      <div class="Body"><span class="Filename"><a name="292530">open(h);</a></span></div>
+      <div class="Body"><span class="Size9Type"><a name="292531">Description</a></span></div>
+      <div class="Body"><a name="292532">Opens the connection between the host PC and the FPGA. Before this function can be </a>called, the hardware co-simulation interface must be configured. Use the xlHwcosimConfig utility to configure the hardware co-simulation interface. The argument, h, is an Hwcosim object. </div>
+      <div class="Heading4"><a name="292545">Close hardware</a></div>
+      <div class="Body"><span class="Bold"><a name="292546">Syntax</a></span></div>
+      <div class="Body"><span class="Filename"><a name="292547">close(h);</a></span></div>
+      <div class="Body"><span class="Size9Type"><a name="292548">Description</a></span></div>
+      <div class="Body"><a name="292549">Closes the connection between the host PC and the FPGA. The argument, h, is an Hwcosim </a>object. </div>
+      <div class="Heading4"><a name="292669">Write data</a></div>
+      <div class="Body"><span class="Bold"><a name="292670">Syntax</a></span></div>
+      <div class="Body"><span class="Filename"><a name="292680">h('portName') = inData;</a></span></div>
+      <div class="Body"><span class="Filename"><a name="292681">h({inPortNames}) = [inData];</a></span></div>
+      <div class="Body"><span class="Filename"><a name="292682">h([inPortIndices]) = [inData];</a></span></div>
+      <div class="Body"><span class="Filename"><a name="292683">write(h, 'portName', inData);</a></span></div>
+      <div class="Body"><span class="Filename"><a name="292684">write(h, {inPortNames}, [inData]);</a></span></div>
+      <div class="Body"><span class="Filename"><a name="292685">write(h, [inPortIndices], [inData]);</a></span></div>
+      <div class="Body"><span class="Size9Type"><a name="292672">Description</a></span></div>
+      <div class="Body"><a name="292702">Access to ports can be done by name or by index. Port names and indices can be extracted </a>from an Hwcosim instance by getting the Inport property of the Hwcosim object. When ports are referred by name, a cell-array of port names is expected to be followed by an array of data that correspond to the ports. Similarly when ports are referred by index, an array of port indices is expected to be followed by an array of data.</div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="292533">For a large number of read and write operations, specifying multiple ports by names may not </a>be encouraged for the sake of performance. It is recommended to resolve a sequence of port names into an equivalent index sequence using the get instruction, and then use the index sequence for subsequent read and write operations.</div>
+      <div class="Heading4"><a name="292714">Read data</a></div>
+      <div class="Body"><span class="Bold"><a name="292715">Syntax</a></span></div>
+      <div class="Body"><span class="Filename"><a name="292765">outData = h('portName');</a></span></div>
+      <div class="Body"><span class="Filename"><a name="292766">[outData] = h({outPortNames});</a></span></div>
+      <div class="Body"><span class="Filename"><a name="292767">[outData] = h([outPortIndices]);</a></span></div>
+      <div class="Body"><span class="Filename"><a name="292768">outData = read(h, 'portName');</a></span></div>
+      <div class="Body"><span class="Filename"><a name="292769">[outData] = read(h, {outPortNames});</a></span></div>
+      <div class="Body"><span class="Filename"><a name="292770">[outData] = read(h, [outPortIndices]);</a></span></div>
+      <div class="Body"><span class="Size9Type"><a name="292722">Description</a></span></div>
+      <div class="Body"><a name="292740">Access to ports can be done by name or by index. Port names and indices can be extracted </a>from an Hwcosim instance by getting the Outport property of the Hwcosim object. When ports are referred by name, a cell-array of port names is expected to be followed by an array of data that correspond to the ports. Similarly when ports are referred by index, an array of port indices is expected to be followed by an array of data</div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="292741">For a large number of read and write operations, specifying multiple ports by names may not </a>be encouraged for the sake of performance. It is recommended to resolve a sequence of port names into an equivalent index sequence using the get instruction, and then use the index sequence for subsequent read and write operations.</div>
+      <div class="Heading4"><a name="292787">Run</a></div>
+      <div class="Body"><span class="Bold"><a name="292788">Syntax</a></span></div>
+      <div class="Body"><span class="Filename"><a name="292789">run(h);</a></span></div>
+      <div class="Body"><span class="Filename"><a name="292911">run(h, n);</a></span></div>
+      <div class="Body"><span class="Size9Type"><a name="292790">Description</a></span></div>
+      <div class="Body"><a name="292922">When the hardware co-simulation object is configured to run in single-step mode, the run </a>command is used to advance the clock. run(h) will advance the clock by one cycle. run(h,n) will advance the clock by n cycles.</div>
+      <div class="Body"><a name="292935">When the hardware co-simulation object is configured to run in free-running mode, the </a>run command has no effect on the clock of the hardware co-simulation. However in JTAG hardware co-simulation, write commands are buffered for efficiency reasons, and the run command can be used to flush the write buffer</div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="292936">Currently the run command has no effect on Ethernet hardware co-simulation in free-running </a>mode; but this behaviour may change in the future.</div>
+      <div class="Heading4"><a name="292962">Get properties</a></div>
+      <div class="Body"><span class="Bold"><a name="292963">Syntax</a></span></div>
+      <div class="Body"><span class="Filename"><a name="292964">get(h);</a></span></div>
+      <div class="Body"><span class="Filename"><a name="292965">getrun(h, prop);</a></span></div>
+      <div class="Body"><span class="Size9Type"><a name="292966">Description</a></span></div>
+      <div class="Body"><a name="292937">Get returns the properties associated with the Hwcosim object h. The properties are </a>returned as a MATLAB struct with the following fields.</div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 388.8865pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 112.8999pt">
+            <div class="CellHeadingLeft"><a name="293758">prop</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 275.9866pt">
+            <div class="CellHeadingLeft"><a name="293760">Description</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="293762">Id</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="293764">Internal use</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="293766">Inport</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="293768">A struct describing all the input ports</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="293770">Outport</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="293772">A struct describing all the output ports</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="293774">Execution</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="293776">A struct describing the execution schedule</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="293778">SharedMemory</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="293781">A struct describing the available shared </a></span><span class="Filename">memories in the object</span></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading4"><a name="293833">Create Exec Id</a></div>
+      <div class="Body"><span class="Bold"><a name="293834">Syntax</a></span></div>
+      <div class="Body"><span class="Filename"><a name="293835">execId = initExec(h, inPorts, outPorts);</a></span></div>
+      <div class="Body"><span class="Filename"><a name="293836">getrun(h, prop);</a></span></div>
+      <div class="Body"><span class="Size9Type"><a name="293837">Description</a></span></div>
+      <div class="Body"><a name="293847">The </a><span class="Bold">exec</span> instruction is designed to minimize the overheads inherited in the MATLAB environment. It condenses a sequence of operations into a single invocation of the underlying hardware co-simulation engine, and thus reduces the overheads on interpreting M-codes, and switching between M-codes and the engine. It can provide a significant performance improvement on simulation, compared to using a repetitive sequence of individual <span class="Bold">write</span>, <span class="Bold">read</span>, and <span class="Bold">run</span> instructions.</div>
+      <div class="Body"><a name="293849">An execution definition is initialized using the </a><span class="Bold">initExec</span> instruction, before subsequent executions of that definition can be invoked. Defining an execution is to specify which input and output ports involve in the execution. An execution can be defined on a subset of input and output ports. Only involved ports are read or written during the execution, while other input ports are expected to be driven by the same values, and other output ports are simply ignored.</div>
+      <div class="Body"><a name="293851">The inPorts and outPorts argument in initExec can either be cell-arrays of portnames or </a>arrays or port indexes.</div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="293853">Having initExec and exec instructions separated is solely for performance concerns. The </a>initialization phase is performed before subsequent executions so that it is only a one-time overhead. It is particularly important when we need to break down a simulation into multiple executions under certain circumstances, for example, when the memory cannot hold the input data for all simulation cycles.</div>
+      <div class="Body"><a name="293855">An execution operates on a cycle basis, where input and output data are given on every </a>cycle. In multi-rate designs, the internal operations are scheduled on a period of the GCD rate (the common sample period) of involved ports. The number of cycles is required to be a multiple of the LCM rate (the minimum execution length) of involved ports.</div>
+      <div class="Body"><a name="293992">Special care is required when mixing the </a><span class="Bold">exec</span> with individual <span class="Bold">read</span>, <span class="Bold">write</span>, and <span class="Bold">run</span> instructions. Before an execution, the samplings of all involved input and output ports should be aligned on their common sample period boundary. In other words, it is expected to sample the involved ports at the first cycle of the execution. Provided this condition holds, the alignment of sampling is guaranteed for the involved ports when the execution completes, because the execution length is a multiple of the LCM rate.</div>
+      <div class="Body"><a name="293994">The figure below illustrates an execution which involves two input ports operating at a </a>sample period of 2 and 4 cycles respectively, and one output port with a sample period of 8 cycles. The common sample period is set to GCD(2,4,8) = 2 cycles, which implies a sequence of write, read, and run operations is invoked on every 2 cycles starting from the first cycle of the execution.  The minimum execution length is LCM(2,4,8) = 8 cycles, and thus the execution must be run for a multiple of 8 cycles.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="294020"><img class="Default" src="images/Programmatic_Access.16.4.6.jpg" width="393" height="215" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading4"><a name="294146">Vectorized execution</a></div>
+      <div class="Body"><span class="Bold"><a name="294147">Syntax</a></span></div>
+      <div class="Body"><span class="Filename"><a name="294148">outData = exec(h, execId, nCycles, inData);</a></span></div>
+      <div class="Body"><span class="Size9Type"><a name="294150">Description</a></span></div>
+      <div class="Body"><a name="294927">The </a><span class="Bold">exec</span> instruction is designed to minimize the overheads inherited in the MATLAB environment. It condenses a sequence of operations into a single invocation of the underlying engine, and thus reduces the overheads on interpreting M-codes, and switching between M-codes and the engine. It can provide a significant performance improvement on simulation, compared to using a repetitive sequence of individual <span class="Bold">write</span>, <span class="Bold">read</span>, and <span class="Bold">run</span> instructions.</div>
+      <div class="Body"><a name="294928">&nbsp;</a></div>
+      <div class="Body"><a name="294929">The execId argument is constructed through a call to initExec. nCycles specifies the </a>number of simulation cycles to be run and inData contains the data used to drive the ports at each cycle. inData is a 2D matrix [M,N] where length(M) corresponds to the number of inPorts specified in initExec, and length(n) corresponds to the nCycles.  All port data for the same execution cycle is stored in the same column. For example, the [m,n] element of the inData matrix corresponds to the (n-1)-th cycle data sample for the m-th input ports specified in the execution.</div>
+      <div class="Heading2"><a name="294925">M-Hwcosim Shared Memory MATLAB Class</a></div>
+      <div class="Heading3"><a name="295875">Shmem</a></div>
+      <div class="Body"><a name="295876">The Shmem MATLAB class provides an interface into shared memories embedded in </a>hardware co-simulation objects.</div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 388.8865pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 112.8999pt">
+            <div class="CellHeadingLeft"><a name="295879">Actions</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 275.9866pt">
+            <div class="CellHeadingLeft"><a name="295881">Syntax</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="295883">Constructor</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="295885">m = Shmem(memName)</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="295887">Destructor</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="295889">release(m)</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="295891">Write data</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="296597">write(m, addresses, inData)</a></span></div>
+            <div class="CellBody"><span class="Filename"><a name="296598">m(addresses) = inData</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="295895">Read data</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="296609">outData = read(m, addresses)</a></span></div>
+            <div class="CellBody"><span class="Filename"><a name="296610">outData = m(addresses)</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="295899">Set properties</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="295901">set(m, prop, data)</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="295918">Get properties</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="295920">data = get(m, prop)</a></span></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading4"><a name="296729">Constructor</a></div>
+      <div class="Body"><span class="Bold"><a name="296730">Syntax</a></span></div>
+      <div class="Body"><span class="Filename" style="font-size: 9.5pt"><a name="296731">m = Shmem(memName)</a></span><span class="Filename" style="font-size: 10.0pt">);</span></div>
+      <div class="Body"><span class="Size9Type"><a name="296732">Description</a></span></div>
+      <div class="Body"><a name="296923">Creates an object handle to a Shared Memory or Shared Register object. The argument is </a>the name of the shared memory as defined in the System Generator model. This is a global object and only one shared memory of a particular name may exist at a time.</div>
+      <div class="Heading4"><a name="296735">Destructor</a></div>
+      <div class="Body"><span class="Bold"><a name="296736">Syntax</a></span></div>
+      <div class="Body"><span class="Filename"><a name="296737">release(m);</a></span></div>
+      <div class="Body"><span class="Size9Type"><a name="296738">Description</a></span></div>
+      <div class="Body"><a name="296739">Releases the resources used by the Shmem object. </a></div>
+      <div class="Heading4"><a name="296750">Write data</a></div>
+      <div class="Body"><span class="Bold"><a name="296751">Syntax</a></span></div>
+      <div class="Body"><span class="Filename"><a name="296757">write(m, addresses, inData);</a></span></div>
+      <div class="Body"><a name="297597">m(addresses) = inData;</a></div>
+      <div class="Body"><span class="Size9Type"><a name="296758">Description</a></span></div>
+      <div class="Body"><a name="297599">When writing to a shared memory, addresses can be an integer or an array of integers </a>specifying the address to write to. </div>
+      <div class="Body"><a name="297601">When writing to a shared register, addresses should be set to 0.</a></div>
+      <div class="Heading4"><a name="296761">Read data</a></div>
+      <div class="Body"><span class="Bold"><a name="297613">Syntax</a></span></div>
+      <div class="Body"><span class="Filename"><a name="297614">outData = read(m, addresses);</a></span></div>
+      <div class="Body"><span class="Filename"><a name="297615">outData = m(addresses);</a></span></div>
+      <div class="Body"><span class="Size9Type"><a name="296769">Description</a></span></div>
+      <div class="Body"><a name="297621">When reading from a shared memory, addresses can be an integer or an array of integers </a>specifying the address to read from. </div>
+      <div class="Body"><a name="297623">When reading from a shared register, addresses should be set to 0.</a></div>
+      <div class="Heading4"><a name="297630">Set properties</a></div>
+      <div class="Body"><span class="Bold"><a name="297631">Syntax</a></span></div>
+      <div class="Body"><span class="Filename"><a name="297632">set(m, prop, data);</a></span></div>
+      <div class="Body"><span class="Size9Type"><a name="297634">Description</a></span></div>
+      <div class="Body"><a name="296770">Used to set the properties of the Shmem object.</a></div>
+      <div class="Heading4"><a name="297647">Get properties</a></div>
+      <div class="Body"><span class="Bold"><a name="297648">Syntax</a></span></div>
+      <div class="Body"><span class="Filename"><a name="297649">data=get(m);</a></span></div>
+      <div class="Body"><span class="Filename"><a name="297762">data=get(m, prop);</a></span></div>
+      <div class="Body"><span class="Size9Type"><a name="297650">Description</a></span></div>
+      <div class="Body"><a name="297651">Used to get the properties of the Shmem object</a></div>
+      <div class="Heading2"><a name="295921">M-Hwcosim Shared FIFO MATLAB Class</a></div>
+      <div class="Heading3"><a name="298432">Shfifo</a></div>
+      <div class="Body"><a name="298433">The Shfifo MATLAB class provides an interface into shared FIFOs embedded in hardware </a>co-simulation objects.</div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 388.8865pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 112.8999pt">
+            <div class="CellHeadingLeft"><a name="298436">Actions</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 275.9866pt">
+            <div class="CellHeadingLeft"><a name="298438">Syntax</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="298440">Constructor</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="298442">m = Shfifo(memName)</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="298444">Destructor</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="298446">release(m)</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="298448">Write data</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="298450">write(m, numValues, inData)</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="298453">Read data</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="298455">outData = read(m, numValues)</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="298458">Set properties</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="298460">set(m, prop, data)</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="298462">Get properties</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="298464">data = get(m, prop)</a></span></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading4"><a name="298465">Constructor</a></div>
+      <div class="Body"><span class="Bold"><a name="298466">Syntax</a></span></div>
+      <div class="Body"><span class="Filename" style="font-size: 9.5pt"><a name="298467">m = Shfifo(fifoName)</a></span><span class="Filename" style="font-size: 10.0pt">);</span></div>
+      <div class="Body"><span class="Size9Type"><a name="298468">Description</a></span></div>
+      <div class="Body"><a name="298469">Creates an object handle to a Shared FIFO object. The argument is the name of the shared </a>FIFO as defined in the System Generator model. This is a global object and only one shared memory of a particular name may exist at a time.</div>
+      <div class="Heading4"><a name="298512">Destructor</a></div>
+      <div class="Body"><span class="Bold"><a name="298513">Syntax</a></span></div>
+      <div class="Body"><span class="Filename"><a name="298514">release(m);</a></span></div>
+      <div class="Body"><span class="Size9Type"><a name="298515">Description</a></span></div>
+      <div class="Body"><a name="298516">Releases the resources used by the Shfifo object. </a></div>
+      <div class="Heading4"><a name="298517">Write data</a></div>
+      <div class="Body"><span class="Bold"><a name="298518">Syntax</a></span></div>
+      <div class="Body"><span class="Filename"><a name="298519">write(m, </a></span><span class="Filename" style="font-size: 9.5pt">numValues</span><span class="Filename" style="font-size: 10.0pt">, inData);</span></div>
+      <div class="Body"><span class="Size9Type"><a name="298521">Description</a></span></div>
+      <div class="Body"><a name="298523">When writing to a Shared FIFO, numValues is an integer that specifies the number of data </a>to write into the FIFO. inData is an array where that data to be written is stored.</div>
+      <div class="Heading4"><a name="298524">Read data</a></div>
+      <div class="Body"><span class="Bold"><a name="298525">Syntax</a></span></div>
+      <div class="Body"><span class="Filename"><a name="298526">outData = read(m, </a></span><span class="Filename" style="font-size: 9.5pt">numValues</span><span class="Filename" style="font-size: 10.0pt">);</span></div>
+      <div class="Body"><span class="Size9Type"><a name="298528">Description</a></span></div>
+      <div class="Body"><a name="298529">When reading to a Shared FIFO, numValues is an integer that specifies the number of data </a>to read from the FIFO. outData is an array where that data read is stored. </div>
+      <div class="Heading4"><a name="298531">Set properties</a></div>
+      <div class="Body"><span class="Bold"><a name="298532">Syntax</a></span></div>
+      <div class="Body"><span class="Filename"><a name="298533">set(m, prop, data);</a></span></div>
+      <div class="Body"><span class="Size9Type"><a name="298534">Description</a></span></div>
+      <div class="Body"><a name="298535">Used to set the properties of the Shfifo object.</a></div>
+      <div class="Heading4"><a name="298536">Get properties</a></div>
+      <div class="Body"><span class="Bold"><a name="298537">Syntax</a></span></div>
+      <div class="Body"><span class="Filename"><a name="298538">data=get(m);</a></span></div>
+      <div class="Body"><span class="Filename"><a name="298539">data=get(m, prop);</a></span></div>
+      <div class="Body"><span class="Size9Type"><a name="298687">Description</a></span></div>
+      <div class="Body"><a name="298688">Used to get the properties of the shfifo object, such as the full flag of the FIFO.</a></div>
+      <div class="Heading2"><a name="298689">M-Hwcosim Utility Functions</a></div>
+      <div class="Heading3"><a name="295865">xlHwcosim</a></div>
+      <div class="Heading4"><a name="295866">Syntax</a></div>
+      <div class="Body"><span class="Filename"><a name="298708">xlHwcosim('release');      </a></span></div>
+      <div class="Body"><span class="Filename"><a name="298709">xlHwcosim('releaseMem');   </a></span></div>
+      <div class="Body"><span class="Filename"><a name="298710">xlHwcosim('releaseFifo'); </a></span></div>
+      <div class="Heading4"><a name="298713">Description</a></div>
+      <div class="Body"><a name="298714">When a M-Hwcosim, Shared Memory or Shared FIFO objects are created global system </a>resources are used to register each of these objects. These objects are typically freed when a release command is called on the object.  xlHwcosim provides an easy way to release all resources used by M-Hwcosim in the event of an unexpected error. The release functions for each of the objects should be used if possible since the xlHwcosim call release the resources for all instances of a particular type of object.</div>
+      <div class="Body"><span class="Filename"><a name="298716">xlHwcosim('release')</a></span> release all instances of Hwcosim objects.</div>
+      <div class="Body"><span class="Filename"><a name="298717">xlHwcosim('releaseMem')</a></span> release all instances of  Shmem objects</div>
+      <div class="Body"><span class="Filename"><a name="298718">xlHwcosim('releaseFifo');</a></span> release all instances of  Shfifo objects</div>
+      <div class="Heading3"><a name="298721">xlHwcosimConfig</a></div>
+      <div class="Heading4"><a name="298722">Syntax</a></div>
+      <div class="Body"><span class="Filename"><a name="298723">  xlHwcosimGetDesignInfo;</a></span></div>
+      <div class="Body"><span class="Filename"><a name="298724">  xlHwcosimGetDesignInfo('netlist')</a></span></div>
+      <div class="Body"><span class="Filename"><a name="298725">  xlHwcosimGetDesignInfo('c:/design/macfir_cw.hwc')</a></span></div>
+      <div class="Heading4"><a name="298728">Description</a></div>
+      <div class="Body"><a name="298729">xlHwcosimConfig launches a graphical front-end (shown below) to configure the settings </a>of the Hardware Co-simulation interface. It is equivalent to the block GUI launched by double clicking a Hardware Co-simulation block in Simulink. Its invocation is similar to xlHwcosimGetDesignInfo.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="299042"><img class="Default" src="images/Programmatic_Access.16.4.7.jpg" width="393" height="333" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="298898">xlHwcosimGetDesignInfo</a></div>
+      <div class="Heading4"><a name="298899">Syntax</a></div>
+      <div class="Body"><a name="298900"> </a><span class="Filename"> xlHwcosimGetDesignInfo;</span></div>
+      <div class="Body"><span class="Filename"><a name="298901">  xlHwcosimGetDesignInfo('netlist')</a></span></div>
+      <div class="Body"><span class="Filename"><a name="298902">  xlHwcosimGetDesignInfo('c:/design/macfir_cw.hwc')</a></span></div>
+      <div class="Heading4"><a name="298905">Description</a></div>
+      <div class="Body"><a name="298906">xlHwcosimGetDesignInfo is used to retrieve the information of a design in a hwc file. By </a>default, it takes a hwc file as input, and returns the design information in a MATLAB struct array. If no hwc file is specified, it searches for the project file in the current directory. If a directory is provided it searches for a hwc file in the given directory.</div>
+      <div class="Heading3"><a name="298909">xlHwcosimSimulate</a></div>
+      <div class="Heading4"><a name="298910">Syntax</a></div>
+      <div class="Body"><span class="Filename"><a name="298911">  outData = xlHwcosimSimulate(project, nCycles, inData)</a></span></div>
+      <div class="Body"><span class="Filename"><a name="298912">  [o1, o2, ...] = xlHwcosimSimulate(project, nCycles, i1, i2, ...)  </a></span></div>
+      <div class="Body"><span class="Filename"><a name="298913">  outData = xlHwcosimSimulate(project, nCycles, struct('Inport', </a></span><span class="Filename"><br /></span><span class="Filename">	</span><span class="Filename">	</span><span class="Filename">	</span><span class="Filename">	</span><span class="Filename">	</span><span class="Filename">inPorts, 'Outport', outPorts, inData)</span></div>
+      <div class="Heading4"><a name="298915">Description</a></div>
+      <div class="Body"><a name="298916">xlHwcosimSimulate provides a one-liner function call to simulate a design with </a>predefined input values. The simulation is done on a cycle basis. The function takes a sequence of data values, one for each input port on each cycle, and returns a sequence of results, one for each output port on each cycle. By default, all input and output ports are involved, and data values are mapped to ports in the ascending order of port indices.</div>
+      <div class="Body"><a name="298918">xlHwcosimSimulate is good for simplicity and fits for common simulation purposes, but is </a>limited in several aspects:</div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="298919">No user-defined simulation semantics</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="298920">All simulation cycles are executed as a whole, i.e. cannot set a breakpoint in a </a>simulation cycle</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="298921">No shared memory access</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="295867">&nbsp;</a></div>
+      <div class="Body"><a name="287486">&nbsp;</a></div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

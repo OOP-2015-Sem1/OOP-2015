@@ -1,0 +1,61 @@
+{
+  'params' => {
+    'C_SPLB_AWIDTH' => {
+      'value' => 32,
+      'type' => 'INTEGER',
+      'range' => '32 to 36',
+      'assignment' => 'CONSTANT',
+    },
+    'C_SPLB_DWIDTH' => {
+      'value' => 32,
+      'type' => 'INTEGER',
+      'range' => '32 to 128',
+    },
+    'C_SPLB_MID_WIDTH' => {
+      'value' => 1,
+      'type' => 'INTEGER',
+      'range' => '0 to 4',
+    },
+    'C_SPLB_NUM_MASTERS' => {
+      'value' => 1,
+      'type' => 'INTEGER',
+      'range' => '1 to 16',
+    },
+    'C_SPLB_SUPPORT_BURSTS' => {
+      'value' => 0,
+      'type' => 'INTEGER',
+      'assignment' => 'CONSTANT',
+    },
+    'C_SPLB_NATIVE_DWIDTH' => {
+      'value' => 32,
+      'type' => 'INTEGER',
+      'assignment' => 'CONSTANT',
+      'range' => '32 to 32',
+    },
+  },
+  'name' => 'SPLB',
+  'type' => 'PLBV46',
+  'std' => 'SLAVE',
+  'clks' => {
+      'SPLB_Clk' => 0,
+  },
+  'resets' => {
+      'SPLB_Rst' => 0,
+  },
+  'inports' => {
+    'PLB_ABus'    => 32,
+    'PLB_PAValid' => 0,
+    'PLB_RNW'     => 0,
+    'PLB_wrDBus'  => 32,
+  },
+  'outports' => {
+    'Sl_addrAck' => 0,
+    'Sl_rdComp'  => 0,
+    'Sl_rdDAck'  => 0,
+    'Sl_rdDBus'  => 32,
+    'Sl_wait'    => 0,
+    'Sl_wrDAck'  => 0,
+    'Sl_wrComp'  => 0,
+  },
+}
+

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>xlUpdateModel</title>
+    <link rel="StyleSheet" href="css/SysGen_Utilities.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="SysGen_Utilities.14.01.html#271092">System Generator Utilities</a> : xlUpdateModel</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="271092">xlUpdateModel</a></div>
+      <div class="Body"><a name="282614">If you have a model that was created in System Generator v7.1 or earlier, you must update </a>the model to be compatible with v9.1.01 and beyond. To update a model, you run the MATLAB command <span class="Filename">xlUpdateModel</span> that invokes a conversion script. </div>
+      <div class="Body"><span class="Italic"><a name="282615">Please be advised that the conversion script does not automatically save an old version of your model </a></span><span class="Italic">as it updates the design nor save a new version of your model after conversion. You can either make </span><span class="Italic">a back up copy of your model before running the conversion script, or you can save the updated </span><span class="Italic">model with a new name. </span></div>
+      <div class="Body"><a name="282616">Some models may require some manual modification after running </a><span class="Filename">xlUpdateModel</span>. The function will point out any necessary changes that must be made manually.</div>
+      <div class="Heading2"><a name="275290">Syntax</a></div>
+      <div class="Code"><a name="275295">xlUpdateModel('my_model_name'); </a></div>
+      <div class="Code"><a name="275299">xlUpdateModel('my_model_name', 'lib'); </a></div>
+      <div class="Code"><a name="283150">xlUpdateModel('my_model_name', 'assert'); </a></div>
+      <div class="Heading2"><a name="275302">Description</a></div>
+      <div class="Heading3"><a name="282478">Updating v2.x and Prior Models</a></div>
+      <div class="Body"><a name="282479">If you are upgrading from versions of System Generator earlier than </a><span class="Bold">v3.1</span>, you must obtain System Generator v7.x and update your models to v7.x before you can update them to v9.1.01.</div>
+      <div class="Heading3"><a name="282480">Updating v3.x, v6.x and v7.x Models</a></div>
+      <div class="Body"><a name="282481">This section describes the process of upgrading a Xilinx System Generator v3.x, v6.x or </a>v7.x model to work with v9.1.01. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><span class="Bold"><a name="282757">Any reference to v3.x or v6.x in this section can be used interchangeably with v7.x</a></span>. </div>
+      <div class="Body"><a name="282482">The basic steps for upgrading a v7.x model to v9.1.01 is as follows: 1) Save a backup copy </a>of your v7.1 model and user-defined libraries that your model uses 2) Run <span class="Filename">xlUpdateModel</span> on any libraries first and then on your model 3) Read the report produced by <span class="Filename">xlUpdateModel</span> and follow the instructions 4) Check that your model runs under v9.1.01.</div>
+      <div class="Body"><a name="282487">These steps are described in greater detail below.</a></div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="282488">Save a backup copy of your v7.1 model and user-defined libraries that your model </a>uses.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="282489">Run the xlUpdateModel Function</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="282490">From the MATLAB console, </a><span class="Filename">cd</span> into the directory containing your model. If the name of your model is <span class="Filename">designName.mdl</span>, type <span class="Filename">xlUpdateModel('designName')</span>.</div>
+      <div class="Body2"><a name="282491">The </a><span class="Filename">xlUpdateModel</span> function performs the following tasks:</div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="282492">Updates each block in your v7.x design to a corresponding v9.1.01 block with </a>equivalent settings.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="282493">Writes a report explaining all of the changes that were made. This report </a>enumerates changes you may need to make by hand to complete the update.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="282494">In most cases, </a><span class="Filename">xlUpdateModel</span> produces an equivalent v9.1.01 model. However, there are a few constructs that may require you to edit your model. It is important that you read the report and follow the remaining steps in this section.</div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="282495">Read the xlUpdateModel report and Follow the Instructions</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="282496">If the report contains the issues listed below, manual intervention will be required to </a>complete the conversion.</div>
+      <div class="NumberedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedSub_inner" style="width: 18pt; white-space: nowrap;">a.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedSub_inner"><a name="282497">Xilinx System Generator v7.x models containing removed blocks</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body3"><a name="282498">The following blocks have been removed from System Generator: CIC, Clear </a>Quantization Error, Digital Up Converter, J.83 Modulator, Quantization Error, Sync.</div>
+      <div class="NumberedSubCont_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedSubCont_inner" style="width: 18pt; white-space: nowrap;">b.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedSubCont_inner"><a name="282505">Xilinx System Generator v7.x Models that Contain Deprecated Blocks</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body3"><a name="282506">The DDSv4.0 block still exist in System Generator, but has been deprecated:</a></div>
+      <div class="NumberedSubCont_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedSubCont_inner" style="width: 18pt; white-space: nowrap;">c.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedSubCont_inner"><a name="282508">Xilinx System Generator v7.x Models Utilizing Explicit Sample Periods</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body3"><a name="282509">The explicit sample period fields have been removed from most non-source blocks </a>in System Generator v9.1.01. Source blocks (e.g., Counter block) continue to allow the specification of explicit sample periods. When upgrading models containing feedback loops, Assert blocks must typically be added by hand after xlUpdateModel has been run. This is necessary in order to help System Generator determine appropriate rates and types for the path. The following error message is an indication that an Assert block is required:</div>
+      <div class="Body3"><span class="XRedLink"><a name="282510">“The data rates could not be established for the feedback paths through this block. </a></span><span class="XRedLink">You may need to add Assert blocks to instruct the system”</span></div>
+      <div class="Body3"><a name="282511">In such a case, you should augment each feedback loop with an Assert block, and </a>specify rates and types explicitly on this block.</div>
+      <div class="Body3"><a name="282513">The update script will annotate the converted model wherever the v7.1 model </a>asserted an explicit period. In the converted model, you will most often not need to insert Assert blocks. To find out where you need them, try to update the diagram (the Update Diagram control is under the Edit menu). If rates do not resolve, you will need to insert one or more Assert blocks. </div>
+      <div class="Body3"><a name="282514">The update script can be configured to automatically insert Assert blocks </a>immediately following blocks configured with an explicit sample period setting. To use this option, run the following command:</div>
+      <div class="Body3"><span class="Filename"><a name="282516">xlUpdateModel(designName,'assert')</a></span></div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="282517">Save and Close the updated model. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body3"><a name="283033">If you did not previously make a backup copy of the old model, you can save the </a>updated model under a new name to preserve the old model.</div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">5.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="283032">Verify that Your model Runs Under System Generator v9.1.01.</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body3"><a name="283075">If you have followed the instructions in the previous steps, your model should run </a>with System Generator v9.1.01. Open the model with System Generator v9.1.01 and run it.</div>
+      <div class="Heading2"><a name="283076">Examples</a></div>
+      <div class="Body"><span class="Bold"><a name="283089">Example 1</a></span>: </div>
+      <div class="Code"><a name="283098">&gt;&gt; xlUpdateModel('my_model_name'); </a></div>
+      <div class="Body"><a name="283091">Update the file </a><span class="Filename">my_model_name.mdl</span> that is located in the current working directory.</div>
+      <div class="Body"><span class="Bold"><a name="283112">Example 2</a></span>: </div>
+      <div class="Code"><a name="283113">&gt;&gt; xlUpdateModel('my_model_name','lib'); </a></div>
+      <div class="Body"><a name="283114">Update the file </a><span class="Filename">my_model_name.mdl</span> that is located in the current working directory, along with the libraries that are associated with the model.</div>
+      <div class="Body"><span class="Bold"><a name="283119">Example 3</a></span>: </div>
+      <div class="Code"><a name="283120">&gt;&gt; xlUpdateModel('my_model_name','assert’); </a></div>
+      <div class="Body"><a name="283121">Update the file </a><span class="Filename">my_model_name.mdl</span> that is located in the current working directory. Add <span class="Bold">Assert</span> blocks where necessary.</div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

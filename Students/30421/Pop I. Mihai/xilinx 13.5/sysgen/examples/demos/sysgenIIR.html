@@ -1,0 +1,35 @@
+<html>
+<body>
+<h3><font size=+1 color="#990000">Multi-channel, folded implementation</font></h3>
+<p>
+This design demonstrates how multiple IIR filters can be implemented using a
+single time-shared second-order section (biquad).  Specifically, 
+15 distinct IIR filters, each consisting of four cascaded biquads, are realized
+in a "folded" architecture that uses a single hardware biquad.  
+Hardware folding is a technique to time-multiplex many algorithm operations onto
+a single functional unit (e.g. adder, multiplier).   For low 
+sample rate applications like audio and control, the required silicon area can
+be much reduced by time-sharing the hardware resources.
+</p>
+<p>
+In this design, the several individual folding techniques are employed:
+</p>
+<p>
+<li>the biquad is time-multiplexed among fifteen channels
+<li>the biquad is time-multiplexed among four cascade stages for each channel  
+<li>the biquad is implemented using two multipliers and a single adder instead of the straightforward 5 multipliers and 4 adders (a biquad output is calculated in every 5 system clock cycles).
+</ul>
+</p>
+<p>
+The maximum clock frequency for the top-level design as shown is approximately
+50 MHz.  The speed for each channel (4-cascade-stage 
+IIR filter) is 50 MHz / (15 channels*4 biquads/channel*5 clks/biquad) = 166 KHz.
+</p>
+<p>
+This design occupies 630 LUTs (20%), 211 flip-flops (6%), and 361 slices (23%),
+7 Block RAMs (29%), and 8 VirtexII dedicated multipliers (33%) of an xc2v250-6 part 
+and runs at 71.26 MHz (Device speed data version: PRODUCTION 1.121 2005-11-04, 
+ISE 8.1i software, VHDL synthesized with XST).
+</p>
+</body>
+</html> 

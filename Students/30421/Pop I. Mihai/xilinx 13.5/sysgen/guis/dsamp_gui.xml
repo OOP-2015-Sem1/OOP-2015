@@ -1,0 +1,42 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Down Sample" block_type="dsamp">
+  <initialization file="xldsamp_init.m"/>
+  <icon width="60" height="56" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="Downsample_config"/>
+  <handlers enablement="xlmagicenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsBasic"/>
+  </libraries>
+  <blockgui label="Xilinx Down Sampler">
+    <editbox name="infoedit" default="Hardware notes: Sample and Latency controls determine the hardware implementation.  The cost in hardware of different implementations varies considerably; press Help for details." read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <editbox name="sample_ratio" default="2" top_label="true" evaluate="true" label="Sampling rate (number of input samples per output sample)" ctype="Int"/>
+        <radiogroup name="sample_phase" default="Last Value of Frame  (most efficient)" evaluate="true" label="Sample" ctype="Int">
+          <item value="First Value of Frame" label="First value of frame"/>
+          <item value="Last Value of Frame  (most efficient)" label="Last value of frame  (most efficient)"/>
+        </radiogroup>
+        <etch name="oportetch" label="Optional Ports">
+          <checkbox name="en" default="off" evaluate="true" label="Provide enable port" ctype="Int"/>
+        </etch>
+        <editbox name="latency" default="1" evaluate="true" label="Latency" ctype="Int"/>
+      </tab>
+      <tab name="advancedtab" label="Advanced">
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <workspacevar name="sysgen_root" ctype="String"/>
+    <workspacevar name="sim_engine" ctype="Int"/>
+  </blockgui>
+</sysgenblock>

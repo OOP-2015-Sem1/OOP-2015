@@ -1,0 +1,99 @@
+## Copyright (c) 1995-2010 Xilinx, Inc.  All rights reserved.
+
+## You may copy and modify these files for your own internal use solely with
+## Xilinx programmable logic devices and  Xilinx EDK system or create IP
+## modules solely for Xilinx programmable logic devices and Xilinx EDK system.
+## No rights are granted to distribute any files unless they are distributed in
+## Xilinx programmable logic devices.
+
+BEGIN $T.pcoreName$
+
+## Peripheral Options
+OPTION RUN_NGCBUILD = TRUE
+OPTION IMP_NETLIST = TRUE
+OPTION STYLE = $T.style$
+OPTION HDL = $T.hdl$
+OPTION IPTYPE = PERIPHERAL
+OPTION LAST_UPDATED = $T.version$
+OPTION USAGE_LEVEL = BASE_USER
+OPTION ARCH_SUPPORT_MAP = ( $T.part_family$=$if(T.is_development)$DEVELOPMENT$else$PRODUCTION$endif$ )
+
+## Bus Interfaces
+$T.bus_interfaces:{BUS_INTERFACE BUS = $it.bus$, BUS_STD = $it.bus_std$, BUS_TYPE = $it.bus_type$};separator="\n"$
+
+## Generics for VHDL or Parameters for Verilog
+PARAMETER C_BASEADDR = 0xffffffff, DT = std_logic_vector(0 to 31), BUS = $T.bus_info.name$, ADDRESS = BASE, PAIR = C_HIGHADDR, MIN_SIZE = $T.memmap_info.min_size$, ASSIGNMENT = REQUIRE
+PARAMETER C_HIGHADDR = 0x00000000, DT = std_logic_vector(0 to 31), BUS = $T.bus_info.name$, ADDRESS = HIGH, PAIR = C_BASEADDR, ASSIGNMENT = REQUIRE
+$if(T.isimportmode)$
+PARAMETER C_CODEBUG = SYSGEN, DT = String, ASSIGNMENT = CONSTANT 
+
+$endif$
+$T.bus_info.params.keys:{$mpd_ports_attr(attr_name="PARAMETER",name=it,param=T.bus_info.params.(it))$, BUS = $T.bus_info.name$};separator="\n"$
+
+# Memory Map Information
+# From Registers
+$T.memmap_info.fromregs:{PARAMETER C_MEMMAP_$it.name;format="toUpper"$ = $it.offset_addr$, DT = integer, ASSIGNMENT = CONSTANT 
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_N_BITS = $it.n_bits$, DT = integer, ASSIGNMENT = CONSTANT 
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_BIN_PT = $it.bin_pt$, DT = integer, ASSIGNMENT = CONSTANT};separator="\n"$
+# To Registers
+$T.memmap_info.toregs:{PARAMETER C_MEMMAP_$it.name;format="toUpper"$ = $it.offset_addr$, DT = integer, ASSIGNMENT = CONSTANT
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_N_BITS = $it.n_bits$, DT = integer, ASSIGNMENT = CONSTANT
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_BIN_PT = $it.bin_pt$, DT = integer, ASSIGNMENT = CONSTANT};separator="\n"$
+# From FIFOs
+$T.memmap_info.fromfifos:{PARAMETER C_MEMMAP_$it.name;format="toUpper"$ = $it.offset_addr$, DT = integer, ASSIGNMENT = CONSTANT 
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_PERCENTFULL = $it.pfull.offset_addr$, DT = integer, ASSIGNMENT = CONSTANT 
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_EMPTY = $it.empty.offset_addr$, DT = integer, ASSIGNMENT = CONSTANT 
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_N_BITS = $it.n_bits$, DT = integer, ASSIGNMENT = CONSTANT 
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_BIN_PT = $it.bin_pt$, DT = integer, ASSIGNMENT = CONSTANT 
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_DEPTH = $it.depth$, DT = integer, ASSIGNMENT = CONSTANT};separator="\n"$
+# To FIFOs
+$T.memmap_info.tofifos:{PARAMETER C_MEMMAP_$it.name;format="toUpper"$ = $it.offset_addr$, DT = integer, ASSIGNMENT = CONSTANT
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_PERCENTFULL = $it.pfull.offset_addr$, DT = integer, ASSIGNMENT = CONSTANT
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_FULL = $it.full.offset_addr$, DT = integer, ASSIGNMENT = CONSTANT
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_N_BITS = $it.n_bits$, DT = integer, ASSIGNMENT = CONSTANT
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_BIN_PT = $it.bin_pt$, DT = integer, ASSIGNMENT = CONSTANT
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_DEPTH = $it.depth$, DT = integer, ASSIGNMENT = CONSTANT};separator="\n"$
+# Shared RAMs
+$T.memmap_info.shmems:{PARAMETER C_MEMMAP_$it.name;format="toUpper"$ = $it.offset_addr$, DT = integer, ASSIGNMENT = CONSTANT
+# PARAMETER C_MEMMAP_$it.name;format="toUpper"$_GRANT = $it.grant$, DT = integer, ASSIGNMENT = CONSTANT
+# PARAMETER C_MEMMAP_$it.name;format="toUpper"$_REQ = $it.req$, DT = integer, ASSIGNMENT = CONSTANT
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_N_BITS = $it.n_bits$, DT = integer, ASSIGNMENT = CONSTANT
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_BIN_PT = $it.bin_pt$, DT = integer, ASSIGNMENT = CONSTANT
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_DEPTH = $it.depth$, DT = integer, ASSIGNMENT = CONSTANT};separator="\n"$
+
+$if(T.isimportmode)$
+# Ports (Import flow)
+PORT SPLB_Clk = "", DIR = I, SIGIS = CLK, BUS = SPLB
+PORT SPLB_Rst = SPLB_Rst, DIR = I, SIGIS = RST, BUS = SPLB
+PORT PLB_ABus = PLB_ABus, DIR = I, VEC = [0:(C_SPLB_AWIDTH-1)], BUS = SPLB
+PORT PLB_PAValid = PLB_PAValid, DIR = I, BUS = SPLB
+PORT PLB_RNW = PLB_RNW, DIR = I, BUS = SPLB
+PORT PLB_wrDBus = PLB_wrDBus, DIR = I, VEC = [0:(C_SPLB_DWIDTH-1)], BUS = SPLB
+PORT Sl_addrAck = Sl_addrAck, DIR = O, BUS = SPLB
+PORT Sl_wait = Sl_wait, DIR = O, BUS = SPLB
+PORT Sl_wrDAck = Sl_wrDAck, DIR = O, BUS = SPLB
+PORT Sl_wrComp = Sl_wrComp, DIR = O, BUS = SPLB
+PORT Sl_rdDBus = Sl_rdDBus, DIR = O, VEC = [0:(C_SPLB_DWIDTH-1)], BUS = SPLB
+PORT Sl_rdDAck = Sl_rdDAck, DIR = O, BUS = SPLB
+PORT Sl_rdComp = Sl_rdComp, DIR = O, BUS = SPLB
+
+PORT sgSPLB_Clk    = "", DIR = O
+PORT sgSPLB_Rst    = "", DIR = O
+PORT sgPLB_ABus    = "", DIR = O, VEC = [0:(C_SPLB_AWIDTH-1)]
+PORT sgPLB_PAValid = "", DIR = O
+PORT sgPLB_RNW     = "", DIR = O
+PORT sgSl_addrAck  = "", DIR = I
+PORT sgSl_wait     = "", DIR = I
+PORT sgPLB_wrDBus  = "", DIR = O, VEC = [0:(C_SPLB_NATIVE_DWIDTH-1)]
+PORT sgSl_wrComp   = "", DIR = I
+PORT sgSl_wrDAck   = "", DIR = I
+PORT sgSl_rdComp   = "", DIR = I
+PORT sgSl_rdDAck   = "", DIR = I
+PORT sgSl_rdDBus   = "", DIR = I, VEC = [0:(C_SPLB_NATIVE_DWIDTH-1)]
+$else$
+# Ports
+$[T.inports,T.outports]:{$ports_attr(attr_name="PORT",ports=it)$};separator="\n"$
+$[T.sginports,T.sgoutports]:{$ports_attr(attr_name="PORT",ports=it)$};separator="\n"$
+$endif$
+
+END
