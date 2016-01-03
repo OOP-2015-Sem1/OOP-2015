@@ -118,9 +118,9 @@ public class GameFrame {
 		beautyPanel1 = new JPanel();
 		beautyPanel2 = new JPanel();
 		beautyPanel3 = new JPanel();
-		beautyPanel1.setPreferredSize(new Dimension(20, Constants.DIMENSION));
-		beautyPanel2.setPreferredSize(new Dimension(20, Constants.DIMENSION));
-		beautyPanel3.setPreferredSize(new Dimension(Constants.DIMENSION, 20));
+		beautyPanel1.setPreferredSize(new Dimension(10, Constants.DIMENSION));
+		beautyPanel2.setPreferredSize(new Dimension(10, Constants.DIMENSION));
+		beautyPanel3.setPreferredSize(new Dimension(Constants.DIMENSION, 10));
 		beautyPanel1.setBackground(Color.GREEN);
 		beautyPanel2.setBackground(Color.GREEN);
 		beautyPanel3.setBackground(Color.GREEN);
@@ -155,7 +155,7 @@ public class GameFrame {
 	public class EventEasyBut implements ActionListener {
 		public void actionPerformed(ActionEvent eDificulty1) {
 
-			Screen.speed = 1000000;
+			Screen.speed = 10000000;
 			jframe.requestFocus();
 		}
 	}
@@ -163,7 +163,7 @@ public class GameFrame {
 	public class EventMedBut implements ActionListener {
 		public void actionPerformed(ActionEvent eDificulty3) {
 
-			Screen.speed = 600000;
+			Screen.speed = 6000000;
 			jframe.requestFocus();
 		}
 	}
@@ -171,7 +171,7 @@ public class GameFrame {
 	public class EventHardBut implements ActionListener {
 		public void actionPerformed(ActionEvent hardDifficulty) {
 
-			Screen.speed = 300000;
+			Screen.speed = 3000000;
 			jframe.requestFocus();
 		}
 	}
