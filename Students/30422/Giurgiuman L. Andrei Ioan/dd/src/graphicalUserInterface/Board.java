@@ -56,7 +56,7 @@ public class Board extends JPanel implements ActionListener, Commons {
 		addKeyListener(new TAdapter());
 		setFocusable(true);
 		setBackground(Color.BLACK);
-		gameRunning = true;		
+		gameRunning = true;
 
 		setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
 
@@ -159,8 +159,7 @@ public class Board extends JPanel implements ActionListener, Commons {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		if (gameRunning == false)
-			showStartAgainScreen(g);
+
 		if (gameRunning) {
 			drawLifePoints(g);
 			doDrawing(g);
@@ -169,19 +168,19 @@ public class Board extends JPanel implements ActionListener, Commons {
 		} else {
 
 			drawGameOver(g);
-			showStartAgainScreen(g);
+			showExitScreen(g);
 		}
 		Toolkit.getDefaultToolkit().sync();
 	}
 
-	private void showStartAgainScreen(Graphics g) {
+	private void showExitScreen(Graphics g) {
 
 		g.setColor(new Color(0, 32, 48));
 		g.fillRect(190, BOARD_WIDTH / 2 - 30, BOARD_HEIGHT - 100, 50);
 		g.setColor(Color.white);
 		g.drawRect(190, BOARD_WIDTH / 2 - 30, BOARD_HEIGHT - 100, 50);
 
-		String s = "Press S to exit.";
+		String s = "Press E to exit.";
 		Font small = new Font("Helvetica", Font.BOLD, 14);
 		FontMetrics metr = this.getFontMetrics(small);
 
@@ -316,8 +315,9 @@ public class Board extends JPanel implements ActionListener, Commons {
 			for (Baddie baddie : baddies) {
 
 				baddie.setVisible(false);
-				gameRunning = false;
+				
 			}
+			gameRunning = false;
 		}
 	}
 
@@ -335,7 +335,7 @@ public class Board extends JPanel implements ActionListener, Commons {
 			int key = e.getKeyCode();
 			hero.keyReleased(e);
 
-			if ((!gameRunning) && ((key == 's') || (key == 'S'))) {
+			if ((!gameRunning) && ((key == 'e') || (key == 'E'))) {
 
 				System.exit(0);
 			}
