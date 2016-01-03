@@ -11,7 +11,7 @@ public class Deck {
 		cards = new Card[52];
 			for (int i = 0; i < 4; i++)
 				for (int j = 0; j < 13; j++) {
-					cards[nrOfCards] = new Card(j, "/cards\\" + i + "" + j + ".png");
+					cards[nrOfCards] = new Card(j, "/" + i + "" + j + ".png");
 					nrOfCards++;
 				}
 	
