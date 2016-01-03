@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Board-Specific I/O Ports</title>
+    <link rel="StyleSheet" href="css/HW_CoSim.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="HW_CoSim.8.1.html#270892">Using Hardware Co-Simulation</a> : Board-Specific I/O Ports</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="270892">Board-Specific I/O Ports</a></div>
+      <div class="Body"><a name="272055">FPGA boards often include a variety of on-board devices (e.g., external memory, analog to </a>digital converters, etc.) that the FPGA can communicate with. For a variety of reasons, it may be useful to form connections to these components in your System Generator models, and to use these components during hardware co-simulation. For example, if your board includes external memory, you may want to define the control and interface logic to this memory in your System Generator design, and use the physical memory during hardware co-simulation. </div>
+      <div class="Body"><a name="272059">You can interface to these types of components by including board-specific I/O ports in </a>your System Generator models. A board-specific port is a port that is wired to an FPGA pad when the model is compiled for hardware co-simulation. Note that this type of port differs from standard co-simulation ports that are controlled by a corresponding port on a hardware co-simulation block. </div>
+      <div class="Body"><a name="272063">A board-specific I/O port is implemented using special </a><span class="Italic">non-memory mapped gateway blocks</span> that tell System Generator to wire the signals to the appropriate FPGA pins when the model is compiled into hardware. To connect a System Generator signal to a board-specific port, connect the appropriate wire to the special gateway (in the same way as is done for a traditional gateway). </div>
+      <div class="Body"><a name="272032">Non-memory mapped gateways that are common to a specific device are often packaged </a>together in a Simulink subsystem or library. The XtremeDSP Development Kit, for example, provides a library of external device interface subsystems, including analog to digital converters, digital to analog converters, LEDs, and external memory. The interface subsystems are constructed using Gateways that specify board-specific port connections. These subsystems are treated like other System Generator subsystems during simulation (i.e., they perform double precision to Xilinx fixed-type conversions). When System Generator compiles the design into hardware, it connects the signals that are associated with the Gateways to the appropriate external devices they signify in hardware. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="272044"><img class="Default" src="images/HW_CoSim.8.6.1.jpg" width="324" height="450" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="272136">I/O Ports in Hardware Co-simulation</a></div>
+      <div class="Body"><a name="272129">A hardware co-simulation block does not include board-specific ports on its external </a>interface. This means that if a model includes a gateway that corresponds to a board-specific port, the corresponding port is connected to the simulation model instead of the actual hardware when the design is compiled for hardware co-sim. To leave the port connected to a real port, use a non-memory mapped gateway instead. See the topic on non-memory-mapped ports <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.14.html#315382', '');" title="Supporting New Boards through JTAG Hardware Co-Simulation">Supporting New Boards</a></span>.</div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

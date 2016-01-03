@@ -1,0 +1,54 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Interleaver Deinterleaver 5.1 " block_type="interleaver_deinterleaver_v5_1">
+  <icon width="60" height="58" wmark_color="white" bg_color="green"/>
+  <dll name="sysgen_blockset" entry_point="Interleaver_config"/>
+  <handlers enablement="xlmagicenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsComm"/>
+  </libraries>
+  <blockgui label="Xilinx Interleaver/Deinterleaver 5.1">
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <radiogroup name="mode" default="Interleaver" evaluate="true" label="Mode" ctype="Int">
+          <item value="Interleaver" label="Interleaver"/>
+          <item value="Deinterleaver" label="Deinterleaver"/>
+        </radiogroup>
+        <editbox name="num_branches" default="3" evaluate="true" label="Number of branches" ctype="Int"/>
+        <editbox name="branch_length" default="[2 4 5]" evaluate="true" label="Lengths of branches" ctype="IntVector"/>
+        <etch label="Optional Ports">
+          <checkbox name="rst" default="off" evaluate="true" label="Provide synchronous reset port" ctype="Bool"/>
+          <checkbox name="en" default="off" evaluate="true" label="Provide enable port" ctype="Bool"/>
+        </etch>
+      </tab>
+      <tab name="advancedtab" label="Advanced">
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles" ctype="Bool"/>
+        </etch>
+        <etch name="periodetch" label="Explicit Sample Period">
+          <checkbox name="explicit_period" default="off" label="Specify explicit sample period" ctype="Bool"/>
+          <editbox name="period" default="1" top_label="true" label="" ctype="Double"/>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <etch name="coreparams" label="Core Parameters">
+          <radiogroup name="mem_type" default="Automatically Chosen" evaluate="true" label="Memory type" ctype="Int">
+            <item value="Automatically Chosen" label="Automatically chosen"/>
+            <item value="Block RAM" label="Block RAM"/>
+            <item value="Distributed RAM" label="Distributed RAM"/>
+          </radiogroup>
+          <checkbox name="pipeline" default="off" evaluate="true" label="Pipeline for maximum performance" ctype="Bool"/>
+          <checkbox name="use_rpm" default="on" evaluate="true" label="Use core placement information" ctype="Bool"/>
+        </etch>
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <hiddenvar name="useCore"/>
+    <hiddenvar name="version" default="51" evaluate="true" ctype="Int"/>
+  </blockgui>
+</sysgenblock>

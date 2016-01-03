@@ -1,0 +1,81 @@
+{
+  'name' => 'S_AXI',
+  'type' => 'AXI',
+  'std' => 'SLAVE',
+  'params' => {
+    'C_S_AXI_SUPPORT_BURST' => {
+      'value' => 0,
+      'type' => 'INTEGER',
+      'assignment' => 'CONSTANT',
+    },
+    'C_S_AXI_ID_WIDTH' => {
+      'value' => 1,
+      'type' => 'INTEGER',
+    },
+    'C_S_AXI_DATA_WIDTH' => {
+      'value' => 32,
+      'type' => 'INTEGER',
+      'assignment' => 'CONSTANT',
+    },
+    'C_S_AXI_ADDR_WIDTH' => {
+      'value' => 32,
+      'type' => 'INTEGER',
+      'assignment' => 'CONSTANT',
+    },
+  },
+  'clks' => {
+      'AXI_ACLK' => 0,
+  },
+  'resets' => {
+      'AXI_ARESETN' => 0,
+  },
+  'port_name_prefix' => 'S_AXI_',
+  'inports' => {
+    'AWADDR'  => 32,
+    'AWID'    => 8,
+    'AWLEN'   => 8,
+    'AWSIZE'  => 3,
+    'AWBURST' => 2,
+    'AWLOCK'  => 2,
+    'AWCACHE' => 4,
+    'AWPROT'  => 3,
+    'AWVALID' => 0,
+    
+    'WLAST'   => 0,
+    'WDATA'   => 32,
+    'WSTRB'   => 4,
+    'WVALID'  => 0,
+    
+    'BREADY'  => 0,
+    
+    'ARADDR'  => 32,
+    'ARID'    => 8,
+    'ARLEN'   => 8,
+    'ARSIZE'  => 3,
+    'ARBURST' => 2,
+    'ARLOCK'  => 2,
+    'ARCACHE' => 4,
+    'ARPROT'  => 3,
+    'ARVALID' => 0,
+
+    'RREADY'  => 0,
+  },
+  'outports' => {
+     'AWREADY' => 0,
+
+     'WREADY'  => 0,
+
+     'BRESP'   => 2,
+     'BID'     => 8,
+     'BVALID'  => 0,
+
+     'ARREADY' => 0,
+
+     'RLAST'   => 0,
+     'RID'     => 8,
+     'RDATA'   => 32,
+     'RRESP'   => 2,
+     'RVALID'  => 0,
+  },
+}
+

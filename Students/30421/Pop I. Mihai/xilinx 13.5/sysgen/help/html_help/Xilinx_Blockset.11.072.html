@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Network-based Ethernet Co-Simulation</title>
+    <link rel="StyleSheet" href="css/Xilinx_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Blockset.11.001.html#2394838">Xilinx Blockset</a> : Network-based Ethernet Co-Simulation</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="2394838">Network-based Ethernet Co-Simulation</a></div>
+      <div class="OneLiner"><a name="2394843"><img class="Default" src="images/Xilinx_Blockset.11.072.1.jpg" width="58" height="58" style="display: block; float: none; left: 0.0; top: 0.0" alt="" />The Xilinx Network-based Ethernet Co-Simulation block provides an </a>interface to perform hardware co-simulation through an Ethernet connection over the IPv4 network infrastructure. </div>
+      <div class="Body"><a name="2394847">Refer to </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.08.07.html#311776', '');" title="Ethernet Hardware Co-Simulation">Network-Based Ethernet Hardware Co-Simulation</a></span><span class="URL"> </span> for further details about the interface, its prerequisites and setup procedures. </div>
+      <div class="Body"><a name="2394849">The port interface of the co-simulation block varies. When a model is implemented for </a>network-based Ethernet hardware co-simulation, a new library is created that contains a custom network-based Ethernet co-simulation block with ports that match the gateway names (or port names if the subsystem is not the top level) from the original model. The co-simulation block interacts with the FPGA hardware platform during a Simulink simulation. Simulation data that is written to the input ports of the block are passed to the hardware by the block. Conversely, when data is read from the co-simulation block's output ports, the block reads the appropriate values from the hardware and drives them on the output ports so they can be interpreted in Simulink. In addition, the block automatically opens, configures, steps, and closes the platform.</div>
+      <div class="Heading2"><a name="2394850">Block Parameters</a></div>
+      <div class="Body"><a name="2394851">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model.</div>
+      <div class="Heading3"><a name="2394852">Basic tab</a></div>
+      <div class="Body"><a name="2394853">Parameters specific to the Basic tab are as follows:</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2394854">Clock source</a></span>: You may select between Single stepped and Free running clock sources. Selecting a Single stepped clock allows the block to step the board one clock cycle at a time. Each clock cycle step corresponds to some duration of time in Simulink. Using this clock source ensures the behavior of the co-simulation hardware during simulation will be bit and cycle accurate when compared to the simulation behavior of the subsystem from which it originated. Sometimes single stepping is not necessary and the board can be run with a Free Running clock. In this case, the board will operate asynchronously to the Simulink simulation. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2394855">Has Combination Path</a></span>: Sometimes it is necessary to have a direct combinational feedback path from an output port on a hardware co-simulation block to an input port on the same block (e.g., a wire connecting an output port to an input port on a given block). If you require a direct feedback path from an output to input port, and your design does not include a combinational path from any input port to any output port, un-checking this box will allow the feedback path in the design. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2394856">Bitstream filename</a></span>: Specifies the co-simulation FPGA configuration file for the network-based Ethernet hardware co-simulation platform. When a new co-simulation block is created during compilation, this parameter is automatically set so that it points to the appropriate configuration file. You need only adjust this parameter if the location of the configuration file changes. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading3"><a name="2394857">Network tab</a></div>
+      <div class="Body"><a name="2394858">Parameters specific to the Network tab are as follows:</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2394859">FPGA IP address</a></span>: Specify the IPv4 address associated with the target FPGA platform. The IP address must be specified using IPv4 dotted decimal notation (e.g. 192.168.8.1). For details on configuring the IP address, refer to the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.08.02.html#307194', '');" title="Installing Your Hardware Board">Installing Your Hardware Board</a></span>. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2394864">Timeout</a></span>: Specifies the timeout value, in milliseconds, for packet retransmission in case of packet loss during the configuration and co-simulation process. The default value should suffice in the general case, but be advised that a larger value may be needed if the network connection is slow, with high latency, or congested. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2394865">Number of retries</a></span>: Specifies the number of retries for packet retransmission in case of packet loss during the configuration and co-simulation process. The default value should suffice in the general case, but be advised that a larger value may be needed if the network connection experiences a considerably amount of packet loss. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="2394866">See Also</a></div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.08.07.html#270896', '');" title="Ethernet Hardware Co-Simulation" name="2394870">Ethernet Hardware Co-Simulation</a></span> </div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.08.07.html#311776', '');" title="Ethernet Hardware Co-Simulation" name="2394877">Network-Based Ethernet Hardware Co-Simulation</a></span> </div>
+      <div class="Body"><a name="2394878">&nbsp;</a></div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

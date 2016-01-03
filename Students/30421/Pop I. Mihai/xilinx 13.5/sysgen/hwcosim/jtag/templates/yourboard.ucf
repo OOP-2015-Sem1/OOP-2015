@@ -1,0 +1,42 @@
+#
+# Filename:    yourboard.ucf
+#
+# Description: Template UCF file that defines the clock input
+#              pin and frequency for the JTAG co-simulation
+#              target.
+#
+
+# (1) Set the sys_clk LOC constraint to match your board's
+#     clock pin.
+NET "sys_clk" LOC = "AH15";
+#                    ~~~~
+
+
+# (2) Set the sys_clk PERIOD constraint to match your board's
+#     clock frequency.
+NET "sys_clk" PERIOD = 27 MHz HIGH 50%;
+#                      ~~
+
+# (3) Spartan-3 Users: The JTAG hardware co-simulation logic
+#     uses two BUFGMUX components to allow switching between
+#     single-step and free-running clock modes.  It is
+#     recommended that you constrain the BUFGMUX components
+#     to occupy adjacent locations near the designated clock
+#     I/O pad (step 1).  The component names of the BUFGMUXs
+#     are "bufgmux_comp1" and "bufgmux_comp2".
+#
+#     For example:
+#
+#     INST "bufgmux_comp1" LOC = "BUFGMUX3";
+#     INST "bufgmux_comp2" LOC = "BUFGMUX2";
+
+# Constrain board-specific I/O ports below.  Remember to
+# declare the same ports in the yourboard_postgeneration
+# function.  Adding comments to each constraint ensures the
+# constraint is removed from the UCF file when the port is
+# not used in the SysGen design.
+
+# NET adc1_d(0) LOC = af20;                       # adc1_d contingent
+# NET adc1_d(1) LOC = ad18;                       # adc1_d contingent
+# NET adc1_d(2) LOC = ac22;                       # adc1_d contingent
+

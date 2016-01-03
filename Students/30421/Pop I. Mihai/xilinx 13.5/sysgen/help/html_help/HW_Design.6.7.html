@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Importing a System Generator Design into a Bigger System</title>
+    <link rel="StyleSheet" href="css/HW_Design.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="HW_Design.6.1.html#278406">Hardware Design Using System Generator</a> : Importing a System Generator Design into a Bigger System</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="278406">Importing a System Generator Design into a Bigger System</a></div>
+      <div class="Body"><a name="410191">A System Generator design is often a sub-design that is incorporated into a larger HDL </a>design. This topic shows how to embed two System Generator designs into a larger design and how VHDL created by System Generator can be incorporated into the simulation model of the overall system.</div>
+      <div class="Body"><a name="410192">Starting with Release 10.1, System Generator introduced a new integration flow between </a>System Generator (Sysgen) and Project Navigator (ProjNav). This first phase of integration concentrates on the following areas: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="410193">Allows you to add a System Generator design as a sub-level to a larger design</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="410194">Consolidates and associates System Generator constraints to the top-level design</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="410195">Enables you to perform certain design iterations between Project Navigator and the </a>System Generator design</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="410197">HDL Netlist Compilation</a></div>
+      <div class="Body"><a name="410198">Selecting the </a><span class="Bold">HDL Netlist</span> compilation target from the System Generator token instructs System Generator to generate HDL along with other related files such as NGC files and EDIF files that implement the design. In addition, System Generator produces auxiliary files that simplify downstream processing such as bringing the design into Project Navigator, simulating the design using an HDL simulator, and performing logic synthesis using various logic synthesis tools. See the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Compilation_Types.10.1.html#205969', '');" title="System Generator Compilation Types">System Generator Compilation Types</a></span> for more details. </div>
+      <div class="Body"><a name="410199">Starting with Release 10.1, the System Generator project information is encapsulated in the </a>file <span class="Filename">&lt;design_name&gt;_cw.sgp</span> or <span class="Filename">&lt;design_name&gt;_mcw.sgp</span> depending on which clocking option is selected. This topic shows how multiple System Generator designs can be included as sub-modules in a larger design.</div>
+      <div class="Heading2"><a name="410200">Integration Design Rules</a></div>
+      <div class="Body"><a name="410201">When a System Generator model is to be included into a larger design, the following two </a>design rules must be followed. </div>
+      <div class="Body"><span class="Bold"><a name="416229">Rule 1</a></span>: No Gateway or System Generator token should specify an IOB/CLK location constraint. Otherwise, the NGDBuild tool will issue the following warning: </div>
+      <div class="Body" style="color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: normal; text-transform: none; vertical-align: baseline;"><span class="Filename"><a name="416225">WARNING:NgdBuild:483 - Attribute "LOC" on "clk" is on the wrong type </a></span><span class="Filename">of object. Please see the Constraints Guide for more information on </span><span class="Filename">this attribute.</span></div>
+      <div class="Body"><a name="498033">Also, IOB timing constraints should be set to "none" in this case as well to avoid the </a>following NGDBuild error:</div>
+      <div class="Body" style="color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: normal; text-transform: none; vertical-align: baseline;"><span class="Filename"><a name="498035">NgdBuild:756 -Could not find net(s) 'gateway_out(1)' in the design. </a></span><span class="Filename">To suppress this error, specify the correct net name or remove the </span><span class="Filename">constraint.</span></div>
+      <div class="Body"><span class="Bold"><a name="410202">Rule 2</a></span>: If there are any I/O ports from the System Generator design that are required to be bubbled up to the top-level design, appropriate buffers should be instantiated in the top-level HDL code. </div>
+      <div class="Heading2"><a name="410203">New Integration Flow between System Generator &amp; Project Navigator</a></div>
+      <div class="Body"><a name="410204">The illustration below shows the entire flow of how multiple System Generator designs </a>can be integrated into Project Navigator as lower-level designs. System Generator generates a project file with an extension <span class="Bold">.sgp</span> that you can add a System Generator source type in Project Navigator. This SGP file is an empty file by design, but by its location, it implicitly identifies the location of the System Generator model. Prior to the integration with Project Navigator in Release 10.1, you had to manually consolidate and associate UCF constraints into the top-level design. It is now done automatically during the implementation in Project Navigator as shown in the following figure.</div>
+      <div class="Body"><a name="410420">&nbsp;</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="410419"><img class="Default" src="images/HW_Design.6.7.1.jpg" width="526" height="301" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="410429">A Step-by-Step Example</a></div>
+      <div class="Body"><a name="410430">In this example, two HDL netlists from System Generator are integrated into a larger </a>VHDL design. Design #1 is named SPRAM and design #2 is named MAC_FIR. The top-level VHDL entity combines the two data ports and a control signal from the SPRAM design to create a bidirectional bus. The top-level VHDL also instantiates the MAC_FIR design and supplies a separate clock signal named clk2. A block diagram of this design is shown below.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="410445"><img class="Default" src="images/HW_Design.6.7.2.jpg" width="526" height="374" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="411815">The files used in this example are located in the System Generator tree at pathname </a><span class="Filename">&lt;ISE_Design_Suite_tree&gt;/sysgen/examples/projnav/mult_diff_designs</span>. The following files are provided:</div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Filename"><a name="411816">spram.mdl</a></span> - System Generator design #1</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Filename"><a name="411817">mac_fir.mdl</a></span> - System Generator design #2 </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="411818">Files within the sub-directory named top_level:</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Filename"><a name="446395">top_level.ise</a></span> – ProjNav project for compiling top_level design</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Filename"><a name="411819">top_level.vhd</a></span> – Top-level VHDL file</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Filename"><a name="446401">top_level_testbench.do</a></span> – Custom ModelSim .do file</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Filename"><a name="411820">top_level_testbench.vhd</a></span> – Top-level VHDL testbench file</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Filename"><a name="411857">wave.do</a></span> – ModelSim .do file called by <span class="Filename">top_level_testbench.do</span> to display waveforms </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading3"><a name="411858">Generating the HDL Files for the System Generator Designs</a></div>
+      <div class="Body"><a name="411825">The steps used to create the HDL files are as follows:</a></div>
+      <div class="Numbered_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="411826">Open the first design,</a><span class="Filename"> spram.mdl</span>, in MATLAB. This is a multirate design due to the down sampling block placed after the output of the Single Port RAM. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="411827">Double click on the System Generator block; select the HDL Netlist target and press </a>the <span class="Bold">Generate</span> button. By pressing the <span class="Bold">Generate</span> button, the HDL file for this design is created in the directory <span class="Filename">&lt;ISE_Design_Suite_tree&gt;/sysgen/examples/projnav/mult_diff_desig</span><span class="Filename">ns/hdl_netlist1</span>.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="439351">Repeat steps 1 and 2 for the </a><span class="Filename">mac_fir.mdl</span> model. The HDL file for this design is created in the directory <span class="Filename">&lt;ISE_Design_Suite_tree&gt;/sysgen/examples/projnav/mult_diff_desig</span><span class="Filename">ns/hdl_netlist2</span>.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="439352">You are now finished generating HDL Netlists from System Generator</a></div>
+      <div class="Heading3"><a name="411831">Switching to Different HDL Libraries</a></div>
+      <div class="Body"><a name="411832">When integrating two or more System Generator designs into a bigger design, you need to </a>rename HDL libraries to prevent name clashes and other undesired behaviors during simulation. System Generator provides a utility that switches library names for all related files in your System Generator design. In addition, it also makes a backup copy in a folder just in case you want to revert back to the original library name. The following is the syntax for this utility: </div>
+      <div class="Body"><span class="Bold"><a name="416702">Syntax</a></span>:</div>
+      <div class="Body"><a name="416703">xlSwitchLibrary(&lt;target_dir_pathname&gt;, &lt;from_lib_name&gt;, &lt;to_lib_name&gt;)</a></div>
+      <div class="Body"><a name="416704">&lt;target_dir_pathname&gt;: location of the design</a></div>
+      <div class="Body"><a name="411838">&lt;from_lib_name&gt;: Original HDL library name</a></div>
+      <div class="Body"><a name="411839">&lt;to_lib_name&gt;: New HDL library name</a></div>
+      <div class="Numbered_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="439973">From the MATLAB Console, enter the following command:</a><br /><span class="Filename">xlSwitchLibrary('hdl_netlist1','work','design1_lib')</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="439982">Next, from the MATLAB Console, enter the following command:</a><br /><span class="Filename">xlSwitchLibrary('hdl_netlist2','work','design2_lib')</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="440017">The transcript should look similar to the following:</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="412071"><img class="Default" src="images/HW_Design.6.7.3.jpg" width="526" height="260" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="412081">Adding System Generator Source into the Top-Level Design</a></div>
+      <div class="Body"><a name="412082">The next two steps are used to synthesize the top_level design:</a></div>
+      <div class="Numbered_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="412083">Launch ISE and reload the pre-generated top-level design ISE project at </a>~top_level/top_level.ise. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="412084">At this point, your Project Navigator should look like the figure below. Both spram_cw and </a>mac_fir_cw instances are instantiated at the top_level design. But since they are not located on the same directory as the top-level design, Project Navigator puts a question mark next to each one of them to indicate that it can not find these two instances / modules.</div>
+      <div class="Body"><a name="412105">:</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="412104"><img class="Default" src="images/HW_Design.6.7.4.jpg" width="526" height="289" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="412270">Add the System Generator source:  under the </a><span class="Bold">Sources</span> tab, right-click on <br /><span class="Bold">u_spram_cw -&gt; Add Source</span>…at <span class="Filename">&lt;ISE_Design_Suite_tree&gt;/sysgen/examples/projnav/mult_diff_desig</span><span class="Filename">ns/hdl_netlist1/spram_cw.sgp</span> </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="412271">Repeat item 2 with </a><span class="Bold">u_mac_fir</span> at <span class="Filename">&lt;ISE_Design_Suite_tree&gt;/sysgen/examples/projnav/mult_diff_desig</span><span class="Filename">ns/hdl_netlist2/mac_fir_cw.sgp</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="497136">As shown below, make sure the file </a><span class="Filename">top_level</span> is selected, then implement the design by double clicking on <span class="Bold">Implement Design</span> in the Processes window. Once the implementation is finished, Project Navigator should look like the figure below.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="497142"><img class="Default" src="images/HW_Design.6.7.5.jpg" width="526" height="304" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">5.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="497143">Examine the timing constraints in the </a><span class="Bold">Place and Route Report</span> that is located in the Detailed Reports section of the Design Summery pane.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="497144">Note that in the PAR report the multirate constraints were met:</a></div>
+      <div class="Body"><a name="412463">&nbsp;</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="412486"><img class="Default" src="images/HW_Design.6.7.6.jpg" width="526" height="200" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="413096">Constraints for each System Generator design were created and translated to a UCF (User </a>Constraint File). These UCF constraint files were then consolidated and associated during ISE implementation (NGDBUILD). They are briefly described as follows: </div>
+      <div class="Body"><a name="413098">A system sample period of 100 ns was set in the System Generator block for both designs </a>(1 &amp; 2)</div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="413099">TS_clk_f488215c2 constraints are from the SRAM design (1)</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="413100">The TS_clk_c4b7e2441 constraints are from the FIR design (2)</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="413101">The ce16_c4b7e244_group_to_ce16_cb47e244_group1 constraint is for all the </a>synchronous elements after the down sampler and it is set to sixteen, the system sample period (3)</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="413102">The down sampling block in the SRAM design performs a down sample by 2. The </a>ce2_f488215c_group_to_ce2_f488215c_group2 constraint is for all the synchronous elements after the down sampler and is set to twice the system sample period (4)</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="413104">With the new integration between System Generator and Project Navigator, these </a>constraints are automatically associated and consolidated by Project Navigator up to the top-level design. This flow is only available starting with Release 10.1.</div>
+      <div class="Heading3"><a name="413105">Simulating the Entire Design</a></div>
+      <div class="Body"><a name="413106">To perform a behavioral simulation of the top_level design, do the following:</a></div>
+      <div class="Numbered_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="413107">System Generator creates VHDL files and invokes the selected logic synthesis tool to </a>generate the HDL Netlist. These VHDL files are used when simulating the top-level design. The VHDL files generated for a design are named <span class="Filename">&lt;design&gt;_cw.vhd</span>, and <span class="Filename">&lt;design&gt;.vhd</span>. Open the custom ModelSim <span class="Bold">do</span> file named “top_level_testbench.do” to see how the VHDL files for both designs are referenced.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="477789">Memory initialization (.</a><span class="Filename">mif</span>) and coefficient (<span class="Filename">.coe</span>) files that are used during simulation must be placed in the same directory as the top-level VHDL file. For this example, the <span class="Filename">mif</span> files are copied from both <span class="Filename">hdl_netlist1</span> and <span class="Filename">hdl_netlist2</span> sub-folders by the following statement in the ModelSim <span class="Bold">do</span> file (top_level_testbench.do):</div>
+      <div class="Code"><a name="477774">foreach i [glob ../hdl_netlist1/*.mif] {</a></div>
+      <div class="Code"><a name="477775">file copy -force $i .</a></div>
+      <div class="Body2"><a name="477790">In a case where there are also coefficient files, you can add a similar statement to the </a><span class="Bold">do</span> file to copy the files up to the top-level VHDL file.</div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="413110">Change the Design View to </a><span class="Bold">Simulation</span>. Select the <span class="Bold">top_level_testbench-</span><span class="Bold">structural(top_level.vhd)</span> source file. This file is imported into the project as a testbench file, thus allowing you to simulate the design using the Simulator.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="537301"><img class="Default" src="images/HW_Design.6.7.7.jpg" width="526" height="229" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="413112">In the Processes View, right click on </a><span class="Bold">Simulate Behavioral Model</span> and select <span class="Bold">Process </span><span class="Bold">Properties…</span> You should see a Simulation Properties dialog box as shown below. Note that aCustom Do File has been specified.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="413645"><img class="Default" src="images/HW_Design.6.7.8.jpg" width="526" height="536" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="415311">The previous screen shot shows the ModelSim commands used to compile the VHDL code </a>generated by System Generator. To simulate the top_level design, double left click on the <span class="Bold">Simulate Behavioral Model</span> process. The ModelSim .do file compiles the VHDL code and runs the simulation for 10000 ns. The resulting waveform is shown below.</div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="415512"><img class="Default" src="images/HW_Design.6.7.9.jpg" width="778" height="264" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="415525">Summary</a></div>
+      <div class="Body"><a name="415526">This topic has shown you how to import a System Generator Design into a larger system. </a>There are a few important things to keep in mind during each phase of the process.</div>
+      <div class="Body"><a name="415527">While creating a System Generator design:</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="415528">IOB constraints should not be specified on Gateways in the System Generator model; </a>neither should the System Generator block specify a clock pin location.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="415529">Use the </a><span class="Bold">HDL Netlist</span> compilation target in the System Generator block. The HDL Netlist file that System Generator produces contains both the RTL, EDIF and constraint information for your design.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="415533">For top-level simulation:</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="415534">Create a custom ModelSim .do file in order to compile the VHDL files created by </a>System Generator. Modify the Project Navigator settings to use this custom .do file</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="415535">New capabilities:</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="415536">Add System Generator Source type project file (.sgp) into Project Navigator as a sub-</a>module design</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="415537">Consolidate and associate System Generator constraints into the top-level design</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="415538">Launch MATLAB and System Generator MDL directly from Project Navigator to </a>perform certain design iterations</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

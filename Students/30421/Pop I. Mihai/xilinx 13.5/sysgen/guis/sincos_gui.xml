@@ -1,0 +1,55 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="SineCosine" block_type="sincos">
+  <icon width="55" height="34" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="SinCos_config"/>
+  <handlers enablement="sincosenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsMath"/>
+  </libraries>
+  <blockgui label="Xilinx Sine/Cosine Generator">
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <radiogroup name="mode" default="Sine" evaluate="true" label="Function" ctype="Int">
+          <item value="Sine" label="Sine"/>
+          <item value="Cosine" label="Cosine"/>
+          <item value="Sine and Cosine" label="Sine and Cosine"/>
+        </radiogroup>
+        <checkbox name="neg_sin" default="off" evaluate="true" label="Negative sine" ctype="Int"/>
+        <checkbox name="neg_cos" default="off" evaluate="true" label="Negative cosine" ctype="Int"/>
+        <editbox name="n_bits" default="8" evaluate="true" label="Output width" ctype="Int"/>
+        <checkbox name="sym_output" default="off" evaluate="true" label="Symmetric output" ctype="Int"/>
+        <etch label="Optional Ports">
+          <checkbox name="en" default="off" evaluate="true" label="Provide enable port" ctype="Int"/>
+        </etch>
+        <editbox name="latency" default="2" evaluate="true" label="Latency" ctype="Int"/>
+      </tab>
+      <tab name="advtab" label="Advanced">
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+        </etch>
+        <etch name="periodetch" label="Explicit Sample Period">
+          <checkbox name="explicit_period" default="off" label="Specify explicit sample period"/>
+          <editbox name="period" default="1" top_label="true" label="" ctype="Double"/>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <etch label="Core Parameters">
+          <radiogroup name="mem_type" default="Distributed Memory" evaluate="true" label="Memory Type" ctype="Int">
+            <item value="Distributed Memory" label="Distributed memory"/>
+            <item value="Block RAM" label="Block RAM"/>
+          </radiogroup>
+          <checkbox name="pipeline" default="off" evaluate="true" label="Pipeline for maximum performance" ctype="Int"/>
+          <checkbox name="use_rpm" default="on" evaluate="true" label="Use pre-defined core placement information" ctype="Int"/>
+        </etch>
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <hiddenvar name="useCore"/>
+  </blockgui>
+</sysgenblock>

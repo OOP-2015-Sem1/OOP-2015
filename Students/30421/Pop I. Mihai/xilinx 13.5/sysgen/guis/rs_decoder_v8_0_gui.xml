@@ -1,0 +1,152 @@
+<sysgenblock simulinkname="Reed-Solomon Decoder 8.0 " block_type="rs_decoder_v8_0">
+   <icon width="95" height="142" wmark_color="white" bg_color="green">
+   </icon>
+   <dll name="sysgen" entry_point="coregenimport_config">
+   </dll>
+   <handlers enablement="rs_decoder_v8_0_enablement" action="rs_decoder_v8_0_action">
+   </handlers>
+   <libraries>
+        <library name="xbsIndex"/>
+        <library name="xbsAXI4"/>
+        <library name="xbsComm"/>
+   </libraries>
+   <blockgui label="Xilinx Reed-Solomon Decoder 8.0 ">
+      <tabpane>
+         <tab name="page_0" label="Attributes 1">
+            <etch label="Code Block Specification">
+               <listbox name="code_specification" label="Code Specification" default="Custom" allow_advanced="false" evaluate="false" ctype="String">
+                <item value="Custom"/>
+                <item value="DVB"/>
+                <item value="ATSC"/>
+                <item value="G.709"/>
+                <item value="CCSDS"/>
+                <item value="IESS-308(All)"/>
+                <item value="IESS-308(126)"/>
+                <item value="IESS-308(194)"/>
+                <item value="IESS-308(208)"/>
+                <item value="IESS-308(219)"/>
+                <item value="IESS-308(225)"/>
+                <item value="IEEE-802.16"/>
+               </listbox>
+               <listbox name="symbol_width" label="Symbol Width" default="8" allow_advanced="false" evaluate="false" ctype="String">
+                <item value="3"/>
+                <item value="4"/>
+                <item value="5"/>
+                <item value="6"/>
+                <item value="7"/>
+                <item value="8"/>
+                <item value="9"/>
+                <item value="10"/>
+                <item value="11"/>
+                <item value="12"/>
+               </listbox>
+               <editbox name="field_polynomial" label="Field Polynomial" default="0" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+               <editbox name="scaling_factor" label="Scaling Factor (h)" default="1" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+               <editbox name="generator_start" label="Generator Start" default="0" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+               <checkbox name="variable_block_length" default="off" evaluate="true" ctype="Bool" label="Variable Block Length">
+               </checkbox>
+               <editbox name="symbols_per_block" label="Symbols Per Block (n)" default="255" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+               <editbox name="data_symbols" label="Data Symbols (k)" default="239" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+               <etch label="Variable Check Symbol Options">
+                  <checkbox name="variable_number_of_check_symbols" default="off" evaluate="true" ctype="Bool" label="Variable Number Of Check Symbols (r)">
+                  </checkbox>
+                  <checkbox name="define_supported_r_in_values" default="off" evaluate="true" ctype="Bool" label="Define Supported R_IN Values">
+                  </checkbox>
+                                  <glayout cols="3">
+                                          <label name="r_in_label" text="Number of Supported R_IN Values">
+                                          </label>
+                                          <editbox name="number_of_supported_r_in_values" default="2" evaluate="true" ctype="Int" top_label="false">
+                                          </editbox>
+                                          <label>
+                                          </label>
+                                          <label name="r_in_def_file_label" text="Supported R_IN Definition File">
+                                          </label>
+                                          <editbox name="supported_r_in_definition_file" default="'no_coe_file_loaded'" evaluate="true" ctype="String" top_label="false">
+                                          </editbox>
+                                          <browsebutton name="r_inbrowsebutton" label="..." filter="COE files(*.coe)" caption="Specify COE File">
+                                          </browsebutton>
+                                  </glayout>
+               </etch>
+            </etch>
+         </tab>
+         <tab name="page_1" label="Attributes 2">
+            <etch label="Implementation">
+               <etch label="State Machine">
+                  <checkbox name="self_recovering" default="off" evaluate="true" ctype="Bool" label="Self Recovering">
+                  </checkbox>
+               </etch>
+               <listbox name="memory_style" label="Memory Style" default="Automatic" allow_advanced="false" evaluate="false" ctype="String">
+                <item value="Automatic"/>
+                <item value="Block"/>
+                <item value="Distributed"/>
+               </listbox>
+               <editbox name="number_of_channels" label="Number Of Channels" default="1" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+               <checkbox name="output_check_symbols" default="on" label="Output check symbols (Output all N symbols in block, including check symbols, or only K information symbols)" ctype="Bool" allow_advanced="false"/>
+            </etch>
+            <etch label="Puncture Options">
+                           <glayout cols="3">
+                                        <label name="no_of_pun_pat" text="Number of Puncture Patterns">
+                                        </label>
+                        <editbox name="number_of_puncture_patterns"  default="0" evaluate="true" ctype="Int" top_label="false">
+                        </editbox>
+                                        <label ></label>
+                                        <label name="pun_file_label" text="Puncture Definition File"></label>
+                                        <editbox name="puncture_definition_file" default="'no_coe_file_loaded'" evaluate="true" ctype="String" top_label="false">
+                                        </editbox>
+                                        <browsebutton name="coebrowsebutton" label="..." filter="COE files(*.coe)" caption="Specify COE File">
+                                        </browsebutton>
+                           </glayout>
+            </etch>
+         </tab>
+         <tab name="page_2" label="Optional pins">
+            <etch label="Optional Pins">
+               <checkbox name="aclken" default="off" evaluate="true" ctype="Bool" label="Clock Enable">
+               </checkbox>
+               <checkbox name="info" default="off" evaluate="true" ctype="Bool" label="Info">
+               </checkbox>
+               <checkbox name="aresetn" default="off" evaluate="true" ctype="Bool" label="Synchronous Reset">
+               </checkbox>
+               <checkbox name="original_delayed_data" default="off" evaluate="true" ctype="Bool" label="Original Delayed Data">
+               </checkbox>
+               <checkbox name="erase" default="off" evaluate="true" ctype="Bool" label="Erase">
+               </checkbox>
+               <checkbox name="error_statistics" default="off" evaluate="true" ctype="Bool" label="Error Statistics">
+               </checkbox>
+               <etch label="Marker Bits">
+                  <checkbox name="marker_bits" default="off" evaluate="true" ctype="Bool" label="Marker Bits">
+                  </checkbox>
+                  <editbox name="number_of_marker_bits" label="Number Of Marker Bits" default="1" evaluate="true" ctype="Int" top_label="false">
+                  </editbox>
+               </etch>
+            </etch>
+	    <etch label="Block Icon Display">
+                <checkbox name="trim_axipin_name" default="on" label="Display shortened port names" ctype="Int" evaluate="true" allow_advanced="false"/>
+            </etch>
+         </tab>
+      </tabpane>
+      <hiddenvar name="ip_name" default="Reed-Solomon Decoder" evaluate="false" ctype="String">
+      </hiddenvar>
+      <hiddenvar name="ip_version" default="8.0" evaluate="false" ctype="String">
+      </hiddenvar>
+      <hiddenvar name="dsptool_ready" default="false" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="ipcore_usecache" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="ipcore_useipmodelcache" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="wrapper_available" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="port_translation_map" default="{ 'aclken' => 'en', 'aresetn' => 'rst'}" evaluate="false" ctype="String">
+      </hiddenvar>
+      <hiddenvar name="structural_sim" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="ipcore_do_not_force_period" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+   </blockgui>
+</sysgenblock>

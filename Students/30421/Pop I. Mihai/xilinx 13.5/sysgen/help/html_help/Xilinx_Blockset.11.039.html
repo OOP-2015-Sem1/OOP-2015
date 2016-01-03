@@ -1,0 +1,1239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>DSP48 Macro</title>
+    <link rel="StyleSheet" href="css/Xilinx_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Blockset.11.001.html#708569">Xilinx Blockset</a> : DSP48 Macro</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="708569">DSP48 Macro</a></div>
+      <div class="Body"><span class="Italic"><a name="708570">This block is listed in the following Xilinx Blockset libraries: Index, DSP.</a></span></div>
+      <div class="OneLiner"><a name="708574"><img class="Default" src="images/Xilinx_Blockset.11.039.1.jpg" width="71" height="111" style="display: block; float: none; left: 0.0; top: 0.0" alt="" />The System Generator DSP48 Macro block provides a device </a>independent abstraction of the blocks DSP48, DSP48A, and DSP48E. Using this block instead of using a technology-specific DSP slice helps makes the design more portable between Xilinx technologies.</div>
+      <div class="Body"><a name="1101194">Depending on the target technology specified at compile time, the block </a>wraps one DSP48/DSP48E/DSP48A block along with reinterpret and convert blocks for data type alignment, multiplexers to handle multiple opmodes and inputs, and registers.</div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="708575">In the remainder of the text on this block, DSP/DSP48A/DSP48E will be </a>collectively referred to as XtremeDSP slice.</div>
+      <div class="Heading2"><a name="708576">Block Interface</a></div>
+      <div class="Body"><a name="708577">The DSP48 Macro block has a variable number of inputs and outputs determined from </a>user-specified parameter values. The input data ports are determined by the opmodes entered in the Instructions field of the DSP48 Macro. Input port Sel appears if more than one opmode is specified in the Instructions field. The Instructions field is discussed in greater detail in the topic on Entering Opmodes in the DSP48 Macro block. </div>
+      <div class="Body"><a name="708578">Port P, an output data port, is the only port appearing in all configurations of the DSP48 </a>Macro. Output ports PCOUT, BCOUT, ACOUT, CARRYOUT, and CARRYCASCOUT appear depending on the user-selections.</div>
+      <div class="Heading2"><a name="708579">Block Parameters</a></div>
+      <div class="Body"><a name="708580">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model.</div>
+      <div class="Heading3"><a name="708581">Basic tab</a></div>
+      <div class="Body"><a name="708582">Parameters specific to the Basic tab are: </a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="708583">Inputs to Port A</a></span>: This field specifies symbolic port identifiers or operands appearing in the Instructions field as connected to port A or port A:B on the XtremeDSP slice. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="708584">Inputs to port B</a></span>: This field specifies symbolic port identifiers or operands appearing in the Instructions field as connected to port B. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="708585">Inputs to port C</a></span>: This field specifies symbolic port identifiers or operands appearing in the Instructions field as connected to port C. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="708586">Instructions</a></span>: This field specifies instructions for the Macro. Refer to the topic on <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.039.html#708594', '');" title="DSP48 Macro">Entering Opmodes in the DSP48 Macro Block</a></span>. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading3"><a name="708587">Pipelining tab</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="708588">Pipeline Options</a></span>: This field specifies the pipelining options on the XtremeDSP slice and latency on the data presented to each port of the XtremeDSP slice. Available options include 'External Registers', 'No External Registers' and 'Custom'. When 'External Registers' is selected multiplexer outputs (underneath DSP48 Macro) are registered (this allows high speed operation). If the DSP48 Macro configures the XtremeDSP slice as an adder only (inferred from the operations entered in the instructions field), then the latency is 3 else the latency is 4. When 'No External Registers' is selected, multiplexer outputs are not registered and the latency of the DSP48 Macro becomes two. When 'Custom' is selected all register instances inside and outside of the XtremeDSP slice are inferred from the Custom Pipeline Options. If the Instructions require the use of the XtremeDSP slice as adder and multiplier then it must be configured to use Custom Pipleline Option. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="708589">Custom Pipeline Options</a></span>: This group of controls is active only when Pipeline Options is set to Custom. Provides individual control for instancing the XtremeDSP slice and multiplexer registers. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="708590">Custom Pipeline Options([A,B,C,P,Ctrl,M,MuxA,MuxB,MuxC,MuxCtrl])</a></span>: This field enables you to specify Custom Pipeline Options as an array of integers.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading3"><a name="708591">Ports tab</a></div>
+      <div class="Body"><a name="1263587">The Ports tab consists of controls to expose the BCOUT, ACOUT, CARRYOUT, </a>CARRYCASCOUT, PCOUT and the various XtremeDSP slice Reset and Enable Ports. </div>
+      <div class="Heading3"><a name="1263588">Implementation tab</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="708592">Use DSP48</a></span>: This field tells System Generator to use the XtremeDSP slice on Virtex®-4, Virtex-5 or Spartan®-3A DSP, which ever is the target technology. If unchecked, a synthesizable model of the XtremeDSP slice is used that can be used in other devices.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="708594">Entering Opmodes in the DSP48 Macro Block</a></div>
+      <div class="Body"><a name="708595">The DSP48 is capable of performing different arithmetic operations on input data </a>depending on the input to its opmode port; this capability enables the DSP48 to operate like a dynamic operator unit. The DSP48 Macro simplifies using the DSP48 as a dynamic operator unit. It orders multiple operands and opmodes with multiplexers and appropriately aligns signals on the data ports. The ordering of operands and opmode execution is determined by the order of opmodes entered in the Instructions field. The Instructions field must contain at least one opmode and a maximum of eight opmodes. This topic details all the issues involved with entering opmodes in the Instructions field of the DSP48 Macro. </div>
+      <div class="Heading3"><a name="708596">Opmode Format </a></div>
+      <div class="Body"><a name="708597">A newline character is used to separate two different opmodes. Each opmode must strictly </a>adhere to the rules listed below: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="708598">Each opmode is an assignment to P and must begin with 'P=' </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="708599">The expression following the assignment operator('=') must be entirely made up of </a>+/-/* operators and symbolic port identifiers (see Operand Format) for operands. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="1406546">Only opmodes that can be implemented on the DSP48 are legal. A list of opmodes </a>supported on the DSP48 Macro is provided in Table 2. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="1406550">Consider the simple model shown below. The DSP48 Macro has three inputs defined as Xo, </a>Yo, and Zo. Because more than one Instruction opmode is specified in block dialog box, the Sel input port is automatically added:</div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504.0pt">
+            <div class="Anchor"><a name="1406579"><img class="Default" src="images/Xilinx_Blockset.11.039.2.jpg" width="471" height="200" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="1406616">The figure below shows the DSP48 Macro dialog box for the above diagram. Three legal </a>opmodes are entered in the Instructions field. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="708607"><img class="Default" src="images/Xilinx_Blockset.11.039.3.jpg" width="388" height="238" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="1405609">When 0 is specified on the Sel input, the first instruction opmode is implemented. The </a>value on Zo is feed directly to output P. In this example, 5 will appear at the output. </div>
+      <div class="Body"><a name="1407009">When 1 is specified on Sel, the second Instruction opmode (Xo*Yo) is implemented. In this </a>case, the number 12 will appear at the output. </div>
+      <div class="Body"><a name="1407012">When 2 is specified on Sel, the third instruction (Xo*Yo+Zo) is implemented and the ouput </a>in this case goes to the number 17.</div>
+      <div class="Body"><a name="1407020">When this design is compiled, if the target technology is Virtex®-4, then a DSP48 slice will </a>be netlisted. If Virtex-5 is specified, then a DSP48E slice will be netlisted, and if the Spartan®-3A DSP technology is specified, then a DSP48A slice will be used in the implementation.</div>
+      <div class="Heading3"><a name="708608">Operand Format </a></div>
+      <div class="Body"><a name="708609">Each operand (symbolic port identifier) used in an opmode must follow the rules listed </a>below: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="708610">Each symbolic port identifier must begin with an alphabet[a-z,A-Z] and can be </a>followed by any number of alphanumeric characters or underscore('_'). </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="708611">The symbolic port identifiers must not match any of the reserved port identifiers </a>listed in Table 1 irrespective of case </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="708612">Each of the symbolic port identifiers must be listed once and only once in the Inputs </a>to Port A, Port B, or Port C fields. Multiple symbolic port identifiers in the same list must be separated using a space or ';'. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="708613">In the figure above, Xo, Yo, and Zo are the symbolic port identifiers. Examples of legal </a>symbolic port identifiers/operands are a1, signal_1, delayed_signal etc. Examples of illegal symbolic port identifiers include Cin, _port1, delay$%, 12signal etc.</div>
+      <div class="Heading3"><a name="1407082">Reserved Port Identifiers.</a></div>
+      <div class="Body"><a name="1407097">&nbsp;</a></div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 356.40000000000003pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 79.2pt">
+            <div class="CellHeadingLeft"><a name="708616">Reserved Port </a>Identifier</div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 158.4pt">
+            <div class="CellHeadingLeft"><a name="708618">Port Type</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 118.8pt">
+            <div class="CellHeadingLeft"><a name="708620">Memory Type</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708622">PCIN</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708624">Input. Connected to port PCIN on </a>the DSP48</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708626">This port appears </a>depending on the opmode used. Refer to Table 2, Opmodes 0x10-0x1f use the PCIN Inport. The PCIN port must be connected to the PCOUT port of another DSP48 block/DSP48 Macro block.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708628">BCIN</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708630">Input. Connected to port BCIN on </a>the DSP48</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708632">This port appears if in any </a>of the opmodes listed in Table 2, B(not A:B) is replaced with BCIN. Must be connected to the BCOUT port of another DSP48 block/DSP48 Macro block.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708634">PCIN&gt;&gt;17</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708636">Input. Connected to port PCIN on </a>the DSP48</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708638">Refer to Table 2. Opmodes </a>0x50-0x5f use this port identifier. PCIN, is right shifted by 17 and input to the DSP48 adder through DSP48's z multiplexer.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708640">CIN</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708642">Input. Connected to port carry_in </a>on the DSP48 </div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708644">This port appears if the </a>opmode contains Cin. Refer to Table 2. Optional on all opmodes except 0x00.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708646">PCOUT</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708648">Output. Connected to port PCOUT </a>on the DSP48</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708650">This port appears if </a><span class="Bold">PCOUT</span> on the Ports tab is selected.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708652">ACOUT</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708654">Output. Connected to port ACOUT </a>on the DSP48</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708656">This port appears if </a><span class="Bold">ACOUT</span> on the Ports tab is selected.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="1411080">BCOUT</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="1411082">Output. Connected to port BCOUT </a>on the DSP48</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="1411084">This port appears if </a><span class="Bold">BCOUT</span> on the Ports tab is selected.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708658">rst_all</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708660">Input. Connected to rst on the </a>DSP48 as well as all registers' reset</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708662">This port appears if </a><span class="Bold">Global Reset</span> on the Ports tab is selected.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708664">ce_all</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708666">Input. Connected to en on the </a>DSP48 as well as all registers' enable</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708668">This port appears if </a>'Global Enable' on the ports tab is selected.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708670">Sel</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708672">Input</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708674">Appears only when more </a>than one opmode instruction is specified in the Instructions field. Used to select an opmode from the list of opmodes in the Instructions field.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708676">P</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708678">Output</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708680">Always present.</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708682">P&gt;&gt;17</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708684">-</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708686">Refer to Table 2. Opmodes </a>0x60-0x6f. P, right shifted by 17 is input to the DSP48 adder through the DSP48's z multiplexer.</div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="708688">Opmode Selection</a></div>
+      <div class="Body"><a name="708689">As stated previously, if more than one opmode is specified in the Instructions field, </a>opmode selection must be provided by the block. This is achieved through the use of the 'Sel' port that appears when there is more than one opmode in the Instructions field. The 'Sel' port is connected to multiplexers instanced underneath the mask; any signal connected to the Sel port must be of the appropriate data type. The value of the Sel signal for each opmode listed in the Instructions field corresponds to the position of the opmode. The first position is position 0, then second position is 1, and so on. </div>
+      <div class="Heading3"><a name="708690">Using Reserved Identifiers</a></div>
+      <div class="Body"><a name="708691">There are two categories of reserved identifiers. Reserved identifiers that manifest as ports </a>on the DSP48 Macro block and reserved identifiers that do not. Descriptions and usage of each of the reserved word identifiers is listed in the Table above. An example of using PCIN and BCIN reserved words is depicted in the following figure. The Instructions are: P=PCIN + A*BCIN</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="708697"><img class="Default" src="images/Xilinx_Blockset.11.039.4.jpg" width="295" height="213" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="708698">Mode Selection</a></div>
+      <div class="Body"><a name="708699">The DSP48 Macro can be operated in two modes: Adder Mode and Multiplier Mode. Mode </a>selection depends on the DSP48 Macro opmodes used; the opmodes supported by each of the modes is listed in Table 2. When A and B ports are routed as inputs to the DSP48's adder, they are concatenated as one signed 36-bit input (refer to the DSP48 documentation). The DSP48's multiplier interprets the ports as two disjoint signed 2's complement 18-bit inputs.</div>
+      <div class="Heading4"><a name="708700">DSP48 Opmodes</a></div>
+      <div class="Body"><a name="708701">In the following table, Cin is optional in all the Opmodes. A:B refers to all the symbolic port </a>identifiers in 'Inputs to Port A' field of DSP48 Macro block mask supplying inputs to the Adder of DSP48 block. Symbols A, B, and C refer to symbolic identifiers in Inputs to Port A, Port B and Port C fields respectively. All other symbols are reserved (refer to Reserved Port Identifier table above for more details).</div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 365.7099pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 130.6789pt">
+            <div class="CellHeadingLeft"><a name="708704">DSP48 Macro Pseudo </a>Opmode</div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 66.5267pt">
+            <div class="CellHeadingLeft"><a name="708706">DSP48 Macro </a>Mode</div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 56.1681pt">
+            <div class="CellHeadingLeft"><a name="708708">Supported </a>for DSP48</div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 56.1681pt">
+            <div class="CellHeadingLeft"><a name="708710">Supported </a>for DSP48E</div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 56.1681pt">
+            <div class="CellHeadingLeft"><a name="708712">Supported </a>for DSP48A</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708714">P=Cin </a></div>
+            <div class="CellBody"><a name="708715">P=+Cin </a></div>
+            <div class="CellBody"><a name="708716">P=-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708718">----</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708720">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708722">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708724">Yes</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708726">P=P+Cin </a></div>
+            <div class="CellBody"><a name="708727">P=-P-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708729">----</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708731">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708733">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708735">Yes</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708737">P = A:B + Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708739">Adder</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708741">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708743">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708745">Yes</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708747">P = A*B + Cin </a></div>
+            <div class="CellBody"><a name="708748">P = -A*B – Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708750">Multiplier</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708752">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708754">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708756">Yes</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708758">P=C+Cin </a></div>
+            <div class="CellBody"><a name="708759">P=-C-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708761">----</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708763">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708765">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708767">Yes</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708769">P=+C+P+Cin </a></div>
+            <div class="CellBody"><a name="708770">P=-C-P-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708772">----</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708774">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708776">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708778">Yes</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708780">P=A:B + C + Cin </a></div>
+            <div class="CellBody"><a name="708781">P = -A:B –C-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708783">Adder</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708785">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708787">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708789">Yes</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708791">P = PCIN + Cin </a></div>
+            <div class="CellBody"><a name="708792">P = PCIN –Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708794">----</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708796">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708798">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708800">Yes(A:B + </a>C + Cin only)</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708802">P=PCIN+P+Cin </a></div>
+            <div class="CellBody"><a name="708803">P=PCIN-P-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708805">----</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708807">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708809">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708811">Yes</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708813">P=PCIN+A:B+Cin </a></div>
+            <div class="CellBody"><a name="708814">P=PCIN-A:B-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708816">Adder</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708818">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708820">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708822">Yes</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708824">P=PCIN+A*B+Cin </a></div>
+            <div class="CellBody"><a name="708825">P=PCIN-A*B-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708827">Multiplier</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708829">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708831">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708833">Yes</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708835">P=PCIN+C +Cin </a></div>
+            <div class="CellBody"><a name="708836">P=PCIN-C –Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708838">----</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708840">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708842">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708844">No</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708846">P=PCIN+C+P+Cin </a></div>
+            <div class="CellBody"><a name="708847">P=PCIN-P-C-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708849">----</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708851">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708853">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708855">No</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708857">P=PCIN+A:B+C+Cin </a></div>
+            <div class="CellBody"><a name="708858">P=PCIN-A:B-C-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708860">Adder</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708862">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708864">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708866">No</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708868">P=P-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708870">----</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708872">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708874">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708876">Yes</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708878">P=P+P+Cin </a></div>
+            <div class="CellBody"><a name="708879">P=P-P-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708881">----</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708883">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708885">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708887">Yes</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708889">P=P-A:B-Cin </a></div>
+            <div class="CellBody"><a name="708890">P=P+A:B+Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708892">Adder</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708894">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708896">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708898">Yes</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708900">P=P+A*B+Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708902">Multiplier</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708904">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708906">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708908">Yes</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708910">P=P+C+Cin </a></div>
+            <div class="CellBody"><a name="708911">P=P-C-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708913">----</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708915">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708917">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708919">No</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708921">P=P+C+P+Cin </a></div>
+            <div class="CellBody"><a name="708922">P=P-C-P-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708924">----</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708926">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708928">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708930">No</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708932">P=P+C+P+Cin </a></div>
+            <div class="CellBody"><a name="708933">P=P-C-P-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708935">Adder</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708937">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708939">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708941">No</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708943">P=C-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708945">----</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708947">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708949">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708951">Yes</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708953">P=C-P-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708955">----</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708957">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708959">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708961">Yes</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708963">P=C-A:B-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708965">Adder</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708967">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708969">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708971">Yes</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708973">P=C-A*B-Cin </a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708975">Multiplier</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708977">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708979">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708981">Yes</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708983">P=C+C+Cin </a></div>
+            <div class="CellBody"><a name="708984">P=C-C-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708986">----</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708988">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708990">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708992">No</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708994">P=C+C+P+Cin </a></div>
+            <div class="CellBody"><a name="708995">P=C-C-P-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708997">----</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="708999">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709001">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709003">No</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709005">P=PCIN&gt;&gt;17+Cin , </a></div>
+            <div class="CellBody"><a name="709006">P=PCIN&gt;&gt;17Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709008">----</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709010">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709012">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709014">No</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709016">P=PCIN&gt;&gt;17+P+Cin </a></div>
+            <div class="CellBody"><a name="709017">P=PCIN&gt;&gt;17-P-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709019">----</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709021">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709023">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709025">No</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709027">P=PCIN&gt;&gt;17+A:B+Cin </a></div>
+            <div class="CellBody"><a name="709028">P=PCIN&gt;&gt;17-A:B-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709030">Adder</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709032">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709034">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709036">No</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709038">P=PCIN&gt;&gt;17+A*B+Cin </a></div>
+            <div class="CellBody"><a name="709039">P=PCIN&gt;&gt;17-A*B-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709041">Multiplier</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709043">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709045">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709047">No</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709049">P=PCIN&gt;&gt;17+C+Cin </a></div>
+            <div class="CellBody"><a name="709050">P=PCIN&gt;&gt;17-C-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709052">----</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709054">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709056">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709058">No</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709060">P=PCIN&gt;&gt;17+P+C+Cin </a></div>
+            <div class="CellBody"><a name="709061">P=PCIN&gt;&gt;17-P-C-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709063">----</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709065">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709067">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709069">No</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709071">P=PCIN&gt;&gt;17+C+A:B+Cin </a></div>
+            <div class="CellBody"><a name="709072">P=PCIN&gt;&gt;17-C-A:B-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709074">Adder</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709076">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709078">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709080">No</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709082">P=P&gt;&gt;17+Cin </a></div>
+            <div class="CellBody"><a name="709083">P=P&gt;&gt;17-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709085">----</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709087">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709089">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709091">No</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709093">P=P&gt;&gt;17+P+Cin </a></div>
+            <div class="CellBody"><a name="709094">P=P&gt;&gt;17-P-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709096">----</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709098">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709100">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709102">No</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709104">P=P&gt;&gt;17+A:B+Cin </a></div>
+            <div class="CellBody"><a name="709105">P=P&gt;&gt;17-A:B-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709107">Adder</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709109">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709111">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709113">No</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709115">P=P&gt;&gt;17+A*B+Cin </a></div>
+            <div class="CellBody"><a name="709116">P=P&gt;&gt;17-A*B-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709118">Multiplier</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709120">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709122">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709124">No</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709126">P=P&gt;&gt;17+C+Cin </a></div>
+            <div class="CellBody"><a name="709127">P=P&gt;&gt;17-C-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709129">----</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709131">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709133">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709135">No</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709137">P=P&gt;&gt;17+P+C+Cin </a></div>
+            <div class="CellBody"><a name="709138">P=P&gt;&gt;17-P-C-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709140">----</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709142">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709144">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709146">No</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709148">P=P&gt;&gt;17+C+A:B +Cin </a></div>
+            <div class="CellBody"><a name="709149">P=P&gt;&gt;17-C-A:B-Cin</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709151">Adder</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709153">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709155">Yes</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="709157">No</a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="709159">Entering Pipeline Options and Editing Custom Pipeline Options</a></div>
+      <div class="Body"><a name="709160">Since the data paths for the A, B and C ports are different and can have a different number </a>of registers, time-alignment issues arise. Control signals also suffer from the same issue. This makes the pipeline model extremely important. There are three pipeline options available in the DSP48 Macro block mask. These include 'External Registers', 'No External Registers' and 'Custom'. </div>
+      <div class="Heading3"><a name="709161">External Registers </a></div>
+      <div class="Body"><a name="709162">This option aligns all the control and data signals by also using additional registers </a>external to the DSP48 block. These external registers are required to register the output of the multiplexers to ensure high-speed operation. If all the opmodes entered into the DSP48 Macro instructions field are such that, they require the use of multiplier, then the latency on the DSP48 Macro is 4. If none of the instructions on the DSP48 Macro require the use of the multiplier, the latency on the DSP48 Macro is 3. </div>
+      <div class="Heading3"><a name="709163">No External Registers </a></div>
+      <div class="Body"><a name="709164">This option aligns all the control and data signals without using registers external to the </a>DSP48 block. The MREG is not selected in this mode. The latency of the DSP48 Macro is 2. </div>
+      <div class="Heading3"><a name="709165">Custom </a></div>
+      <div class="Body"><a name="709166">This option gives you control over instancing each register of the DSP48 Macro block. </a>When this option is selected the 'Custom Pipeline Options' group of controls becomes active and each of the individual registers can be selected. When the DSP48 Macro contains instructions that require using the multiplier in the DSP48 and the Adder with A:B as one of the inputs, Custom pipeline is the only legal option. </div>
+      <div class="Heading2"><a name="709167">DSP48 Macro Limitations</a></div>
+      <div class="Body"><a name="709168">Though the DSP48 Macro eases the use of the DSP 48 block it is not without limitations: </a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="709169">It does not support the DSP48's rounding features </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="709170">It supports carry-in only from fabric </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="709171">It does not support all input data types. Input data types that exceed the data type </a>restrictions of a single DSP48 are not supported currently. For example if, after alignment of inputs, the input to Port A of DSP48 exceeds 18bits then it will result in an error </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="709172">See Also</a></div>
+      <div class="Body"><a name="709173">The following topics give valuable insight into using and understanding the DSP48 block:</a></div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.038.html#271125', '');" title="DSP48" name="709177">DSP48</a></span> block</div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.06.15.html#312886', '');" title="Generating Multiple Cycle-True Islands for Distinct Clocks" name="709181">Generating Multiple Cycle-True Islands for Distinct Clocks</a></span> </div>
+      <div class="Body" style="color: #0000ff; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: normal; text-transform: none; vertical-align: baseline"><span class="URL"><a href="http://www.xilinx.com/products/design_resources/dsp_central/grouping/index.htm" target="external_window" name="709183">Xilinx XtremeDSP™</a></span></div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

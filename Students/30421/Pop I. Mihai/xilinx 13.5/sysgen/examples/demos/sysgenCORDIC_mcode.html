@@ -1,0 +1,34 @@
+<html>
+<body>
+<h3><font size=+1 color="#990000">CORDIC-based rectangular-to-polar coordinate
+converter</font></h3>
+<p>
+This design implements a rectangular-to-polar coordinate conversion using a
+fully parallel CORDIC  (COordinate Rotation 
+DIgital Computer) algorithm in vectoring mode.  That is, given a complex-input
+<x,y>, it computes a new vector <m,a>, where 
+magnitude m = K sqrt(x^2 + y^2), and the angle a = arctan(y/x).  As is common,
+the magnitude scale factor K = 1.646760... is 
+not compensated in the processor, i.e. the magnitude output is scaled by this
+factor.
+</p>
+<p>
+The CORDIC algorithm is attractive for an FPGA implementation because it
+consists primarily of shift and add operations.  
+An N-bit adder/subtractor  requiries only N/2 logic slices.  The CORDIC
+subsystem is masked, and allows customization of bit precision, 
+and the number of processing elements (PEs) in the CORDIC engine.  With eight
+PEs, the design occupies 564 LUTs (55%), 539 flip-flops (52%), and 307 slices (59%) 
+of a Xilinx xc2v80-5 part. The maximum clock frequency is approximately 198.45 MHz 
+(Device speed data version: PRODUCTION PRODUCTION 1.121 2005-11-04, 
+ISE 8.1i software, VHDL synthesized with XST).
+</p>
+<p>References:</p>
+<p>J. E. Volder, "The CORDIC Trigonometric Computing Technique", IRE Trans. On
+Electronic Computers, Vol. EC-8,  1959, pp. 330-334.</p>
+<p>J. S. Walther, "A Unified Algorithm for Elementary Functions", Spring Joint
+Computer Conference (1971) pp. 379-385.</p>
+<p>Yu Hen Hu, "CORDIC-Based VLSI Architectures for Digital Signal Processing", IEEE
+Signal Processing Magazine, pp. 17-34, July 1992.</p>
+</body>
+</html>

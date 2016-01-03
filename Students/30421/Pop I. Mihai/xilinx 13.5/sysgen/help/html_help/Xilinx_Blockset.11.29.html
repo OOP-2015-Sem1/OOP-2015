@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Depuncture</title>
+    <link rel="StyleSheet" href="css/Xilinx_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Blockset.11.1.html#271121">Xilinx Blockset</a> : Depuncture</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="271121">Depuncture</a></div>
+      <div class="Body"><span class="Italic"><a name="275654">This block is listed in the following Xilinx Blockset libraries: Communication and Index.</a></span></div>
+      <div class="OneLiner"><a name="390353"><img class="Default" src="images/Xilinx_Blockset.11.29.1.jpg" width="75" height="47" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" />The Xilinx Depuncture block allows you to insert an arbitrary symbol into </a>your input data at the location specified by the depuncture code. </div>
+      <div class="Body"><a name="1101170">The Xilinx depuncture block accepts data of type </a><span class="Filename">UFixN_0</span> where N equals the length of insert string x (the number of ones in the depuncture code) and produces output data of type <span class="Filename">UFixK_0</span> where K equals the length of insert string multiplied by the length of the depuncture code. </div>
+      <div class="Body"><a name="506321">The Xilinx Depuncture block can be used to decode a range of punctured convolution </a>codes. The following diagram illustrates an application of this block to implement soft decision Viterbi decoding of punctured convolution codes.</div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="506481"><img class="Default" src="images/Xilinx_Blockset.11.29.2.jpg" width="1056" height="404" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="506476">The previous diagram shows a matched filter block connected to a add_erasure subsystem </a>which attaches a 0 to the input data to mark it as a non-erasure signal. The output from the add_erasure subsytem is then passed to a serial to parallel block. The serial to parallel block concatenates two continuous soft inputs and presents it as a 8-bit word to the depuncture block. The depuncture block inserts the symbol '0001' after the 4-bits from the MSB for code 0 ( [1 0 1] ) and 8-bits from the MSB for code 1 ( [1 1 0] ) to form a 12-bit word. The output of the depuncture block is serialized as 4-bit words using the parallel to serial block. The extract_erasure subsystem takes the input 4-bit word and extracts 3-bits from the MSB to form a soft decision input data word and 1-bit from the LSB to form the erasure signal for the Viterbi decoder.</div>
+      <div class="Heading2"><a name="507525">Block Parameters</a></div>
+      <div class="Body"><a name="507691">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="507697"><img class="Default" src="images/Xilinx_Blockset.11.29.3.jpg" width="329" height="249" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="507710">Parameters specific to the Xilinx Depuncturer block are: </a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="507712">Depuncture code</a></span>: specifies the depuncture pattern for inserting the string to the input. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="507698">Symbol to insert</a></span>: specifies the binary word to be inserted in the depuncture code.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="1282592">Other parameters used by this block are explained in the topic</a><br /><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.3.html#271277', '');" title="Common Options in Block Parameter Dialog Boxes">Common Options in Block Parameter Dialog Boxes</a></span>. </div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

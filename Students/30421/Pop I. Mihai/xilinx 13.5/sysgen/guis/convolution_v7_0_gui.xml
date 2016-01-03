@@ -1,0 +1,97 @@
+<sysgenblock simulinkname="Convolution Encoder 7.0 " block_type="convolution_v7_0">
+   <icon width="95" height="142" wmark_color="white" bg_color="blue">
+   </icon>
+   <dll name="sysgen" entry_point="coregenimport_config">
+   </dll>
+   <handlers enablement="xlipmagiccallback_pass_evaluate_params" action="xlipmagicaction">
+   </handlers>
+   <libraries>
+        <library name="xbsIndex"/>
+        <library name="xbsComm"/>
+
+    
+   </libraries>
+   <blockgui label="Xilinx Convolution Encoder 7.0 ">
+      <tabpane>
+         <tab name="page_0" label="page_0">
+                <etch label="Data Rates">
+                    <editbox name="input_rate" label="Input Rate" default="1" evaluate="true" ctype="Int" top_label="false">
+                    </editbox>
+                    <editbox name="output_rate" label="Output Rate" default="2" evaluate="true" ctype="Int" top_label="false">
+                    </editbox>
+                </etch>
+                <etch label="Punctures">
+                    <checkbox name="punctured" default="off" evaluate="true" ctype="Bool" label="Punctured">
+                    </checkbox>
+                    <checkbox name="dual_output" default="off" evaluate="true" ctype="Bool" label="Dual Output">
+                    </checkbox>			    
+                    <editbox name="puncture_code0" label="Puncture Code0" default="'0'" evaluate="true" ctype="String" top_label="false">
+                    </editbox>
+                    <editbox name="puncture_code1" label="Puncture Code1" default="'0'" evaluate="true" ctype="String" top_label="false">
+                    </editbox>
+                </etch>       
+         </tab>
+         <tab name="page_1" label="page_1">
+            <etch label="Convolution">
+                <listbox name="constraint_length" label="Constraint Length" default="7" allow_advanced="false" evaluate="false" ctype="String">
+                    <item value="3"/>
+                    <item value="4"/>
+                    <item value="5"/>
+                    <item value="6"/>
+                    <item value="7"/>
+                    <item value="8"/>
+                    <item value="9"/>
+                </listbox>
+                <editbox name="convolution_code0" label="Convolution Code0" default="'1001111'" evaluate="true" ctype="String" top_label="false">
+                </editbox>
+                <editbox name="convolution_code1" label="Convolution Code1" default="'1101101'" evaluate="true" ctype="String" top_label="false">
+                </editbox>
+                <editbox name="convolution_code2" label="Convolution Code2" default="'0000011'" evaluate="true" ctype="String" top_label="false">
+                </editbox>
+                <editbox name="convolution_code3" label="Convolution Code3" default="'0000011'" evaluate="true" ctype="String" top_label="false">
+                </editbox>
+                <editbox name="convolution_code4" label="Convolution Code4" default="'0000011'" evaluate="true" ctype="String" top_label="false">
+                </editbox>
+                <editbox name="convolution_code5" label="Convolution Code5" default="'0000011'" evaluate="true" ctype="String" top_label="false">
+                </editbox>
+                <editbox name="convolution_code6" label="Convolution Code6" default="'0000011'" evaluate="true" ctype="String" top_label="false">
+                </editbox>
+            </etch>
+            <etch label="Optional Pins">
+                <checkbox name="nd" default="off" evaluate="true" ctype="Bool" label="ND">
+                </checkbox>
+                <checkbox name="rfd" default="off" evaluate="true" ctype="Bool" label="RFD">
+                </checkbox>
+                <checkbox name="fd_in" default="off" evaluate="true" ctype="Bool" label="FD_IN">
+                </checkbox>
+                <checkbox name="rffd" default="off" evaluate="true" ctype="Bool" label="RFFD">
+                </checkbox>
+                <checkbox name="rdy" default="off" evaluate="true" ctype="Bool" label="RDY">
+                </checkbox>
+                <checkbox name="synchronous_clear" default="off" evaluate="true" ctype="Bool" label="SCLR">
+                </checkbox>
+                <checkbox name="ce" default="off" evaluate="true" ctype="Bool" label="CE">
+                </checkbox>
+            </etch>            
+         </tab>
+      </tabpane>
+      <hiddenvar name="ip_name" default="Convolution Encoder" evaluate="false" ctype="String">
+      </hiddenvar>
+      <hiddenvar name="ip_version" default="7.0" evaluate="false" ctype="String">
+      </hiddenvar>
+      <hiddenvar name="dsptool_ready" default="false" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="ipcore_usecache" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="ipcore_useipmodelcache" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="wrapper_available" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="port_translation_map" default="{ 'ce' => 'en', 'sclr' => 'rst'}" evaluate="false" ctype="String">
+      </hiddenvar>
+      <hiddenvar name="structural_sim" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="ipcore_do_not_force_period" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+   </blockgui>
+</sysgenblock>

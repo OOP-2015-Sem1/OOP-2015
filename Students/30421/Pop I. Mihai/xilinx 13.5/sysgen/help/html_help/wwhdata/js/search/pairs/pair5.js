@@ -1,0 +1,20 @@
+function FileData_Pairs(x)
+{
+x.t("included","system");
+x.t("modeling","implementation");
+x.t("mcode","block");
+x.t("support","matlab");
+x.t("introduction","support");
+x.t("block","allows");
+x.t("non-algorithmic","matlab");
+x.t("simple","control");
+x.t("matlab","included");
+x.t("matlab","modeling");
+x.t("matlab","support");
+x.t("matlab","introduction");
+x.t("allows","non-algorithmic");
+x.t("control","operations");
+x.t("implementation","simple");
+x.t("generator","mcode");
+x.t("system","generator");
+}

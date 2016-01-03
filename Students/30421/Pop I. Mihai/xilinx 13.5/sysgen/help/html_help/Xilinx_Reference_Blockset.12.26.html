@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Registered Moore State Machine</title>
+    <link rel="StyleSheet" href="css/Xilinx_Reference_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Reference_Blockset.12.01.html#633029">Xilinx Reference Blockset</a> : Registered Moore State Machine</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="633029">Registered Moore State Machine</a></div>
+      <div class="Body"><a name="633033"><img class="Default" src="images/Xilinx_Reference_Blockset.12.26.1.jpg" width="97" height="86" style="display: block; float: none; left: 0.0; top: 0.0" alt="" />A "Moore machine" is a finite state machine whose output is only a </a>function of the machine's current state. A "registered Moore machine" is one having registered output, and can be described with the following block diagram:</div>
+      <div class="Body"><a name="633034">&nbsp;</a></div>
+      <div class="Body"><a name="633035">&nbsp;</a></div>
+      <div class="Body"><a name="633042">&nbsp;</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="633041"><img class="Default" src="images/Xilinx_Reference_Blockset.12.26.2.jpg" width="293" height="67" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="633043">There are many ways to implement such state machines in System Generator, e.g., using </a>the Mcode block. This reference block provides a method for implementing a Moore machine using block and distributed memory. The implementation is very fast and efficient. For example, a state machine with 8 states, 1 input, and 2 outputs that are registered can be realized with a single block RAM that runs at more than 150 MHz in a Xilinx Virtex device.</div>
+      <div class="Body"><a name="633044">The transition function and output mapping are each represented as an </a><span class="Italic">N x M</span> matrix, where <span class="Italic">N</span> is the number of states, and <span class="Italic">M</span> is the size of the input alphabet (e.g., <span class="Italic">M = 2</span> for a binary input). It is convenient to number rows and columns from <span class="Italic">0</span> to <span class="Italic">N – 1</span> and <span class="Italic">0</span> to <span class="Italic">M – 1</span> respectively. Each state is represented as an unsigned integer from <span class="Italic">0</span> to <span class="Italic">N - 1</span>, and each alphabet character is represented as an unsigned integer from <span class="Italic">0</span> to <span class="Italic">M - 1</span>. The row index of each matrix represents the current state, and the column index represents the input character.</div>
+      <div class="Body"><a name="633045">For the purpose of discussion, let </a><span class="Bold" style="font-style: italic">F</span> be the <span class="Italic">N x M</span> transition function matrix, and <span class="Bold" style="font-style: italic">O</span> be the <span class="Italic">N</span> <span class="Italic">x M</span> output function matrix. Then <span class="Bold" style="font-style: italic">F</span><span class="Italic" style="font-weight: normal">(i,j)</span> is the next state when the current state is <span class="Italic">i</span> and the current input character is <span class="Italic">j</span>, and <span class="Bold" style="font-style: italic">O</span><span class="Italic" style="font-weight: normal">(i,j)</span> is the corresponding output of the Mealy machine. </div>
+      <div class="Heading2"><a name="633046">Example</a></div>
+      <div class="Body"><a name="633047">Consider the problem of designing a Moore machine to recognize the pattern '1011' in a </a>serial stream of bits. The state transition diagram and equivalent transition table are shown below..</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="633054"><img class="Default" src="images/Xilinx_Reference_Blockset.12.26.3.jpg" width="185" height="268" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="633055">The table lists the next state and output that result from the current state and input. For </a>example, if the current state is 4, the output is 1 indicating the detection of the desired sequence, and if the input is 1 the next state is state 1. </div>
+      <div class="Body"><a name="633056">The Registered Moore State Machine block is configured with next state matrix and output </a>array obtained from the next state/output table discussed above. They are constructed as shown below: </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="633062"><img class="Default" src="images/Xilinx_Reference_Blockset.12.26.4.jpg" width="178" height="143" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="633063">The rows of the matrices correspond to the current state. The next state matrix has one </a>column for each input value. The output array has only one column since the input value does not affect the output of the state machine. </div>
+      <div class="Heading2"><a name="633064">Block Parameters</a></div>
+      <div class="Body"><a name="633065">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model. </div>
+      <div class="Body"><a name="633066">The next state logic and state register in this block are implemented with high speed </a>dedicated block RAM. </div>
+      <div class="Body"><a name="633067">The number of bits used to implement a Moore state machine is given by the equations: </a></div>
+      <div class="Body2"><a name="633068">ds = (2</a><span class="Superscript">k</span>)(2<span class="Superscript">i</span>) = 2<span class="Superscript">k+i</span></div>
+      <div class="Body2"><a name="633069">w</a><span class="Subscript">s</span> = k</div>
+      <div class="Body2"><a name="633070">N</a><span class="Subscript">s</span> = d<span class="Subscript">s</span>*w<span class="Subscript">s</span> = (k)(2<span class="Superscript">k+i</span>)</div>
+      <div class="Body"><a name="633071">where </a></div>
+      <div class="Body2"><a name="743500">N</a><span class="Subscript">s </span>= total number of next state logic block RAM bits </div>
+      <div class="Body2"><a name="743501">s = number of states </a></div>
+      <div class="Body2"><a name="743502">k = ceil(log2(s))</a></div>
+      <div class="Body2"><a name="743503">i = number of input bits </a></div>
+      <div class="Body2"><a name="743511">d</a><span class="Subscript">s</span> = depth of state logic block RAM </div>
+      <div class="Body2"><a name="743512">w</a><span class="Subscript">s</span> = width of state logic block RAM </div>
+      <div class="Body"><a name="633078">The following table gives examples of block RAM sizes necessary for various state </a>machines:</div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 261.3579pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 87.1193pt">
+            <div class="CellHeading"><a name="633081">Number of States</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 87.1193pt">
+            <div class="CellHeading"><a name="633083">Number of Input </a>Bits</div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 87.1193pt">
+            <div class="CellHeading"><a name="633085">Block RAM Bits </a>Needed</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><a name="633087">2</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><a name="633089">5</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><a name="633091">64</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><a name="633093">4</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><a name="633095">1</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><a name="633097">8</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><a name="633099">8</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><a name="633101">6</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><a name="633103">1536</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><a name="633105">16</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><a name="633107">5</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><a name="633109">2048</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><a name="633111">32</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><a name="633113">4</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><a name="633115">2560</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><a name="633117">52</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><a name="633119">1</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><a name="633121">768</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><a name="633123">100</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><a name="633125">4</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><a name="633127">14336</a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="633128">The block RAM width and depth limitations are described in the core datasheet for the </a>Single Port Block Memory.</div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

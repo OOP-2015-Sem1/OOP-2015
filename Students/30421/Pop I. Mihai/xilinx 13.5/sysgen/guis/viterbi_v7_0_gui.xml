@@ -1,0 +1,220 @@
+<sysgenblock simulinkname="Viterbi Decoder 7.0 " block_type="viterbi_v7_0">
+   <icon width="95" height="142" wmark_color="white" bg_color="green">
+   </icon>
+   <dll name="sysgen" entry_point="coregenimport_config">
+   </dll>
+   <handlers enablement="xlipmagiccallback_pass_evaluate_params" action="xlipmagicaction">
+   </handlers>
+   <libraries>
+        <library name="xbsIndex"/>
+        <library name="xbsComm"/>
+
+    
+   </libraries>
+   <blockgui label="Xilinx Viterbi Decoder 7.0 ">
+      <tabpane>
+         <tab name="Page1" label="Page1">
+            <etch label="Viterbi Type">
+               <editbox name="channels" label="Number of Channels" default="1" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+               <radiogroup label="" name="viterbi_type" default="Standard" evaluate="false" ctype="String">
+                  <item label="Standard" value="Standard">
+                  </item>
+                  <item label="Multi-Channel" value="Multi_Channel">
+                  </item>
+                  <item label="Trellis Mode" value="Trellis_Mode">
+                  </item>
+                  <item label="Dual Decoder" value="Dual_Decoder">
+                  </item>
+               </radiogroup>
+            </etch>
+            <etch label="Decoder Options">
+               <checkbox name="reduced_latency" default="off" evaluate="true" ctype="Bool" label="Use Reduced Latency">
+               </checkbox>
+               <editbox name="constraint_length" label="Constraint Length" default="7" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+               <editbox name="traceback_length" label="Traceback Length" default="42" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+            </etch>
+         </tab>
+         <tab name="Page2" label="Page2">
+            <etch label="Architecture">
+               <radiogroup label="" name="architecture" default="Parallel" evaluate="false" ctype="String">
+                  <item label="Parallel" value="Parallel">
+                  </item>
+                  <item label="Serial" value="Serial">
+                  </item>
+               </radiogroup>
+            </etch>
+            <etch label="Best State">
+               <checkbox name="best_state" default="on" evaluate="true" ctype="Bool" label="Use Best State">
+               </checkbox>
+               <editbox name="best_state_width" label="Best State Width" default="3" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+            </etch>
+            <etch label="Coding">
+               <editbox name="soft_width" label="Soft Width" default="3" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+               <radiogroup label="" name="coding" default="Soft_Coding" evaluate="false" ctype="String">
+                  <item label="Soft Coding" value="Soft_Coding">
+                  </item>
+                  <item label="Hard Coding" value="Hard_Coding">
+                  </item>
+               </radiogroup>
+            </etch>
+            <etch label="Data Format">
+               <radiogroup label="" name="data_format" default="Signed_Magnitude" evaluate="false" ctype="String">
+                  <item label="Signed Magnitude" value="Signed_Magnitude">
+                  </item>
+                  <item label="Offset Binary" value="Offset_Binary">
+                  </item>
+               </radiogroup>
+            </etch>
+         </tab>
+         <tab name="Page3" label="Page3">
+            <etch label="Convolution 0">
+               <editbox name="output_rate0" label="Output Rate 0" default="2" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+               <listbox name="convolution_code_0_radix" label="Convolution Code 0 Radix" default="Binary" allow_advanced="false" evaluate="false" ctype="String">
+		<item value="Binary"/>
+<item value="Octal"/>
+<item value="Decimal"/>
+
+    
+               </listbox>
+               <editbox name="convolution0_code0" label="Convolution 0 Code 0" default="'1111001'" evaluate="true" ctype="String" top_label="false">
+               </editbox>
+               <editbox name="convolution0_code1" label="Convolution 0 Code 1" default="'1011011'" evaluate="true" ctype="String" top_label="false">
+               </editbox>
+               <editbox name="convolution0_code2" label="Convolution 0 Code 2" default="'0'" evaluate="true" ctype="String" top_label="false">
+               </editbox>
+               <editbox name="convolution0_code3" label="Convolution 0 Code 3" default="'0'" evaluate="true" ctype="String" top_label="false">
+               </editbox>
+               <editbox name="convolution0_code4" label="Convolution 0 Code 4" default="'0'" evaluate="true" ctype="String" top_label="false">
+               </editbox>
+               <editbox name="convolution0_code5" label="Convolution 0 Code 5" default="'0'" evaluate="true" ctype="String" top_label="false">
+               </editbox>
+               <editbox name="convolution0_code6" label="Convolution 0 Code 6" default="'0'" evaluate="true" ctype="String" top_label="false">
+               </editbox>
+            </etch>
+         </tab>
+         <tab name="Page4" label="Page4">
+            <etch label="Convolution 1">
+               <editbox name="output_rate1" label="Output Rate 1" default="2" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+               <listbox name="convolution_code_1_radix" label="Convolution Code 1 Radix" default="Binary" allow_advanced="false" evaluate="false" ctype="String">
+		<item value="Binary"/>
+<item value="Octal"/>
+<item value="Decimal"/>
+
+    
+               </listbox>
+               <editbox name="convolution1_code0" label="Convolution 1 Code 0" default="'1111001'" evaluate="true" ctype="String" top_label="false">
+               </editbox>
+               <editbox name="convolution1_code1" label="Convolution 1 Code 1" default="'1011011'" evaluate="true" ctype="String" top_label="false">
+               </editbox>
+               <editbox name="convolution1_code2" label="Convolution 1 Code 2" default="'0'" evaluate="true" ctype="String" top_label="false">
+               </editbox>
+               <editbox name="convolution1_code3" label="Convolution 1 Code 3" default="'0'" evaluate="true" ctype="String" top_label="false">
+               </editbox>
+               <editbox name="convolution1_code4" label="Convolution 1 Code 4" default="'0'" evaluate="true" ctype="String" top_label="false">
+               </editbox>
+               <editbox name="convolution1_code5" label="Convolution 1 Code 5" default="'0'" evaluate="true" ctype="String" top_label="false">
+               </editbox>
+               <editbox name="convolution1_code6" label="Convolution 1 Code 6" default="'0'" evaluate="true" ctype="String" top_label="false">
+               </editbox>
+            </etch>
+         </tab>
+         <tab name="Page5" label="Page5">
+            <etch label="Packet Options">
+               <etch label="Trellis Initialization">
+                  <radiogroup label="" name="trellis_initialization" default="None" evaluate="false" ctype="String">
+                     <item label="None" value="None">
+                     </item>
+                     <item label="State Zero" value="State_Zero">
+                     </item>
+                     <item label="Equal States" value="Equal_States">
+                     </item>
+                     <item label="User Input" value="User_Input">
+                     </item>
+                  </radiogroup>
+               </etch>
+               <etch label="Direct Traceback">
+                  <editbox name="maximum_direct" label="Maximum Direct" default="42" evaluate="true" ctype="Int" top_label="false">
+                  </editbox>
+                  <radiogroup label="" name="direct_traceback" default="None" evaluate="false" ctype="String">
+                     <item label="None" value="None">
+                     </item>
+                     <item label="State Zero" value="State_Zero">
+                     </item>
+                     <item label="User Input" value="User_Input">
+                     </item>
+                     <item label="Best State" value="Best_State">
+                     </item>
+                  </radiogroup>
+               </etch>
+            </etch>
+         </tab>
+         <tab name="Page6" label="Page6">
+            <etch label="Puncturing">
+               <radiogroup label="" name="puncturing" default="None" evaluate="false" ctype="String">
+                  <item label="None" value="None">
+                  </item>
+                  <item label="External (Erased Symbols)" value="External">
+                  </item>
+               </radiogroup>
+            </etch>
+            <etch label="BER Options">
+               <checkbox name="ber_symbol_count" default="on" evaluate="true" ctype="Bool" label="Use BER Symbol Count">
+               </checkbox>
+               <editbox name="number_of_ber_symbols" label="Number of BER Symbols" default="300" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+            </etch>
+         </tab>
+         <tab name="Page7" label="Page7">
+            <etch label="Synchronization Options">
+               <checkbox name="synchronization" default="off" evaluate="true" ctype="Bool" label="Use Synchronization">
+               </checkbox>
+               <checkbox name="dynamic_thresholds" default="off" evaluate="true" ctype="Bool" label="Use Dynamic Thresholds">
+               </checkbox>
+               <etch label="Static Thresholds">
+                  <editbox name="ber_thresh" label="BER Thresh" default="600" evaluate="true" ctype="Int" top_label="false">
+                  </editbox>
+                  <editbox name="norm_thresh" label="Norm Thresh" default="250" evaluate="true" ctype="Int" top_label="false">
+                  </editbox>
+               </etch>
+            </etch>
+         </tab>
+         <tab name="Page8" label="Page8">
+            <etch label="Optional Pins">
+               <checkbox name="ce" default="off" evaluate="true" ctype="Bool" label="CE">
+               </checkbox>
+               <checkbox name="rdy" default="off" evaluate="true" ctype="Bool" label="RDY">
+               </checkbox>
+               <checkbox name="synchronous_clear" default="off" evaluate="true" ctype="Bool" label="SCLR">
+               </checkbox>
+               <checkbox name="norm" default="off" evaluate="true" ctype="Bool" label="NORM">
+               </checkbox>
+               <checkbox name="block_valid" default="off" evaluate="true" ctype="Bool" label="Block Valid">
+               </checkbox>
+            </etch>
+         </tab>
+      </tabpane>
+      <hiddenvar name="ip_name" default="Viterbi Decoder" evaluate="false" ctype="String">
+      </hiddenvar>
+      <hiddenvar name="ip_version" default="7.0" evaluate="false" ctype="String">
+      </hiddenvar>
+      <hiddenvar name="dsptool_ready" default="false" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="ipcore_usecache" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="ipcore_useipmodelcache" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="wrapper_available" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="port_translation_map" default="{ 'ce' => 'en', 'sclr' => 'rst'}" evaluate="false" ctype="String">
+      </hiddenvar>
+      <hiddenvar name="structural_sim" default="false" evaluate="true" ctype="Bool">
+      </hiddenvar>
+   </blockgui>
+</sysgenblock>

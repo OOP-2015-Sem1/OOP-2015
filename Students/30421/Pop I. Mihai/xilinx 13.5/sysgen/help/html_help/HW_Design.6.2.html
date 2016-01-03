@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>A Brief Introduction to FPGAs</title>
+    <link rel="StyleSheet" href="css/HW_Design.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="HW_Design.6.1.html#310742">Hardware Design Using System Generator</a> : A Brief Introduction to FPGAs</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="310742">A Brief Introduction to FPGAs</a></div>
+      <div class="Body"><a name="310744">A field programmable gate array (FPGA) is a general-purpose integrated circuit that is </a>“programmed” by the designer rather than the device manufacturer. Unlike an application-specific integrated circuit (ASIC), which can perform a similar function in an electronic system, an FPGA can be reprogrammed, even after it has been deployed into a system.</div>
+      <div class="Body"><a name="270944">An FPGA is programmed by downloading a configuration program called a bitstream into </a>static on-chip random-access memory. Much like the object code for a microprocessor, this bitstream is the product of compilation tools that translate the high-level abstractions produced by a designer into something equivalent but low-level and executable. Xilinx System Generator pioneered the idea of compiling an FPGA program from a high-level Simulink model.</div>
+      <div class="Body"><a name="309083">An FPGA provides you with a two-dimensional array of configurable resources that can </a>implement a wide range of arithmetic and logic functions. These resources include dedicated DSP blocks, multipliers, dual port memories, lookup tables (LUTs), registers, tri-state buffers, multiplexers, and digital clock managers. In addition, Xilinx FPGAs contain sophisticated I/O mechanisms that can handle a wide range of bandwidth and voltage requirements. The Virtex®-4 FPGAs include embedded microcontrollers (IBM PowerPC® 405), and multi-gigabit serial transceivers. The compute and I/O resources are linked under the control of the bitstream by a programmable interconnect architecture that allows them to be wired together into systems.</div>
+      <div class="Body"><a name="270948">FPGAs are high performance data processing devices. DSP performance is derived from </a>the FPGA’s ability to construct highly parallel architectures for processing data. In contrast with a microprocessor or DSP processor, where performance is tied to the clock rate at which the processor can run, FPGA performance is tied to the amount of parallelism that can be brought to bear in the algorithms that make up a signal processing system.   A combination of increasingly high system clock rates (current system frequencies of 100-200 MHz are common today) and a highly-distributed memory architecture gives the system designer an ability to exploit parallelism in DSP (and other) applications that operate on data streams. For example, the raw memory bandwidth of a large FPGA running at a clock rate of 150 MHz can be hundreds of terabytes per second. </div>
+      <div class="Body"><a name="270950">There are many DSP applications (e.g., digital up/down converters) that can be </a>implemented only in custom integrated circuits (ICs) or in an FPGA; a von Neumann processor lacks both the compute capability and the memory bandwidth required. Advantages of using an FPGA include significantly lower non-recurring engineering costs than those associated with a custom IC (FPGAs are commercial off-the-shelf devices), shorter time to market, and the configurability of an FPGA, which allows a design to be modified, even after deployment in an end application. </div>
+      <div class="Body"><a name="270952">When working in System Generator, it is important to keep in mind that an FPGA has </a>many degrees of freedom in implementing signal processing functions. You have, for example, the freedom to define data path widths throughout your system and to employ many individual data processors (e.g., multiply-accumulate engines), depending on system requirements. System Generator provides abstractions that allow you to design for an FPGA largely by thinking about the algorithm you want to implement. However, the more you know about the underlying FPGA, the more likely you are to exploit the unique capabilities an FPGA provides in achieving high performance.</div>
+      <div class="Body"><a name="270954">The remainder of this topic is a brief introduction to some of the logic resources available in </a>the FPGA, so that you gain some appreciation for the abstractions provided in System Generator.  </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="271032"><img class="Default" src="images/HW_Design.6.2.1.jpg" width="522" height="284" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="270959">The figure above shows a physical view of a Virtex®-4 FPGA. To a signal DSP engineer, an </a>FPGA can be thought of as a 2-D array of logic slices striped with columns of hard macro blocks (block memory and arithmetic blocks) suitable for implementing DSP functions, embedded within a configurable interconnect mesh. In a Virtex®-4 FPGA, the DSP blocks (shown in the next figure) can run in excess of 450 MHz, and are pitch-matched to dual port memory blocks (BRAMs) whose ports can be configured to a wide range of word sizes (18 Kb total per BRAM). The Virtex®-4 SX55 device contains 512 such DSP blocks and BRAMs. In System Generator, you can access all of these resources through arithmetic and logic abstractions to build very high performance digital filters, FFTs, and other arithmetic and signal processing functions. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="271070"><img class="Default" src="images/HW_Design.6.2.2.jpg" width="1056" height="276" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="270965">While the multiply-accumulate function supported by a Virtex®-4 DSP block is familiar to </a>a DSP engineer, it is instructive to take a closer look at the Virtex® FPGA family logic slice (shown below), which is the fundamental unit of the logic fabric array. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="271127"><img class="Default" src="images/HW_Design.6.2.3.jpg" width="563" height="233" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="270970">Each logic slice contains two 4-input lookup tables (LUTs), two configurable D-flip flops, </a>multiplexers, dedicated carry logic, and gates used for creating slice-based multipliers. Each LUT can implement an arbitrary 4-input Boolean function. Coupled with dedicated logic for implementing fast carry circuits, the LUTs can also be used to build fast adder/subtractors and multipliers of essentially any word size. In addition to implementing Boolean functions, each LUT can also be configured as a 16x1 bit RAM or as a shift register (SRL16). An SRL16 shift register is a synchronously clocked 16x1 bit delay line with a dynamically addressable tap point. </div>
+      <div class="Body"><a name="270972">In System Generator, these different memory options are represented with higher-level </a>abstractions.   Instead of providing a D-flip flop primitive, System Generator provides a register of arbitrary size.   There are two blocks that provide abstractions of arbitrary width, arbitrary depth delay lines that map directly onto the SRL16 configuration. The delay block can be used for pipeline balancing, and can also be used as storage for time- division multiplexed (TDM) data streams.   The addressable shift register (ASR) block, with a function depicted in the figure below, provides an arbitrary width, arbitrary depth tapped delay line.   This block is of particular interest to the DSP engineer, since it can be used to implement tapped delay lines as well as sweeping through TDM data streams. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="271177"><img class="Default" src="images/HW_Design.6.2.4.jpg" width="613" height="158" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="270977">Although random access memories can be constructed either out of the BRAM or LUT </a>(RAM16x1) primitives, doing so can require considerable care to ensure most efficient mappings, and considerable clerical attention to detail to correctly assemble the primitives into larger structures. System Generator removes the need for such tasks. </div>
+      <div class="Body"><a name="270979">For example, the dual port RAM (DPRAM) block shown in the figure below maps </a>efficiently onto as many BRAM or RAM16x1 components on the device as are necessary to implement the desired memory. As can be seen from the mask dialog box for the DPRAM, the interface allows you to specify a type of memory (BRAM or RAM16x1), depth (data width is inferred from the Simulink signal driving a particular input port), initial memory contents, and other characteristics. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="271211"><img class="Default" src="images/HW_Design.6.2.5.jpg" width="650" height="346" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="270984">In general, System Generator maps abstractions onto device primitives efficiently, freeing </a>you from worrying about interconnections between the primitives. System Generator employs libraries of intellectual property (IP) when appropriate to provide efficient implementations of functions in the block libraries. In this way, you don’t always have to have detailed knowledge of the underlying FPGA details. However, when it makes sense to implement an algorithm using basic functions (e.g., adder, register, memory), System Generator allows you to exploit your FPGA knowledge while reducing the clerical tasks of managing all signals explicitly.</div>
+      <div class="Body"><a name="270986">System Generator library blocks and the mapping from Simulink to hardware are </a>described in detail in subsequent topics of this documentation. There is a wealth of detailed information about FPGAs that can be found online at <span class="URL"><a href="http://support.xilinx.com" target="external_window">http://support.xilinx.com</a></span>, including data books, application notes, white papers, and technical articles.</div>
+      <div class="Heading2"><a name="270988">Note to the DSP Engineer</a></div>
+      <div class="Body"><a name="270989">System Generator extends Simulink to enable hardware design, providing high-level </a>abstractions that can be automatically compiled into an FPGA. Although the arithmetic abstractions are suitable to Simulink (discrete time and space dynamical system simulation), System Generator also provides access to features in the underlying FPGA.</div>
+      <div class="Body"><a name="270991">The more you know about a hardware realization (e.g., how to exploit parallelism and </a>pipelining), the better the implementation you’ll obtain. Using IP cores makes it possible to have efficient FPGA designs that include complex functions like FFTs. System Generator also makes it possible to refine a model to more accurately fit the application.</div>
+      <div class="Body"><a name="270993">Scattered throughout the System Generator documentation are notes that explain ways in </a>which system parameters can be used to exploit hardware capabilities.</div>
+      <div class="Heading2"><a name="270995">Note to the Hardware Engineer</a></div>
+      <div class="Body"><a name="270996">System Generator does not replace hardware description language (HDL)-based design, </a>but does makes it possible to focus your attention only on the critical parts. By analogy, most DSP programmers do not program exclusively in assembler; they start in a higher-level language like C, and write assembly code only where it is required to meet performance requirements.</div>
+      <div class="Body"><a name="330472">A good rule of thumb is this: in the parts of the design where you must manage internal </a>hardware clocks (e.g., using the DDR or phased clocking), you should implement using HDL. The less critical portions of the design can be implemented in System Generator, and then the HDL and System Generator portions can be connected. Usually, most portions of a signal processing system do not need this level of control, except at external interfaces. System Generator provides mechanisms to import HDL code into a design (see <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Importing_HDL_Modules.9.1.html#279243', '');" title="Importing HDL Modules">Importing HDL Modules</a></span>) that are of particular interest to the HDL designer.</div>
+      <div class="Body"><a name="330477">Another aspect of System Generator that is of interest to the engineer who designs using </a>HDL is its ability to automatically generate an HDL testbench, including test vectors. This aspect is described in the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.6.5.html#284113', '');" title="Automatic Code Generation">HDL Testbench</a></span>. </div>
+      <div class="Body"><a name="318031">Finally, the hardware co-simulation interfaces described in the topic </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.1.html#321096', '');" title="Using Hardware Co-Simulation">Using Hardware Co-Simulation</a></span> allow you to run a design in hardware under the control of Simulink, bringing the full power of MATLAB and Simulink to bear for data analysis and visualization. </div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

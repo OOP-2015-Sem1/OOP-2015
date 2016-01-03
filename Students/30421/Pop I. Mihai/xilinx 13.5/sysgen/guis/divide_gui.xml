@@ -1,0 +1,80 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Divide" block_type="divide">
+  <icon width="55" height="53" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen" entry_point="FPOBlockDescriptor_config"/>
+  <handlers enablement="divideenablement" action="divideaction"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsMath"/>
+    <library name="xbsFloatingPoint"/>
+  </libraries>
+  <blockgui label="Xilinx Divider">
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <etch name="axi_options" label="AXI Interface">
+          <editbox name="infoedit" read_only="true" multi_line="true" default="Blocking: Wait for data on all inputs, allow back-pressure.&lt;br&gt;NonBlocking: operate every cycle in which all inputs are valid, no back-pressure." evaluate="false"/>
+          <radiogroup name="flow_control" default="NonBlocking" top_label="false" evaluate="false" label="Flow Control" ctype="String" allow_advanced="false">
+            <item value="Blocking"/>
+            <item value="NonBlocking"/>
+          </radiogroup>
+          <radiogroup name="axi_optimize_goal" default="Resources" top_label="false" evaluate="false" label="Optimize Goal" ctype="String" allow_advanced="false">
+            <item value="Resources"/>
+            <item value="Performance"/>
+          </radiogroup>
+        </etch>
+	<etch name="fixed_point_etch" label="Fixed-point Options">
+          <radiogroup name="algorithm_type" default="High_Radix" top_label="false" evaluate="false" label="Algorithm Type" ctype="String" allow_advanced="false">
+            <item value="Radix2"/>
+            <item value="High_Radix"/>
+          </radiogroup>
+          <editbox name="infoedit1" read_only="true" multi_line="true" default="Specify output fraction-width for Fixed-point division." evaluate="false"/>
+          <editbox name="fractional_width" default="16" top_label="false" evaluate="true" label="Output Fractional width" ctype="Int"/>
+        </etch>
+        <etch name="latencyrate_etch" label="Latency and Rate Specification">
+          <editbox name="latency" default="0" evaluate="true" label="Latency" ctype="Int"/>
+	  <editbox name="rate" default="1" evaluate="true" label="Cycles/operation" ctype="Int"/>
+        </etch>
+      </tab>
+      <tab name="Optional_Parameters_tab" label="Optional ports">
+        <glayout cols="2">
+        <etch name="a_channel_ports" label="Dividend Channel Ports">
+            <checkbox name="has_a_tlast" default="off" label="Has TLAST" ctype="Bool" allow_advanced="false"/>
+	    <checkbox name="has_a_tuser" default="off" label="Has TUSER" ctype="Bool" allow_advanced="false"/>
+	    <!-- <editbox name="a_tuser_width" default="1" top_label="false" evaluate="true" label="A tuser width" ctype="Int"/> -->
+        </etch>
+	<etch name="b_channel_ports" label="Divisor Channel Ports">
+            <checkbox name="has_b_tlast" default="off" label="Has TLAST" ctype="Bool" allow_advanced="false"/>
+            <checkbox name="has_b_tuser" default="off" label="Has TUSER" ctype="Bool" allow_advanced="false"/>
+	    <!-- <editbox name="b_tuser_width" default="1" top_label="false" evaluate="true" label="B tuser width" ctype="Int"/> -->
+        </etch>
+        </glayout>
+	<etch name="other_options" label="Control Options">
+          <checkbox name="en" default="off" label="Provide enable port" ctype="Bool" allow_advanced="false"/>
+	  <!-- <checkbox name="has_aresetn" default="off" label="Has aresetn" ctype="Bool" allow_advanced="false"/> -->
+          <checkbox name="has_result_tready" default="off" label="Has Result TREADY" ctype="Bool" allow_advanced="false"/>
+          <listbox name="result_tlast_behv" default="Pass_A_TLAST" evaluate="true" label="Output TLAST behavior" ctype="Int">
+            <item value="Pass_A_TLAST"/>
+            <item value="Pass_B_TLAST"/>
+            <item value="OR_all_TLASTs"/>
+            <item value="AND_all_TLASTs"/>
+          </listbox>
+        </etch>
+	<etch name="exception_signals" label="Exception Signals">
+            <checkbox name="has_underflow" default="off" label="UNDERFLOW" ctype="Bool" allow_advanced="false"/>
+            <checkbox name="has_overflow" default="off" label="OVERFLOW" ctype="Bool" allow_advanced="false"/>
+            <checkbox name="has_invalid_op" default="off" label="INVALID_OP" ctype="Bool" allow_advanced="false"/>
+            <checkbox name="has_divide_by_zero" default="off" label="DIVIDE_BY_ZERO" ctype="Bool" allow_advanced="false"/>
+        </etch>
+      </tab>
+      <tab name="implementationtab" label="Implementation">
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <hiddenvar name="fpo_op_type" default="mergeddivide" evaluate="false" ctype="String"/>
+  </blockgui>
+</sysgenblock>

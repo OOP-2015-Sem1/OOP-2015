@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!--
+########################################################################
+##
+## Copyright (c) 2010 Xilinx, Inc.  All rights reserved.
+##
+########################################################################
+-->
+
+<!DOCTYPE doc SYSTEM "sg_ipdialog.dtd" [
+<!ENTITY C_BASEADDR '
+<widget id="C_BASEADDR">
+    <key>C_BASEADDR</key>
+    <label>C_BASEADDR</label>
+    <tip>Base Address</tip>
+</widget>
+'>
+<!ENTITY C_HIGHADDR '
+<widget id="C_HIGHADDR">
+    <key>C_HIGHADDR</key>
+    <label>C_HIGHADDR</label>
+    <tip>High Address</tip>
+</widget>
+'>
+$T.memmap_info.fromregs:{<!ENTITY C_MEMMAP_$it.name;format="toUpper"$ '
+<widget id="C_MEMMAP_$it.name;format="toUpper"$">
+    <key>C_MEMMAP_$it.name;format="toUpper"$</key>
+    <label>C_MEMMAP_$it.name;format="toUpper"$</label>
+    <tip>From Register
+    data type: $it.type_str$</tip>
+</widget>
+'>};separator="\n"$
+$T.memmap_info.toregs:{<!ENTITY C_MEMMAP_$it.name;format="toUpper"$ '
+<widget id="C_MEMMAP_$it.name;format="toUpper"$">
+    <key>C_MEMMAP_$it.name;format="toUpper"$</key>
+    <label>C_MEMMAP_$it.name;format="toUpper"$</label>
+    <tip>To Register
+    data type: $it.type_str$</tip>
+</widget>
+'>};separator="\n"$
+$T.memmap_info.fromfifos:{<!ENTITY C_MEMMAP_$it.name;format="toUpper"$ '
+<widget id="C_MEMMAP_$it.name;format="toUpper"$">
+    <key>C_MEMMAP_$it.name;format="toUpper"$</key>
+    <label>C_MEMMAP_$it.name;format="toUpper"$</label>
+    <tip>From FIFO
+    data type: $it.type_str$</tip>
+</widget>
+'>};separator="\n"$
+$T.memmap_info.tofifos:{<!ENTITY C_MEMMAP_$it.name;format="toUpper"$ '
+<widget id="C_MEMMAP_$it.name;format="toUpper"$">
+    <key>C_MEMMAP_$it.name;format="toUpper"$</key>
+    <label>C_MEMMAP_$it.name;format="toUpper"$</label>
+    <tip>To FIFO
+    data type: $it.type_str$</tip>
+</widget>
+'>};separator="\n"$
+$T.memmap_info.shmems:{<!ENTITY C_MEMMAP_$it.name;format="toUpper"$ '
+<widget id="C_MEMMAP_$it.name;format="toUpper"$">
+    <key>C_MEMMAP_$it.name;format="toUpper"$</key>
+    <label>C_MEMMAP_$it.name;format="toUpper"$</label>
+    <tip>Shared Memory
+    data type: $it.type_str$</tip>
+</widget>
+'>};separator="\n"$
+]>
+
+<doc>
+<view id="Memory Map Information">
+    <display>Memory Map Information</display>
+    <group id="All">
+        <display>All</display>
+        <item>&C_BASEADDR;</item>
+$T.memmap_info.fromregs:{        <item>&C_MEMMAP_$it.name;format="toUpper"$;</item>};separator="\n"$
+$T.memmap_info.toregs:{        <item>&C_MEMMAP_$it.name;format="toUpper"$;</item>};separator="\n"$
+$T.memmap_info.fromfifos:{        <item>&C_MEMMAP_$it.name;format="toUpper"$;</item>};separator="\n"$
+$T.memmap_info.tofifos:{        <item>&C_MEMMAP_$it.name;format="toUpper"$;</item>};separator="\n"$
+$T.memmap_info.shmems:{        <item>&C_MEMMAP_$it.name;format="toUpper"$;</item>};separator="\n"$
+    </group>
+    <group id="From/To Registers">
+        <display>From/To Registers</display>
+        <item>&C_BASEADDR;</item>
+$T.memmap_info.fromregs:{        <item>&C_MEMMAP_$it.name;format="toUpper"$;</item>};separator="\n"$
+$T.memmap_info.toregs:{        <item>&C_MEMMAP_$it.name;format="toUpper"$;</item>};separator="\n"$
+    </group>
+    <group id="From/To FIFOs">
+        <display>From/To FIFOs</display>
+        <item>&C_BASEADDR;</item>
+$T.memmap_info.fromfifos:{        <item>&C_MEMMAP_$it.name;format="toUpper"$;</item>};separator="\n"$
+$T.memmap_info.tofifos:{        <item>&C_MEMMAP_$it.name;format="toUpper"$;</item>};separator="\n"$
+    </group>
+    <group id="Shared Memories">
+        <display>Shared Memories</display>
+        <item>&C_BASEADDR;</item>
+$T.memmap_info.shmems:{        <item>&C_MEMMAP_$it.name;format="toUpper"$;</item>};separator="\n"$
+    </group>
+</view>
+</doc>

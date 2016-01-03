@@ -1,0 +1,60 @@
+package require xilinxSimUtilities 1.0
+namespace import ::xilinx::sim::utilities::*
+
+package require xilinxSimGeneration 1.0
+namespace import ::xilinx::sim::generation::*
+
+package require xilinxSimGenerationIPModel 1.0
+namespace import ::xilinx::sim::generation::IPModel::*
+
+set ipDir [file dirname [file dirname [info script]]]
+set ipGuiDir [file join $ipDir gui]
+set ipUtil [file join $ipGuiDir ${ipkey}_util.tcl]
+source $ipUtil
+
+set sysgenbuild [GetSysgenInstallDir]
+if {$sysgenbuild == ""} {
+    message ERROR "Could not find System Generator Installation"
+}
+
+set sysgen_coregen_util_dir [file join $sysgenbuild sysgen coregen util]
+
+proc sysgen_setup { sysgenbuild_arg sysgen_coregen_util_dir_arg } {
+    variable sysgenbuild
+    variable sysgen_coregen_util_dir
+   
+    set sysgenbuild $sysgenbuild_arg
+    set sysgen_coregen_util_dir $sysgen_coregen_util_dir_arg
+}
+
+sysgen_setup $sysgenbuild $sysgen_coregen_util_dir
+
+proc generate {} {
+    variable simParameters
+    variable preferences
+    variable sysgen_coregen_util_dir
+    variable coreName
+       
+    message DEBUG "coreName = $coreName\n \n"
+    # Guard against 2x running
+    ::xilinx::sim::generation::GenerationProc
+
+    #Obtain generatuion settings
+    set design_entry [set preferences(designentry)]
+    if {[string tolower $design_entry] == "vhdl"} {
+        set hdl_suffix ".vhd"
+    } else {
+        set hdl_suffix ".v"
+    }
+    set ComponentName [getComponentName]
+    set CoregenTmpDir  [file normalize [set preferences(workingdirectory)] ]
+    set WorkingDirectory [file join $CoregenTmpDir $ComponentName]
+    set sysgenNetlistDir $WorkingDirectory
+    set sysgen_dut [string range $coreName 0 end-3]
+    set sysgen_cw ${sysgen_dut}_cw
+
+    set sysgen_generator_util_tcl  [file join $sysgen_coregen_util_dir sysgen_generator_util.tcl]
+    source $sysgen_generator_util_tcl
+    __deliverSysgenResults ${ComponentName} ${sysgen_cw} ${sysgenNetlistDir} ${hdl_suffix} ${WorkingDirectory}
+    return
+}

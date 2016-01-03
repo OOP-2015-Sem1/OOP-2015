@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>XtremeDSP Co-Simulation</title>
+    <link rel="StyleSheet" href="css/XtremeDSP%20Kit.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="XtremeDSP%20Kit.13.1.html#271191">Xilinx XtremeDSP Kit Blockset</a> : XtremeDSP Co-Simulation</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="271191">XtremeDSP Co-Simulation</a></div>
+      <div class="Body"><a name="604333"><img class="Default" src="images/XtremeDSP%20Kit.13.3.1.jpg" width="56" height="77" style="display: block; float: none; left: 0.0; top: 0.0" alt="" />The Xilinx XtremeDSP Co-simulation block can be used in place of a </a>Simulink subsystem that was compiled for XtremeDSP co-simulation. During simulation, the block behaves exactly as the subsystem from which it originated, except that the simulation data is processed in hardware instead of software. </div>
+      <div class="Body"><a name="604337">The port interface of the co-simulation block will vary. When a model is </a>compiled for co-simulation, a new library is created that contains a custom XtremeDSP hardware co-simulation block. This block has input and output ports that match the gateway names (or port names if the subsystem is not the top level) from the original model. </div>
+      <div class="Body"><a name="277407">The hardware co-simulation block interacts with the XtremeDSP development kit board </a>during a Simulink simulation. Simulation data that is written to the input ports of the block are passed to the hardware by the block. Conversely, when data is read from the co-simulation block's output ports, the block reads the appropriate values from the hardware and drives them on the output ports so they can be interpreted in Simulink. In addition, the block automatically opens, configures, steps, and closes the development kit board.</div>
+      <div class="Heading2"><a name="277410">Block Parameters</a></div>
+      <div class="Body"><a name="277411">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model.</div>
+      <div class="Heading3"><a name="604375">Basic tab</a></div>
+      <div class="Body"><a name="323184">Parameters specific to the Basic tab are as follows:</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="604399">Clock source</a></span>: You may select between Single stepped and Free running clock sources. Selecting a Single Stepped clock allows the block to step the board one clock cycle at a time. Each clock cycle step corresponds to some duration of time in Simulink Using this clock source ensures the behavior of the co-simulation hardware during simulation will be bit and cycle accurate when compared to the simulation behavior of the subsystem from which it originated. Sometimes single stepping is not necessary and the board can be run with a Free Running clock. In this case, the board will operate asynchronously to the Simulink simulation. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="604401">Frequency (MHz)</a></span>: When Free Running clock mode is selected, you may specify the operating frequency that the free running clock should be programmed to run at during simulation. The selected clock frequency will be rounded to the nearest valid frequency available from the programmable oscillator. Note: You must take care to specify a frequency that does not exceed the maximum operating frequency of the model's FPGA implementation. The valid operating frequencies of the programmable oscillator are listed below: </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="604405">20 MHz; 25 MHz; 30 MHz; 33.33 MHz; 40 MHz; 45 MHz; 50 MHz; 60 MHz; 66.66 MHz; </a>70 MHz; 75 MHz; 80 MHz; 90 MHz; 100 MHz; 120 MHz. </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="604409">Card number</a></span>: Specifies the index of the XtremeDSP development kit card to use for hardware co-simulation. A default value of 1 should be used unless you have multiple XtremeDSP kit boards installed. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="604411">Bus</a></span>: Allows you to choose the interface in which the co-simulation block communicates with the XtremeDSP development kit board during a Simulink simulation. You may select between PCI and USB interfaces. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="604413">Has combinational path</a></span>: Sometimes it is necessary to have a direct combinational feedback path from an output port on a hardware co-simulation block to an input port on the same block (e.g., a wire connecting an output port to an input port on a given block). If you require a direct feedback path from an output to input port, and your design does not include a combinational path from any input port to any output port, un-checking this box allows the feedback path in the design. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="323185">Bitstream name</a></span>: Specifies the co-simulation FPGA configuration file for the XtremeDSP development kit board. When a new co-simulation block is instantiated during compilation, this parameter is automatically set so that it points to the appropriate configuration file. You need only adjust this parameter if the location of the configuration file changes.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

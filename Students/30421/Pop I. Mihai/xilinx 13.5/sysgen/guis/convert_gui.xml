@@ -1,0 +1,83 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Convert" block_type="convert">
+  <initialization file="xlconvert_init.m"/>
+  <icon width="45" height="30" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="Convert_config"/>
+  <handlers enablement="convertenablement" action="convertaction"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsBasic"/>
+    <library name="xbsTypes"/>
+    <library name="xbsMath"/>
+    <library name="xbsFloatingPoint"/>
+  </libraries>
+  <blockgui label="Xilinx Type Converter">
+    <editbox name="infoedit" default="Hardware notes: rounding and saturating require hardware resources; truncating and wrapping do not." read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <etch name="outputetch" label="Output Type">
+          <radiogroup name="gui_display_data_type" default="Fixed-point" evaluate="true" label="" ctype="Int">
+            <item value="Boolean" label="Boolean"/>
+            <item value="Fixed-point" label="Fixed-point"/>
+            <item value="Floating-point" label="Floating-point"/>
+          </radiogroup>
+          <listbox name="arith_type" default="Signed  (2's comp)" evaluate="true" label="Arithmetic type" ctype="Int">
+            <item value="Boolean"/>
+            <item value="Signed  (2's comp)"/>
+            <item value="Unsigned"/>
+            <item value="Floating-point"/>
+          </listbox>
+	      <etch name="fixedetch" label="Fixed-point Precision">
+            <glayout cols="2">
+              <editbox name="n_bits" default="16" evaluate="true" label="Number of bits" ctype="Int"/>
+	          <editbox name="bin_pt" default="14" evaluate="true" label="Binary point" ctype="Int"/>
+            </glayout>
+          </etch>
+          <etch name="floatetch" label="Floating-point Precision">
+            <radiogroup name="float_type" default="Single" evaluate="true" label="" ctype="Int">
+              <item value="Single" label="Single"/>
+              <item value="Double" label="Double"/>
+              <item value="Custom" label="Custom"/>
+            </radiogroup>
+            <glayout cols="2">
+              <editbox name="exp_bits" default="8" evaluate="true" label="Exponent width" ctype="Int"/>
+              <editbox name="fraction_bits" default="24" evaluate="true" label="Fraction width" ctype="Int"/>
+            </glayout>
+          </etch>
+        </etch>
+        <radiogroup name="quantization" default="Truncate" evaluate="true" label="Quantization" ctype="Int">
+          <item value="Truncate" label="Truncate"/>
+          <item value="Round  (unbiased: +/- Inf)" label="Round  (unbiased: +/- Inf)"/>
+          <item value="Round  (unbiased: Even Values)" label="Round  (unbiased: even values)"/>
+        </radiogroup>
+        <radiogroup name="overflow" default="Wrap" evaluate="true" label="Overflow" ctype="Int">
+          <item value="Wrap" label="Wrap"/>
+          <item value="Saturate" label="Saturate"/>
+          <item value="Flag as error" label="Flag as error"/>
+        </radiogroup>
+        <etch name="optportetch" label="Optional Ports">
+          <checkbox name="en" default="off" evaluate="true" label="Provide enable port" ctype="Int"/>
+        </etch>
+        <editbox name="latency" default="0" evaluate="true" label="Latency" ctype="Int"/>
+      </tab>
+      <tab name="advancedtab" label="Advanced">
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <etch label="Performance Parameters">
+          <checkbox name="pipeline" default="off" evaluate="true" label="Pipeline for maximum performance" ctype="Int"/>
+        </etch>
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <workspacevar name="sysgen_root" ctype="String"/>
+    <workspacevar name="sim_engine" ctype="Int"/>
+  </blockgui>
+</sysgenblock>

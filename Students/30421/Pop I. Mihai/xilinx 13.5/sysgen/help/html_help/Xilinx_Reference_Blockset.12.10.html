@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>CIC Filter</title>
+    <link rel="StyleSheet" href="css/Xilinx_Reference_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Reference_Blockset.12.01.html#632217">Xilinx Reference Blockset</a> : CIC Filter</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="632217">CIC Filter</a></div>
+      <div class="Body"><a name="743653"><img class="Default" src="images/Xilinx_Reference_Blockset.12.10.1.jpg" width="51" height="53" style="display: block; float: none; left: 0.0; top: 0.0" alt="" />Cascaded integrator-comb (CIC) filters are multirate filters used for realizing </a>large sample rate changes in digital systems. Both decimation and interpolation structures are supported. CIC filters contain no multipliers; they consist only of adders, subtractors and registers. They are typically employed in applications that have a large excess sample rate; that is, the system sample rate is much larger than the bandwidth occupied by the signal. CIC filters are frequently used in digital down-converters and digital up-converters.</div>
+      <div class="Body"><a name="743654">Implementation details are provided in the filter design subsystems. To read the </a>annotations, place the block in a model, then right-click on the block and select <span class="Bold">Explore </span>from the popup menu. Double click on one of the sub-blocks to open the sub-block model and read the annotations.</div>
+      <div class="Heading2"><a name="632223">Block Interface</a></div>
+      <div class="Body"><a name="632224">The CIC Block has a single data input port and a data output port: </a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="632225">xn : data input port, can be between 1 and 128 bits (inclusive). </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="632226">yn : data output port </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="632227">The two basic building blocks of a CIC filter are the integrator and the comb. A single </a>integrator is a single-pole IIR filter with a transfer function of: </div>
+      <div class="Body"><a name="632228">H(z) = (1 - z</a><span class="Superscript">-1</span> )<span class="Superscript">-1</span> </div>
+      <div class="Body"><a name="632229">The integrator's unity feedback coefficient is y[n] = y[n-1] + x[n]. </a></div>
+      <div class="Body"><a name="632230">A single comb filter is an odd-symmetric FIR filter described by: </a></div>
+      <div class="Body"><a name="632231">y[n] = x[n] - x[n - RM] </a></div>
+      <div class="Body"><a name="632232">M is the differential delay selected in the block dialog box, and R is the selected integer rate </a>change factor. The transfer function for a single comb stage is </div>
+      <div class="Body"><a name="632233">H(z) = 1 -z</a><span class="Superscript">-RM</span> </div>
+      <div class="Body"><a name="632234">As seen in the two figures below, the CIC filter cascades N integrator sections together with </a>N comb sections. To keep the integrator and comb structures independent of rate change, a rate change block (i.e., an up-sampler or down-sampler) is inserted between the sections. In the interpolator, the up-sampler causes a rate increase by a factor of R by inserting R-1 zero-valued samples between consecutive samples of the comb section output. In the decimator, the down-sampler reduces the sample rate by a factor of R by taking subsamples of the output from the last integrator stage. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="632240"><img class="Default" src="images/Xilinx_Reference_Blockset.12.10.2.jpg" width="396" height="151" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="632241">Block Parameters</a></div>
+      <div class="Body"><a name="632242">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model. </div>
+      <div class="Body"><a name="632243">Parameters specific to this reference block are as follows:</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632244">Input Bit Width</a></span>: Width of input sample. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632245">Input Binary Point</a></span>: Binary point location of input. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632246">Filter Type</a></span>: Interpolator or Decimator </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632247">Sample Rate Change</a></span>: 8 to 16384 (inclusive) </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632248">Number of Stages</a></span>: 1 to 32 (inclusive) </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632249">Differential Delay</a></span>: 1 to 4 (inclusive) </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632250">Pipeline Differentiators</a></span>: On or Off </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="632255">Reference</a></div>
+      <div class="Body"><a name="632256">E. B. Hogenauer. </a><span class="Italic">An economical class of digital filters for decimation and interpolation.</span> IEEE Transactions on Acoustics, Speech and Signal Processing, ASSP- 29(2):155{162, 1981 </div>
+      <div class="Body"><a name="632257">&nbsp;</a></div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

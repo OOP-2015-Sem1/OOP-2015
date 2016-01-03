@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Importing HDL Modules</title>
+    <link rel="StyleSheet" href="css/Importing_HDL_Modules.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">Importing HDL Modules</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="ChapterTitle"><a name="279243">Importing HDL Modules</a></div>
+      <div class="Body"><a name="281267">Sometimes it is important to add one or more existing HDL modules to a System Generator </a>design. The System Generator Black Box block allows VHDL, Verilog, and EDIF to be brought into a design. The <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.011.html#327797', '');" title="Black Box">Black Box</a></span> block behaves like other System Generator blocks - it is wired into the design, participates in simulations, and is compiled into hardware. When System Generator compiles a Black Box block, it automatically wires the imported module and associated files into the surrounding netlist.</div>
+      <table class="Column" style="text-align: left; width: 381.5114pt" cellspacing="0" summary="">
+        <caption>
+          <div class="TableTitle">
+            <span class="XTable_002fFigureTitle">Table 9‑1:&nbsp;</span><a name="299138">&nbsp;</a></div>
+        </caption>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 381.5114pt" colspan="2">
+            <div class="CellHeadingLeft"><a name="281270">The Black Box Interface</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top; width: 148.8664pt">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Importing_HDL_Modules.09.2.html#279296', '');" title="Black Box HDL Requirements and Restrictions" name="281276">Black Box HDL Requirements and Restrictions</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top; width: 232.645pt">
+            <div class="CellBody"><a name="281279">Details the requirements and restrictions for VHDL, </a>Verilog, and EDIF associated with black boxes.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Importing_HDL_Modules.09.3.html#279618', '');" title="Black Box Configuration Wizard" name="281283">Black Box Configuration Wizard</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="281286">Describes how to use the </a><span style="font-size: 10.0pt">Black Box Configuration </span><span style="font-size: 10.0pt">Wizard</span>. </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Importing_HDL_Modules.09.4.html#280204', '');" title="Black Box Configuration M-Function" name="281290">Black Box Configuration M-Function</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="281293">Describes how to create a black box configuration M-</a>function. </div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="281313">&nbsp;</a></div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 381.5114pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 381.5114pt" colspan="2">
+            <div class="CellHeadingLeft"><a name="281296">HDL Co-Simulation</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top; width: 148.8664pt">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Importing_HDL_Modules.09.5.html#270770', '');" title="HDL Co-Simulation" name="281303">Configuring the HDL Simulator</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top; width: 232.645pt">
+            <div class="CellBody"><a name="281305">Explains how to configure ISE®</a><span style="font-size: 10.0pt"> Software </span>or ModelSim to co-simulate the HDL in the Black Box block.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Importing_HDL_Modules.09.5.html#270771', '');" title="HDL Co-Simulation" name="281309">Co-Simulating Multiple Black Boxes</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="281312">Describes how to co-simulate several Black Box blocks </a>in a single HDL simulator session.</div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="281361">&nbsp;</a></div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 381.5114pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top; width: 148.8664pt">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Importing_HDL_Modules.09.6.html#274983', '');" title="Black Box Examples" name="282595">Black Box Tutorial Example 1: Importing a Core Generator Module that Satisfies Black Box HDL Requirements</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top; width: 232.645pt">
+            <div class="CellBody"><a name="282598">Describes an approach that uses the System Generator </a><span style="font-size: 10.0pt">Black Box Configuration Wizard</span>. </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Importing_HDL_Modules.09.6.html#275339', '');" title="Black Box Examples" name="282602">Black Box Tutorial Example 2: Importing a Core Generator Module that Needs a VHDL Wrapper to Satisfy Black Box HDL Requirements</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="282605">Describes an approach that requires that you to </a>provide a VHDL core wrapper. Simulation issues are also addressed.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Importing_HDL_Modules.09.6.html#282397', '');" title="Black Box Examples" name="282609">Black Box Tutorial Example 3: Importing a VHDL Module</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="282612">Describes how to use the Black Box block to import </a>VHDL into a System Generator design and how to use ModelSim to co-simulate.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Importing_HDL_Modules.09.6.html#282770', '');" title="Black Box Examples" name="282616">Black Box Tutorial Example 4: Importing a Verilog Module</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="282619">Demonstrates how Verilog black boxes can be used in </a>System Generator and co-simulated using ModelSim.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Importing_HDL_Modules.09.6.html#282523', '');" title="Black Box Examples" name="282623">Black Box Tutorial Example 5: Dynamic Black Boxes</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="282626">Demonstrates dynamic black boxes using a transpose </a>FIR filter black box that dynamically adjusts to changes in the widths of its inputs.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Importing_HDL_Modules.09.6.html#282530', '');" title="Black Box Examples" name="282630">Black Box Tutorial Example 6: Simulating Several Black Boxes Simultaneously</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="282633">Demonstrates how several System Generator Black </a>Box Blocks can be co-simulated simultaneously, using only one ModelSim license while doing so.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Importing_HDL_Modules.09.6.html#282566', '');" title="Black Box Examples" name="282637">Black Box Tutorial Exercise 7: Advanced Black Box Example Using ModelSim</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="282640">Describes how to design a Black Box block with a </a>dynamic port interface and how to configure a black box using mask parameters. Also, describes how to assign generic values based on input port data types and how to save black box blocks in Simulink libraries for later reuse. How to specify custom scripts for ModelSim HDL co-simulation is also covered.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Importing_HDL_Modules.09.6.html#296979', '');" title="Black Box Examples" name="296673">Black Box Tutorial Example 8: Importing, Simulating, and Exporting an Encrypted VHDL File</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="296676">Describes how to import a design as an encrypted </a>VHDL file into a Black Box block, simulate the design, then export the VHDL back out as a separate encrypted file from the rest of the netlist.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Importing_HDL_Modules.09.6.html#307233', '');" title="Black Box Examples" name="307280">Black Box Tutorial Exercise 9: Prompting a User for Parameters in a Simulink Model and Passing Them to a Black Box</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="307283">Describes how to access generics/parameters from </a>the masked counter and pass them onto the black box to override the default local parameters in the VHDL file.</div>
+          </td>
+        </tr>
+      </table>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

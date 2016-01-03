@@ -1,0 +1,9 @@
+input_image = imread('Peppers.png');
+[rows, cols, depth] = size(input_image);
+im_size = rows;
+R = input_image(:,:,1);
+R = R(:);
+G = input_image(:,:,2);
+G = G(:);
+B = input_image(:,:,3);
+B = B(:);

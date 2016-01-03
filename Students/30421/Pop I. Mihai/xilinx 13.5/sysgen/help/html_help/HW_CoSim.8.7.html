@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Ethernet Hardware Co-Simulation</title>
+    <link rel="StyleSheet" href="css/HW_CoSim.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="HW_CoSim.8.1.html#270896">Using Hardware Co-Simulation</a> : Ethernet Hardware Co-Simulation</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="270896">Ethernet Hardware Co-Simulation</a></div>
+      <div class="Body"><a name="276555">System Generator provides hardware co-simulation interfaces that facilitate high-</a>throughput communication with an FPGA board over an Ethernet connection. These interfaces eliminate the communication range limitation imposed by programming cable solutions, while also offering superior bandwidth for real-time applications. By supporting device configuration over Ethernet, there is no need for a separate programming cable. </div>
+      <div class="Body"><a name="276548">Two flavors of Ethernet hardware co-simulation are supported by the tool. Point-to-point </a>Ethernet co-simulation provides a straightforward high-performance co-simulation environment using a direct, point-to-point Ethernet connection between a PC and FPGA board. Network-based Ethernet Co-Simulation allows communication with a remote FPGA through the widely deployed IPv4 network infrastructure. </div>
+      <div class="Heading2"><a name="270898">Point-to-Point Ethernet Hardware Co-Simulation</a></div>
+      <div class="Body"><a name="276912">Point-to-point Ethernet Hardware Co-simulation provides a co-simulation interface using </a>a raw Ethernet connection. The raw Ethernet connection refers to a Layer 2 (a.k.a. Data-Link Layer) Ethernet connection, between a supported FPGA development board and a host PC, with no network routing equipment along the path. By taking the advantage of the ubiquity and advancement of Ethernet technologies, the interface facilitates a convenient and high-bandwidth co-simulation to an external FPGA device. </div>
+      <div class="Heading3"><a name="276915">Interface Features</a></div>
+      <div class="Body"><a name="316597">The interface supports 10/100/1000 Mbps half/full duplex modes. Jumbo Frame is also </a>supported on a Gigabit Ethernet, provided it is enabled by the underlying connection. For FPGA device configuration, the interface supports either JTAG-based configuration over a Xilinx Parallel Cable IV or a Xilinx Platform USB cable, or , for selected boards, Ethernet-based configuration over the same Point-to-point Ethernet connection for co-simulation. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="276922">This co-simulation interface utilizes an evaluation version of the Ethernet MAC core. Because </a>this is an evaluation version of the core, it will become dysfunctional after continuous, prolonged operation (e.g., around 7 hours) in the target FPGA. Operation of the core will restart with a new simulation. For more information about obtaining the full version of the core, please visit the product page at <span class="URL"><a href="http://www.xilinx.com/xlnx/xebiz/designResources/ip_product_details.jsp?key=TEMAC" target="external_window">http://www.xilinx.com/xlnx/xebiz/designResources/ip_product_details.jsp?key=TEMAC</a></span>. </div>
+      <div class="Heading3"><a name="276925">Supported FPGA Development Boards</a></div>
+      <div class="Body"><a name="276928">Development boards that support point-to-point ethernet hardware co-simulation are </a>listed in the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.2.html#307244', '');" title="Installing Your Hardware Board">Ethernet-Based Hardware Co-Simulation</a></span>. Links to the appropriate board installation instructions are also provided.</div>
+      <div class="Heading3"><a name="276965">Configuring Co-Simulation Block Parameters</a></div>
+      <div class="Body"><a name="283593">There are several block parameters specific to the Point-to-point Ethernet co-simulation </a>interface. The rest of this topic describes step-by-step how to configure the parameters of the Point-to-point Ethernet co-simulation block. Refer to the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.70.html#2081397', '');" title="Point-to-point Ethernet Co-Simulation">Point-to-point Ethernet Co-Simulation</a></span>  in the Xilinx Block section for details of all the block parameters.</div>
+      <div class="Numbered_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="276603">Use the </a><span class="Bold">Basic</span> tab to select the appropriate clock source for the co-simulation.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="277744"><img class="Default" src="images/HW_CoSim.8.7.1.jpg" width="520" height="201" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="298311">Use the </a><span class="Bold">Configuration</span> tab to select the Configuration Method:</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="299001"><img class="Default" src="images/HW_CoSim.8.7.2.jpg" width="517" height="190" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="299084">For the </a><span class="Bold">Download cable</span> panel, choose <span class="Bold">Point-to-point Ethernet. </span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="299101">For JTAG-based download cables (</a><span class="Bold">Parallel Cable IV</span> or <span class="Bold">Platform USB</span>), change the cable speed if the default value is not suitable for the cable in use.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="299112">Change the </a><span class="Bold">Configuration timeout (ms)</span> value only when necessary. The default value should suffice in most cases. A larger value is needed when it takes a considerable amount of time to re-establish a network connection with the FPGA board after device configuration completes.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="337824">If there is a Video I/O daughter card attached to the ML402 board, select </a><span class="Bold">Video </span><span class="Bold">I/O Daughter Card (VIODC)</span> from the <span class="Bold">Configuration profile</span> pulldown menu</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="337840">Use the </a><span class="Bold">Ethernet</span> tab to configure the Ethernet Interface Settings:</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="337839"><img class="Default" src="images/HW_CoSim.8.7.3.jpg" width="527" height="327" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="337841">From the </a><span class="Bold">Host interface</span> panel, use the pulldown list to select the appropriate network interface for co-simulation.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Note3">
+        <span class="XNote">Note:&nbsp;</span><a name="300024">The pull down list only shows those Ethernet-compatible network interfaces installed </a>on the host, which support 10/100/1000 Mbps, and are currently enabled and attached to an active Ethernet segment. If the target interface is not listed as expected, examine the connection and click the <span class="Bold">Refresh</span> button to update the list.</div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="277420">The information box beneath the pull-down list provides the details about the </a>selected interface. Examine the information to ensure the appropriate interface is chosen, and adjust the network settings in the operating system when necessary.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="277426">Depending on which configuration method is chosen, the MAC address in the </a><span class="Bold">FPGA </span><span class="Bold">interface</span> panel may need to be changed.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedSub_inner" style="width: 18pt; white-space: nowrap;">a.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedSub_inner"><a name="277432">For Point-to-point Ethernet-based configuration:</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="277434">Observe the MAC address displayed on the LCD screen of the target board when the </a>configuration boot-loader is running. Change the FPGA MAC address in the co-simulation block if the default value does not match the target board. Refer to <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.12.html#348036', '');" title="Installing Your Board for Ethernet Hardware Co-Simulation">Optional Step to Set the Ethernet MAC Address and the IPv4 Address</a></span> for details about assigning the MAC address on a ML402 board.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="277849"><img class="Default" src="images/HW_CoSim.8.7.4.jpg" width="512" height="172" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="277436">The MAC address must be specified using six pairs of two-digit hexadecimal number </a>separated by colons (for example, 00:0a:35:11:22:33).</div>
+      <div class="Heading3"><a name="277439">Co-Simulating the Design</a></div>
+      <div class="Body"><a name="277442">After setting the block parameters appropriately, you may begin co-simulation by pressing </a>the Simulink <span class="Bold">Start</span> button. System Generator automates the device configuration process and transfers the design under test (DUT) into the FPGA device for co-simulation. A dialog box will be shown to describe the status of the process. </div>
+      <div class="Numbered_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="277446">The final configuration file is first generated based on the input bitstream specified in </a>the block parameters.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="277871"><img class="Default" src="images/HW_CoSim.8.7.5.jpg" width="368" height="161" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="277452">The final configuration file is then transferred to the target board using the selected </a>download cable, and used to configure the FPGA device. The progress of configuration is shown in the dialog box when the configuration is performed over a Point-to-point Ethernet connection.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="277884"><img class="Default" src="images/HW_CoSim.8.7.6.jpg" width="364" height="161" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="277458">Upon the completion of device configuration, the co-simulation engine re-establishes </a>the connection to the target board, and starts co-simulating the design.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="277897"><img class="Default" src="images/HW_CoSim.8.7.7.jpg" width="366" height="162" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="313714">Known Issues</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="313715">If you encounter problems transmitting data over a point-to-point Ethernet </a>connection or experience instability issues, please disable the Hyper-Threading option in the BIOS on an Intel board. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="313716">IP fragmentation is not supported by the network-based Ethernet configuration. </a>Please consult with your network administrator or the user manual for the Ethernet interface card to ensure that the connection established between the host and the target FPGA board can handle a maximum transmission unit (MTU) size of at least 1300 bytes without fragmentation. The MTU size (or similarly maximum frame size setting such as “maximum transfer size” or “jumbo frame size”) may be determined or changed through the Ethernet interface settings.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="311776">Network-Based Ethernet Hardware Co-Simulation</a></div>
+      <div class="Heading3"><a name="311778">Interface Features</a></div>
+      <div class="Body"><a name="311779">The interface supports operations in 10/100/1000 Mbps half/full duplex modes. For </a>FPGA device configuration, the interface supports Ethernet-based configuration over the same network connection for co-simulation. This means that a separate programming cable (e.g., Parallel Cable IV) is not required. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="311780">This co-simulation interface utilizes an evaluation version of the Ethernet MAC core. Because </a>this is an evaluation version of the core, it will become dysfunctional after continuous, prolonged operation (e.g., around 7 hours) in the target FPGA. Operation of the core will restart with a new simulation. For more information about obtaining the full version of the core, please visit the product page at <span class="URL"><a href="http://www.xilinx.com/xlnx/xebiz/designResources/ip_product_details.jsp?key=TEMAC" target="external_window">http://www.xilinx.com/xlnx/xebiz/designResources/ip_product_details.jsp?key=TEMAC</a></span>. </div>
+      <div class="Heading3"><a name="311783">Supported FPGA Development Boards</a></div>
+      <div class="Body"><a name="311784">The Xilinx ML402 and ML506 development board is currently supported for the network-</a>based Ethernet co-simulation. </div>
+      <div class="Heading3"><a name="311785">Setup Procedures</a></div>
+      <div class="Numbered_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="311786">Network-based Ethernet co-simulation performs device configuration over the </a>network configuration. Before using network configuration, you must ensure the IP address, MAC address, and configuration server are properly setup on the System ACE™ CompactFlash. Refer to the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.12.html#348036', '');" title="Installing Your Board for Ethernet Hardware Co-Simulation">Optional Step to Set the Ethernet MAC Address and the IPv4 Address</a></span> for information on how to do this. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="311791">The target FPGA listens on the UDP port 9999. Please ensure the underlying network </a>does not block the associated traffic. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading3"><a name="311799">Known Issues</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="336738">IP fragmentation is not supported by the network-based Ethernet configuration. </a>Please consult with your network administrator or the user manual for the Ethernet interface card to ensure that the connection established between the host and the target FPGA board can handle a maximum transmission unit (MTU) size of at least 1300 bytes without fragmentation. The MTU size (or similarly maximum frame size setting such as “maximum transfer size” or “jumbo frame size”) may be determined or changed through the Ethernet interface settings.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="347653">Remote JTAG Cable Support in JTAG Co-Simulation</a></div>
+      <div class="Body"><a name="351876">Starting with Release 12.2, JTAG Co-simulation supports a remote JTAG cable connection </a>via the CSE (ChipScope Engine) server (which is also being used with iMPACT software and ChipScope Pro software). This allows you to run JTAG Co-simulation over a JTAG cable that is connected to a board in a remote location. </div>
+      <div class="Heading3"><a name="351877">Specifying the Cable Location</a></div>
+      <div class="Body"><a name="351878">As shown in the figure below, the “Cable Location” option on the Cable tab of the JTAG </a>Co-simulation block is used to specify the location of the cable.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="351884"><img class="Default" src="images/HW_CoSim.8.7.8.jpg" width="357" height="301" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="351885">If the Cable Location is set to </a><span class="Bold">Local</span>, a local JTAG cable is used.</div>
+      <div class="Body"><a name="351886">If the Cable Location is set to </a><span class="Bold">Remote CSE Server</span>, you can specify a CSE server, in form of a host name or an IP address, followed by an optional port number: </div>
+      <div class="Code"><a name="351887">&lt;host name or IP address&gt; [ :&lt;port number&gt; ]</a></div>
+      <div class="Body"><a name="351894">If you omit the port number, the default port number is used by the CSE server.</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="351893"><img class="Default" src="images/HW_CoSim.8.7.9.jpg" width="358" height="302" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="351895">Starting Up a CSE server</a></div>
+      <div class="Body"><a name="351896">Before starting JTAG co-simulation, you need to start the CSE server on the remote </a>machine that connects to the target board with a JTAG cable. The CSE server can be started by simply running the CSE server executable located in the ISE installation: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="351897">Windows 32-bit</a></span>: <span class="Filename">&lt;ISE_tree&gt;\bin\nt\cse_server.exe</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="351898">Windows 64-bit</a></span>: <span class="Filename">&lt;ISE_tree&gt;\bin\nt64\cse_server.exe</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="351899">Linux 32-bit</a></span>: <span class="Filename">&lt;ISE_tree&gt;/bin/lin/cse_server</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="351900">Linux 64-bit</a></span>: <span class="Filename">&lt;ISE_tree&gt;/bin/lin64/cse_server</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><span class="Filename"><a name="351901">cse_server</a></span> starts a CSE server with the default port number.</div>
+      <div class="Body"><span class="Filename"><a name="347957">cse_server -port &lt;port number&gt;</a></span> starts a CSE server with the given port number.</div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

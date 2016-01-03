@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Multiple Subsystem Generator</title>
+    <link rel="StyleSheet" href="css/Xilinx_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Blockset.11.001.html#573408">Xilinx Blockset</a> : Multiple Subsystem Generator</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="573408">Multiple Subsystem Generator</a></div>
+      <div class="Body"><span class="Italic"><a name="276502">This block is listed in the following Xilinx Blockset libraries: Shared Memory and Index.</a></span></div>
+      <div class="OneLiner"><a name="276505"><img class="Default" src="images/Xilinx_Blockset.11.069.1.jpg" width="55" height="65" style="display: block; float: none; left: 0.0; top: 0.0" alt="" />The Xilinx Multiple Subsystem Generator block wires two or more System </a>Generator designs into a single top-level HDL component that incorporates multiple clock domains. This top-level component includes the logic associated with each System Generator design and additional logic to allow the designs to communicate with one another. </div>
+      <div class="Body"><a name="1104544">In software, this communication is handled using shared memory and </a>shared memory derivative blocks (e.g., Shared Memory, To/From FIFO, and To/From Register blocks). In hardware, the designs are interfaced to hardware implementations (e.g., dual-port memory, asynchronous FIFOs, and registers) of their shared memory counterparts, making it possible to partition and implement systems with multiple clock domains.</div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="2109541">The Multiple Subsystem Generator block does not support designs that include an EDK </a>Processor block</div>
+      <div class="Heading2"><a name="276506">Block Parameters</a></div>
+      <div class="Body"><a name="573419">The block parameters dialog box can be invoked by double-clicking the Multiple </a>Subsystem Generator icon in your Simulink model. </div>
+      <div class="Body"><a name="573429">Parameters specific to the Multiple Subsystem Generator block are: </a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="573433">Part</a></span>: Defines the FPGA part to be used. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="574171">Target Directory</a></span>: Defines where System Generator should write compilation results. Because System Generator and the FPGA physical design tools typically create many files, it is best to specify a separate target directory, i.e., a directory other than the directory containing your Simulink model files. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="573437">Synthesis Tool</a></span>: Specifies the tool to be used to synthesize the design. Tool choices are Synplicity's Synplify Pro or Synplify, and Xilinx's XST. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="573439">Hardware Description Language</a></span>: Tells the type of HDL language (Verilog or VHDL) that should be generated for each design. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="573442">Design Generation</a></div>
+      <div class="Body"><a name="573561">The Multiple Subsystem Generator block performs the following steps when you press the </a><span class="Bold">Generate</span> button in the block's parameters dialog box:</div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="574201">It determines the System Generator designs that should be generated and wired </a>together. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="574203">It configures each System Generator design with appropriate settings and generates </a>the designs individually. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="574205">It produces hardware implementations (e.g., core netlists) for the shared memory </a>blocks. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="574207">It generates a top-level HDL file that includes the System Generator designs wired </a>together with the corresponding shared memory hardware implementations. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="574211">The Multiple Subsystem Generator block determines which subsystems to implement and </a>wire together by searching for subsystems that contain System Generator blocks that reside at the same level of hierarchy as the Multiple Subsystem Generator block. Inclusion of the Multiple Subsystem Generator block in a Simulink design is restricted in the following ways: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="574215">System Generator blocks may not be included in the same level of hierarchy as the </a>Multiple Subsystem Generator block. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="574217">There must be at least two master System Generator tokens in subsystems located in </a>the same level of hierarchy as the Multiple Subsystem Generator block. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="574219">Only one Multiple Subsystem Generator block may be included in a given level of </a>hierarchy. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="574197">For example, consider the example block diagram shown below. This diagram comprises </a>two subsystems, and it is assumed that each subsystem contains a System Generator token along with some amount of System Generator logic. Note that although only two subsystems are shown in the diagram, the Multiple Subsystem Generator block can accommodate any number of subsystems. A Multiple Subsystem Generator block is included in the same level of hierarchy as the two subsystems. When a user chooses to generate the overall design using the Multiple Subsystem Generator block, the subsystems are generated and then wired together. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="575209"><img class="Default" src="images/Xilinx_Blockset.11.069.2.jpg" width="234" height="193" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="574368">A subsystem that includes a master System Generator token is implemented using the </a>NGC compilation target when the <span class="Bold">Generate</span> button is pressed on the Multiple Subsystem Generator block. Using the NGC compilation target has the advantage of allowing the resulting HDL netlist, cores, and constraints to be delivered as a single netlist file. The HDL component that stitches the designs together instantiates the System Generator designs as black boxes; the NGC files provide the black box implementations. For the example shown above, three separate NGC files would be generated – one corresponding to each subsystem. </div>
+      <div class="Body"><a name="574372">Before a design is generated, it is configured with the Part, Synthesis Tool, and Hardware </a>Description Language parameters specified in the Multiple Subsystem Generator dialog box. These settings override the settings of the master System Generator tokens. Note that the original System Generator token settings are restored once generation is complete. </div>
+      <div class="Body"><a name="574376">Subsystems that are wired together using the Multiple Subsystem Generator block can </a>communicate with one another using a pair of Shared Memory blocks, To/From FIFO blocks, or To/From Register blocks. The block pairs must be partitioned so that one block resides in one subsystem (e.g., To FIFO block) while the other partner half resides in a different subsystem (e.g., From FIFO block). </div>
+      <div class="Body"><a name="574380">When the complete design is translated into hardware, the two FIFO halves are pulled out </a>of their respective subsystems. The System Generator logic that was previously attached to shared memory ports (e.g., data in, data out) are then wired to new top-level ports for that design. This means that one subsystem HDL component includes ports for one half of the shared memory, while the other half has ports for the other shared memory side. A hardware implementation of the shared memory is then created and wired to the top-level shared memory ports. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="574384">The Multiple Subsystem Generator block does not currently support multiple shared memory </a>blocks referencing the same shared memory object in the same subsystem. For example, a To FIFO block cannot be used to communicate to two From FIFO blocks placed in other subsystems. </div>
+      <div class="Body"><a name="574364">Consider an example with two subsystems, A and B, where subsystem A contains a To </a>FIFO block and subsystem B contains a From FIFO block. The opposing halves of the FIFO specify the same shared memory name, my_fifo. When the design is netlisted using the Multiple Subsystem Generator block, the To FIFO and From FIFO blocks are removed from their respective subsystems, and merged into a single core implementation (e.g., Asynchronous FIFO Core). This process is shown in the figure below. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="575101"><img class="Default" src="images/Xilinx_Blockset.11.069.3.jpg" width="244" height="205" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="575213">The table below provides the core or HDL component implementation that is used to </a>implement shared memory and shared memory derivative blocks. </div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 316.8pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 79.2pt">
+            <div class="CellHeadingLeft"><a name="576049">To Block</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 79.2pt">
+            <div class="CellHeadingLeft"><a name="576051">From Block</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 158.4pt">
+            <div class="CellHeadingLeft"><a name="576053">Hardware Implementation</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="576055">Shared Memory</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="576073">Shared Memory</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="576059">Dual Port Block Memory</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="576061">To FIFO</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="576075">To FIFO</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="576065">Fifo Generator</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="576067">To Register</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="576077">To Register</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="576071">synth_reg_w_init.(vhd,v)</a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="575223">Shared memory blocks should be used as the only means of communication between the </a>subsystems. Do not use explicit System Generator signals to communicate between subsystems, as these are ultimately translated into top-level ports on the top-level HDL component that is created by the Multiple Subsystem Generator block. </div>
+      <div class="Body"><a name="575227">All gateway ports included in the System Generator designs considered by the Multiple </a>Subsystem Generator block are included in the top-level HDL component port interface. In addition, individual clock and clock enable ports are included in the port interface for each System Generator subsystem. The clock and clock enable port names are differentiated by the design name, which prefixes the port names. For example, assume the subsystem named <span class="Filename">Domain A</span> has one input port named <span class="Filename">inport_a</span> and one output port named <span class="Filename">outport_a</span>. Also assume the subsystem named <span class="Filename">Domain B</span> has one input port named <span class="Filename">inport_b</span> and one output port named <span class="Filename">outport_b</span>. The VHDL port interface for the resulting top-level entity is provided below: </div>
+      <div class="Code"><a name="575231">entity multiple_subsys_ex is </a></div>
+      <div class="Code"><a name="575233">port ( </a></div>
+      <div class="Code"><a name="575235">&nbsp;</a>&nbsp;domain_a_ce: in std_logic := '1'; </div>
+      <div class="Code"><a name="575237">&nbsp;</a>&nbsp;domain_a_clk: in std_logic; </div>
+      <div class="Code"><a name="575239">&nbsp;</a>&nbsp;domain_b_ce: in std_logic := '1'; </div>
+      <div class="Code"><a name="575241">&nbsp;</a>&nbsp;domain_b_clk: in std_logic; </div>
+      <div class="Code"><a name="575243">&nbsp;</a>&nbsp;inport_a: in std_logic_vector(17 downto 0); </div>
+      <div class="Code"><a name="575245">&nbsp;</a>&nbsp;inport_b: in std_logic_vector(17 downto 0); </div>
+      <div class="Code"><a name="575247">&nbsp;</a>&nbsp;outport_a: out std_logic_vector(17 downto 0); </div>
+      <div class="Code"><a name="575249">&nbsp;</a>&nbsp;outport_b: out std_logic_vector(17 downto 0) </div>
+      <div class="Code"><a name="575251">); </a></div>
+      <div class="Body"><a name="575253">end multiple_subsys_ex; </a></div>
+      <div class="Heading2"><a name="575256">Multiple Clock Support</a></div>
+      <div class="Body"><a name="575259">Because each subsystem considered by the Multiple Subsystem Generator block has a </a>master System Generator token, it is possible to specify different clocking information (e.g., Simulink system period, FPGA clock period) in each block. By specifying different Simulink system periods, each System Generator design can run at a different rate during simulation, allowing you to effectively model systems that utilize asynchronous clock domains. </div>
+      <div class="Body"><a name="575263">The Multiple Subsystem Generator creates a separate clock port for each subsystem that </a>was generated. The clock ports are then routed to the corresponding clock port on the System Generator design. When a design that uses multiple clocks is netlisted (i.e., translated from a high-level model into a lower level HDL description) the two shared memory halves are moved from their respective subsystems into the upper level of hierarchy. The two halves of the shared memory pair are then replaced with a single HDL component that implements the clock domain bridge (e.g., a dual-port memory). Clocks from the two domains are then connected to the opposing sides of the bridge component, along with the necessary data and control signals. </div>
+      <div class="Heading2"><a name="575264">Files Generated</a></div>
+      <div class="Body"><a name="575219">The Multiple Subsystem Generator produces several low level files when the </a><span class="Bold">Generate</span> button is pushed. These files are written to the target directory specified on the Multiple Subsystem Generator block dialog box. The key files produced by this block are defined in the following table:</div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 356.4pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 118.8pt">
+            <div class="CellHeadingLeft"><a name="576118">File Name Type</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 237.6pt">
+            <div class="CellHeadingLeft"><a name="576120">Description</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="576122">&lt;design&gt;.vhd (or .v)</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="576124">Top-level HDL component that contains the System </a>Generator designs stitched together.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="576126">.edn files</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="576128">Besides writing HDL, the Multiple Subsystem </a>Generator runs CORE Generator<span style="font-size: 10.0pt">™</span> to implement shared memory hardware implementations. Coregen writes EDIF files whose names typically look something like multiplier_virtex2_6_0_83438798287b830b.edn.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="576138">globals</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="576140">This file consists of key/value pairs that describe the </a>design. The file is organized as a Perl hash table so that the keys and values can be made available to Perl scripts using Perl evals.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="576134">&lt;design&gt;.xcf (or .ncf)</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="576136">This contains timing and port location constraints. </a>These are used by the Xilinx synthesis tool XST and the Xilinx implementation tools. If the synthesis tool is set to something other than XST, then the suffix is changed to .ncf.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="576130">hdlFiles</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="576132">This tells full list of HDL files written by the Multiple </a>Subsystem Generator block. The files are listed in the usual HDL dependency order. </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="576170">&lt;design&gt;.npl</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="576172">This allows the HDL and EDIF to be brought into the </a>Xilinx project management tool Project Navigator.</div>
+          </td>
+        </tr>
+      </table>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

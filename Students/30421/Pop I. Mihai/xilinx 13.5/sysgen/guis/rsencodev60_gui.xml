@@ -1,0 +1,75 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="RS Encoder v6_0 " block_type="rsencodev60">
+  <initialization file="xlrsencode_init.m"/>
+  <icon width="95" height="142" wmark_color="white" bg_color="green"/>
+  <dll name="sysgen_blockset" entry_point="RSencoder_config"/>
+  <handlers enablement="rsencodeenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsComm"/>
+  </libraries>
+  <blockgui label="Xilinx Reed-Solomon Encoder">
+    <editbox name="infoedit" default="Systematic Reed-Solomon (RS) encoder. The encoder transforms each block of k information symbols presented serially at the input port to a block of n symbols presented serially at the output port." read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <listbox name="code_spec" default="DVB" evaluate="true" label="Code specification" ctype="Int">
+          <item value="Custom"/>
+          <item value="ATSC"/>
+          <item value="CCSDS"/>
+          <item value="DVB"/>
+          <item value="IESS-308 (126)"/>
+          <item value="IESS-308 (194)"/>
+          <item value="IESS-308 (208)"/>
+          <item value="IESS-308 (219)"/>
+          <item value="IESS-308 (225)"/>
+          <item value="ITU J.83 Annex B"/>
+        </listbox>
+        <editbox name="num_channels" default="1" top_label="true" evaluate="true" label="Number of channels (integer between 1 and 128)" ctype="Int"/>
+        <etch label="Optional Ports">
+          <checkbox name="r_in" default="off" evaluate="true" label="Provide variable number of check symbols port (&lt;tt&gt;r_in&lt;/tt&gt;)" ctype="Bool"/>
+          <checkbox name="n_in" default="off" evaluate="true" label="Provide variable block Length port (&lt;tt&gt;n_in&lt;/tt&gt;)" ctype="Bool"/>
+          <checkbox name="nd" default="off" evaluate="true" label="Provide new data port (&lt;tt&gt;nd&lt;/tt&gt;)" ctype="Bool"/>
+          <checkbox name="rdy" default="off" evaluate="true" label="Provide ready port (&lt;tt&gt;rdy&lt;/tt&gt;)" ctype="Bool"/>
+          <checkbox name="rfd" default="off" evaluate="true" label="Provide ready for data port (&lt;tt&gt;rfd&lt;/tt&gt;)" ctype="Bool"/>
+          <checkbox name="rffd" default="off" evaluate="true" label="Provide ready for first data port (&lt;tt&gt;rffd&lt;/tt&gt;)" ctype="Bool"/>
+          <checkbox name="rst" default="off" evaluate="true" label="Provide synchronous reset port" ctype="Bool"/>
+          <checkbox name="en" default="off" evaluate="true" label="Provide enable port" ctype="Bool"/>
+        </etch>
+      </tab>
+      <tab name="customtab" label="Custom Specification">
+        <editbox name="sym_width" default="8" top_label="true" evaluate="true" label="Symbol width (integer between 3 and 12)" ctype="Int"/>
+        <editbox name="nn" default="204" top_label="true" evaluate="true" label="n (number of symbols per code block)" ctype="Int"/>
+        <editbox name="kk" default="188" top_label="true" evaluate="true" label="k (number of information symbols per code block)" ctype="Int"/>
+        <editbox name="poly_char" default="[1 0 0 0 1 1 1 0 1]" top_label="true" evaluate="true" label="Field polynomial (example: [1 0 1 1] =&gt; x^3  +  x  +  1)"/>
+        <editbox name="gen_start" default="0" top_label="true" evaluate="true" label="Generator start (log of first root of generator polynomial)" ctype="Int"/>
+        <editbox name="scale" default="1" top_label="true" evaluate="true" label="Scaling factor for generator polynomial" ctype="Int"/>
+        <etch name="simetch" label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <etch label="Core Parameters">
+          <radiogroup name="mem_style" default="Automatic" evaluate="true" label="Memory style" ctype="Int">
+            <item value="Automatic" label="Automatic"/>
+            <item value="Block" label="Block"/>
+            <item value="Distributed" label="Distributed"/>
+          </radiogroup>
+          <radiogroup name="sym_generator" default="Optimized for area" evaluate="true" label="Check Symbol Generator" ctype="Int">
+            <item value="Optimized for area" label="Optimized for area"/>
+            <item value="Optimized for flexibility" label="Optimized for flexibility"/>
+          </radiogroup>
+          <checkbox name="use_rpm" default="off" evaluate="true" label="Use core placement information" ctype="Bool"/>
+        </etch>
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <workspacevar name="alpha" ctype="Int"/>
+    <workspacevar name="poly" ctype="String"/>
+    <hiddenvar name="core_version" default="6.0" evaluate="false" ctype="String"/>    
+  </blockgui>
+</sysgenblock>

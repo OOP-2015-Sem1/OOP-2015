@@ -1,0 +1,110 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta http-equiv="Content-Style-Type" content="text/css">
+   <title>SRAM</title>
+<link rel="STYLESHEET" href="sysgen.css" charset="ISO-8859-1"
+ type="text/css">
+</head>
+<body bgcolor="#FFFFFF">
+&nbsp;
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="100%" >
+<caption><tbody>
+<br></tbody></caption>
+
+<tr>
+<td WIDTH="10"></td>
+
+<td BGCOLOR="#F0E0B0">&nbsp;<b>Xilinx XtremeDSP Development Kit</b></td>
+
+<td ALIGN=RIGHT WIDTH="150" BGCOLOR="#F0E0B0"></td>
+
+<td WIDTH="10"></td>
+</tr>
+</table>
+
+<h5 class="Section2">
+<a NAME="pgfId-256149"></a><font size=+2>External RAM</font></h5>
+
+<table BORDER=0 CELLSPACING=8 CELLPADDING=2 >
+<caption><tbody>
+<br></tbody></caption>
+
+<tr>
+<td VALIGN=TOP><img SRC="images/sram_icon.gif" height=127 width=140 align=LEFT></td>
+
+<td>
+<blockquote class="Body">The Xilinx XtremeDSP External RAM block allows
+System Generator components to connect to the external 256K x 16 ZBT SRAM
+on the Nallatech BenAdda board when a model is prepared for hardware co-simulation.&nbsp;
+<p>The&nbsp; block provides a Simulink simulation model for the memory
+device.&nbsp; The ports on the block look and behave like ports on a traditional
+synchronous RAM device.&nbsp; The <i>address</i> port should be driven
+by an unsigned 18-bit Xilinx fixed point signal having binary point at
+position 0.&nbsp; The <i>we</i> port should be driven by a Xilinx boolean
+signal.&nbsp; The <i>data</i> port should be driven by a 16-bit Xilinx
+fixed point signal.&nbsp; The block drives 16-bit Xilinx fixed point data
+values on its output port.&nbsp;
+<p>In hardware, components that read from and write to the&nbsp; block
+in Simulink&nbsp; read from and write to the Micron ZBT SRAM device on
+the BenAdda board.&nbsp; When a System Generator model that uses an external
+RAM block is translated into hardware, the ports on the RAM block are translated
+into top-level input and output ports on the model HDL.&nbsp; The appropriate
+pin location constraints for these ports are included in the BenAdda constraints
+file.&nbsp; The ZBT SRAM device uses the same clock as the System Generator
+portion of the hardware co-simulation implementation.&nbsp;&nbsp;
+<p>Although there are different configurations for the SRAM available,
+the memory configuration used by this block is the only one currently available.&nbsp;
+A datasheet for the Micron ZBT SRAM can be found online at:&nbsp;
+<p><i><a href="http://download.micron.com/pdf/datasheets/sram/MT55L512L18P_C.pdf">http://download.micron.com/pdf/datasheets/sram/MT55L512L18_C.pdf</a></i>
+<br>&nbsp;</blockquote>
+</td>
+</tr>
+</table>
+
+<h6 class="Section3">
+<a NAME="pgfId-442391"></a><font size=+0>Block Parameters Dialog Box</font></h6>
+
+<blockquote class="Body"><a NAME="pgfId-442389"></a>The block parameters
+dialog box can be invoked by double-clicking the icon in your Simulink
+model.</blockquote>
+
+<center>
+<p><br><img SRC="images/sram_gui.gif" height=254 width=376>
+<p><b><font face="Arial,Helvetica"><font size=-1>XtremeDSP External RAM
+block parameters dialog box</font></font></b>.</center>
+
+<h6 class="FigureHTML">
+<font size=+0>External RAM block parameters dialog box</font></h6>
+
+<ul>
+<li class="Bulleted">
+<i>Output Data Type </i>:&nbsp; selects the output data type of the RAM.&nbsp;
+You may choose between unsigned and signed (two's complement) data types.</li>
+</ul>
+
+<ul>
+<li class="Bulleted">
+<i>Data Binary Point </i>: selects the binary point position of the data
+values stored as the memory contents. The binary point position must be
+between 0 and 16 (the data width).</li>
+</ul>
+
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="100%" >
+<caption><tbody>
+<br></tbody></caption>
+
+<tr>
+<td WIDTH="10"></td>
+
+<td BGCOLOR="#F0E0B0">&nbsp;<b>Xilinx XtremeDSP Development Kit</b></td>
+
+<td ALIGN=RIGHT WIDTH="150" BGCOLOR="#F0E0B0"></td>
+
+<td WIDTH="10"></td>
+</tr>
+</table>
+
+</body>
+</html>

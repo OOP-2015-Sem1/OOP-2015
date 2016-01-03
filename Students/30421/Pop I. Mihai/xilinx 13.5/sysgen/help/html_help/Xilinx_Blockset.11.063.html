@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>JTAG Co-Simulation</title>
+    <link rel="StyleSheet" href="css/Xilinx_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Blockset.11.001.html#407445">Xilinx Blockset</a> : JTAG Co-Simulation</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="407445">JTAG Co-Simulation</a></div>
+      <div class="Body"><a name="276158">&nbsp;</a></div>
+      <div class="OneLiner"><a name="407461"><img class="Default" src="images/Xilinx_Blockset.11.063.1.jpg" width="64" height="75" style="display: block; float: none; left: 0.0; top: 0.0" alt="" />The Xilinx JTAG Co-Simulation block allows you to perform hardware co-</a>simulation using JTAG and a Parallel Cable IV or Platform USB. The JTAG hardware co-simulation interface takes advantage of the ubiquity of JTAG to extend System Generator's hardware in the simulation loop capability to numerous other FPGA platforms. </div>
+      <div class="Body"><a name="407465">The port interface of the co-simulation block varies. When a model is </a>implemented for JTAG hardware co-simulation, a new library is created that contains a custom JTAG co-simulation block with ports that match the gateway names (or port names if the subsystem is not the top level) from the original model. The co-simulation block interacts with the FPGA hardware platform during a Simulink simulation. Simulation data that is written to the input ports of the block are passed to the hardware by the block. Conversely, when data is read from the co-simulation block's output ports, the block reads the appropriate values from the hardware and drives them on the output ports so they can be interpreted in Simulink. In addition, the block automatically opens, configures, steps, and closes the platform. </div>
+      <div class="Body"><a name="407469">Refer to </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.08.07.html#270896', '');" title="Ethernet Hardware Co-Simulation">Ethernet Hardware Co-Simulation</a></span>  for JTAG hardware requirements, and information on how to support new platforms.</div>
+      <div class="Heading2"><a name="276164">Block Parameters</a></div>
+      <div class="Body"><a name="276165">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model.</div>
+      <div class="Heading3"><a name="572910">Basic tab</a></div>
+      <div class="Body"><a name="323069">Parameters specific to the Basic tab are as follows:</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="572769">Clock source</a></span>: You may select between Single stepped and Free running clock sources. Selecting a Single stepped clock allows the block to step the board one clock cycle at a time. Each clock cycle step corresponds to some duration of time in Simulink Using this clock source ensures the behavior of the co-simulation hardware during simulation will be bit and cycle accurate when compared to the simulation behavior of the subsystem from which it originated. Sometimes single stepping is not necessary and the board can be run with a Free Running clock. In this case, the board will operate asynchronously to the Simulink simulation. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="572771">Has combinational path</a></span>: Sometimes it is necessary to have a direct combinational feedback path from an output port on a hardware co-simulation block to an input port on the same block (e.g., a wire connecting an output port to an input port on a given block). If you require a direct feedback path from an output to input port, and your design does not include a combinational path from any input port to any output port, un-checking this box will allow the feedback path in the design. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="572773">Bitstream name</a></span>: Specifies the co-simulation FPGA configuration file for the JTAG hardware co-simulation platform. When a new co-simulation block is created during compilation, this parameter is automatically set so that it points to the appropriate configuration file. You need only adjust this parameter if the location of the configuration file changes.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading3"><a name="572939">Advanced tab</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="572775">Skip device configuration</a></span>: Selecting this option causes the co-simulation block to skip the device configuration phase at the beginning of a simulation. Doing so is useful for co-simulation designs that do not need to be reset (or reprogrammed) at the end of a simulation. This checkbox should be used with caution since the co-simulation platform is not programmed when this checkbox is selected. This means that it is possible to perform hardware co-simulation without a co-simulation bitstream loaded on the hardware platform. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading3"><a name="572953">Cable tab</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2392029">Type</a></span> Select one of the following: <span class="Bold">Auto Detect</span>, <span class="Bold">Xilinx Parallel Cable IV</span>, <span class="Bold">Xilinx </span><span class="Bold">Platform USB</span>, <span class="Bold">Xilinx Point-to-point Ethernet</span>, <span class="Bold">Custom</span>. When <span class="Bold">Auto Detect</span> is selected, JTAG co-simulation automatically scans through different JTAG cables (LPT1-LPT4, USB21-USB216) and picks the first FPGA device that matches what the design is targeted for.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="572777">Similarly, you can select </a><span class="Bold">Xilinx Parallel Cable IV</span>, <span class="Bold">Xilinx Platform USB</span>, or <span class="Bold">Custom</span> to use the different JTAG configuration cables. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="323070">Speed</a></span>: Sometimes you may need to run the programming cable at a frequency less than the default (maximum) speed setting for hardware co-simulation. This menu allows you to choose a cable speed that is suitable for your hardware setup. Normally the default speed will suffice, however, it is recommended to try a slower cable speed if System Generator fails to configure the device for co-simulation.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2392042">Port</a></span> Select the port name for the JTAG cable.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2392050">Blink Cable LED</a></span> When Xilnx Platform USB is selected, you can click on this button to activate a blinking light next to the cable connector on the hardware board.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2392054">Plug-in Parameters</a></span> Specify the plug-in parameters for a<span class="Bold"> Custom</span> cable. This field uses the same syntax as that used by ChipScope/iMPACT.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Code"><a name="2392055">&lt;plugin&gt; &lt;param1&gt;=&lt;value1&gt; &lt;param2&gt;=&lt;value2&gt;</a></div>
+      <div class="Body2"><a name="2392062">For example, see the figure below:</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="2392061"><img class="Default" src="images/Xilinx_Blockset.11.063.2.jpg" width="296" height="113" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body2"><a name="2392063">Refer to the Chipscope/iMPACT user documentation for further details on the cable </a>plugin parameters.</div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="1277118">Shared cable for concurrent access</a></span>: This option allows the JTAG cable to be shared with EDK XMD and ChipScope™ Pro Analyzer during a JTAG co-simulation. When the option is checked, the JTAG co-simulation engine only acquires a lock on the cable access and then immediately releases the lock when the access completes. Otherwise, the JTAG co-simulation engine holds the lock throughout the simulation. Due to the significant overhead on locking and unlocking the cable, this cable sharing option is disabled by default and only enabled when you check the box.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading3"><a name="2392497">Shared Memories tab</a></div>
+      <div class="Body"><a name="2392498">Displays the names of the shared memories that are detected in the design to be simulated.</a></div>
+      <div class="Heading3"><a name="2392499">Software tab</a></div>
+      <div class="Body"><a name="2392500">Parameters specific to the Network tab are as follows:</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2392501">Enable Co-Debug with Xilinx SDK</a></span>: On by default, clicking this item off disables the SDK Co-Debug feature in Sysgen</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading4"><a name="2392502">Xilinx Software Development Kit (SDK)</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2392503">Workspace</a></span>: Specifies the pathname to the SDK workspace when SDK is started from Sysgen using the Launch Xilinx SDK button.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2392504">Launch Xilinx SDK</a></span>: Starts Xilinx SDK for use in a Sysgen/SDK Co-Debug session</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading4"><a name="2392505">Software Initialization</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2392506">ELF file</a></span>: Specifies the pathname to the SDK project ELF file.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2392507">BMM file</a></span>: Specifies the pathname to the SDK project BMM file.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="1282865">Other parameters used by this block are explained in the topic</a><br /><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.003.html#271277', '');" title="Common Options in Block Parameter Dialog Boxes">Common Options in Block Parameter Dialog Boxes</a></span>. </div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

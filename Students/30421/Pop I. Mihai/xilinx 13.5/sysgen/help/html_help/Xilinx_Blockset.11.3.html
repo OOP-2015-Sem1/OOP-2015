@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Common Options in Block Parameter Dialog Boxes</title>
+    <link rel="StyleSheet" href="css/Xilinx_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Blockset.11.1.html#271277">Xilinx Blockset</a> : Common Options in Block Parameter Dialog Boxes</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="271277">Common Options in Block Parameter Dialog Boxes</a></div>
+      <div class="Body"><a name="271889">Each Xilinx block has several controls and configurable parameters, seen in its block </a>parameters dialog box. This dialog box can be accessed by double-clicking on the block. Many of these parameters are specific to the block. Block-specific parameters are described in the documentation for the block. </div>
+      <div class="Body"><a name="271891">The remaining controls and parameters are common to most blocks. These common </a>controls and parameters are described below. </div>
+      <div class="Body"><a name="271881">Each dialog box contains four buttons: </a><span class="Bold">OK</span>, <span class="Bold">Cancel</span>, <span class="Bold">Help</span>, and <span class="Bold">Apply</span>. <span class="Bold">Apply</span> applies configuration changes to the block, leaving the box open on the screen. <span class="Bold">Help</span> displays HTML help for the block. <span class="Bold">Cancel</span> closes the box without saving changes. <span class="Bold">OK</span> applies changes and closes the box. </div>
+      <div class="Heading2"><a name="271086">Precision</a></div>
+      <div class="Body"><a name="271956">The fundamental computational mode in the Xilinx blockset is arbitrary precision fixe- </a>point arithmetic. Most blocks give you the option of choosing the precision, i.e. the number of bits and binary point position. </div>
+      <div class="Body"><a name="271958">By default, the output of Xilinx blocks is </a><span class="Italic">full</span> precision; that is, sufficient precision to represent the result without error. Most blocks have a <span class="Italic">User-Defined</span> precision option that fixes the number of total and fractional bits</div>
+      <div class="Heading2"><a name="271087">Arithmetic Type</a></div>
+      <div class="Body"><a name="272013">In the </a><span class="Bold">Type</span> field of the block parameters dialog box, you can choose unsigned or signed (two's complement) as the data type of the output signal. </div>
+      <div class="Heading2"><a name="271088">Number of Bits</a></div>
+      <div class="Body"><a name="272026">Fixed-point numbers are stored in data types characterized by their word size as specified </a>by number of bits, binary point, and arithmetic type parameters. The maximum number of bits supported is 4096.</div>
+      <div class="Heading2"><a name="272127">Binary Point</a></div>
+      <div class="Body"><a name="272151">The binary point is the means by which fixed-point numbers are scaled. The binary point </a>parameter indicates the number of bits to the right of the binary point (i.e., the size of the fraction) for the output port. The binary point position must be between zero and the specified number of bits.</div>
+      <div class="Heading2"><a name="271089">Overflow and Quantization</a></div>
+      <div class="Body"><a name="272189">When user-defined precision is selected, errors may result from overflow or quantization. </a>Overflow errors occur when a value lies outside the representable range. Quantization errors occur when the number of fractional bits is insufficient to represent the fractional portion of a value. </div>
+      <div class="Body"><a name="272191">The Xilinx fixed-point data type supports several options for user-defined precision. For </a>overflow the options are to<span class="Bold"> Saturate</span> to the largest positive/smallest negative value, to <span class="Bold">Wrap</span> (i.e., to discard bits to the left of the most significant representable bit), or to <span class="Bold">Flag as </span><span class="Bold">error</span> (an overflow as a Simulink error) during simulation. <span class="Bold">Flag as error</span> is a simulation only feature. The hardware generated is the same as when <span class="Bold">Wrap</span> is selected.</div>
+      <div class="Body"><a name="272195">For quantization, the options are to </a><span class="Bold">Round</span> to the nearest representable value (or to the value furthest from zero if there are two equidistant nearest representable values), or to <span class="Bold">Truncate</span> (i.e., to discard bits to the right of the least significant representable bit). </div>
+      <div class="Body"><a name="272199">The following is an image showing the Quantization and Overflow options. </a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="464782"><img class="Default" src="images/Xilinx_Blockset.11.3.1.jpg" width="512" height="67" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><span class="Bold"><a name="2178384">Round(unbiased: +/- inf) </a></span>also known as "Symmetric Round (towards +/- inf)" or "Symmetric Round (away from zero)". This is similar to the Matlab round() function. This method rounds the value to the nearest desired bit away from zero and when there is a value at the midpoint between two possible rounded values, the one with the larger magnitude is selected. For example, to round 01.0110 to a Fix_4_2, this yields 01.10, since 01.0110 is exactly between 01.01 and 01.10 and the latter is further from zero.</div>
+      <div class="Body"><span class="Bold"><a name="2178385">Round (unbiased: even values)</a></span> also known as "Convergent Round (toward even)" or "Unbiased Rounding". Symmetric rounding is biased because it rounds all ambiguous midpoints away from zero which means the average magnitude of the rounded results is larger than the average magnitude of the raw results. Convergent rounding removes this by alternating between a symmetric round toward zero and symmetric round away from zero. That is, midpoints are rounded toward the nearest even number. For example, to round 01.0110 to a Fix_4_2, this yields 01.10, since 01.0110 is exactly between 01.01 and 01.10 and the latter is even. To round 01.1010 to a Fix_4_2, this yields 01.10, since 01.1010 is exactly between 01.10 and 01.11 and the former is even.</div>
+      <div class="Body"><a name="272363">It is important to realize that whatever option is selected, the generated HDL model and </a>Simulink model will behave identically.</div>
+      <div class="Heading2"><a name="271090">Latency</a></div>
+      <div class="Body"><a name="272371">Many elements in the Xilinx blockset have a latency option. This defines the number of </a>sample periods by which the block's output is delayed. One sample period may correspond to multiple clock cycles in the corresponding FPGA implementation (for example, when the hardware is over-clocked with respect to the Simulink model). System Generator does not perform extensive pipelining; additional latency is usually implemented as a shift register on the output of the block.</div>
+      <div class="Heading2"><a name="271092">Provide Synchronous Reset Port</a></div>
+      <div class="Body"><a name="272623">Selecting the </a><span class="Bold">Provide Synchronous Reset Port</span> option activates an optional reset (<span class="Filename">rst</span>) pin on the block. </div>
+      <div class="Body"><a name="272625">When the reset signal is asserted the block goes back to its initial state. Reset signal has </a>precedence over the optional enable signal available on the block. The reset signal has to run at a multiple of the block's sample rate. The signal driving the reset port must be Boolean.</div>
+      <div class="Heading2"><a name="271093">Provide Enable Port</a></div>
+      <div class="Body"><a name="272704">Selecting the </a><span class="Bold">Provide Enable Port</span> option activates an optional enable (en) pin on the block. When the enable signal is not asserted the block holds its current state until the enable signal is asserted again or the reset signal is asserted. Reset signal has precedence over the enable signal. The enable signal has to run at a multiple of the block 's sample rate. The signal driving the enable port must be Boolean.</div>
+      <div class="Heading2"><a name="271094">Sample Period</a></div>
+      <div class="Body"><a name="272057">Data streams are processed at a specific sample rate as they flow through Simulink. </a>Typically, each block detects the input sample rate and produces the correct sample rate on its output. Xilinx blocks Up Sample and Down Sample provide a means to increase or decrease sample rates.</div>
+      <div class="Heading3"><a name="464835">Specify Explicit Sample Period</a></div>
+      <div class="Body"><a name="464856">If you select</a><span class="Bold"> Specify explicit sample period</span> rather than the default, you may set the sample period required for all the block outputs. This is useful when implementing features such as feedback loops in your design. In a feedback loop, it is not possible for System Generator to determine a default sample rate, because the loop makes an input sample rate depend on a yet-to-be-determined output sample rate. System Generator under these circumstances requires you to supply a hint to establish sample periods throughout a loop. </div>
+      <div class="Heading2"><a name="271096">Use Behavioral HDL (otherwise use core)</a></div>
+      <div class="Body"><a name="463848">When this checkbox is checked, the behavioral HDL generated by the M-code simulation is </a>used instead of the structural HDL from the cores. </div>
+      <div class="Body"><a name="463850">The M-code simulation creates the C simulation and this C simulation creates behavioral </a>HDL. When this option is selected, it is this behavioral HDL that is used for further synthesis. When this option is not selected, the structural HDL generated from the cores and HDL templates (corresponding to each of the blocks in the model) is used instead for synthesis. Cores are generated for each block in a design once and cached for future netlisting. This capability ensures the fastest possible netlist generation while guaranteeing that the cores will be available for downstream synthesis and place and route tools.</div>
+      <div class="Heading2"><a name="463875">Use Core Placement Information</a></div>
+      <div class="Body"><a name="463882">If </a><span class="Bold">Use Core Placement Information</span> is selected, the generated core includes relative placement information. This generally results in a faster implementation. Because the placement is constrained by this information, it can sometimes hinder the place and route software.</div>
+      <div class="Heading2"><a name="2177104">Use XtremeDSP Slice</a></div>
+      <div class="Body"><a name="2177105">This field specifies that if possible, use the XtremeDSP slice (DSP48 type element) in the </a>target device. Otherwise, CLB logic will be used for the multipliers.</div>
+      <div class="Heading2"><a name="463884">Placement</a></div>
+      <div class="Body"><a name="463876">For the multiplier core, this option is presented if Use Core Placement Information is </a>selected. This option allows specification of the layout shape in which the multiplier core will be placed in hardware. The <span class="Bold">Rectangular</span> option will generate a rectangular placed core with loosely placed LUTs. <span class="Bold">Triangular</span> packing will create a more compact shape with denser placement of LUTs.</div>
+      <div class="Heading2"><a name="466567">FPGA Area (Slices, FFs, LUTs, IOBs, Embedded Mults, TBUFs) / Use </a>Area Above For Estimation</div>
+      <div class="Body"><a name="466571">These fields are used by the </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.78.html#271164', '');" title="Resource Estimator">Resource Estimator</a></span> block. The Resource Estimator gives you the ability to calculate the hardware resources needed for your System Generator design. </div>
+      <div class="Body"><a name="272821">If you have placed a Resource Estimator in your design, you can use the </a><span class="Bold">FPGA Area</span> field to manually enter the FPGA area utilization of a specific block. If you do not fill in these values, the Resource Estimator will calculate and fill in these values automatically. </div>
+      <div class="Body"><a name="272825">If you wish to manually enter your own values for a specific block, then you must check </a>the <span class="Bold">Define FPGA area for resource estimation</span> box in order to force the Resource Estimator to use your entered values. Otherwise, the Resource Estimator will recalculate the FPGA Area and overwrite any values that you have entered into this field. </div>
+      <div class="Body"><a name="272829">There are seven values available to enter into the FPGA Area field. You must enter or read </a>each value in its correct position. If 'value=[1,2,3,4,5,6,7];' then: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="272833">value(1) = Slices utilized by the block. An FPGA slice usually consists of two flip-</a>flops, two LUTs and some associated mux, carry, and control logic. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="272837">value(2) = Flip Flops utilized by the block. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="272839">value(3) = Block RAM (BRAMs) utilized by the block. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="272841">value(4) = LUTs utilized by the block. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="272843">value(5) = IOBs consumed by the block. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="272845">value(6) = Embedded (Emb.) multipliers utilized by the block. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="272847">value(7) = Tristate Buffers (TBUFs) utilized by the block. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="272849">Only the Xilinx blocks that have a hardware cost (i.e., blocks that require physical </a>hardware resources) will be considered by the Resource Estimator. The FPGA Area field is omitted from blocks with no associated hardware. </div>
+      <div class="Body"><a name="272853">Although Slices are related to LUTs and Flops (Each Slice contains 1 LUT and 1 Flip Flop), </a>they are entered separately since the number of packed slices will vary depending on the particular design. </div>
+      <div class="Body"><a name="272857">Some Xilinx blocks do not support automatic resource estimation, as indicated in the </a>Resource Estimator block documentation. The FPGA Area field for these blocks will not be updated automatically, and attempting to do so will cause a warning message to be displayed in the MATLAB console.</div>
+      <div class="Heading2"><a name="2607801">Display shortened port names</a></div>
+      <div class="Body"><a name="2607818">AXI4-Stream signal names have been shortened (by default) to improve readability on the </a>block. Name shortening is purely cosmetic and when netlisting occurs, the full AXI4-Stream name is used. For example, a shortened master signal on an AXI4-Stream interface might be <span class="Filename">data_tvalid</span>. When <span class="Bold">Display shortened port names</span> is unchecked, the name becomes <span class="Filename">m_axis_data_tvalid</span>.</div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

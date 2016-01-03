@@ -1,0 +1,44 @@
+Set objWord = CreateObject("Word.Application")
+objWord.Visible = True
+
+Set objDoc = objWord.Documents.Add()
+Set objSelection = objWord.Selection
+
+objSelection.Style = "Heading 1"
+objSelection.Font.Name = "Helvetica"
+objSelection.Font.Size = "14"
+objSelection.Font.Italic = true
+objSelection.Font.Bold = true
+objSelection.TypeText "4.2 Functionality"
+objSelection.TypeParagraph()
+
+[% FOREACH PARAM = T.PARAMS -%]
+objSelection.Style = "Heading 3"
+objSelection.Font.Name = "Helvetica"
+objSelection.Font.Size = "13"
+objSelection.Font.Italic = false
+objSelection.Font.Bold = true
+objSelection.TypeText "4.1.[% PARAM.INDEX %] [% PARAM.NAME %]"
+objSelection.TypeParagraph()
+
+objSelection.Range.ListFormat.ApplyListTemplate objWord.ListGalleries(1).ListTemplates(1) 
+objSelection.Range.ListFormat.ListIndent
+objSelection.Font.Name = "Helvetica"
+objSelection.Font.Size = "12"
+objSelection.Font.Italic = false
+objSelection.Font.Bold = false
+objSelection.TypeText "Description: " & vbCrLf
+objSelection.TypeText "Tool tip: " & vbCrLf
+objSelection.TypeText "Type: [% PARAM.TYPE %]" & vbCrLf
+objSelection.TypeText "Range: [% PARAM.RANGE %]" & vbCrLf
+objSelection.TypeText "Default: " & vbCrLf
+objSelection.TypeText "SIM Parameter: [% PARAM.SIM_PARAM %]" & vbCrLf
+objSelection.TypeText "XCO name (suggested): [% PARAM.XCO_PARAM %]" & vbCrLf
+objSelection.TypeText "GUI/SIM mapping: [% PARAM.XCO_SIM_MAP %]"
+objSelection.TypeParagraph()
+
+[% END %]
+
+objDoc.SaveAs("[% T.PATH %]/[% T.IPKEY %]_gui_spec-4.2.doc")
+objWord.Quit
+

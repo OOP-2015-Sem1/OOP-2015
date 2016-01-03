@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Shared Memory</title>
+    <link rel="StyleSheet" href="css/Xilinx_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Blockset.11.1.html#271171">Xilinx Blockset</a> : Shared Memory</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="271171">Shared Memory</a></div>
+      <div class="Body"><span class="Italic"><a name="276964">This block is listed in the following Xilinx Blockset libraries: Index, Shared Memory.</a></span></div>
+      <div class="OneLiner"><a name="276967"><img class="Default" src="images/Xilinx_Blockset.11.83.1.jpg" width="172" height="100" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" />The Xilinx Shared Memory block implements a random </a>access memory (RAM) that can be shared among multiple designs or sections of a design. </div>
+      <div class="Body"><a name="1104669">A Shared Memory Block is uniquely identified by its name. </a>In the blocks above, the shared memory has been named "Bar". Instances of Shared Memory "Bar", whether within the same model or in different models or even different instances of MATLAB, will share the same memory space. System Generator's hardware co-simulation interfaces allow shared memory blocks to be compiled and co-simulated in FPGA hardware. These interfaces make it possible for hardware-based shared memory resources to map transparently to common address spaces on a host PC. When used in System Generator co-simulation hardware, shared memories facilitate high-speed data transfers between the host PC and FPGA, and bolster the tool's real-time hardware co-simulation capabilities.</div>
+      <div class="Body"><a name="1262705">Starting with the 9.2 release, during netlisting, each pair of </a><span class="Bold">Shared Memory</span> blocks with the same name are stitched together as a BRAM-based “Dual Port RAM block” in the netlist. For <span class="Bold">Shared Memory</span> blocks that do not form a pair, their input and output ports are pushed to the top level of System Generator design. A pair of matching blocks can exist anywhere in the design hierarchy, however ,if more than two <span class="Bold">Shared Memory </span>blocks with the same name exist in the design, then an error is issued.</div>
+      <div class="Body"><a name="1262706">For backward compatibility, you can set the MATLAB global variable </a><span class="Bold">xlSgSharedMemoryStitch</span> to “off” to bring System Generator back to the netlisting behavior before the 9.2 release. For example, from the MATLAB command line, enter the following:</div>
+      <div class="Code"><a name="1262707">global xlSgSharedMemoryStitch;</a></div>
+      <div class="Code"><a name="1262708">xlSgSharedMemoryStitch = 'off';</a></div>
+      <div class="Heading2"><a name="276968">Block Interface</a></div>
+      <div class="Body"><a name="427118">By default, the shared memory block has 3 inputs (</a><span class="Filename">addr</span>, <span class="Filename">din</span> and <span class="Filename">we</span>) and 1 output (<span class="Filename">dout</span>). Access to the shared memory can be protected by setting the Access protection parameter to Lockable. Setting access protection to Lockable causes two additional ports to appear; an input port req and an output port grant. </div>
+      <div class="Body"><a name="427122">The </a><span class="Filename">addr</span> port should be driven by a signal of type <span class="Filename">UFIX_N_0</span>, where <span class="Filename">N</span> equals ceil(log2(depth)). The memory word size is determined, at compile-time, by the bit width of the signal driving <span class="Filename">din</span>. Driving the write enable port (<span class="Filename">we</span>) with 1 indicates that the value on the <span class="Filename">din</span> port should be written to the memory address pointed to by port <span class="Filename">addr</span>. </div>
+      <div class="Body"><a name="427124">When access protection is set to Lockable, the req and grant ports are used to control access </a>to the memory. Before a read or write can occur, a request must first be made by setting <span class="Filename">req</span> to 1. When grant becomes 1, the request for access has been allowed and read or write operations can proceed. The figure below shows the relationship between the <span class="Filename">req</span>, <span class="Filename">grant</span> and <span class="Filename">we</span> ports. The figure also shows that the block output is suppressed until access to the memory is granted. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="428110"><img class="Default" src="images/Xilinx_Blockset.11.83.2.jpg" width="355" height="428" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="427231">The output during a write operation depends on the write mode. When the </a><span class="Filename">we</span> is 0, the output port has the value at the location specified by the address line. During a write operation (<span class="Filename">we</span> asserted), the data presented on the input data port is stored in memory at the location selected by the port's address input. During a write cycle, you can configure the behavior of the data out port to one of the following choices: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="427235">Read After Write </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="427237">Read Before Write </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="427239">No Read On Write </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="427241">The write modes can be described with the help of the figure below. In the figure below, the </a>memory has been set to an initial value of 5 and the address bit is specified as 2. When using No Read On Write mode, the output is unaffected by the address line and the output is the same as the last output when <span class="Filename">we</span> was 0. When <span class="Filename">we</span> is 1, <span class="Filename">dout</span> holds its previous value until <span class="Filename">we</span> is 1. In the figure below, you see <span class="Filename">dout</span> reflecting the value of <span class="Filename">addr</span> position 2, one cycle after <span class="Filename">we</span> is set to 1. </div>
+      <div class="Body"><a name="427245">For the other two modes, the output is obtained from the location specified by the address </a>line, and hence is the value of the location being written to. This means that the output can be the old value which corresponds to Read After Write. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="427298"><img class="Default" src="images/Xilinx_Blockset.11.83.3.jpg" width="355" height="434" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="276970">Block Parameters</a></div>
+      <div class="Body"><a name="276971">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model. </div>
+      <div class="Heading3"><a name="323134">Basic tab</a></div>
+      <div class="Body"><a name="589120">Parameters specific to the Basic tab are as follows:</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="588562">Shared memory name</a></span>: name of the shared memory. All memories with the same name share the same physical memory. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Note2">
+        <span class="XNote">Note:&nbsp;</span><a name="2470964">The EDK Processor block does not support Shared Memory blocks with spaces in their </a>names.</div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="588564">Depth</a></span>: specifies the number of words in the memory. The word size is inferred from the bit width of the data port din. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="588566">Ownership and initialization</a></span>: indicates whether the memory is Locally owned and initialized or Owned and initialized elsewhere. If the memory is locally owned and initialized, the Initial value vector parameter is made available. A block that is Locally owned and initialized is responsible for creating an instance of the memory. A block that is Owned and initialized elsewhere attaches itself to a memory instance that has already been created. As a result, if two shared memory blocks are used in two different models during simulation, the model containing the Locally owned and initialized block has to be started first. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="588568">Initial value vector</a></span>: specifies initial memory contents. The size and precision of the elements of the initial value vector are inferred from the type of the data samples that drive din. When the vector is longer than the RAM, the vector's trailing elements are discarded. When the RAM is longer than the vector, the RAM's trailing words are set to zero. The initial value vector is saturated and rounded according to the precision specified on the data port din. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="588570">Access protection</a></span>: either Lockable or Unprotected. An unprotected memory has no restrictions concerning when a read or write can occur. In a locked shared memory, the block can only be written to when granted access to the memory. When the grant port outputs a 1, access is granted to the memory and the write request can proceed. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="588572">Access mode</a></span>: specifies the way in which the memory is used by the design. When Read and write mode is used, the block is configured with din and dout ports. When Read only mode is used, the block is configured with a dout port for memory read access. When Write only mode is used, the block is configured with a din port for memory write access. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="588574">Write mode</a></span>: specifies the memory behavior to be Read after write, Read before write, or No read on write. There are device specific restrictions on the applicability of these modes. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="588576">Memory access timeout (sec)</a></span>: when the memory is running in hardware, this specifies the maximum time to wait for the memory to respond to a request. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="1386283">Latency:</a></span> may be set to 1 or 2.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="1283109">Other parameters used by this block are explained in the topic</a><br /><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.3.html#271277', '');" title="Common Options in Block Parameter Dialog Boxes">Common Options in Block Parameter Dialog Boxes</a></span>. </div>
+      <div class="Heading2"><a name="588583">Xilinx LogiCORE</a></div>
+      <div class="Body"><a name="588586">The block uses the Xilinx LogiCORE™ Dual Port Block Memory Generator. </a></div>
+      <div class="Heading2"><a name="588591">See Also</a></div>
+      <div class="Body"><a name="588594">The following documents are provided as part of the System Generator documentation </a>and give valuable insight into using and understanding the Shared Memory block: </div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.61.html#573408', '');" title="Multiple Subsystem Generator" name="588598">Multiple Subsystem Generator</a></span></div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.8.html#270904', '');" title="Shared Memory Support" name="323135">Co-Simulating Shared Registers</a></span> </div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

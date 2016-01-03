@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Compiling a Model for Hardware Co-Simulation</title>
+    <link rel="StyleSheet" href="css/HW_CoSim.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="HW_CoSim.8.1.html#306981">Using Hardware Co-Simulation</a> : Compiling a Model for Hardware Co-Simulation</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="306981">Compiling a Model for Hardware Co-Simulation</a></div>
+      <div class="Body"><a name="271100">Once your hardware board is installed, the starting point for hardware co-simulation is the </a>System Generator model or subsystem you would like to run in hardware. A model can be co-simulated, provided it meets the requirements of the underlying hardware board. This model must include a System Generator block; this block defines how the model should be compiled into hardware. The first step in the flow is to open the System Generator block dialog box and select a compilation type under <span class="Bold">Compilation.</span> </div>
+      <div class="Body"><a name="271118">For information on how to use the System Generator block, see </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.6.5.html#273553', '');" title="Automatic Code Generation">Compiling and Simulating Using the System Generator Block</a></span>.</div>
+      <div class="Heading2"><a name="271134">Choosing a Compilation Target</a></div>
+      <div class="Body"><a name="271159">You may choose the hardware co-simulation board by selecting an appropriate </a>compilation type in the System Generator block dialog box. Hardware co-simulation targets are organized under the <span class="Bold">Hardware Co-Simulation</span> submenu in the <span class="Bold">Compilation</span> dialog box field.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="292063"><img class="Default" src="images/HW_CoSim.8.3.1.jpg" width="278" height="190" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="292064">When a compilation target is selected, the fields on the System Generator block dialog box </a>are automatically configured with settings appropriate for the selected compilation target. System Generator remembers the dialog box settings for each compilation target. These settings are saved when a new target is selected, and restored when the target is recalled. </div>
+      <div class="Heading2"><a name="271260">Invoking the Code Generator </a></div>
+      <div class="Body"><a name="271245">The code generator is invoked by pressing the </a><span class="Bold">Generate</span> button in the System Generator block dialog box. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="271404"><img class="Default" src="images/HW_CoSim.8.3.2.jpg" width="153" height="104" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="271436">The code generator produces a FPGA configuration bitstream for your design that is </a>suitable for hardware co-simulation. System Generator not only generates the HDL and netlist files for your model during the compilation process, but it also runs the downstream tools necessary to produce an FPGA configuration file. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="271428">A status dialog box (shown below) will appear after you press the </a><span class="Bold">Generate</span> button. During compilation, the status box provides a <span class="Bold">Cancel</span> and <span class="Bold">Show Details</span> button. Pressing the <span class="Bold">Cancel</span> button will stop compilation. Pressing the <span class="Bold">Show Details </span>button exposes details about each phase of compilation as it is run. It is possible to hide the compilation details by pressing the <span class="Bold">Hide Details</span> button on the status dialog box.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="271540"><img class="Default" src="images/HW_CoSim.8.3.3.jpg" width="384" height="401" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="271549">The configuration bitstream contains the hardware associated with your model, and also </a>contains additional interfacing logic that allows System Generator to communicate with your design using a physical interface between the board and the PC. This logic includes a memory map interface over which System Generator can read and write values to the input and output ports on your design. It also includes any board-specific circuitry (e.g., DCMs, external component wiring) that is required for the target FPGA board to function correctly.</div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

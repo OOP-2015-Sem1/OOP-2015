@@ -1,0 +1,19 @@
+<!--   *  Copyright (c) 2006, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Puncture" block_type="puncture">
+  <icon width="55" height="32" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="Puncture_config"/>
+  <handlers enablement="xlmagicenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsComm"/>
+  </libraries>
+  <blockgui label="Xilinx Puncturer">
+    <editbox name="infoedit" default="Reads values from the input port, removes the bits corresponding to zeros in the puncture code, then presents the remaining bits at the output port.&lt;br&gt;&lt;br&gt;Hardware notes: In hardware this block costs nothing." read_only="true" evaluate="false" multi_line="true"/>
+    <editbox name="punc_char" default="[1 0 0]" evaluate="true" label="Puncture code" ctype="IntVector"/>
+    <etch name="simetch" label="Simulation">
+      <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+    </etch>
+  </blockgui>
+</sysgenblock>

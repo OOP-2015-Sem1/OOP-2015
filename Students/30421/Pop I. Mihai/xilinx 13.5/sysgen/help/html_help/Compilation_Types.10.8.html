@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Creating Compilation Targets</title>
+    <link rel="StyleSheet" href="css/Compilation_Types.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Compilation_Types.10.1.html#276489">System Generator Compilation Types</a> : Creating Compilation Targets</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="276489">Creating Compilation Targets</a></div>
+      <div class="Body"><a name="276490">The HDL and netlist files that System Generator produces when it compiles a design into </a>hardware must be run through additional tools in order to produce a configuration bitstream file that is suitable for your FPGA. A typical flow that allows you to generate an FPGA configuration file is ProjectNavigator. There are other ways in which a bitstream can be generated for your model. For example, it is possible to configure System Generator to automatically run the tools necessary to produce a configuration file when it compiles a design. This is advantageous since the complete bitstream generation process is accomplished inside the tool. Moreover, you can have System Generator run different tools (e.g., ChipScope™ Pro Analyzer and iMPACT) once the configuration file is generated for a model. </div>
+      <div class="Body"><a name="276491">The way in which System Generator compiles a model into hardware depends on the </a>compilation target that is chosen for the design. The <span class="Bold">HDL Netlist</span> compilation target is most common, and generates an HDL netlist of your design plus any cores that go along with it. New compilation targets can be created that extend the HDL Netlist target so that additional tools can be applied to the resulting HDL netlist files. </div>
+      <div class="Body"><a name="276492">This topic explains how you can create new compilation targets that extend the HDL </a>Netlist target in order to produce and configure FPGA hardware. More specifically, it describes how to configure System Generator to produce a bitstream for a model, and how to invoke various tools once the bitstream is created.</div>
+      <div class="Heading2"><a name="276493">Defining New Compilation Targets</a></div>
+      <div class="Body"><a name="276826">You can create new compilation targets to run tools that process the output files associated </a>with HDL Netlist compilation. A compilation target is defined by a minimum of two MATLAB functions. The first function, <span class="Filename">xltarget.m</span>, tells System Generator to support the target (i.e., make it selectable from the System Generator token dialog box), and specifies the MATLAB function where more information about the target can be found. This function is called a "target info" function. A target info function defines information about the target, and can take any name, provided it is specified correctly in the target's <span class="Filename">xltarget.m</span> function. In some cases, a target info function defines a post-generation function. A post-generation function is responsible for invoking tools or scripts after normal HDL netlist compilation is complete. These functions are discussed in more detail in the topics that follow. </div>
+      <div class="Heading3"><a name="276828">The xltarget Function</a></div>
+      <div class="Body"><a name="276829">An xltarget function specifies one or more compilation targets that should be supported by </a>System Generator. It also provides entry points through which System Generator can find out more information about these targets. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="276497">System Generator determines which compilation targets to support by searching the </a>plugins/compilation (and its subdirectories) of your System Generator software install tree for <span class="Filename">xltarget.m</span> files. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="276503"><img class="Default" src="images/Compilation_Types.10.8.1.jpg" width="119" height="184" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="276504">Although an xltarget function can specify multiple targets, it is not uncommon for each </a>compilation target to have its own xltarget function. The directories these functions are saved in distinguish the targets. This means that each<span class="Filename"> xltarget.m</span> file must be saved in its own subdirectory under the <span class="Filename">plugins/compilation</span> directory. </div>
+      <div class="Body"><a name="276505">An xltarget function returns a cell array of target information. Different elements in this </a>cell array define different compilation targets. The elements in this cell array are MATLAB structs that define two parameters: </div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="276506">The name of the compilation target as it should appear in the Compilation field of the </a>System Generator parameters dialog box; </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="276507">The name of the MATLAB function it should invoke to find out more information (e.g., </a>System Generator dialog box parameters, which post-generation function to use, if any) about the target. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="276508">The following code shows how to define three compilation targets named Standalone </a>Bitstream, iMPACT, and ChipScope™ Pro Analyzer: </div>
+      <div class="Code"><a name="276509">function s = xltarget </a></div>
+      <div class="Code"><a name="276510">s = {}; </a></div>
+      <div class="Code"><a name="276511">target_1.('name') = 'Standalone Bitstream'; </a></div>
+      <div class="Code"><a name="276512">target_1.('target_info') = 'xltools_target'; </a></div>
+      <div class="Code"><a name="276513">target_2.('name') = 'iMPACT'; </a></div>
+      <div class="Code"><a name="276514">target_2.('target_info') = 'xltools_target'; </a></div>
+      <div class="Code"><a name="276515">target_3.('name') = 'ChipScope Pro Analyzer'; </a></div>
+      <div class="Code"><a name="278942">target_3.('target_info') = 'xltools_target'; </a></div>
+      <div class="Code"><a name="278943">s = {target_1, target_2, target_3};</a></div>
+      <div class="Body"><a name="278944">The name field in the code shown above specifies the name of the compilation target, as it </a>should appear in the Compilation field of the System Generator dialog box: </div>
+      <div class="Code"><a name="276519">target_1.('name') = 'Standalone Bitstream';</a></div>
+      <div class="Body"><a name="276520">The target_info field tells System Generator the target info function it should call to find </a>out more information about the target. This function can have any name provided it is saved in the same directory as the corresponding xltarget.m file, or it is saved somewhere in the MATLAB path. </div>
+      <div class="Code"><a name="278956">target_1.('target_info') = 'xltools_target'; </a></div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="278957">An example xltarget function is included in the </a><span class="Filename">examples/comp_targets</span> directory of your System Generator install tree. You can modify this function to define your own bitstream-related compilation targets. </div>
+      <div class="Heading3"><a name="276523">Target Info Functions</a></div>
+      <div class="Body"><a name="276524">A target info function (specified by the target_info field in the code above) is responsible </a>for two things: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="276525">It defines the available and default settings for the target in the System Generator </a>token dialog box; </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="276526">It specifies the functions System Generator should call before and after the standard </a>code generation process. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="276527">An example target info function, </a><span class="Filename">xltools_target.m</span>, is included in the examples/comp_targets directory of your System Generator install tree. </div>
+      <div class="Body"><a name="276528">One such function that is particularly useful to compilation targets is the post-generation </a>function. A post-generation function is run after standard code generation. The code below shows how a post-generation function is specified in a target info function: </div>
+      <div class="Code"><a name="276529">settings.('postgeneration_fcn') = 'xltools_postgeneration'; </a></div>
+      <div class="Heading4"><a name="276530">Post-generation Functions</a></div>
+      <div class="Body"><a name="276531">One way to extend System Generator compilation is by defining a new variety of </a>compilation that specifies a<span class="Italic"> post-generation function</span>. A post-generation function is a MATLAB function that tells System Generator how to process the HDL and netlist files once they are generated. This function is run after System Generator finishes the normal code generation steps involved with HDL Netlist compilation (i.e., producing an HDL description of the design, running CORE Generator™, etc). For example, a hardware co-simulation target defines a post-generation function that in turn runs the tools necessary to produce hardware that can be used in the Simulink simulation loop. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="276532">Two post-generation functions </a><span class="Filename">xlBitstreamPostGeneration.m</span> and <span class="Filename">xltools_postgeneration.m</span>, are included in the <span class="Filename">examples/comp_targets</span> directory of your System Generator install tree. </div>
+      <div class="Heading4"><a name="276533">xlBitstreamPostGeneration.m</a></div>
+      <div class="Body"><a name="276534">This example post-generation function compiles your model into a configuration bitstream </a>that is appropriate for the settings (e.g., FPGA part, clock frequency, clock pin location) given in the System Generator dialog box of your design.</div>
+      <div class="Body"><a name="276536">It then uses an XFLOW-based flow to invoke the Xilinx tools necessary to produce an </a>FPGA configuration bitstream. </div>
+      <div class="Body"><a name="276538">It is possible to configure the tools and configurations for each tool invoked by XFLOW. </a>For more information on how to do this, refer to the topic in this example entitled <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Compilation_Types.10.8.html#276575', '');" title="Creating Compilation Targets">Using XFLOW</a></span></div>
+      <div class="Heading4"><a name="276542">xltools_postgeneration.m</a></div>
+      <div class="Body"><a name="276543">Sometimes you may want to run tools that configure and run the FPGA after a </a>configuration bitstream has been generated (e.g., iMPACT, ChipScope™ Pro Analyzer). The xltools_postgeneration function first calls the xlBitstreamGeneration function to generate the bitstream. It then invokes the appropriate tool (or tools) depending on the compilation target that is selected. </div>
+      <div class="Body"><a name="276544">For example, you may want a compilation target that invokes iMPACT after the bitstream </a>is generated. This can be done as follows (assuming iMPACT is in your system path): </div>
+      <div class="Code"><a name="276545">if (strcmp(params.compilation, 'iMPACT')) </a></div>
+      <div class="Code"><a name="276546">&nbsp;</a>&nbsp;dos('impact'); </div>
+      <div class="Code"><a name="276547">end;  </a></div>
+      <div class="Body"><a name="276548">The first line checks the name of the compilation target. The second line sets up a DOS </a>command that invokes iMPACT. ChipScope Pro Analyzer can be invoked similarly to the code above: </div>
+      <div class="Code"><a name="276549">if (strcmp(params.compilation, 'ChipScope Pro Analyzer')) </a></div>
+      <div class="Code"><a name="276550">&nbsp;</a>&nbsp;xlCallChipScopeAnalyzer; </div>
+      <div class="Code"><a name="276551">end; </a></div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="276552">xlCallChipScopeAnalyzer is a MATLAB function provided by System Generator to invoke </a>ChipScope. </div>
+      <div class="Heading3"><a name="276554">Configuring and Installing the Compilation Target</a></div>
+      <div class="Body"><a name="276555">Listed below are the steps necessary to configure and install new bitstream compilation </a>targets. </div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="276556">Copy the </a><span class="Filename">xltarget.m, xltools_postgeneration.m</span>, and <span class="Filename">xltools_target.m</span> files from<span class="Filename"> examples/comp_targets</span> into a temporary directory. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="276557">Change the permissions of the above files so they can be modified. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="276558">Add the desired compilation targets (e.g., iMPACT, ChipScope Analyzer Pro) to the </a><span class="Filename">xltarget.m</span> file. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="276559">Add the desired tool invocations to the </a><span class="Filename">xltools_postgeneration.m</span> file. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">5.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="276560">Create a new directory (e.g., Bitstream) under the </a><span class="Filename">plugins/compilation</span> directory of your System Generator software install tree. Copy the<span class="Filename"> xltarget.m</span>, <span class="Filename">xltools_postgeneration.m</span>, and <span class="Filename">xltools_target.m</span> files into this directory. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="276561">The System Generator Compilation submenus mirror the directory structure under the </a>plugins/compilation directory. When you create a new directory, or directory hierarchy, for the compilation target files, the names of the directories define the taxonomy of the compilation target submenus. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="276567"><img class="Default" src="images/Compilation_Types.10.8.2.jpg" width="319" height="125" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">6.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="276568">Copy the </a><span class="Filename">xlBitstreamPostGeneration.m</span>,<span class="Filename"> xlToolsMakebit.pl</span>, <span class="Filename">balanced_xltools.opt</span> and <span class="Filename">bitgen_xltools.opt</span> files from the <span class="Filename">examples/comp_targets</span> directory into a directory that is in your MATLAB path. These files must be in a common directory. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">7.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="276569">In the MATLAB command window, type the following: </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Code"><a name="276570">&gt;&gt; rehash toolboxcache</a></div>
+      <div class="Code"><a name="276571">&gt;&gt; xlrehash_xltarget_cache   </a></div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">8.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="276572">You can now access the newly installed compilation target from the System Generator </a>graphical interface. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading3"><a name="276575">Using XFLOW</a></div>
+      <div class="Body"><a name="276576">The post-generation scripting included with this example uses XFLOW to produce a </a>configuration file for your FPGA. XFLOW allows you to automate the process of design synthesis, implementation, and simulation using a command line interface. XFLOW uses command files to tell it which tools to run, and how they should be run. </div>
+      <div class="Body"><a name="276580">This example contains two XFLOW options files, </a><span class="Filename">balanced_xltools.opt</span> and <span class="Filename">bitgen_xltools.opt</span>. These files are associated with the implementation and configuration flows of XFLOW, respectively. The<span class="Filename"> balanced_xltools.opt</span> options files runs the Xilinx NGDBUILD, MAP, and PAR tools. The settings for each tool are specified in the options files . The <span class="Filename">bitgen_xltools.opt</span> file runs BITGEN to produce a configuration file for your FPGA. You may modify these files as desired (e.g., to run the timing analyzer after PAR). </div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

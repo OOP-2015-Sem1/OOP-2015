@@ -1,0 +1,39 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Shared Memory Read" block_type="fromshmem" priority="2">
+  <initialization file="xlfromshmem_init.m"/>
+  <icon width="80" height="50" wmark_color="yellow" bg_color="white" caption_format="&lt;&lt; %&lt;shmem_name&gt; &gt;&gt;" file="fromshmem_icon.m"/>
+  <sfunction name="xlfromshmem" parameters="shmem_name,sample_time,outDims,isFrame,dataType,shmem_type"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsShared"/>
+  </libraries>
+  <blockgui label="Xilinx Shared Memory Read">
+    <editbox name="infoedit" default="Reads sequentially from a shared memory block." read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <editbox name="shmem_name" default="'Bar'" evaluate="true" label="Shared memory name"/>
+        <radiogroup name="shmem_type" default="FIFO" evaluate="true" label="Type">
+          <item value="FIFO" label="FIFO"/>
+          <item value="Lockable memory" label="Lockable memory"/>
+        </radiogroup>
+        <editbox name="sample_time" default="1" evaluate="true" label="Sample time"/>
+      </tab>
+      <tab name="typetab" label="Output Type">
+        <listbox name="dataType" default="int8" evaluate="true" label="Data type">
+          <item value="int8"/>
+          <item value="uint8"/>
+          <item value="int16"/>
+          <item value="uint16"/>
+          <item value="int32"/>
+          <item value="uint32"/>
+        </listbox>
+        <editbox name="outDims" default="[1 1]" evaluate="true" label="Output dimensions (N or [M,N])"/>
+        <checkbox name="isFrame" default="off" evaluate="true" label="Use frame-based output (otherwise sample-based)"/>
+      </tab>
+    </tabpane>
+    <hiddenvar name="shmem_word" default="0" evaluate="true"/>
+    <hiddenvar name="shmem_depth" default="0" evaluate="true"/>
+  </blockgui>
+</sysgenblock>

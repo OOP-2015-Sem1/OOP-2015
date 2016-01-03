@@ -1,0 +1,39 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="ModelSim" block_type="hdlcosim">
+  <initialization file="xlhdlcosim_init.m"/>
+  <icon width="65" height="56" wmark_color="blue" bg_color="white" file="hdlcosim_icon.m"/>
+  <dll name="Sysgen" entry_point="hdlcosim_block_config"/>
+  <handlers enablement="hdlcosimenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsTools"/>
+  </libraries>
+  <blockgui label="ModelSim HDL Co-Simulation Interface">
+    <editbox name="infoedit" default="Allow other blocks to schedule HDL co-simulation tasks.&lt;br&gt;&lt;br&gt;Note that selecting &quot;Skip compilation&quot; when inappropriate can cause simulation errors and failures. Please refer to the block help for details." read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <editbox name="dir" default="./modelsim" evaluate="false" label="Run co-simulation in directory:" ctype="String"/>
+        <checkbox name="waveform" default="on" evaluate="true" label="Open waveform viewer" ctype="Int"/>
+        <checkbox name="leave_open" default="on" evaluate="true" label="Leave ModelSim open at end of simulation" ctype="Int"/>
+        <checkbox name="skip_compile" default="off" evaluate="true" label="Skip compilation (use previous results)" ctype="Int"/>
+      </tab>
+      <tab name="advtab" label="Advanced">
+        <checkbox name="use_unisim" default="off" evaluate="true" label="Include Verilog unisim library" ctype="Int"/>
+        <checkbox name="use_ver_xilinxcorelib" default="off" evaluate="true" label="Include Verilog XILINXCORELIB library" ctype="Int"/>
+        <checkbox name="custom_scripts" default="off" evaluate="true" label="Add custom scripts" ctype="Int"/>
+        <editbox name="pre_comp_script" default="" evaluate="false" label="Script to run before starting compilation:" ctype="String"/>
+        <editbox name="vsim_script" default="" evaluate="false" label="Script to run in place of  &quot;vsim&quot;: " ctype="String"/>
+        <editbox name="post_vsim_script" default="" evaluate="false" label="Script to run after &quot;vsim&quot;:" ctype="String"/>
+      </tab>
+    </tabpane>
+    <workspacevar name="engineDll" ctype="String"/>
+    <workspacevar name="binDir" ctype="String"/>
+    <hiddenvar name="startup_timeout" default="40" evaluate="true" ctype="Int"/>
+    <workspacevar name="period" ctype="Double"/>
+    <workspacevar name="mdlPath" ctype="String"/>
+    <workspacevar name="screenSize" ctype="DoubleVector"/>
+    <workspacevar name="sim_status" ctype="String"/>
+  </blockgui>
+</sysgenblock>

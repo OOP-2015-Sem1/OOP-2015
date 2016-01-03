@@ -1,0 +1,618 @@
+Library {
+  Name			  "mfcm_mac_lib_v1"
+  Version		  6.1
+  MdlSubVersion		  0
+  SavedCharacterEncoding  "ibm-5348_P100-1997"
+  SaveDefaultBlockParams  on
+  LibraryLinkDisplay	  "none"
+  ShowLoopsOnError	  on
+  IgnoreBidirectionalLines off
+  CovSaveName		  "covdata"
+  CovMetricSettings	  "dw"
+  CovNameIncrementing	  off
+  CovHtmlReporting	  on
+  covSaveCumulativeToWorkspaceVar on
+  CovSaveSingleToWorkspaceVar on
+  CovCumulativeReport	  off
+  CovReportOnPause	  on
+  ScopeRefreshTime	  0.035000
+  OverrideScopeRefreshTime on
+  DisableAllScopes	  off
+  BlockNameDataTip	  off
+  BlockParametersDataTip  off
+  BlockDescriptionStringDataTip	off
+  ToolBar		  on
+  StatusBar		  on
+  BrowserShowLibraryLinks off
+  BrowserLookUnderMasks	  on
+  Created		  "Fri Mar 18 14:41:12 2005"
+  Creator		  "dandrews"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "alexc"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Thu Mar 23 14:51:26 2006"
+  ModelVersionFormat	  "1.%<AutoIncrement:101>"
+  ConfigurationManager	  "None"
+  LinearizationMsg	  "none"
+  Profile		  off
+  ParamWorkspaceSource	  "MATLABWorkspace"
+  ExtModeBatchMode	  off
+  ExtModeEnableFloating	  on
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "normal"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigDurationFloating "auto"
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  on
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  on
+  ExtModeAutoUpdateStatusClock on
+  StrictBusMsg		  "None"
+  ProdHWDeviceType	  "32-bit Generic"
+  ShowModelReferenceBlockVersion off
+  ShowModelReferenceBlockIO off
+  BlockDefaults {
+    Orientation		    "right"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+  }
+  BlockParameterDefaults {
+    Block {
+      BlockType		      Inport
+      BusObject		      "BusObject"
+      BusOutputAsStruct	      off
+      PortDimensions	      "-1"
+      SampleTime	      "-1"
+      DataType		      "auto"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      Interpolate	      on
+    }
+    Block {
+      BlockType		      Outport
+      Port		      "1"
+      BusObject		      "BusObject"
+      BusOutputAsStruct	      off
+      PortDimensions	      "-1"
+      SampleTime	      "-1"
+      DataType		      "auto"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      OutputWhenDisabled      "held"
+      InitialOutput	      "[]"
+    }
+    Block {
+      BlockType		      Reference
+    }
+    Block {
+      BlockType		      SubSystem
+      ShowPortLabels	      on
+      Permissions	      "ReadWrite"
+      PermitHierarchicalResolution "All"
+      SystemSampleTime	      "-1"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      SimViewingDevice	      off
+      DataTypeOverride	      "UseLocalSettings"
+      MinMaxOverflowLogging   "UseLocalSettings"
+    }
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  System {
+    Name		    "mfcm_mac_lib_v1"
+    Location		    [202, 82, 1270, 1000]
+    Open		    on
+    ModelBrowserVisibility  on
+    ModelBrowserWidth	    200
+    ScreenColor		    "white"
+    PaperOrientation	    "landscape"
+    PaperPositionMode	    "auto"
+    PaperType		    "A4"
+    PaperUnits		    "centimeters"
+    ZoomFactor		    "100"
+    ReportName		    "simulink-default.rpt"
+    Block {
+      BlockType		      Reference
+      Name		      "Copyright"
+      Ports		      []
+      Position		      [452, 21, 651, 119]
+      DropShadow	      on
+      ShowName		      off
+      FontName		      "Arial"
+      FontSize		      12
+      SourceBlock	      "xbsCopyrightNotice_r4/Copyright"
+      SourceType	      ""
+      ShowPortLabels	      on
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "mfcm_mac"
+      Tag		      "configX"
+      Ports		      [4, 1]
+      Position		      [205, 317, 295, 403]
+      UserDataPersistent      on
+      UserData		      "DataTag0"
+      BlockChoice	      "mfcm_mac_sim"
+      TemplateBlock	      "self"
+      MemberBlocks	      "mfcm_mac_sim,mfcm_mac_syn"
+      TreatAsAtomicUnit	      off
+      MinAlgLoopOccurrences   off
+      RTWSystemCode	      "Auto"
+      System {
+	Name			"mfcm_mac"
+	Location		[148, 182, 646, 482]
+	Open			off
+	ModelBrowserVisibility	on
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "a"
+	  Position		  [20, 40, 40, 60]
+	  Port			  "1"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "b"
+	  Position		  [20, 80, 40, 100]
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "acc"
+	  Position		  [20, 120, 40, 140]
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "sub"
+	  Position		  [20, 160, 40, 180]
+	  Port			  "4"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "mfcm_mac_sim"
+	  Ports			  [4, 1]
+	  Position		  [100, 40, 140, 80]
+	  SourceBlock		  "mfcm_mac_lib_v1/mfcm_mac_sim"
+	  SourceType		  "Unknown"
+	  ShowPortLabels	  "on"
+	  ACC_GROWTH		  "0"
+	  ACC_DEPTH		  "1"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "res"
+	  Position		  [200, 40, 220, 60]
+	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
+	}
+	Line {
+	  SrcBlock		  "a"
+	  SrcPort		  1
+	  DstBlock		  "mfcm_mac_sim"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "b"
+	  SrcPort		  1
+	  DstBlock		  "mfcm_mac_sim"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "acc"
+	  SrcPort		  1
+	  DstBlock		  "mfcm_mac_sim"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "sub"
+	  SrcPort		  1
+	  DstBlock		  "mfcm_mac_sim"
+	  DstPort		  4
+	}
+	Line {
+	  SrcBlock		  "mfcm_mac_sim"
+	  SrcPort		  1
+	  DstBlock		  "res"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "mfcm_mac_sim"
+      Ports		      [4, 1]
+      Position		      [100, 136, 190, 224]
+      AncestorBlock	      "dsp_mac_lib/syn_mac"
+      TreatAsAtomicUnit	      off
+      MinAlgLoopOccurrences   off
+      RTWSystemCode	      "Auto"
+      MaskPromptString	      "ACC_GROWTH|ACC_DEPTH"
+      MaskStyleString	      "edit,edit"
+      MaskTunableValueString  "on,on"
+      MaskCallbackString      "|"
+      MaskEnableString	      "on,on"
+      MaskVisibilityString    "on,on"
+      MaskToolTipString	      "on,on"
+      MaskVarAliasString      ","
+      MaskVariables	      "ACC_GROWTH=@1;ACC_DEPTH=@2;"
+      MaskDisplay	      "disp('z^{-4} sim','texmode','on');\n"
+      MaskSelfModifiable      on
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "4|1"
+      MaskTabNameString	      ","
+      System {
+	Name			"mfcm_mac_sim"
+	Location		[202, 74, 1598, 1106]
+	Open			off
+	ModelBrowserVisibility	on
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "a"
+	  Position		  [25, 63, 55, 77]
+	  Port			  "1"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "b"
+	  Position		  [25, 93, 55, 107]
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "acc"
+	  Position		  [25, 123, 55, 137]
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "sub"
+	  Position		  [25, 153, 55, 167]
+	  Port			  "4"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "entity"
+	  Ports			  [4, 1]
+	  Position		  [150, 58, 275, 172]
+	  SourceBlock		  "xbsIndex_r4/MCode"
+	  SourceType		  "Xilinx MCode Block"
+	  infoedit		  "Pass input values to a MATLAB function for "
+"evaluation in Xilinx fixed-point type. The input ports of the block are input"
+" arguments of the function. The output ports of the block are output argument"
+"s of the function."
+	  mfname		  "mfcm_mac_sim"
+	  explicit_period	  "off"
+	  period		  "1"
+	  dbl_ovrd		  "off"
+	  enable_debug		  "off"
+	  xl_use_area		  "off"
+	  xl_area		  "[0,0,0,0,0,0,0]"
+	  block_version		  "8.1"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "mcode"
+	  sg_icon_stat		  "71,62,4,1,white,blue,0,41dcd034"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 125 125 0 ],[0 0 114 114 ],[0.77 0.82 0.91]);\npatch([32 13 40 13"
+" 32 62 70 78 110 85 61 43 70 43 61 85 110 78 70 62 32 ],[12 31 58 85 104 104 "
+"96 104 104 79 103 85 58 31 13 37 12 12 20 12 12 ],[0.98 0.96 0.92]);\nplot([0"
+" 0 125 125 0 ],[0 114 114 0 0 ]);\nfprintf('','COMMENT: end icon graphics');"
+"\n\nfprintf('','COMMENT: begin icon text ');\nport_label('input',1,'a');\npor"
+"t_label('input',2,'b');\nport_label('input',3,'acc');\nport_label('input',4,'"
+"sub');\nport_label('output',1,'res');\ndisp('\\bf{mfcm\\_mac\\_sim}','texmode"
+"','on');\nfprintf('','COMMENT: end icon text');\n"
+	  suppress_output	  "1"
+	  defparams		  "{'ACC_GROWTH',ACC_GROWTH,'ACC_DEPTH',ACC_DE"
+"PTH}"
+	  hide_port_list	  "{}"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "res"
+	  Position		  [375, 108, 405, 122]
+	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
+	}
+	Line {
+	  SrcBlock		  "a"
+	  SrcPort		  1
+	  DstBlock		  "entity"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "entity"
+	  SrcPort		  1
+	  DstBlock		  "res"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "b"
+	  SrcPort		  1
+	  DstBlock		  "entity"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "acc"
+	  SrcPort		  1
+	  DstBlock		  "entity"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "sub"
+	  SrcPort		  1
+	  DstBlock		  "entity"
+	  DstPort		  4
+	}
+	Annotation {
+	  Name			  "This is a simulation only model - It will n"
+"ot synthesise to a DSP48...\nNote the name 'entity' - if this is every synthe"
+"sised it should fail."
+	  Position		  [223, 212]
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "mfcm_mac_syn"
+      Ports		      [4, 1]
+      Position		      [295, 136, 385, 224]
+      AncestorBlock	      "dsp_mac_lib/dsp_mac_sim"
+      TreatAsAtomicUnit	      off
+      MinAlgLoopOccurrences   off
+      RTWSystemCode	      "Auto"
+      MaskPromptString	      "ACC_GROWTH|ACC_DEPTH"
+      MaskStyleString	      "edit,edit"
+      MaskTunableValueString  "on,on"
+      MaskCallbackString      "|"
+      MaskEnableString	      "on,on"
+      MaskVisibilityString    "on,on"
+      MaskToolTipString	      "on,on"
+      MaskVarAliasString      ","
+      MaskVariables	      "ACC_GROWTH=@1;ACC_DEPTH=@2;"
+      MaskDisplay	      "disp('z^{-4} syn','texmode','on');\n"
+      MaskSelfModifiable      on
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "4|1"
+      MaskTabNameString	      ","
+      System {
+	Name			"mfcm_mac_syn"
+	Location		[202, 74, 1598, 1106]
+	Open			off
+	ModelBrowserVisibility	on
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "a"
+	  Position		  [30, 63, 60, 77]
+	  Port			  "1"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "b"
+	  Position		  [30, 108, 60, 122]
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "acc"
+	  Position		  [30, 153, 60, 167]
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "sub"
+	  Position		  [30, 198, 60, 212]
+	  Port			  "4"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Configurable Subsystem Manager"
+	  Tag			  "xcfgMgr"
+	  Ports			  []
+	  Position		  [236, 374, 289, 425]
+	  ShowName		  off
+	  AttributesFormatString  "Configurable Subsystem\\nManager"
+	  SourceBlock		  "xbsIndex_r4/Configurable Subsystem Manager"
+	  SourceType		  "Xilinx System Generator"
+	  ShowPortLabels	  "on"
+	  block_type		  "configsubsys"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "mac"
+	  Ports			  [4, 1]
+	  Position		  [215, 50, 315, 225]
+	  SourceBlock		  "xbsIndex_r4/Black Box"
+	  SourceType		  "Xilinx Blackbox Block"
+	  infoedit		  " Incorporates black box HDL and simulation "
+"model into a System Generator design.<P><P>You must supply a Black Box with c"
+"ertain information about the HDL component you would like to bring into Syste"
+"m Generator. This information is provided through a Matlab function.<P><P>Whe"
+"n \"Simulation Mode\" is set to \"Inactive,\" you will typically want to prov"
+"ide a separate simulation model by using a Simulation Multiplexer.<P>When \"S"
+"imulation Mode\" is set to \"Use HDL Co-Simulation\", you must include a Mode"
+"lSim block in the design."
+	  init_code		  "mfcm_mac_syn_config"
+	  sim_method		  "Inactive"
+	  xl_use_area		  "off"
+	  xl_area		  "[0,0,0,0,0,0,0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "blackbox2"
+	  sg_icon_stat		  "73,64,4,1,white,blue,0,a836e8f7"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 100 100 0 ],[0 0 175 175 ],[0.77 0.82 0.91]);\npatch([24 7 30 7 2"
+"4 50 57 64 92 70 49 33 56 33 49 70 92 64 57 50 24 ],[48 65 88 111 128 128 121"
+" 128 128 106 127 111 88 65 49 70 48 48 55 48 48 ],[0.98 0.96 0.92]);\nplot([0"
+" 0 100 100 0 ],[0 175 175 0 0 ]);\nfprintf('','COMMENT: end icon graphics');"
+"\n\nfprintf('','COMMENT: begin icon text ');\nport_label('input',1,'a');\npor"
+"t_label('input',2,'b');\nport_label('input',3,'op_acc');\nport_label('input',"
+"4,'op_sub');\nport_label('output',1,'x');\nfprintf('','COMMENT: end icon text"
+"');\nfprintf('','COMMENT: Make no changes above this line -- machine generate"
+"d code. ');\n\n"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "res"
+	  Position		  [475, 133, 505, 147]
+	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
+	}
+	Line {
+	  SrcBlock		  "mac"
+	  SrcPort		  1
+	  DstBlock		  "res"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "a"
+	  SrcPort		  1
+	  DstBlock		  "mac"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "b"
+	  SrcPort		  1
+	  DstBlock		  "mac"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "acc"
+	  SrcPort		  1
+	  DstBlock		  "mac"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "sub"
+	  SrcPort		  1
+	  DstBlock		  "mac"
+	  DstPort		  4
+	}
+	Annotation {
+	  Name			  "This is a synthesis only model"
+	  Position		  [263, 307]
+	}
+      }
+    }
+    Annotation {
+      Name		      "Flexible Highspeed MAC"
+      Position		      [256, 55]
+      FontName		      "Arial"
+      FontSize		      18
+    }
+  }
+}
+MatData {
+  NumRecords		  1
+  DataRecord {
+    Tag			    DataTag0
+    Data		    "  %)30     .    X ,   8    (     @         %    "
+"\"     $    !     0         %  0 !@    $    &    <V%V960    .    F ,   8    ("
+"     @         %    \"     $    !     0         %  0 #     $    8    <VAA<F5D"
+"        8V]M<&EL871I;VX #@   # \"   &    \"     (         !0    @    !     0 "
+"   $         !0 $ !(    !    -@   &-O;7!I;&%T:6]N         &-O;7!I;&%T:6]N7VQU"
+"=    &=E;F5R871I;VY?8VAO:6-E    #@   #@    &    \"     0         !0    @    !"
+"    !P    $         $     <   !T87)G970Q  X    P 0  !@    @    \"          4 "
+"   (     0    $    !          4 !  '     0    X   !K97ES    =F%L=65S    #@   "
+"'     &    \"     $         !0    @    !     0    $         #@   $     &    "
+"\"     0         !0    @    !    \"P    $         $     L   !(1$P@3F5T;&ES=  "
+"     #@   &@    &    \"     $         !0    @    !     0    $         #@   #@"
+"    &    \"     0         !0    @    !    !P    $         $     <   !T87)G970"
+"Q  X   !     !@    @    $          4    (     0    P    !         !     ,    "
+";69C;5]M86-?<WEN      X    ( 0  !@    @    \"          4    (     0    $    !"
+"          4 !  (     0    @   !T87)G970Q  X   #     !@    @    \"          4 "
+"   (     0    $    !          4 !  *     0   !0   !!0T-?5TE$5$@ 8VQO8VM?;&]C "
+"      .    ,     8    (    !          %    \"     $    \"     0         0  ( "
+"-#@   X    P    !@    @    $          4    (               !         !       "
+"   "
+  }
+}

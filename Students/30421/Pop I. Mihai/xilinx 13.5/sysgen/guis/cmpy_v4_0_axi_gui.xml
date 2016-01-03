@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+
+<sysgenblock simulinkname="Complex Multiplier 4.0 " block_type="cmpy_v4_0">
+   <icon width="135" height="164" wmark_color="white" bg_color="blue">
+   </icon>
+   <dll name="sysgen" entry_point="coregenimport_config">
+   </dll>
+   <handlers enablement="xlipmagiccallback_pass_evaluate_params" action="xlipmagicaction">
+   </handlers>
+   <libraries>
+        <library name="xbsIndex"/>
+        <library name="xbsAXI4"/>
+        <library name="xbsDSP"/>
+        <library name="xbsMath"/>
+   </libraries>
+   <blockgui label="Xilinx Complex Multiplier 4.0 ">
+      <tabpane>
+         <tab name="page_1" label="Page 1">
+            <etch label="Channel A Options">
+		    <!-- <editbox name="aportwidth" label="AR/AI Operand Width" default="16" evaluate="true" ctype="Int" top_label="false"> -->
+			    <!-- </editbox> -->
+               <checkbox name="hasatlast" default="off" evaluate="true" ctype="Bool" label="Has TLAST">
+               </checkbox>
+               <checkbox name="hasatuser" default="off" evaluate="true" ctype="Bool" label="Has TUSER">
+               </checkbox>
+               <editbox name="atuserwidth" label="TUSER Width" default="1" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+            </etch>
+            <etch label="Channel B Options">
+		    <!-- <editbox name="bportwidth" label="BR/BI Operand Width" default="16" evaluate="true" ctype="Int" top_label="false"> -->
+			    <!-- </editbox> -->
+               <checkbox name="hasbtlast" default="off" evaluate="true" ctype="Bool" label="Has TLAST">
+               </checkbox>
+               <checkbox name="hasbtuser" default="off" evaluate="true" ctype="Bool" label="Has TUSER">
+               </checkbox>
+               <editbox name="btuserwidth" label="TUSER Width" default="1" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+            </etch>
+            <etch label="Multiplier Construction Options">
+               <radiogroup label="" name="multtype" default="Use_Mults" evaluate="false" ctype="String">
+                  <item label="Use Mults" value="Use_Mults">
+                  </item>
+                  <item label="Use LUTs" value="Use_LUTs">
+                  </item>
+               </radiogroup>
+            </etch>
+            <etch label="Optimization Goal">
+               <radiogroup label="" name="optimizegoal" default="Resources" evaluate="false" ctype="String">
+                  <item label="Resources" value="Resources">
+                  </item>
+                  <item label="Performance" value="Performance">
+                  </item>
+               </radiogroup>
+            </etch>
+            <etch label="Flow Control Options">
+               <radiogroup label="" name="flowcontrol" default="NonBlocking" evaluate="false" ctype="String">
+                  <item label="Blocking" value="Blocking">
+                  </item>
+                  <item label="NonBlocking" value="NonBlocking">
+                  </item>
+               </radiogroup>
+            </etch>
+         </tab>
+         <tab name="page_2" label="Page 2">
+            <etch label="Output Product Range">
+               <editbox name="outputwidth" label="Output Width" default="33" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+            </etch>
+            <etch label="Output Rounding">
+               <radiogroup label="" name="roundmode" default="Truncate" evaluate="false" ctype="String">
+                  <item label="Truncate" value="Truncate">
+                  </item>
+                  <item label="Random Rounding" value="Random_Rounding">
+                  </item>
+               </radiogroup>
+            </etch>
+            <etch label="Channel CTRL Options">
+               <checkbox name="hasctrltlast" default="off" evaluate="true" ctype="Bool" label="Has TLAST">
+               </checkbox>
+               <checkbox name="hasctrltuser" default="off" evaluate="true" ctype="Bool" label="Has TUSER">
+               </checkbox>
+               <editbox name="ctrltuserwidth" label="TUSER Width" default="1" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+            </etch>
+            <etch label="Output TLAST Behavior">
+               <listbox name="outtlastbehv" label="TLAST Behavior" default="Null" allow_advanced="false" evaluate="false" ctype="String">
+		<item value="Null"/>
+<item value="Pass_A_TLAST"/>
+<item value="Pass_B_TLAST"/>
+<item value="Pass_CTRL_TLAST"/>
+<item value="OR_all_TLASTs"/>
+<item value="AND_all_TLASTs"/>
+
+    
+               </listbox>
+            </etch>
+            <etch label="Core Latency">
+               <listbox name="latencyconfig" label="Latency Configuration" default="Automatic" allow_advanced="false" evaluate="false" ctype="String">
+		<item value="Automatic"/>
+<item value="Manual"/>
+
+    
+               </listbox>
+               <editbox name="minimumlatency" label="Minimum Latency" default="15" evaluate="true" ctype="Int" top_label="false">
+               </editbox>
+            </etch>
+            <etch label="Control Signals">
+               <checkbox name="aclken" default="off" evaluate="true" ctype="Bool" label="ACLKEN">
+               </checkbox>
+               <checkbox name="aresetn" default="off" evaluate="true" ctype="Bool" label="ARESETn">
+               </checkbox>
+            </etch>
+         </tab>
+         <tab name="Advanced_tab" label="Advanced">
+           <etch label="Block Icon Display">
+             <checkbox name="trim_axipin_name" default="on" label="Display shortened port names" ctype="Int" evaluate="true" allow_advanced="false"/>
+           </etch> 
+         </tab>
+      </tabpane>
+      <hiddenvar name="aportwidth" default="63" evaluate="false" ctype="String">
+      </hiddenvar>
+      <hiddenvar name="bportwidth" default="63" evaluate="false" ctype="String">
+      </hiddenvar>
+      <hiddenvar name="ip_name" default="Complex Multiplier" evaluate="false" ctype="String">
+      </hiddenvar>
+      <hiddenvar name="ip_version" default="4.0" evaluate="false" ctype="String">
+      </hiddenvar>
+      <hiddenvar name="dsptool_ready" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="ipcore_usecache" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="ipcore_useipmodelcache" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="ipcore_verbose" default="false" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="wrapper_available" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="port_translation_map" default="{ 'aclken' => 'en', 'aresetn' => 'rst'}" evaluate="false" ctype="String">
+      </hiddenvar>
+      <hiddenvar name="structural_sim" default="false" evaluate="true" ctype="Bool">
+      </hiddenvar>
+   </blockgui>
+</sysgenblock>

@@ -1,0 +1,43 @@
+<html>
+<body>
+<h3><font size=+1 color="#990000">2nd-order Direct Form I implementation</font></h3>
+<p>
+
+This design example shows two distinct FPGA implementations of a 2nd order IIR
+filter in Direct Form I, 
+and compares them to the double precision Simulink IIR filter block.
+
+<p>
+The FPGA_FIXED_SUBSYSTEM is an IIR block 'IIIR_FIXED which is implemented with data input set to Fix32_27;
+coefficients use 32 bit with 30 bits fractional and the adder tree usesFix32_24 notation
+
+<p>
+The FPGA_FLOAT_SUBSYSTEM is an IIR block 'IIIR_FLOAT which is implemented using floating point block with custom
+precision with exponent set to 7 bits and the fractional set to 20 bits
+Therefore data and coefficients use Float_7_20
+
+<p>
+Multiple display blocks allow the user to visualize the Power Spectrum  Density (PSD) of each 
+implementation as well as the quantization error in the DISPLAY block.
+
+<p>
+The input is a sine wave with random noise added. if the random noise is small the fixed implementation gives good results 
+but as the dynamic range is increased the floating point implementation is better and when compared with an error window 
+the fixed implemenation is alway outside the error window.
+
+</p>
+
+<p>
+
+All the variables such as data width, coefficient width, Sample period, and coefficient values are 
+initialized in the sysgenIIR_DFormI_Float_PreLoadFcn.m file. 
+</p>
+
+<p>
+
+A separate counter system is added to create multi cycle paths. The counter is running at the highest rate
+and this forces System Generator  to create a CE for the IIR logic which is running at multiple of  the 
+FPGA clock rate. 
+</p>
+</body>
+</html> 

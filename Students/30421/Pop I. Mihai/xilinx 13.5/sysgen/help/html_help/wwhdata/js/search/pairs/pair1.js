@@ -1,0 +1,20 @@
+function FileData_Pairs(x)
+{
+x.t("notes","guide");
+x.t("ise","design");
+x.t("document","ise");
+x.t("found","following");
+x.t("dsp","release");
+x.t("design","suite");
+x.t("release","notes");
+x.t("release","information");
+x.t("suite","release");
+x.t("generator","dsp");
+x.t("web-","based");
+x.t("information","found");
+x.t("information","release");
+x.t("information","system");
+x.t("based","document");
+x.t("system","generator");
+x.t("following","web-");
+}

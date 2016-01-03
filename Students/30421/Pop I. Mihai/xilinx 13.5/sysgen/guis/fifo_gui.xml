@@ -1,0 +1,81 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="FIFO" block_type="fifo">
+  <icon width="80" height="114" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="FIFO_config"/>
+  <handlers enablement="fifoenablement" action="fifoaction"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsControl"/>
+    <library name="xbsMemory"/>
+    <library name="xbsFloatingPoint"/>
+  </libraries>
+  <blockgui label="Xilinx FIFO Block">
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <radiogroup name="performance_options" default="Standard_FIFO" evaluate="true" label="Performance Options" ctype="Int">
+          <item value="Standard_FIFO" label="Standard FIFO"/>
+          <item value="First_Word_Fall_Through" label="First Word Fall Through"/>
+        </radiogroup>
+        <listbox name="depth" default="16" evaluate="true" label="Depth" ctype="Int">
+          <item value="16"/>
+          <item value="32"/>
+          <item value="64"/>
+          <item value="128"/>
+          <item value="256"/>
+          <item value="512"/>
+          <item value="1K"/>
+          <item value="2K"/>
+          <item value="4K"/>
+          <item value="8K"/>
+          <item value="16K"/>
+          <item value="32K"/>
+          <item value="64K"/>
+        </listbox>
+        <listbox name="percent_nbits" default="1" evaluate="true" label="Bits of precision to use for &lt;tt&gt;%full&lt;/tt&gt; signal       " ctype="Int">
+          <item value="1"/>
+          <item value="2"/>
+          <item value="3"/>
+          <item value="4"/>
+          <item value="5"/>
+        </listbox>
+        <etch label="Optional Ports">
+          <checkbox name="rst" default="off" evaluate="true" label="Provide reset port" ctype="Bool"/>
+          <checkbox name="en" default="off" evaluate="true" label="Provide enable port" ctype="Bool"/>
+          <checkbox name="use_dcount" default="off" evaluate="true" label="Provide data count port" ctype="Bool"/>
+          <checkbox name="use_percent_full_port" default="on" evaluate="true" label="Provide percent full port" ctype="Bool"/>
+          <checkbox name="use_almost_empty" default="off" evaluate="true" label="Provide almost empty port" ctype="Bool"/>
+          <editbox name="almost_empty_thresh" default="2" top_label="true" label="Almost empty threshold" ctype="Int"/>
+          <checkbox name="use_almost_full" default="off" evaluate="true" label="Provide almost full port" ctype="Bool"/>
+          <editbox name="almost_full_thresh" default="14" top_label="true" label="Almost full threshold" ctype="Int"/>
+        </etch>
+      </tab>
+      <tab name="advancedtab" label="Advanced">
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <radiogroup name="mem_type" default="Block RAM" evaluate="true" label="Memory Type" ctype="Int">
+          <item value="Block RAM" label="Block RAM"/>
+          <item value="Distributed RAM" label="Distributed RAM"/>
+          <item value="Shift Register" label="Shift Register"/>
+          <item value="Built-in FIFO" label="Built-in FIFO"/>
+        </radiogroup>
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <hiddenvar name="infoedit"/>
+    <hiddenvar name="almost_empty_offset"/>
+    <hiddenvar name="almost_full_offset"/>
+    <hiddenvar name="explicit_period" default="off" evaluate="false" ctype="String"/>
+    <hiddenvar name="period"/>
+    <hiddenvar name="store_only_valid"/>
+    <hiddenvar name="init_zero"/>
+    <hiddenvar name="xlcconfig" default="" evaluate="false" ctype="String"/>    
+  </blockgui>
+</sysgenblock>

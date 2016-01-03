@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Dual Port RAM</title>
+    <link rel="StyleSheet" href="css/Xilinx_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Blockset.11.1.html#393831">Xilinx Blockset</a> : Dual Port RAM</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="393831">Dual Port RAM</a></div>
+      <div class="Body"><span class="Italic"><a name="275798">This block is listed in the following Xilinx Blockset libraries: Control Logic, Memory, and Index.</a></span></div>
+      <div class="OneLiner"><a name="275801"><img class="Default" src="images/Xilinx_Blockset.11.38.1.jpg" width="109" height="173" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" />The Xilinx Dual Port RAM block implements a random access </a>memory (RAM). Dual ports enable simultaneous access to the memory space at different sample rates using multiple data widths.</div>
+      <div class="Heading2"><a name="275802">Block Interface</a></div>
+      <div class="Body"><a name="393891">The block has two independent sets of ports for simultaneous reading and writing. </a>Independent address, data, and write enable ports allow shared access to a single memory space. By default, each port set has one output port and three input ports for address, input data, and write enable. Optionally, you can also add a port enable and synchronous reset signal to each input port set. </div>
+      <div class="Heading3"><a name="393903">Form Factors</a></div>
+      <div class="Body"><a name="1046966">The Dual Port RAM block also supports various Form Factors (FF). Form factor is defined </a>as: </div>
+      <div class="Body2"><a name="394043">FF = W</a><span class="Subscript">B</span> / W<span class="Subscript">A</span> where W<span class="Subscript">B</span> is data width of Port B and W<span class="Subscript">A</span> is Data Width of Port A. </div>
+      <div class="Body"><a name="393919">The Depth of port B (D</a><span class="Subscript">B</span>) is inferred from the specified form factor as follows: </div>
+      <div class="Body2"><a name="393923">D</a><span class="Subscript">B</span> = D<span class="Subscript">A</span> / FF. </div>
+      <div class="Body"><a name="393927">The data input ports on Port A and B can have different arithmetic type and binary point </a>position for a form factor of 1. For form factors greater than 1, the data input ports on Port A and Port B should have an unsigned arithmetic type with binary point at 0. The output ports, labeled A and B, have the same types as the corresponding input data ports. </div>
+      <div class="Body"><a name="393931">The location in the memory block can be accessed for reading or writing by providing the </a>valid address on each individual address port. A valid address is an unsigned integer from 0 to d-1, where d denotes the RAM depth (number of words in the RAM) for the particular port. An attempt to read past the end of the memory is caught as an error in simulation. The initial RAM contents can be specified through a block parameter. Each write enable port must be a boolean value. When the WE port is 1, the value on the data input is written to the location indicated by the address line. </div>
+      <div class="Heading3"><a name="393935">Write Mode</a></div>
+      <div class="Body"><a name="1050756">The output during a write operation depends on the write mode. When the WE is 0, the </a>output port has the value at the location specified by the address line. During a write operation (WE asserted), the data presented on the input data port is stored in memory at the location selected by the port's address input. During a write cycle, you can configure the behavior of each data out port A and B to one of the following choices: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="393939">Read after write</a></span> </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="393941">Read before write</a></span> </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="393943">No read on write</a></span> </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="395621">The write modes can be described with the help of the figure below. In the figure, the </a>memory has been set to an initial value of 5 and the address bit is specified as 4. When using <span class="Bold">No read on write</span> mode, the output is unaffected by the address line and the output is the same as the last output when the WE was 0. For the other two modes, the output is obtained from the location specified by the address line, and hence is the value of the location being written to. This means that the output can be the old value which corresponds to <span class="Bold">Read after write</span>.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="396927"><img class="Default" src="images/Xilinx_Blockset.11.38.2.jpg" width="217" height="453" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="1050032">Collision Behavior</a></div>
+      <div class="Body"><a name="1050033">The result of simultaneous access to both ports is described below: </a></div>
+      <div class="Heading4"><a name="1050034">Read-Read Collisions</a></div>
+      <div class="Body"><a name="1050035">If both ports read simultaneously from the same memory cell, the read operation is </a>successful. </div>
+      <div class="Heading4"><a name="1050036">Write-Write Collisions</a></div>
+      <div class="Body"><a name="1050037">If both ports try to write simultaneously to the same memory cell, both outputs are marked </a>as invalid (nan). </div>
+      <div class="Heading4"><a name="1050038">Write-Read Collisions</a></div>
+      <div class="Body"><a name="1050670">This collision occurs when one port writes and the other reads from the same memory cell. </a>While the memory contents are not corrupted, the validity of the output data on the read port depends on the Write Mode of the write port.</div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="1050679">If the write port is in </a><span class="Bold">Read before write</span> mode, the other port can reliably read the old memory contents.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="1050683">If the write port is in </a><span class="Bold">Read after write</span> or <span class="Bold">No read on write</span>, data on the output of the read port is invalid (nan).</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="1050749">You can set the Write Mode of each port using the Advanced tab of the block parameters </a>dialog box.</div>
+      <div class="Heading3"><a name="395386">Maximum Timing Performance</a></div>
+      <div class="Body"><a name="1046974">When implementing dual port RAM blocks on Virtex®4, Virtex-5, Virtex-6 and Spartan®-</a>3A DSP devices, maximum timing performance is possible if the following conditions are satisfied: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="395390">The option </a><span class="Bold">Provide synchronous reset port for port A output register</span> is un-checked. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="893713">The option </a><span class="Bold">Provide synchronous reset port for port B</span> <span class="Bold">output register</span> is un-checked. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="893714">The option </a><span class="Bold">Depth</span> is less than 16,384. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="893715">The option </a><span class="Bold">Latency</span> is set to 2 or higher.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="550763">Block Parameters</a></div>
+      <div class="Body"><a name="550764">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model.</div>
+      <div class="Heading3"><a name="550765">Basic tab</a></div>
+      <div class="Body"><a name="550766">Parameters specific to the Basic tab are: </a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="550779">Depth</a></span>: specifies the number of words in the memory for Port A, which must be a positive integer. The Port B depth is inferred from the form factor specified by the input data widths. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="550781">Initial value vector</a></span>: specifies the initial memory contents. The size and precision of the elements of the initial value vector are based on the data format specified for Port A. When the vector is longer than the RAM, the vector's trailing elements are discarded. When the RAM is longer than the vector, the RAM's trailing words are set to zero. The initial value vector is saturated and rounded according to the precision specified on the data port A of RAM. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="550783">Memory Type</a></span>: option to select between block and distributed RAM. The distributed dual port RAM is always set to use port A in Read Before Write mode and port B in read-only mode. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="550785">Write Modes (A/B Ports)</a></span>: specifies the memory behavior to be Read Before Write, Read After Write, or No Read On Write. There are device specific restrictions on the applicability of these modes. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="551083">Initial value for port A output Register</a></span>: specifies the initial value for port A output register. The initial value is saturated and rounded according to the precision specified on the data port A of RAM. The option to set initial value is available only for Spartan®-3, Virtex®-4, Virtex-5, Virtex-6, and Spartan-3A DSP devices. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="551101">Initial value for port B output register</a></span>: specifies the initial value for port B output register. The initial value is saturated and rounded according to the precision specified on the data port B of RAM. The option to set initial value is available only for Spartan®-3, Virtex-4, Virtex-5, Virtex-6,and Spartan-3A DSP devices. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="550787">Provide synchronous reset port for port A output register</a></span>: when selected, allows access to the reset port available on the port A output register of the Block RAM. The reset port is available only when the latency of the Block RAM is set to 1. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="550791">Provide synchronous reset port for port B output register</a></span>: when selected, allows access to the reset port available on the port B output register of the Block RAM. The reset port is available only when the latency of the Block RAM is set to 1. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="550795">Provide enable port for port A</a></span>: when selected, allows access to the enable port for port A. The enable port is available only when the latency of the block is greater than or equal to 1. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="550797">Provide enable port for port B</a></span>: when selected, allows access to the enable port for port B. The enable port is available only when the latency of the block is greater than or equal to 1. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="1282632">Other parameters used by this block are explained in the topic</a><br /><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.3.html#271277', '');" title="Common Options in Block Parameter Dialog Boxes">Common Options in Block Parameter Dialog Boxes</a></span>. </div>
+      <div class="Heading2"><a name="550804">Xilinx LogiCORE</a></div>
+      <div class="Body"><a name="1244888">This block always uses a Xilinx LogiCORE™: Dual Port Block Memory or Distributed </a>Memory. For the dual port block memory, the address width must be equal to ceil(log2(d)) where d denotes the memory depth. The maximum width of data words in the block memory depends on the depth specified; the maximum depth depends on the device family targeted. The tables above provide the maximum data word width for a given block memory depth.</div>
+      <div class="Body"><a name="1245085">This block uses the following Xilinx LogiCOREs:</a></div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 489.3076000000001pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 70.7617pt;" rowspan="2">
+            <div class="CellHeading"><a name="2176142">System </a>Generator Block</div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 64.3293pt;" rowspan="2">
+            <div class="CellHeading"><a name="2176144">Xilinx </a>LogiCORE<span style="font-family: &quot;Microsoft Sans Serif&quot;; font-size: 10.0pt; font-weight: normal;">™</span></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 54.8486pt;" rowspan="2">
+            <div class="CellHeading"><a name="2176146">LogiCORE</a><span style="font-family: &quot;Microsoft Sans Serif&quot;; font-size: 10.0pt; font-weight: normal;">™</span> Version / Data Sheet</div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 142.557pt;" colspan="5">
+            <div class="CellHeading"><a name="2176148">Spartan® Device</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 156.811pt;" colspan="5">
+            <div class="CellHeading"><a name="2176156">Virtex® Device</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 70.7617pt;">
+            <div class="CellHeading"><a name="2176170">3,3E</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 64.3293pt;">
+            <div class="CellHeading"><a name="2176172">3A</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 54.8486pt;">
+            <div class="CellHeading"><a name="2176174">3A </a>DSP</div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 28.5114pt;">
+            <div class="CellHeading"><a name="2176176">6</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 28.5114pt;">
+            <div class="CellHeading"><a name="2333907">6 -1L</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 28.5114pt;">
+            <div class="CellHeading"><a name="2176178">4</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 28.5114pt;">
+            <div class="CellHeading"><a name="2176180">5</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 28.5114pt;">
+            <div class="CellHeading"><a name="2176244">5Q</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 31.3622pt;">
+            <div class="CellHeading"><a name="2176182">6</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 31.3622pt;">
+            <div class="CellHeading"><a name="2176184">6 -1L</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;" rowspan="2">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.38.html#393831', '');" title="Dual Port RAM" name="2176188">Dual Port RAM</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="2176191">Block </a>Memory Generator</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;"><a href="javascript:void(0);" onClick="WWHFrame.WWHBrowser.fXilinxLink('coregen/ip/xilinx/primary/com/xilinx/ip/blk_mem_gen_v4_1/doc/blk_mem_gen_ds512.pdf','')">V4.1</a><div class="CellBody" style="color: #0000ff; font-size: 9.5pt; font-style: normal; font-variant: normal; font-weight: normal; text-transform: none; vertical-align: baseline;"><a name="2176195">&nbsp;</a></div></td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2176197">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2176199">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2176201">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2176203">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2333909">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2176205">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2176207">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2176246">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2176209">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2176211">•</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="2176215">Distributed </a>Memory Generator</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a href="javascript:void(0);" onClick="WWHFrame.WWHBrowser.fXilinxLink('coregen/ip/xilinx/primary/com/xilinx/ip/dist_mem_gen_v5_1/doc/dist_mem_gen_ds322.pdf','')">V5.1</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2176220">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2176222">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2176224">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2176226">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2333911">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2176228">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2176230">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2176248">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2176232">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2176234">•</a></span></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading4"><a name="551314">Maximum Width for Various Depth Ranges (Virtex®/Virtex-E/Spartan®-3)</a></div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 158.4pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 79.2pt;">
+            <div class="CellHeadingLeft"><a name="551467">Depth</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 79.2pt;">
+            <div class="CellHeadingLeft"><a name="551469">Width</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551471">2 to 2048</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551473">256</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551475">2049 to 4096</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551477">192</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551479">4097 to 8192</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551481">96</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551483">8193 to 16K</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551485">48</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551487">16K+1 to 32K</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551489">24</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551491">32K+1 to 64K</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551493">12</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551495">64K+1 to 128K</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551497">6</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551499">128K+1 to 256K</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551501">3</a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading4"><a name="551324">Width for Various Depth Ranges (Virtex-4/Virtex-5/Spartan-3A DSP)</a></div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 158.4pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 79.2pt;">
+            <div class="CellHeadingLeft"><a name="551424">Depth</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 79.2pt;">
+            <div class="CellHeadingLeft"><a name="551426">Width</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551428">2 to 8192</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551430">256</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551432">8193 to 16K</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551434">192</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551436">16K+1 to 32K</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551438">96</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551440">32K+1 to 64K</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551442">48</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551444">64K+1 to 128K</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551446">24</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551448">128K+1 to 256K</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551450">12</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551452">256K+1 to 512K</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551454">6</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551456">512K+1 to 1024K</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="551458">3</a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="551315">When the distributed memory parameter is selected, LogiCORE™ Distributed Memory is </a>used. The depth must be between 16 and 65536, inclusive for Spartan®-3, Virtex®-4, Virtex-5, Virtex-6, and Spartan-3A DSP devices; depth must be between 16 to 4096, inclusive for the other FPGA families. The word width must be between 1 and 1024, inclusive.</div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

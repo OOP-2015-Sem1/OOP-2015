@@ -1,0 +1,19 @@
+<!--  *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.            -->
+<!--  *  Reproduction or reuse, in any form, without the explicit written  -->
+<!--  *  consent of Xilinx, Inc., is strictly prohibited.                  -->
+<sysgenblock simulinkname="FDATool" block_type="fdatool" has_userdata="true">
+  <initialization file="xlfdatool_init.m"/>
+  <block_creation_script file="fdatool/developer/fdatool_creation_script.m"/>
+  <icon width="54" height="56" wmark_color="blue" bg_color="white" file="fdatool_icon.m"/>
+  <sfunction name="xlpermissive"/>
+  <callbacks NameChangeFcn="xlfdatool_utils('NameChange');" CloseFcn="xlfdatool_utils('CloseFcn');" CopyFcn="xlfdatool_utils('BlockCopy');" DeleteFcn="xlfdatool_utils('CloseFcn');" ModelCloseFcn="xlfdatool_utils('ModelCloseFcn');" OpenFcn="xlfdatool_utils('OpenFcn');"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsDSP"/>
+    <library name="xbsTools"/>
+  </libraries>
+  <blockgui label="Xilinx FDATool Interface">
+    <editbox name="infoedit" default="FDATool" read_only="true" multi_line="true" evaluate="false"/>
+    <hiddenvar name="ShowPortLabels"/>
+  </blockgui>
+</sysgenblock>

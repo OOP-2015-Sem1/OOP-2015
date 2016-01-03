@@ -1,0 +1,46 @@
+<html>
+<body>
+<h3><font size=+1 color="#990000">PicoBlaze Based Pattern Generator</font></h3>
+<p>
+<b>PicoBlaze-Based Pattern Generator</b>
+This design shows how the PicoBlaze soft processor can be used to generate an image for video display.  This demo includes a function to display the image in a Matlab figure window.
+</p>
+<p>
+The pattern generator is intended to be connected to the UltraMC SDRAM memory controller.  (The memory controller is not included in this demo.)  The four output ports on the "Pattern Generator" subsystem interface directly to a 32-bit write port on the UltraMC.
+</P>
+
+<b>Full System Description</b>
+<p>
+In a full system, there would be an UltraMC memory controller, external SDRAM, and a soft VGA controller connected to the UltraMC and to an external video DAC.  (This system has been built but and demonstrated on the ML402.)  The VGA controller retrieves video data from a video buffer in SDRAM.  The video buffer contains a 32-bit unpacked value for each pixel.  Of these 32 bits, the eight MSBs are "don’t care" and the lower 24 bits are an RGB value, with the least significant eight bits corresponding to blue.
+</p>
+
+<b>Generating Pixel Data</b>
+<p>
+The pattern generator contains a PicoBlaze and some ancillary logic.  The PicoBlaze must generate 24 bits for each pixel to be displayed, as well as an address start and burst length for each group of pixels.  The ancillary logic is required because the PicoBlaze has only a single 8-bit data "out_port" and an 8-bit "port_id", the latter of which is similar to an address.
+</p>
+<p>
+The pattern generator creates the 24-bit value for each pixel by concatenating 8-bit RGB values.  To specify the blue value, it writes the blue value to "out_port" and the address 254 to "port_id".  This latches the blue value into an 8-bit register.  The same is done with the red and green values, using "port_id" addresses of 252 and 253, respectively.  Now there is a 24-bit pixel value at the ready on the 32-bit "wr_data" port.  The the address 251 is written to "port_id" to strobe "wr_data_we".  This writes the 32-bit value containing the 24-bit color data into the write data FIFO of the UltraMC (not included here).  Sixteen pixels are written to the write data FIFO in the same manner.  These will comprise a horizonatal row of sixteen adjacent pixels.  (When using the UltraMC memory controller, it is only possible to write data in contiguous bursts.)
+</p>
+<b>Generating Pixel Addresses</b>
+<p>
+After the burst of data is written, the write address is written.  The write address is actually a 36-bit value that comprises a ten-bit burst size (MSBs) and a 26-bit start address (LSBs).  The burst size will be 16, indicating that 16 32-bit words (e.g., pixels) are to be written in each burst.  The starting address is a 26-bit value where 0 is the upper-left pixel on the screen (the first pixel of row 0), 1024 is the first pixel of row 1, etc.  There are 1024 pixels per row and 768 rows in this configuration.  Therefore the 26-bit address into the video buffer can be thought of as a 10-bit column address (bits [9:0]) and a 10-bit row address (bits [19:10]) with the remaining six bits "don’t care".
+</p>
+<p>
+The PicoBlaze forms the 26-bit address by writing a 6-bit value (using "port_id"=250) that is concatenated with the four-bit value "0000" to yield the 10-bit column address.  This is concatenated in turn with a 10-bit row address which can be incremented using "port_id"=2 using ancillary logic. 
+</p>
+<p>
+
+When the 26-bit address is latched into "wr_addr" (using "port_id"=250), then "wr_addr_we" is also strobed to put the address into the UltraMC’s write address FIFO.  If the UltraMC were connected, it would then begin the process of moving the data from the write data FIFO into the SDRAM into the video buffer region.  The VGA controller would then display the updated video buffer on its next pass, which would occur at the video refresh rate (~60Hz).
+</p>
+
+<p>
+The PicoBlaze is stopped when the row address reaches 768, which is the end of the video buffer.
+</p>
+
+<b>Displaying Pattern in Demo</b>
+<p>
+In this demo, the RGB data is written to the Matlab workspace, and at the end of the demo, displayed by the function "makematrix".  This displays, in a Matlab figure window, what the display would look like were it shown on a VGA display connected to a VGA controller connected, in turn, to the UltraMC.
+
+</p>
+</body>
+</html> 

@@ -1,0 +1,34 @@
+<html>
+<body>
+<h3><font size=+1 color="#990000">Double Buffer</font></h3>
+<b>Double Buffer</b>
+<p>
+This design shows how to create a generic double data buffer using SysGen External Memory Interface simulation model block based on the VDMA IP behaviour. The design behaves similarly to a Dual Port RAM with two read , write data ports and some simple control I/O ports.
+</p>
+<b>Design</b>
+<p>
+For this particular configuration, each buffer reads a complete frame of an input image file and stores it in the VDMA system memory. 
+The same image is then transmitted via axi_stream_transmitter ports. At the top-level, the parameters are provided so you can configure the design to read and write different size of 2D images. 
+
+Block Descriptors:
+
+The VDMA can be configured to transfer multiple frames of data where each frame is a 2D data characterized by : 
+START_ADDRESS : The Physical location in memory where the first Byte of the frame is read from or written to.
+HSIZE : Number of horizontal bytes 
+VSIZE : Number of vertical lines of transfer 
+STRIDE : The address offset between the start byte in each line.
+
+In this design, users can manipulate how and when to read the image stored in the VDMA system memory by modifying these two M-code files:
+   -  xldScatterGatherEngineBlockTransfer_1.m for the first buffer channel
+   -  xldScatterGatherEngineBlockTransfer_2.m for the second buffer channel
+For example, to read from the first buffer , the START_ADDRESS will need to be set to zero. On the other hand, to read from the second buffer, the START_ADDRESS will need need to be offset  by the size of the first input image.  
+
+Both buffers share the same M-code file (xlWriteControlRegister_db.m) to control data and address registers of the AXI VDMA operation.
+</p>
+<p>
+   <b> Expected Input and Output for this Demo,</b> (Results captured after simulation)
+</p>
+<image src="./InputOutputResult_DoubleBuffer.jpg" alt="Output SnapShot"/>
+
+</body>
+</html> 

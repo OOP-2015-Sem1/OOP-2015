@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Simulation Multiplexer</title>
+    <link rel="StyleSheet" href="css/Xilinx_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Blockset.11.1.html#2382968">Xilinx Blockset</a> : Simulation Multiplexer</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="2382968">Simulation Multiplexer</a></div>
+      <div class="Body"><span class="Italic"><a name="592164">This block appears only in the Index library of the Xilinx Blockset.</a></span></div>
+      <div class="OneLiner"><a name="592464"><img class="Default" src="images/Xilinx_Blockset.11.87.1.jpg" width="62" height="57" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" />The Simulation Multiplexer has been deprecated in System Generator. </a></div>
+      <div class="Body"><a name="1104684">It is expected that the block will be eliminated in a future version of the Xilinx </a>Blockset. The functionality supplied by this block is now available through System Generator's support for Simulink's configurable subsystem capabilities. The use of configurable subsystems offers several advantages over the use of Simulation Multiplexer blocks. </div>
+      <div class="Body"><a name="592470">The Simulation Multiplexer is a System Generator block that allows two portions of a </a>design to work in parallel, with simulation results provided by the first portion and hardware provided by the second. </div>
+      <div class="Body"><a name="593404">This is useful, for example, when a subsystem is defined in the usual way with Simulink </a>blocks, but black box HDL is used to implement the subsystem in hardware. An example is shown below. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="593749"><img class="Default" src="images/Xilinx_Blockset.11.87.2.jpg" width="265" height="225" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="593405">Using Subsystem for Simulation and Black Box for Hardware</a></div>
+      <div class="Body"><a name="592495">The Simulation Multiplexer has two inputs ports. In the block parameters dialog box, one </a>port can be identified as For Simulation and a second as For Generation. The portion of the design that drives the For Simulation port is used as the simulation model, and the portion that drives For Generation is used to produce hardware. The same port can be used for both. In this case the portion of the design that drives the combined For Simulation/For Generation port is used both for simulation and to produce hardware, while the other portion is ignored. It should be noted that simulation results from a design that contains a Simulation Multiplexer need not be bit and cycle accurate. </div>
+      <div class="Body"><a name="592499">The Simulation Multiplexer is useful whenever there is a difference between what should </a>be used for simulation and what should be used in hardware. For example, a hardware co-simulation token with an accompanying FPGA bitstream can be simulated but cannot be translated into hardware. If the HDL used to produce the bitstream is available, a black box can incorporate the HDL. Driving a Simulation Multiplexer's For Simulation port with the token and its For Generation port with the black box makes it possible both to simulate the design and to produce hardware. Another use for the multiplexer is to switch between black boxes that incorporate different types of HDL. One might provide behavioral HDL to be used in simulation, and the other might provide RTL to be used for implementation. </div>
+      <div class="Heading2"><a name="592506">Block Parameters</a></div>
+      <div class="Body"><a name="593829">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model.</div>
+      <div class="Body"><a name="593842">Parameters specific to the block are: </a></div>
+      <div class="Body"><span class="Bold"><a name="593844">For Simulation, Pass Through Data from Input Port</a></span>: Determines which input port (either 1 or 2) is used for simulation. </div>
+      <div class="Body"><span class="Bold"><a name="1915071">For Generation, Pass Through Data from Input Port</a></span>: Determines which input port (either 1 or 2) is used for generation. </div>
+      <div class="Body"><a name="1915217">&nbsp;</a></div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>xlgetparams</title>
+    <link rel="StyleSheet" href="css/SysGen_Utilities.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="SysGen_Utilities.14.1.html#285771">System Generator Utilities</a> : xlgetparams</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="285771">xlgetparams</a></div>
+      <div class="Body"><a name="285775">The </a><span class="Filename">xlgetparams</span> command is used to get all parameter values in a <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.91.html#467900', '');" title="System Generator">System Generator</a></span> block (token) associated with the current compilation type. The <span class="Filename">xlgetparams</span> command can be used in conjunction with the <span class="Filename">xlgetparam</span> and <span class="Filename">xlsetparam</span> commands to change or retrieve a System Generator block's parameters.</div>
+      <div class="Heading2"><a name="287311">Syntax</a></div>
+      <div class="Code"><a name="287312">paramstruct = xlgetparams(sysgenblock_handle); </a></div>
+      <div class="Body"><a name="287313">To get the </a><span style="font-family: &quot;Microsoft Sans Serif&quot;; font-size: 9.0pt;">sysgenblock_handle</span>, enter <span class="Filename">gbc</span> or <span class="Filename">gcbh</span> at the MATLAB command line.</div>
+      <div class="Code"><a name="287299">paramstruct = xlgetparams('</a><span class="Filename" style="font-size: 10.0pt;">chip/ System Generator</span>'); </div>
+      <div class="Code"><a name="287300">paramstruct = xlgetparams(gcb); </a></div>
+      <div class="Code"><a name="287328">paramstruct = xlgetparams(gcbh); </a></div>
+      <div class="Heading2"><a name="285761">Description</a></div>
+      <div class="Body"><a name="285765">All the parameters available to a </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.91.html#467900', '');" title="System Generator">System Generator</a></span> block can be retrieved using the xletparams command. For more information regarding the parameters, please refer to the System Generator block documentation. </div>
+      <div class="Code"><a name="274009">paramstruct = xlgetparams(sysgenblock); </a></div>
+      <div class="Body"><a name="274010">The first input argument of xlgetparams should be a handle to the System Generator block. </a>The function returns a MATLAB structure that lists the parameter value pairs. </div>
+      <div class="Heading2"><a name="274011">Examples</a></div>
+      <div class="Body"><a name="286678">To illustrate how the </a><span class="Filename">xlparams</span> function works, do the following:</div>
+      <div class="Numbered_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="286772">Open the following MDL file: </a><span class="Filename">sysgen/examples/chipscope/chip.mdl</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="286798">Select the System Generator token</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="286803">Enter the following at the MATLAB command line: </a><span class="Filename">gcb</span><span class="Filename"><br /></span><span class="Filename">ans = chip/ System Generator</span><span class="Filename"><br /></span>this is the System Genertor token “string” handle</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="286828">Now enter the following from the MATLAB command line: </a><span class="Filename">gcbh</span><span class="Filename"><br /></span><span class="Filename">ans = 4.3431</span><span class="Filename"><br /></span>this is the System Genertor token “numeric” handle</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">5.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="286826">Now enter the following from the MATLAB command line: </a><br /><span class="Filename">xlgetparams(gcb)</span><span class="Filename"><br /></span>the function returns all the parameters associated with the <span class="Filename">Bitstream</span> compilation type:</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Code"><a name="286850">compilation: 'Bitstream'</a></div>
+      <div class="Code"><a name="286851">compilation_lut: [1x1 struct]</a></div>
+      <div class="Code"><a name="286852">simulink_period: '1'</a></div>
+      <div class="Code"><a name="286853">incr_netlist: 'off'</a></div>
+      <div class="Code"><a name="286854">trim_vbits: 'Everywhere in SubSystem'</a></div>
+      <div class="Code"><a name="286855">dbl_ovrd: 'According to Block Masks'</a></div>
+      <div class="Code"><a name="286856">deprecated_control: 'off'</a></div>
+      <div class="Code"><a name="286857">block_icon_display: 'Default'</a></div>
+      <div class="Code"><a name="286858">xilinxfamily: 'virtex5'</a></div>
+      <div class="Code"><a name="286859">part: 'xc5vsx50t'</a></div>
+      <div class="Code"><a name="286860">speed: '-1'</a></div>
+      <div class="Code"><a name="286861">package: 'ff1136'</a></div>
+      <div class="Code"><a name="286862">synthesis_tool: 'XST'</a></div>
+      <div class="Code"><a name="286863">directory: './bitstream'</a></div>
+      <div class="Code"><a name="286864">testbench: 'off'</a></div>
+      <div class="Code"><a name="286865">sysclk_period: '10'</a></div>
+      <div class="Code"><a name="286866">core_generation: 'According to Block Masks'</a></div>
+      <div class="Code"><a name="286867">run_coregen: 'off'</a></div>
+      <div class="Code"><a name="287124">eval_field: '0'</a></div>
+      <div class="Code"><a name="287125">clock_loc: 'AH15'</a></div>
+      <div class="Code"><a name="286870">clock_wrapper: 'Clock Enables'</a></div>
+      <div class="Code"><a name="286871">dcm_input_clock_period: '100'</a></div>
+      <div class="Code"><a name="286872">synthesis_language: 'VHDL'</a></div>
+      <div class="Code"><a name="286873">ce_clr: 0</a></div>
+      <div class="Code"><a name="286874">preserve_hierarchy: 0</a></div>
+      <div class="Code"><a name="286875">postgeneration_fcn: 'xlBitstreamPostGeneration'</a></div>
+      <div class="Code"><a name="274034">settings_fcn: 'xlTopLevelNetlistGUI'</a></div>
+      <div class="Body"><a name="274035">The </a><span class="Filename">compilation_lut</span> parameter is another structure that lists the other compilation types that are stored in this System Generator token. Using <span class="Filename">xlsetparam</span> to set the compilation type allows the parameters associated with that compilation type to be visible to either <span class="Filename">xlgetparams</span> or <span class="Filename">xlgetparam</span>. </div>
+      <div class="Heading2"><a name="274036">See Also</a></div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'SysGen_Utilities.14.7.html#278402', '');" title="xlGenerateButton" name="274043">xlGenerateButton</a></span>, <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'SysGen_Utilities.14.8.html#274001', '');" title="xlgetparam and xlsetparam">xlgetparam and xlsetparam</a></span> </div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

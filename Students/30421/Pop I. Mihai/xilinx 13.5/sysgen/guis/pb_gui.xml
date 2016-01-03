@@ -1,0 +1,40 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="PicoBlaze\nMicrocontroller" block_type="pb">
+  <initialization file="xlpb_init.m"/>
+  <icon width="95" height="78" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="PicoBlaze_config"/>
+  <handlers enablement="pbenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsControl"/>
+    <library name="xbsTools"/>
+  </libraries>
+  <blockgui label="Xilinx PicoBlaze Microcontroller">
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <radiogroup name="version" default="PicoBlaze 2" evaluate="true" label="Version" ctype="Int">
+          <item value="PicoBlaze 2" label="PicoBlaze 2"/>
+          <item value="PicoBlaze 3" label="PicoBlaze 3"/>
+        </radiogroup>
+        <etch name="internalstateetch" label="Internal State">
+          <checkbox name="display_mi" default="off" evaluate="true" label="Display internal state"/>
+          <radiogroup name="xl_view_as" default="Decimal" evaluate="true" label="Display values as" ctype="Int">
+            <item value="Decimal" label="Decimal"/>
+            <item value="Hexadecimal" label="Hexadecimal"/>
+          </radiogroup>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <workspacevar name="period" ctype="Double"/>
+    <workspacevar name="program_file" ctype="String"/>
+    <workspacevar name="debug_mode" ctype="Int"/>
+  </blockgui>
+</sysgenblock>

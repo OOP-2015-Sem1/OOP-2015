@@ -1,0 +1,723 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>DDS Compiler 4.0</title>
+    <link rel="StyleSheet" href="css/Xilinx_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Blockset.11.1.html#1985590">Xilinx Blockset</a> : DDS Compiler 4.0</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="1985590">DDS Compiler 4.0</a></div>
+      <div class="Body"><span class="Italic"><a name="2106636">This block is listed in the following Xilinx Blockset libraries: DSP and Index.</a></span></div>
+      <div class="OneLiner"><a name="2109532"><img class="Default" src="images/Xilinx_Blockset.11.26.1.jpg" width="78" height="120" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" />The Xilinx DDS Compiler block is a direct digital synthesizer, also </a>commonly called a numerically controlled oscillator (NCO). The block uses a lookup table scheme to generate sinusoids. A digital integrator (accumulator) generates a phase that is mapped by the lookup table into the output sinusoidal waveform. </div>
+      <div class="Heading2"><a name="2140378">Architecture Overview</a></div>
+      <div class="Body"><a name="2140655">To understand the DDS Compiler, it is necessary to know how the block is implemented in </a>FPGA hardware. The following is a block diagram of the DDS Compiler core. The core consist of two main parts, a Phase Generator part and a SIN/COS LUT part. These parts can be used independently or together with an optional dither generator to create a DDS capability. A time-division multi-channel capability is supported with independently configurable phase increment and offset parameters</div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="2141662"><img class="Default" src="images/Xilinx_Blockset.11.26.2.jpg" width="631" height="364" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="2141659">Phase Generator</a></div>
+      <div class="Body"><a name="2140460">The Phase Generator consists of an accumulator followed by an optional adder to provide </a>the addition of a phase offset. When the core is customized, the phase increment and offset can be independently configured to be either fixed, programmable or supplied by the <span class="Bold">pinc_in</span> and <span class="Bold">poff_in</span> input ports respectively.</div>
+      <div class="Body"><a name="2140463">When set to programmable, registers are implemented with a bus interface consisting of </a><span class="Bold">addr</span>, <span class="Bold">reg_select</span>, <span class="Bold">we</span>, and <span class="Bold">data</span> signals. The address input, <span class="Bold">addr</span>, specifies the channel for which data is to be written when in multi-channel mode, with <span class="Bold">reg_select</span> specifying whether data is phase increment or offset.</div>
+      <div class="Body"><a name="2140467">When set to fixed, the DDS output frequency is set when the core is customized and the </a>frequency cannot be adjusted once the core is embedded in a design.</div>
+      <div class="Body"><a name="2140469">When used in conjunction with the SIN/COS LUT, an optional dither generator can be </a>configured to provide increased SFDR at the expense of an increased noise floor.</div>
+      <div class="Heading3"><a name="2140471">SIN/COS LUT</a></div>
+      <div class="Body"><a name="2140472">The SIN/COS LUT transforms the phase generator output into a </a><span class="Bold">sine</span> and <span class="Bold">cosine</span> output. Efficient memory usage is achieved using halfwave and quarterwave storage schemes. The presence of both outputs and their negation are configurable when the core is customized. Precision can be increased using optional Taylor Series Correction. This exploits XtremeDSP slices on FPGA families that support them to achieve high SFDR with high speed operation.</div>
+      <div class="Heading2"><a name="2071555">Block Interface</a></div>
+      <div class="Body"><a name="2071562">&nbsp;</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="2071561"><img class="Default" src="images/Xilinx_Blockset.11.26.3.jpg" width="521" height="115" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="2109690">Port functions on the DDS Compiler 4.0 block are as follows: </a></div>
+      <div class="Heading4"><a name="2109691">Input Ports</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2109692">we</a></span>: write enable (active high). Enables a write operation to the offset frequency memory and/or the programmable frequency memory. Which memory is written to is determined by the <span class="Bold">reg_select</span> port value. Maps to the <span class="Bold">we</span> port on the underlying LogiCORE.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2109693">reg_select</a></span>: <span style="font-size: 9.0pt;">Address select for writing to the phase increment (PINC) memory and the phase </span><span style="font-size: 9.0pt;">offset (POFF) memory. When </span>reg_select=0, the pinc memory is selected. When reg_select =1, the POFF memory is selected This port only appears when Phase Increment and Phase Offset are Programmable.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2109694">addr</a></span>: <span style="font-size: 9.0pt;">this bus is used to address up to 16 channels for the </span>currently selected memory. The number of bits in <span class="Bold">addr</span> is 1 for 2 channels, 2 for 3 or 4 channels, 3 for 5 to 8 channels, and 4 for 9 to 16.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2109695">data</a></span>: time-shared data bus. The data port is used for supplying values to the programmable phase increment memory or programmable phase offset memory. The input value describes a phase angle. This input may be an unsigned or signed purely fractional quantity. When supplying the phase increment or phase offset, the phase is entered as a fraction of a cycle; that is, for an 18-bit phase, the types are UFix 18.18 or Fix 18.18, which relates to the ranges 0&lt;=phase&lt;1.0 or -0.5&lt;=phase&lt;0.5 respectively. In the case of phase increment, the fraction supplied is also the output frequency relative to the rate at which the core is clocked per channel; that is, the rate at which the core is clocked divided by the number of channels.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2109696">rst</a></span>: synchronous reset. When '1', the internal memories of the block are reset. (POFF and PINC memmories are not reset.) Maps to the SCLR (synchronous clear) input on the underlying LogiCORE.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2109697">en</a></span>: user enable. When '1', the block is active. Maps to the CE port on the underlying LogiCORE. (Does not apply to POFF and PINC memory write.)</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2109699">phase_in</a></span>: used when the DDS Compiler is configured as SIN_COS_LUT_only. This is the phase input to replace the phase signal created by the Phase Generator. This input is either an unsigned or signed purely fractional quantity and provides the phase as a fraction of a cycle.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2109700">pinc_in</a></span>: streaming input for Phase Increment. This input allows for easy modulation of the DDS output frequency. This input is either an unsigned or signed purely fractional quantity and supplies the phase increment as a fraction of a cycle. This is also the output frequency as a fraction of the rate at which the core is clocked per channel.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2109701">poff_in</a></span>: streaming input for Phase Offset. This input allows easy modulation of the DDS output phase. This input is either an unsigned or signed fractional quantity and provides the phase offset as a fraction of a cycle.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading4"><a name="2109702">Output Ports</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2109703">rdy</a></span>: output data ready - active High. Indicates when the output samples are valid.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2109704">rfd</a></span>: ready for data - active High. <span class="Bold" style="font-size: 9.0pt;">rfd</span><span style="font-size: 9.0pt;"> is a dataflow control signal present on many Xilinx </span><span style="font-size: 9.0pt;">LogiCOREs. In the context of the DDS, it is supplied only for consistency with other LogiCORE </span><span style="font-size: 9.0pt;">cores. This optional port is always tied to VCC.</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2109705">channel</a></span>: Channel index. Indicates which channel is currently available at the output when the underlying core is configured for multi-channel operation. This is an unsigned number. It’s width is determined by the number of channels that are specified by the <span class="Bold">Number of Channels </span>parameter on the Basic tab.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2109706">sine</a></span>: sine output value. Maps to the SINE output on the underlying LogiCORE.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2109707">cosine</a></span>: cosine output value. Maps to the COSINE output on the underlying LogiCORE.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2109708">phase_out</a></span>: appears when the Phase_Generator_only option is selected. This output is optional on all other variants.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="2109709">Block Parameters</a></div>
+      <div class="Body"><a name="2109710">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model. </div>
+      <div class="Heading3"><a name="2109711">Basic tab</a></div>
+      <div class="Body"><a name="2109712">Parameters specific to the Basic tab are as follows:</a></div>
+      <div class="Body"><span class="Bold"><a name="2109713">Configuration Options</a></span>: This parameter allows for two parts of the DDS to be instantiated separately or instantiated together. Select one of the following:</div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2109714">Phase_Generator_and_SIN_COS_LUT</a></span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2109715">SIN_COS_LUT_only</a></span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2109716">Phase_Generator_only</a></span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="2109717">System Requirements</a></div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="2109718">System Clock (Mhz): Specifies the frequency at which the block will be clocked for </a>the purposes of making architectural decisions and calculating phase increment from the specified output frequency. This will be a fixed ratio off the System Clock.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="2109719">Number of Channels</a></span>: The channels are time-multiplexed in the DDS which affects the effective clock per channel. The DDS can support 1 to 16 time-multiplexed channels.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="2109720">Parameter Selection: Choose </a><span class="Bold">System_Parameters</span> or <span class="Bold">Hardware_Parameters</span></div>
+      <div class="Body"><a name="2109721">System Parameters</a></div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="2109722">Spurious Free Dynamic Range (dB)</a></span>: The targeted purity of the tone produced by the DDS. This sets the output width as well as internal bus widths and various implementation decisions.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="2109723">Frequency Resolution (Hz)</a></span>: This sets the precision of the PINC and POFF values. Very precise values will require larger accumulators. Less precise values will cost less in hardware resource.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><span class="Bold"><a name="2131569">Noise Shaping: </a></span>Choose one - None, Phase_Dithering, Taylor_Series_Corrected, or Auto.</div>
+      <div class="Body4"><a name="2131574">If the Configuration Options selection is SIN_COS_LUT_only, then None and </a>Taylor_Series_Corrected are the only valid options for Noise Shaping. If Phase_Generator_Only is selected, then None is the only valid choice for Noise Shaping.</div>
+      <div class="Body"><a name="2131570">Hardware Parameters</a></div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="2109725">Phase Width</a></span>: Equivalent to frequency resolution, this sets the width of the internal phase calculations.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="2109726">Output Width</a></span>: Broadly equivalent to SFDR, this sets the output precision and the minimum Phase Width allowable. However, the output accuracy is also affected by the choice of Noise Shaping.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><span class="Bold"><a name="2109727">Output Selection</a></span>: specifies the function(s) that the block will calculate; <span class="Bold">Sine</span>, <span class="Bold">Cosine</span>, or both <span class="Bold">Sine_and_Cosine</span>.</div>
+      <div class="Body2"><a name="2109728">Polarity</a></div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="2109729">Negative Sine</a></span>: negates the <span class="Bold">sine</span> output. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="2109730">Negative Cosine</a></span>: negates the <span class="Bold">cosine</span> output. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="2109731">Amplitude Mode</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2109732">Full_Range</a></span>: Selects the maximum possible amplitude.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2109733">Unit_Circle</a></span>: Selects an exact power-of-two amplitude, which is about one half the Full_Range amplitude.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><span class="Bold"><a name="2109734">Use explicit period</a></span>: When checked, the DDS Compiler 4.0 uses the explicit sample period that is specified in the dialog entry box below.</div>
+      <div class="Heading3"><a name="2109735">Implementation tab</a></div>
+      <div class="Body"><a name="2109736">Implementation Options</a></div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="2109737">Memory Type</a></span>: Choose between Auto, Distributed_ROM, or Block_ROM.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="2109738">Optimization Goal</a></span>: Choose between Auto, Area, or Speed.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2109739">DSP48 Use</a></span>: Choose between Minimal and Maximal. When set to Maximal, <br />XtremeDSP slices are used to achieve to maximum performance.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="2109742">Latency Options</a></div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="2109743">Auto</a></span>: The DDS will be fully pipelined for optimal performance.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="2109744">Configurable</a></span>: Allows you to specify less pipeline stages in the <span class="Bold">Latency</span> pulldown menu below. This generally results in less resources consumed.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="2109745">Optional Pins</a></div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="2109746">Has phase out</a></span>: When checked the DDS will have the <span class="Bold">phase_output</span> port. This is an output of the Phase_Generator half of the DDS, so it precedes the <span class="Bold">sine</span> and<span class="Bold"> </span><span class="Bold">cosine</span> outputs by the latency of the sine/cosine lookup table.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="2109748">rfd</a></span>: When checked, the DDS will have an <span class="Bold">rfd</span> port. This is for completeness. The DDS is always ready for <span class="Bold">data</span>, <span class="Bold">pinc_in</span> and <span class="Bold">poff_in</span>.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="2109749">rdy</a></span>: When checked, the DDS will have the <span class="Bold">rdy</span> output port which validates the <span class="Bold">sine</span> and <span class="Bold">cosine</span> outputs.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="2109750">Channel Pin</a></span>: When selected, the DDS Compiler will have a <span class="Bold">channel</span> (output) port which qualifies the channel to which the <span class="Bold">sine</span> and/or <span class="Bold">cosine</span> port outputs belong.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading3"><a name="2109751">Output Frequency tab</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2109752">Phase Increment Programmability</a></span>: specifies the phase increment to be<span class="Bold"> Fixed</span>, <span class="Bold">Programmable</span> or<span class="Bold"> Streaming</span>. The choice of Programmable adds channel, data, and we input ports to the block.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="2131651">The following fields are activated when Phase_Generator_and_SIN_COS_LUT is </a>selected as the Configuration Options field on the Basic tab, the Parameter Selection on the Basic tab is set to Hardware Parameters and Phase Increment Programmability field on the Phase Offset Angles tab is set to <span class="Bold">Fixed</span> or <span class="Bold">Programmable</span>. </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="2109753">Output frequencies (Mhz)</a></span>: for each channel, an independent frequency can be entered into an array. This field is activated when Parameter Selection on the Basic tab is set to <span class="Bold">System Parameters</span> and Phase Increment Programmability is <span class="Bold">Fixed</span> or <span class="Bold">Programmable</span>. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="2109754">Phase Angle Increment Values</a></span>: This field is activated when Phase_Generator_and_SIN_COS_LUT is selected as the Configuration Options field on the Basic tab, the Parameter Selection on the Basic tab is set to <span class="Bold">Hardware </span><span class="Bold">Parameters</span> and Phase Increment Programmability field on the Phase Offset Angles tab is set to <span class="Bold">Fixed</span> or <span class="Bold">Programmable</span>. Values must be entered in binary. The range is 0 to the weight of the accumulator, i.e. 2<span class="Size9Type" style="vertical-align: super;">Phase_Width</span>-1.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading3"><a name="2109755">Phase Offset Angles tab</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2109756">Phase Offset Programmability</a></span>: specifies the phase offset to be<span class="Bold"> None</span>, <span class="Bold">Fixed</span>, <span class="Bold">Programmable</span> or<span class="Bold"> Streaming</span>. The choice of Fixed or Programmable adds the channel, data, and we input ports to the block.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="2109757">Phase Offset Angles (x2pi radians)</a></span>: for each channel, an independent offset can be entered into an array. The entered values will be multiplied by 2<span class="Symbol">π</span> radians. This field is activated when Parameter Selection on the Basic tab is set to <span class="Bold">System </span><span class="Bold">Parameters</span> and Phase Increment Programmability is <span class="Bold">Fixed</span> or <span class="Bold">Programmable</span>. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="2109758">Phase Angle Offset Values</a></span>: for each channel, an independent offset can be entered into an array. The entered values will be multiplied by 2<span class="Symbol">π</span> radians. This field is activated when Parameter Selection on the Basic tab is set to <span class="Bold">Hardware </span><span class="Bold">Parameters</span> and Phase Increment Programmability is <span class="Bold">Fixed</span> or <span class="Bold">Programmable</span>. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="2109759">Other parameters used by this block are explained in the topic</a><br /><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.3.html#271277', '');" title="Common Options in Block Parameter Dialog Boxes">Common Options in Block Parameter Dialog Boxes</a></span>. </div>
+      <div class="Heading2"><a name="2109763">Xilinx LogiCORE</a></div>
+      <div class="Body"><a name="2109829">This block uses the Xilinx LogiCORE™ DDS Compiler v4.0.</a></div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 489.3076000000001pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 70.7617pt;" rowspan="2">
+            <div class="CellHeading"><a name="2175977">System </a>Generator Block</div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 64.3293pt;" rowspan="2">
+            <div class="CellHeading"><a name="2175979">Xilinx </a>LogiCORE<span style="font-family: &quot;Microsoft Sans Serif&quot;; font-size: 10.0pt; font-weight: normal;">™</span></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 54.8486pt;" rowspan="2">
+            <div class="CellHeading"><a name="2175981">LogiCORE</a><span style="font-family: &quot;Microsoft Sans Serif&quot;; font-size: 10.0pt; font-weight: normal;">™</span> Version / Data Sheet</div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 142.557pt;" colspan="5">
+            <div class="CellHeading"><a name="2175983">Spartan® Device</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 156.811pt;" colspan="5">
+            <div class="CellHeading"><a name="2175991">Virtex® Device</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 70.7617pt;">
+            <div class="CellHeading"><a name="2176005">3,3E</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 64.3293pt;">
+            <div class="CellHeading"><a name="2176007">3A</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 54.8486pt;">
+            <div class="CellHeading"><a name="2176009">3A </a>DSP</div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 28.5114pt;">
+            <div class="CellHeading"><a name="2176011">6</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 28.5114pt;">
+            <div class="CellHeading"><a name="2333831">6 -1L</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 28.5114pt;">
+            <div class="CellHeading"><a name="2176013">4</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 28.5114pt;">
+            <div class="CellHeading"><a name="2176015">5</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 28.5114pt;">
+            <div class="CellHeading"><a name="2176050">5Q</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 31.3622pt;">
+            <div class="CellHeading"><a name="2176017">6</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 31.3622pt;">
+            <div class="CellHeading"><a name="2176019">6 -1L</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.26.html#1985590', '');" title="DDS Compiler 4.0" name="2176023">DDS Compiler 4.0</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="2176026">DDS </a>Compiler</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;"><a href="javascript:void(0);" onClick="WWHFrame.WWHBrowser.fXilinxLink('coregen/ip/xilinx/dsp/com/xilinx/ip/dds_compiler_v4_0/doc/dds_ds558.pdf','')">V4.0</a><div class="CellBodyCenterMid"><a name="2176030">&nbsp;</a></div></td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2176032">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2176034">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2176036">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2176038">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2333833">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2176040">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2176042">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2176052">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2176044">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="2176046">•</a></span></div>
+          </td>
+        </tr>
+      </table>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

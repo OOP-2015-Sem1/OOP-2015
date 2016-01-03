@@ -1,0 +1,1506 @@
+Library {
+  Name			  "xrbsImage_r3"
+  Version		  5.1
+  SaveDefaultBlockParams  on
+  LibraryLinkDisplay	  "none"
+  ShowLoopsOnError	  on
+  IgnoreBidirectionalLines off
+  CovSaveName		  "covdata"
+  CovMetricSettings	  "dw"
+  CovNameIncrementing	  off
+  CovHtmlReporting	  on
+  covSaveCumulativeToWorkspaceVar on
+  CovSaveSingleToWorkspaceVar on
+  CovCumulativeReport	  off
+  BlockNameDataTip	  off
+  BlockParametersDataTip  off
+  BlockDescriptionStringDataTip	off
+  ToolBar		  on
+  StatusBar		  on
+  BrowserShowLibraryLinks off
+  BrowserLookUnderMasks	  off
+  Created		  "Tue Feb 04 18:38:07 2003"
+  Creator		  "singhj"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "shirazi"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Fri Sep 17 18:08:28 2004"
+  ModelVersionFormat	  "1.%<AutoIncrement:40>"
+  ConfigurationManager	  "None"
+  SimParamPage		  "Solver"
+  LinearizationMsg	  "none"
+  Profile		  off
+  ParamWorkspaceSource	  "MATLABWorkspace"
+  ExtModeMexFile	  "ext_comm"
+  ExtModeBatchMode	  off
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "normal"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  on
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  on
+  ExtModeAutoUpdateStatusClock on
+  SimulationMode	  "normal"
+  ConsistencyChecking	  "none"
+  ArrayBoundsChecking	  "none"
+  AlgebraicLoopMsg	  "warning"
+  BlockPriorityViolationMsg "warning"
+  MinStepSizeMsg	  "warning"
+  InheritedTsInSrcMsg	  "warning"
+  DiscreteInheritContinuousMsg "warning"
+  MultiTaskRateTransMsg	  "error"
+  SingleTaskRateTransMsg  "none"
+  CheckForMatrixSingularity "none"
+  IntegerOverflowMsg	  "warning"
+  Int32ToFloatConvMsg	  "warning"
+  ParameterDowncastMsg	  "error"
+  ParameterOverflowMsg	  "error"
+  ParameterPrecisionLossMsg "warning"
+  UnderSpecifiedDataTypeMsg "none"
+  UnnecessaryDatatypeConvMsg "none"
+  VectorMatrixConversionMsg "none"
+  InvalidFcnCallConnMsg	  "error"
+  SignalLabelMismatchMsg  "none"
+  UnconnectedInputMsg	  "warning"
+  UnconnectedOutputMsg	  "warning"
+  UnconnectedLineMsg	  "warning"
+  SfunCompatibilityCheckMsg "none"
+  ProdHWDeviceType	  "Microprocessor"
+  ProdHWWordLengths	  "8,16,32,32"
+  RTWMakeCommand	  "make_rtw"
+  RTWGenerateCodeOnly	  off
+  RTWRetainRTWFile	  off
+  TLCProfiler		  off
+  TLCDebug		  off
+  TLCCoverage		  off
+  TLCAssertion		  off
+  BlockDefaults {
+    Orientation		    "right"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+  }
+  BlockParameterDefaults {
+    Block {
+      BlockType		      Inport
+      Port		      "1"
+      PortDimensions	      "-1"
+      ShowAdditionalParam     off
+      LatchInput	      off
+      DataType		      "auto"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      Interpolate	      on
+    }
+    Block {
+      BlockType		      Outport
+      Port		      "1"
+      OutputWhenDisabled      "held"
+      InitialOutput	      "[]"
+    }
+    Block {
+      BlockType		      Reference
+    }
+    Block {
+      BlockType		      SubSystem
+      ShowPortLabels	      on
+      Permissions	      "ReadWrite"
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      SimViewingDevice	      off
+      DataTypeOverride	      "UseLocalSettings"
+      MinMaxOverflowLogging   "UseLocalSettings"
+    }
+    Block {
+      BlockType		      Terminator
+    }
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  System {
+    Name		    "xrbsImage_r3"
+    Location		    [126, 86, 384, 525]
+    Open		    on
+    ModelBrowserVisibility  off
+    ModelBrowserWidth	    212
+    ScreenColor		    "white"
+    PaperOrientation	    "landscape"
+    PaperPositionMode	    "auto"
+    PaperType		    "usletter"
+    PaperUnits		    "inches"
+    ZoomFactor		    "100"
+    ReportName		    "simulink-default.rpt"
+    Block {
+      BlockType		      SubSystem
+      Name		      "5x5Filter"
+      Ports		      [5, 1]
+      Position		      [20, 122, 95, 228]
+      BackgroundColor	      "yellow"
+      TreatAsAtomicUnit	      off
+      MaskType		      "5x5 Filter"
+      MaskDescription	      "The Xilinx 5x5 Filter reference block is implem"
+"ented using 5 n-tap MAC FIR Filters.  Nine different 2-D filters have been pr"
+"ovided to filter grayscale images.  "
+      MaskHelp		      "eval('xlWeb(xlhtmldoclink(''5x5Filter''))');"
+      MaskPromptString	      "5x5 Mask|Number of Bits per Coefficient|Binary "
+"Point for Coefficient|Number of Bits per Input Sample|Binary Point for Input "
+"Samples|Sample Period|Mask Value|Mask Division"
+      MaskStyleString	      "popup(Edge|Sobel X|Sobel Y|Sobel X-Y|Blur|Smoot"
+"h|Sharpen|Gaussian|Identity),edit,edit,edit,edit,edit,edit,edit"
+      MaskTunableValueString  "on,on,on,on,on,on,on,on"
+      MaskCallbackString      "|||||||"
+      MaskEnableString	      "on,on,on,on,on,on,on,on"
+      MaskVisibilityString    "on,off,off,off,off,on,off,off"
+      MaskToolTipString	      "on,on,on,on,on,on,on,on"
+      MaskVarAliasString      ",,,,,,,"
+      MaskVariables	      "maskNum=@1;coef_n_bits=@2;coef_bin_pt=@3;smpl_n"
+"_bits=@4;smpl_bin_pt=@5;smpl_period=@6;mask=@7;maskDiv=@8;"
+      MaskInitialization      "[bg,fg] = xlcmap('XBlock',0);\niPos = get_param"
+"(gcb,'Position');\niWidth=iPos(3)-iPos(1); iHeight=iPos(4)-iPos(2);\niCx=iWid"
+"th/2;\niCy=iHeight/2;\n[logoX, logoY] = xlogo(iPos);\n\n% Different 5x5 Filte"
+"rs \n%  by default edge is used\n\nedge = [ 0  0  0  0 0; ...\n         0 -1 "
+"-1 -1 0; ...\n         0 -1  8 -1 0; ...\n         0 -1 -1 -1 0; ...\n       "
+"  0  0  0  0 0];\nedgeDiv = 1;\n\nsobelX = [ 0  0  0  0 0; ...\n           0 "
+"-1  0  1 0; ...\n           0 -2  0  2 0; ...\n           0 -1  0  1 0; ...\n"
+"           0  0  0  0 0];\nsobelXDiv = 1;\n\nsobelY = [ 0  0  0  0 0; ...\n  "
+"         0  1  2  1 0; ...\n           0  0  0  0 0; ...\n           0 -1 -2 "
+"-1 0; ...\n           0  0  0  0 0];\nsobelYDiv = 1;\n\nsobelXY = [ 0  0  0  "
+"0 0; ...\n            0  0 -1 -1 0; ...\n            0  1  0 -1 0; ...\n     "
+"       0  1  1  0 0; ...\n            0  0  0  0 0];\nsobelXYDiv = 1;\n\nblur"
+" = [ 1  1  1  1 1; ...\n         1  0  0  0 1; ...\n         1  0  0  0 1; .."
+".\n         1  0  0  0 1; ...\n         1  1  1  1 1];\nblurDiv = 1/16;\n\nsm"
+"ooth = [ 1  1  1  1 1; ...\n           1  5  5  5 1; ...\n           1  5 44 "
+" 5 1; ...\n           1  5  5  5 1; ...\n           1  1  1  1 1];\nsmoothDiv"
+" = 1/100;\n\nsharpen = [ 0  0  0  0 0; ...\n            0 -2 -2 -2 0; ...\n  "
+"          0 -2 32 -2 0; ...\n            0 -2 -2 -2 0; ...\n            0  0 "
+" 0  0 0];\nsharpenDiv = 1/16;\n\n\ngaussian = [1 1 2 1 1; ...\n            1 "
+"2 4 2 1; ...\n            2 4 8 4 2; ...\n            1 2 4 2 1; ...\n       "
+"     1 1 2 1 1];\ngaussianDiv = 1/52;\n\nidentity = [ 0  0  0  0 0; ...\n    "
+"         0  0  0  0 0; ...\n             0  0  1  0 0; ...\n             0  0"
+"  0  0 0; ...\n             0  0  0  0 0];\nidentityDiv = 1;\n\nmask = zeros("
+"5,5,5);\nmask(:,:,1) = edge;\nmask(:,:,2) = sobelX;\nmask(:,:,3) = sobelY;\nm"
+"ask(:,:,4) = sobelXY;\nmask(:,:,5) = blur;\nmask(:,:,6) = smooth;\nmask(:,:,7"
+") = sharpen;\nmask(:,:,8) = gaussian;\nmask(:,:,9) = identity;\n\nmaskDiv = ["
+"edgeDiv sobelXDiv sobelYDiv sobelXYDiv blurDiv smoothDiv sharpenDiv gaussianD"
+"iv identityDiv];\n"
+      MaskDisplay	      "patch([0 iWidth iWidth 0],[0 0 iHeight iHeight]"
+" , bg);\npatch(logoX,logoY , fg);\nport_label('input',1,'Line1');\nport_label"
+"('input',2,'Line2');\nport_label('input',3,'Line3');\nport_label('input',4,'L"
+"ine4');\nport_label('input',5,'Line5');\nport_label('output',1,'out');\nplot("
+"[0 0 iWidth iWidth 0], [0 iHeight iHeight 0 0]);"
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "Edge|6|0|8|0|1|0|0"
+      System {
+	Name			"5x5Filter"
+	Location		[157, 186, 671, 584]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "Line1"
+	  Position		  [25, 53, 55, 67]
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "Line2"
+	  Position		  [25, 123, 55, 137]
+	  Port			  "2"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "Line3"
+	  Position		  [25, 193, 55, 207]
+	  Port			  "3"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "Line4"
+	  Position		  [25, 263, 55, 277]
+	  Port			  "4"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "Line5"
+	  Position		  [25, 328, 55, 342]
+	  Port			  "5"
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "ABS1"
+	  Ports			  [1, 1]
+	  Position		  [460, 226, 515, 264]
+	  BackgroundColor	  "yellow"
+	  TreatAsAtomicUnit	  off
+	  System {
+	    Name		    "ABS1"
+	    Location		    [272, 414, 632, 595]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "In1"
+	      Position		      [25, 128, 55, 142]
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Mux"
+	      Ports		      [3, 1]
+	      Position		      [245, 61, 285, 129]
+	      SourceBlock	      "xbsIndex_r3/Mux"
+	      SourceType	      "Xilinx Multiplexer Block"
+	      inputs		      "2"
+	      precision		      "Full"
+	      arith_type	      "Unsigned"
+	      n_bits		      "8"
+	      bin_pt		      "0"
+	      quantization	      "Truncate"
+	      overflow		      "Saturate"
+	      latency		      "1"
+	      mux_type		      "off"
+	      explicit_period	      "off"
+	      period		      "1"
+	      en		      "off"
+	      dbl_ovrd		      "off"
+	      gen_core		      "on"
+	      use_rpm		      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      xl_use_area	      "off"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Negate"
+	      Ports		      [1, 1]
+	      Position		      [120, 113, 165, 157]
+	      SourceBlock	      "xbsIndex_r3/Negate"
+	      SourceType	      "Xilinx Negate Block"
+	      precision		      "Full"
+	      arith_type	      "Unsigned"
+	      n_bits		      "8"
+	      bin_pt		      "2"
+	      quantization	      "Truncate"
+	      overflow		      "Wrap"
+	      latency		      "1"
+	      explicit_period	      "off"
+	      period		      "1"
+	      en		      "off"
+	      dbl_ovrd		      "off"
+	      use_core		      "off"
+	      gen_core		      "on"
+	      use_rpm		      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      xl_use_area	      "off"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Register1"
+	      Ports		      [1, 1]
+	      Position		      [185, 85, 210, 105]
+	      SourceBlock	      "xbsIndex_r3/Register"
+	      SourceType	      "Xilinx Register Block"
+	      init		      "0"
+	      reg_only_valid	      "off"
+	      explicit_period	      "off"
+	      period		      "1"
+	      rst		      "off"
+	      en		      "off"
+	      out_en		      "off"
+	      dbl_ovrd		      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      xl_use_area	      "off"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Register2"
+	      Ports		      [1, 1]
+	      Position		      [185, 30, 210, 50]
+	      SourceBlock	      "xbsIndex_r3/Register"
+	      SourceType	      "Xilinx Register Block"
+	      init		      "0"
+	      reg_only_valid	      "off"
+	      explicit_period	      "off"
+	      period		      "1"
+	      rst		      "off"
+	      en		      "off"
+	      out_en		      "off"
+	      dbl_ovrd		      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      xl_use_area	      "off"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Slice"
+	      Ports		      [1, 1]
+	      Position		      [100, 30, 135, 50]
+	      SourceBlock	      "xbsIndex_r3/Slice"
+	      SourceType	      "Xilinx Slice Block"
+	      mode		      "Upper Bit Location + Width"
+	      nbits		      "1"
+	      bit1		      "0"
+	      base1		      "MSB of Input"
+	      bit0		      "0"
+	      base0		      "LSB of Input"
+	      boolean_output	      "off"
+	      explicit_period	      "off"
+	      period		      "1"
+	      dbl_ovrd		      "off"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Out1"
+	      Position		      [305, 88, 335, 102]
+	    }
+	    Line {
+	      SrcBlock		      "Register1"
+	      SrcPort		      1
+	      DstBlock		      "Mux"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "Register2"
+	      SrcPort		      1
+	      Points		      [5, 0; 0, 35]
+	      DstBlock		      "Mux"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Mux"
+	      SrcPort		      1
+	      DstBlock		      "Out1"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "In1"
+	      SrcPort		      1
+	      Points		      [0, 0; 15, 0]
+	      Branch {
+		Points			[0, -40]
+		Branch {
+		  DstBlock		  "Register1"
+		  DstPort		  1
+		}
+		Branch {
+		  Points		  [0, -55]
+		  DstBlock		  "Slice"
+		  DstPort		  1
+		}
+	      }
+	      Branch {
+		DstBlock		"Negate"
+		DstPort			1
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "Negate"
+	      SrcPort		      1
+	      Points		      [50, 0; 0, -20]
+	      DstBlock		      "Mux"
+	      DstPort		      3
+	    }
+	    Line {
+	      SrcBlock		      "Slice"
+	      SrcPort		      1
+	      DstBlock		      "Register2"
+	      DstPort		      1
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "AddSub15"
+	  Ports			  [2, 1]
+	  Position		  [380, 223, 410, 267]
+	  SourceBlock		  "xbsIndex_r3/AddSub"
+	  SourceType		  "Xilinx Adder/Subtractor"
+	  mode			  "Addition"
+	  precision		  "Full"
+	  arith_type		  "Unsigned"
+	  n_bits		  "8"
+	  bin_pt		  "2"
+	  quantization		  "Truncate"
+	  overflow		  "Wrap"
+	  latency		  "1"
+	  explicit_period	  "off"
+	  period		  "1"
+	  en			  "off"
+	  dbl_ovrd		  "off"
+	  use_core		  "off"
+	  pipeline		  "off"
+	  use_rpm		  "off"
+	  gen_core		  "on"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  xl_use_area		  "off"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "AddSub2"
+	  Ports			  [2, 1]
+	  Position		  [230, 73, 260, 117]
+	  SourceBlock		  "xbsIndex_r3/AddSub"
+	  SourceType		  "Xilinx Adder/Subtractor"
+	  mode			  "Addition"
+	  precision		  "Full"
+	  arith_type		  "Unsigned"
+	  n_bits		  "8"
+	  bin_pt		  "2"
+	  quantization		  "Truncate"
+	  overflow		  "Wrap"
+	  latency		  "1"
+	  explicit_period	  "off"
+	  period		  "1"
+	  en			  "off"
+	  dbl_ovrd		  "off"
+	  use_core		  "off"
+	  pipeline		  "off"
+	  use_rpm		  "off"
+	  gen_core		  "on"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  xl_use_area		  "off"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "AddSub3"
+	  Ports			  [2, 1]
+	  Position		  [230, 213, 260, 257]
+	  SourceBlock		  "xbsIndex_r3/AddSub"
+	  SourceType		  "Xilinx Adder/Subtractor"
+	  mode			  "Addition"
+	  precision		  "Full"
+	  arith_type		  "Unsigned"
+	  n_bits		  "8"
+	  bin_pt		  "2"
+	  quantization		  "Truncate"
+	  overflow		  "Wrap"
+	  latency		  "1"
+	  explicit_period	  "off"
+	  period		  "1"
+	  en			  "off"
+	  dbl_ovrd		  "off"
+	  use_core		  "off"
+	  pipeline		  "off"
+	  use_rpm		  "off"
+	  gen_core		  "on"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  xl_use_area		  "off"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "AddSub4"
+	  Ports			  [2, 1]
+	  Position		  [315, 143, 345, 187]
+	  SourceBlock		  "xbsIndex_r3/AddSub"
+	  SourceType		  "Xilinx Adder/Subtractor"
+	  mode			  "Addition"
+	  precision		  "Full"
+	  arith_type		  "Unsigned"
+	  n_bits		  "8"
+	  bin_pt		  "2"
+	  quantization		  "Truncate"
+	  overflow		  "Wrap"
+	  latency		  "1"
+	  explicit_period	  "off"
+	  period		  "1"
+	  en			  "off"
+	  dbl_ovrd		  "off"
+	  use_core		  "off"
+	  pipeline		  "off"
+	  use_rpm		  "off"
+	  gen_core		  "on"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  xl_use_area		  "off"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "CMult"
+	  Ports			  [1, 1]
+	  Position		  [560, 215, 610, 275]
+	  SourceBlock		  "xbsIndex_r3/CMult"
+	  SourceType		  "Xilinx Constant Multiplier"
+	  const			  "maskDiv(maskNum)"
+	  const_n_bits		  "18"
+	  const_bin_pt		  "17"
+	  precision		  "Full"
+	  arith_type		  "Unsigned"
+	  n_bits		  "8"
+	  bin_pt		  "0"
+	  quantization		  "Truncate"
+	  overflow		  "Wrap"
+	  mult_type		  "Parallel"
+	  mem_type		  "Distributed RAM"
+	  pipeline		  "on"
+	  latency		  "4"
+	  explicit_period	  "off"
+	  period		  "1"
+	  en			  "off"
+	  dbl_ovrd		  "off"
+	  oversample		  "2"
+	  use_rpm		  "off"
+	  placement_style	  "Rectangular Shape"
+	  gen_core		  "on"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  xl_use_area		  "off"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Convert1"
+	  Ports			  [1, 1]
+	  Position		  [670, 225, 710, 265]
+	  SourceBlock		  "xbsIndex_r3/Convert"
+	  SourceType		  "Xilinx Converter Block"
+	  arith_type		  "Unsigned"
+	  n_bits		  "8"
+	  bin_pt		  "0"
+	  quantization		  "Truncate"
+	  overflow		  "Saturate"
+	  latency		  "1"
+	  explicit_period	  "off"
+	  period		  "1"
+	  dbl_ovrd		  "off"
+	  inserted_by_tool	  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  xl_use_area		  "off"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Register1"
+	  Ports			  [1, 1]
+	  Position		  [225, 313, 255, 357]
+	  SourceBlock		  "xbsIndex_r3/Register"
+	  SourceType		  "Xilinx Register Block"
+	  init			  "0"
+	  reg_only_valid	  "off"
+	  explicit_period	  "off"
+	  period		  "1"
+	  rst			  "off"
+	  en			  "off"
+	  out_en		  "off"
+	  dbl_ovrd		  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  xl_use_area		  "off"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Register2"
+	  Ports			  [1, 1]
+	  Position		  [310, 313, 340, 357]
+	  SourceBlock		  "xbsIndex_r3/Register"
+	  SourceType		  "Xilinx Register Block"
+	  init			  "0"
+	  reg_only_valid	  "off"
+	  explicit_period	  "off"
+	  period		  "1"
+	  rst			  "off"
+	  en			  "off"
+	  out_en		  "off"
+	  dbl_ovrd		  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  xl_use_area		  "off"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "n-tap\nMAC FIR Filter"
+	  Ports			  [1, 1]
+	  Position		  [115, 42, 170, 78]
+	  SourceBlock		  "xrbsDSP_r3/n-tap\nMAC FIR Filter"
+	  SourceType		  "n-tap MAC FIR Filter"
+	  coef			  "mask(1,5:-1:1,maskNum)"
+	  coef_n_bits		  "coef_n_bits"
+	  coef_bin_pt		  "coef_bin_pt"
+	  smpl_n_bits		  "smpl_n_bits"
+	  smpl_bin_pt		  "smpl_bin_pt"
+	  smpl_period		  "smpl_period"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "n-tap\nMAC FIR Filter1"
+	  Ports			  [1, 1]
+	  Position		  [115, 112, 170, 148]
+	  SourceBlock		  "xrbsDSP_r3/n-tap\nMAC FIR Filter"
+	  SourceType		  "n-tap MAC FIR Filter"
+	  coef			  "mask(2,5:-1:1,maskNum)"
+	  coef_n_bits		  "coef_n_bits"
+	  coef_bin_pt		  "coef_bin_pt"
+	  smpl_n_bits		  "smpl_n_bits"
+	  smpl_bin_pt		  "smpl_bin_pt"
+	  smpl_period		  "smpl_period"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "n-tap\nMAC FIR Filter2"
+	  Ports			  [1, 1]
+	  Position		  [115, 182, 170, 218]
+	  SourceBlock		  "xrbsDSP_r3/n-tap\nMAC FIR Filter"
+	  SourceType		  "n-tap MAC FIR Filter"
+	  coef			  "mask(3,5:-1:1,maskNum)"
+	  coef_n_bits		  "coef_n_bits"
+	  coef_bin_pt		  "coef_bin_pt"
+	  smpl_n_bits		  "smpl_n_bits"
+	  smpl_bin_pt		  "smpl_bin_pt"
+	  smpl_period		  "smpl_period"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "n-tap\nMAC FIR Filter3"
+	  Ports			  [1, 1]
+	  Position		  [115, 252, 170, 288]
+	  SourceBlock		  "xrbsDSP_r3/n-tap\nMAC FIR Filter"
+	  SourceType		  "n-tap MAC FIR Filter"
+	  coef			  "mask(4,5:-1:1,maskNum)"
+	  coef_n_bits		  "coef_n_bits"
+	  coef_bin_pt		  "coef_bin_pt"
+	  smpl_n_bits		  "smpl_n_bits"
+	  smpl_bin_pt		  "smpl_bin_pt"
+	  smpl_period		  "smpl_period"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "n-tap\nMAC FIR Filter4"
+	  Ports			  [1, 1]
+	  Position		  [115, 317, 170, 353]
+	  SourceBlock		  "xrbsDSP_r3/n-tap\nMAC FIR Filter"
+	  SourceType		  "n-tap MAC FIR Filter"
+	  coef			  "mask(5,5:-1:1,maskNum)"
+	  coef_n_bits		  "coef_n_bits"
+	  coef_bin_pt		  "coef_bin_pt"
+	  smpl_n_bits		  "smpl_n_bits"
+	  smpl_bin_pt		  "smpl_bin_pt"
+	  smpl_period		  "smpl_period"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Out1"
+	  Position		  [745, 238, 775, 252]
+	}
+	Line {
+	  SrcBlock		  "Line1"
+	  SrcPort		  1
+	  DstBlock		  "n-tap\nMAC FIR Filter"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Line2"
+	  SrcPort		  1
+	  DstBlock		  "n-tap\nMAC FIR Filter1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Line3"
+	  SrcPort		  1
+	  DstBlock		  "n-tap\nMAC FIR Filter2"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Line4"
+	  SrcPort		  1
+	  DstBlock		  "n-tap\nMAC FIR Filter3"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Line5"
+	  SrcPort		  1
+	  DstBlock		  "n-tap\nMAC FIR Filter4"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "n-tap\nMAC FIR Filter"
+	  SrcPort		  1
+	  Points		  [10, 0; 0, 25]
+	  DstBlock		  "AddSub2"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "n-tap\nMAC FIR Filter1"
+	  SrcPort		  1
+	  Points		  [10, 0; 0, -25]
+	  DstBlock		  "AddSub2"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "n-tap\nMAC FIR Filter2"
+	  SrcPort		  1
+	  Points		  [10, 0; 0, 25]
+	  DstBlock		  "AddSub3"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "n-tap\nMAC FIR Filter3"
+	  SrcPort		  1
+	  Points		  [10, 0; 0, -25]
+	  DstBlock		  "AddSub3"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "AddSub2"
+	  SrcPort		  1
+	  Points		  [10, 0; 0, 60]
+	  DstBlock		  "AddSub4"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "AddSub3"
+	  SrcPort		  1
+	  Points		  [10, 0; 0, -60]
+	  DstBlock		  "AddSub4"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "n-tap\nMAC FIR Filter4"
+	  SrcPort		  1
+	  DstBlock		  "Register1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Register1"
+	  SrcPort		  1
+	  DstBlock		  "Register2"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "AddSub15"
+	  SrcPort		  1
+	  DstBlock		  "ABS1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "AddSub4"
+	  SrcPort		  1
+	  Points		  [15, 0]
+	  DstBlock		  "AddSub15"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Register2"
+	  SrcPort		  1
+	  Points		  [20, 0]
+	  DstBlock		  "AddSub15"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "CMult"
+	  SrcPort		  1
+	  DstBlock		  "Convert1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "ABS1"
+	  SrcPort		  1
+	  DstBlock		  "CMult"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Convert1"
+	  SrcPort		  1
+	  DstBlock		  "Out1"
+	  DstPort		  1
+	}
+	Annotation {
+	  Name			  "The 5x5 operator is computed by using 5 MAC"
+" FIR filters in parallel and then\nsumming the results.  The absolute value o"
+"f the FIR filters is computed \nand the data is narrowed to 8-bits"
+	  Position		  [165, 450]
+	  HorizontalAlignment	  "left"
+	  DropShadow		  on
+	  FontName		  "Arial"
+	  FontSize		  12
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Virtex Line Buffer"
+      Ports		      [1, 1]
+      Position		      [165, 159, 220, 191]
+      TreatAsAtomicUnit	      off
+      MaskType		      "Virtex Line Buffer"
+      MaskDescription	      "The Xilinx Virtex Line Buffer reference block d"
+"elayes a sequential stream of pixels by the specified buffer depth."
+      MaskHelp		      "eval('xlWeb(xlhtmldoclink(''Virtex Line Buffer'"
+"'))');"
+      MaskPromptString	      "Buffer Depth|Sample Period"
+      MaskStyleString	      "edit,edit"
+      MaskTunableValueString  "on,on"
+      MaskCallbackString      "|"
+      MaskEnableString	      "on,on"
+      MaskVisibilityString    "on,on"
+      MaskToolTipString	      "on,on"
+      MaskVarAliasString      ","
+      MaskVariables	      "buf_depth=@1;cst=@2;"
+      MaskInitialization      "str = sprintf('-%d',buf_depth);\n[bg,fg] = xlcm"
+"ap('XBlock',0);\niPos = get_param(gcb,'Position');\niWidth=iPos(3)-iPos(1); i"
+"Height=iPos(4)-iPos(2);\niCx=iWidth/2;\niCy=iHeight/2;\n[logoX, logoY] = xlog"
+"o(iPos);"
+      MaskDisplay	      "patch([0 iWidth iWidth 0],[0 0 iHeight iHeight]"
+" , bg);\npatch(logoX,logoY , fg);\ntext(iCx-6,iCy,'z');\ntext(iCx,iCy+4,str);"
+"\nplot([0 0 iWidth iWidth 0], [0 iHeight iHeight 0 0]);"
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "64|1"
+      System {
+	Name			"Virtex Line Buffer"
+	Location		[263, 256, 891, 818]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "i"
+	  Position		  [15, 203, 45, 217]
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Constant1"
+	  Ports			  [0, 1]
+	  Position		  [350, 151, 365, 169]
+	  ShowName		  off
+	  SourceBlock		  "xbsIndex_r3/Constant"
+	  SourceType		  "Xilinx Constant Block"
+	  const			  "0"
+	  arith_type		  "Boolean"
+	  n_bits		  "1"
+	  bin_pt		  "0"
+	  explicit_period	  "off"
+	  period		  "cst"
+	  dbl_ovrd		  "off"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Constant3"
+	  Ports			  [0, 1]
+	  Position		  [355, 225, 370, 245]
+	  ShowName		  off
+	  SourceBlock		  "xbsIndex_r3/Constant"
+	  SourceType		  "Xilinx Constant Block"
+	  const			  "1"
+	  arith_type		  "Boolean"
+	  n_bits		  "1"
+	  bin_pt		  "0"
+	  explicit_period	  "off"
+	  period		  "cst"
+	  dbl_ovrd		  "off"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Constant4"
+	  Ports			  [0, 1]
+	  Position		  [15, 96, 50, 114]
+	  ShowName		  off
+	  SourceBlock		  "xbsIndex_r3/Constant"
+	  SourceType		  "Xilinx Constant Block"
+	  const			  "buf_depth-1"
+	  arith_type		  "Unsigned"
+	  n_bits		  "ceil(log2(buf_depth))"
+	  bin_pt		  "0"
+	  explicit_period	  "off"
+	  period		  "cst"
+	  dbl_ovrd		  "off"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Constant5"
+	  Ports			  [0, 1]
+	  Position		  [135, 112, 160, 128]
+	  ShowName		  off
+	  SourceBlock		  "xbsIndex_r3/Constant"
+	  SourceType		  "Xilinx Constant Block"
+	  const			  "0"
+	  arith_type		  "Unsigned"
+	  n_bits		  "ceil(log2(buf_depth))"
+	  bin_pt		  "0"
+	  explicit_period	  "on"
+	  period		  "cst"
+	  dbl_ovrd		  "off"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Counter1"
+	  Ports			  [2, 1]
+	  Position		  [180, 83, 225, 132]
+	  SourceBlock		  "xbsIndex_r3/Counter"
+	  SourceType		  "Xilinx Counter Block"
+	  cnt_type		  "Free Running"
+	  n_bits		  "ceil(log2(buf_depth))"
+	  bin_pt		  "0"
+	  arith_type		  "Unsigned"
+	  start_count		  "1"
+	  cnt_to		  "buf_depth -1"
+	  cnt_by_val		  "1"
+	  operation		  "Up"
+	  explicit_period	  "off"
+	  period		  "cst"
+	  load_pin		  "on"
+	  rst			  "off"
+	  en			  "off"
+	  dbl_ovrd		  "off"
+	  gen_core		  "on"
+	  use_rpm		  "off"
+	  xl_area		  "[6 10 0 11 0 0 0]"
+	  xl_use_area		  "off"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Dual Port RAM"
+	  Ports			  [6, 2]
+	  Position		  [390, 97, 465, 248]
+	  SourceBlock		  "xbsIndex_r3/Dual Port RAM"
+	  SourceType		  "Xilinx Dual Port Random Access Memory"
+	  depth			  "buf_depth"
+	  initVector		  "0"
+	  write_mode_A		  "Read After Write"
+	  write_mode_B		  "Read After Write"
+	  latency		  "1"
+	  mem_collision		  "off"
+	  init_zero		  "on"
+	  explicit_period	  "off"
+	  period		  "-1"
+	  dbl_ovrd		  "off"
+	  gen_core		  "on"
+	  xl_area		  "[0 0 1 0 0 0 0]"
+	  xl_use_area		  "off"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Register"
+	  Ports			  [1, 1]
+	  Position		  [260, 173, 300, 197]
+	  SourceBlock		  "xbsIndex_r3/Register"
+	  SourceType		  "Xilinx Register Block"
+	  init			  "0"
+	  reg_only_valid	  "off"
+	  explicit_period	  "off"
+	  period		  "1"
+	  rst			  "off"
+	  en			  "off"
+	  out_en		  "off"
+	  dbl_ovrd		  "off"
+	  xl_area		  "[5 10 0 0 0 0 0]"
+	  xl_use_area		  "off"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Relational"
+	  Ports			  [2, 1]
+	  Position		  [80, 73, 125, 117]
+	  SourceBlock		  "xbsIndex_r3/Relational"
+	  SourceType		  "Xilinx Relational Block"
+	  mode			  "a=b"
+	  latency		  "0"
+	  explicit_period	  "on"
+	  period		  "cst"
+	  en			  "off"
+	  dbl_ovrd		  "off"
+	  xl_area		  "[4 0 0 3 0 0 0]"
+	  xl_use_area		  "off"
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator"
+	  Position		  [515, 200, 535, 220]
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "o"
+	  Position		  [510, 128, 540, 142]
+	}
+	Line {
+	  SrcBlock		  "Dual Port RAM"
+	  SrcPort		  2
+	  DstBlock		  "Terminator"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "i"
+	  SrcPort		  1
+	  Points		  [265, 0]
+	  Branch {
+	    DstBlock		    "Dual Port RAM"
+	    DstPort		    5
+	  }
+	  Branch {
+	    Points		    [0, -75]
+	    DstBlock		    "Dual Port RAM"
+	    DstPort		    2
+	  }
+	}
+	Line {
+	  SrcBlock		  "Dual Port RAM"
+	  SrcPort		  1
+	  DstBlock		  "o"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Constant3"
+	  SrcPort		  1
+	  DstBlock		  "Dual Port RAM"
+	  DstPort		  6
+	}
+	Line {
+	  SrcBlock		  "Constant1"
+	  SrcPort		  1
+	  DstBlock		  "Dual Port RAM"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "Counter1"
+	  SrcPort		  1
+	  Points		  [5, 0]
+	  Branch {
+	    Points		    [25, 0]
+	    Branch {
+	      Points		      [0, -75; -210, 0; 0, 50]
+	      DstBlock		      "Relational"
+	      DstPort		      1
+	    }
+	    Branch {
+	      DstBlock		      "Dual Port RAM"
+	      DstPort		      1
+	    }
+	  }
+	  Branch {
+	    Points		    [0, 75]
+	    DstBlock		    "Register"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "Relational"
+	  SrcPort		  1
+	  DstBlock		  "Counter1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Constant4"
+	  SrcPort		  1
+	  DstBlock		  "Relational"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Register"
+	  SrcPort		  1
+	  DstBlock		  "Dual Port RAM"
+	  DstPort		  4
+	}
+	Line {
+	  SrcBlock		  "Constant5"
+	  SrcPort		  1
+	  DstBlock		  "Counter1"
+	  DstPort		  2
+	}
+	Annotation {
+	  Name			  "This implementation of the line buffer can "
+"be realized in a Virtex \npart since the Read after Write option is being on "
+"the\n Dual Port RAM block."
+	  Position		  [311, 323]
+	  DropShadow		  on
+	  FontName		  "Arial"
+	  FontSize		  12
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Virtex2 5 Line Buffer"
+      Ports		      [1, 5]
+      Position		      [25, 277, 90, 383]
+      BackgroundColor	      "yellow"
+      TreatAsAtomicUnit	      off
+      MaskType		      "Virtex2 5 Line Buffer"
+      MaskDescription	      "The block buffers a sequential stream of pixels"
+" to  construct  5 lines of output.  Each line is delayed by N samples, where "
+"N is the length of the line.  Line 1 is delayed 4*N samples, each of the foll"
+"owing lines are delay by N fewer samples, and line 5 is a copy of the input."
+      MaskHelp		      "eval('xlWeb(xlhtmldoclink(''Virtex2 5 Line Buff"
+"er''))');"
+      MaskPromptString	      "Line Size|Sample Period"
+      MaskStyleString	      "edit,edit"
+      MaskTunableValueString  "on,on"
+      MaskCallbackString      "|"
+      MaskEnableString	      "on,on"
+      MaskVisibilityString    "on,on"
+      MaskToolTipString	      "on,on"
+      MaskVarAliasString      ","
+      MaskVariables	      "line_size=@1;cst=@2;"
+      MaskInitialization      "[bg,fg] = xlcmap('XBlock',0);\niPos = get_param"
+"(gcb,'Position');\niWidth=iPos(3)-iPos(1); iHeight=iPos(4)-iPos(2);\niCx=iWid"
+"th/2;\niCy=iHeight/2;\n[logoX, logoY] = xlogo(iPos);"
+      MaskDisplay	      "patch([0 iWidth iWidth 0],[0 0 iHeight iHeight]"
+" , bg);\npatch(logoX,logoY , fg);\nport_label('input',1,'in');\nport_label('o"
+"utput',1,'Line1');\nport_label('output',2,'Line2');\nport_label('output',3,'L"
+"ine3');\nport_label('output',4,'Line4');\nport_label('output',5,'Line5');\npl"
+"ot([0 0 iWidth iWidth 0], [0 iHeight iHeight 0 0]);"
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "64|1"
+      System {
+	Name			"Virtex2 5 Line Buffer"
+	Location		[171, 221, 866, 794]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "In1"
+	  Position		  [25, 38, 55, 52]
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Virtex2 Line Buffer"
+	  Ports			  [1, 1]
+	  Position		  [80, 78, 135, 112]
+	  SourceBlock		  "xrbsImage_r3/Virtex2 Line Buffer"
+	  SourceType		  "Virtex2 Line Buffer"
+	  buf_depth		  "line_size"
+	  cst			  "cst"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Virtex2 Line Buffer1"
+	  Ports			  [1, 1]
+	  Position		  [80, 143, 135, 177]
+	  SourceBlock		  "xrbsImage_r3/Virtex2 Line Buffer"
+	  SourceType		  "Virtex2 Line Buffer"
+	  buf_depth		  "line_size"
+	  cst			  "cst"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Virtex2 Line Buffer2"
+	  Ports			  [1, 1]
+	  Position		  [80, 208, 135, 242]
+	  SourceBlock		  "xrbsImage_r3/Virtex2 Line Buffer"
+	  SourceType		  "Virtex2 Line Buffer"
+	  buf_depth		  "line_size"
+	  cst			  "cst"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Virtex2 Line Buffer3"
+	  Ports			  [1, 1]
+	  Position		  [80, 273, 135, 307]
+	  SourceBlock		  "xrbsImage_r3/Virtex2 Line Buffer"
+	  SourceType		  "Virtex2 Line Buffer"
+	  buf_depth		  "line_size"
+	  cst			  "cst"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Line1"
+	  Position		  [195, 283, 225, 297]
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Line2"
+	  Position		  [195, 218, 225, 232]
+	  Port			  "2"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Line3"
+	  Position		  [195, 153, 225, 167]
+	  Port			  "3"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Line4"
+	  Position		  [195, 88, 225, 102]
+	  Port			  "4"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Line5"
+	  Position		  [195, 38, 225, 52]
+	  Port			  "5"
+	}
+	Line {
+	  SrcBlock		  "In1"
+	  SrcPort		  1
+	  Points		  [5, 0]
+	  Branch {
+	    DstBlock		    "Line5"
+	    DstPort		    1
+	  }
+	  Branch {
+	    DstBlock		    "Virtex2 Line Buffer"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "Virtex2 Line Buffer"
+	  SrcPort		  1
+	  Points		  [25, 0]
+	  Branch {
+	    DstBlock		    "Line4"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 35; -115, 0; 0, 30]
+	    DstBlock		    "Virtex2 Line Buffer1"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "Virtex2 Line Buffer1"
+	  SrcPort		  1
+	  Points		  [25, 0]
+	  Branch {
+	    DstBlock		    "Line3"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 40; -115, 0; 0, 25]
+	    DstBlock		    "Virtex2 Line Buffer2"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "Virtex2 Line Buffer2"
+	  SrcPort		  1
+	  Points		  [0, 0; 25, 0]
+	  Branch {
+	    DstBlock		    "Line2"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 40; -115, 0; 0, 25]
+	    DstBlock		    "Virtex2 Line Buffer3"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "Virtex2 Line Buffer3"
+	  SrcPort		  1
+	  DstBlock		  "Line1"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Virtex2 Line Buffer"
+      Ports		      [1, 1]
+      Position		      [165, 313, 220, 347]
+      TreatAsAtomicUnit	      off
+      MaskType		      "Virtex2 Line Buffer"
+      MaskDescription	      "The Xilinx Virtex2 Line Buffer reference block "
+"delayes a sequential stream of pixels by the specified buffer depth.  It is o"
+"ptimized for the Virtex2 family since it uses the Read Before Write option on"
+" the underlying Single Port RAM block."
+      MaskHelp		      "eval('xlWeb(xlhtmldoclink(''Virtex2 Line Buffer"
+"''))');"
+      MaskPromptString	      "Buffer Depth|Sample Period"
+      MaskStyleString	      "edit,edit"
+      MaskTunableValueString  "on,on"
+      MaskCallbackString      "|"
+      MaskEnableString	      "on,on"
+      MaskVisibilityString    "on,on"
+      MaskToolTipString	      "on,on"
+      MaskVarAliasString      ","
+      MaskVariables	      "buf_depth=@1;cst=@2;"
+      MaskInitialization      "str = sprintf('-%d',buf_depth);\n[bg,fg] = xlcm"
+"ap('XBlock',0);\niPos = get_param(gcb,'Position');\niWidth=iPos(3)-iPos(1); i"
+"Height=iPos(4)-iPos(2);\niCx=iWidth/2;\niCy=iHeight/2;\n[logoX, logoY] = xlog"
+"o(iPos);"
+      MaskDisplay	      "patch([0 iWidth iWidth 0],[0 0 iHeight iHeight]"
+" , bg);\npatch(logoX,logoY , fg);\ntext(iCx-6,iCy,'z');\ntext(iCx,iCy+4,str);"
+"\nplot([0 0 iWidth iWidth 0], [0 iHeight iHeight 0 0]);"
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "64|1"
+      System {
+	Name			"Virtex2 Line Buffer"
+	Location		[330, 269, 743, 511]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "i"
+	  Position		  [25, 68, 55, 82]
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Constant3"
+	  Ports			  [0, 1]
+	  Position		  [150, 100, 165, 120]
+	  ShowName		  off
+	  SourceBlock		  "xbsIndex_r3/Constant"
+	  SourceType		  "Xilinx Constant Block"
+	  const			  "1"
+	  arith_type		  "Boolean"
+	  n_bits		  "1"
+	  bin_pt		  "0"
+	  explicit_period	  "on"
+	  period		  "cst"
+	  dbl_ovrd		  "off"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Counter2"
+	  Ports			  [0, 1]
+	  Position		  [105, 25, 150, 55]
+	  SourceBlock		  "xbsIndex_r3/Counter"
+	  SourceType		  "Xilinx Counter Block"
+	  cnt_type		  "Count Limited"
+	  n_bits		  "ceil(log2(buf_depth-1))"
+	  bin_pt		  "0"
+	  arith_type		  "Unsigned"
+	  start_count		  "0"
+	  cnt_to		  "buf_depth -2"
+	  cnt_by_val		  "1"
+	  operation		  "Up"
+	  explicit_period	  "on"
+	  period		  "cst"
+	  load_pin		  "off"
+	  rst			  "off"
+	  en			  "off"
+	  dbl_ovrd		  "off"
+	  gen_core		  "on"
+	  use_rpm		  "off"
+	  xl_area		  "[7 10 0 13 0 0 0]"
+	  xl_use_area		  "off"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Single Port RAM"
+	  Ports			  [3, 1]
+	  Position		  [200, 22, 255, 128]
+	  SourceBlock		  "xbsIndex_r3/Single Port RAM"
+	  SourceType		  "Xilinx Single Port Random Access Memory"
+	  depth			  "buf_depth-1"
+	  initVector		  "0"
+	  write_mode		  "Read Before Write"
+	  latency		  "1"
+	  distributed_mem	  "off"
+	  init_zero		  "on"
+	  explicit_period	  "off"
+	  period		  "1"
+	  en			  "off"
+	  dbl_ovrd		  "off"
+	  gen_core		  "on"
+	  use_rpm		  "off"
+	  xl_area		  "[0 0 1 0 0 0 0]"
+	  xl_use_area		  "off"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "o"
+	  Position		  [305, 68, 335, 82]
+	}
+	Line {
+	  SrcBlock		  "Constant3"
+	  SrcPort		  1
+	  DstBlock		  "Single Port RAM"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "Single Port RAM"
+	  SrcPort		  1
+	  DstBlock		  "o"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "i"
+	  SrcPort		  1
+	  DstBlock		  "Single Port RAM"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Counter2"
+	  SrcPort		  1
+	  DstBlock		  "Single Port RAM"
+	  DstPort		  1
+	}
+	Annotation {
+	  Name			  "This implementation of the line buffer uses"
+" a \n Single Port RAM block with the Read before Write \noption selected.  Th"
+"is results in a efficient\nimplementation in a Virtex2 part."
+	  Position		  [186, 188]
+	  DropShadow		  on
+	  FontName		  "Arial"
+	  FontSize		  12
+	}
+      }
+    }
+    Annotation {
+      Name		      "Xilinx Reference Blockset v6.3\n(c) 2004  Xilin"
+"x, Inc.\n\nImaging Reference Library"
+      Position		      [127, 59]
+      FontSize		      12
+    }
+  }
+}

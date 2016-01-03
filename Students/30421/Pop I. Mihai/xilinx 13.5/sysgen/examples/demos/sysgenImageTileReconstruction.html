@@ -1,0 +1,38 @@
+<html>
+<body>
+<h3><font size=+1 color="#990000">Image Tile Reconstruction</font></h3>
+<b>Image Tile Reconstruction</b>
+<p>
+This design shows how to write 2D data to and read 2D data from the VDMA Interface block in System Generator.The VDMA Interface is a simulation only block and the block transforms into top level Gateway Ins and Gateway Outs on netlisting. Further use of the design requires stitching it with VDMA IP available in Xilinx Platform Studio.
+</p>
+<b>Image Data Generation</b>
+<p>
+Image source is read from the disk and supplied to the AXI Stream Slave Ports of the VDMA Interface. 16 lines of the image constitute a frame and the TLAST signifies the end of each frame. Each RGB pixel is concatenated and packed into a 32 bit word and passed to the VDMA. TSTRB for each word is set to 0xF to indicate all 4 byte lines of the input data are valid.
+</p>
+<b>Block Descriptors</b>
+<p>
+The VDMA can be configured to transfer multiple frames of data where each frame is a 2D data characterized by : 
+<ul>
+<li>START_ADDRESS : The Physical location in memory where the first Byte of the frame is read from or written to.
+<li>HSIZE  : Number of horizontal bytes
+<li>VSIZE : Number of vertical lines of transfer
+<li>STRIDE : The address offset between the start byte in each line.
+To accomodate specification of multiple frame transfers a Master AXI Read Channel Interface is provided on the VDMA Interface block. The purpose of this interface is to gather multiple block descriptor, also known as block descriptor chain where each block descriptor is made of 7 32 bit words with the following fields :
+In this design the 15 block descriptors are provided each enabling transfer of 16 lines of a 320x240 image using xlScatterGatherLineTransfer block. Similarly during read cycles 15 block descriptors are used to read 64x64 tiles 2D data from the memory. xlScatterGatherEngineBlockTransfer is used to provide these block descriptors.
+</p>
+<b>Initializing the VDMA Interface</b>
+<p>
+Before Block Descriptors can be provided through the Master AXI Read Channel Interface, the VDMA has to be initialized. Since, the VDMA comes from a processor centric design space the initialization proceeds through the Slave AXI Lite Control Interface in the following way and in the same order :
+    <ul>
+        <li> Specification of Start Address of Block Descriptors in MM2S_CURR_DESC/S2MM_CURR_DESC : This specifies the address in memory the block descriptors must be gathered from. This simply means that this address will be pushed out on the araddr channel of the Master AXI Read Channel Interface. As long as the slave responds to this address with a block descriptor the VDMA Read Channel Interface will be satisfied. In this design the xlScatterGatherLineTransfer and xlScatterGatherBlockTransfer will repond to any araddr presented to them with the first Block descriptor they have. Thereafter the araddr will conatin the NEXT_ADDRESS as specified by te current Block Descriptor till the end of chain is encountered.
+        <li> Setting the flag to start the DMA by setting the RS Bit of MM2S_DMACR/S2MM_DMACR
+        <li> Specification of TAIL Address of Block Descriptors in MM2S_TAIL_DESC/S2MM_TAIL_DESC : This will initiate the transfer.
+    </ul>
+In this design the above three steps are performed using Control Instructions Generator Block.
+</p>
+<p>
+   <b> Expected Input and Output for this Demo,</b> (Result captured during mid of simulation cycle)
+</p>
+<image src="./InputOutputResult_ImageReTile.jpg" alt="Ouput SnapShot"/>
+</body>
+</html> 

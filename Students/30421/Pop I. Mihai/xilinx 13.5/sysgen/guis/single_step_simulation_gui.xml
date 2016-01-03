@@ -1,0 +1,18 @@
+<!--  *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.            -->
+<!--  *  Reproduction or reuse, in any form, without the explicit written  -->
+<!--  *  consent of Xilinx, Inc., is strictly prohibited.                  -->
+<sysgenblock simulinkname="Single-Step\nSimulation" block_type="single_step_simulation">
+  <icon width="64" height="48" wmark_color="blue" bg_color="white" file="single_step_simulation_icon.m"/>
+  <initialization file="xlsingle_step_simulation_init.m"/>
+  <callbacks OpenFcn="sw = get_param(gcb,'xl_state');\nif(sw == '0')\nset_param(gcb,'xl_state','1');\nset_param(gcb,'xl_status','Continuous');\nelse\nset_param(gcb,'xl_state','0');\nset_param(gcb,'xl_status','Single-Step');\nend"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsTools"/>
+  </libraries>
+  <subsystem_model file="single_step_simulation_subsystem.mdl"/>
+  <blockgui label="Xilinx Single-Step Simulation.">
+    <editbox name="infoedit" default="Single-Step\nSimulation" read_only="true" multi_line="true" evaluate="false"/>
+    <hiddenvar name="xl_status" default="Single-Step" evaluate="false"/>
+    <hiddenvar name="xl_state" default="0" evaluate="true"/>
+  </blockgui>
+</sysgenblock>

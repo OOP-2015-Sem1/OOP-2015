@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>PicoBlaze Microcontroller</title>
+    <link rel="StyleSheet" href="css/Xilinx_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Blockset.11.1.html#412060">Xilinx Blockset</a> : PicoBlaze Microcontroller</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="412060">PicoBlaze Microcontroller</a></div>
+      <div class="Body"><span class="Italic"><a name="276656">This block is listed in the following Xilinx Blockset libraries: Control Logic and Index.</a></span></div>
+      <div class="OneLiner"><a name="412072"><img class="Default" src="images/Xilinx_Blockset.11.69.1.jpg" width="99" height="104" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" />The Xilinx PicoBlaze Microcontroller block implements an embedded 8-</a>bit microcontroller using the PicoBlaze macro. </div>
+      <div class="Body"><a name="2429403">The block provides access to two versions of PicoBlaze™. PicoBlaze 2 </a>only supports Virtex®-II and is superseded by PicoBlaze 3 which supports Spartan®-3, Spartan-6, Virtex®-4, Virtex-5, and Virtex-6. The PicoBlaze 2 macro provides 49 instructions, 32 8-bit general-purpose registers, 256 directly and indirectly addressable ports, and a maskable interrupt. By comparison, the PicoBlaze 3 provides 53 instructions, 16 8-bit general-purpose registers, 256 directly and indirectly addressable ports, and a maskable interrupt, as well as 64 bytes of internal scratch pad memory accessible using the STORE and FETCH instructions. The PicoBlaze 3 embedded controller and its instruction set are described in detail in the PicoBlaze 8-bit Embedded Microcontroller User Guide, which can be found at:</div>
+      <div class="Body"><span class="URL"><a name="2429416">http://www.xilinx.com/support/documentation/ip_documentation/ug129.pdf</a></span>.</div>
+      <div class="Body"><a name="413115">Ordinarily, a single block ROM containing 1024 or fewer 8 bit words serves as the program </a>store. The microcontroller and ROM are connected as shown below.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="413328"><img class="Default" src="images/Xilinx_Blockset.11.69.2.jpg" width="232" height="116" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="276660">Block Interface</a></div>
+      <div class="Body"><a name="413255">Both versions of the block have four input ports. The 8-bit data port, in_port, is read during </a>an INPUT operation. The value can be transferred into any of the 32 registers. The program can be interrupted by setting the port brk to 1. The processor can be reset by setting rst to 1. This clears registers and forces the processor to begin executing instructions at address 0. The 8-bit input port instr accepts PicoBlaze instructions. </div>
+      <div class="Body"><a name="276661">The PicoBlaze 2 block has five output ports. The PicoBlaze 3 block has six output ports. The </a>8-bit output port out_port is written during an OUTPUT instruction. During a read/write, the port_id output identifies the location from which a value is read/written. The output ports rs (read strobe) and ws (write strobe) indicate whether a read (INPUT) or write (OUTPUT) operation is occurring. addr is the address of the next instruction to be executed by the processor. The processor has no internal program store. The output port addr specifies the next location from which an instruction should be executed. The ack port (PicoBlaze 3 only) indicates when the interrupt service routine is started (i.e. the program counter is set to 0x3FF).</div>
+      <div class="Heading2"><a name="276662">Block Parameters</a></div>
+      <div class="Body"><a name="580187">Parameters specific to the PicoBlaze Microcontroller block are: </a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="580189">Version</a></span>: PicoBlaze 2 or PicoBlaze 3. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="580191">Display Internal State</a></span>: When checked, the registers and control flags are made available in the MATLAB workspace. The information is present as a structure with the following naming convention:</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Code"><span class="Filename"><a name="580192">&lt; design name &gt;_&lt; subsystem name &gt;_&lt; PicoBlaze block name &gt;.</a></span></div>
+      <div class="Body2"><a name="580194">The structure contains a field for each register (i.e. s00,s01, etc.) and the control flags </a>CARRY and ZERO. </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="580196">Display Values As</a></span>: Tells the radix to use for displaying values. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="1282943">Other parameters used by this block are explained in the topic</a><br /><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.3.html#271277', '');" title="Common Options in Block Parameter Dialog Boxes">Common Options in Block Parameter Dialog Boxes</a></span>. </div>
+      <div class="Heading2"><a name="1686676">How to Use the PicoBlaze Assembler</a></div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="1686682">The Xilinx PicoBlaze Assembler is only available with the Windows Operating System. Third-</a>party PicoBlaze Assemblers are available for Linux, but are not shipped by Xilinx.</div>
+      <div class="Numbered_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="1686677">Write a PicoBlaze program. Save the program with a .psm file extension. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="1686678">Run the assembler from the MATLAB command prompt. The command is:</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Code"><a name="580904">xlpb_as </a>–p &lt;your_psm_file&gt;. </div>
+      <div class="Body2"><a name="580905">The default is to assemble a program for </a><span class="Filename">PicoBlaze 3</span>. To assemble a program for <span class="Filename">PicoBlaze 2 </span>use the <span class="Filename">–</span><span class="Filename">v 2</span> option. This script runs the PicoBlaze assembler and generates a M-code program which should be used to populate the ROM or RAM used as the program store. </div>
+      <div class="Heading2"><a name="580211">Known Issues</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="580216">The PicoBlaze assembler xlpb_as fails when the assembly code file is found in a </a>directory whose full path name contains more than 58 characters. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="580218">Verilog netlisting is not supported for this block.</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="580221">PicoBlaze Microprocessor Online Documentation</a></div>
+      <div class="Body"><a name="2081391">More information can be found at </a><span class="URL"><a href="http://www.xilinx.com/ipcenter/processor_central/picoblaze/picoblaze_user_resources.htm" target="external_window">http://www.xilinx.com/ipcenter/processor_central/picoblaze/picoblaze_user_resources.htm</a></span>.</div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

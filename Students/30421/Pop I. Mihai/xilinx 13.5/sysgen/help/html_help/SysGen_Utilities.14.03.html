@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>xlCache</title>
+    <link rel="StyleSheet" href="css/SysGen_Utilities.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="SysGen_Utilities.14.01.html#288400">System Generator Utilities</a> : xlCache</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="288400">xlCache</a></div>
+      <div class="Body"><a name="288401">Used to manage the System Generator caches. </a></div>
+      <div class="Heading2"><a name="288402">Syntax</a></div>
+      <div class="Code"><a name="288472">[core, sg, usertemp] = xlCache ('getpath')</a></div>
+      <div class="Code"><a name="288481">xlCache ('clearall')</a></div>
+      <div class="Code"><a name="288489">xlCache ('clearcorecache')</a></div>
+      <div class="Code"><a name="288490">xlCache ('cleardiskcache')</a></div>
+      <div class="Code"><a name="288491">xlCache ('cleartargetcache')</a></div>
+      <div class="Code"><a name="288492">xlCache ('clearusertemp') </a></div>
+      <div class="Code"><a name="288493">[maxsize] = xlCache ('getdiskcachesize')</a></div>
+      <div class="Code"><a name="288494">[maxentries] = xlCache ('getdiskcacheentries') </a></div>
+      <div class="Heading2"><a name="288404">Description</a></div>
+      <div class="Body"><a name="288405">This function is used to manage the System Generator caches. The different forms of the </a>function are described as follows:</div>
+      <div class="Code"><a name="288540">[core, sg, usertemp] = xlCache ('getpath')</a></div>
+      <div class="Body"><a name="288544">Returns the location for the System Generator core cache, disk cache and usertemp </a>directory.</div>
+      <div class="Code"><a name="288571">xlCache ('clearall')</a></div>
+      <div class="Body"><a name="288606">Clears the System Generator core cache, disk cache, the usertemp location, then reloads the </a>compilation target plugin cache from disk.</div>
+      <div class="Code"><a name="288572">xlCache ('clearcorecache')</a></div>
+      <div class="Body"><a name="288636">Clears the core cache. The core cache speeds up execution by storing cores generated from </a>Xilinx Core Generator, then recalls those files when reuse is possible.</div>
+      <div class="Code"><a name="288573">xlCache ('cleardiskcache')</a></div>
+      <div class="Body"><a name="288666">Clears the disk cache. The disk cache speeds up execution by tagging and storing files </a>related to simulation and generation, then recalls those files during subsequent simulation and generation rather than rerunning the time consuming tools used to create those files.</div>
+      <div class="Code"><a name="288574">xlCache ('cleartargetcache')</a></div>
+      <div class="Body"><a name="289349">Rehashes the compilation target plugin cache. The compilation target plugin cache needs </a>to be rehashed when a new compilation target plugin is added, or an existing target is changed.</div>
+      <div class="Code"><a name="288575">xlCache ('clearusertemp') </a></div>
+      <div class="Body"><a name="290012">Clears the contents in the usertemp directory. The usertemp directory is used by System </a>Generator to store temporary files used during simulation or netlisting. They are kept on disk for debugging purposes and can be safely deleted without any impact on performance.</div>
+      <div class="Code"><a name="288576">[maxsize] = xlCache ('getdiskcachesize')</a></div>
+      <div class="Body"><a name="290679">Returns the maximum amount of disk space used by the disk cache. By default, the disk </a>cache uses 500MB of disk space to store files. You should set the SYSGEN_CACHE_SIZE environment variable to the size of the cache in megabytes. You should set this number to a higher value when working on several large designs.</div>
+      <div class="Body"><a name="288569">[maxentries] = xlCache ('getdiskcacheentries') </a></div>
+      <div class="Body"><a name="290827">Returns the maximum number of entries in the cache. The default is 20,000 entries. To set </a>the size of the cache entry database, you should set the SYSGEN_CACHE_ENTRIES environment variable to the desired number of entries. Setting this number too small will adversely affect cache performance. You should set this number to a higher value when working on several large designs.</div>
+      <div class="Heading2"><a name="291341">See Also</a></div>
+      <div class="Body">Configuring the System Generator Cache , </div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

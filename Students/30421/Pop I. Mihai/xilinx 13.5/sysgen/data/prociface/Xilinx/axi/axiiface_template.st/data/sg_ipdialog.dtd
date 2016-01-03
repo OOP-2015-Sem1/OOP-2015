@@ -1,0 +1,69 @@
+<!--
+########################################################################
+##
+## Copyright (c) 2010 Xilinx, Inc.  All rights reserved.
+##
+########################################################################
+-->
+
+<!ELEMENT key      (#PCDATA)>
+<!ELEMENT label    (#PCDATA)>
+<!ELEMENT tip      (#PCDATA)>
+<!ELEMENT display  (#PCDATA)>
+<!ELEMENT unit     (#PCDATA)>
+<!ELEMENT id       (#PCDATA)>
+<!ELEMENT cond     (#PCDATA)>
+<!ELEMENT action   (#PCDATA)>
+<!ELEMENT widget   (key, label, tip, unit?)>
+<!ELEMENT item     (widget)>
+<!ELEMENT source   (id, cond)>
+<!ELEMENT target   (id, action)>
+<!ELEMENT rule     (source, target)>
+<!ELEMENT group    (display, item*)>
+<!ELEMENT view     (display, group*)>
+<!ELEMENT doc      (view*, rule*)>
+<!ATTLIST widget   id NMTOKEN #REQUIRED>
+<!ATTLIST group    id NMTOKEN #REQUIRED>
+<!ATTLIST view     id NMTOKEN #REQUIRED>
+<!ENTITY C_BASEADDR '
+<widget id="C_BASEADDR">
+	<key>C_BASEADDR</key>
+	<label>Base Address</label>
+	<tip></tip>
+</widget>
+'>
+<!ENTITY C_HIGHADDR '
+<widget id="C_HIGHADDR">
+	<key>C_HIGHADDR</key>
+	<label>High Address</label>
+	<tip></tip>
+</widget>
+'>
+<!ENTITY C_FAMILY '
+<widget id="C_FAMILY">
+	<key>C_FAMILY</key>
+	<label>Device Family</label>
+	<tip></tip>
+</widget>
+'>
+<!ENTITY C_DEVICE '
+<widget id="C_DEVICE">
+	<key>C_DEVICE</key>
+	<label>Device Name</label>
+	<tip></tip>
+</widget>
+'>
+<!ENTITY C_PACKAGE '
+<widget id="C_PACKAGE">
+	<key>C_PACKAGE</key>
+	<label>Package Name</label>
+	<tip></tip>
+</widget>
+'>
+<!ENTITY C_SPEEDGRADE '
+<widget id="C_SPEEDGRADE">
+	<key>C_SPEEDGRADE</key>
+	<label>Speed Grade Name</label>
+	<tip></tip>
+</widget>
+'>

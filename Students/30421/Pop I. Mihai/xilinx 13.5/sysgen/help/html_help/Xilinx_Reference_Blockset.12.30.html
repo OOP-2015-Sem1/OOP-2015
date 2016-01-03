@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>White Gaussian Noise Generator</title>
+    <link rel="StyleSheet" href="css/Xilinx_Reference_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Reference_Blockset.12.01.html#633236">Xilinx Reference Blockset</a> : White Gaussian Noise Generator</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="633236">White Gaussian Noise Generator</a></div>
+      <div class="Body"><a name="633240"><img class="Default" src="images/Xilinx_Reference_Blockset.12.30.1.jpg" width="64" height="91" style="display: block; float: none; left: 0.0; top: 0.0" alt="" />The The Xilinx White Gaussian Noise Generator (WGNG) generates white </a>Gaussian noise using a combination of the Box-Muller algorithm and the Central Limit Theorem following the general approach described in [1] (reference listed below). </div>
+      <div class="Body"><a name="633241">The Box-Muller algorithm generates a unit normal random variable via a </a>transformation of two independent random variables that are uniformly distributed over [0,1]. This is accomplished by storing Box-Muller function values in ROMs and addressing them with uniform random variables. </div>
+      <div class="Body"><a name="633242">The uniform random variables are produced by multiple-bit leap-forward LFSRs. A </a>standard LFSR generates one output per clock cycle. K-bit leap-forward LFSRs are able to generate k outputs in a single cycle. For example, a 4-bit leap-forward LFSR outputs a discrete uniform random variable between 0 and 15. A portion of the 48-bit block parameter seed initializes each LFSR allowing customization. The outputs of four parallel Box-Muller subsystems are averaged to obtain a probability density function (PDF) that is Gaussian to within 0.2% out to 4.8sigma. The overall latency of the WGNG is 10 clock cycles. The output port noise is a 12 bit signed number with 7 bits after the binary point.</div>
+      <div class="Heading2"><a name="633243">4-bit Leap-Forward LFSR</a></div>
+      <div class="Body"><a name="633250">&nbsp;</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="633249"><img class="Default" src="images/Xilinx_Reference_Blockset.12.30.2.jpg" width="394" height="294" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="633251">Box-Muller Method</a></div>
+      <div class="Body"><a name="633258">&nbsp;</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="633257"><img class="Default" src="images/Xilinx_Reference_Blockset.12.30.3.jpg" width="264" height="142" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="633259">Block Parameters</a></div>
+      <div class="Body"><a name="633260">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model. </div>
+      <div class="Body"><a name="633261">The block parameter is a decimal starting seed value.</a></div>
+      <div class="Heading2"><a name="633262">Reference</a></div>
+      <div class="Body"><a name="633263">A. Ghazel, E. Boutillon, J. L. Danger, G. Gulak and H. Laamari, </a><span class="Italic">Design and Performance </span><span class="Italic">Analysis of a High Speed AWGN Communication Channel Emulator</span>, IEEE PACRIM Conference, Victoria, B. C., Aug. 2001.</div>
+      <div class="Body"><a name="634613">&nbsp;</a></div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

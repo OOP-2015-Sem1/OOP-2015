@@ -1,0 +1,64 @@
+# Core name
+set ipkey [% T.CORE_IP_KEY %]                                                                         
+                                                                                                
+source [% T.CORE_IP_KEY %]_util.tcl
+
+set sysgeninstalldir [GetSysgenInstallDir]
+
+# find the sysgen coregen util dir, based on sysgeninstalldir
+set sysgen_coregen_util_dir [file join $sysgeninstalldir "sysgen" "coregen" "util"]
+
+# the directory where this script is located                                                    
+set sysgen_ipcore_dir [pwd]                                                                     
+                                                                                                
+# the environment setting is a list of lists                                                    
+set env_settings [list]                                                                         
+
+#Setup Sysgen environment                                                                                                
+sysgen_environment                                                                              		                                                                                               
+
+lappend env_settings [list "Sysgen" "sysgen" $sysgeninstalldir/sysgen]                    
+lappend env_settings [list "System" "tempdir" $::env(TEMP)]                                 
+lappend env_settings [list "Sysgen" "xilinx" $::env(XILINX)]                                
+                                                                                                
+set toplevel_name [% T.CORE_IP_KEY %]                                                                 
+lappend env_settings [list "Model" "design" $toplevel_name]                                 
+lappend env_settings [list "IPExport" "core_is_deployed" 1]                                 
+lappend env_settings [list "Generation" "hdlDir" $sysgeninstalldir/sysgen/hdl ]           
+lappend env_settings [list "Model" "hdl_path" $sysgen_ipcore_dir ]                          
+                                                                                                
+set target_dir [file join [pwd] "netlist"]                                                    
+lappend env_settings [list Generation directory $target_dir]                                    
+set default_env_file [glob ${sysgen_ipcore_dir}/*.bin]                                          
+lappend env_settings [list "IPExport" "default_env_file" $default_env_file]  
+lappend env_settings [list "IPExport" checkLicense xlIgnoreLicense]
+               
+#There can be only one DLL file                                                                 
+
+set core_lib_file [glob ${sysgen_ipcore_dir}/*[info sharedlibextension] ]                       
+lappend env_settings [list "IPExport" "core_lib_file" $core_lib_file]                       
+
+# source the env setting particular to this core                                                
+set sysgen_ipcore_setenv ${ipkey}_setenv                                                        
+set sysgen_ipcore_setenv_tcl [file join $sysgen_ipcore_dir ${sysgen_ipcore_setenv}.tcl]         
+                                                                                                
+set core_ports [list]                                                                           
+source $sysgen_ipcore_setenv_tcl                                                                
+$sysgen_ipcore_setenv env_settings core_ports $sysgen_ipcore_dir                                
+                                                                                                
+# now the parameters                                                                            
+set core_parameters [list]                                                                      
+[% T.CORE_PARAMETERS %]                                                                                                
+foreach one_param $core_parameters {                                                            
+    set param_name [lindex $one_param 0]                                                        
+    set param_value [lindex $one_param 1]                                                       
+#   puts "Parameter $param_name = $param_value"                                               
+}                                                                                               
+                                                                                                
+# now generate                                                                                  
+puts "Generating"
+set sysgen_generator_tcl [file join $sysgen_coregen_util_dir sysgen_generator.tcl]
+exec xtclsh $sysgen_generator_tcl "generate" $env_settings $core_parameters $core_ports >& sysgen_generator.out
+puts "Done"
+exit
+

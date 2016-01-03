@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Black Box Configuration Wizard</title>
+    <link rel="StyleSheet" href="css/Importing_HDL_Modules.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Importing_HDL_Modules.09.1.html#279618">Importing HDL Modules</a> : Black Box Configuration Wizard</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="279618">Black Box Configuration Wizard</a></div>
+      <div class="Body"><a name="279619">System Generator provides a configuration wizard that makes it easy to associate a VHDL </a>or Verilog module to a Black Box block. The Configuration Wizard parses the VHDL or Verilog module that you are trying to import, and automatically constructs a configuration M-function based on its findings. It then associates the configuration M-function it produces to the Black Box block in your model. Whether or not you can use the configuration M-function as is depends on the complexity of the HDL you are importing. Sometimes the configuration M-function must be customized by hand to specify details the configuration wizard misses. Details on the construction of the configuration M-function can be found in the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Importing_HDL_Modules.09.4.html#280204', '');" title="Black Box Configuration M-Function">Black Box Configuration M-Function</a></span><span style="font-size: 9.5pt">.</span></div>
+      <div class="Heading4"><a name="279620">Using the Configuration Wizard</a></div>
+      <div class="Body"><a name="279621">The Black Box Configuration Wizard opens automatically when a new black box block is </a>added to a model. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="279622">Before running the Configuration Wizard, ensure the VHDL or Verilog you are importing </a>meets the specified <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Importing_HDL_Modules.09.2.html#279296', '');" title="Black Box HDL Requirements and Restrictions">Black Box HDL Requirements and Restrictions</a></span>. </div>
+      <div class="Body"><a name="279626">For the Configuration Wizard to find your module, the model must be saved in the same </a>directory as the module you are trying to import. This means, in particular, that the model must be saved to same directory. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="279627">The wizard only searches for </a><span class="Filename">.vhd</span> and <span class="Filename">.v</span> files in the same directory as the <span class="Filename">.mdl</span> file. If the wizard does not find any files it issues a warning and the black box is not automatically configured. The warning looks like the following:</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="291301"><img class="Default" src="images/Importing_HDL_Modules.09.3.1.jpg" width="335" height="124" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="279628">After searching the model's directory for </a><span class="Filename">.vhd</span> and <span class="Filename">.v </span>files, the Configuration Wizard opens a new window that lists the possible files that can be imported. An example screenshot is shown below:</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="279634"><img class="Default" src="images/Importing_HDL_Modules.09.3.2.jpg" width="254" height="168" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="279635">You can select the file you would like to import by selecting the file, and then pressing the </a><span class="Bold">Open</span> button. At this point, the configuration wizard generates a configuration M-function and associates it with the black box block. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="279636">The configuration M-function is saved in the model's directory as </a><span class="Filename">&lt;module&gt;_config.m</span>, where <span class="Filename">&lt;module&gt;</span> is the name of the module that you are importing. </div>
+      <div class="Heading4"><a name="279637">Configuration Wizard Fine Points</a></div>
+      <div class="Body"><a name="279638">The configuration wizard automatically extracts certain information from the imported </a>module when it is run, but some things must be specified by hand. These things are described below: </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="279639">The configuration function is annotated with comments that instruct you where to make these </a>changes. </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="279640">If your model has a combinational path, you must call the tagAsCombinational </a>method of the block's SysgenBlockDescriptor object. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="279641">The Configuration Wizard only knows about the top-level entity that is being </a>imported. There are typically other files that go along with this entity. These files must be added manually in the configuration M-function by invoking the addFile method for each additional file. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="279642">The Configuration Wizard creates a single-rate black box. This means that every port </a>on the black box runs at the same rate. In most cases, this is acceptable. You may want to explicitly set port rates, which can result in a faster simulation time.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

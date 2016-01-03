@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>xlAddTerms</title>
+    <link rel="StyleSheet" href="css/SysGen_Utilities.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="SysGen_Utilities.14.1.html#270918">System Generator Utilities</a> : xlAddTerms</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="270918">xlAddTerms</a></div>
+      <div class="Body"><a name="271114">xlAddTerms is similar to the addterms command in Simulink, in that it adds blocks to </a>terminate or drive unconnected ports in a model. With xlAddTerms, output ports are terminated with a Simulink terminator block, and input ports are correctly driven with either a Simulink or System Generator constant block. Additionally System Generator gateway blocks can also be conditionally added. </div>
+      <div class="Body"><a name="271118">The optionStruct argument can be configured to instruct xlAddTerms to set a block's </a>property (e.g. set a constant block's value to 5) or to use different source or terminator blocks. </div>
+      <div class="Heading2"><a name="271123">Syntax</a></div>
+      <div class="Code"><a name="271126">xlAddTerms(arg1,optionStruct) </a></div>
+      <div class="Heading2"><a name="271139">Description</a></div>
+      <div class="Body"><a name="271144">In the following description, 'source block' refers to the block that is used to drive an </a>unconnected port. And 'term block' refers to the block that is used to terminate an unconnected port. </div>
+      <div class="Code"><a name="271148">xlAddTerms(arg1,optionStruct) </a></div>
+      <div class="Body"><a name="271152">xlAddTerms takes either 1 or 2 arguments. The second argument, optionStruct argument is </a>optional. The first argument can be the name of a system, or a block list. </div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 380.15959999999995pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 142.5596pt;">
+            <div class="CellHeadingLeft"><a name="271552">arg1</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 237.6pt;">
+            <div class="CellHeadingLeft"><a name="271554">Description</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><span class="Filename"><a name="271556">gcs</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="288081">A string-handle of the current system</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><span class="Filename"><a name="271568">'top/test1'</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="271570">A string-handle of a system called test1. In this case, </a>xlAddTerms is passed a handle to a system. This will run xlAddTerms on all the blocks under test1, including all children blocks of subsystems.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><span class="Filename"><a name="271572">{'top/test1'}</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="271574">A block list of string handles. In this case, xlAddTerms </a>is passed a handle to a block. This will run xlAddTerms only on the block called test1, and will not process child blocks.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><span class="Filename"><a name="271576">{'t/b1';'t/b2';'t/b3'}</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="271578">A block list of string handles. </a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><span class="Filename"><a name="271580">[1;2;3] </a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="271582">A block list of numeric handles.</a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="271184">The optionStruct argument is optional, but when included, should be a MATLAB </a>structure. The following table describes the possible values in the structure. The structure field names (as is true with all MATLAB structure field names) are case sensitive. </div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 389.5378pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 115.1153pt;">
+            <div class="CellHeadingLeft"><a name="272461">optionStruct</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 274.4225pt;">
+            <div class="CellHeadingLeft"><a name="272463">Description</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><span class="Filename"><a name="272465">Source</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="Body"><a name="272467">xlAddTerms can terminate in-ports using any source block </a>(refer to SourceWith field). The parameters of the source block can be specified using the Source field of the optionStruct by passing the parameters as sub-fields of the Source field. The Source field prompts xlAddTerms to do a series of set_params on the source block. Since it is possible to change the type of the source block, it is left to the user to ensure that the parameters here are relevant to the source block in use. </div>
+            <div class="Body"><a name="272468">E.g. when a Simulink constant block is used as a Source Block, </a>setting the block's value to 10 can be done with: </div>
+            <div class="Code"><a name="272469">Source.value = '10'</a></div>
+            <div class="Body"><a name="272470">And when a System Generator Constant block is used as a </a>Source Block, setting the constant block to have a value of 10 and of type UFIX_32_0 can be done with: </div>
+            <div class="Code"><a name="272471">Source.const = '10'; </a></div>
+            <div class="Code"><a name="272472">Source.arith_type='Unsigned'; </a></div>
+            <div class="Code"><a name="272473">Source.bin_pt=0; </a></div>
+            <div class="Code"><a name="272474">Source.n_bits=32;</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><span class="Filename"><a name="272476">SourceWith</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="272478">The SourceWith field allows the source block to be specified. </a>Default is to use a constant block. SourceWith has two sub-fields which must be specified.</div>
+            <div class="CellBody"><span class="Bold"><a name="272479">SourceWithBlock</a></span>: A string specifying the full path and name of the block to be used. e.g. 'built-in/Constant' or 'xbsIndex_r3/AddSub'.</div>
+            <div class="CellBody"><span class="Bold"><a name="272480">SourceWithPort</a></span>: A string specifying the port number used to connect. E.g. '1' or '3' Specifying '1' instructs xlAddTerms to connect using port 1, etc. </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><span class="Filename"><a name="272482">TermWith</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="272484">The TermWith Field allows the term block to be specified. </a>Default is to use a Simulink terminator block. TermWith has two sub-fields which must be specified.</div>
+            <div class="CellBody"><span class="Bold"><a name="272485">TermWithBlock</a></span>: A string specifying the full path and name of the block to be used. e.g. 'built-in/Terminator' or 'xbsIndex_r3/AddSub'.</div>
+            <div class="CellBody"><span class="Bold"><a name="272486">TermWithPort</a></span>: </div>
+            <div class="CellBody"><a name="272487">&nbsp;</a></div>
+            <div class="CellBody"><a name="272488">A string specifying the port number used to connect. E.g. '1' or </a>'3' </div>
+            <div class="CellBody"><a name="272489">&nbsp;</a></div>
+            <div class="CellBody"><a name="272490">Specifying '1' instructs xlAddTerms to connect using port 1, etc. </a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><span class="Filename"><a name="272492">UseGatewayIns</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="272494">Instructs xlAddTerms to insert System Generator gateway ins </a>when required. The existence of the field is used to denote insertion of gateway ins. This field must not be present if gateway ins are not to be used.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="272496">GatewayIn</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="272498">If gateway ins are inserted, their parameters can be set using this </a>field, in a similar way as for Source and Term. </div>
+            <div class="CellBody"><a name="272499">For example,</a></div>
+            <div class="Code"><a name="272500">GatewayIn.arith_type='Unsigned'; </a></div>
+            <div class="Code"><a name="272501">GatewayIn.n_bits='32' </a></div>
+            <div class="Code"><a name="272502">GatewayIn.bin_pt='0' </a></div>
+            <div class="CellBody"><a name="272503">will set the gateway in to output a ufix_32_0.</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><span class="Filename"><a name="272505">UseGatewayOuts</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="272507">Instructs xlAddTerms to insert System Generator gateway outs </a>when required. The existence of the field is used to denote insertion of gateway outs. This field must not be present if gateway outs are not to be used.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="272509">GatewayOut</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="272511">If gateway outs are inserted, their parameters can be set using </a>this field, in a similar way as for Source and Term. </div>
+            <div class="CellBody"><a name="272512">For example,</a></div>
+            <div class="Code"><a name="272513">GatewayOut.arith_type='Unsigned'; </a></div>
+            <div class="Code"><a name="272514">GatewayOut.n_bits='32' </a></div>
+            <div class="Code"><a name="272515">Gatewayout.bin_pt='0' </a></div>
+            <div class="CellBody"><a name="272516">will set the gateway out to take an input of ufix_32_0.</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="272518">RecurseSubSystems</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="272520">Instructs xlAddTerm to recursively run xlAddTerm under all </a>child subsystems. Expects a scalar number, 1 or 0.</div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="271332">Examples</a></div>
+      <div class="Body"><span class="Bold"><a name="271335">Example 1</a></span>: Runs xlAddTerms on the current system, with the default parameters: constant source blocks are used, and gateways are not added. Subsystems will be recursively terminated. </div>
+      <div class="Code"><a name="271339">xlAddTerms(gcs); </a></div>
+      <div class="Body"><span class="Bold"><a name="271343">Example 2</a></span>: runs xlAddTerms on all the blocks in the subsystem tt./mySubsystem. </div>
+      <div class="Code"><a name="271347">xlAddTerms(find_system('tt/mySubsystem','SearchDepth',1)); </a></div>
+      <div class="Body"><span class="Bold"><a name="271351">Example 3</a></span>: runs xlAddTerms on the current system, setting the source block's constant value to 1, using gateway outs and changing the term block to use a Simulink display block.</div>
+      <div class="Code"><a name="271355">s.Source.const = '10';</a></div>
+      <div class="Code"><a name="271357">s.UseGatewayOuts = 1;</a></div>
+      <div class="Code"><a name="271359">s.TermWith.Block = 'built-in/Display';</a></div>
+      <div class="Code"><a name="271361">s.TermWith.Port = '1';</a></div>
+      <div class="Code"><a name="271363">s.RecurseSubSystem = 1;</a></div>
+      <div class="Code"><a name="271365">xlAddTerms(gcs,s);</a></div>
+      <div class="Heading2"><a name="271368">Remarks</a></div>
+      <div class="Body"><a name="271371">Note that field names are case sensitive. When using the fields 'Source', 'GatewayIn' and </a>'GatewayOut', users have to ensure that the parameter names to be set are valid. </div>
+      <div class="Heading2"><a name="273309">See Also</a></div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.97.html#271186', '');" title="Toolbar" name="278374">Toolbar</a></span>, <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'SysGen_Utilities.14.17.html#278480', '');" title="xlTBUtils">xlTBUtils</a></span></div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

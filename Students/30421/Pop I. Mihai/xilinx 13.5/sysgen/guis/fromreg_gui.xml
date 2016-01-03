@@ -1,0 +1,62 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="From Register" block_type="fromreg">
+  <icon width="60" height="56" wmark_color="white" bg_color="blue" caption_format="&lt;&lt; %&lt;shared_memory_name&gt; &gt;&gt;"/>
+  <dll name="sysgen_blockset" entry_point="fromreg_config"/>
+  <handlers enablement="fromregenablement" action="xlDatatypeAction"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsShared"/>
+    <library name="xbsFloatingPoint"/>
+  </libraries>
+  <blockgui label="Xilinx Shared Memory Based From Register">
+    <editbox name="infoedit" default="Register block that reads data to a shared memory register.  Delay of one sample period." read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <editbox name="shared_memory_name" default="'Bar'" evaluate="true" label="Shared memory name" ctype="String"/>
+        <editbox name="init" default="0" evaluate="true" label="Initial value" ctype="Double"/>
+        <editbox name="period" default="1" evaluate="true" label="Sample period" ctype="Double"/>
+        <radiogroup name="ownership" default="Owned and initialized elsewhere" evaluate="true" label="Ownership and initialization" ctype="Int">
+          <item value="Locally owned and initialized"/>
+          <item value="Owned and initialized elsewhere"/>
+        </radiogroup>
+      </tab>
+      <tab name="typetab" label="Output">
+        <etch label="Output Type">
+          <radiogroup name="gui_display_data_type" default="Fixed-point" evaluate="true" label="" ctype="Int" allow_advanced="false">
+            <item value="Fixed-point" label="Fixed-point"/>
+            <item value="Floating-point" label="Floating-point"/>
+          </radiogroup>
+          <listbox name="arith_type" default="Signed  (2's comp)" evaluate="true" label="Arithmetic type" ctype="Int">
+            <item value="Signed  (2's comp)"/>
+            <item value="Unsigned"/>
+            <item value="Floating-point"/>
+          </listbox>
+          <etch name="fixed_type_p" label="Fixed-point Precision">
+            <glayout cols="2">
+              <editbox name="n_bits" default="16" evaluate="true" label="Number of bits" ctype="Int"/>
+              <editbox name="bin_pt" default="14" evaluate="true" label="Binary point" ctype="Int"/>
+            </glayout>
+          </etch>
+          <etch name="preci_type_p" label="Floating-point Precision">
+            <radiogroup name="preci_type" default="Single" evaluate="true" label="" ctype="Int">
+              <item value="Single" label="Single"/>
+            </radiogroup>
+          </etch>
+        </etch>
+      </tab>
+      <tab name="advtab" label="Advanced">
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles" ctype="Int"/>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+  </blockgui>
+</sysgenblock>

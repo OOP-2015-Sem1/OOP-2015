@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>CORDIC ATAN</title>
+    <link rel="StyleSheet" href="css/Xilinx_Reference_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Reference_Blockset.12.01.html#632289">Xilinx Reference Blockset</a> : CORDIC ATAN</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="632289">CORDIC ATAN</a></div>
+      <div class="Body"><a name="632293"><img class="Default" src="images/Xilinx_Reference_Blockset.12.12.1.jpg" width="56" height="73" style="display: block; float: none; left: 0.0; top: 0.0" alt="" />The Xilinx CORDIC ATAN reference block implements a rectangular-to-</a>polar coordinate conversion using a fully parallel CORDIC  (COordinate Rotation DIgital Computer) algorithm in Circular Vectoring mode. </div>
+      <div class="Body"><a name="632294">That is, given a complex-input &lt;x,y&gt;, it computes a new vector &lt;m,a&gt;, </a>where magnitude m = K x sqrt (x<span class="Superscript">2</span> + y<span class="Superscript">2</span>), and the angle a = arctan(y/x). As is common, the magnitude scale factor K = 1.646760... is not compensated in the processor, i.e. the magnitude output should be scaled by this factor. The CORDIC processor is implemented using building blocks from the Xilinx blockset. </div>
+      <div class="Body"><a name="632295">The CORDIC ATAN algorithm is implemented in the following 3 steps: </a></div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="632296">Coarse Angle Rotation. The algorithm converges only for angles between -pi/2 and </a>pi/2, so if x &lt; zero, the input vector is reflected to the 1st or 3rd quadrant by making the x-coordinate non-negative. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="632297">Fine Angle Rotation. For rectangular-to-polar conversion, the resulting vector is </a>rotated through progressively smaller angles, such that y goes to zero. In the i-th stage, the angular rotation is by either +/- atan(1/2<span class="Superscript">i</span>), depending on whether or not its input y is less than or greater than zero. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="632298">Angle Correction. If there was a reflection applied in Step 1, this step applies the </a>appropriate angle correction by subtracting it from +/- pi.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="632299">Block Parameters</a></div>
+      <div class="Body"><a name="632300">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model. </div>
+      <div class="Body"><a name="632301">Parameters specific to this reference block are as follows:</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632302">Number of Processing Elements</a></span>: specifies the number of iterative stages used for fine angle rotation. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632303">X,Y Data Width</a></span>: specifies the width of the inputs x and y. The inputs x, and y should be signed data type having the same data width. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632304">X,Y Binary Point Position</a></span>: specifies the binary point position for inputs x and y. The inputs x and y should be signed data type with the same binary point position. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632305">Latency for each Processing element</a></span>: This parameter sets the pipeline latency after each circular rotation stage. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="632306">The latency of the CORDIC arc tangent block is calculated based on the formula </a>specified as follows: Latency = 3 + sum (latency of Processing Elements) </div>
+      <div class="Heading2"><a name="632307">Reference</a></div>
+      <div class="Body"><a name="632308">1) J. E. Volder, </a><span class="Italic">The CORDIC Trigonometric Computing Technique</span>, IRE Trans. On Electronic Computers, Vol. EC-8, 1959, pp. 330-334. </div>
+      <div class="Body"><a name="632309">2) J. S. Walther, </a><span class="Italic">A Unified Algorithm for Elementary Functions</span>, Spring Joint Computer Conference (1971) pp. 379-385. </div>
+      <div class="Body"><a name="632310">3) Yu Hen Hu,</a><span class="Italic"> CORDIC-Based VLSI Architectures for Digital Signal Processing</span>, IEEE Signal Processing Magazine, pp. 17-34, July 1992.</div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

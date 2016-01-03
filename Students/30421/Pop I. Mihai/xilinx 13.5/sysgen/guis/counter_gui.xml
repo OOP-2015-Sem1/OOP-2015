@@ -1,0 +1,75 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Counter" block_type="counter">
+  <icon width="60" height="60" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="Counter_config"/>
+  <handlers enablement="counterenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsBasic"/>
+    <library name="xbsControl"/>
+    <library name="xbsMath"/>
+  </libraries>
+  <blockgui label="Xilinx Counter">
+    <editbox name="infoedit" default="Hardware notes: Free running counters are the least expensive in hardware.  A count limited counter is implemented by combining a counter with a comparator." read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <radiogroup name="cnt_type" default="Free Running" evaluate="true" label="Counter type" ctype="Int">
+          <item value="Free Running" label="Free running"/>
+          <item value="Count Limited" label="Count limited"/>
+        </radiogroup>
+        <editbox name="cnt_to" default="Inf" evaluate="true" label="Count to value" ctype="Double"/>
+        <radiogroup name="operation" default="Up" evaluate="true" label="Count direction" ctype="Int">
+          <item value="Up" label="Up"/>
+          <item value="Down" label="Down"/>
+          <item value="Up/Down" label="Up/Down"/>
+        </radiogroup>
+        <editbox name="start_count" default="0" evaluate="true" label="Initial value" ctype="Double"/>
+        <editbox name="cnt_by_val" default="1" evaluate="true" label="Step" ctype="Double"/>
+        <etch name="outputetch" label="Output Precision">
+          <radiogroup name="arith_type" default="Unsigned" evaluate="true" label="Output type" ctype="Int">
+            <item value="Signed  (2's comp)" label="Signed  (2's comp)"/>
+            <item value="Unsigned" label="Unsigned"/>
+          </radiogroup>
+          <editbox name="n_bits" default="8" evaluate="true" label="Number of bits" ctype="Int"/>
+          <editbox name="bin_pt" default="0" evaluate="true" label="Binary point" ctype="Int"/>
+        </etch>
+        <etch name="oportetch" label="Optional Ports">
+          <checkbox name="load_pin" default="off" evaluate="true" label="Provide load port" ctype="Int"/>
+          <checkbox name="rst" default="off" evaluate="true" label="Provide synchronous reset port" ctype="Int"/>
+          <checkbox name="en" default="off" evaluate="true" label="Provide enable port" ctype="Int"/>
+        </etch>
+        <etch name="periodetch" label="Explicit Sample Period">
+<!--          <checkbox name="explicit_period" default="off" label="Specify explicit sample period" ctype="Int"/> -->
+          <radiogroup name="explicit_period" default="on" evaluate="true" label="Sample period source" ctype="Int">
+            <item value="on" label="Explicit"/>
+            <item value="off" label="Inferred from inputs"/>
+          </radiogroup>
+
+          <editbox name="period" default="1" label="Explicit period" ctype="Double"/>
+        </etch>
+      </tab>
+      <tab name="advancedtab" label="Advanced">
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <checkbox name="use_behavioral_HDL" evaluate="true" label="Use behavioral HDL (otherwise use core)" ctype="Int"/>
+        <etch name="coreparams" label="Core Parameters">
+          <radiogroup name="implementation" default="Fabric" evaluate="false" label="Implement using" ctype="String">
+            <item value="Fabric" label="Fabric"/>
+            <item value="DSP48" label="DSP48"/>
+          </radiogroup>
+        </etch>
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <hiddenvar name="use_rpm" default="" evaluate="false" ctype="String"/>
+    <hiddenvar name="xlcconfig" default="" evaluate="false" ctype="String"/>
+  </blockgui>
+</sysgenblock>

@@ -1,0 +1,34 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Inverter" block_type="inv">
+  <icon width="55" height="58" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="Inverter_config"/>
+  <handlers enablement="xlmagicenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsBasic"/>
+    <library name="xbsControl"/>
+    <library name="xbsMath"/>
+  </libraries>
+  <blockgui label="Xilinx Inverter">
+    <editbox name="infoedit" default="Bitwise logical negation (one's complement) operator." read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <etch label="Optional Ports">
+          <checkbox name="en" default="off" evaluate="true" label="Provide enable port" ctype="Int"/>
+        </etch>
+        <editbox name="latency" default="0" evaluate="true" label="Latency" ctype="Int"/>
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles" ctype="Int"/>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+  </blockgui>
+</sysgenblock>

@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Resource Estimator</title>
+    <link rel="StyleSheet" href="css/Xilinx_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Blockset.11.001.html#271164">Xilinx Blockset</a> : Resource Estimator</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="271164">Resource Estimator</a></div>
+      <div class="Body"><span class="Italic"><a name="276810">This block is listed in the following Xilinx Blockset libraries: Tools and Index.</a></span></div>
+      <div class="OneLiner"><a name="419912"><img class="Default" src="images/Xilinx_Blockset.11.090.1.jpg" width="46" height="60" style="display: block; float: none; left: 0.0; top: 0.0" alt="" />The Xilinx Resource Estimator block provides fast estimates of FPGA resources </a>required to implement a System Generator subsystem or model. </div>
+      <div class="Body"><a name="1104609">These estimates are computed by invoking block-specific estimators for Xilinx </a>blocks, and summing these values to obtain aggregated estimates of lookup tables (LUTs), flip-flops (FFs), block memories (BRAM), 18x18 multipliers, tristate buffers, and I/Os. </div>
+      <div class="Body"><a name="419918">Every Xilinx block that requires FPGA resources has a mask parameter that stores a vector </a>containing its resource requirements. The Resource Estimator block can invoke underlying functions to populate these vectors (e.g. after parameters or data types have been changed), or aggregate previously computed values that have been stored in the vectors. Each block has a checkbox control <span class="Filename">Define FPGA area for resource estimation</span> that short-circuits invocation of the estimator function and uses the estimates stored in the vector instead. </div>
+      <div class="Body"><a name="276813">An estimator block can be placed in any subsystem of a model. When another estimator </a>block is situated in the sub-hierarchy below an estimator, the blocks interact as described below.</div>
+      <div class="Heading2"><a name="276814">Block Parameters</a></div>
+      <div class="Body"><a name="419951">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model. </div>
+      <div class="Body"><a name="583347">Parameters in the Resource Estimator dialog box are: </a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="583349">Slices</a></span>: Slices utilized by the block. (A slice normally consists of two flip-flops, two LUTs and associated mux, carry and control logic.) </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="583351">FFs</a></span>: Flip Flops utilized by the block. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="583353">BRAMs</a></span>: Block RAMs utilized by the block. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="583491">LUTs</a></span>: Look-up Tables utilized by the block. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="583357">IOBs</a></span>: Input/Output blocks consumed by the block. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="583359">Embedded Mults</a></span>: Embedded multipliers utilized by the block. (For example, the Virtex®-4 device contains embedded 18X18 multipliers.) </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="583361">TBUFs</a></span>: Tristate Buffers utilized by the block. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="583363">Use Area Above</a></span>: When this box is checked, any resource estimation performed on this subsystem will return the numbers entered in the edit boxes of the dialog box (The data represented by these fields is equivalent to the FPGA Area field in the individual System Generator blocks). Any blocks at the level of the subsystem where this block resides, or below, will have no automatic resource estimation performed when this box is checked. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="583365">Estimate Options</a></span>: Allows selection of estimation method as one of the following: Estimate, Quick, Post Map and Read Mrp. These options are explained in greater detail in the next topic. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="583367">Estimate</a></span>: Launches resource estimation </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="583368">Perform Resource Estimation Buttons</a></div>
+      <div class="Body"><a name="583371">The FPGA Area fields described above can either be manually entered or filled in by </a>launching resource estimation with Estimate Options set to one of the following: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="583373">Estimate</a></span>: Invokes block estimation functions top-down for each block and subsystem recursively. Blocks that do not have an estimation function but can be implemented in hardware (except shared memory blocks) are automatically estimated using post-map area. If any block has the Define FPGA area for resource estimation option selected, its estimation function is short-circuited and its current estimate is used. If Use area above option is selected for a Resource Estimator block, this block's estimate will be used for the entire subsystem containing it, and no other block estimation functions will be invoked for that portion of the model hierarchy. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="583375">Quick</a></span>: Causes the <span class="Bold">Estimate</span> button to sum all of the FPGA Area fields on the blocks and subsystems at or below the current subsystem. No underlying estimation functions are invoked. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="583377">Post-Map Area</a></span>: Causes the <span class="Bold">Estimate</span> button to automatically invoke Xilinx map tool on the entire subsystem and read back the results from the created Map Report File (MRP). In order to use this option a System Generator token along with the resource estimator block must be instanced in the subsystem being estimated. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="583343">Read MRP</a></span>: Causes the <span class="Bold">Estimate</span> button to open a file browser. The results from a selected MRP file are read into the Resource Estimator. This method of obtaining resource information is available for subsystems that have been previously synthesized, translated and mapped. This can be useful for complex Xilinx blocks that have no estimation function and will no longer change in a design.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="583598">The numbers from the map report file and those inserted into the Resource Estimator </a>dialog box area fields may be slightly different (this applies to Post Map Area option also). Any IOB FF resources found in the MRP file will be added into the estimators FFs field. Along the same lines, half of the MRP's IOB FF resources will be added into the estimators Slices field and the estimators IOBs field will always be set to 0 after performing a Post-Map Area MRP or Read MRP. Since the usefulness of this feature generally occurs in estimating subsystems, IOB resources must be included in the CLB utilization numbers to prevent incorrectly reporting IOB resources not used in the final design. </div>
+      <div class="Heading2"><a name="583601">Blocks Supported by Resource Estimation</a></div>
+      <div class="Heading3"><a name="583603">Blocks that have Fast Resource Estimation Functions: </a></div>
+      <div class="Body"><a name="583606">Accumulator, Addressable Shift Register, AddSub, CMult (sequential version not </a>supported), Convert, Counter, Delay, Down Sample, Dual Port RAM, FIFO, FFT, FFTx, Gateway In, Gateway Out, Inverter, LFSR, Logical, Mult (sequential version not supported), Mux (tristate version not supported), Negate, Parallel to Serial, PicoBlaze Processor, Register, Relational, ROM, Serial To Parallel, Shift, Sine Cosine, Single Port RAM, Threshold, Up Sample. </div>
+      <div class="Heading3"><a name="583607">Blocks that Use Post Map Area Estimates: </a></div>
+      <div class="Body"><a name="583610">System generator blocks that do not have fast resource estimation functions and use </a>hardware are estimated using post-map area. In order to avoid using this method enter in a constant or a user-created estimation function into the FPGA Area field of the block and click on the <span class="Bold">Define FPGA area for resource estimation</span> checkbox. </div>
+      <div class="Heading3"><a name="583611">Blocks that Do Not Use Any Hardware: </a></div>
+      <div class="Body"><a name="583614">System Generator, Clear Quantization Error, Clock Enable Probe, Clock Probe, Concat, </a>Constant, Discard Subsystem, FDATool, Indeterminate Probe, ModelSim, Pause Simulation, PicoBlaze Instruction Display, Quantization Error, Reinterpret, Sample Time, Scale, Simulation Multiplexer, Single-Step Simulation, Slice, BitBasher. </div>
+      <div class="Heading3"><a name="583615">Blocks with Special Handling: </a></div>
+      <div class="Body"><a name="583618">Discard Subsystem (Resource Estimator will ignore any resources in a subsystem </a>containing this block). Shared memory blocks are not estimated. In designs containing Shared Memory blocks, use the Multiple System Generator block to generate the HDL netlist files. Use ISE® software to create the Map Report File for the design and use the Read MRP option to obtain the results contained in the MRP file produced. </div>
+      <div class="Heading2"><a name="1763100">Viewing ISE Reports</a></div>
+      <div class="Body"><a name="1763101">When you select the </a><span class="Bold">Post Map</span> Estimate option and click the <span class="Bold">Estimate</span>, the<span class="Bold"> Running </span><span class="Bold">Resource Estimator </span>dialog box appears as shown below. You can then click on the <span class="Bold">Show </span><span class="Bold">Reports</span> button and the associated ISE Reports will be avilable for your viewing:</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="1763108"><img class="Default" src="images/Xilinx_Blockset.11.090.2.jpg" width="361" height="384" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="583623">Known Issues for Resource Estimation</a></div>
+      <div class="Body"><a name="583626">Resource estimation in System Generator has the following known issues: </a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="583628">Estimations are based upon the data types for the inputs and outputs of each block </a>that Simulink calculates during the compilation phase. If significant trimming takes place in a design that is not seen at the block level, the resource estimation tool will overestimate those trimmed resources. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="583630">Any logic that the synthesis tools can combine across blocks will be overestimated. </a>For example, when using blocks that have no latency, there is a good chance combinational logic will be optimized across block boundaries. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="583632">Multirate designs contain clock enable generation logic that is underestimated. </a>System Generator handles multirate designs by using one clock and generating a different clock enable for each rate. In order to accurately predict the amount of logic in the clock enable drivers, the estimator would need to look at the system as a whole instead of at the block level. Note, this underestimation will also include resources associated with additional clock enable connections that will be made to each of the blocks that were not visible to the block estimation functions. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="2986923">Shared Memory Blocks are not estimated. In designs containing Shared Memory </a>blocks, the estimates reported do not include the resources used be the Shared Memory blocks.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

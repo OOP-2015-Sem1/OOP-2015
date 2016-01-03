@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Post Installation Tasks</title>
+    <link rel="StyleSheet" href="css/Installation.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Installation.4.1.html#277245">Installation</a> : Post Installation Tasks</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="277245">Post Installation Tasks</a></div>
+      <div class="Heading2"><a name="285051">Post-Installation Tasks on Linux</a></div>
+      <div class="Body"><a name="285052">After following the directions of the main ISE Design Suite Installation Wizard, you are </a>ready to launch System Generator by typing: <span class="Filename">sysgen</span></div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="285053">This will invoke MATLAB and dynamically add System Generator to that MATLAB session. At </a>the top of the MATLAB Command Window, you should see the “Installed System Generator dynamically” messages. You are now ready to run System Generator.</div>
+      <div class="Body"><a name="285054">The following is an expected message under certain conditions. If System Generator is </a>already installed when this script runs, you will see the following message:</div>
+      <div class="Body3"><span class="Filename"><a name="285056">System Generator currently found installed into matlab </a></span><span class="Filename">default path.</span></div>
+      <div class="Heading2"><a name="285057">Troubleshooting a Linux Installation</a></div>
+      <div class="Body"><a name="285751">The following four functions are used to troubleshoot and verify the Linux Installation.</a></div>
+      <div class="Body"><span class="Bold"><a name="285058">xl_get_matlab_support_xmlfile</a></span></div>
+      <div class="Body2"><a name="285059">This MATLAB function will retrieve the expected location of the common XML file </a>used for determining MATLAB support within System Generator.</div>
+      <div class="Body"><span class="Bold"><a name="285060">xl_verify_matlab_support_xmlfile</a></span></div>
+      <div class="Body2"><a name="285061">This matlab function will verify that the XML file exists and is readable. If no XML file </a>exists, the following error message is thrown to the MATLAB console”</div>
+      <div class="Body2"><span class="Filename"><a name="285062">Could not find ml_supported.xml to determine supported versions </a></span><span class="Filename">of MATLAB with System Generator.</span></div>
+      <div class="Body2"><a name="285063">If the XML file is unreadable, the error message that is thrown to the MATLAB console </a>is:</div>
+      <div class="Body2"><span class="Filename"><a name="285172">Could not read ml_supported.xml to determine supported versions </a></span><span class="Filename">of MATLAB with System Generator</span></div>
+      <div class="Body"><span class="Bold"><a name="285173">xl_read_matlab_support_xmlfile</a></span></div>
+      <div class="Body2"><a name="285174">This MATLAB function reads and parses the XML file looking for the supported </a>MATLAB version information and provides error/warning messages used by the <span class="Filename">sysgen_startup.m</span> script.</div>
+      <div class="Body"><span class="Bold"><a name="285175">xl_test_matlab_support_xmlfile</a></span></div>
+      <div class="Body2"><a name="285176">This MATLAB function tests the current instantiated MATLAB session and compares </a>its version to those which are supported.  Errors or warnings will be displayed based on results of this comparison. If the XML file is devoid of information, the error thrown to the MATLAB console is as folows:</div>
+      <div class="Body2"><span class="Filename"><a name="285177">Matlab support table used by System Generator is empty!</a></span></div>
+      <div class="Body2"><a name="285178">If the XML file information does not conform to the expected format, the following </a>error is thrown to the MATLAB console:</div>
+      <div class="Body2"><span class="Filename"><a name="285179">Input matlab support table is not well formed.  It should have </a></span><span class="Filename">only 2 columns!</span></div>
+      <div class="Body2"><a name="285180">If you are using a version of MATLAB that is too old (unsupported), then you will see </a>the following error messages:</div>
+      <div class="Body2"><span class="Filename"><a name="285181">System Generator will not properly function under this version </a></span><span class="Filename">of MATLAB!</span></div>
+      <div class="Body2"><span class="Filename"><a name="285182">Error occurred while attempting to install System Generator into </a></span><span class="Filename">MATLAB path.</span></div>
+      <div class="Body2"><a name="285183">If you are using a version of MATLAB that is too new, then you will see the following </a>warning messages:</div>
+      <div class="Body2"><span class="Filename"><a name="285184">System Generator may not properly function under this version of </a></span><span class="Filename">MATLAB!</span></div>
+      <div class="Heading2"><a name="278808">Hardware Co-Simulation Installation</a></div>
+      <div class="Body"><a name="278809">This topic provides links to hardware and software installation procedures for hardware </a>co-simulation. If you do not plan to use hardware co-simulation, you may skip this topic.</div>
+      <div class="Heading3"><a name="278810">Ethernet-Based Hardware Co-Simulation</a></div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.12.html#342813', '');" title="Installing Your Board for Ethernet Hardware Co-Simulation" name="290424">Installing an ML402 Board for Ethernet Hardware Co-Simulation</a></span> </div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.12.html#301831', '');" title="Installing Your Board for Ethernet Hardware Co-Simulation" name="291524">Installing an ML506 Board for Ethernet Hardware Co-Simulation</a></span> </div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.12.html#336869', '');" title="Installing Your Board for Ethernet Hardware Co-Simulation" name="291549">Installing an ML605 Board for Ethernet Hardware Co-Simulation</a></span> </div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.12.html#318504', '');" title="Installing Your Board for Ethernet Hardware Co-Simulation" name="290921">Installing a Spartan-3A DSP 1800A Starter Board for Ethernet Hardware Co-Simulation</a></span> </div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.12.html#318802', '');" title="Installing Your Board for Ethernet Hardware Co-Simulation" name="278828">Installing a Spartan-3A DSP 3400A Board for Ethernet Hardware Co-Simulation</a></span> </div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.12.html#338486', '');" title="Installing Your Board for Ethernet Hardware Co-Simulation" name="285364">Installing an SP601/SP605 Board for Ethernet Hardware Co-Simulation</a></span> </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="287370">If installation instructions for your particular platform are not provided here, please refer to the </a>installation instuctions that come with your Platform Kit. For instructions on how to install a Xilinx USB Cable and cable driver software on a Windows or Linux Operating System, refer to the Xilinx document titled: <span class="Italic" style="color: #0000ff;"><a href="http://www.xilinx.com/support/documentation/user_guides/ug344.pdf" target="external_window">USB Cable Installation Guide</a></span></div>
+      <div class="Heading3"><a name="278832">JTAG-Based Hardware Co-Simulation</a></div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.13.html#316300', '');" title="Installing Your Board for JTAG Hardware Co-Simulation" name="278836">Installing an ML402 Board for JTAG Hardware Co-Simulation</a></span> </div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.13.html#329154', '');" title="Installing Your Board for JTAG Hardware Co-Simulation" name="279026">Installing an ML605 Board for JTAG Hardware Co-Simulation</a></span> </div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.13.html#329846', '');" title="Installing Your Board for JTAG Hardware Co-Simulation" name="281165">Installing an SP601/SP605 Board for JTAG Hardware Co-Simulation</a></span> </div>
+      <div class="Heading3"><a name="278838">Third-Party Hardware Co-Simulation</a></div>
+      <div class="Body"><a name="284747">As part of the Xilinx XtremeDSP™ Initiative, Xilinx works with distributors and many </a>OEMs to provide a variety of DSP prototyping and development platforms. Please refer to the following Xilinx web site page for more information on available platforms:<br /><span class="URL"><a href="http://www.xilinx.com/products/boards_kits/index.htm" target="external_window">http://www.xilinx.com/products/boards_kits/index.htm</a></span></div>
+      <div class="Heading2"><a name="284751">Compiling Xilinx HDL Libraries</a></div>
+      <div class="Body"><a name="271562">If you intend to simulate System Generator designs using ModelSim, you must compile </a>your IP (cores) libraries. This topic describes the procedure.</div>
+      <div class="Heading3"><a name="271563">ModelSim SE</a></div>
+      <div class="Body"><a name="271564">The Xilinx tool that compiles libraries for use in ModelSim SE is named </a><span class="Bold">compxlib</span>. The following command can, for example, be used to compile all the VHDL and Verilog libraries with ModelSim SE:</div>
+      <div class="Code"><a name="271565">compxlib </a>–s mti_se –f all –l all</div>
+      <div class="Body"><a name="271566">Complete instructions for running compxlib can be found in the ISE Software Manual </a>titled “Command Line Tool User Guide”.</div>
+      <div class="Heading2"><a name="272067">Configuring the System Generator Cache</a></div>
+      <div class="Body"><a name="272068">Both the System Generator simulator and the design generator incorporate a disk cache to </a>speed up the iterative design process. The cache does this by tagging and storing files related to simulation and generation, then recalling those files during subsequent simulation and generation rather than rerunning the time consuming tools used to create those files. </div>
+      <div class="Heading3"><a name="272001">Setting the Size</a></div>
+      <div class="Body"><a name="272002">By default, the cache will use up to 500 MB of disk space to store files. To specify the </a>amount of disk space the cache should use, set the SYSGEN_CACHE_SIZE environment variable to the size of the cache in megabytes. Set this number to a higher value when working on several large designs. </div>
+      <div class="Heading3"><a name="272003">Setting the Number of Entries</a></div>
+      <div class="Body"><a name="279351">The cache entry database stores a fixed number of entries. The default is 20,000 entries. To </a>set size of the cache entry database, set the SYSGEN_CACHE_ENTRIES environment variable to the desired number of entries. Setting this number too small will adversely affect cache performance. Set this number to a higher value when working on several large designs.</div>
+      <div class="Body"><a name="279365">You can use the </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'SysGen_Utilities.14.3.html#288400', '');" title="xlCache">xlCache</a></span><span style="font-size: 9.5pt;"> </span>function to manage and inspect the properties of difference caches used by System Generator. A detailed description of this function can be found under the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'SysGen_Utilities.14.1.html#205969', '');" title="System Generator Utilities">System Generator Utilities</a></span> .</div>
+      <div class="Heading2"><a name="272082">Displaying and Changing Versions of System Generator</a></div>
+      <div class="Body"><a name="272083">It is possible to have several versions of System Generator installed. The MATLAB </a>command <span class="Filename">xlVersion</span> displays which versions are installed, and makes it possible to switch from one to another. <span class="Filename">xlVersion</span> is useful when upgrading a model to run in the latest version of System Generator. </div>
+      <div class="Body"><a name="272084">Entering  "</a><span class="Filename">xlVersion</span>" in the MATLAB console displays the versions of System Generator that are installed, and entering "<span class="Filename">xlVersion &lt;version&gt;</span>" switches to the specified version. For example, if the versions that are installed are 11.4 and 12.1, and the currently selected version is 12.1, then entering "<span class="Filename">xlVersion</span>" displays </div>
+      <div class="Code"><a name="276466">Available System Generator installations: </a></div>
+      <div class="Code"><a name="276467">&nbsp;</a>&nbsp;Version 11.4 in C:/Xilinx/11.4/DSP_Tools/sysgen </div>
+      <div class="Code"><a name="276468">&nbsp;</a>&nbsp;Version 12.1 in C:/Xilinx/12.1_ISE_DS/ISE/sysgen</div>
+      <div class="Code"><a name="272088">Current version of System Generator is 12.1. </a></div>
+      <div class="Body"><a name="272089">Entering "</a><span class="Filename">xlVersion 11.4</span>" switches the System Generator version to 11.4. </div>
+      <div class="Body"><a name="272090">Occasionally, it is necessary to restart MATLAB to make it possible to switch. In this case, </a>the response to entering "<span class="Filename">xlVersion 12.1</span>" looks like the following: </div>
+      <div class="Code"><a name="272091">Please restart MATLAB and run xlVersion 12.1 again to switch. </a></div>
+      <div class="Body"><a name="272092">When the switch succeeds, </a><span class="Filename">xlVersion</span> prints the following: </div>
+      <div class="Code"><a name="272093">Your System Generator has been switched. Please restart MATLAB. </a></div>
+      <div class="Body"><a name="272094">If you install System Generator 11.4 after you install 12.1, you need to install 12.1 again in </a>order to make <span class="Filename">xlVersion</span> work. </div>
+      <div class="Body"><a name="272095">Once you switch System Generator version, you need to switch to the right version of ISE </a>in order to make System Generator work correctly.</div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

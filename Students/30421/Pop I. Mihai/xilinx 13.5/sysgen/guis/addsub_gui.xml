@@ -1,0 +1,78 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="AddSub" block_type="addsub">
+  <icon width="60" height="58" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="Addsub_config"/>
+  <handlers enablement="addsubenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsMath"/>
+    <library name="xbsFloatingPoint"/>
+  </libraries>
+  <blockgui label="Xilinx Adder/Subtracter">
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <radiogroup name="mode" default="Addition" evaluate="true" label="Operation" ctype="Int">
+          <item value="Addition" label="Addition"/>
+          <item value="Subtraction" label="Subtraction"/>
+          <item value="Addition or Subtraction" label="Addition or subtraction"/>
+        </radiogroup>
+        <etch name="oportetch" label="Optional Ports">
+          <checkbox name="use_carryin" default="off" evaluate="true" label="Provide carry-in port" ctype="Int"/>
+          <checkbox name="use_carryout" default="off" evaluate="true" label="Provide carry-out port" ctype="Int"/>
+          <checkbox name="en" default="off" evaluate="true" label="Provide enable port" ctype="Int"/>
+        </etch>
+        <editbox name="latency" default="0" evaluate="true" label="Latency" ctype="Int"/>
+      </tab>
+      <tab name="typestab" label="Output">
+        <radiogroup name="precision" default="Full" label="Precision" ctype="Int">
+          <item value="Full" label="Full"/>
+          <item value="User Defined" label="User defined"/>
+        </radiogroup>
+        <etch name="userprecisionetch" label="Fixed-point Output Type">
+            <radiogroup name="arith_type" default="Unsigned" label="Arithmetic type" ctype="Int">
+              <item value="Signed  (2's comp)" label="Signed  (2's comp)"/>
+              <item value="Unsigned" label="Unsigned"/>
+            </radiogroup>
+            <etch name="fixedprecetch" label="Fixed-point Precision">
+              <glayout cols="2">
+                <editbox name="n_bits" default="16" label="Number of bits" ctype="Int"/>
+                <editbox name="bin_pt" default="14" label="Binary point" ctype="Int"/>
+              </glayout>
+            </etch>
+            <radiogroup name="quantization" default="Truncate" evaluate="true" label="Quantization" ctype="Int">
+              <item value="Truncate" label="Truncate"/>
+              <item value="Round  (unbiased: +/- Inf)" label="Round  (unbiased: +/- Inf)"/>
+            </radiogroup>
+            <radiogroup name="overflow" default="Wrap" evaluate="true" label="Overflow" ctype="Int">
+              <item value="Wrap" label="Wrap"/>
+              <item value="Saturate" label="Saturate"/>
+              <item value="Flag as error" label="Flag as error"/>
+            </radiogroup>
+        </etch>
+      </tab>
+      <tab name="advancedtab" label="Advanced">
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <checkbox name="use_behavioral_HDL" evaluate="true" label="Use behavioral HDL (otherwise use core)" ctype="Int"/>
+        <etch name="coreparams" label="Core Parameters">
+          <radiogroup name="hw_selection" default="Fabric" evaluate="false" label="Implement using" ctype="String">
+            <item value="Fabric" label="Fabric"/>
+            <item value="DSP48" label="DSP48"/>
+          </radiogroup>
+          <checkbox name="pipelined" default="off" evaluate="true" label="Pipeline for maximum performance" ctype="Int"/>
+        </etch>
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <workspacevar name="rst" ctype="Int"/>
+    <hiddenvar name="use_rpm" default="" evaluate="false" ctype="String"/>
+  </blockgui>
+</sysgenblock>

@@ -1,0 +1,325 @@
+{
+  'attributes' => {
+    'sysgeninterface' => {
+      'version' => '9.2'
+    },
+  },
+  'entityName' => 'eth_cosim_core',
+  'ports' => {
+    'sys_clk' => {
+      'attributes' => {
+        'sysgeninterface' => {
+          'hwcosim_iface_port' => 'sys_clk',
+          'clock' => {
+            'period' => 5,
+          },
+          'iopad' => {
+            'type' => 'ibufds',
+          },
+        },
+      },
+      'direction' => 'in',
+      'width' => 1,
+      'hdlType' => 'std_logic',
+    },
+    'clk_125' => {
+      'attributes' => {
+        'sysgeninterface' => {
+          'hwcosim_iface_port' => 'clk_125',
+          'clock' => {
+            'period' => 8,
+          },
+        },
+      },
+      'direction' => 'in',
+      'width' => 1,
+      'hdlType' => 'std_logic',
+    },
+    'clk_200' => {
+      'attributes' => {
+        'sysgeninterface' => {
+          'hwcosim_iface_port' => 'clk_200',
+          'clock' => {
+            'period' => 5,
+          },
+        },
+      },
+      'direction' => 'in',
+      'width' => 1,
+      'hdlType' => 'std_logic',
+    },
+    'cosim_addr' => {
+      'attributes' => {
+        'sysgeninterface' => {
+          'hwcosim_iface_port' => 'addr',
+        },
+      },
+      'direction' => 'out',
+      'width' => 24,
+      'hdlType' => 'std_logic_vector(23 downto 0)',
+    },
+    'cosim_bank_sel' => {
+      'attributes' => {
+        'sysgeninterface' => {
+          'hwcosim_iface_port' => 'bank_sel',
+        },
+      },
+      'direction' => 'out',
+      'width' => 8,
+      'hdlType' => 'std_logic_vector(7 downto 0)',
+    },
+    'cosim_clk_sel' => {
+      'attributes' => {
+        'sysgeninterface' => {
+          'hwcosim_iface_port' => 'clk_sel',
+        },
+      },
+      'direction' => 'out',
+      'width' => 1,
+      'hdlType' => 'std_logic',
+    },
+    'cosim_data_in' => {
+      'attributes' => {
+        'sysgeninterface' => {
+          'hwcosim_iface_port' => 'data_in',
+        },
+      },
+      'direction' => 'out',
+      'width' => 32,
+      'hdlType' => 'std_logic_vector(31 downto 0)',
+    },
+    'cosim_data_out' => {
+      'attributes' => {
+        'sysgeninterface' => {
+          'hwcosim_iface_port' => 'data_out',
+        },
+      },
+      'direction' => 'in',
+      'width' => 32,
+      'hdlType' => 'std_logic_vector(31 downto 0)',
+    },
+    'cosim_sstep_clk' => {
+      'attributes' => {
+        'sysgeninterface' => {
+          'hwcosim_iface_port' => 'sstep_clk',
+        },
+      },
+      'direction' => 'out',
+      'width' => 1,
+      'hdlType' => 'std_logic',
+    },
+    'cosim_we' => {
+      'attributes' => {
+        'sysgeninterface' => {
+          'hwcosim_iface_port' => 'we',
+        },
+      },
+      'direction' => 'out',
+      'width' => 1,
+      'hdlType' => 'std_logic',
+    },
+    'cosim_re' => {
+      'attributes' => {
+        'sysgeninterface' => {
+          'hwcosim_iface_port' => 're',
+        },
+      },
+      'direction' => 'out',
+      'width' => 1,
+      'hdlType' => 'std_logic',
+    },
+    'ethernet_phy_rst' => {
+      'attributes' => {
+        'invert' => 1,
+        'sysgeninterface' => {
+          'iopad' => {
+            'name' => 'ethernet_phy_rst_n',
+          },
+        },
+      },
+      'direction' => 'out',
+      'width' => 1,
+      'hdlType' => 'std_logic',
+    },
+    'ethernet_phy_intr' => {
+      'attributes' => {
+        'invert' => 1,
+        'sysgeninterface' => {
+          'iopad' => {
+            'name' => 'ethernet_phy_intr_n',
+          },
+        },
+      },
+      'direction' => 'in',
+      'width' => 1,
+      'hdlType' => 'std_logic',
+    },
+    'ethernet_phy_gtx_clk' => {
+      'attributes' => {
+      },
+      'direction' => 'out',
+      'width' => 1,
+      'hdlType' => 'std_logic',
+    },
+    'ethernet_phy_tx_clk' => {
+      'attributes' => {
+      },
+      'direction' => 'in',
+      'width' => 1,
+      'hdlType' => 'std_logic',
+    },
+    'ethernet_phy_txd' => {
+      'attributes' => {
+      },
+      'direction' => 'out',
+      'width' => 8,
+      'hdlType' => 'std_logic_vector(7 downto 0)',
+    },
+    'ethernet_phy_tx_en' => {
+      'attributes' => {
+      },
+      'direction' => 'out',
+      'width' => 1,
+      'hdlType' => 'std_logic',
+    },
+    'ethernet_phy_tx_er' => {
+      'attributes' => {
+      },
+      'direction' => 'out',
+      'width' => 1,
+      'hdlType' => 'std_logic',
+    },
+    'ethernet_phy_rxd' => {
+      'attributes' => {
+      },
+      'direction' => 'in',
+      'width' => 8,
+      'hdlType' => 'std_logic_vector(7 downto 0)',
+    },
+    'ethernet_phy_rx_clk' => {
+      'attributes' => {
+        'sysgeninterface' => {
+          'iopad' => {
+            'type' => 'ibufg',
+          },
+        },
+      },
+      'direction' => 'in',
+      'width' => 1,
+      'hdlType' => 'std_logic',
+    },
+    'ethernet_phy_rx_dv' => {
+      'attributes' => {
+      },
+      'direction' => 'in',
+      'width' => 1,
+      'hdlType' => 'std_logic',
+    },
+    'ethernet_phy_rx_er' => {
+      'attributes' => {
+      },
+      'direction' => 'in',
+      'width' => 1,
+      'hdlType' => 'std_logic',
+    },
+    'ethernet_phy_col' => {
+      'attributes' => {
+      },
+      'direction' => 'in',
+      'width' => 1,
+      'hdlType' => 'std_logic',
+    },
+    'ethernet_phy_crs' => {
+      'attributes' => {
+      },
+      'direction' => 'in',
+      'width' => 1,
+      'hdlType' => 'std_logic',
+    },
+    'ethernet_phy_mdc' => {
+      'attributes' => {
+      },
+      'direction' => 'out',
+      'width' => 1,
+      'hdlType' => 'std_logic',
+    },
+    'ethernet_phy_mdio' => {
+      'attributes' => {
+      },
+      'direction' => 'inout',
+      'width' => 1,
+      'hdlType' => 'std_logic',
+    },
+    'reset' => {
+      'attributes' => {
+        'invert' => 1,
+        'sysgeninterface' => {
+          'iopad' => {
+            'name' => 'reset_n',
+          },
+        },
+      },
+      'direction' => 'in',
+      'width' => 1,
+      'hdlType' => 'std_logic',
+    },
+    'sysace_clk' => {
+      'attributes' => {
+        'sysgeninterface' => {
+          'iopad' => {
+            'type' => 'bufgp',
+          },
+        },
+      },
+      'direction' => 'in',
+      'width' => 1,
+      'hdlType' => 'std_logic',
+    },
+    'sysace_mpa' => {
+      'attributes' => {
+      },
+      'direction' => 'out',
+      'width' => 7,
+      'hdlType' => 'std_logic_vector(6 downto 0)',
+    },
+    'sysace_mpd' => {
+      'attributes' => {
+      },
+      'direction' => 'inout',
+      'width' => 16,
+      'hdlType' => 'std_logic_vector(15 downto 0)',
+    },
+    'sysace_cen' => {
+      'attributes' => {
+      },
+      'direction' => 'out',
+      'width' => 1,
+      'hdlType' => 'std_logic',
+    },
+    'sysace_oen' => {
+      'attributes' => {
+      },
+      'direction' => 'out',
+      'width' => 1,
+      'hdlType' => 'std_logic',
+    },
+    'sysace_wen' => {
+      'attributes' => {
+      },
+      'direction' => 'out',
+      'width' => 1,
+      'hdlType' => 'std_logic',
+    },
+    'sysace_mpirq' => {
+      'attributes' => {
+      },
+      'direction' => 'in',
+      'width' => 1,
+      'hdlType' => 'std_logic',
+    },
+  },
+  'nets' => {
+  },
+  'subblocks' => {
+  },
+}

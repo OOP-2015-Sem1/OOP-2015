@@ -1,0 +1,64 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Logical" block_type="logical">
+  <initialization file="xllogical_init.m"/>
+  <icon width="55" height="60" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="Logical_config"/>
+  <handlers enablement="logicalenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsBasic"/>
+    <library name="xbsControl"/>
+    <library name="xbsMath"/>
+  </libraries>
+  <blockgui label="Xilinx Logical Block">
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <listbox name="logical_function" default="AND" label="Logical function  " ctype="Int">
+          <item value="AND"/>
+          <item value="NAND"/>
+          <item value="OR"/>
+          <item value="NOR"/>
+          <item value="XOR"/>
+          <item value="XNOR"/>
+        </listbox>
+        <editbox name="inputs" default="2" evaluate="true" label="Number of inputs " ctype="Int"/>
+        <etch name="oportetch" label="Optional Ports">
+          <checkbox name="en" default="off" evaluate="true" label="Provide enable port" ctype="Int"/>
+        </etch>
+        <editbox name="latency" default="0" evaluate="true" label="Latency" ctype="Int"/>
+      </tab>
+      <tab name="typetab" label="Output Type">
+        <radiogroup name="precision" default="Full" label="Precision" ctype="Int">
+          <item value="Full" label="Full"/>
+          <item value="User Defined" label="User defined"/>
+        </radiogroup>
+        <etch name="userprecisionetch" label="User Defined Precision">
+          <radiogroup name="arith_type" default="Unsigned" label="Output Type" ctype="Int">
+            <item value="Signed  (2's comp)" label="Signed  (2's comp)"/>
+            <item value="Unsigned" label="Unsigned"/>
+          </radiogroup>
+          <editbox name="n_bits" default="16" label="Number of bits" ctype="Int"/>
+          <editbox name="bin_pt" default="0" label="Binary point" ctype="Int"/>
+        </etch>
+        <checkbox name="align_bp" default="on" evaluate="true" label="Align binary point"/>
+      </tab>
+      <tab name="advancedtab" label="Advanced">
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+        </etch>
+      </tab>
+      <tab name="implementationtab" label="Implementation">
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <workspacevar name="sysgen_root" ctype="String"/>
+    <workspacevar name="sim_engine" ctype="Int"/>
+    <hiddenvar name="overflow"/>
+    <hiddenvar name="quantization"/>
+  </blockgui>
+</sysgenblock>

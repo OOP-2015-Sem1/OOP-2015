@@ -1,0 +1,852 @@
+Library {
+  Name			  "xrbsControl_r3"
+  Version		  5.0
+  SaveDefaultBlockParams  on
+  LibraryLinkDisplay	  "none"
+  ShowLoopsOnError	  on
+  IgnoreBidirectionalLines off
+  CovSaveName		  "covdata"
+  CovMetricSettings	  "dw"
+  CovNameIncrementing	  off
+  CovHtmlReporting	  on
+  covSaveCumulativeToWorkspaceVar on
+  CovSaveSingleToWorkspaceVar on
+  CovCumulativeReport	  off
+  BlockNameDataTip	  off
+  BlockParametersDataTip  off
+  BlockDescriptionStringDataTip	off
+  ToolBar		  on
+  StatusBar		  on
+  BrowserShowLibraryLinks off
+  BrowserLookUnderMasks	  off
+  Created		  "Tue Feb 04 18:36:00 2003"
+  Creator		  "singhj"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "singhj"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Tue Apr 27 11:16:23 2004"
+  ModelVersionFormat	  "1.%<AutoIncrement:12>"
+  ConfigurationManager	  "None"
+  SimParamPage		  "Solver"
+  LinearizationMsg	  "none"
+  Profile		  off
+  ParamWorkspaceSource	  "MATLABWorkspace"
+  ExtModeMexFile	  "ext_comm"
+  ExtModeBatchMode	  off
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "normal"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  on
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  on
+  ExtModeAutoUpdateStatusClock on
+  SimulationMode	  "normal"
+  ConsistencyChecking	  "none"
+  ArrayBoundsChecking	  "none"
+  AlgebraicLoopMsg	  "warning"
+  BlockPriorityViolationMsg "warning"
+  MinStepSizeMsg	  "warning"
+  InheritedTsInSrcMsg	  "warning"
+  DiscreteInheritContinuousMsg "warning"
+  MultiTaskRateTransMsg	  "error"
+  SingleTaskRateTransMsg  "none"
+  CheckForMatrixSingularity "none"
+  IntegerOverflowMsg	  "warning"
+  Int32ToFloatConvMsg	  "warning"
+  ParameterDowncastMsg	  "error"
+  ParameterOverflowMsg	  "error"
+  ParameterPrecisionLossMsg "warning"
+  UnderSpecifiedDataTypeMsg "none"
+  UnnecessaryDatatypeConvMsg "none"
+  VectorMatrixConversionMsg "none"
+  InvalidFcnCallConnMsg	  "error"
+  SignalLabelMismatchMsg  "none"
+  UnconnectedInputMsg	  "warning"
+  UnconnectedOutputMsg	  "warning"
+  UnconnectedLineMsg	  "warning"
+  SfunCompatibilityCheckMsg "none"
+  ProdHWDeviceType	  "Microprocessor"
+  ProdHWWordLengths	  "8,16,32,32"
+  RTWMakeCommand	  "make_rtw"
+  RTWGenerateCodeOnly	  off
+  RTWRetainRTWFile	  off
+  TLCProfiler		  off
+  TLCDebug		  off
+  TLCCoverage		  off
+  TLCAssertion		  off
+  BlockDefaults {
+    Orientation		    "right"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+  }
+  BlockParameterDefaults {
+    Block {
+      BlockType		      Inport
+      Port		      "1"
+      PortDimensions	      "-1"
+      SampleTime	      "-1"
+      ShowAdditionalParam     off
+      LatchInput	      off
+      DataType		      "auto"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      Interpolate	      on
+    }
+    Block {
+      BlockType		      Outport
+      Port		      "1"
+      OutputWhenDisabled      "held"
+      InitialOutput	      "[]"
+    }
+    Block {
+      BlockType		      Reference
+    }
+    Block {
+      BlockType		      SubSystem
+      ShowPortLabels	      on
+      Permissions	      "ReadWrite"
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      SimViewingDevice	      off
+      DataTypeOverride	      "UseLocalSettings"
+      MinMaxOverflowLogging   "UseLocalSettings"
+    }
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  System {
+    Name		    "xrbsControl_r3"
+    Location		    [56, 85, 444, 456]
+    Open		    on
+    ModelBrowserVisibility  off
+    ModelBrowserWidth	    200
+    ScreenColor		    "white"
+    PaperOrientation	    "landscape"
+    PaperPositionMode	    "auto"
+    PaperType		    "usletter"
+    PaperUnits		    "inches"
+    ZoomFactor		    "100"
+    ReportName		    "simulink-default.rpt"
+    Block {
+      BlockType		      SubSystem
+      Name		      "Mealy State Machine"
+      Ports		      [1, 2]
+      Position		      [50, 118, 125, 182]
+      TreatAsAtomicUnit	      off
+      MaskType		      "Xilinx Mealy State Machine"
+      MaskDescription	      "Implements a Mealy state machine.  The output i"
+"s a function of the current state and input."
+      MaskHelp		      "web(xlhtmldoclink('Mealy State Machine'));"
+      MaskPromptString	      "Next State Matrix|Output Matrix|Number of  Outp"
+"ut Bits|Sample Period"
+      MaskStyleString	      "edit,edit,edit,edit"
+      MaskTunableValueString  "on,on,on,on"
+      MaskCallbackString      "|||"
+      MaskEnableString	      "on,on,on,on"
+      MaskVisibilityString    "on,on,on,on"
+      MaskToolTipString	      "on,on,on,on"
+      MaskVarAliasString      ",,,"
+      MaskVariables	      "next_state_matrix=@1;output_matrix=@2;n_bits=@3"
+";period=@4;"
+      MaskInitialization      "% Set Block Logo\n[bg,fg] = xlcmap('XBlock',0);"
+"\niPos = get_param(gcb,'Position');\niWidth=iPos(3)-iPos(1); iHeight=iPos(4)-"
+"iPos(2);\niCx=iWidth/2;\niCy=iHeight/2;\n[logoX, logoY] = xlogo(iPos);\n\n"
+      MaskDisplay	      "patch([0 iWidth iWidth 0],[0 0 iHeight iHeight]"
+" , bg);\npatch(logoX,logoY, fg);\nport_label('input',1,'Inputs');\nport_label"
+"('output',1,'CurrentState');\nport_label('output',2,'Outputs');\n\nplot([0 0 "
+"iWidth iWidth 0], [0 iHeight iHeight 0 0]);"
+      MaskIconFrame	      off
+      MaskIconOpaque	      off
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "[0 1; 2 1; 0 3; 2 1]|[0 0; 0 0; 0 0; 0 1]|1|1"
+      System {
+	Name			"Mealy State Machine"
+	Location		[184, 135, 705, 403]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "Inputs"
+	  Position		  [30, 118, 60, 132]
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Concat"
+	  Ports			  [2, 1]
+	  Position		  [140, 93, 180, 137]
+	  SourceBlock		  "xbsIndex_r3/Concat"
+	  SourceType		  "Xilinx Bus Concatenator"
+	  explicit_period	  "off"
+	  period		  "1"
+	  dbl_ovrd		  "off"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Next State ROM"
+	  Ports			  [1, 1]
+	  Position		  [245, 88, 310, 142]
+	  SourceBlock		  "xbsIndex_r3/ROM"
+	  SourceType		  "Xilinx Single Port Read-Only Memory"
+	  depth			  "xlNumMealyElements(next_state_matrix, outpu"
+"t_matrix)"
+	  initVector		  "xlMatrixToStateInitVec(next_state_matrix,xl"
+"NumStateBits(next_state_matrix),0,1,1,1)"
+	  arith_type		  "Unsigned"
+	  n_bits		  "xlNumStateBits(next_state_matrix)"
+	  bin_pt		  "0"
+	  latency		  "1"
+	  distributed_mem	  "off"
+	  init_zero		  "on"
+	  explicit_period	  "on"
+	  period		  "period"
+	  en			  "off"
+	  dbl_ovrd		  "off"
+	  gen_core		  "on"
+	  use_rpm		  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  xl_use_area		  "off"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Output ROM"
+	  Ports			  [1, 1]
+	  Position		  [245, 168, 310, 222]
+	  SourceBlock		  "xbsIndex_r3/ROM"
+	  SourceType		  "Xilinx Single Port Read-Only Memory"
+	  depth			  "xlDistRamDepth(output_matrix)"
+	  initVector		  "xlMatrixToOutputVec(output_matrix,n_bits,0,"
+"1,1,1)"
+	  arith_type		  "Unsigned"
+	  n_bits		  "n_bits"
+	  bin_pt		  "0"
+	  latency		  "0"
+	  distributed_mem	  "on"
+	  init_zero		  "on"
+	  explicit_period	  "on"
+	  period		  "period"
+	  en			  "off"
+	  dbl_ovrd		  "off"
+	  gen_core		  "on"
+	  use_rpm		  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  xl_use_area		  "off"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "CurrentState"
+	  Position		  [445, 28, 475, 42]
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Outputs"
+	  Position		  [400, 188, 430, 202]
+	  Port			  "2"
+	}
+	Line {
+	  SrcBlock		  "Inputs"
+	  SrcPort		  1
+	  DstBlock		  "Concat"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Output ROM"
+	  SrcPort		  1
+	  DstBlock		  "Outputs"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Concat"
+	  SrcPort		  1
+	  Points		  [20, 0]
+	  Branch {
+	    DstBlock		    "Next State ROM"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 80]
+	    DstBlock		    "Output ROM"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "Next State ROM"
+	  SrcPort		  1
+	  Points		  [75, 0; 0, -80]
+	  Branch {
+	    Points		    [-270, 0; 0, 70]
+	    DstBlock		    "Concat"
+	    DstPort		    1
+	  }
+	  Branch {
+	    DstBlock		    "CurrentState"
+	    DstPort		    1
+	  }
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Moore State Machine"
+      Ports		      [1, 2]
+      Position		      [225, 118, 300, 182]
+      TreatAsAtomicUnit	      off
+      MaskType		      "Xilinx Moore State Machine"
+      MaskDescription	      "Implements a Moore state machine.  The output i"
+"s a function only of the current state."
+      MaskHelp		      "web(xlhtmldoclink('Moore State Machine'));"
+      MaskPromptString	      "Next State Matrix|Output Array|Number of Output"
+" Bits|Sample Period"
+      MaskStyleString	      "edit,edit,edit,edit"
+      MaskTunableValueString  "on,on,on,on"
+      MaskCallbackString      "|||"
+      MaskEnableString	      "on,on,on,on"
+      MaskVisibilityString    "on,on,on,on"
+      MaskToolTipString	      "on,on,on,on"
+      MaskVarAliasString      ",,,"
+      MaskVariables	      "next_state_matrix=@1;output_matrix=@2;n_bits=@3"
+";period=@4;"
+      MaskInitialization      "% Set Block Logo\n[bg,fg] = xlcmap('XBlock',0);"
+"\niPos = get_param(gcb,'Position');\niWidth=iPos(3)-iPos(1); iHeight=iPos(4)-"
+"iPos(2);\niCx=iWidth/2;\niCy=iHeight/2;\n[logoX, logoY] = xlogo(iPos);\n\n"
+      MaskDisplay	      "patch([0 iWidth iWidth 0],[0 0 iHeight iHeight]"
+" , bg);\npatch(logoX,logoY, fg);\nport_label('input',1,'Inputs');\nport_label"
+"('output',1,'CurrentState');\nport_label('output',2,'Outputs');\n\nplot([0 0 "
+"iWidth iWidth 0], [0 iHeight iHeight 0 0]);"
+      MaskIconFrame	      off
+      MaskIconOpaque	      off
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "[0 1; 2 1; 0 3; 2 4; 0 1]|[0; 0; 0; 0; 1]|1|1"
+      System {
+	Name			"Moore State Machine"
+	Location		[48, 164, 579, 372]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "Inputs"
+	  Position		  [25, 113, 55, 127]
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Concat"
+	  Ports			  [2, 1]
+	  Position		  [135, 88, 175, 132]
+	  SourceBlock		  "xbsIndex_r3/Concat"
+	  SourceType		  "Xilinx Bus Concatenator"
+	  explicit_period	  "off"
+	  period		  "1"
+	  dbl_ovrd		  "off"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Next State ROM"
+	  Ports			  [1, 1]
+	  Position		  [240, 83, 305, 137]
+	  SourceBlock		  "xbsIndex_r3/ROM"
+	  SourceType		  "Xilinx Single Port Read-Only Memory"
+	  depth			  "xlNumMooreStateElements(next_state_matrix, "
+"output_matrix)"
+	  initVector		  "xlMatrixToStateInitVec(next_state_matrix,xl"
+"NumStateBits(next_state_matrix),0,1,1,1)"
+	  arith_type		  "Unsigned"
+	  n_bits		  "xlNumStateBits(next_state_matrix)"
+	  bin_pt		  "0"
+	  latency		  "1"
+	  distributed_mem	  "off"
+	  init_zero		  "on"
+	  explicit_period	  "on"
+	  period		  "period"
+	  en			  "off"
+	  dbl_ovrd		  "off"
+	  gen_core		  "on"
+	  use_rpm		  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  xl_use_area		  "off"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Output ROM"
+	  Ports			  [1, 1]
+	  Position		  [350, 83, 415, 137]
+	  SourceBlock		  "xbsIndex_r3/ROM"
+	  SourceType		  "Xilinx Single Port Read-Only Memory"
+	  depth			  "xlDistRamDepth(output_matrix)"
+	  initVector		  "xlMatrixToOutputVec(output_matrix,n_bits,0,"
+"1,1,1)"
+	  arith_type		  "Unsigned"
+	  n_bits		  "n_bits"
+	  bin_pt		  "0"
+	  latency		  "0"
+	  distributed_mem	  "on"
+	  init_zero		  "on"
+	  explicit_period	  "on"
+	  period		  "period"
+	  en			  "off"
+	  dbl_ovrd		  "off"
+	  gen_core		  "on"
+	  use_rpm		  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  xl_use_area		  "off"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "CurrentState"
+	  Position		  [445, 23, 475, 37]
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Outputs"
+	  Position		  [450, 103, 480, 117]
+	  Port			  "2"
+	}
+	Line {
+	  SrcBlock		  "Inputs"
+	  SrcPort		  1
+	  DstBlock		  "Concat"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Output ROM"
+	  SrcPort		  1
+	  DstBlock		  "Outputs"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Concat"
+	  SrcPort		  1
+	  DstBlock		  "Next State ROM"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Next State ROM"
+	  SrcPort		  1
+	  Points		  [5, 0]
+	  Branch {
+	    Points		    [0, -80]
+	    Branch {
+	      Points		      [-200, 0; 0, 70]
+	      DstBlock		      "Concat"
+	      DstPort		      1
+	    }
+	    Branch {
+	      DstBlock		      "CurrentState"
+	      DstPort		      1
+	    }
+	  }
+	  Branch {
+	    DstBlock		    "Output ROM"
+	    DstPort		    1
+	  }
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Registered Mealy State Machine"
+      Ports		      [1, 2]
+      Position		      [50, 233, 125, 297]
+      TreatAsAtomicUnit	      off
+      MaskType		      "Xilinx Registered Mealy State Machine"
+      MaskDescription	      "Implements a registered Mealy state machine.  T"
+"he output is a function of the current state and its input.  The output is re"
+"gistered."
+      MaskHelp		      "web(xlhtmldoclink('Registered Mealy State Machi"
+"ne'));"
+      MaskPromptString	      "Next State Matrix|Output Matrix|Number of Outpu"
+"t Bits|Sample Period"
+      MaskStyleString	      "edit,edit,edit,edit"
+      MaskTunableValueString  "on,on,on,on"
+      MaskCallbackString      "|||"
+      MaskEnableString	      "on,on,on,on"
+      MaskVisibilityString    "on,on,on,on"
+      MaskToolTipString	      "on,on,on,on"
+      MaskVarAliasString      ",,,"
+      MaskVariables	      "next_state_matrix=@1;output_matrix=@2;n_bits=@3"
+";period=@4;"
+      MaskInitialization      "% Set Block Logo\n[bg,fg] = xlcmap('XBlock',0);"
+"\niPos = get_param(gcb,'Position');\niWidth=iPos(3)-iPos(1); iHeight=iPos(4)-"
+"iPos(2);\niCx=iWidth/2;\niCy=iHeight/2;\n[logoX, logoY] = xlogo(iPos);\n\n"
+      MaskDisplay	      "patch([0 iWidth iWidth 0],[0 0 iHeight iHeight]"
+" , bg);\npatch(logoX,logoY, fg);\nport_label('input',1,'Inputs');\nport_label"
+"('output',1,'CurrentState');\nport_label('output',2,'Outputs');\n\nplot([0 0 "
+"iWidth iWidth 0], [0 iHeight iHeight 0 0]);"
+      MaskIconFrame	      off
+      MaskIconOpaque	      off
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "[0 1; 2 1; 0 3; 2 1]|[0 0; 0 0; 0 0; 0 1]|1|1"
+      System {
+	Name			"Registered Mealy State Machine"
+	Location		[313, 242, 859, 491]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "Inputs"
+	  Position		  [15, 163, 45, 177]
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Concat"
+	  Ports			  [2, 1]
+	  Position		  [125, 138, 165, 182]
+	  SourceBlock		  "xbsIndex_r3/Concat"
+	  SourceType		  "Xilinx Bus Concatenator"
+	  explicit_period	  "off"
+	  period		  "1"
+	  dbl_ovrd		  "off"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Next State and Output ROM"
+	  Ports			  [1, 1]
+	  Position		  [230, 133, 295, 187]
+	  SourceBlock		  "xbsIndex_r3/ROM"
+	  SourceType		  "Xilinx Single Port Read-Only Memory"
+	  depth			  "xlNumMealyElements(next_state_matrix, outpu"
+"t_matrix)"
+	  initVector		  "xlRegMealyInitVec(next_state_matrix, output"
+"_matrix, n_bits,0,1,1,1)"
+	  arith_type		  "Unsigned"
+	  n_bits		  "xlNumStateBits(next_state_matrix)+n_bits"
+	  bin_pt		  "0"
+	  latency		  "1"
+	  distributed_mem	  "off"
+	  init_zero		  "on"
+	  explicit_period	  "on"
+	  period		  "period"
+	  en			  "off"
+	  dbl_ovrd		  "off"
+	  gen_core		  "on"
+	  use_rpm		  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  xl_use_area		  "off"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Output Slice"
+	  Ports			  [1, 1]
+	  Position		  [355, 144, 400, 176]
+	  SourceBlock		  "xbsIndex_r3/Slice"
+	  SourceType		  "Xilinx Slice Block"
+	  mode			  "Lower Bit Location + Width"
+	  nbits			  "n_bits"
+	  bit1			  "0"
+	  base1			  "MSB of Input"
+	  bit0			  "0"
+	  base0			  "LSB of Input"
+	  boolean_output	  "off"
+	  explicit_period	  "off"
+	  period		  "1"
+	  dbl_ovrd		  "off"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "State Slice"
+	  Ports			  [1, 1]
+	  Position		  [325, 79, 370, 111]
+	  SourceBlock		  "xbsIndex_r3/Slice"
+	  SourceType		  "Xilinx Slice Block"
+	  mode			  "Upper Bit Location + Width"
+	  nbits			  "xlNumStateBits(next_state_matrix)"
+	  bit1			  "0"
+	  base1			  "MSB of Input"
+	  bit0			  "0"
+	  base0			  "LSB of Input"
+	  boolean_output	  "off"
+	  explicit_period	  "off"
+	  period		  "1"
+	  dbl_ovrd		  "off"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "CurrentState"
+	  Position		  [440, 88, 470, 102]
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Outputs"
+	  Position		  [435, 153, 465, 167]
+	  Port			  "2"
+	}
+	Line {
+	  SrcBlock		  "Inputs"
+	  SrcPort		  1
+	  DstBlock		  "Concat"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Output Slice"
+	  SrcPort		  1
+	  DstBlock		  "Outputs"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Concat"
+	  SrcPort		  1
+	  DstBlock		  "Next State and Output ROM"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Next State and Output ROM"
+	  SrcPort		  1
+	  Points		  [5, 0]
+	  Branch {
+	    DstBlock		    "Output Slice"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, -65]
+	    DstBlock		    "State Slice"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "State Slice"
+	  SrcPort		  1
+	  Points		  [15, 0]
+	  Branch {
+	    DstBlock		    "CurrentState"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, -50; -280, 0]
+	    DstBlock		    "Concat"
+	    DstPort		    1
+	  }
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Registered Moore State Machine"
+      Ports		      [1, 2]
+      Position		      [225, 233, 300, 297]
+      TreatAsAtomicUnit	      off
+      MaskType		      "Xilinx Registered Moore State Machine"
+      MaskDescription	      "Implements a registered Moore state machine.  T"
+"he output is a function only of the current state. The output is registered."
+      MaskHelp		      "web(xlhtmldoclink('Registered Moore State Machi"
+"ne'));"
+      MaskPromptString	      "Next State Matrix|Output Array|Number of Output"
+" Bits|Sample Period"
+      MaskStyleString	      "edit,edit,edit,edit"
+      MaskTunableValueString  "on,on,on,on"
+      MaskCallbackString      "|||"
+      MaskEnableString	      "on,on,on,on"
+      MaskVisibilityString    "on,on,on,on"
+      MaskToolTipString	      "on,on,on,on"
+      MaskVarAliasString      ",,,"
+      MaskVariables	      "next_state_matrix=@1;output_matrix=@2;n_bits=@3"
+";period=@4;"
+      MaskInitialization      "% Set Block Logo\n[bg,fg] = xlcmap('XBlock',0);"
+"\niPos = get_param(gcb,'Position');\niWidth=iPos(3)-iPos(1); iHeight=iPos(4)-"
+"iPos(2);\niCx=iWidth/2;\niCy=iHeight/2;\n[logoX, logoY] = xlogo(iPos);\n\n"
+      MaskDisplay	      "patch([0 iWidth iWidth 0],[0 0 iHeight iHeight]"
+" , bg);\npatch(logoX,logoY, fg);\nport_label('input',1,'Inputs');\nport_label"
+"('output',1,'CurrentState');\nport_label('output',2,'Outputs');\n\nplot([0 0 "
+"iWidth iWidth 0], [0 iHeight iHeight 0 0]);"
+      MaskIconFrame	      off
+      MaskIconOpaque	      off
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "[0 1; 2 1; 0 3; 2 4; 0 1]|[0; 0; 0; 0; 1]|1|1"
+      System {
+	Name			"Registered Moore State Machine"
+	Location		[147, 358, 678, 566]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "Inputs"
+	  Position		  [25, 113, 55, 127]
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Concat"
+	  Ports			  [2, 1]
+	  Position		  [135, 88, 175, 132]
+	  SourceBlock		  "xbsIndex_r3/Concat"
+	  SourceType		  "Xilinx Bus Concatenator"
+	  explicit_period	  "off"
+	  period		  "1"
+	  dbl_ovrd		  "off"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Next State ROM"
+	  Ports			  [1, 1]
+	  Position		  [240, 83, 305, 137]
+	  SourceBlock		  "xbsIndex_r3/ROM"
+	  SourceType		  "Xilinx Single Port Read-Only Memory"
+	  depth			  "xlNumMooreStateElements(next_state_matrix, "
+"output_matrix)"
+	  initVector		  "xlMatrixToStateInitVec(next_state_matrix,xl"
+"NumStateBits(next_state_matrix),0,1,1,1)"
+	  arith_type		  "Unsigned"
+	  n_bits		  "xlNumStateBits(next_state_matrix)"
+	  bin_pt		  "0"
+	  latency		  "1"
+	  distributed_mem	  "off"
+	  init_zero		  "on"
+	  explicit_period	  "on"
+	  period		  "period"
+	  en			  "off"
+	  dbl_ovrd		  "off"
+	  gen_core		  "on"
+	  use_rpm		  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  xl_use_area		  "off"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Output ROM"
+	  Ports			  [1, 1]
+	  Position		  [350, 83, 415, 137]
+	  SourceBlock		  "xbsIndex_r3/ROM"
+	  SourceType		  "Xilinx Single Port Read-Only Memory"
+	  depth			  "xlNumMooreOutputElements(output_matrix)"
+	  initVector		  "xlMatrixToOutputVec(output_matrix,n_bits,0,"
+"1,1,1)"
+	  arith_type		  "Unsigned"
+	  n_bits		  "n_bits"
+	  bin_pt		  "0"
+	  latency		  "1"
+	  distributed_mem	  "off"
+	  init_zero		  "on"
+	  explicit_period	  "on"
+	  period		  "period"
+	  en			  "off"
+	  dbl_ovrd		  "off"
+	  gen_core		  "on"
+	  use_rpm		  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  xl_use_area		  "off"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "CurrentState"
+	  Position		  [445, 23, 475, 37]
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Outputs"
+	  Position		  [450, 103, 480, 117]
+	  Port			  "2"
+	}
+	Line {
+	  SrcBlock		  "Next State ROM"
+	  SrcPort		  1
+	  Points		  [5, 0]
+	  Branch {
+	    DstBlock		    "Output ROM"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, -80]
+	    Branch {
+	      DstBlock		      "CurrentState"
+	      DstPort		      1
+	    }
+	    Branch {
+	      Points		      [-200, 0; 0, 70]
+	      DstBlock		      "Concat"
+	      DstPort		      1
+	    }
+	  }
+	}
+	Line {
+	  SrcBlock		  "Concat"
+	  SrcPort		  1
+	  DstBlock		  "Next State ROM"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Output ROM"
+	  SrcPort		  1
+	  DstBlock		  "Outputs"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Inputs"
+	  SrcPort		  1
+	  DstBlock		  "Concat"
+	  DstPort		  2
+	}
+      }
+    }
+    Annotation {
+      Name		      "Xilinx Reference Blockset v6.3\n(c) 2004  Xilin"
+"x, Inc.\n\nControl Logic Reference Library"
+      Position		      [182, 59]
+      FontSize		      12
+    }
+  }
+}

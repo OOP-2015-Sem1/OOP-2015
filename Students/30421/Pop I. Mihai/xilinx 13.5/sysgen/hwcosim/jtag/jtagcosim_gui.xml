@@ -1,0 +1,108 @@
+<!--   *  Copyright (c) 2008, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="_hwcosim" block_type="jtagcosim">
+  <initialization file="xljtagcosim_init.m"/>
+  <icon width="93" height="88" wmark_color="white" bg_color="gray" file="jtagcosim_icon.m"/>
+  <dll name="Sysgen" entry_point="hwcosim_block_config"/>
+  <callbacks StopFcn="xlHwcosimStopCallback(gcbh);%s" merge_defaults="true"/>
+  <handlers enablement="xlJTAGGuiEnablement" action="xlJTAGGuiAction"/>
+  <libraries>
+    <library name="JTAGRuntimeCosim_r4"/>
+  </libraries>
+  <doc htmlname="JTAG Co-Simulation"/>
+  <blockgui label="Xilinx JTAG Hardware Co-simulation">
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <etch label="Clocking">
+          <radiogroup name="clkSrc" default="Single Stepped" evaluate="true" label="Clock source" ctype="Int">
+            <item value="Single Stepped" label="Single stepped"/>
+            <item value="Free Running" label="Free running"/>
+          </radiogroup>
+        </etch>
+        <checkbox name="hasCombinationalPath" default="on" evaluate="true" label="Has combinational path" ctype="Int"/>
+        <glayout cols="2">
+          <editbox name="bitfileName" default="example.bit" evaluate="false" label="Bitstream file" ctype="String"/>
+          <browsebutton name="bitfiledialog" label="..." filter="Configuraton Bitstream (*.bit)"/>
+        </glayout>
+      </tab>
+      <tab name="advancedtab" label="Advanced">
+        <checkbox name="skipConfig" default="off" evaluate="true" label="Skip device configuration" ctype="Int"/>
+      </tab>
+      <tab name="cabletab" label="Cable">
+        <etch name="etch_cable_settings" label="Cable Settings">
+          <listbox name="cable" default="Auto Detect" evaluate="false" label="Type" ctype="String">
+            <item value="Auto Detect"/>
+            <item value="Xilinx Parallel Cable IV"/>
+            <item value="Xilinx Platform USB"/>
+            <item value="Digilent USB JTAG Cable"/>
+            <item value="Custom"/>
+          </listbox>
+          <hlayout>
+            <listbox name="speed" default="N/A" evaluate="false" dynamic="true" label="Speed" ctype="String">
+              <item value="N/A"/>
+            </listbox>
+            <listbox name="cablePort" default="N/A" evaluate="false" dynamic="true" label="Port" ctype="String">
+              <item value="N/A"/>
+            </listbox>
+            <button name="blink_cable_led" label="Blink Cable LED"/>
+            <spacer stretch="1"/>
+          </hlayout>
+          <editbox name="cableParameters" default="" evaluate="false" label="Plug-in Parameters" ctype="String"/>
+        </etch>
+        <etch name="etch_cable_location" label="Cable Location">
+          <glayout cols="2">
+          <radiogroup name="cableLocation" default="Local" label="" evaluate="false" ctype="String">
+            <item value="Local" label="Local"/>
+            <item value="Remote" label="Remote CSE Server"/>
+          </radiogroup>
+          <editbox name="cableServer" default="" evaluate="false" label="" ctype="String"/>
+          </glayout>
+        </etch>
+        <checkbox name="shareCable" default="off" evaluate="true" label="Share cable for concurrent access with ChipScope Analyzer or EDK XMD" ctype="Int"/>
+      </tab>
+      <tab name="sharedmemories" label="Shared Memories">
+        <editbox name="treeview" read_only="true" top_label="false" evaluate="false" multi_line="true"/>
+      </tab>
+      <tab name="software" label="Software">
+        <checkbox name="enable_codebug" default="on" evaluate="true" label="Enable Co-Debug with Xilinx SDK (Beta)" ctype="Bool"/>
+        <etch name='etch_sdk' label="Xilinx Software Development Kit (SDK)">
+          <glayout cols="2">
+            <editbox name="sdk_workspace" label="Workspace" multi_line="false" evaluate="false" ctype="String"/>
+            <browsebutton name="sdk_workspace_browse" label="..." mode="directoryonly"/>
+          </glayout>
+          <button name="edit_software" label=" Launch Xilinx SDK "/>
+        </etch>
+        <etch name='etch_sw_init' label="Software Initialization">
+          <glayout cols="2">
+              <editbox name="elffileName" default="" evaluate="false" label="ELF file" ctype="String"/>
+              <browsebutton name="elffiledialog" label="..." filter="Executable (*.elf)"/>
+          </glayout>
+          <glayout cols="2">
+              <editbox name="bmm" label="BMM file" multi_line="false" evaluate="false" ctype="String"/>
+              <browsebutton name="bmm_browse" label="..." filter="BMM file (*.bmm)"/>
+          </glayout>
+        </etch>
+      </tab>
+    </tabpane>
+    <!-- kept for legacy -->
+    <hiddenvar name="xmp" evaluate="false" ctype="String"/>
+    <!-- de-serialized AnyTable string containing processor software settings -->
+    <hiddenvar name="software_settings" evaluate="false" ctype="String"/>
+    <hiddenvar name="cableSessionParameters" default="" evaluate="false" ctype="String"/>
+    <hiddenvar name="savedCableParameters" default="" evaluate="false" ctype="String"/>
+    <hiddenvar name="design_xtable" default="{'clocksGcd' =&gt; 1, 'ports' =&gt; { }}" evaluate="false" ctype="String"/>
+    <hiddenvar name="binDir" evaluate="false" ctype="String"/>
+    <hiddenvar name="engineDll" default="JTAGCosimEngine.dll" evaluate="false" ctype="String"/>
+    <hiddenvar name="cableWaitTime" default="10" evaluate="true" ctype="Int"/>
+    <hiddenvar name="bscanPos" default="-1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="IRLengths" default="[]" evaluate="true" ctype="IntVector"/>
+    <hiddenvar name="useWaitBox" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="hasBufgmux" default="on" evaluate="true"/>
+    <hiddenvar name="Scheme" default="Cosim" evaluate="true"/>
+    <hiddenvar name="useCmdProc" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="memxtable" default="" evaluate="false"/>
+    <hiddenvar name="hasProc" default="0" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="preConfigCallbackString" default="" evaluate="false" ctype="String"/>
+  </blockgui>
+</sysgenblock>

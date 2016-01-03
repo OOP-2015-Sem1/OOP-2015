@@ -1,0 +1,91 @@
+;  PicoBlaze 3(Tm) Microcontroller Example Program
+;
+        ENABLE INTERRUPT
+start:	CALL loadreg         ; load all the registers 
+start1: CALL regshift        ; shift the register back 1 location
+	CALL output_all
+	JUMP start1
+
+; --------------------- End Main routine ---------------------
+	
+
+loadreg:	       ;load the registers
+        LOAD s0, 00
+	LOAD s1, 01
+	LOAD s2, 02
+	LOAD s3, 03
+	LOAD s4, 04
+	LOAD s5, 05
+	LOAD s6, 06
+	LOAD s7, 07
+	LOAD s8, 08
+	LOAD s9, 09
+	LOAD sA, 0A
+	LOAD sB, 0B
+	LOAD sC, 0C
+	LOAD sD, 0D
+	LOAD sE, 0E
+	LOAD sF, 0F
+	RETURN
+
+regshift:	        ;shift the register values
+        LOAD s0, s1
+	LOAD s1, s2
+	LOAD s2, s3
+	LOAD s3, s4
+	LOAD s4, s5
+	LOAD s5, s6
+	LOAD s6, s7
+	LOAD s7, s8
+	LOAD s8, s9
+	LOAD s9, sA
+	LOAD sA, sB
+	LOAD sB, sC
+	LOAD sC, sD
+	LOAD sD, sE
+	LOAD sE, sF
+	LOAD sF, s0
+	RETURN
+
+output_all:                     ;output all the register values
+	DISABLE INTERRUPT
+	OUTPUT s0, 00
+	OUTPUT s1, 01
+	OUTPUT s2, 02
+	OUTPUT s3, 03
+	OUTPUT s4, 04
+	OUTPUT s5, 05
+	OUTPUT s6, 06
+	OUTPUT s7, 07
+	OUTPUT s8, 08
+	OUTPUT s9, 09
+	OUTPUT sA, 0A
+	OUTPUT sB, 0B
+	OUTPUT sC, 0C
+	OUTPUT sD, 0D
+	OUTPUT sE, 0E
+	OUTPUT sF, 0F
+	ENABLE INTERRUPT
+	RETURN
+
+int_routine:
+	INPUT s0, 00  ;put the value from the in_port into the registers
+	INPUT s1, 00
+	INPUT s2, 00
+	INPUT s3, 00
+	INPUT s4, 00
+	INPUT s5, 00
+	INPUT s6, 00
+	INPUT s7, 00
+	INPUT s8, 00
+	INPUT s9, 00
+	INPUT sA, 00
+	INPUT sB, 00
+	INPUT sC, 00
+	INPUT sD, 00
+	INPUT sE, 00
+	INPUT sF, 00
+	RETURNI ENABLE
+
+	ADDRESS 3FF ; set interrupt vector
+	JUMP int_routine

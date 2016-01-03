@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>BPSK AWGN Channel</title>
+    <link rel="StyleSheet" href="css/Xilinx_Reference_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Reference_Blockset.12.1.html#632193">Xilinx Reference Blockset</a> : BPSK AWGN Channel</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="632193">BPSK AWGN Channel</a></div>
+      <div class="Body"><a name="632197"><img class="Default" src="images/Xilinx_Reference_Blockset.12.9.1.jpg" width="87" height="146" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" />The Xilinx BPSK AWGN Channel reference block adds scaled white </a>Gaussian noise to an input signal. The noise is created by the <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Reference_Blockset.12.30.html#633236', '');" title="White Gaussian Noise Generator">White Gaussian Noise Generator</a></span> reference block. </div>
+      <div class="Body"><a name="632201">The noise is scaled based on the SNR to achieve the desired noise variance, </a>as shown below. The SNR is defined as (Eb/No) in dB for uncoded BPSK with unit symbol energy (Es = 1). The SNR input is UFix8_4 and the valid range is from 0.0 to 15.9375 in steps of 0.0625dB. </div>
+      <div class="Body"><a name="632202">To use the AWGN in a system with coding and/or to use the core with </a>different modulation formats, it is necessary to adjust the SNR value to accommodate the difference in spectral efficiency. If we have BPSK modulation with rate 1/2 coding and keep Es = 1 and No constant, then Eb = 2 and Eb/No = SNR + 3 dB. If we have uncoded QPSK modulation with I = +/-1 and Q = +/-1 and add independent noise sequences, then each channel looks like an independent BPSK channel and the Eb/No = SNR. If we then add rate 1/2 coding to the QPSK case, we have Eb/No = SNR + 3 dB. </div>
+      <div class="Body"><a name="632203">The overall latency of the AWGN Channel is 15 clock cycles. Channel output is a 17 bit </a>signed number with 11 bits after the binary point. The input port snr can be any type. The reset port must be Boolean and the input port din must be of unsigned 1-bit type with binary point position at zero. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="632209"><img class="Default" src="images/Xilinx_Reference_Blockset.12.9.2.jpg" width="495" height="223" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="632210">Block Parameters</a></div>
+      <div class="Body"><a name="632211">The block parameter is the decimal starting seed value. </a></div>
+      <div class="Heading2"><a name="632212">Reference</a></div>
+      <div class="Body"><a name="632213">[1] A. Ghazel, E. Boutillon, J. L. Danger, G. Gulak and H. Laamari, </a><span class="Italic">Design and Performance </span><span class="Italic">Analysis of a High Speed AWGN Communication Channel Emulator</span>, IEEE PACRIM Conference, Victoria, B. C., Aug. 2001. </div>
+      <div class="Body"><a name="632214">[2] Xilinx Data Sheet: </a><span class="Italic">Additive White Gaussian Noise (AWGN) Core v1.0</span>, Xilinx, Inc. October 2002</div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

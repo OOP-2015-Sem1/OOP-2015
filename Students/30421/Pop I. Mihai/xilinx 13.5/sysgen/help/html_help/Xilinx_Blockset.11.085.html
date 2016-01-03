@@ -1,0 +1,992 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Reed-Solomon Encoder 8.0</title>
+    <link rel="StyleSheet" href="css/Xilinx_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Blockset.11.001.html#3277022">Xilinx Blockset</a> : Reed-Solomon Encoder 8.0</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="3277022">Reed-Solomon Encoder 8.0</a></div>
+      <div class="Body" style="color: #000000; font-size: 10.0pt; font-style: italic; font-variant: normal; font-weight: normal; text-transform: none; vertical-align: baseline"><span class="Italic"><a name="3277023">This block is listed in the following Xilinx Blockset libraries: AXI4, Communications and Index.</a></span></div>
+      <div class="OneLiner"><a name="3277028"><img class="Default" src="images/Xilinx_Blockset.11.085.1.jpg" width="140" height="149" style="display: block; float: none; left: 0.0; top: 0.0" alt="" />The Reed-Solomon (RS) codes are block-based error </a>correcting codes with a wide range of applications in digital communications and storage. This block adheres to the AMBA® AXI4-Stream standard.</div>
+      <div class="Body"><a name="3277029">They are used to correct errors in many systems such as </a>digital storage devices, wireless or mobile communications, and digital video broadcasting. </div>
+      <div class="Body"><a name="3277030">The Reed-Solomon encoder augments data blocks with </a>redundant symbols so that errors introduced during transmission can be corrected. Errors may occur for a number of reasons (noise or interference, scratches on a CD, etc.). The Reed-Solomon decoder attempts to correct errors and recover the original data. The number and type of errors that can be corrected depends on the characteristics of the code. </div>
+      <div class="Body"><a name="3277037">A typical system is shown below:</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="3277036"><img class="Default" src="images/Xilinx_Blockset.11.085.2.jpg" width="282" height="41" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="3277038">Reed-Solomon codes are Bose-Chaudhuri-Hocquenghem (BCH) codes, which in turn are </a>linear block codes. An (<span class="Italic">n</span>, <span class="Italic">k</span>) linear block code is a <span class="Italic">k</span>-dimensional sub space of an <span class="Italic">n</span>-dimensional vector space over a finite field. Elements of the field are called symbols. For a Reed-Solomon code, <span class="Italic">n</span> ordinarily is 2<span class="Superscript">S</span> -1, where s is the width in bits of each symbol. When the code is shortened, <span class="Italic">n</span> is smaller. The encoder handles both full length and shortened codes. </div>
+      <div class="Body"><a name="3277039">The encoder is systematic. This means it constructs code blocks of length </a><span class="Italic">n</span> from information blocks of length <span class="Italic">k</span> by adjoining <span class="Italic">n</span>-<span class="Italic">k</span> parity symbols. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="3277045"><img class="Default" src="images/Xilinx_Blockset.11.085.3.jpg" width="186" height="52" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="3277046">A Reed-Solomon code is characterized by its field and generator polynomials. The field </a>polynomial is used to construct the symbol field, and the generator polynomial is used to calculate parity symbols. The encoder allows both polynomials to be configured. The generator polynomial has the form: </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="3277052"><img class="Default" src="images/Xilinx_Blockset.11.085.4.jpg" width="181" height="30" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="3277053">where </a><span class="Symbol">α</span> is a primitive element of the finite field having n + 1 elements.</div>
+      <div class="Heading2"><a name="3281413">Bloc</a><span style="color: #000000; font-size: 12.5pt">k Interface Channels and Pins</span></div>
+      <div class="Body"><a name="3281414">The Xilinx Reed-Solomon Decoder 8.0 block is AXI4 compliant. The following describes </a>the standard AXI channels and pins on the interface: </div>
+      <div class="Heading3"><a name="3281415">input Channel</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt; vertical-align: baseline">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner" style="color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none"><span class="Bold"><a name="3282088">input_tvalid</a></span><span style="font-weight: normal">: TVALID for the input channel.</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt; vertical-align: baseline">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner" style="color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none"><span class="Bold"><a name="3282090">input_tdata_data_in</a></span><span style="font-weight: normal">: presents blocks of </span><span class="Filename">n</span><span style="font-weight: normal"> symbols to be decoded. This signal must </span><span style="font-weight: normal">have type </span><span class="Filename">UFIX_s_0</span><span style="font-weight: normal">, where </span><span class="Filename">s</span><span style="font-weight: normal"> is the width in bits of each symbol. </span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt; vertical-align: baseline">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner" style="color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none"><span style="color: #000000; font-family: &quot;Microsoft Sans Serif&quot;; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><a name="3281419">input_tlast</a></span><span style="font-weight: normal">: Marks the last symbol of the input block. Only used to generate event </span><span style="font-weight: normal">outputs. Can be tied low or high if event outputs are not used.</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt; vertical-align: baseline">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner" style="color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none"><span style="color: #000000; font-family: &quot;Microsoft Sans Serif&quot;; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><a name="3283469">input_tready</a></span><span style="font-weight: normal">: TREADY for the input channel.</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt; vertical-align: baseline">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner" style="color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none"><span style="color: #000000; font-family: &quot;Microsoft Sans Serif&quot;; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><a name="3281421">input_tuser_user</a></span><span style="font-weight: normal">: marker bits for tagging data on input_tdata_data_in. Added to the </span><span style="font-weight: normal">channel when you select </span><span class="Bold">Marker Bits</span><span style="font-weight: normal"> from the Detailed Implementation tab.</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading3"><a name="3281422">output Channel</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt; vertical-align: baseline">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner" style="color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none"><span style="color: #000000; font-family: &quot;Microsoft Sans Serif&quot;; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><a name="3281423">output_tready</a></span><span style="font-weight: normal">: TREADY for the output channel. Added to the channel when you </span><span style="font-weight: normal">select </span><span class="Bold">Output TREADY </span><span style="font-weight: normal">from the Optional Pins tab.</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt; vertical-align: baseline">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner" style="color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none"><span style="color: #000000; font-family: &quot;Microsoft Sans Serif&quot;; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><a name="3281424">output_tvalid</a></span><span style="font-weight: normal">: TVALID for the output channel.</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt; vertical-align: baseline">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner" style="color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none"><span style="color: #000000; font-family: &quot;Microsoft Sans Serif&quot;; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><a name="3281425">output_tdata_data_out</a></span><span style="font-weight: normal">: produces the information and parity symbols resulting from </span><span style="font-weight: normal">decoding. The type of </span><span class="Filename">data_out</span><span style="font-weight: normal"> is the same as that for </span><span class="Filename">data_in</span><span style="font-weight: normal">. </span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt; vertical-align: baseline">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner" style="color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none"><span style="color: #000000; font-family: &quot;Microsoft Sans Serif&quot;; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><a name="3281426">output_tlast</a></span><span style="font-weight: normal">: Goes high when the last symbol of the last block is on </span><span class="Filename">tdata_data_out</span><span style="font-weight: normal">. </span><span class="Filename">output_tlast</span><span style="font-weight: normal"> produces a signal of type </span><span class="Filename">UFIX_1_0</span><span style="font-weight: normal">. </span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt; vertical-align: baseline">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner" style="color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none"><span style="color: #000000; font-family: &quot;Microsoft Sans Serif&quot;; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><a name="3344168">output_tuser_tuser</a></span><span style="font-weight: normal">: This pin is available when user selects "Marker Bits" from the </span><span style="font-weight: normal">Detailed Implementation tab.</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading3"><a name="3281440">event Channel</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt; vertical-align: baseline">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner" style="color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none"><span style="color: #000000; font-family: &quot;Microsoft Sans Serif&quot;; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><a name="3281441">event_s_input_tlast_missing</a></span><span style="font-weight: normal">: this output flag indicates that the input_tlast was not </span><span style="font-weight: normal">asserted when expected. You should leave this pin unconnected if it is not required.</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt; vertical-align: baseline">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner" style="color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none"><span style="color: #000000; font-family: &quot;Microsoft Sans Serif&quot;; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><a name="3281442">event_s_input_tlast_unexpected</a></span><span style="font-weight: normal">: this output flag indicates that the input_tlast was </span><span style="font-weight: normal">asserted when not expected. You should leave this pin unconnected if it is not </span><span style="font-weight: normal">required.</span> </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt; vertical-align: baseline">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner" style="color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none"><span style="color: #000000; font-family: &quot;Microsoft Sans Serif&quot;; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><a name="3344213">event_s_ctrl_tdata_invalid</a></span><span style="font-weight: normal">: this output flag indicates that values provided on </span><span style="font-weight: normal">ctrl_tdata were illegal. This pin is available when "Variable Block Length" or "Variable </span><span style="font-weight: normal">Number of Check Symbols" are selected on the GUI.</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading3"><a name="3294694">ctrl Channel</a></div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="3294734">This channel is only present when variable block length or number of check symbols is </a>selected as a block parameter</div>
+      <div class="Bulleted_outer" style="margin-left: 0pt; vertical-align: baseline">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner" style="color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none"><span style="color: #000000; font-family: &quot;Microsoft Sans Serif&quot;; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><a name="3294743">ctrl_tvalid</a></span><span style="font-weight: normal">: TVALID for the ctrl channel.</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt; vertical-align: baseline">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner" style="color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none"><span style="color: #000000; font-family: &quot;Microsoft Sans Serif&quot;; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><a name="3294745">ctrl_tdata_n_in</a></span><span style="font-weight: normal">: This signal is only present if “Variable Block Length” is selected in </span><span style="font-weight: normal">the GUI. This allows the block length to be changed every block. The ctrl_tdata_n_in </span><span style="font-weight: normal">signal must have type UFIX_s_0, where s is the width in bits of each symbol. Unless </span><span style="font-weight: normal">there is an R_IN field, the number of check symbols is fixed, so varying n </span><span style="font-weight: normal">automatically varies k.</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt; vertical-align: baseline">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner" style="color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none"><span style="color: #000000; font-family: &quot;Microsoft Sans Serif&quot;; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><a name="3294881">ctrl_tdata_n_r</a></span><span style="font-weight: normal">: This field is only present if “Variable Number of Check Symbols” is </span><span style="font-weight: normal">selected in the GUI. It allows the number of check symbols to be changed every block. </span><span style="font-weight: normal">The new block's length, r_block, is set to ctrl_tdata_r_in sampled. The ctrl_tdata_r_in </span><span style="font-weight: normal">signal must have type UFIX_p_0, where p is the number of bits required to represent </span><span style="font-weight: normal">the parity bits (n-k) in the default code word, n being the "Symbols Per Block" and k </span><span style="font-weight: normal">being "Data Symbols". Selecting this input significantly increases the size of the core.</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="3345995">Other Optional Pins</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="3284596">aresetn</a></span>: resets the encoder. This pin is added to the block when you specify <span class="Bold">ARESETn</span> on the Detailed Implementation tab. The signal driving <span class="Filename">ARESETn</span> must be <span class="Filename">Bool</span>. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Note2">
+        <span class="XNote">Note:&nbsp;</span><span class="Filename"><a name="3284597">aresetn</a></span> must be asserted low for at least 2 clock periods and at least 1 sample period before the decoder can start decoding code symbols. </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="3281452">aclken</a></span>: carries the clock enable signal for the encoder. The signal driving aclk<span class="Filename">en</span> must be <span class="Filename">Bool</span>. Added to the block when you select the optional pin <span class="Bold">ACLKEN</span>.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="3281453">Block Parameters</a></div>
+      <div class="Body"><a name="3281454">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model. </div>
+      <div class="Heading3"><a name="3281455">Attributes</a></div>
+      <div class="Body"><a name="3281456">Parameters specific to the Basic tab are as follows:</a></div>
+      <div class="Body"><a name="3281457">Code Block Specification</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="3281458">Code specification</a></span>: specifies the encoder type desired. The choices are: </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="3281459">Custom</a></span>: allows you to set all the block parameters. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="3281460">DVB</a></span>: implements DVB (Digital Video Broadcasting) standard (204, 188) shortened RS code. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="3281461">ATSC</a></span>: implements ATSC (Advanced Television Systems Committee) standard (207, 187) shortened RS code. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="3281462">G_709</a></span>: implements G.709 Optical Transport Network standard.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="3284613">ETSI_BRAN</a></span>: implements the ETSI Project standard for Broadband Radio Access Networks (BRAN).</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="3346058">CCSDS</a></span>: implements CCSDS (Consultative Committee for Space Data Systems) standard (255, 223) full length RS code. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="3346059">ITU_J_83_Annex_B</a></span>: implements International Telecommunication Union(ITU)-J.83 Annex B specification (128, 122) extended RS code. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="3346060">IESS-308 (All)</a></span>: implements IESS-308 (INTELSAT Earth Station Standard) specification (all) shortened RS code. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="3281465">IESS-308 (126)</a></span>: implements IESS-308 (INTELSAT Earth Station Standard) specification (126, 112) shortened RS code. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="3281466">IESS-308 (194)</a></span>: implements IESS-308 specification (194, 178) shortened RS code. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="3281467">IESS-308 (208)</a></span>: implements IESS-308 specification (208, 192) shortened RS code. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="3281468">IESS-308 (219)</a></span>: implements IESS-308 specification (219, 201) shortened RS code. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="3281469">IESS-308 (225)</a></span>: implements IESS-308 specification (225, 205) shortened RS code. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="3346123">Variable Number of Check Symbols (r)</a></span>: false, true. When checked, the ctrl_tdata_r_in and ctrl_tdata_n_in pins become available on the block.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="3346124">Variable Block Length</a></span>: false, true. When checked, the ctrl_tdata_n_in pin becomes available on the block. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="3346125">Symbol width</a></span>: tells the width in bits for symbols in the code. The encoder support widths from 3 to 12. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="3281472">Field polynomial</a></span>: specifies the polynomial from which the symbol field is derived. It must be specified as a decimal number. This polynomial must be primitive. A value of zero indicates the default polynomial should be used. Default polynomials are listed in the table below.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 288.6816pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 74.8431pt">
+            <div class="CellHeadingLeft"><a name="3281475">Symbol Width</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 95.0385pt">
+            <div class="CellHeadingLeft"><a name="3281477">Default Polynomials</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 118.8pt">
+            <div class="CellHeadingLeft"><a name="3281479">Array Representation</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281481">3</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281483">x</a><span class="Superscript">3</span> + x + 1</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281485">11</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281487">4</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281489">x</a><span class="Superscript">4</span> + x + 1</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281491">19</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281493">5</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281495">x</a><span class="Superscript">5</span> + x2 + 1</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281497">37</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281499">6</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281501">x</a><span class="Superscript">6</span> + x + 1</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281503">67</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281505">7</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281507">x</a><span class="Superscript">7</span> + x<span class="Superscript">3</span> + 1</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281509">137</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281511">8</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281513">x</a><span class="Superscript">8</span> + x<span class="Superscript">4</span> + x<span class="Superscript">3</span> + x<span class="Superscript">2</span> + 1</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281515">285</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281517">9</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281519">x</a><span class="Superscript">9</span> + x<span class="Superscript">4</span>+ 1</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281521">529</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281523">10</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281525">x</a><span class="Superscript">10</span> + x<span class="Superscript">3</span> + 1</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281527">1033</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281529">11</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281531">x</a><span class="Superscript">11</span> + x<span class="Superscript">2</span> + 1</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281533">2053</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281535">12</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281537">x</a><span class="Superscript">12</span> + x<span class="Superscript">6</span> + x<span class="Superscript">4</span> + x + 1</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281539">4179</a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="3281540">Scaling Factor (h)</a></span>: (represented in the previous formula as h) specifies the scaling factor for the code. Ordinarily, h is 1, but can be as large as 2<span class="Superscript">S</span> - 1 where s is the symbol width. The value must be chosen so that <span class="Symbol">α</span><span class="Superscript" style="font-family: &quot;Microsoft Sans Serif&quot;">h</span> is primitive. That is, h must be relatively prime to 2<span class="Superscript">S</span> - 1. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="3281541">Generator Start</a></span>: specifies the first root r of the generator polynomial. The generator polynomial g(x), is given by: </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="3281547"><img class="Default" src="images/Xilinx_Blockset.11.085.5.jpg" width="155" height="48" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="3281548">where </a><span class="Symbol">α</span> is a primitive element of the symbol field, and the scaling factor is described below. </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="3281550">Symbols Per Block(n)</a></span>: tells the number of symbols in the blocks the encoder produces. Acceptable numbers range from 3 to 2<span class="Superscript">S</span> -1, where s denotes the symbol width. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="3281551">Data Symbols(k)</a></span>: tells the number of information symbols each block contains. Acceptable values range from max(n - 256, 1) to n - 2. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading3"><a name="3281558">Detailed Implementation tab</a></div>
+      <div class="Body"><a name="3346252">Implementation</a></div>
+      <div class="Body2"><a name="3346308">Check Symbol Generator Optimization</a></div>
+      <div class="Body2"><a name="3346309">This option is available when "Variable Number of Check Symbols" option is selected </a>on the GUI.</div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="3346310">Fixed Architecture</a></span>: The check symbol generator is implemented using a highly efficient fixed architecture.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="3284765">Area</a></span>: The check symbol generator implementation is optimized for area and speed efficiency. The range of input, ctrl_tdata_n_in, is reduced.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="3281561">Flexibility</a></span>: The check symbol generator implementation is optimized to maximize the range of input of ctrl_tdata_n_in.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="3281562">Memory Style</a></span>: Select between <span class="Bold">Distributed</span>, <span class="Bold">Block</span> and <span class="Bold">Automatic</span> memory choices. This option is available only for CCSDS codes.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="3281563">Number Of Channels</a></span>: specifies the number of separate time division multiplexed channels to be processed by the encoder. The encoder supports up to 128 channels. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="3281568">Optional Pins</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt; vertical-align: baseline">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner" style="color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none"><span class="Bold"><a name="3281569">ACLKEN</a></span><span style="font-weight: normal">: Adds a </span><span class="Bold">aclken </span><span style="font-weight: normal">pin to the block. This signal carries the clock enable and </span><span style="font-weight: normal">must be of type </span><span class="Filename">Bool</span><span style="font-weight: normal">.</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="3286178">Output TREADY</a></span>: When selected, the output channels will have a TREADY and hence support the full AXI handshake protocol with inherent back-pressure.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt; vertical-align: baseline">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner" style="color: #000000; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none"><span class="Bold"><a name="3281571">ARESETn</a></span><span style="font-weight: normal">: Adds a </span><span class="Bold">aresetn </span><span style="font-weight: normal">pin to the block. This signal resets the block and must be of </span><span style="font-weight: normal">type </span><span class="Filename">Bool</span><span style="font-weight: normal">. </span><span class="Filename" style="font-size: 9.0pt">aresetn</span><span style="font-family: Arial; font-size: 9.0pt; font-weight: normal"> must be asserted low for at least 2 clock periods and at least 1 sample </span><span style="font-family: Arial; font-size: 9.0pt; font-weight: normal">period before the decoder can start decoding code symbols. </span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="3284801">Info bit</a></span>: Adds the <span class="Bold">output_tdata_info</span> pin. Marks the last information symbol of a block on <span class="Filename">tdata_data_out</span>.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="3281577">Marker Bits</a></span>: Adds the following pins to the block:</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="3281578">input_tuser_user</a></span>: carries marker bits for tagging data on <span class="Filename">input_tdata_ </span><span class="Filename">data_in</span>.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span style="font-weight: bold"><a name="3281579">output_tuser_user</a></span>: mark_in tagging bits delayed by the latency of the LogiCORE.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="3281580">Number of Marker Bits</a></span>: specifies the number of marker bits.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="3281581">Other parameters used by this block are explained in the topic</a><br /><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.003.html#271277', '');" title="Common Options in Block Parameter Dialog Boxes">Common Options in Block Parameter Dialog Boxes</a></span>. </div>
+      <div class="Heading2"><a name="3281585">Xilinx LogiCore</a></div>
+      <div class="Body"><a name="3281681">The block uses the following Xilinx LogiCORE™:</a></div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 527.0944pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 70.7617pt" rowspan="2">
+            <div class="CellHeading" style="color: #000000; font-size: 9.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><span class="Size9Type"><a name="3281588">System </a></span><span class="Size9Type">Generator </span><span class="Size9Type">Block</span></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 64.3293pt" rowspan="2">
+            <div class="CellHeading" style="color: #000000; font-size: 9.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><span class="Size9Type"><a name="3281590">Xilinx </a></span><span class="Size9Type">LogiCORE</span><span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;; font-weight: normal">™</span></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 54.8486pt" rowspan="2">
+            <div class="CellHeading" style="color: #000000; font-size: 9.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><span class="Size9Type"><a name="3281592">LogiCORE</a></span><span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;; font-weight: normal">™</span><span class="Size9Type" style="font-family: Arial; font-weight: bold"> Version / </span><span class="Size9Type" style="font-family: Arial; font-weight: bold">Data Sheet</span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 128.3pt" colspan="5">
+            <div class="CellHeading" style="color: #000000; font-size: 9.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><span class="Size9Type"><a name="3281594">Spartan® Device</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 169.35479999999998pt" colspan="6">
+            <div class="CellHeading" style="color: #000000; font-size: 9.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><span class="Size9Type"><a name="3281604">Virtex® Device</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 39.5pt">
+            <div class="CellHeading" style="color: #000000; font-size: 9.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><span class="Size9Type"><a name="3281616">Kintex</a></span><span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;; font-weight: normal">™</span><span class="Size9Type" style="font-family: Arial; font-weight: bold"> </span><span class="Size9Type" style="font-family: Arial; font-weight: bold">Device</span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 70.7617pt">
+            <div class="CellHeading" style="color: #000000; font-size: 9.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><span class="Size9Type"><a name="3281624">3,3E</a></span></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 64.3293pt">
+            <div class="CellHeading" style="color: #000000; font-size: 9.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><span class="Size9Type"><a name="3281626">3A</a></span></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 54.8486pt">
+            <div class="CellHeading" style="color: #000000; font-size: 9.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><span class="Size9Type"><a name="3281628">3A </a></span><span class="Size9Type">DSP</span></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 25.66pt">
+            <div class="CellHeading" style="color: #000000; font-size: 9.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><span class="Size9Type"><a name="3281630">6</a></span></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 25.66pt">
+            <div class="CellHeading" style="color: #000000; font-size: 9.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><span class="Size9Type"><a name="3281632">6 -1L</a></span></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 25.66pt">
+            <div class="CellHeading" style="color: #000000; font-size: 9.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><span class="Size9Type"><a name="3281634">4</a></span></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 25.66pt">
+            <div class="CellHeading" style="color: #000000; font-size: 9.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><span class="Size9Type"><a name="3281636">5</a></span></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 25.66pt">
+            <div class="CellHeading" style="color: #000000; font-size: 9.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><span class="Size9Type"><a name="3281638">5Q</a></span></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 28.2258pt">
+            <div class="CellHeading" style="color: #000000; font-size: 9.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><span class="Size9Type"><a name="3281640">6</a></span></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 28.2258pt">
+            <div class="CellHeading" style="color: #000000; font-size: 9.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><span class="Size9Type"><a name="3281642">6 -1L</a></span></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 28.2258pt">
+            <div class="CellHeading" style="color: #000000; font-size: 9.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><span style="color: #000000; font-family: Arial; font-size: 9.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><a name="3281644">7</a></span></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 28.2258pt">
+            <div class="CellHeading" style="color: #000000; font-size: 9.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><span style="color: #000000; font-family: Arial; font-size: 9.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline"><a name="3281646">7</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.085.html#3277022', '');" title="Reed-Solomon Encoder 8.0" name="3281650">Reed-Solomon Encoder 8.0</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="3281653">Reed-</a>Solomon Encoder</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle"><a href="javascript:void(0);" onClick="WWHFrame.WWHBrowser.fXilinxLink('coregen/ip/xilinx/dsp/com/xilinx/ip/rs_encoder_v8_0/doc/pg025_rs_encoder.pdf','')">V8.0</a><div class="CellBodyCenterMid"><a name="3281656">&nbsp;</a></div></td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><a name="3281658">&nbsp;</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><a name="3281660">&nbsp;</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><a name="3281662">&nbsp;</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="3281664">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="3281666">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><a name="3281668">&nbsp;</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><a name="3281670">&nbsp;</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><a name="3281672">&nbsp;</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="3281674">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="3281676">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="3281678">•</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle">
+            <div class="CellBodyCenterMid"><span class="Symbol"><a name="3281680">•</a></span></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="3277285">This is a licensed core, available for purchase on the Xilinx web site at: </a><span class="URL"><a href="http://www.xilinx.com/xlnx/xebiz/designResources/ip_product_details.jsp?key=DO-DI-RSE" target="external_window">http://www.xilinx.com/xlnx/xebiz/designResources/ip_product_details.jsp?key=DO-DI-RSE</a></span>.</div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

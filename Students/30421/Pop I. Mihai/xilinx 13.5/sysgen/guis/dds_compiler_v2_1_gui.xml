@@ -1,0 +1,187 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="DDS Compiler 2.1 " block_type="dds_compiler_v2_1">
+  <initialization file="xldds_compiler_v2_1_init.m"/>
+  <icon width="95" height="142" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen" entry_point="coregenimport_config"/>
+  <handlers enablement="xlipmagiccallback" action="xlipmagicaction"/>  
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsDSP"/>
+  </libraries>
+  <blockgui label="Xilinx DDS Compiler 2.1">
+    <!-- <editbox name="infoedit" default="DDS Compiler 2.1" read_only="true" evaluate="false" multi_line="true"/> -->
+    <tabpane>
+      <tab name="Basic_Parameters_tab" label="Basic">
+        <etch name="Function_Selection" label="Function Selection">
+          <radiogroup name="output_selection" default="Sine_and_Cosine" evaluate="false" label="Output selection" ctype="String" allow_advanced="false">
+            <item value="Sine"/>
+            <item value="Cosine"/>
+            <item value="Sine_and_Cosine"/>
+          </radiogroup>
+          <etch name="Polarity" label="Polarity">
+            <checkbox name="negative_sine" default="off" label="Negative sine" ctype="Bool" allow_advanced="false"/>
+            <checkbox name="negative_cosine" default="off" label="Negative cosine" ctype="Bool" allow_advanced="false"/>
+          </etch>
+        </etch>
+        <etch name="Performance_Options" label="Performance Options">
+          <listbox name="channels" default="1" evaluate="false" label="Number of channels" ctype="String" allow_advanced="false">
+            <item value="1"/>
+            <item value="2"/>
+            <item value="3"/>
+            <item value="4"/>
+            <item value="5"/>
+            <item value="6"/>
+            <item value="7"/>
+            <item value="8"/>
+            <item value="9"/>
+            <item value="10"/>
+            <item value="11"/>
+            <item value="12"/>
+            <item value="13"/>
+            <item value="14"/>
+            <item value="15"/>
+            <item value="16"/>
+          </listbox>
+          <editbox name="dds_clock_rate" default="100" top_label="true" evaluate="true" label="DDS clock rate (MHz)" ctype="Double"/>
+          <editbox name="spurious_free_dynamic_range" default="36" top_label="true" evaluate="true" label="Spurious free dynamic range (dB)" ctype="Double"/>
+          <editbox name="frequency_resolution" default="0.4" top_label="true" evaluate="true" label="Frequency resolution (Hz)" ctype="Double"/>
+        </etch>
+        <etch label="Optional Ports" name="optional_ports">
+          <!--<checkbox name="sclr_pin" default="off" label="Sclr pin" ctype="Bool" allow_advanced="false"/>-->
+          <checkbox name="rst" default="off" label="rst" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="en" default="off" label="en" ctype="Bool" allow_advanced="false"/>
+          <!--<checkbox name="clock_enable" default="off" label="Clock enable" ctype="Bool" allow_advanced="false"/>-->
+          <checkbox name="rfd" default="off" label="rfd" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="rdy" default="off" label="rdy" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="channel_pin" default="off" label="channel" ctype="Bool" allow_advanced="false"/>
+        </etch>
+        <etch name="periodetch" label="Explicit Sample Period">
+          <checkbox label="Use explicit period" name="explicit_period" default="on" evaluate="true" ctype="Int" allow_advanced="false"/>
+          <editbox name="period" default="1" label="Explicit period" ctype="Double"/>
+        </etch>        
+      </tab>
+      <tab name="Output_Frequency_Tab" label="Output Frequency">
+        <etch name ="Phase_Increment_Etch" label="Phase Increment">
+          <radiogroup label="" name="phase_increment" default="Fixed" evaluate="false" ctype="String" allow_advanced="false">
+            <item value="Fixed"/>
+            <item value="Programmable"/>
+          </radiogroup>
+        </etch>
+        <etch name="output_frequency_table_etch" label="Output Frequencies (MHz)">
+          <editbox name="output_frequency1" default="0"  evaluate="true" label="Frequency 1 " ctype="Double"/>
+          <editbox name="output_frequency2" default="0"  evaluate="true" label="Frequency 2 " ctype="Double"/>
+          <editbox name="output_frequency3" default="0"  evaluate="true" label="Frequency 3 " ctype="Double"/>
+          <editbox name="output_frequency4" default="0"  evaluate="true" label="Frequency 4 " ctype="Double"/>
+          <editbox name="output_frequency5" default="0"  evaluate="true" label="Frequency 5 " ctype="Double"/>
+          <editbox name="output_frequency6" default="0"  evaluate="true" label="Frequency 6 " ctype="Double"/>
+          <editbox name="output_frequency7" default="0"  evaluate="true" label="Frequency 7 " ctype="Double"/>
+          <editbox name="output_frequency8" default="0"  evaluate="true" label="Frequency 8 " ctype="Double"/>
+          <editbox name="output_frequency9" default="0"  evaluate="true" label="Frequency 9 " ctype="Double"/>
+          <editbox name="output_frequency10" default="0"  evaluate="true" label="Frequency 10 " ctype="Double"/>
+          <editbox name="output_frequency11" default="0"  evaluate="true" label="Frequency 11 " ctype="Double"/>
+          <editbox name="output_frequency12" default="0"  evaluate="true" label="Frequency 12 " ctype="Double"/>
+          <editbox name="output_frequency13" default="0"  evaluate="true" label="Frequency 13 " ctype="Double"/>
+          <editbox name="output_frequency14" default="0"  evaluate="true" label="Frequency 14 " ctype="Double"/>
+          <editbox name="output_frequency15" default="0"  evaluate="true" label="Frequency 15 " ctype="Double"/>
+          <editbox name="output_frequency16" default="0"  evaluate="true" label="Frequency 16 " ctype="Double"/>
+        </etch>
+      </tab>
+      <tab name="Output_Phase_Offset_Tab" label="Output Phase Offset">
+        <etch name="Phase_Offset_Etch" label="Phase Offset">
+          <radiogroup name="phase_offset" default="None" evaluate="false" label="" ctype="String" allow_advanced="false">
+            <item value="None"/>
+            <item value="Fixed"/>
+            <item value="Programmable"/>
+          </radiogroup>
+        </etch>
+        <etch name="phase_offset_table_etch" label="Phase Offset Angles (x 2pi radians)">
+          <editbox name="phase_offset_angles1" default="0"  evaluate="true" label="Angle 1" ctype="Double"/>
+          <editbox name="phase_offset_angles2" default="0"  evaluate="true" label="Angle 2" ctype="Double"/>
+          <editbox name="phase_offset_angles3" default="0"  evaluate="true" label="Angle 3" ctype="Double"/>
+          <editbox name="phase_offset_angles4" default="0"  evaluate="true" label="Angle 4" ctype="Double"/>
+          <editbox name="phase_offset_angles5" default="0"  evaluate="true" label="Angle 5" ctype="Double"/>
+          <editbox name="phase_offset_angles6" default="0"  evaluate="true" label="Angle 6" ctype="Double"/>
+          <editbox name="phase_offset_angles7" default="0"  evaluate="true" label="Angle 7" ctype="Double"/>
+          <editbox name="phase_offset_angles8" default="0"  evaluate="true" label="Angle 8" ctype="Double"/>
+          <editbox name="phase_offset_angles9" default="0"  evaluate="true" label="Angle 9" ctype="Double"/>
+          <editbox name="phase_offset_angles10" default="0"  evaluate="true" label="Angle 10" ctype="Double"/>
+          <editbox name="phase_offset_angles11" default="0"  evaluate="true" label="Angle 11" ctype="Double"/>
+          <editbox name="phase_offset_angles12" default="0"  evaluate="true" label="Angle 12" ctype="Double"/>
+          <editbox name="phase_offset_angles13" default="0"  evaluate="true" label="Angle 13" ctype="Double"/>
+          <editbox name="phase_offset_angles14" default="0"  evaluate="true" label="Angle 14" ctype="Double"/>
+          <editbox name="phase_offset_angles15" default="0"  evaluate="true" label="Angle 15" ctype="Double"/>
+          <editbox name="phase_offset_angles16" default="0"  evaluate="true" label="Angle 16" ctype="Double"/>
+        </etch>
+      </tab>
+      <tab name="Implementation_Tab" label="Implementation">
+        <etch name="Implementation_Options" label="Implementation Options">
+          <radiogroup name="memory_type" default="Auto" evaluate="false" label="Memory type" ctype="String" allow_advanced="false">
+            <item value="Auto"/>
+            <item value="Distributed_ROM"/>
+            <item value="Block_ROM"/>
+          </radiogroup>
+          <radiogroup name="optimization_goal" default="Auto" evaluate="false" label="Optimization goal" ctype="String" allow_advanced="false">
+            <item value="Auto"/>
+            <item value="Area"/>
+            <item value="Speed"/>
+          </radiogroup>
+          <radiogroup name="dsp48_use" default="Minimal" evaluate="false" label="Dsp48 use" ctype="String" allow_advanced="false">
+            <item value="Minimal"/>
+            <item value="Maximal"/>
+          </radiogroup>
+        </etch>
+        <etch name="Performance_options2" label="Performance Options">
+           <listbox name="noise_shaping" default="None" evaluate="false" label="Noise shaping" ctype="String" allow_advanced="false">
+             <item value="None"/>
+             <item value="Phase_Dithering"/>
+             <item value="Taylor_Series_Corrected"/>
+             <item value="Auto"/>
+           </listbox>    
+           <etch name="Latency_Options" label="Latency Options">
+             <radiogroup name="latency_configuration" default="Auto" evaluate="false" label="Latency configuration" ctype="String" allow_advanced="false">
+               <item value="Auto"/>
+               <item value="Configurable"/>
+             </radiogroup>
+             <listbox name="latency" default="1" evaluate="false" label="Latency" ctype="String" allow_advanced="false">
+               <item value="1"/>
+               <item value="2"/>
+               <item value="3"/>
+               <item value="4"/>
+               <item value="5"/>
+               <item value="6"/>
+               <item value="7"/>
+               <item value="8"/>
+               <item value="9"/>
+               <item value="10"/>
+               <item value="11"/>
+               <item value="12"/>
+               <item value="13"/>
+               <item value="14"/>
+               <item value="15"/>
+             </listbox>
+             <radiogroup name="accumulator_latency" default="One" evaluate="false" label="Accumulator latency" ctype="String" allow_advanced="false">
+               <item value="Zero"/>
+               <item value="One"/>
+             </radiogroup>
+           </etch>  
+        </etch>        
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation" ctype="Bool" allow_advanced="false"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" evaluate="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]" />
+        </etch>
+      </tab>
+    </tabpane>
+    <hiddenvar name="por_mode" default="false" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="ip_name" default="DDS Compiler" evaluate="false" ctype="String"/>
+    <hiddenvar name="ip_version" default="2.1" evaluate="false" ctype="String"/>
+    <hiddenvar name="dsptool_ready" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="wrapper_available" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="structural_sim" default="false" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="clock_enable" default="true" ctype="Bool" evaluate="true"/>
+    <hiddenvar name="sclr_pin" default="false" ctype="Bool" evaluate="true"/>
+    <hiddenvar name="port_translation_map" default="{ 'ce' => 'en', 'sclr' => 'rst'}" ctype="String" evaluate="false"/>
+  </blockgui>
+</sysgenblock>
+

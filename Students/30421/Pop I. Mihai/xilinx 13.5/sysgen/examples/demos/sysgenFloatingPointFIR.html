@@ -1,0 +1,43 @@
+<html>
+<body>
+<h3><font size=+1 color="#990000">Sysgen Floating Point FIR using M-Hardware Cosim</font></h3>
+<p>
+This model implements a transposed FIR filter with single precision floating point inputs. The floating 
+point data is communicated to/from the FIR filter using the Shared FIFO based approach. 
+</p>
+<p>
+The read enable on the input FIFO is asserted only when the FIFO is not empty. The write enable on the 
+output FIFO is asserted when the FIFO is not full and the delayed read enable signal from the input FIFO is 
+high. The delayed read enable signal is used from the input FIFO for synchronization with the output FIFO, 
+when the subsytem is free-running in nature. This ensures that  the correct samples are read out from the 
+output FIFO.
+</p>
+<p>
+This model implements a transposed FIR filter with single precision floating point inputs. The floating 
+point data is communicated to/from the FIR filter using the Shared FIFO based approach. 
+</p>
+<p>
+The amount of delay required between the input and the output FIFO is equal to the clock cycles required by 
+the subsystem to produce the first output + 1(delay from the FIFO). 
+</p>
+<p>
+The subsystem also contains an enable input. This signal is used for synchronization in the internal circuitry. 
+It ensures that the correct data samples are propagated through the internal circuitry only when there is valid
+data in the input FIFO.
+</p>
+<p>
+The FIR subsystem takes in the coefficients of the filters and implements a transposed FIR Filter. When the 
+coefficients are given to the block, internally the 'sysgenFloatingPointFIRGenerator.m' script is run. This is 
+used for programmatic generation of Xilinx based simulink blocks and models. Please refer the section on 
+Programmatic Access in the SysGen User Guide for more details on Programmatic Generation API (PGAPI).  
+</p>
+<p>
+The files for hardware cosimulation(.hwc, .mdl, .bit) with six tap FIR filter are provided along with this example
+for SP-605 board. The M-hardware cosimulation script 'mhwcosim_fir_filter.m' will run the simulation on
+hardware. According to the synchronization circuitry provided, each input sample in the input FIFO will provide a corresponding ouput 
+sample on the output FIFO.  Sifting in zero input can be used to get the remaining data samples in the 
+subsystem out. 
+</p>
+
+</body>
+</html>

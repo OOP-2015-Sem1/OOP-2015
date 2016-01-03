@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Shared Memory Read</title>
+    <link rel="StyleSheet" href="css/Xilinx_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Blockset.11.001.html#271172">Xilinx Blockset</a> : Shared Memory Read</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="271172">Shared Memory Read</a></div>
+      <div class="Body"><span class="Italic"><a name="589145">This block is listed in the following Xilinx Blockset libraries: Shared Memory and Index.</a></span></div>
+      <div class="OneLiner"><a name="589154"><img class="Default" src="images/Xilinx_Blockset.11.097.1.jpg" width="60" height="51" style="display: block; float: none; left: 0.0; top: 0.0" alt="" />The Xilinx Shared Memory Read block provides a high-speed interface for </a>reading data from a Xilinx shared memory object. Both FIFO and lockable shared memory objects are supported by the block. </div>
+      <div class="Body"><a name="1104673">The requested data is read out of the shared memory and into a Simulink </a>scalar, vector, or matrix signal which is written to the block's output port. The bracketed text beneath the block indicates shared memory with which this block interfaces. The depth and width displays on the block indicate the size of the shared memory. These values are updated at runtime when the block makes the connection to the shared memory object. </div>
+      <div class="Body"><a name="589160">The Shared Memory Read block performs several transactions with its associated shared </a>memory object when it is woken up during a simulation. The frequency at which the block is woken up is determined by its <span class="Bold">Sample Time</span> parameter. The type of transactions performed depends on whether the block is associated with a FIFO or lockable shared memory object. </div>
+      <div class="Heading2"><a name="589163">FIFO Transactions </a></div>
+      <div class="Body"><a name="589166">The transactions with a shared FIFO object are listed below in their order of occurrence </a>during a simulation cycle: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="589170">Wait for Data</a></span>: The Shared Memory Read block waits for the shared FIFO object to become empty. If the shared FIFO object is not empty after 15 seconds, the Shared Memory Read block will time out and the simulation will terminate.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="589172">Read Data</a></span>: Once the block ensures a sufficient number of words are available, the Shared Memory Read block will read data from the shared FIFO object. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="589175">Lockable Memory Transactions</a></div>
+      <div class="Body"><a name="589180">The transactions with a lockable shared memory are listed below in their order of </a>occurrence during a simulation cycle: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="589184">Acquire Lock</a></span>: Before the Shared Memory Read block may read the shared memory contents, it must acquire lock over the shared memory object. If the block fails to gain lock after 15 seconds, it will time out and the simulation will terminate. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="589186">Read Data</a></span>: Once lock is acquired, the Shared Memory Read block will read data from the shared memory object. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="589188">Release Lock</a></span>: The Shared Memory Read block releases the lock after reading data from the shared memory object. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="589149">The Shared Memory Read block is useful for simulation only and is ignored during </a>netlisting. In particular, the Shared Memory Read block can be applied to hardware co-simulation designs with high throughput requirements. For more information on how this done, see the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.08.11.html#286973', '');" title="Real-Time Signal Processing using Hardware Co-Simulation">Real-Time Signal Processing using Hardware Co-Simulation</a></span> </div>
+      <div class="Heading2"><a name="589150">Block Parameters</a></div>
+      <div class="Body"><a name="590556">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model.</div>
+      <div class="Heading3"><a name="590557">Basic tab</a></div>
+      <div class="Body"><a name="590558">Parameters specific to the Basic tab are as follows:</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="590125">Shared memory name</a></span>: This parameter tells the unique string identifier for the Xilinx shared memory object from which data should be read. The shared memory must be a shared FIFO or lockable memory that is created and initialized elsewhere (i.e., the Shared Memory Read block does not create the specified shared memory object). </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="590127">Type</a></span>: Tells whether the block should read from a Xilinx shared FIFO or Lockable memory object. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="590129">Sample time</a></span>: Specifies how often this block should read from the shared memory. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading3"><a name="590588">Output Type tab</a></div>
+      <div class="Body"><a name="590589">Parameters specific to the Output Type tab are as follows:</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="590131">Data type</a></span>: Specifies how shared memory data words should be interpreted by the Shared Memory Read block. The Simulink scalar, vector, or matrix signal that is generated will be of the chosen data type. The supported data types are int8, uint8, int16, uint16, int32, and uint32. The width of the chosen data type must match the width of the data stored in the shared memory object. For example, if the width of the shared memory data is 16 bits, then you may choose int16 or uint16. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="590133">Output dimensions</a></span>: Specifies how the shared memory data image should be interpreted, by giving the size of each available dimension. For a vectored output, only a single dimension (N) must be specified. For a matrix output, specify the dimensions in a two-element array [M, N], where M gives the number of rows, and N gives the number of columns. The total number of elements in the output (N, or M*N) must not be greater than the depth of the shared memory. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="590135">Use frame-based output</a></span>: Specifies whether the output signal from the Shared Memory Read block should be represented as a frame-based signal or a sample-based signal. Frame-based signals represent consecutive sample-based signals that have been buffered together. For example, a frame-based output would be suitable for driving a Simulink Unbuffer block. Note that enabling frame-based output requires a two-dimensional output specified in the Output Dimensions parameter. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="590138">See Also</a></div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.098.html#271173', '');" title="Shared Memory Write" name="276991">Shared Memory Write</a></span></div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.08.11.html#286973', '');" title="Real-Time Signal Processing using Hardware Co-Simulation" name="590625">Real-Time Signal Processing using Hardware Co-Simulation</a></span> </div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

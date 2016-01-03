@@ -1,0 +1,430 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="VDMA Interface 4.0 " block_type="vdma">
+  <icon width="335" height="742" wmark_color="white" bg_color="yellow"/>
+  <dll name="emi" entry_point="emi_all_interfaces_config"/>
+  <handlers enablement="xlEMIEnablement" action="xlEMIaction"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsMemory"/>
+    <library name="xbsAXI4"/>
+  </libraries>
+  <blockgui label="Xilinx VDMA Interface">
+    <editbox name="infoedit" default="This is a bit-accurate simulation model for multiple AXI VDMA external memory interfaces.  Netlisting will generate the port interface that can be attached to the VDMA IP.  This block is currently in beta." read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="basic" label="Basic">
+		<listbox name="c_mem_size" default="64MB" evaluate="true" label="Memory size" ctype="Int" allow_advanced="true">
+          <item value="16MB"/>
+          <item value="32MB"/>
+          <item value="64MB"/>
+          <item value="128MB"/>
+          <item value="256MB"/>
+          <item value="512MB"/>
+          <item value="1GB"/>
+          <item value="2GB"/>
+        </listbox>
+        <listbox name="c_number_of_vdma_if" default="1" evaluate="true" label="Number of VDMA interfaces" ctype="Int" allow_advanced="true">
+	  <item value="1"/>
+          <item value="2"/>
+          <item value="3"/>
+          <item value="4"/>
+  	</listbox>
+      </tab>
+      <tab name="vdma_1" label="Interface 1">
+      <!-- Every Parameter will be suffixed with one if we want to move to one tab format later -->
+        <glayout cols="2">
+          <etch label="Parameters" >
+            <glayout cols="2">
+              <listbox name="c_stream_if_configuration_1" label="Stream interface" default="Master/Slave" evaluate="true" ctype="Int" allow_advanced="true">
+                <item value="Master/Slave"/>
+                <item value="Master"/>
+                <item value="Slave"/>
+              </listbox>
+              <editbox name="c_no_of_frames_1" default="3" evaluate="true" label="Number of frame stores [1..16]" ctype="Int" />
+            </glayout>
+            <glayout cols="2">
+              <checkbox name="c_use_fsync_1" label="Use external frame sync" default="off" evaluate="true" ctype="Int" allow_advanced="true"/>
+              <checkbox name="c_flush_on_fsync_1" label="Flush on frame sync" default="off" evaluate="true" ctype="Int" allow_advanced="true"/>
+              <checkbox name="c_use_sg_engine_1" label="Use Scatter Gather Engine" default="off" evaluate="true" ctype="Int" allow_advanced="true"/> 
+			  <checkbox name="c_video_prm_read_1" label="Use Video Parameter Read for Direct Mode" default="on" evaluate="true" ctype="Int" allow_advanced="true"/>
+              
+            </glayout>
+          </etch>
+        </glayout>
+        <glayout cols="2">
+          <etch name="memory_mapped_to_stream_parameters_1" label="Master Stream Interface">
+            <etch name="Streaming_Interface_1" label="Parameters">
+              <listbox name="c_m_axis_mm2s_data_width_1" label="Data width" default="32" ctype="Int" evaluate="true" allow_advanced="true">
+                <item value="8"/>
+                <item value="16"/>
+                <item value="32"/>
+                <item value="64"/>
+                <item value="128"/>
+                <item value="256"/>
+                <item value="512"/>
+                <item value="1024"/>
+              </listbox>
+            </etch>	
+            <etch name="Line_Buffer_1" label="Video Line Buffer">
+              <listbox name="c_mm2s_linebuffer_depth_1" label="Depth" default="0" ctype="Int" evaluate="true" allow_advanced="true">
+                <item value="0"/>
+                <item value="1"/>
+                <item value="2"/>
+                <item value="4"/>
+                <item value="8"/>
+                <item value="16"/>
+                <item value="32"/>
+                <item value="64"/>
+                <item value="128"/>
+                <item value="256"/>
+                <item value="512"/>
+                <item value="1024"/>
+                <item value="2048"/>
+                <item value="4096"/>
+                <item value="8192"/>
+                <item value="16384"/>
+                <item value="32768"/>
+                <item value="65536"/>
+              </listbox>
+              <editbox name="c_mm2s_linebuffer_threshold_1" label="Almost empty threshold [1..65536]" default="1" evaluate="true" ctype="Int"/>
+            </etch>
+          </etch>
+          <etch name="stream_to_memory_mapped_parameters_1" label="Slave Stream Interface">
+            <etch name="Streaming_Interface_1_b" label="Parameters">
+              <listbox name="c_s_axis_s2mm_data_width_1" label="Data width" default="32" ctype="Int" evaluate="true" allow_advanced="true">
+                <item value="8"/>
+                <item value="16"/>
+                <item value="32"/>
+                <item value="64"/>
+                <item value="128"/>
+                <item value="256"/>
+                <item value="512"/>
+                <item value="1024"/>
+              </listbox>
+            </etch>
+            <etch name="Line_Buffer_1_b" label="Video Line Buffer">
+              <listbox name="c_s2mm_linebuffer_depth_1" label="Depth" default="0" ctype="Int" evaluate="true" allow_advanced="true">
+                <item value="0"/>
+                <item value="1"/>
+                <item value="2"/>
+                <item value="4"/>
+                <item value="8"/>
+                <item value="16"/>
+                <item value="32"/>
+                <item value="64"/>
+                <item value="128"/>
+                <item value="256"/>
+                <item value="512"/>
+                <item value="1024"/>
+                <item value="2048"/>
+                <item value="4096"/>
+                <item value="8192"/>
+                <item value="16384"/>
+                <item value="32768"/>
+                <item value="65536"/>
+              </listbox>
+              <editbox name="c_s2mm_linebuffer_threshold_1" label="Almost full threshold [1..65536]" default="1" evaluate="true" ctype="Int"/>
+            </etch>
+          </etch>
+       </glayout>	
+     </tab>
+
+      <tab name="vdma_2" label="Interface 2">
+        <!-- Every Parameter will be suffixed with one if we want to move to one tab format later -->
+        <glayout cols="2">
+          <etch label="Parameters" >
+            <glayout cols="2">
+              <listbox name="c_stream_if_configuration_2" label="Stream interface" default="Master/Slave" evaluate="true" ctype="Int" allow_advanced="true">
+                <item value="Master/Slave"/>
+                <item value="Master"/>
+                <item value="Slave"/>
+              </listbox>
+              <editbox name="c_no_of_frames_2" default="3" evaluate="true" label="Number of frame stores [1..16]" ctype="Int" />
+            </glayout>
+            <glayout cols="2">
+              <checkbox name="c_use_fsync_2" label="Use external frame sync" default="off" evaluate="true" ctype="Int" allow_advanced="true"/>
+              <checkbox name="c_flush_on_fsync_2" label="Flush on frame sync" default="off" evaluate="true" ctype="Int" allow_advanced="true"/>
+              <checkbox name="c_use_sg_engine_2" label="Use Scatter Gather Engine" default="off" evaluate="true" ctype="Int" allow_advanced="true"/> 
+			  <checkbox name="c_video_prm_read_2" label="Use Video Parameter Read for Direct Mode" default="on" evaluate="true" ctype="Int" allow_advanced="true"/>
+            </glayout>
+          </etch>
+        </glayout>
+        <glayout cols="2">
+          <etch name="memory_mapped_to_stream_parameters_2" label="Master Stream Interface">
+            <etch name="Streaming_Interface_2" label="Parameters">
+              <listbox name="c_m_axis_mm2s_data_width_2" label="Data width" default="32" ctype="Int" evaluate="true" allow_advanced="true">
+                <item value="8"/>
+                <item value="16"/>
+                <item value="32"/>
+                <item value="64"/>
+                <item value="128"/>
+                <item value="256"/>
+                <item value="512"/>
+                <item value="1024"/>
+              </listbox>
+            </etch>
+            <etch name="Line_Buffer_2" label="Video Line Buffer">
+              <listbox name="c_mm2s_linebuffer_depth_2" label="Depth" default="0" ctype="Int" evaluate="true" allow_advanced="true">
+                <item value="0"/>
+                <item value="1"/>
+                <item value="2"/>
+                <item value="4"/>
+                <item value="8"/>
+                <item value="16"/>
+                <item value="32"/>
+                <item value="64"/>
+                <item value="128"/>
+                <item value="256"/>
+                <item value="512"/>
+                <item value="1024"/>
+                <item value="2048"/>
+                <item value="4096"/>
+                <item value="8192"/>
+                <item value="16384"/>
+                <item value="32768"/>
+                <item value="65536"/>
+              </listbox>
+              <editbox name="c_mm2s_linebuffer_threshold_2" label="Almost empty threshold [1..65536]" default="1" evaluate="true" ctype="Int"/>
+            </etch>
+          </etch>
+          <etch name="stream_to_memory_mapped_parameters_2" label="Slave Stream Interface">
+            <etch name="Streaming_Interface_2_b" label="Parameters">
+              <listbox name="c_s_axis_s2mm_data_width_2" label="Data width" default="32" ctype="Int" evaluate="true" allow_advanced="true">
+                <item value="8"/>
+                <item value="16"/>
+                <item value="32"/>
+                <item value="64"/>
+                <item value="128"/>
+                <item value="256"/>
+                <item value="512"/>
+                <item value="1024"/>
+              </listbox>
+            </etch>
+            <etch name="Line_Buffer_2_b" label="Video Line Buffer">
+              <listbox name="c_s2mm_linebuffer_depth_2" label="Depth" default="0" ctype="Int" evaluate="true" allow_advanced="true">
+                <item value="0"/>
+                <item value="1"/>
+                <item value="2"/>
+                <item value="4"/>
+                <item value="8"/>
+                <item value="16"/>
+                <item value="32"/>
+                <item value="64"/>
+                <item value="128"/>
+                <item value="256"/>
+                <item value="512"/>
+                <item value="1024"/>
+                <item value="2048"/>
+                <item value="4096"/>
+                <item value="8192"/>
+                <item value="16384"/>
+                <item value="32768"/>
+                <item value="65536"/>
+              </listbox>
+              <editbox name="c_s2mm_linebuffer_threshold_2" label="Almost full threshold [1..65536]" default="1" evaluate="true" ctype="Int"/>
+            </etch>
+          </etch>
+        </glayout>
+      </tab>
+      
+      <tab name="vdma_3" label="Interface 3">
+        <!-- Every Parameter will be suffixed with one if we want to move to one tab format later -->
+        <glayout cols="2">
+          <etch label="Parameters" >
+            <glayout cols="2">
+              <listbox name="c_stream_if_configuration_3" label="Stream interface" default="Master/Slave" evaluate="true" ctype="Int" allow_advanced="true">
+                <item value="Master/Slave"/>
+                <item value="Master"/>
+                <item value="Slave"/>
+              </listbox>
+              <editbox name="c_no_of_frames_3" default="3" evaluate="true" label="Number of frame stores [1..16]" ctype="Int" />
+            </glayout>
+            <glayout cols="2">
+              <checkbox name="c_use_fsync_3" label="Use external frame sync" default="off" evaluate="true" ctype="Int" allow_advanced="true"/>
+              <checkbox name="c_flush_on_fsync_3" label="Flush on frame sync" default="off" evaluate="true" ctype="Int" allow_advanced="true"/>
+              <checkbox name="c_use_sg_engine_3" label="Use Scatter Gather Engine" default="off" evaluate="true" ctype="Int" allow_advanced="true"/> 
+			  <checkbox name="c_video_prm_read_3" label="Use Video Parameter Read for Direct Mode" default="on" evaluate="true" ctype="Int" allow_advanced="true"/>
+            </glayout>
+          </etch>
+        </glayout>
+        <glayout cols="2">
+          <etch name="memory_mapped_to_stream_parameters_3" label="Master Stream Interface">
+            <etch name="Streaming_Interface_3" label="Parameters">
+              <listbox name="c_m_axis_mm2s_data_width_3" label="Data width" default="32" ctype="Int" evaluate="true" allow_advanced="true">
+                <item value="8"/>
+                <item value="16"/>
+                <item value="32"/>
+                <item value="64"/>
+                <item value="128"/>
+                <item value="256"/>
+                <item value="512"/>
+                <item value="1024"/>
+              </listbox>
+            </etch>
+            <etch name="Line_Buffer_3" label="Video Line Buffer">
+              <listbox name="c_mm2s_linebuffer_depth_3" label="Depth" default="0" ctype="Int" evaluate="true" allow_advanced="true">
+                <item value="0"/>
+                <item value="1"/>
+                <item value="2"/>
+                <item value="4"/>
+                <item value="8"/>
+                <item value="16"/>
+                <item value="32"/>
+                <item value="64"/>
+                <item value="128"/>
+                <item value="256"/>
+                <item value="512"/>
+                <item value="1024"/>
+                <item value="2048"/>
+                <item value="4096"/>
+                <item value="8192"/>
+                <item value="16384"/>
+                <item value="32768"/>
+                <item value="65536"/>
+              </listbox>
+              <editbox name="c_mm2s_linebuffer_threshold_3" label="Almost empty threshold [1..65536]" default="1" evaluate="true" ctype="Int"/>
+            </etch>
+          </etch>
+          <etch name="stream_to_memory_mapped_parameters_3" label="Slave Stream Interface">
+            <etch name="Streaming_Interface_3_b" label="Parameters">
+              <listbox name="c_s_axis_s2mm_data_width_3" label="Data width" default="32" ctype="Int" evaluate="true" allow_advanced="true">
+                <item value="8"/>
+                <item value="16"/>
+                <item value="32"/>
+                <item value="64"/>
+                <item value="128"/>
+                <item value="256"/>
+                <item value="512"/>
+                <item value="1024"/>
+              </listbox>
+            </etch>
+            <etch name="Line_Buffer_3_b" label="Video Line Buffer">
+              <listbox name="c_s2mm_linebuffer_depth_3" label="Depth" default="0" ctype="Int" evaluate="true" allow_advanced="true">
+                <item value="0"/>
+                <item value="1"/>
+                <item value="2"/>
+                <item value="4"/>
+                <item value="8"/>
+                <item value="16"/>
+                <item value="32"/>
+                <item value="64"/>
+                <item value="128"/>
+                <item value="256"/>
+                <item value="512"/>
+                <item value="1024"/>
+                <item value="2048"/>
+                <item value="4096"/>
+                <item value="8192"/>
+                <item value="16384"/>
+                <item value="32768"/>
+                <item value="65536"/>
+              </listbox>
+              <editbox name="c_s2mm_linebuffer_threshold_3" label="Almost full threshold [1..65536]" default="1" evaluate="true" ctype="Int"/>
+            </etch>
+          </etch>
+        </glayout>
+      </tab>
+
+      <tab name="vdma_4" label="Interface 4">
+        <!-- Every Parameter will be suffixed with one if we want to move to one tab format later -->
+        <glayout cols="2">
+          <etch label="Parameters" >
+            <glayout cols="2">
+              <listbox name="c_stream_if_configuration_4" label="Stream interface" default="Master/Slave" evaluate="true" ctype="Int" allow_advanced="true">
+                <item value="Master/Slave"/>
+                <item value="Master"/>
+                <item value="Slave"/>
+              </listbox>
+              <editbox name="c_no_of_frames_4" default="3" evaluate="true" label="Number of frame stores [1..16]" ctype="Int" />
+            </glayout>
+            <glayout cols="2">
+              <checkbox name="c_use_fsync_4" label="Use external frame sync" default="off" evaluate="true" ctype="Int" allow_advanced="true"/>
+              <checkbox name="c_flush_on_fsync_4" label="Flush on frame sync" default="off" evaluate="true" ctype="Int" allow_advanced="true"/>
+              <checkbox name="c_use_sg_engine_4" label="Use Scatter Gather Engine" default="off" evaluate="true" ctype="Int" allow_advanced="true"/> 
+			  <checkbox name="c_video_prm_read_4" label="Use Video Parameter Read for Direct Mode" default="on" evaluate="true" ctype="Int" allow_advanced="true"/>
+            </glayout>
+          </etch>
+        </glayout>
+        <glayout cols="2">
+          <etch name="memory_mapped_to_stream_parameters_4" label="Master Stream Interface">
+            <etch name="Streaming_Interface_4" label="Parameters">
+              <listbox name="c_m_axis_mm2s_data_width_4" label="Data width" default="32" ctype="Int" evaluate="true" allow_advanced="true">
+                <item value="8"/>
+                <item value="16"/>
+                <item value="32"/>
+                <item value="64"/>
+                <item value="128"/>
+                <item value="256"/>
+                <item value="512"/>
+                <item value="1024"/>
+              </listbox>
+            </etch>
+            <etch name="Line_Buffer_4" label="Video Line Buffer">
+              <listbox name="c_mm2s_linebuffer_depth_4" label="Depth" default="0" ctype="Int" evaluate="true" allow_advanced="true">
+                <item value="0"/>
+                <item value="1"/>
+                <item value="2"/>
+                <item value="4"/>
+                <item value="8"/>
+                <item value="16"/>
+                <item value="32"/>
+                <item value="64"/>
+                <item value="128"/>
+                <item value="256"/>
+                <item value="512"/>
+                <item value="1024"/>
+                <item value="2048"/>
+                <item value="4096"/>
+                <item value="8192"/>
+                <item value="16384"/>
+                <item value="32768"/>
+                <item value="65536"/>
+              </listbox>
+              <editbox name="c_mm2s_linebuffer_threshold_4" label="Almost empty threshold [1..65536]" default="1" evaluate="true" ctype="Int"/>
+            </etch>
+          </etch>
+          <etch name="stream_to_memory_mapped_parameters_4" label="Slave Stream Interface">
+            <etch name="Streaming_Interface_4_b" label="Parameters">
+              <listbox name="c_s_axis_s2mm_data_width_4" label="Data width" default="32" ctype="Int" evaluate="true" allow_advanced="true">
+                <item value="8"/>
+                <item value="16"/>
+                <item value="32"/>
+                <item value="64"/>
+                <item value="128"/>
+                <item value="256"/>
+                <item value="512"/>
+                <item value="1024"/>
+              </listbox>
+            </etch>
+            <etch name="Line_Buffer_4_b" label="Video Line Buffer">
+              <listbox name="c_s2mm_linebuffer_depth_4" label="Depth" default="0" ctype="Int" evaluate="true" allow_advanced="true">
+                <item value="0"/>
+                <item value="1"/>
+                <item value="2"/>
+                <item value="4"/>
+                <item value="8"/>
+                <item value="16"/>
+                <item value="32"/>
+                <item value="64"/>
+                <item value="128"/>
+                <item value="256"/>
+                <item value="512"/>
+                <item value="1024"/>
+                <item value="2048"/>
+                <item value="4096"/>
+                <item value="8192"/>
+                <item value="16384"/>
+                <item value="32768"/>
+                <item value="65536"/>
+              </listbox>
+              <editbox name="c_s2mm_linebuffer_threshold_4" label="Almost full threshold [1..65536]" default="1" evaluate="true" ctype="Int"/>
+            </etch>
+          </etch>
+        </glayout>
+      </tab>
+    </tabpane>  
+    <hiddenvar name="simulation_model" default="'emi:EMIModel'" evaluate="true" ctype="String"/>	 
+  </blockgui>
+</sysgenblock>
+

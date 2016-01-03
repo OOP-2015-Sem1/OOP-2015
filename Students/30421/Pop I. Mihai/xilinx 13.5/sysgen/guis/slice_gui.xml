@@ -1,0 +1,48 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Slice" block_type="slice">
+  <initialization file="xlslice_init.m"/>
+  <icon width="60" height="30" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="Slice_config"/>
+  <handlers enablement="sliceenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsBasic"/>
+    <library name="xbsControl"/>
+    <library name="xbsTypes"/>
+  </libraries>
+  <blockgui label="Xilinx Bit Slice Extractor">
+    <editbox name="infoedit" default="Extracts a given range of bits from each input sample and presents it at the output.  The output type is ordinarily unsigned with binary point at zero, but can be Boolean when the slice is one bit wide.&lt;br&gt;&lt;br&gt;Hardware notes: In hardware this block costs nothing." read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <editbox name="nbits" default="1" evaluate="true" label="Width of slice (number of bits)" ctype="Int"/>
+        <checkbox name="boolean_output" default="off" evaluate="true" label="Boolean output" ctype="Int"/>
+        <radiogroup name="mode" default="Upper Bit Location + Width" evaluate="true" label="Specify range as" ctype="Int">
+          <item value="Two Bit Locations" label="Two bit locations"/>
+          <item value="Upper Bit Location + Width" label="Upper bit location + width"/>
+          <item value="Lower Bit Location + Width" label="Lower bit location + width"/>
+        </radiogroup>
+        <editbox name="bit1" default="0" evaluate="true" label="Offset of top bit" ctype="Int"/>
+        <radiogroup name="base1" default="MSB of Input" evaluate="true" label="Relative to" ctype="Int">
+          <item value="LSB of Input" label="LSB of input"/>
+          <item value="Binary Point of Input" label="Binary point of input"/>
+          <item value="MSB of Input" label="MSB of input"/>
+        </radiogroup>
+        <editbox name="bit0" default="0" evaluate="true" label="Offset of bottom bit" ctype="Int"/>
+        <radiogroup name="base0" default="LSB of Input" evaluate="true" label="Relative to" ctype="Int">
+          <item value="LSB of Input" label="LSB of input"/>
+          <item value="Binary Point of Input" label="Binary point of input"/>
+          <item value="MSB of Input" label="MSB of input"/>
+        </radiogroup>
+      </tab>
+      <tab name="advancedtab" label="Advanced">
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <workspacevar name="sysgen_root" ctype="String"/>
+    <workspacevar name="sim_engine" ctype="Int"/>
+  </blockgui>
+</sysgenblock>

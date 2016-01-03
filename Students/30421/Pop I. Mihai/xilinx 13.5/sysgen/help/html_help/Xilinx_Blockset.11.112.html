@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Up Sample</title>
+    <link rel="StyleSheet" href="css/Xilinx_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Blockset.11.001.html#599620">Xilinx Blockset</a> : Up Sample</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="599620">Up Sample</a></div>
+      <div class="Body"><span class="Italic"><a name="277316">This block is listed in the following Xilinx Blockset libraries: Basic Elements and Index.</a></span></div>
+      <div class="OneLiner"><a name="600152"><img class="Default" src="images/Xilinx_Blockset.11.112.1.jpg" width="46" height="45" style="display: block; float: none; left: 0.0; top: 0.0" alt="" />The Xilinx Up Sample block increases the sample rate at the point where the </a>block is placed in your design. The output sample period is l/n, where l is the input sample period and n is the sampling rate. </div>
+      <div class="Body"><a name="1104738">The input signal is up sampled so that within an input sample frame, an input </a>sample is either presented at the output n times if samples are copied, or presented once with (n-1) zeroes interspersed if zero padding is used. </div>
+      <div class="Body"><a name="277319">In hardware, the Up Sample block has two possible implementations. If the Copy Samples </a>option is selected on the block parameters dialog box, the Din port is connected directly to Dout and no hardware is expended. Alternatively, if zero padding is selected, a mux is used to switch between the input sample and inserted zeros. The corresponding circuit for the zero padding Up Sample block is shown below.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="601149"><img class="Default" src="images/Xilinx_Blockset.11.112.2.jpg" width="153" height="104" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="600185">Block Interface</a></div>
+      <div class="Body"><a name="600186">The Up Sample block receives two clock enable signals, Src_CE and Dest_CE. Src_CE is the </a>clock enable signal corresponding to the input data stream rate. Dest_CE is the faster clock enable, corresponding to the output data stream rate. Notice that the circuit uses a single flip-flop in addition to the mux. The flip-flop is used to adjust the timing of Src_CE, so that the mux switches to the data input sample at the start of the input sample period, and switches to the constant zero after the first input sample. It is important to notice that the circuit has a combinational path from Din to Dout. As a result, an Up Sample block configured to zero pad should be followed by a register whenever possible.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="601309"><img class="Default" src="images/Xilinx_Blockset.11.112.3.jpg" width="284" height="105" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="600187">Block Parameters</a></div>
+      <div class="Body"><a name="277323">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model.</div>
+      <div class="Heading3"><a name="600521">Basic tab</a></div>
+      <div class="Body"><a name="600363">Parameters specific to the Basic tab are as follows:</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="600469">Sampling rate (number of output samples per input sample)</a></span>: must be an integer with a value of 2 or greater. This is the ratio of the output sample period to the input, and is essentially a sample rate multiplier. For example, a ratio of 2 indicates a doubling of the input sample rate. If a non-integer ratio is desired, the Up Sample block can be used in combination with the Down Sample block. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="600364">Copy samples (otherwise zeros are inserted)</a></span>: allows you to choose what to do with the additional samples produced by the increased clock rate. By selecting Copy Samples, the same sample will be duplicated (copied) during the extra sample times. If this checkbox is not selected, the additional samples are zero.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="2177596">Optional Ports</a></div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><span class="Bold"><a name="2177592">Provide enable port</a></span>. When checked, this option adds an en(enable) input port, if the Latency is specified as a positive integer greater than zero.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2152704">Latency</a></span>: This defines the number of sample periods by which the block's output is delayed. One sample period may correspond to multiple clock cycles in the corresponding FPGA implementation (for example, when the hardware is over-clocked with respect to the Simulink model). The user defined sample latency is handled in the Upsample block by placing shift registers that are clock enabled at the input sample rate, on the input of the block. The behavior of an Upsample block with non-zero latency is similar to putting a delay block, with equivalent latency, at the input of an Upsample block with zero latency.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="2152699">Parameters used by this block are explained in the topic </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.003.html#271277', '');" title="Common Options in Block Parameter Dialog Boxes">Common Options in Block Parameter Dialog Boxes</a></span>.</div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

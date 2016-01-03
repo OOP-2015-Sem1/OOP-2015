@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Lesson 4 - Multi-Rate Systems</title>
+    <link rel="StyleSheet" href="css/Getting%20Started.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Getting%20Started.5.1.html#273833">Getting Started</a> : Lesson 4 - Multi-Rate Systems</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="273833">Lesson 4 - Multi-Rate Systems</a></div>
+      <div class="Heading2"><a name="276423">Creating Multi-Rate Systems</a></div>
+      <div class="BodyWide"><a name="276665">The following illustration shows a typical base-station receiver. The tower has multiple antennas to provide </a>sectored coverage of the area. The diagram shows that this results in two receiver channels. In each of these channels, there is some form of complex mixing, resulting in real and imaginary channels.</div>
+      <div class="BodyWide"><a name="276666">Often DSP systems such as this will down sample the input signals prior to the digital filtering steps performed </a>during equalization and demodulation. Doing so can simplify the filter design and hardware significantly. These systems are referred to as “multi-rate” systems</div>
+      <div class="BodyWide"><a name="276585">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="276584"><img class="Default" src="images/Getting%20Started.5.5.1.jpg" width="666" height="452" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="276683">Up and Down Sampling Blocks</a></div>
+      <div class="BodyWide"><a name="276694">System Generator includes Up Sample and Down Sample blocks that change the system sample rate. The Up </a>Sample block adds additional samples to the signal to achieve the desired rate change. The value of these new samples is either zero or the value of the last actual sample depending on the block options. The Down Sample block simply discards samples until it achieves the desired rate change. For example, downsample by 3 means to discard 2 out of every 3 samples.</div>
+      <div class="BodyWide"><a name="276690">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="276689"><img class="Default" src="images/Getting%20Started.5.5.2.jpg" width="671" height="470" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="276426">Rate Changing Functional Blocks</a></div>
+      <div class="BodyWide"><a name="276705">In addition to the straightforward “Up Sample” and “Down Sample” blocks, System Generator also provides rate </a>changing functional blocks; that is blocks that also perform a specific function. The Parallel to Serial block will up sample, the Serial to Parallel block will down sample, the FIR Compiler, if using a resource-shared multiplier will down sample and the TDM block will up sample. </div>
+      <div class="BodyWide"><a name="276615">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="276614"><img class="Default" src="images/Getting%20Started.5.5.3.jpg" width="666" height="426" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="276427">Viewing Rate Changes in Simulink</a></div>
+      <div class="BodyWide"><a name="276717">Simulink supports viewing different sample times as different colors which is fully supported for System Generator </a>blocks. To enable the <span class="Bold">Sample Time Colors</span> feature, select the pulldown menu <span class="Bold">Format &gt; Sample Time Colors</span>. The Simulink tool does not automatically recolor the model with each change you make to it, so you must select <span class="Bold">Edit &gt; </span><span class="Bold">Update Diagram</span> to explicitly update the model coloration. To return to your original coloring, disable the sample time coloration by, again, choosing<span class="Bold"> Sample Time Colors</span>.</div>
+      <div class="BodyWide"><a name="276630">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="276629"><img class="Default" src="images/Getting%20Started.5.5.4.jpg" width="663" height="468" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="276428">Debugging Tools</a></div>
+      <div class="BodyWide"><a name="276724">System Generator provides 3 debugging utilities to assist in debugging complex multi-rate systems. </a></div>
+      <div class="BodyWide"><a name="276726">The Sample Time (ST) probe can be connected to any System Generator signal then to a Simulink “display” block </a>from the “Sinks” library. The sample time for the connected net will appear in the display. </div>
+      <div class="BodyWide"><a name="276728">The </a><span class="Filename">clk</span> probe is not connected to any inputs but only to a scope output. It displays the master clock. This can be used with the Clock Enable Probe to display the behavior of the clock enable signal at various points in the down sampling</div>
+      <div class="BodyWide"><a name="276645">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="276644"><img class="Default" src="images/Getting%20Started.5.5.5.jpg" width="654" height="469" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="276745">Sample Period “Rules”</a></div>
+      <div class="BodyWide"><a name="276756">The illustration below is an example of a multi-rate system that demonstrates how the Simulink System Period can </a>be calculated and entered into the System Generator token GUI. </div>
+      <div class="BodyWide"><a name="276757">If you get it wrong, there is a sampling period analyzer that automatically determines the appropriate sample </a>period and prompts you to update the GUI.</div>
+      <div class="BodyWide"><a name="276752">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="276751"><img class="Default" src="images/Getting%20Started.5.5.6.jpg" width="669" height="472" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="276491">Lab Exercise: Multi-Rate Systems</a></div>
+      <div class="Body"><a name="276503">In this lab you will be exploring the effects of the rate changing blocks available in System </a>Generator. These blocks include Upsample, Downsample, Serial to Parallel and Parallel to Serial.</div>
+      <div class="Body"><a name="276495">The lab instructions and lab design are located in the System Generator software tree at the </a>following pathname:</div>
+      <div class="Body" style="color: #000000; font-size: 9.0pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 5.0pt; margin-top: 5.0pt; text-transform: none; vertical-align: baseline;"><span class="Filename"><a name="286418">&lt;ISE_Design_Suite_tree&gt;/sysgen/examples/getting_started_training/lab5/</a></span></div>Lab Instructions<a href="javascript:void();" onClick="WWHFrame.WWHBrowser.fMLProtocol(&quot;cd(xilinx.environment.getpath(\'sysgen\'));cd examples/getting_started_training/lab5;open ('lab5.pdf')&quot;)">(Open Lab Instructions)</a>Lab Design<a href="javascript:void();" onClick="WWHFrame.WWHBrowser.fMLProtocol('cd(xilinx.environment.getpath(\'sysgen\'));cd examples/getting_started_training/lab5;open lab5.mdl')">(Open Lab Design)</a><script type="text/javascript" language="JavaScript1.2"><!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // --></script></blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

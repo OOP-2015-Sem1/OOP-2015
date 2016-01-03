@@ -1,0 +1,52 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Serial to Parallel" block_type="s2p">
+  <initialization file="xls2p_init.m"/>
+  <icon width="60" height="54" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="S2P_config"/>
+  <handlers enablement="xlmagicenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsBasic"/>
+    <library name="xbsTypes"/>
+  </libraries>
+  <blockgui label="Xilinx Serial to Parallel Converter">
+    <editbox name="infoedit" default="Groups of samples presented serially at the input become single samples presented at the output." read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <radiogroup name="input_order" default="Least Significant Word First" evaluate="true" label="Input order" ctype="Int">
+          <item value="Least Significant Word First" label="Least significant word first"/>
+          <item value="Most Significant Word First" label="Most significant word first"/>
+        </radiogroup>
+        <etch label="Output Precision">
+          <radiogroup name="arith_type" default="Unsigned" evaluate="true" label="Arithmetic type" ctype="Int">
+            <item value="Signed  (2's comp)" label="Signed  (2's comp)"/>
+            <item value="Unsigned" label="Unsigned"/>
+          </radiogroup>
+          <editbox name="output_bits" default="16" evaluate="true" label="Number of bits" ctype="Int"/>
+          <editbox name="bin_pt" default="0" evaluate="true" label="Binary point" ctype="Int"/>
+        </etch>
+        <etch label="Optional Ports">
+          <checkbox name="rst" default="off" evaluate="true" label="Provide &lt;tt&gt;reset&lt;/tt&gt; port" ctype="Bool"/>
+          <checkbox name="en" default="off" evaluate="true" label="Provide &lt;tt&gt;enable&lt;/tt&gt; port" ctype="Int"/>
+        </etch>
+        <editbox name="latency" default="1" evaluate="true" label="Latency" ctype="Int"/>
+      </tab>
+      <tab name="advancedtab" label="Advanced">
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <workspacevar name="sysgen_root" ctype="String"/>
+    <workspacevar name="sim_engine" ctype="Int"/>
+    <hiddenvar name="input_bits"/>
+  </blockgui>
+</sysgenblock>

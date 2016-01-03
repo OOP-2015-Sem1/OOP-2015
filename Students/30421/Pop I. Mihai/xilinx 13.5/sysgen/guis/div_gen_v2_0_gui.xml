@@ -1,0 +1,71 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Divider Generator 2.0 " block_type="div_gen_v2_0">
+  <icon width="95" height="142" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen" entry_point="coregenimport_config"/>
+  <initialization file="xldivider_generator_v2_0_init.m"/>
+  <handlers enablement="xlipmagiccallback" action="xlipmagicaction"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsMath"/>
+    <library name="xbsDSP"/>
+  </libraries>
+  <blockgui label="Xilinx Divider Generator 2.0">
+    <!-- <editbox name="infoedit" default="Divider Generator 2.0" read_only="true" evaluate="false" multi_line="true"/> -->
+    <tabpane>
+      <tab name="Coregen_Parameters_tab" label="Basic">
+        <etch label="Common Options">
+          <editbox name="dividend_and_quotient_width" label="Dividend and quotient width" default="2" evaluate="true" ctype="Int"/>
+          <editbox name="divisor_width" label="Divisor width" default="32" evaluate="true" ctype="Int"/>
+          <radiogroup name="algorithm_type" default="Radix2" evaluate="false" label="Algorithm Type" ctype="String" allow_advanced="false">
+            <item value="Radix2"/>
+            <item value="High_Radix"/>
+          </radiogroup>
+          <radiogroup name="remainder_type" default="Remainder" evaluate="false" label="Remainder type" ctype="String" allow_advanced="false">
+            <item value="Remainder"/>
+            <item value="Fractional"/>
+          </radiogroup>
+          <editbox name="fractional_width" default="16" top_label="true" evaluate="true" label="Fractional width" ctype="Int"/>
+        </etch>
+        <etch label="Radix2 Options">
+          <listbox name="clocks_per_division" default="1" evaluate="false" label="Clocks per division" ctype="String" allow_advanced="false">
+            <item value="1"/>
+            <item value="2"/>
+            <item value="4"/>
+            <item value="8"/>
+          </listbox>
+        </etch>
+        <etch label="High Radix Options">
+          <checkbox name="divide_by_zero_detect" default="off" label="Detect divide by zero" ctype="Bool" allow_advanced="false"/>
+          <radiogroup name="latency_configuration" default="Automatic" evaluate="false" label="Latency configuration" ctype="String" allow_advanced="false">
+            <item value="Automatic"/>
+            <item value="Manual"/>
+          </radiogroup>
+          <editbox name="latency" default="25" top_label="true" evaluate="true" label="Latency" ctype="Int"/>
+        </etch>
+        <etch label="Optional Ports">
+          <checkbox name="en" default="off" label="en" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="rst" default="off" label="rst" ctype="Bool" allow_advanced="false"/>
+        </etch>
+      </tab>
+      <tab name="Implementation_tab" label="Implementation">
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation" ctype="Bool" allow_advanced="false"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" evaluate="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]" />
+        </etch>
+      </tab>
+    </tabpane>
+    <hiddenvar name="ip_name" default="Divider Generator" evaluate="false" ctype="String"/>
+    <hiddenvar name="ip_version" default="2.0" evaluate="false" ctype="String"/>
+    <hiddenvar name="dsptool_ready" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="wrapper_available" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="ce" default="1" ctype="Bool" evaluate="true" />
+    <hiddenvar name="sclr" default="1" ctype="Bool" evaluate="true" />
+    <hiddenvar name="sclr_ce_priority" default="SCLR_overrides_CE" evaluate="false" ctype="String"/>
+    <hiddenvar name="operand_sign" default="Signed" evaluate="false" ctype="String"/>
+    <hiddenvar name="port_translation_map" default="{ 'ce' => 'en', 'sclr' => 'rst' }" evaluate="false" ctype="String"/>
+    <hiddenvar name="ipcore_fpga_part" default="xlipgetpartsetting(gcb, {'virtex4', 'xc4vsx35', '-10', 'ff668'})" evaluate="true" ctype="StringVector" />
+  </blockgui>
+</sysgenblock>
+

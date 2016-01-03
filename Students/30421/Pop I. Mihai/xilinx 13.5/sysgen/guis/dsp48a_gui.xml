@@ -1,0 +1,90 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="DSP48A" block_type="dsp48a">
+  <icon width="75" height="136" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="DSP48A_config"/>
+  <handlers enablement="dsp48aenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsDSP"/>
+	<library name="xbsMath"/>
+  </libraries>
+  <blockgui label="Xilinx DSP48A">
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <etch name="optports" label="Optional Ports">
+          <checkbox name="use_op" default="on" evaluate="true" label="Consolidate control port (opmode, carry_in, preadd select, preadd subtract)" ctype="Bool"/>
+          <checkbox name="use_creg" default="off" evaluate="true" label="Provide &lt;tt&gt;C&lt;/tt&gt; port" ctype="Bool"/>
+          <checkbox name="use_d" default="off" evaluate="true" label="Provide &lt;tt&gt;D&lt;/tt&gt; port" ctype="Bool"/>
+          <checkbox name="use_pcin" default="off" evaluate="true" label="Provide &lt;tt&gt;PCIN&lt;/tt&gt; port" ctype="Bool"/>
+          <checkbox name="use_pcout" default="off" evaluate="true" label="Provide &lt;tt&gt;PCOUT&lt;/tt&gt; port" ctype="Bool"/>
+          <checkbox name="use_bcout" default="off" evaluate="true" label="Provide &lt;tt&gt;BCOUT&lt;/tt&gt; port" ctype="Bool"/>
+          <checkbox name="use_carryin" default="off" evaluate="true" label="Provide &lt;tt&gt;CARRYIN&lt;/tt&gt; port" ctype="Bool"/>
+          <checkbox name="use_carryout" default="off" evaluate="true" label="Provide &lt;tt&gt;CARRYOUT&lt;/tt&gt; port" ctype="Bool"/>
+          <checkbox name="rst_all" default="off" evaluate="true" label="Provide global reset port" ctype="Bool"/>
+          <checkbox name="en_all" default="off" evaluate="true" label="Provide global enable port" ctype="Bool"/>
+        </etch>
+	<radiogroup name="carryin_type" default="Direct from carry in port" evaluate="true" label="Carry in input" ctype="Int">
+          <item value="Direct from carry in port" label="Direct from carry in port"/>
+          <item value="Cascaded from carry in port" label="Cascaded from carry in port"/>
+  	</radiogroup> 
+      </tab>
+      <tab label="Pipelining">
+        <etch label="Pipeline Options">
+          <etch name="pipe_a" label="Pipeline A Input">
+            <checkbox name="use_a0reg" default="on" evaluate="true" label="Use A0 reg" ctype="Bool"/>
+            <checkbox name="use_a1reg" default="on" evaluate="true" label="Use A1 reg" ctype="Bool"/>
+          </etch>
+          <etch name="pipe_b" label="Pipeline B Input">
+            <checkbox name="use_b0reg" default="on" evaluate="true" label="Use B0 reg" ctype="Bool"/>
+            <checkbox name="use_b1reg" default="on" evaluate="true" label="Use B1 reg" ctype="Bool"/>
+          </etch>
+          <checkbox name="pipeline_c" default="on" evaluate="true" label="Pipeline &lt;tt&gt;C&lt;/tt&gt;" ctype="Bool"/>
+          <checkbox name="pipeline_d" default="on" evaluate="true" label="Pipeline &lt;tt&gt;D&lt;/tt&gt;" ctype="Bool"/>
+          <checkbox name="pipeline_mult" default="on" evaluate="true" label="Pipeline multiplier" ctype="Bool"/>
+          <checkbox name="pipeline_p" default="on" evaluate="true" label="Pipeline &lt;tt&gt;P&lt;/tt&gt;" ctype="Bool"/>
+          <checkbox name="pipeline_opmode" default="on" evaluate="true" label="Pipeline &lt;tt&gt;opmode&lt;/tt&gt;" ctype="Bool"/>
+          <checkbox name="pipeline_carryin" default="on" evaluate="true" label="Pipeline carry in" ctype="Bool"/>
+        </etch>
+      </tab>
+      <tab name="advtab" label="Ports">
+        <hlayout>
+          <etch name="individualresets" label="Provide Reset Ports">
+            <checkbox name="rst_a" default="off" evaluate="true" label="Reset port for &lt;tt&gt;A&lt;/tt&gt;" ctype="Bool"/>
+            <checkbox name="rst_b" default="off" evaluate="true" label="Reset port for &lt;tt&gt;B&lt;/tt&gt;" ctype="Bool"/>
+            <checkbox name="rst_c" default="off" evaluate="true" label="Reset port for &lt;tt&gt;C&lt;/tt&gt;" ctype="Bool"/>
+            <checkbox name="rst_d" default="off" evaluate="true" label="Reset port for &lt;tt&gt;D&lt;/tt&gt;" ctype="Bool"/>
+            <checkbox name="rst_mult" default="off" evaluate="true" label="Reset port for multiplier" ctype="Bool"/>
+            <checkbox name="rst_p" default="off" evaluate="true" label="Reset port for &lt;tt&gt;P&lt;/tt&gt;" ctype="Bool"/>
+            <checkbox name="rst_opmode" default="off" evaluate="true" label="Reset port for &lt;tt&gt;opmode&lt;/tt&gt;" ctype="Bool"/>
+            <checkbox name="rst_carry_in" default="off" evaluate="true" label="Reset port for carry in" ctype="Bool"/>
+          </etch>
+          <etch name="individualenables" label="Provide Enable Ports">
+            <checkbox name="en_a" default="off" evaluate="true" label="Enable port for &lt;tt&gt;A&lt;/tt&gt;" ctype="Bool"/>
+            <checkbox name="en_b" default="off" evaluate="true" label="Enable port for &lt;tt&gt;B&lt;/tt&gt;" ctype="Bool"/>
+            <checkbox name="en_c" default="off" evaluate="true" label="Enable port for &lt;tt&gt;C&lt;/tt&gt;" ctype="Bool"/>
+            <checkbox name="en_d" default="off" evaluate="true" label="Enable port for &lt;tt&gt;D&lt;/tt&gt;" ctype="Bool"/>
+            <checkbox name="en_mult" default="off" evaluate="true" label="Enable port for multiplier" ctype="Bool"/>
+            <checkbox name="en_p" default="off" evaluate="true" label="Enable port for &lt;tt&gt;P&lt;/tt&gt;" ctype="Bool"/>
+            <checkbox name="en_opmode" default="off" evaluate="true" label="Enable port for &lt;tt&gt;opmode&lt;/tt&gt;" ctype="Bool"/>
+            <checkbox name="en_carry_in" default="off" evaluate="true" label="Enable port for carry in" ctype="Bool"/>
+          </etch>
+        </hlayout>
+      </tab>
+      <tab label="Advanced">
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles" ctype="Bool"/>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <checkbox name="use_synth_model" default="off" evaluate="true" label="Use synthesizable model" ctype="Bool"/>
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <hiddenvar name="device" default="3" evaluate="true" ctype="Int"/>
+  </blockgui>
+</sysgenblock>

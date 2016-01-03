@@ -1,0 +1,80 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="MCode" block_type="mcode">
+  <initialization file="xlmcode_init.m"/>
+  <icon width="65" height="62" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="mcode_block_config"/>
+  <handlers enablement="mcodeenablement" action="mcodeaction"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsControl"/>
+    <library name="xbsMath"/>
+  </libraries>
+  <blockgui label="Xilinx MCode Block">
+    <editbox name="infoedit" default="Pass input values to a MATLAB function for evaluation in Xilinx fixed-point type. The input ports of the block are input arguments of the function. The output ports of the block are output arguments of the function." read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <etch label="Block Interface">
+          <editbox name="mfname" default="xlmax" top_label="true" evaluate="false" label="MATLAB function" ctype="String"/>
+          <hlayout>
+            <browsebutton  name="browse" caption="Select MCode file"  filter="MCode files (*.m *.sgp)"/>
+            <button name="editmfile" label="Edit M-File..."/>
+          </hlayout>
+        </etch>
+        <etch name="periodetch" label="Explicit Sample Period">
+          <checkbox name="explicit_period" default="off" label="Specify explicit sample period" ctype="Int"/>
+          <editbox name="period" default="1" top_label="true" label="" ctype="Double"/>
+        </etch>
+      </tab>
+      <tab name="interface" label="Interface">
+	<etch label="Block Interface" name="blockinterface">
+	  <table name="inputsTable" read_only="false" show_grid="true">
+	    <editbox name="inputs" read_only="true" label="Input name"/>
+	    <editbox name="boundInpExpr" read_only="false" label="Bind to value"/>
+	  </table>
+	  <table name="outputsTable" read_only="false" show_grid="true">
+	    <editbox name="outputs" read_only="true" label="Output name"/>
+	    <checkbox name="suppressOut" label="Suppress output"/>
+	  </table>		
+	</etch>	
+      </tab>	
+      <tab name="advancedtab" label="Advanced">
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+          <checkbox name="enable_stdout" default="off" label="Enable printing with disp" ctype="Int"/>
+          <checkbox name="enable_debug" default="off" label="Enable MATLAB debugging (slows simulation)" ctype="Int"/>
+        </etch>
+      </tab>
+      <tab name="implementationtab" label="Implementation">
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <workspacevar name="mfilename" ctype="String"/>
+    <workspacevar name="sgpfilename" ctype="String"/>
+    <workspacevar name="error_msgs" ctype="StringVector"/>
+    <workspacevar name="explicitClk" ctype="Int"/>
+    <workspacevar name="param_names_bool" ctype="StringVector"/>
+    <workspacevar name="param_values_bool" ctype="IntVector"/>
+    <workspacevar name="param_names_double" ctype="StringVector"/>
+    <workspacevar name="param_values_double" ctype="DoubleVector"/>
+    <workspacevar name="bool_vec_names" ctype="StringVector"/>
+    <workspacevar name="bool_vec_values" ctype="IntVector"/>
+    <workspacevar name="bool_vec_lens" ctype="IntVector"/>
+    <workspacevar name="dbl_vec_names" ctype="StringVector"/>
+    <workspacevar name="dbl_vec_values" ctype="DoubleVector"/>
+    <workspacevar name="dbl_vec_lens" ctype="IntVector"/>
+    <workspacevar name="icontext" ctype="String"/>
+    <workspacevar name="drawport" ctype="String"/>
+    <hiddenvar name="mfilecontent" default="" evaluate="false" ctype="String"/>
+    <hiddenvar name="suppress_output" default="on" evaluate="false"/>
+    <hiddenvar name="defparams" default="{}" evaluate="true" ctype="Struct"/>
+    <hiddenvar name="hide_port_list" default="{}" evaluate="true" ctype="StringVector"/>
+    <workspacevar name="mfile_dir" ctype="String"/>
+    <workspacevar name="sysgen_root" ctype="String"/>
+    <workspacevar name="block_fullname" ctype="String"/>
+  </blockgui>
+</sysgenblock>

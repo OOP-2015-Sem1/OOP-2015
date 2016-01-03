@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Multipath Fading Channel Model</title>
+    <link rel="StyleSheet" href="css/Xilinx_Reference_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Reference_Blockset.12.01.html#632704">Xilinx Reference Blockset</a> : Multipath Fading Channel Model</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="632704">Multipath Fading Channel Model</a></div>
+      <div class="Body"><a name="632708"><img class="Default" src="images/Xilinx_Reference_Blockset.12.22.01.jpg" width="116" height="119" style="display: block; float: none; left: 0.0; top: 0.0" alt="" />The Multipath Fading Channel Model block implements a </a>model of a fading communication channel. The model supports both Single Input/Single Output (SISO) and Multiple Input/Multiple Output (MIMO) channels. The model provides functionality similar to the Simulink 'Multipath Rayleigh Fading Channel' block in a hardware realizable form. This enables high speed hardware co-simulation of entire communication links.</div>
+      <div class="Heading2"><a name="632709">Theory</a></div>
+      <div class="Body"><a name="632710">The block implements the </a><span class="Italic">Kronecker model</span>. This model is suitable for systems with antenna arrays not exceeding four elements. The primary model parameters are: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="632711">MT: The number of antennas in the transmit array. For SISO systems this is 1. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="632712">MR: The number of antennas in the receive array. For SISO systems this is 1. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="743143">N; The number of discrete paths between the arrays. For frequency flat channels this </a>is 1. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="743147">The model can be represented by the discrete time equation:<img class="Default" src="images/Xilinx_Reference_Blockset.12.22.02.jpg" width="191" height="59" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+      <div class="Body"><a name="743148">Where: </a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="632722">x(.): Transmit symbol column vector (MT complex elements, time varying). </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="632723">T: Sample interval. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="632724">n: Sample index. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="632725">d</a><span class="Subscript">k</span>: Delay for path k. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="632726">H</a><span class="Subscript">k</span>(.): Channel coefficient matrix (MR×MT complex elements, time varying). </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="632727">g</a><span class="Subscript">k</span>: Gain for path k. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="632728">y(.): Receive symbol column vector (MR complex elements, time varying). </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="743095">The channel coefficient matrix can be further defined in terms of the spatial covariance </a>matrices of the antenna arrays:<img class="Default" src="images/Xilinx_Reference_Blockset.12.22.03.jpg" width="175" height="55" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></div>
+      <div class="Body"><a name="632736">Where: </a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="632737">R</a><span class="Subscript">T,k</span>: Transmit array spatial covariance matrix for path k. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="632738">H</a><span class="Subscript">U,k</span>(.): Uncorrelated channel coefficient matrix for path k (M<span class="Subscript">R</span>×M<span class="Subscript">T</span> elements, time varying). </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="632739">R</a><span class="Subscript">R,k</span>: Receive array spatial covariance matrix for path k. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="632740">Implementation</a></div>
+      <div class="Body"><a name="632741">The above equations can be rephrased as sparse matrix operations. This allows the </a>elimination of the path summation. The model can then be implemented as follows:</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="632747"><img class="Default" src="images/Xilinx_Reference_Blockset.12.22.04.jpg" width="330" height="142" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="632748">Block Parameters</a></div>
+      <div class="Body"><a name="632749">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model.</div>
+      <div class="Heading3"><a name="632750">Paths tab</a></div>
+      <div class="Body"><a name="632751">Parameters specific to the Paths tab are as follows:</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632752">Path Delay Vector</a></span>: Specify the delay spread for each path in the model. Each element represents the number of samples to delay the path by. The value must be an N element vector. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632753">Path Gain Vector</a></span>: Specify the gain for each path in the model. Each element represents the linear gain of the path. The value must be an N element vector</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading3"><a name="632754">Covariance tab</a></div>
+      <div class="Body"><a name="632755">To support frequency selective channels (N&gt;1), these parameters can be specified as three </a>dimensional arrays. The first two dimensions specify the square covariance matrix, the third specifies the path. If a two dimensional array is specified for a frequency selective channel, it is automatically replicated to produce a three dimensional array. The third dimension is optional for frequency flat (N=1) channels. </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632756">Transmit Array Spatial Covariance Matrices</a></span>: Specify the transmit antenna array covariance matrix for each path. The value can be a M<span class="Subscript">T</span>×M<span class="Subscript">T</span> matrix, or a M<span class="Subscript">T</span>×M<span class="Subscript">T</span>×N array. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632757">Receive Array Spatial Covariance Matrices</a></span>: Specify the receive antenna array covariance matrix for each path. The value can be a M<span class="Subscript">R</span>×M<span class="Subscript">R</span> matrix, or a M<span class="Subscript">R</span>×M<span class="Subscript">R</span>×N array.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading3"><a name="632758">Fading tab</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632759">Spectrum Data</a></span>: Specify the fading phase and frequency response of each physical path. The number of physical paths is the product of the number of discrete paths (N), and the number of paths between each element of the transmit and receive antenna arrays (MT×MR). Spectrum data must be a multidimensional structure with dimensions MR×MT×N. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632760">Rate</a></span>: Specify the interpolation rate from maximum Doppler frequency (FDMAX) to channel sample frequency (FS). It can be determined as follows:<img class="Default" src="images/Xilinx_Reference_Blockset.12.22.05.jpg" width="114" height="54" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading3"><a name="632767">Internal tab</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632768">Datapath Width in Bits</a></span>: Specify the width in bits of all internal datapaths. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632769">Transmit Multiply Binary Point</a></span>: Specify the binary point position at the output of the RT multiply block. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632770">Fading Multiply Binary Point</a></span>: Specify the binary point position at the output of the fading multiply block. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632771">Receive Multiply Binary Point</a></span>: Specify the binary point position at the output of the RR multiply block. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632772">Covariance Matrix Binary Point</a></span>: Specify the binary point position of the covariance matrix coefficients. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632773">Random Seed</a></span>: Specify the 61-bit (16 hexadecimal digits) seed of the phase noise random number generator. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="632774">Functions</a></div>
+      <div class="Body"><a name="632775">The model includes two MATLAB functions to simply parameter generation. </a></div>
+      <div class="Heading3"><a name="632776">create_r_la</a></div>
+      <div class="Body"><a name="632777">The 'create_r_la(M,P,phi0,d,lambda,AS)' function generates a covariance matrix from </a>steering vectors as described in <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Reference_Blockset.12.22.html#632868', '');" title="Multipath Fading Channel Model">Reference</a></span> [1] at the end of this block description. </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632778">M</a></span>: Specify the number of antennas in the array (transmit or receive). </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632779">P</a></span>: Specify the number of random paths to integrate over to generate the matrix (a value of 50000 gives good results). </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632780">phi0</a></span>: Specify the mean angle of departure (for transmit arrays) or arrival (for receive arrays). Value is in radians. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632781">d</a></span>: Specify antenna spacing as a vector of antenna positions along a baseline. If this value is specified as a scalar value, the function assumes a uniform linear array (ULA) with the elements evenly distributed about the baseline origin. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632782">lambda</a></span>: Specify the wavelength, in meters. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632783">AS</a></span>: Specify the angular spread around the mean angle in radians. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="632784">For example, to create a matrix for a 3 element ULA with element spacing of </a><span class="Symbol">λ</span>/2 at 2GHz with an angular spread of 15°: </div>
+      <div class="Code"><a name="632785">lambda=2.0e9/2.99e8; </a></div>
+      <div class="Code"><a name="632786">create_r_la(3,50000,0,lambda/2,lambda,15*(2*pi/360)) </a></div>
+      <div class="Heading3"><a name="632787">calc_path_data</a></div>
+      <div class="Body"><a name="632788">The '</a><span class="Filename">calc_path_data(spec_type,spec_fd)</span>' function generates spectrum data for a model. </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632789">spec_type</a></span>: Specify the spectrum type for each physical path in the model. This value must be a multidimensional array with dimensions MR×MT×N. Each element specifies the spectrum type for the physical path. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632790">spec_fd</a></span>: Specify the spectrum Doppler frequency for each physical path, normalized to the maximum Doppler frequency (FDMAX). This value can be a multidimensional array with dimensions MR×MT×N or scalar, in which case the value is applied to all physical paths. If omitted a value of unity is assumed. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="632791">The value of each spectrum type element specifies the spectrum shape to use for that </a>physical path. Four spectrum types are supported. </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632792">Type 0</a></span>: Specify a null physical path. The path coefficients are zero, and the path exhibits no transmission. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632793">Type 1</a></span>: Specify an impulse physical path. An impulse path has a single impulse in its spectrum. They can be used to represent the line-of-sight (LOS) paths in a channel model (such as required by Rician channels). </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="743408">Type 2</a></span>: Specify a classic spectrum physical path. The classic spectrum is also known as the Jakes or Clarke spectrum. It is used to model wireless links with mobile stations [2] [3] [4] and is defined as:</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="743414"><img class="Default" src="images/Xilinx_Reference_Blockset.12.22.06.jpg" width="156" height="62" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="743419">Type 3</a></span>: Specify a rounded spectrum physical path. The rounded spectrum is used to model wireless links with fixed stations [5] and is defined as:</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="743425"><img class="Default" src="images/Xilinx_Reference_Blockset.12.22.07.jpg" width="210" height="44" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="632808">Once generated, each spectrum is normalized to unity power. </a></div>
+      <div class="Body"><a name="632809">For example, to create and plot spectrum data for a M</a><span class="Subscript">T</span>=4, M<span class="Subscript">R</span>=3 and N=2 channel, where the two paths combine to give Rician fading (i.e. impulse and classic). We assume that the mobile station (MS) is receding from the base station (BS) at 0.707×vMS (giving fd=0.707 for the LOS physical paths): </div>
+      <div class="Code"><a name="632810">Mt=4; Mr=3; N=2; </a></div>
+      <div class="Code"><a name="632811">spec_type=cat(3,ones(Mr,Mt)*1  ,ones(Mr,Mt)*2); </a></div>
+      <div class="Code"><a name="632812">spec_fd  =cat(3,ones(Mr,Mt)*0.707,ones(Mr,Mt)*1); </a></div>
+      <div class="Code"><a name="632813">spec_data=calc_path_data(spec_type,spec_fd); </a></div>
+      <div class="Code"><a name="632814">plot([spec_data.spectrum]); </a></div>
+      <div class="Heading2"><a name="632815">Data Format</a></div>
+      <div class="Body"><a name="632816">Internally the model uses a three signal interface for transferring complex vector quantities </a>between blocks. This interface allows matrix/vector operations to be chained together. Vectors are transferred as streams of interleaved real and imaginary samples tagged with frame and repetition handshaking signals. This interface allows vectors to be repeated multiple times per frame. This feature can be used to simplify matrix-vector multiplies, where the vector values are required repeatedly, once per matrix row. </div>
+      <div class="Body"><a name="632817">The three signal interface is as follows: </a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632818">reim</a></span>: Stream of interleaved real and imaginary (I and Q) samples for each vector. Potentially each vector is transferred multiple times, as indicated by the rd signal. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632819">fd</a></span>: Indicates the start of each vector frame. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632820">rd</a></span>: Indicates the start of each vector repetition. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="632821">The diagram below shows how a 3-element vector would be represented before </a>multiplication by a 3×3 matrix. The vector is repeated 3 times (once for each matrix row) greatly simplifying the multiplication logic.</div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504.0pt">
+            <div class="Anchor"><a name="741531"><img class="Default" src="images/Xilinx_Reference_Blockset.12.22.08.jpg" width="484" height="127" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="632828">Input</a></div>
+      <div class="Body"><a name="632829">Input data is presented on the in_fd, in_rd, and in_reim ports. Vector repetition is not </a>required at the input, hence the in_rd signal is ignored, and only the first 2×MT samples are used. For example, for a MT=2 channel:</div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504.0pt">
+            <div class="Anchor"><a name="741820"><img class="Default" src="images/Xilinx_Reference_Blockset.12.22.09.jpg" width="461" height="127" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="632836">Output</a></div>
+      <div class="Body"><a name="742568">Output data is presented on the out_fd, out_rd, and out_reim ports. The data is repeated </a>throughout the frame. For example, for a MR=3 channel.:</div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504.0pt">
+            <div class="Anchor"><a name="742574"><img class="Default" src="images/Xilinx_Reference_Blockset.12.22.10.jpg" width="473" height="127" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="742580">Timing</a></div>
+      <div class="Body"><a name="632845">The number of samples between successive fd pulses (TVEC), must be sufficient for the </a>internal blocks to process the data. The number of cycles required by each block is a function of the MT, MR, N, and RATE parameters as follows: </div>
+      <div class="Body"><a name="632846">  RT Multiply: Requires 2×MT×MT×N cycles </a></div>
+      <div class="Body"><a name="632847">  Fading Multiply: Requires 2×MT×MR×N×ceil(64/RATE) cycles </a></div>
+      <div class="Body"><a name="632848">  RR Multiply: Requires 2×MR×MR×N cycles </a></div>
+      <div class="Body"><a name="632855">Hence, the minimum value of TVEC is:<img class="Default" src="images/Xilinx_Reference_Blockset.12.22.11.jpg" width="310" height="55" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+      <div class="Body"><a name="632856">The model will produce an error during simulation if this constraint is not met.</a></div>
+      <div class="Heading2"><a name="632857">Initialization</a></div>
+      <div class="Body"><a name="632858">The model requires approximate 3×R input frames for the fading coefficient generator to </a>initialize. During this period the channel coefficients, and consequentially the output data, will be zero.</div>
+      <div class="Heading2"><a name="632859">Demonstrations</a></div>
+      <div class="Body"><a name="632860">Two demonstrations are included that show how the model can be used. Each includes </a>notes on how parameters can be calculated. </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="632861">SISO Channel Model </a><a href="javascript:void();" onClick="WWHFrame.WWHBrowser.fMLProtocol('cd(xilinx.environment.getpath(\'sysgen\'));cd examples/demos;open mfcm_siso_sim.mdl')">(Open this model)</a>: A demo showing a SISO channel based on 3GPP TS 25.104, Annex B.2, Case 4. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="632862">MIMO Channel Model </a><a href="javascript:void();" onClick="WWHFrame.WWHBrowser.fMLProtocol('cd(xilinx.environment.getpath(\'sysgen\'));cd examples/demos;open mfcm_mimo_sim.mdl')">(Open this model)</a>: A demo showing a frequency flat MIMO channel.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="632863">Hardware Co-Simulation Example</a></div>
+      <div class="Body"><a name="740363">An example of how to use the model for hardware co-simulation is included in the </a><span class="Filename" style="font-style: normal">&lt;ISE_Design_Suite_tree&gt;/sysgen</span><span class="Filename" style="font-style: normal">/examples/mfcm_hwcosim</span> directory. The directory contains three files: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="740364">mfcm_hw.mdl </a><a href="javascript:void();" onClick="WWHFrame.WWHBrowser.fMLProtocol('cd(xilinx.environment.getpath(\'sysgen\'));cd examples/mfcm_hwcosim;open mfcm_hw.mdl')">(Open this model)</a>: Model specifying the hardware component of the co-simulation design. Design consists of a shared memory for data input, a channel model, and a shared memory for data output. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="632866">mfcm_hw_cw.bit: The 'mfcm_hw.mdl' design compiled for the XtremeDSP kit. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="632867">mfcm_cosim.mdl </a><a href="javascript:void();" onClick="WWHFrame.WWHBrowser.fMLProtocol('cd(xilinx.environment.getpath(\'sysgen\'));cd examples/mfcm_hwcosim;open mfcm_cosim.mdl')">(Open this model)</a>: Model specifying the software component of the co-simulation. The shared memory blocks are used to pass packets of data to the hardware for processing, and to receive packets of processed data. By default this design will use the pre-generated 'mfcm_hw_cw.bit' – this will have to be regenerated for different hardware targets.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="632868">Reference</a></div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="632869">A. Forenza and R.W. Heath Jr. </a><span class="Italic">Impact of Antenna Geometry on MIMO Communication in </span><span class="Italic">Indoor Clustered Channels</span>, Wireless Networking and Communications Group, ECE Department, The University of Texas at Austin. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="632870">3GPP TS 25.101 V6.7.0 (2005-03) </a><span class="Italic">Annex B, User Equipment (UE) radio transmission and </span><span class="Italic">reception (FDD)</span>, Technical Specification Group Radio Access Network, 3rd Generation Partnership Project. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="632871">3GPP TS 25.104 V6.8.0 (2004-12) </a><span class="Italic">Annex B, Base Station (BS) radio transmission and </span><span class="Italic">reception (FDD)</span>, Technical Specification Group Radio Access Network, 3rd Generation Partnership Project. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="632872">3GPP TR 25.943 V6.0.0 (2004-12), </a><span class="Italic">Deployment aspects</span>, Technical Specification Group Radio Access Network, 3rd Generation Partnership Project. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">5.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="632873">IEEE 802.16.3c-01/29r4 (2001-07-16) </a><span class="Italic">Channel Models for Fixed Wireless Applications</span>, IEEE 802.16 Broadband Wireless Access Working Group.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

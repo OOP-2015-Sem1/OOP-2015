@@ -1,0 +1,125 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="ChipScope" block_type="chipscope">
+  <initialization file="xlchipscope_init.m"/>
+  <icon width="60" height="84" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="Chipscope_config"/>
+  <handlers enablement="chipscopeenablement" action="chipscopeaction"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsTools"/>
+  </libraries>
+  <blockgui label="Xilinx ChipScope">
+    <editbox name="infoedit" default="Enables run-time debugging and verification of signals by inserting ChipScope Pro ICON and ILA cores.&lt;br&gt;&lt;br&gt;  Restrictions: &lt;br&gt;Only one ChipScope core can be instantiated in a System Generator design. A design or subsystem containing a ChipScope block must have at least one output port." read_only="true" evaluate="false" multi_line="true"/>
+    <etch label="Triggers">
+      <listbox name="num_trig_ports" default="2" evaluate="true" label="Number of trigger ports" ctype="Int">
+        <item value="1"/>
+        <item value="2"/>
+        <item value="3"/>
+        <item value="4"/>
+        <item value="5"/>
+        <item value="6"/>
+        <item value="7"/>
+        <item value="8"/>
+        <item value="9"/>
+        <item value="10"/>
+        <item value="11"/>
+        <item value="12"/>
+        <item value="13"/>
+        <item value="14"/>
+        <item value="15"/>
+        <item value="16"/>
+      </listbox>
+    </etch>
+    <etch label="Trigger Settings">
+      <hiddenvar name="current_port" default="0"/>
+      <listbox name="show_trig_port" default="0" evaluate="true" label="Display settings for trigger port" ctype="Int">
+        <item value="0"/>
+        <item value="1"/>
+        <item value="2"/>
+        <item value="3"/>
+        <item value="4"/>
+        <item value="5"/>
+        <item value="6"/>
+        <item value="7"/>
+        <item value="8"/>
+        <item value="9"/>
+        <item value="10"/>
+        <item value="11"/>
+        <item value="12"/>
+        <item value="13"/>
+        <item value="14"/>
+        <item value="15"/>
+      </listbox>
+      <listbox name="match_units" default="1" evaluate="true" label="Number of match units">
+        <item value="1"/>
+        <item value="2"/>
+        <item value="3"/>
+        <item value="4"/>
+      </listbox>
+      <listbox name="match_type" default="Basic" evaluate="true" label="Match type">
+        <item value="Basic"/>
+        <item value="Basic with edges"/>
+        <item value="Extended"/>
+        <item value="Extended with edges"/>
+        <item value="Range"/>
+        <item value="Range with edges"/>
+      </listbox>
+    </etch>
+    <checkbox name="data_is_trigger" default="off" evaluate="true" label="Use trigger ports as data" ctype="Int"/>
+    <editbox name="num_data_ports" default="1" evaluate="true" label="Number of data ports" ctype="Int"/>
+    <listbox name="data_depth" default="512" evaluate="true" label="Depth of capture buffer" ctype="Int">
+      <item value="512"/>
+      <item value="1024"/>
+      <item value="2048"/>
+      <item value="4096"/>
+      <item value="8192"/>
+      <item value="16384"/>
+      <item value="32768"/>
+      <item value="65536"/>
+      <item value="131072"/>
+    </listbox>
+    <etch label="Implementation">
+      <checkbox name="SRL16s" default="on" evaluate="true" label="Use SRL16s (when possible)" ctype="Int"/>
+      <checkbox name="add_bufg" default="on" evaluate="true" label="Add BUFG to JTAG clock" ctype="Int"/>
+    </etch>
+    <hiddenvar name="match_type_t0" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_type_t1" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_type_t2" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_type_t3" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_type_t4" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_type_t5" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_type_t6" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_type_t7" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_type_t8" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_type_t9" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_type_t10" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_type_t11" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_type_t12" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_type_t13" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_type_t14" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_type_t15" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_units_t0" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_units_t1" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_units_t2" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_units_t3" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_units_t4" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_units_t5" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_units_t6" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_units_t7" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_units_t8" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_units_t9" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_units_t10" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_units_t11" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_units_t12" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_units_t13" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_units_t14" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="match_units_t15" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="dbl_ovrd" default="0" evaluate="true"/>
+    <hiddenvar name="user_scan_chain" default="USER1" evaluate="false" ctype="String"/>
+    <workspacevar name="dstr" ctype="StringVector"/>
+    <workspacevar name="match_type_t#" ctype="Int"/>
+    <workspacevar name="match_units_t#" ctype="Int"/>
+  </blockgui>
+</sysgenblock>

@@ -1,0 +1,1371 @@
+Library {
+  Name			  "sysgenTestbenchLibrary"
+  Version		  6.1
+  MdlSubVersion		  0
+  SavedCharacterEncoding  "ibm-5348_P100-1997"
+  SaveDefaultBlockParams  on
+  LibraryLinkDisplay	  "none"
+  ShowLoopsOnError	  on
+  IgnoreBidirectionalLines off
+  CovSaveName		  "covdata"
+  CovMetricSettings	  "dw"
+  CovNameIncrementing	  off
+  CovHtmlReporting	  on
+  covSaveCumulativeToWorkspaceVar on
+  CovSaveSingleToWorkspaceVar on
+  CovCumulativeReport	  off
+  CovReportOnPause	  on
+  ScopeRefreshTime	  0.035000
+  OverrideScopeRefreshTime on
+  DisableAllScopes	  off
+  BlockNameDataTip	  off
+  BlockParametersDataTip  off
+  BlockDescriptionStringDataTip	off
+  ToolBar		  on
+  StatusBar		  on
+  BrowserShowLibraryLinks off
+  BrowserLookUnderMasks	  off
+  Created		  "Thu Jun 03 12:55:30 2004"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "annr"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Fri Apr 15 13:38:54 2005"
+  ModelVersionFormat	  "1.%<AutoIncrement:3>"
+  ConfigurationManager	  "None"
+  LinearizationMsg	  "none"
+  Profile		  off
+  ParamWorkspaceSource	  "MATLABWorkspace"
+  ExtModeBatchMode	  off
+  ExtModeEnableFloating	  on
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "normal"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigDurationFloating "auto"
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  on
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  on
+  ExtModeAutoUpdateStatusClock on
+  StrictBusMsg		  "None"
+  ProdHWDeviceType	  "32-bit Generic"
+  ShowModelReferenceBlockVersion off
+  ShowModelReferenceBlockIO off
+  BlockDefaults {
+    Orientation		    "right"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+  }
+  BlockParameterDefaults {
+    Block {
+      BlockType		      Abs
+      SaturateOnIntegerOverflow	on
+      ZeroCross		      on
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      Constant
+      Value		      "1"
+      VectorParams1D	      on
+      OutDataTypeMode	      "Inherit from 'Constant value'"
+      OutDataType	      "sfix(16)"
+      ConRadixGroup	      "Use specified scaling"
+      OutScaling	      "2^0"
+      SampleTime	      "inf"
+    }
+    Block {
+      BlockType		      DataTypeConversion
+      OutDataTypeMode	      "Inherit via back propagation"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+      LockScale		      off
+      ConvertRealWorld	      "Real World Value (RWV)"
+      RndMeth		      "Zero"
+      SaturateOnIntegerOverflow	on
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      Inport
+      BusObject		      "BusObject"
+      BusOutputAsStruct	      off
+      PortDimensions	      "-1"
+      SampleTime	      "-1"
+      DataType		      "auto"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      Interpolate	      on
+    }
+    Block {
+      BlockType		      Math
+      Operator		      "exp"
+      OutputSignalType	      "auto"
+      SampleTime	      "-1"
+      OutDataTypeMode	      "Same as first input"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+      LockScale		      off
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	on
+    }
+    Block {
+      BlockType		      Outport
+      Port		      "1"
+      BusObject		      "BusObject"
+      BusOutputAsStruct	      off
+      PortDimensions	      "-1"
+      SampleTime	      "-1"
+      DataType		      "auto"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      OutputWhenDisabled      "held"
+      InitialOutput	      "[]"
+    }
+    Block {
+      BlockType		      Product
+      Inputs		      "2"
+      Multiplication	      "Element-wise(.*)"
+      InputSameDT	      on
+      OutDataTypeMode	      "Same as first input"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+      LockScale		      off
+      RndMeth		      "Zero"
+      SaturateOnIntegerOverflow	on
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      Reference
+    }
+    Block {
+      BlockType		      RelationalOperator
+      Operator		      ">="
+      InputSameDT	      on
+      LogicOutDataTypeMode    "Logical (see Configuration Parameters: Optimiza"
+"tion)"
+      LogicDataType	      "uint(8)"
+      ZeroCross		      on
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      "S-Function"
+      FunctionName	      "system"
+      SFunctionModules	      "''"
+      PortCounts	      "[]"
+    }
+    Block {
+      BlockType		      SubSystem
+      ShowPortLabels	      on
+      Permissions	      "ReadWrite"
+      PermitHierarchicalResolution "All"
+      SystemSampleTime	      "-1"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      SimViewingDevice	      off
+      DataTypeOverride	      "UseLocalSettings"
+      MinMaxOverflowLogging   "UseLocalSettings"
+    }
+    Block {
+      BlockType		      Switch
+      Criteria		      "u2 >= Threshold"
+      Threshold		      "0"
+      InputSameDT	      on
+      OutDataTypeMode	      "Inherit via internal rule"
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	on
+      ZeroCross		      on
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      Terminator
+    }
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  System {
+    Name		    "sysgenTestbenchLibrary"
+    Location		    [339, 484, 921, 751]
+    Open		    on
+    ModelBrowserVisibility  off
+    ModelBrowserWidth	    200
+    ScreenColor		    "white"
+    PaperOrientation	    "landscape"
+    PaperPositionMode	    "auto"
+    PaperType		    "usletter"
+    PaperUnits		    "inches"
+    ZoomFactor		    "100"
+    ReportName		    "simulink-default.rpt"
+    Block {
+      BlockType		      SubSystem
+      Name		      "Xfer Scope"
+      Ports		      [2]
+      Position		      [105, 93, 165, 162]
+      CopyFcn		      "sdspfscope2([],[],[],'BlockCopy');"
+      DeleteFcn		      "sdspfscope2([],[],[],'BlockDelete');"
+      NameChangeFcn	      "sdspfscope2([],[],[],'NameChange');"
+      ShowPortLabels	      off
+      TreatAsAtomicUnit	      on
+      MinAlgLoopOccurrences   off
+      RTWSystemCode	      "Function"
+      MaskType		      "Xfer Scope"
+      MaskDescription	      "Computes a non-biased transfer function estimat"
+"ion by using \nthe ratio of the cross spectrum between the excitation and res"
+"ponse \nchannels, and the autospectrum of the excitation channel.\n\nX= chann"
+"el 1 = DUT excitation (discrete time random noise is best)\nY= channel 2 = DU"
+"T response from DUT\n\nDisplays xfer function magnitude in linear or dB forma"
+"t. \n"
+      MaskHelp		      "Use a broad band discrete time excitation and a"
+"pply it to both \nanalyzer the upper input port and the (discrete time) Devic"
+"e Under Test input. \nConnect the discrete time DUT response to the lower inp"
+"ut port. \nAveraging of circa 100 produces good results. \n\nThe measurement "
+"results will be unbiased as long as the excitation \ndoes not have noise whic"
+"h is correlated with noise in the response channel. \n\n\nRAB 01/28/02"
+      MaskPromptString	      "_______ Scope properties _______|Input domain:|"
+"Time display span (number of frames):|Buffer input|Buffer size:|Buffer overla"
+"p:|Specify FFT length|FFT length:|Number of spectral averages:|_______ Displa"
+"y properties _______|Show grid|Persistence|Frame number|Channel legend|Compac"
+"t display|Open scope at start of simulation|Open scope immediately|Scope posi"
+"tion:|_______ Axis properties _______|Frequency units:|Frequency range:|Inher"
+"it sample increment from input|Sample time of original time series:|X-axis ti"
+"tle:|Amplitude scaling:|Minimum Y-limit:|Maximum Y-limit:|Y-axis title:|_____"
+"__ Line properties _______|Line visibility:|Line styles:|Line markers:|Line c"
+"olors:"
+      MaskStyleString	      "checkbox,popup(Time|Frequency|User-defined),edi"
+"t,checkbox,edit,edit,checkbox,edit,edit,checkbox,checkbox,checkbox,checkbox,c"
+"heckbox,checkbox,checkbox,checkbox,edit,checkbox,popup(Hertz|rad/sec),popup(["
+"0...Fs/2]|[-Fs/2...Fs/2]|[0...Fs]),checkbox,edit,edit,popup(Magnitude|dB),edi"
+"t,edit,edit,checkbox,edit,edit,edit,edit"
+      MaskTunableValueString  "on,on,off,on,on,on,on,on,on,on,on,on,on,on,on,o"
+"n,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on"
+      MaskCallbackString      "dspblkbfftscope2('dynamic','ScopeProperties')||"
+"|dspblkbfftscope2('dynamic','useBuffer');|||dspblkbfftscope2('dynamic','FftLe"
+"nCheckbox');|||dspblkbfftscope2('dynamic','DisplayProperties');|||||||dspblkb"
+"fftscope2('dynamic','OpenScope');||dspblkbfftscope2('dynamic','AxisProperties"
+"');|||dspblkbfftscope2('dynamic','InheritXIncr');|||||||dspblkbfftscope2('dyn"
+"amic','LineProperties');||||"
+      MaskEnableString	      "on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on"
+",on,on,on,on,on,on,off,on,on,on,on,on,on,on,on,on,on"
+      MaskVisibilityString    "on,off,off,off,off,off,off,off,off,on,off,off,o"
+"ff,off,off,off,off,off,on,off,off,off,off,off,off,off,off,off,on,on,on,on,on"
+      MaskToolTipString	      "on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on"
+",on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on"
+      MaskVarAliasString      ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"
+      MaskVariables	      "ScopeProperties=&1;Domain=@2;HorizSpan=@3;UseBu"
+"ffer=&4;BufferSize=@5;Overlap=@6;inpFftLenInherit=@7;FFTlength=@8;numAvg=@9;D"
+"isplayProperties=&10;AxisGrid=&11;Memory=&12;FrameNumber=&13;AxisLegend=&14;A"
+"xisZoom=&15;OpenScopeAtSimStart=&16;OpenScopeImmediately=&17;FigPos=@18;AxisP"
+"roperties=&19;XUnits=@20;XRange=@21;InheritXIncr=&22;XIncr=@23;XLabel=&24;YUn"
+"its=@25;YMin=@26;YMax=@27;YLabel=&28;LineProperties=&29;LineDisables=&30;Line"
+"Styles=&31;LineMarkers=&32;LineColors=&33;"
+      MaskInitialization      "[x,y,str] = xferscope1('icon');\ns = xferscope1"
+"('init');"
+      MaskDisplay	      "plot(x,y); text(14,20,str);\n"
+      MaskSelfModifiable      on
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "off|Frequency|1|on|512|64|off|512|500|off|on|of"
+"f|on|off|off|on|off|[500 200 600 300]|off|Hertz|[0...Fs/2]|on|1|Samples|dB|-1"
+"00|20|Magnitude, dB|on||||[0.1 0.2 0.7]\\|[0.6 0.2 0.1]\\|[0.1 0.6 0.1]"
+      MaskTabNameString	      ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"
+      System {
+	Name			"Xfer Scope"
+	Location		[54, 338, 1058, 667]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "In1"
+	  Position		  [25, 78, 55, 92]
+	  Port			  "1"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "In2"
+	  Position		  [20, 203, 50, 217]
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Abs
+	  Name			  "Abs"
+	  Position		  [640, 165, 670, 195]
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant"
+	  Position		  [510, 130, 540, 160]
+	  Value			  "YUnits"
+	}
+	Block {
+	  BlockType		  DataTypeConversion
+	  Name			  "Data Type Conversion"
+	  Position		  [210, 71, 265, 99]
+	  ShowName		  off
+	  OutDataTypeMode	  "double"
+	}
+	Block {
+	  BlockType		  DataTypeConversion
+	  Name			  "Data Type Conversion1"
+	  Position		  [210, 196, 265, 224]
+	  ShowName		  off
+	  OutDataTypeMode	  "double"
+	}
+	Block {
+	  BlockType		  "S-Function"
+	  Name			  "Frame Scope"
+	  Ports			  [1]
+	  Position		  [870, 130, 955, 160]
+	  FunctionName		  "sdspfscope2_r13"
+	  Parameters		  "s"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Frame Status\nConversion"
+	  Ports			  [1, 1]
+	  Position		  [465, 78, 545, 122]
+	  ShowName		  off
+	  SourceBlock		  "dspsigattribs/Frame Status\nConversion"
+	  SourceType		  "Frame Status Conversion"
+	  growRefPort		  "off"
+	  outframe		  "Sample-based"
+	}
+	Block {
+	  BlockType		  Math
+	  Name			  "Math\nFunction"
+	  Ports			  [1, 1]
+	  Position		  [640, 85, 670, 115]
+	  Operator		  "magnitude^2"
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "NaN Filter"
+	  Ports			  [2, 2]
+	  Position		  [70, 22, 110, 273]
+	  TreatAsAtomicUnit	  off
+	  MinAlgLoopOccurrences	  off
+	  RTWSystemCode		  "Auto"
+	  System {
+	    Name		    "NaN Filter"
+	    Location		    [244, 125, 698, 589]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "In1"
+	      Position		      [40, 133, 70, 147]
+	      Port		      "1"
+	      IconDisplay	      "Port number"
+	      LatchInput	      off
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "In2"
+	      Position		      [40, 328, 70, 342]
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	      LatchInput	      off
+	    }
+	    Block {
+	      BlockType		      Abs
+	      Name		      "Abs"
+	      Position		      [120, 225, 150, 255]
+	    }
+	    Block {
+	      BlockType		      RelationalOperator
+	      Name		      "Relational\nOperator"
+	      Position		      [195, 232, 225, 263]
+	      Operator		      ">"
+	    }
+	    Block {
+	      BlockType		      Switch
+	      Name		      "Switch"
+	      Position		      [285, 135, 315, 165]
+	      Threshold		      "0.5"
+	    }
+	    Block {
+	      BlockType		      Switch
+	      Name		      "Switch1"
+	      Position		      [285, 330, 315, 360]
+	      Threshold		      "0.5"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "c0"
+	      Ports		      [0, 1]
+	      Position		      [125, 273, 150, 297]
+	      SourceBlock	      "dspsrcs4/DSP\nConstant"
+	      SourceType	      "DSP Constant"
+	      Value		      "-inf"
+	      SampleMode	      "Continuous"
+	      discreteOutput	      "Sample-based"
+	      continuousOutput	      "Sample-based"
+	      sampTime		      "1"
+	      framePeriod	      "1"
+	      additionalParams	      "off"
+	      dataType		      "Inherit from 'Constant value'"
+	      wordLen		      "16"
+	      udDataType	      "sfix(16)"
+	      fracBitsMode	      "Best precision"
+	      numFracBits	      "15"
+	      InterpretAs1D	      "off"
+	      Ts		      "1"
+	      FramebasedOutput	      "off"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "c1"
+	      Ports		      [0, 1]
+	      Position		      [120, 343, 145, 367]
+	      SourceBlock	      "dspsrcs4/DSP\nConstant"
+	      SourceType	      "DSP Constant"
+	      Value		      "0"
+	      SampleMode	      "Continuous"
+	      discreteOutput	      "Sample-based"
+	      continuousOutput	      "Sample-based"
+	      sampTime		      "1"
+	      framePeriod	      "1"
+	      additionalParams	      "off"
+	      dataType		      "Inherit from 'Constant value'"
+	      wordLen		      "16"
+	      udDataType	      "sfix(16)"
+	      fracBitsMode	      "Best precision"
+	      numFracBits	      "15"
+	      InterpretAs1D	      "off"
+	      Ts		      "1"
+	      FramebasedOutput	      "off"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Out1"
+	      Position		      [375, 138, 405, 152]
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Out2"
+	      Position		      [375, 338, 405, 352]
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	    }
+	    Line {
+	      SrcBlock		      "In2"
+	      SrcPort		      1
+	      Points		      [30, 0]
+	      Branch {
+		DstBlock		"Switch1"
+		DstPort			1
+	      }
+	      Branch {
+		DstBlock		"Abs"
+		DstPort			1
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "In1"
+	      SrcPort		      1
+	      DstBlock		      "Switch"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Switch"
+	      SrcPort		      1
+	      Points		      [40, 0]
+	      DstBlock		      "Out1"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Switch1"
+	      SrcPort		      1
+	      DstBlock		      "Out2"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Abs"
+	      SrcPort		      1
+	      DstBlock		      "Relational\nOperator"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "c0"
+	      SrcPort		      1
+	      Points		      [25, 0]
+	      DstBlock		      "Relational\nOperator"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "Relational\nOperator"
+	      SrcPort		      1
+	      Points		      [10, 0]
+	      Branch {
+		Points			[0, -100]
+		DstBlock		"Switch"
+		DstPort			2
+	      }
+	      Branch {
+		Points			[0, 95]
+		DstBlock		"Switch1"
+		DstPort			2
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "c1"
+	      SrcPort		      1
+	      Points		      [110, 0]
+	      Branch {
+		DstBlock		"Switch1"
+		DstPort			3
+	      }
+	      Branch {
+		Points			[0, -195]
+		DstBlock		"Switch"
+		DstPort			3
+	      }
+	    }
+	    Annotation {
+	      Name		      "NaNs  (not a numbers) are initially pro"
+"duced by the digital filter. \nThis circuit keeps them from propagating to th"
+"e FFT and being\nincluded in the averaging. "
+	      Position		      [69, 77]
+	      HorizontalAlignment     "left"
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Optional\nBuffering"
+	  Ports			  [1, 1]
+	  Position		  [130, 63, 180, 107]
+	  TreatAsAtomicUnit	  off
+	  MinAlgLoopOccurrences	  off
+	  RTWSystemCode		  "Auto"
+	  MaskType		  "Replaceable Contents"
+	  MaskDescription	  "Configurable subsystem holding blocks which"
+" may be replaced by virtual short-circuits (muxes) when not needed."
+	  MaskHelp		  "\n"
+	  MaskPromptString	  "Relative name of blocks to replace:|Simulin"
+"k path to each source block:|Parameter/value pairs to each block:|Replace wit"
+"h short-circuit:"
+	  MaskStyleString	  "edit,edit,edit,edit"
+	  MaskTunableValueString  "off,off,off,off"
+	  MaskCallbackString	  "|||"
+	  MaskEnableString	  "on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on"
+	  MaskVarAliasString	  ",,,"
+	  MaskVariables		  "oname=&1;osrc=&2;oargs=@3;replace=@4;"
+	  MaskInitialization	  "opts.name = oname; opts.src = osrc; opts.ar"
+"gs = oargs;\ndspskipblk(gcb,opts,replace);\n"
+	  MaskSelfModifiable	  on
+	  MaskIconFrame		  on
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "Buffer|dspbuff3/Buffer|{'N','BufferSize','V"
+"','Overlap','ic','0'}|strcmp(UseBuffer,'off')"
+	  MaskTabNameString	  ",,,"
+	  System {
+	    Name		    "Optional\nBuffering"
+	    Location		    [112, 787, 368, 881]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "In"
+	      Position		      [25, 38, 55, 52]
+	      Port		      "1"
+	      IconDisplay	      "Port number"
+	      LatchInput	      off
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Buffer"
+	      Ports		      [1, 1]
+	      Position		      [80, 20, 130, 70]
+	      SourceBlock	      "dspbuff3/Buffer"
+	      SourceType	      "Buffer"
+	      N			      "BufferSize"
+	      V			      "Overlap"
+	      ic		      "0"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Out"
+	      Position		      [160, 38, 190, 52]
+	      IconDisplay	      "Port number"
+	      InitialOutput	      "0"
+	    }
+	    Line {
+	      SrcBlock		      "In"
+	      SrcPort		      1
+	      DstBlock		      "Buffer"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Buffer"
+	      SrcPort		      1
+	      DstBlock		      "Out"
+	      DstPort		      1
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Optional\nBuffering1"
+	  Ports			  [1, 1]
+	  Position		  [130, 188, 180, 232]
+	  TreatAsAtomicUnit	  off
+	  MinAlgLoopOccurrences	  off
+	  RTWSystemCode		  "Auto"
+	  MaskType		  "Replaceable Contents"
+	  MaskDescription	  "Configurable subsystem holding blocks which"
+" may be replaced by virtual short-circuits (muxes) when not needed."
+	  MaskHelp		  "\n"
+	  MaskPromptString	  "Relative name of blocks to replace:|Simulin"
+"k path to each source block:|Parameter/value pairs to each block:|Replace wit"
+"h short-circuit:"
+	  MaskStyleString	  "edit,edit,edit,edit"
+	  MaskTunableValueString  "off,off,off,off"
+	  MaskCallbackString	  "|||"
+	  MaskEnableString	  "on,on,on,on"
+	  MaskVisibilityString	  "on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on"
+	  MaskVarAliasString	  ",,,"
+	  MaskVariables		  "oname=&1;osrc=&2;oargs=@3;replace=@4;"
+	  MaskInitialization	  "opts.name = oname; opts.src = osrc; opts.ar"
+"gs = oargs;\ndspskipblk(gcb,opts,replace);\n"
+	  MaskSelfModifiable	  on
+	  MaskIconFrame		  on
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "Buffer|dspbuff3/Buffer|{'N','BufferSize','V"
+"','Overlap','ic','0'}|strcmp(UseBuffer,'off')"
+	  MaskTabNameString	  ",,,"
+	  System {
+	    Name		    "Optional\nBuffering1"
+	    Location		    [112, 787, 368, 881]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "In"
+	      Position		      [25, 38, 55, 52]
+	      Port		      "1"
+	      IconDisplay	      "Port number"
+	      LatchInput	      off
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Buffer"
+	      Ports		      [1, 1]
+	      Position		      [80, 20, 130, 70]
+	      SourceBlock	      "dspbuff3/Buffer"
+	      SourceType	      "Buffer"
+	      N			      "BufferSize"
+	      V			      "Overlap"
+	      ic		      "0"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Out"
+	      Position		      [160, 38, 190, 52]
+	      IconDisplay	      "Port number"
+	      InitialOutput	      "0"
+	    }
+	    Line {
+	      SrcBlock		      "Buffer"
+	      SrcPort		      1
+	      DstBlock		      "Out"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "In"
+	      SrcPort		      1
+	      DstBlock		      "Buffer"
+	      DstPort		      1
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  Switch
+	  Name			  "Switch"
+	  Position		  [805, 130, 835, 160]
+	  Threshold		  "1.5"
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Xfer Function"
+	  Ports			  [2, 1]
+	  Position		  [330, 71, 410, 124]
+	  TreatAsAtomicUnit	  off
+	  MinAlgLoopOccurrences	  off
+	  RTWSystemCode		  "Auto"
+	  MaskType		  "Xfer Function"
+	  MaskPromptString	  "Window type:|Stopband attenuation in dB:|Be"
+"ta:|Window sampling:|Inherit FFT length from input dimensions|FFT length:|Num"
+"ber of spectral averages:"
+	  MaskStyleString	  "popup(Bartlett|Blackman|Boxcar|Chebyshev|Ha"
+"mming|Hann|Hanning|Kaiser|Triang),edit,edit,popup(Symmetric|Periodic),checkbo"
+"x,edit,edit"
+	  MaskTunableValueString  "on,on,on,on,off,off,off"
+	  MaskCallbackString	  "dspblkshorttimefft2||||dspblkshorttimefft2|"
+"|"
+	  MaskEnableString	  "on,off,off,on,on,off,on"
+	  MaskVisibilityString	  "on,on,on,on,on,on,on"
+	  MaskToolTipString	  "on,on,on,on,on,on,on"
+	  MaskVarAliasString	  ",,,,,,"
+	  MaskVariables		  "wintype=@1;Rs=@2;beta=@3;winsamp=@4;inherit"
+"FFT=@5;fftsize=@6;navg=@7;"
+	  MaskInitialization	  "[x,y,xe]=xfer_function1('icon');\nxfer_func"
+"tion1('init');\n"
+	  MaskDisplay		  "text(-3,1.15,'Xfer_Function'); plot((-xe),0"
+",xe,1.3,x,y)\n"
+	  MaskSelfModifiable	  on
+	  MaskIconFrame		  on
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskIconUnits		  "autoscale"
+	  MaskValueString	  "Hann|50|5|Periodic|on|FFTlength|numAvg"
+	  MaskTabNameString	  ",,,,,,"
+	  System {
+	    Name		    "Xfer Function"
+	    Location		    [352, 339, 1114, 753]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "In"
+	      Position		      [15, 133, 45, 147]
+	      Port		      "1"
+	      IconDisplay	      "Port number"
+	      LatchInput	      off
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "In1"
+	      Position		      [30, 233, 60, 247]
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	      LatchInput	      off
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Exp Averaged Aspec "
+	      Ports		      [1, 1]
+	      Position		      [420, 103, 490, 147]
+	      SourceBlock	      "dsparch3/Direct-Form II\nTranspose Filt"
+"er"
+	      SourceType	      "Direct-Form II Transpose Filter"
+	      num		      "-1"
+	      den		      "[abs(navg) (-abs(navg)-1)]"
+	      ic		      "eps"
+	      Port {
+		PortNumber		1
+		Name			"averaged_aspec"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Exp Averaged cspec"
+	      Ports		      [1, 1]
+	      Position		      [420, 203, 490, 247]
+	      SourceBlock	      "dsparch3/Direct-Form II\nTranspose Filt"
+"er"
+	      SourceType	      "Direct-Form II Transpose Filter"
+	      num		      "-1"
+	      den		      "[abs(navg) (-abs(navg)-1)]"
+	      ic		      "eps"
+	      Port {
+		PortNumber		1
+		Name			"averaged_cspec"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+		ShowSigGenPortName	on
+	      }
+	    }
+	    Block {
+	      BlockType		      Product
+	      Name		      "Product2"
+	      Ports		      [2, 1]
+	      Position		      [610, 119, 635, 146]
+	      ShowName		      off
+	      Inputs		      "/*"
+	      RndMeth		      "Floor"
+	    }
+	    Block {
+	      BlockType		      Terminator
+	      Name		      "Terminator"
+	      Position		      [195, 245, 215, 265]
+	    }
+	    Block {
+	      BlockType		      Terminator
+	      Name		      "Terminator1"
+	      Position		      [180, 145, 200, 165]
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Window"
+	      Ports		      [1, 2]
+	      Position		      [75, 112, 155, 168]
+	      SourceBlock	      "dspsigops/Window\nFunction"
+	      SourceType	      "Window Function"
+	      winmode		      "Generate and apply window"
+	      wintype		      "Hann"
+	      N			      "64"
+	      Rs		      "Rs"
+	      beta		      "beta"
+	      winsamp		      "Periodic"
+	      UserWindow	      "hamming"
+	      OptParams		      "off"
+	      UserParams	      "{1.0}"
+	      datatype		      "Double"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Window1"
+	      Ports		      [1, 2]
+	      Position		      [80, 212, 160, 268]
+	      SourceBlock	      "dspsigops/Window\nFunction"
+	      SourceType	      "Window Function"
+	      winmode		      "Generate and apply window"
+	      wintype		      "Hann"
+	      N			      "64"
+	      Rs		      "Rs"
+	      beta		      "beta"
+	      winsamp		      "Symmetric"
+	      UserWindow	      "hamming"
+	      OptParams		      "off"
+	      UserParams	      "{1.0}"
+	      datatype		      "Double"
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "aspec_cspec"
+	      Ports		      [2, 2]
+	      Position		      [265, 111, 345, 164]
+	      TreatAsAtomicUnit	      off
+	      MinAlgLoopOccurrences   off
+	      RTWSystemCode	      "Auto"
+	      MaskType		      "aspec_aspec"
+	      MaskPromptString	      "Inherit FFT length from input dimension"
+"s|FFT length:"
+	      MaskStyleString	      "checkbox,edit"
+	      MaskTunableValueString  "off,off"
+	      MaskCallbackString      "dspblkmagfft2;|"
+	      MaskEnableString	      "on,off"
+	      MaskVisibilityString    "on,on"
+	      MaskToolTipString	      "on,on"
+	      MaskVarAliasString      ","
+	      MaskVariables	      "fftLenInherit=@1;fftsize=@2;"
+	      MaskInitialization      "aspec_cspec1('init');aspec_cspec1('upda"
+"te'); str='aspec_cspec';"
+	      MaskDisplay	      "disp(str);"
+	      MaskSelfModifiable      on
+	      MaskIconFrame	      on
+	      MaskIconOpaque	      on
+	      MaskIconRotate	      "none"
+	      MaskIconUnits	      "autoscale"
+	      MaskValueString	      "on|fftsize"
+	      MaskTabNameString	      ","
+	      System {
+		Name			"aspec_cspec"
+		Location		[728, 267, 1353, 472]
+		Open			off
+		ModelBrowserVisibility	off
+		ModelBrowserWidth	200
+		ScreenColor		"white"
+		PaperOrientation	"landscape"
+		PaperPositionMode	"auto"
+		PaperType		"usletter"
+		PaperUnits		"inches"
+		ZoomFactor		"100"
+		Block {
+		  BlockType		  Inport
+		  Name			  "In"
+		  Position		  [15, 38, 45, 52]
+		  Port			  "1"
+		  IconDisplay		  "Port number"
+		  LatchInput		  off
+		}
+		Block {
+		  BlockType		  Inport
+		  Name			  "In1"
+		  Position		  [15, 118, 45, 132]
+		  Port			  "2"
+		  IconDisplay		  "Port number"
+		  LatchInput		  off
+		}
+		Block {
+		  BlockType		  Reference
+		  Name			  "Check Signal\nAttributes"
+		  Ports			  [1, 1]
+		  Position		  [85, 24, 135, 66]
+		  SourceBlock		  "dspsigattribs/Check Signal\nAttribu"
+"tes"
+		  SourceType		  "Check Signal Attributes"
+		  SigAttribCheckMethod	  "Matches attributes exactly"
+		  Complexity		  "Ignore"
+		  Frame			  "Sample-based"
+		  DimsCheckMethod	  "Is..."
+		  Dimensions		  "Row vector (2-D)"
+		  DatatypeCheckMethod	  "Ignore"
+		  DatatypeGeneral	  "Boolean"
+		  DtypeFloatSpecific	  "Any floating-point"
+		  DtypeFixedSpecific	  "Any fixed-point"
+		  DtypeIntSpecific	  "Any integer"
+		  SampleMode		  "Ignore"
+		}
+		Block {
+		  BlockType		  Reference
+		  Name			  "Check Signal\nAttributes1"
+		  Ports			  [1, 1]
+		  Position		  [85, 104, 135, 146]
+		  SourceBlock		  "dspsigattribs/Check Signal\nAttribu"
+"tes"
+		  SourceType		  "Check Signal Attributes"
+		  SigAttribCheckMethod	  "Matches attributes exactly"
+		  Complexity		  "Ignore"
+		  Frame			  "Sample-based"
+		  DimsCheckMethod	  "Is..."
+		  Dimensions		  "Row vector (2-D)"
+		  DatatypeCheckMethod	  "Ignore"
+		  DatatypeGeneral	  "Boolean"
+		  DtypeFloatSpecific	  "Any floating-point"
+		  DtypeFixedSpecific	  "Any fixed-point"
+		  DtypeIntSpecific	  "Any integer"
+		  SampleMode		  "Ignore"
+		}
+		Block {
+		  BlockType		  Reference
+		  Name			  "FFT"
+		  Ports			  [1, 1]
+		  Position		  [260, 28, 300, 62]
+		  SourceBlock		  "dspxfrm3/FFT"
+		  SourceType		  "FFT"
+		  CompMethod		  "Table lookup"
+		  TableOpt		  "Speed"
+		  BitRevOrder		  "off"
+		}
+		Block {
+		  BlockType		  Reference
+		  Name			  "FFT1"
+		  Ports			  [1, 1]
+		  Position		  [260, 108, 300, 142]
+		  SourceBlock		  "dspxfrm3/FFT"
+		  SourceType		  "FFT"
+		  CompMethod		  "Table lookup"
+		  TableOpt		  "Speed"
+		  BitRevOrder		  "off"
+		}
+		Block {
+		  BlockType		  Math
+		  Name			  "Magnitude\nSquared_foo_name change"
+		  Ports			  [1, 1]
+		  Position		  [430, 30, 460, 60]
+		  Operator		  "magnitude^2"
+		}
+		Block {
+		  BlockType		  Math
+		  Name			  "Math\nFunction"
+		  Ports			  [1, 1]
+		  Position		  [340, 65, 370, 95]
+		  Operator		  "conj"
+		}
+		Block {
+		  BlockType		  Product
+		  Name			  "Product"
+		  Ports			  [2, 1]
+		  Position		  [420, 116, 465, 149]
+		  RndMeth		  "Floor"
+		}
+		Block {
+		  BlockType		  Reference
+		  Name			  "Zero Pad_a"
+		  Ports			  [1, 1]
+		  Position		  [180, 27, 225, 63]
+		  SourceBlock		  "dspsigops/Zero Pad"
+		  SourceType		  "Zero Pad"
+		  padSigAt		  "End"
+		  zpadAlong		  "None"
+		  padNumOutRowsSpecMethod "User-specified"
+		  numOutRows		  "fftsize"
+		  padNumOutColsSpecMethod "User-specified"
+		  numOutCols		  "1"
+		  trunc_flag		  "None"
+		}
+		Block {
+		  BlockType		  Reference
+		  Name			  "Zero Pad_b"
+		  Ports			  [1, 1]
+		  Position		  [180, 107, 225, 143]
+		  SourceBlock		  "dspsigops/Zero Pad"
+		  SourceType		  "Zero Pad"
+		  padSigAt		  "End"
+		  zpadAlong		  "None"
+		  padNumOutRowsSpecMethod "User-specified"
+		  numOutRows		  "fftsize"
+		  padNumOutColsSpecMethod "User-specified"
+		  numOutCols		  "1"
+		  trunc_flag		  "None"
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "aspec_i"
+		  Position		  [535, 38, 565, 52]
+		  IconDisplay		  "Port number"
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "cspec_i"
+		  Position		  [535, 128, 565, 142]
+		  Port			  "2"
+		  IconDisplay		  "Port number"
+		}
+		Line {
+		  SrcBlock		  "Check Signal\nAttributes"
+		  SrcPort		  1
+		  DstBlock		  "Zero Pad_a"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Zero Pad_a"
+		  SrcPort		  1
+		  DstBlock		  "FFT"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "FFT"
+		  SrcPort		  1
+		  Points		  [20, 0]
+		  Branch {
+		    DstBlock		    "Math\nFunction"
+		    DstPort		    1
+		  }
+		  Branch {
+		    DstBlock		    "Magnitude\nSquared_foo_name chang"
+"e"
+		    DstPort		    1
+		  }
+		}
+		Line {
+		  SrcBlock		  "In"
+		  SrcPort		  1
+		  DstBlock		  "Check Signal\nAttributes"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Magnitude\nSquared_foo_name change"
+		  SrcPort		  1
+		  DstBlock		  "aspec_i"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "In1"
+		  SrcPort		  1
+		  DstBlock		  "Check Signal\nAttributes1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Check Signal\nAttributes1"
+		  SrcPort		  1
+		  DstBlock		  "Zero Pad_b"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Zero Pad_b"
+		  SrcPort		  1
+		  DstBlock		  "FFT1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Math\nFunction"
+		  SrcPort		  1
+		  Points		  [15, 0; 0, 45]
+		  DstBlock		  "Product"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "FFT1"
+		  SrcPort		  1
+		  Points		  [50, 0; 0, 15]
+		  DstBlock		  "Product"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "Product"
+		  SrcPort		  1
+		  DstBlock		  "cspec_i"
+		  DstPort		  1
+		}
+	      }
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Xfer_Function"
+	      Position		      [695, 128, 725, 142]
+	      IconDisplay	      "Port number"
+	      InitialOutput	      "0"
+	    }
+	    Line {
+	      Name		      "averaged_aspec"
+	      Labels		      [0, 0]
+	      SrcBlock		      "Exp Averaged Aspec "
+	      SrcPort		      1
+	      DstBlock		      "Product2"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Product2"
+	      SrcPort		      1
+	      DstBlock		      "Xfer_Function"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Window"
+	      SrcPort		      1
+	      DstBlock		      "aspec_cspec"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "aspec_cspec"
+	      SrcPort		      1
+	      DstBlock		      "Exp Averaged Aspec "
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "In"
+	      SrcPort		      1
+	      DstBlock		      "Window"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "In1"
+	      SrcPort		      1
+	      DstBlock		      "Window1"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Window1"
+	      SrcPort		      1
+	      Points		      [85, 0]
+	      DstBlock		      "aspec_cspec"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "Window1"
+	      SrcPort		      2
+	      DstBlock		      "Terminator"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "aspec_cspec"
+	      SrcPort		      2
+	      Points		      [30, 0; 0, 75]
+	      DstBlock		      "Exp Averaged cspec"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Window"
+	      SrcPort		      2
+	      DstBlock		      "Terminator1"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "averaged_cspec"
+	      Labels		      [0, 0]
+	      SrcBlock		      "Exp Averaged cspec"
+	      SrcPort		      1
+	      Points		      [55, 0; 0, -85]
+	      DstBlock		      "Product2"
+	      DstPort		      2
+	    }
+	  }
+	}
+	Line {
+	  SrcBlock		  "Data Type Conversion"
+	  SrcPort		  1
+	  DstBlock		  "Xfer Function"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Optional\nBuffering"
+	  SrcPort		  1
+	  DstBlock		  "Data Type Conversion"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Xfer Function"
+	  SrcPort		  1
+	  DstBlock		  "Frame Status\nConversion"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Frame Status\nConversion"
+	  SrcPort		  1
+	  Points		  [0, 0; 40, 0]
+	  Branch {
+	    DstBlock		    "Math\nFunction"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 80]
+	    DstBlock		    "Abs"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "Optional\nBuffering1"
+	  SrcPort		  1
+	  DstBlock		  "Data Type Conversion1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Data Type Conversion1"
+	  SrcPort		  1
+	  Points		  [5, 0; 0, -100]
+	  DstBlock		  "Xfer Function"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Math\nFunction"
+	  SrcPort		  1
+	  Points		  [20, 0; 0, 35]
+	  DstBlock		  "Switch"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Switch"
+	  SrcPort		  1
+	  DstBlock		  "Frame Scope"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Abs"
+	  SrcPort		  1
+	  Points		  [20, 0; 0, -25]
+	  DstBlock		  "Switch"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "Constant"
+	  SrcPort		  1
+	  DstBlock		  "Switch"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "NaN Filter"
+	  SrcPort		  1
+	  DstBlock		  "Optional\nBuffering"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "NaN Filter"
+	  SrcPort		  2
+	  DstBlock		  "Optional\nBuffering1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "In2"
+	  SrcPort		  1
+	  DstBlock		  "NaN Filter"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "In1"
+	  SrcPort		  1
+	  DstBlock		  "NaN Filter"
+	  DstPort		  1
+	}
+	Annotation {
+	  Name			  "sdspfscope2 does 10log10, therefore need to"
+" square the magnitude in dB \ndisplay, but not in linear. \n"
+	  Position		  [485, 270]
+	}
+      }
+    }
+    Annotation {
+      Name		      "Xilinx Testbench Library v6.2\n(c) 1995-2004  T"
+"he MathWorks, Inc."
+      Position		      [297, 44]
+      FontSize		      12
+    }
+  }
+}

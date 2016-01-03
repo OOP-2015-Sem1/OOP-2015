@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Programmatic Access</title>
+    <link rel="StyleSheet" href="css/Programmatic_Access.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">Programmatic Access</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="ChapterTitle"><a name="205969">Programmatic Access</a></div>
+      <div class="Heading1"><a name="282653">System Generator API for Programmatic Generation</a></div>
+      <div class="Heading2"><a name="282731">Introduction</a></div>
+      <div class="Body"><a name="299994">A script of System Generator for programmatic generation (PG API script) is a MATLAB </a>M-function file that builds a System Generator subsystem by instantiating and interconnecting <span class="Bold">xBlock</span>, <span class="Bold">xSignal</span>, <span class="Bold">xInport</span>, and <span class="Bold">xOutport</span> objects. It is a programmatic way of constructing System Generator diagrams (i.e., subsystems). As will be demonstrated below with examples, the top-level function of a System Generator programmatic script is its entry point and must be invoked through an <span class="Bold">xBlock</span> contructor. Upon constructor exit, MATLAB adds the corresponding System Generator subsystem to the corresponding model. If no model is opened, a new “untitled” model will be created and the System Generator subsystem is inserted into it. </div>
+      <div class="Body"><a name="299996">The </a><span class="Filename">xBlock</span> constructor creates an <span class="Filename">xBlock</span> object. The object can be created from a library block or it can be a subsystem. An <span class="Filename">xSignal</span> object corresponds to a wire that connects a source block to a target. An <span class="Filename">xInport</span> object instantiates a Simulink Inport and an <span class="Filename">xOutport</span> object instantiates a Simulink Outport</div>
+      <div class="Body"><a name="299997">The API also has one helper function, </a><span class="Bold">xlsub2script</span> which converts a Simulink diagram to a programmatic generation script.</div>
+      <div class="Body"><a name="299999">The API works in three modes: </a><span class="Italic">learning mode</span>, <span class="Italic">production mode</span>, and <span class="Italic">debugging mode</span>. The learning mode allows you to type in the commands without having a physical script file. It is very useful when you learn the API. In this mode, all blocks, ports, and subsystems will be added into a Simulink model named “untiled”. Please remember to run <span class="Filename">xBlock</span> without any argument or to close the untitled model before starting a new learning session. The production mode has an M-function file and is invoked through the <span class="Filename">xBlock</span> constructor. You will have a subsystem generated. The subsystem can be either in the existing model or can be inserted in a new model. The debugging mode works the same as the production mode except that every time a new object is created or a new connection is established, the Simulink diagram is rerouted. It is very useful when you debug the script that you set some break points in the script or single step the script.</div>
+      <div class="Heading2"><a name="299991">xBlock</a></div>
+      <div class="Body"><a name="300220">The x</a><span class="Filename">Block</span> constructor creates an <span class="Filename">xBlock</span> object. The object can be created from a library block or it can be a subsystem. The <span class="Filename">xBlock</span> constructor can be used in three ways: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="300221">to add a leaf block to the current subsystem, </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="300222">to add a subsystem to the current subsystem, </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="300223">to attach a top-level subsystem to a model. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="300224">The </a><span class="Filename">xBlock</span> takes four arguments and is invoked as follows. </div>
+      <div class="Code"><a name="300226">block = xBlock(source, params, inports, outports); </a></div>
+      <div class="Body"><a name="300228">If the source argument is a string, it is expected to be a library block name. If the source </a>block is in the xbsIndex_r4 library or in the Simulink built-in library, you can use the block name without the library name. For example, calling <span class="Filename">xBlock('AddSub', ...)</span> is equivalent to <span class="Filename">xBlock('xbsIndex_r4/AddSub',...)</span>. For a source block that is not in the xbsIndex_r4 library or built-in library, you need to use the full path, for example, <span class="Filename">xBlock('xbsTest_r4/Assert Relation', ...)</span>. If the source argument is a function handle, it is interpreted as a PG API function. If it is a MATLAB struct, it is treated as a configuration struc to specify how to attach the top-level to a model. </div>
+      <div class="Body"><a name="300229">The </a><span class="Filename">params</span> argument sets up the parameters. It can be a cell array for position-based binding or a MATLAB struct for name-based binding. If the source parameter is a block in a library, this argument must be a cell array. If the source parameter is a function pointer, this argument must be a cell array. </div>
+      <div class="Body"><a name="300230">The </a><span class="Filename">inports</span> and <span class="Filename">outports</span> arguments specify how subsystem input and output ports are bound. The binding can be a cell array for position-based binding or a MATLAB struct for name-based binding. When specifying an inport/outport binding, an element of a cell array can be an <span class="Filename">xSignal</span>, an <span class="Filename">xInport</span>, or an <span class="Filename">xOutport</span> object. If the port binding argument is a MATLAB struct, a field of the struct is a port name of the block, a value of the struct is the object that the port is bound to. </div>
+      <div class="Body"><a name="300231">The two port binding arguments are optional. If the arguments are missing when </a>constructing the xBlock object, the port binding can be specified through the <span class="Filename">bindPort</span> method of an <span class="Filename">xBlock</span> object. The <span class="Filename">bindPort</span> method is invoked as follows: </div>
+      <div class="Body"><span class="Filename"><a name="300232">block.bindPort(inports, outports)</a></span></div>
+      <div class="Body"><a name="300233">where </a><span class="Filename">inports</span> and <span class="Filename">outports</span> arguments specify the input and output port binding. In this case, the object block is create by <span class="Filename">xBlock</span> with only two arguments, the source and the parameter binding. </div>
+      <div class="Body"><a name="300234">Other </a><span class="Filename">xBlock</span> methods include the following. </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="300235">names = block.getOutportNames</a></span> returns a cell array of outport names,</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="300236">names = block.getInportNames</a></span> returns a cell array of inport names,</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="300237">nin = block.getNumInports</a></span> returns the number of inports,</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="300238">nout = block.getNumoutports</a></span> returns the number of outports.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="300239">insigs = block.getInSignals</a></span> returns a cell array of in coming signals</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="300240">outsigs = block.getOutSignals</a></span> returns a cell array of out going signals</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="300242">xInport</a></div>
+      <div class="Body"><a name="300243">An </a><span class="Filename">xInport</span> object represents a subsystem input port. </div>
+      <div class="Body"><a name="300245">The constructor </a></div>
+      <div class="Body"><span class="Filename"><a name="300246">port = xInport(port_name)</a></span></div>
+      <div class="Body"><a name="300247">creates an xInport object with name port_name, </a></div>
+      <div class="Body"><span class="Filename"><a name="300249">[port1, port2, port3, ...] = xInport(name1, name2, name2, ...)</a></span> </div>
+      <div class="Body"><a name="300250">creates a list of input port with names, and </a></div>
+      <div class="Body"><span class="Filename"><a name="300252">port = xInport</a></span></div>
+      <div class="Body"><a name="300253">creates an input port with an automatically generated name. </a></div>
+      <div class="Body"><a name="300254">An </a><span class="Filename">xInport</span> object can be passed for port binding. </div>
+      <div class="Body"><span class="Bold"><a name="300255">METHODS</a></span></div>
+      <div class="Body"><span class="Filename"><a name="300256">outsigs = port.getOutSignals</a></span></div>
+      <div class="Body"><a name="300257">returns a cell array of out going signals.</a></div>
+      <div class="Heading2"><a name="300259">xOutport</a></div>
+      <div class="Body"><a name="300260">An </a><span class="Filename">xOutport</span> object represents a subsystem output port. </div>
+      <div class="Body"><a name="300262">The constructor </a></div>
+      <div class="Body"><span class="Filename"><a name="300263">port = xOutport(port_name)</a></span></div>
+      <div class="Body"><a name="300264">creates an </a><span class="Filename">xOutport</span> object with name <span class="Filename">port_name</span>, </div>
+      <div class="Body"><span class="Filename"><a name="300266">[port1, port2, port3, ...] = xOutport(name1, name2, name2, ...)</a></span></div>
+      <div class="Body"><a name="300267">creates a list of output port with names, and </a></div>
+      <div class="Body"><span class="Filename"><a name="300269">port = xOutport </a></span></div>
+      <div class="Body"><a name="300270">creates an output port with an automatically generated name. </a></div>
+      <div class="Body"><a name="300271">An </a><span class="Filename">xOutport</span> object can be passed for port binding. </div>
+      <div class="Body"><span class="Bold"><a name="300272">METHODS</a></span></div>
+      <div class="Body"><span class="Filename"><a name="300273">port.bind(obj)</a></span></div>
+      <div class="Body"><a name="300274">connects the object to port, where port is an xOutport object and obj is an xSignal or xInport </a>object. </div>
+      <div class="Body"><span class="Filename"><a name="300276">insigs = port.getInSignals</a></span></div>
+      <div class="Body"><a name="300277">returns a cell array of incoming signals.</a></div>
+      <div class="Heading2"><a name="300279">xSignal</a></div>
+      <div class="Body"><a name="300280">An </a><span class="Filename">xSignal</span> represents a signal object that connects a source to targets. </div>
+      <div class="Body"><a name="300281">The constructor </a></div>
+      <div class="Body"><span class="Filename"><a name="300282">sig = xSignal(sig_name)</a></span></div>
+      <div class="Body"><a name="300283">creates an </a><span class="Filename">xSignal</span> object with name sig_name, </div>
+      <div class="Body"><span class="Filename"><a name="300285">[sig1, sig2, sig3, ...] = xSignal(name1, name2, name2, ...)</a></span></div>
+      <div class="Body"><a name="300286">creates a list of signals with names, and </a></div>
+      <div class="Body"><span class="Filename"><a name="300288">sig = xSignal</a></span></div>
+      <div class="Body"><a name="300289">creates an </a><span class="Filename">xSignal</span> for which a name is automatically generated.</div>
+      <div class="Body"><a name="300291">An </a><span class="Filename">xSignal</span> object can be passed for port binding. </div>
+      <div class="Body"><span class="Bold"><a name="300292">METHODS</a></span></div>
+      <div class="Body"><span class="Filename"><a name="300293">sig.bind(obj)</a></span></div>
+      <div class="Body"><a name="300294">connects the obj to sig, where sig is an xSignal object and obj is an xSignal or an xInport </a>object. </div>
+      <div class="Body"><span class="Filename"><a name="300296">src = sig.getSrc</a></span></div>
+      <div class="Body"><a name="300297">returns a cell array of the source objects that are driving the </a><span class="Filename">xSignal</span> object. The cell array can have at most one element. If the source is an input port, the source object will be an xInport object. If the source is an output port of a block, the source object will be a struct, having two fields block and port. The block field is an xBlock object and the port field is the port index. </div>
+      <div class="Body"><span class="Filename"><a name="300299">dst = sig.getDst</a></span></div>
+      <div class="Body"><a name="300300">returns a cell array of the destination objects that the </a><span class="Filename">xSignal</span> object is driving. Each element can be either a struct or an xOutport object. It is defined same as the return value of the <span class="Filename">getSrc</span> method.</div>
+      <div class="Heading2"><a name="300302">xlsub2script</a></div>
+      <div class="Body"><span class="Filename"><a name="300303">xlsub2script</a></span> is a helper function that converts a subsystem into the top level of a Sysgen script. </div>
+      <div class="Body"><span class="Filename"><a name="300304">xlsub2script(subsystem)</a></span> converts the subsystem into the top-level script. The argument can also be a model. </div>
+      <div class="Body"><a name="300305">By default, the generated M-function file is named after the name of the subsystem with </a>white spaces replaced with underscores. Once the <span class="Filename">xlsub2script</span> finishes, a help message will guide you how to use the generated script. The main purpose of this <span class="Filename">xlsub2script</span> function is to make learning Sysgen Script easier. This is also a nice utility that allows you to construct a subsystem using graphic means and then convert the subsystem to a PG API M-function.</div>
+      <div class="Body"><span class="Filename"><a name="300306">xlsub2script(block)</a></span>, where <span class="Filename">block</span> is a leaf block, prints out the <span class="Filename">xBlock</span> call that creates the block.</div>
+      <div class="Body"><a name="300307">The following are the limitations of </a><span class="Filename">xlsub2script</span>. </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="300308">If the subsystem has mask initialization code that contains function calls such as </a><span class="Filename">gcb</span>, <span class="Filename">set_param</span>, <span class="Filename">get_param</span>, <span class="Filename">add_block</span>, and so on, the function will error out and you must modify the mask initialization code to remove those Simulink calls. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="300309">If there is an access to global variables inside the subsystem, you need add </a>corresponding mask parameters to the top subsystem that you run the xlsub2script.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="300310">If a block’s link is broken, that block will be skipped.</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><span class="Filename"><a name="300312">xlsub2script</a></span> can also be invoked as the following: </div>
+      <div class="Body"><span class="Filename"><a name="300313">  xlsub2script(subsyste, options)</a></span></div>
+      <div class="Body"><a name="300314">where </a><span class="Filename">options</span> is a MATLAB struct. The <span class="Filename">options</span> struct can have two fields: <span class="Filename">forcewrite</span>, and <span class="Filename">basevars</span>.</div>
+      <div class="Body"><a name="300315">If </a><span class="Filename">xlsub2script</span> is invoked for the same subsystem the second time, <span class="Filename">xlsub2script</span> will try to overwrite the existing M-function file. By default, <span class="Filename">xlsub2script</span> will pop up a question dialog asking whether to overwrite the file or not. If the <span class="Filename">forcewrite</span> field of the <span class="Filename">options</span> argument is set to be true or 1, <span class="Filename">xlsub2script</span> will overwrite the M-function file without asking.</div>
+      <div class="Body"><a name="301308">Sometimes a subsystem is depended on some variables in the MATLAB base workspace. </a>In that case, when you run <span class="Filename">xlsub2script</span>, you want <span class="Filename">xlsub2script</span> to pick these base workspace variables and generate the proper code to handle base workspace variables. The <span class="Filename">basevars</span> field of the <span class="Filename">options</span> argument is for that purpose. If you want <span class="Filename">xlsub2script</span> to pick up every variable in the base workspace, you need to set the <span class="Filename">basevars</span> field to be <span class="Filename">'all'</span>. If you want <span class="Filename">xlsub2script</span> to selectively pick up some variables, you can set the <span class="Filename">basevars</span> field to be a cell array of strings, where each string is a variable name.</div>
+      <div class="Body"><a name="301309">The following are examples of calling </a><span class="Filename">xlsub2script</span> with the options argument: </div>
+      <div class="Code"><a name="300318">xlsub2script(subsystem, struct('forcewrite', true));</a></div>
+      <div class="Code"><a name="300319">xlsub2script(subsystem, struct('forcewrite', true, 'basevars', </a><br />																																					'all'));</div>
+      <div class="Code"><a name="300320">options.basevars = {'var1', 'var2', 'var3');</a></div>
+      <div class="Code"><a name="300321">xlsub2script(subsystem, options);</a></div>
+      <div class="Code"><a name="300322">xlsub2script(subsystem, struct('basevars', {{'var1', 'var2', </a><br />																																			'var3'}}));</div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="307645">In MATLAB, if the field of a struct is a cell array, when you call the struct() function call, you </a>need the extra {}.</div>
+      <div class="Heading2"><a name="307852">xBlockHelp</a></div>
+      <div class="Body"><span class="Filename"><a name="307870">xBlockHelp(&lt;block_name&gt;)</a></span> prints out the parameter names and the acceptable values for the corresponding parameters. When you execute <span class="Filename">xBlockHelp</span> without a parameter, the available blocks in the <span class="Filename">xbsIndex_r4</span> library are listed..</div>
+      <div class="Body"><a name="307878">For example, when you execute the following in the MATLAB command line:</a></div>
+      <div class="Code"><a name="307879">       xBlockHelp('AddSub')</a></div>
+      <div class="Body"><a name="307881">    You'll get the following table in the transcript:</a></div>
+      <div class="Code"><a name="308242">'xbsIndex_r4/AddSub' Parameter Table</a></div>
+      <div class="Code"><a name="308243">&nbsp;</a></div>
+      <div class="Code"><a name="308244">Parameter              Acceptable value        Type</a></div>
+      <div class="Code"><a name="308245">============           ==================      ========</a></div>
+      <div class="Code"><a name="308246">mode                   'Addition'              String</a></div>
+      <div class="Code"><a name="308247">                       'Subtraction'           </a></div>
+      <div class="Code"><a name="308248">                       'Addition or Subtraction' </a></div>
+      <div class="Code"><a name="308249">------------           ------------------      --------</a></div>
+      <div class="Code"><a name="308250">use_carryin            'off'                   String</a></div>
+      <div class="Code"><a name="308251">                       'on'                    </a></div>
+      <div class="Code"><a name="308252">------------           ------------------      --------</a></div>
+      <div class="Code"><a name="308253">use_carryout           'off'                   String</a></div>
+      <div class="Code"><a name="308254">                       'on'                    </a></div>
+      <div class="Code"><a name="308255">------------           ------------------      --------</a></div>
+      <div class="Code"><a name="308256">en                     'off'                   String</a></div>
+      <div class="Code"><a name="308257">                       'on'                    </a></div>
+      <div class="Code"><a name="308258">------------           ------------------      --------</a></div>
+      <div class="Code"><a name="308259">latency                An Int value            Int</a></div>
+      <div class="Code"><a name="308260">------------           ------------------      --------</a></div>
+      <div class="Code"><a name="308261">precision              'Full'                  String</a></div>
+      <div class="Code"><a name="308262">                       'User Defined'          </a></div>
+      <div class="Code"><a name="308263">------------           ------------------      --------</a></div>
+      <div class="Code"><a name="308264">arith_type             'Signed  (2's comp)'    String</a></div>
+      <div class="Code"><a name="308265">                       'Unsigned'              </a></div>
+      <div class="Code"><a name="308266">------------           ------------------      --------</a></div>
+      <div class="Code"><a name="308267">n_bits                 An Int value            Int</a></div>
+      <div class="Code"><a name="308268">------------           ------------------      --------</a></div>
+      <div class="Code"><a name="308269">bin_pt                 An Int value            Int</a></div>
+      <div class="Code"><a name="308270">------------           ------------------      --------</a></div>
+      <div class="Code"><a name="308271">quantization           'Truncate'              String</a></div>
+      <div class="Code"><a name="308272">                       'Round  (unbiased: +/- Inf)' </a></div>
+      <div class="Code"><a name="308273">------------           ------------------      --------</a></div>
+      <div class="Code"><a name="308274">overflow               'Wrap'                  String</a></div>
+      <div class="Code"><a name="308275">                       'Saturate'              </a></div>
+      <div class="Code"><a name="308276">                       'Flag as error'         </a></div>
+      <div class="Code"><a name="308277">------------           ------------------      --------</a></div>
+      <div class="Code"><a name="308278">use_behavioral_HDL     'off'                   String</a></div>
+      <div class="Code"><a name="308279">                       'on'                    </a></div>
+      <div class="Code"><a name="308280">------------           ------------------      --------</a></div>
+      <div class="Code"><a name="308281">pipelined              'off'                   String</a></div>
+      <div class="Code"><a name="308282">                       'on'                    </a></div>
+      <div class="Code"><a name="308283">------------           ------------------      --------</a></div>
+      <div class="Code"><a name="308284">use_rpm                'off'                   String</a></div>
+      <div class="Code"><a name="308285">                       'on'                    </a></div>
+      <div class="Code"><a name="308240">------------           ------------------      --------</a></div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

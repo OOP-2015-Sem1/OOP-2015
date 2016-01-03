@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Shared Memory Write</title>
+    <link rel="StyleSheet" href="css/Xilinx_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Blockset.11.001.html#271173">Xilinx Blockset</a> : Shared Memory Write</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="271173">Shared Memory Write</a></div>
+      <div class="Body"><span class="Italic"><a name="277008">This block is listed in the following Xilinx Blockset libraries: Shared Memory and Index.</a></span></div>
+      <div class="OneLiner"><a name="590707"><img class="Default" src="images/Xilinx_Blockset.11.098.1.jpg" width="59" height="53" style="display: block; float: none; left: 0.0; top: 0.0" alt="" />The Xilinx Shared Memory Write block provides a high-speed interface for </a>writing data into a Xilinx shared memory object. Both FIFO and lockable shared memory objects are supported by the block. </div>
+      <div class="Body"><a name="1104677">The Shared Memory Write block input port should be driven by the </a>Simulink scalar, vector, or matrix signal containing the data you would like written into the shared memory object. The bracketed text beneath the block indicates the shared memory with which this block interfaces. The depth and width displays on the block indicate the size of the shared memory - these values are updated at runtime when the block makes the connection to shared memory. The width of the input data must match the width of the shared memory, and the total number of elements in the input must not be bigger than the depth of the shared memory object. </div>
+      <div class="Body"><a name="590713">The Shared Memory Write block performs several transactions with its associated shared </a>memory object when it is woken up during a simulation. The frequency at which the block is woken up is determined by its sample period, which is inherited from the signal driving its input port. The type of transactions performed depends on whether the block is associated with a FIFO or lockable shared memory object. </div>
+      <div class="Heading2"><a name="590716">FIFO Transactions </a></div>
+      <div class="Body"><a name="590719">The transactions with a shared FIFO object are listed below in their order of occurrence </a>during a simulation cycle: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="590723">Wait for Available Storage</a></span>: The Shared Memory Write block waits for the shared FIFO object to become empty. If the shared FIFO object is not empty after 15 seconds, the Shared Memory Write block will time out and the simulation will terminate.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="590725">Write Data</a></span>: Once the block ensures a sufficient amount of available, the Shared Memory Write block will write data into the shared FIFO object. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="590728">Lockable Memory Transactions</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="590733">Acquire Lock</a></span>: Before the Shared Memory Write block may write to the shared memory contents, it must acquire lock over the shared memory object. If the block fails to gain lock after 15 seconds, it will time out and the simulation will terminate. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="590735">Write Data</a></span>: Once lock is acquired, the Shared Memory Write block will write data to the shared memory object. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="590737">Release Lock</a></span>: The Shared Memory Write block releases the lock after writing data to the shared memory object. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="590741">The Shared Memory Write block is useful for simulation only and is ignored during </a>netlisting. In particular, the Shared Memory Write block can be applied to hardware co-simulation designs with high throughput requirements. For more information on how this done, see the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.08.11.html#286973', '');" title="Real-Time Signal Processing using Hardware Co-Simulation">Real-Time Signal Processing using Hardware Co-Simulation</a></span> . </div>
+      <div class="Heading2"><a name="591316">Block Parameters</a></div>
+      <div class="Body"><a name="591317">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model.</div>
+      <div class="Body"><a name="591332">Parameters specific to the Shared Memory Write block are: </a></div>
+      <div class="Body"><span class="Bold"><a name="591333">Shared Memory Name</a></span>: This parameter gives the unique string identifier for the shared memory to which the block should write the incoming data. The memory must be a lockable memory that is created and initialized elsewhere (i.e., the Shared Memory Write block does not create the specified shared memory object). </div>
+      <div class="Body"><span class="Bold"><a name="591220">Type</a></span>: Tells whether the block should write to a Xilinx shared FIFO or Lockable memory object. </div>
+      <div class="Heading2"><a name="591223">See Also</a></div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.097.html#271172', '');" title="Shared Memory Read" name="591210">Shared Memory Read</a></span></div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.08.11.html#286973', '');" title="Real-Time Signal Processing using Hardware Co-Simulation" name="591288">Real-Time Signal Processing using Hardware Co-Simulation</a></span> </div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

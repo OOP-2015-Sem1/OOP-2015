@@ -1,0 +1,9 @@
+function settings = xledkexporttarget
+settings.version = '9.2.01';
+% settings.('postgeneration_fcn') = 'xledkpostgen';
+settings.('settings_fcn')='xledksettings';
+settings.('precompile_fcn') = 'xledkprecompile';
+settings.('synthesis_tool').('allowed') = 'XST';
+settings.('sysclk_period').('allowed') = '10';
+settings.testbench.allowed = 'off';
+settings.update_fcn = 'xledkupdatefn';

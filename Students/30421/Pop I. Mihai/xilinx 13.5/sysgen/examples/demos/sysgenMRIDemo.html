@@ -1,0 +1,27 @@
+<html>
+<body>
+<h2><font size=+1 color="#990000">Performing corner turn for 2D-FFT using VDMA Interface</font></h2>
+<h3><b>Introduction</b></h3>
+<p>
+MRI Image reconstruction can be defined as the process reconstructing the image from MRI data. The MRI machine collects data in the spatial frequency domain (also referred to as k-space). This data is then conditioned and processed to create the spatial image that can be meaningfully inspected. An important step of this image reconstruction is performing a Two Dimensional FFT on the input data. This demo focuses entirely on this particular step of the image reconstruction process. The VDMA Interface is a simulation only block and the block transforms into top level Gateway Ins and Gateway Outs on netlisting. Further use of the design requires stitching it with VDMA IP available in Xilinx Platform Studio.
+</p>
+<h3><b>Methodology</b></h3>
+<p>
+This demo performs two dimensional FFT (2D-FFT) on input data. Two pieces of high level IP along with control for data flow are used to perform (2D-FFT)
+<ul>
+<li>AXI Streaming FFT IP - FFTv8.0
+<li>VDMA Interface
+</ul>
+Since FFT is completely separable in two dimensions row wise FFT is performed in the input image followed by column wise FFT to realize 2D-FFT. In this design, the input data is a 256x256 FFT image. Firstly, the image is written into the External memory as one frame. Secondly, each row of the image is read from the external memory and sent to the FFT core and the results are written back. Thirdly, each column of the image is read from the external memory and sent to the FFT to generate the final results.
+Since VDMA Interface exposes a streaming interface and FFT cores does the same connecting them is trivial.
+</p>
+<h3><b>Input FFT Data</b></h3>
+<p>
+The input 2D FFT source is K-Space data generally obtained after processing Data produced by an MRI Machine. The FFT on the data will create a sagittal view of a human head. Because of the way the data was collected there is some spatial aliasing in the reconstructed image.
+</p>
+<p>
+   <b> Expected Input and Output for this Demo,</b> (Results captured after simulation)
+</p>
+<image src="./InputOutputResult_MRI.jpg" alt="Ouput SnapShot"/>
+</body>
+</html> 

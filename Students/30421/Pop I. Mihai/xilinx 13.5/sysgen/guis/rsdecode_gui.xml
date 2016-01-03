@@ -1,0 +1,71 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="RS Decoder v5_1 " block_type="rsdecode">
+  <initialization file="xlrsdecode_init.m"/>
+  <icon width="85" height="156" wmark_color="white" bg_color="green"/>
+  <dll name="sysgen_blockset" entry_point="RSdecoder_config"/>
+  <handlers enablement="rsdecodeenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsComm"/>
+  </libraries>
+  <blockgui label="Xilinx Reed-Solomon Decoder">
+    <editbox name="infoedit" default="Decodes systematically encoded RS codes. The decoder supports marking received data symbols as erasures." read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <listbox name="code_spec" default="DVB" evaluate="true" label="Code specification" ctype="Int">
+          <item value="Custom"/>
+          <item value="ATSC"/>
+          <item value="CCSDS"/>
+          <item value="DVB"/>
+          <item value="IESS-308 (126)"/>
+          <item value="IESS-308 (194)"/>
+          <item value="IESS-308 (208)"/>
+          <item value="IESS-308 (219)"/>
+          <item value="IESS-308 (225)"/>
+          <item value="IEEE-802.16d"/>
+        </listbox>
+        <editbox name="num_channels" default="1" top_label="true" evaluate="true" label="Number of channels integer between 1 and 128" ctype="Int"/>
+        <editbox name="clocks_per_symbol" default="1" top_label="true" evaluate="true" label="Clocks per symbol" ctype="Int"/>
+        <etch label="Optional Ports">
+          <checkbox name="erase" default="off" evaluate="true" label="Provide erase port" ctype="Int"/>
+          <checkbox name="data_del" default="off" evaluate="true" label="Provide original delayed data port (&lt;tt&gt;data_del&lt;/tt&gt;)" ctype="Int"/>
+          <checkbox name="n_in" default="off" evaluate="true" label="Provide variable block length port (&lt;tt&gt;n_in&lt;/tt&gt;)" ctype="Int"/>
+          <checkbox name="rst" default="off" evaluate="true" label="Provide synchronous reset port" ctype="Int"/>
+          <checkbox name="en" default="off" evaluate="true" label="Provide enable port" ctype="Int"/>
+        </etch>
+      </tab>
+      <tab name="customtab" label="Custom Specification">
+        <editbox name="sym_width" default="8" top_label="true" evaluate="true" label="Symbol width integer between 3 and 12" ctype="Int"/>
+        <editbox name="nn" default="204" top_label="true" evaluate="true" label="Number of symbols per code block (n)" ctype="Int"/>
+        <editbox name="kk" default="188" top_label="true" evaluate="true" label="Number of information symbols per code block (k)" ctype="Int"/>
+        <editbox name="poly_char" default="[ 1 0 0 0 1 1 1 0 1]" top_label="true" evaluate="true" label="Field polynomial (example: [ 1 0 1 1] =&gt; x^3  +  x  +  1)"/>
+        <editbox name="gen_start" default="0" top_label="true" evaluate="true" label="Generator start (log of first root of generator polynomial)" ctype="Int"/>
+        <editbox name="scale" default="1" top_label="true" evaluate="true" label="Scaling factor for generator polynomial" ctype="Int"/>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <etch label="Core Parameters">
+          <radiogroup name="mem_style" default="Automatic" evaluate="true" label="Memory Type" ctype="Int">
+            <item value="Automatic" label="Automatic"/>
+            <item value="Block RAM" label="Block RAM"/>
+            <item value="Distributed memory" label="Distributed memory"/>
+          </radiogroup>
+          <radiogroup name="opt_mode" default="Speed" evaluate="true" label="Optimization" ctype="Int">
+            <item value="Area" label="Area"/>
+            <item value="Speed" label="Speed"/>
+          </radiogroup>
+          <checkbox name="self_recovering" default="off" evaluate="true" label="Self recovering state machine" ctype="Int"/>
+          <checkbox name="use_rpm" default="off" evaluate="true" label="Use core placement information" ctype="Int"/>
+        </etch>
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <workspacevar name="alpha" ctype="Int"/>
+    <workspacevar name="poly" ctype="String"/>
+    <hiddenvar name="core_version" default="5.1" evaluate="false" ctype="String"/>    
+  </blockgui>
+</sysgenblock>

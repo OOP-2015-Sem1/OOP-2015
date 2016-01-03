@@ -1,0 +1,18 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Simulation Multiplexer" block_type="simmux">
+  <initialization file="xlsimmux_init.m"/>
+  <icon width="50" height="49" wmark_color="white" bg_color="blue" file="simmux_icon.m"/>
+  <dll name="sysgen_blockset" entry_point="SimMux_config"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsTools"/>
+  </libraries>
+  <blockgui label="Xilinx Simulation Multiplexer">
+    <editbox name="infoedit" default="Distinguish input subsystems as &quot;simulation only&quot; and &quot;generation only&quot;.  The input specified For Simulation will be used during Simulink simulation.  The input specified For Generation will be used during code generation.  This block will typically be used on the output of a HW Co-Simulation, Black Box, or ModelSim subsystem.&lt;br&gt;&lt;br&gt;Hardware Notes: This block costs nothing." read_only="true" evaluate="false" multi_line="true"/>
+    <editbox name="sim_sel" default="1" evaluate="true" label="For simulation,  pass through data from input port:   (1 or 2)" ctype="Int"/>
+    <editbox name="hw_sel" default="2" evaluate="true" label="For generation,  pass through data from input port:   (1 or 2)" ctype="Int"/>
+    <workspacevar name="period" ctype="Double"/>
+  </blockgui>
+</sysgenblock>
