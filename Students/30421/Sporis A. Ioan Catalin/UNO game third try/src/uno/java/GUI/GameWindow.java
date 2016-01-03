@@ -28,14 +28,12 @@ public class GameWindow extends JFrame implements Designer {
 	public PlayerDescriptionPanel playerDescPanel1;
 	public PlayerDescriptionPanel playerDescPanel2;
 
-	
 	public ChangeColorPanel colorPanel = new ChangeColorPanel();
 	public Color gameColor;
 	public int reverse = 1;
 	public int turn = 0;
 	public JLabel playerTurn = new JLabel("Player 1");
-	
-	
+
 	public GameWindow() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(1370, 700);
@@ -70,10 +68,8 @@ public class GameWindow extends JFrame implements Designer {
 					players.get(1).getNickname(), new Dimension(120, 120));
 
 			players.get(0).playerCardsPanel = new PlayerCardsPanelHorizontal(new Dimension(600, 200));
-			// playerCardsPanel1.setPlayer(players.get(0));
 
 			players.get(1).playerCardsPanel = new PlayerCardsPanelHorizontal(new Dimension(600, 150));
-			// playerCardsPanel2.setPlayer(players.get(1));
 
 			players.get(0).playerCardsPanel.arrangeCards(players.get(0).getHand());
 			players.get(1).playerCardsPanel.arrangeCards(players.get(1).getHand());
@@ -109,27 +105,27 @@ public class GameWindow extends JFrame implements Designer {
 			players.get(2).playerCardsPanel.arrangeCards(players.get(2).getHand());
 
 			this.componentSetBounds(playerDescPanel1, new Rectangle(285, 540, 120, 130));
-			this.componentSetBounds(players.get(0).playerCardsPanel,
-					new Rectangle(425, 500, players.get(0).playerCardsPanel.getWidth(), players.get(0).playerCardsPanel.getHeight()));
+			this.componentSetBounds(players.get(0).playerCardsPanel, new Rectangle(425, 500,
+					players.get(0).playerCardsPanel.getWidth(), players.get(0).playerCardsPanel.getHeight()));
 
 			this.backgroundPanel.add(playerDescPanel1);
 			this.backgroundPanel.add(players.get(0).playerCardsPanel);
 
 			this.componentSetBounds(playerDescPanel3, new Rectangle(905, 40, 120, 130));
-			this.componentSetBounds(players.get(2).playerCardsPanel,
-					new Rectangle(285, 0, players.get(2).playerCardsPanel.getWidth(), players.get(2).playerCardsPanel.getHeight()));
+			this.componentSetBounds(players.get(2).playerCardsPanel, new Rectangle(285, 0,
+					players.get(2).playerCardsPanel.getWidth(), players.get(2).playerCardsPanel.getHeight()));
 
 			this.backgroundPanel.add(players.get(2).playerCardsPanel);
 			this.backgroundPanel.add(playerDescPanel3);
 
 			this.componentSetBounds(playerDescPanel2, new Rectangle(0, 65, 120, 130));
-			this.componentSetBounds(players.get(1).playerCardsPanel,
-					new Rectangle(0, 205, players.get(1).playerCardsPanel.getWidth(), players.get(1).playerCardsPanel.getHeight()));
+			this.componentSetBounds(players.get(1).playerCardsPanel, new Rectangle(0, 205,
+					players.get(1).playerCardsPanel.getWidth(), players.get(1).playerCardsPanel.getHeight()));
 
 			this.backgroundPanel.add(playerDescPanel2);
 			this.backgroundPanel.add(players.get(1).playerCardsPanel);
-		} 
-	
+		}
+
 		else if (nrOfPlayers == 4) {
 			PlayerDescriptionPanel playerDescPanel1 = new PlayerDescriptionPanel("images.png",
 					players.get(0).getNickname(), new Dimension(120, 120));
@@ -154,29 +150,29 @@ public class GameWindow extends JFrame implements Designer {
 			players.get(3).playerCardsPanel.arrangeCards(players.get(3).getHand());
 
 			this.componentSetBounds(playerDescPanel1, new Rectangle(285, 540, 120, 130));
-			this.componentSetBounds(players.get(0).playerCardsPanel,
-					new Rectangle(425, 500, players.get(0).playerCardsPanel.getWidth(), players.get(0).playerCardsPanel.getHeight()));
+			this.componentSetBounds(players.get(0).playerCardsPanel, new Rectangle(425, 500,
+					players.get(0).playerCardsPanel.getWidth(), players.get(0).playerCardsPanel.getHeight()));
 
 			this.backgroundPanel.add(playerDescPanel1);
 			this.backgroundPanel.add(players.get(0).playerCardsPanel);
 
 			this.componentSetBounds(playerDescPanel3, new Rectangle(905, 40, 120, 130));
-			this.componentSetBounds(players.get(2).playerCardsPanel,
-					new Rectangle(285, 0, players.get(2).playerCardsPanel.getWidth(), players.get(2).playerCardsPanel.getHeight()));
+			this.componentSetBounds(players.get(2).playerCardsPanel, new Rectangle(285, 0,
+					players.get(2).playerCardsPanel.getWidth(), players.get(2).playerCardsPanel.getHeight()));
 
 			this.backgroundPanel.add(players.get(2).playerCardsPanel);
 			this.backgroundPanel.add(playerDescPanel3);
 
 			this.componentSetBounds(playerDescPanel2, new Rectangle(0, 65, 120, 130));
-			this.componentSetBounds(players.get(1).playerCardsPanel,
-					new Rectangle(0, 205, players.get(1).playerCardsPanel.getWidth(), players.get(1).playerCardsPanel.getHeight()));
+			this.componentSetBounds(players.get(1).playerCardsPanel, new Rectangle(0, 205,
+					players.get(1).playerCardsPanel.getWidth(), players.get(1).playerCardsPanel.getHeight()));
 
 			this.backgroundPanel.add(playerDescPanel2);
 			this.backgroundPanel.add(players.get(1).playerCardsPanel);
 
 			this.componentSetBounds(playerDescPanel4, new Rectangle(1220, 485, 120, 130));
-			this.componentSetBounds(players.get(3).playerCardsPanel,
-					new Rectangle(1220, 65, players.get(3).playerCardsPanel.getWidth(), players.get(3).playerCardsPanel.getHeight()));
+			this.componentSetBounds(players.get(3).playerCardsPanel, new Rectangle(1220, 65,
+					players.get(3).playerCardsPanel.getWidth(), players.get(3).playerCardsPanel.getHeight()));
 
 			this.backgroundPanel.add(playerDescPanel4);
 			this.backgroundPanel.add(players.get(3).playerCardsPanel);
@@ -200,15 +196,16 @@ public class GameWindow extends JFrame implements Designer {
 				new Rectangle(0, 600, this.colorPanel.getWidth(), this.colorPanel.getHeight()));
 		this.backgroundPanel.add(this.colorPanel);
 	}
-	public void turnDisplay(){
-		
-		this.componentSetBounds(this.playerTurn, new Rectangle(540,300,152,95));
-		this.playerTurn.setFont(new Font("Times New Roman",Font.BOLD,40));
-		
+
+	public void turnDisplay() {
+
+		this.componentSetBounds(this.playerTurn, new Rectangle(540, 300, 152, 95));
+		this.playerTurn.setFont(new Font("Times New Roman", Font.BOLD, 40));
+
 		this.playerTurn.setBackground(this.backgroundColor);
-	
+
 		this.backgroundPanel.add(this.playerTurn);
-		
+
 	}
 
 }

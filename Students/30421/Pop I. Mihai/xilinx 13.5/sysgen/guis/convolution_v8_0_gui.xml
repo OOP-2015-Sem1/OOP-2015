@@ -1,0 +1,82 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Convolution Encoder 8.0 " block_type="convolution_v8_0">
+  <icon width="95" height="142" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen" entry_point="coregenimport_config"/>
+   <handlers enablement="convolutionencoder_v8_0_enablement" action="convolutionencoder_v8_0_action"/>
+  <libraries>
+        <library name="xbsIndex"/>
+        <library name="xbsComm"/>
+        <library name="xbsAXI4"/>
+  </libraries>
+  <blockgui label="Xilinx Convolution Encoder 8.0">
+    <tabpane>
+      <tab name="page_0" label="page_0">
+      	<etch label="Data Rates and Puncturing">
+      		<checkbox name="punctured" default="off" label="Punctured" ctype="Bool" allow_advanced="false"/>
+		<checkbox name="dual_output" default="off" label="Dual output" ctype="Bool" allow_advanced="false"/>      	
+      		<editbox name="input_rate" default="1" top_label="false" evaluate="true" label="Input rate" ctype="Int"/>
+		<editbox name="output_rate" default="2" top_label="false" evaluate="true" label="Output rate" ctype="Int"/>
+		<editbox name="puncture_code0" default="'0'" top_label="false" evaluate="true" label="Puncture code0" ctype="String"/>
+		<editbox name="puncture_code1" default="'0'" top_label="false" evaluate="true" label="Puncture code1" ctype="String"/>
+      	</etch> 
+      	<etch label="Radix">
+	        <listbox name="convolution_code_radix" default="Binary" top_label="false" evaluate="false" label="Convolution code radix" ctype="String" allow_advanced="false">
+	          <item value="Binary"/>
+	          <item value="Octal"/>
+	          <item value="Decimal"/>
+	        </listbox>      	
+      	</etch>
+   
+      	<etch label="Convolution">
+        	<listbox name="constraint_length" default="7" top_label="false" evaluate="false" label="Constraint length" ctype="String" allow_advanced="false">
+        	  <item value="3"/>
+        	  <item value="4"/>
+        	  <item value="5"/>
+        	  <item value="6"/>
+        	  <item value="7"/>
+        	  <item value="8"/>
+        	  <item value="9"/>
+        	</listbox>
+        	<editbox name="convolution_code0" default="'1111001'" top_label="false" evaluate="true" label="Convolution code0" ctype="String"/>
+        	<editbox name="convolution_code1" default="'1011011'" top_label="false" evaluate="true" label="Convolution code1" ctype="String"/>
+        	<editbox name="convolution_code2" default="'0000000'" top_label="false" evaluate="true" label="Convolution code2" ctype="String"/>
+        	<editbox name="convolution_code3" default="'0000000'" top_label="false" evaluate="true" label="Convolution code3" ctype="String"/>
+        	<editbox name="convolution_code4" default="'0000000'" top_label="false" evaluate="true" label="Convolution code4" ctype="String"/>
+        	<editbox name="convolution_code5" default="'0000000'" top_label="false" evaluate="true" label="Convolution code5" ctype="String"/>
+        	<editbox name="convolution_code6" default="'0000000'" top_label="false" evaluate="true" label="Convolution code6" ctype="String"/>      	
+      	</etch>
+      	<etch label="Optional Pins">
+	        <!--Checkbox name="tready" default="on" label="Tready" ctype="Bool" allow_advanced="false"/-->
+	        <checkbox name="aclken" default="off" label="Aclken" ctype="Bool" allow_advanced="false"/>      	
+	        <checkbox name="aresetn" default="off" label="Aresetn" ctype="Bool" allow_advanced="false"/>
+      	</etch>
+      </tab>
+      <tab name="Implementation_tab" label="Implementation">
+        <etch label="Block Icon Display">
+          <checkbox name="trim_axipin_name" default="on" label="Display shortened port names" ctype="Int" evaluate="true" allow_advanced="false"/>
+        </etch>       
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation" ctype="Bool" allow_advanced="false"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" evaluate="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]" />
+        </etch>
+      </tab>
+    </tabpane>
+    <!-- IP Import Specific Parameters -->
+    <hiddenvar name="ip_name" default="Convolution Encoder" evaluate="false" ctype="String"/>
+    <hiddenvar name="ip_version" default="8.0" evaluate="false" ctype="String"/>
+    <hiddenvar name="dsptool_ready" default="false" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="ipcore_usecache" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="ipcore_useipmodelcache" default="true" evaluate="true" ctype="Bool"/>
+    <!-- IP Import Wrapper Specific Parameters -->
+    <hiddenvar name="wrapper_available" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="port_translation_map" default="{ 'aclken' => 'en', 'aresetn' => 'rst' }" evaluate="false" ctype="String"/>
+      <hiddenvar name="structural_sim" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="ipcore_do_not_force_period" default="true" evaluate="true" ctype="Bool">
+      </hiddenvar>
+      <hiddenvar name="oldconvolution_code_radix" default="Binary" evaluate="false" ctype="String"/>
+  </blockgui>
+</sysgenblock>
+

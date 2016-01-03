@@ -1,0 +1,723 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>System-Level Modeling in System Generator</title>
+    <link rel="StyleSheet" href="css/HW_Design.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="HW_Design.06.01.html#270748">Hardware Design Using System Generator</a> : System-Level Modeling in System Generator</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="270748">System-Level Modeling in System Generator</a></div>
+      <div class="Body"><a name="288183">System Generator allows device-specific hardware designs to be constructed directly in a </a>flexible high-level system modeling environment. In a System Generator design, signals are not just bits. They can be signed and unsigned fixed-point numbers, and changes to the design automatically translate into appropriate changes in signal types. Blocks are not just stand-ins for hardware. They respond to their surroundings, automatically adjusting the results they produce and the hardware they become. </div>
+      <div class="Body"><a name="288177">System Generator allows designs to be composed from a variety of ingredients. Data flow </a>models, traditional hardware design languages (VHDL, Verilog, and EDIF), and functions derived from the MATLAB programming language, can be used side-by-side, simulated together, and synthesized into working hardware. System Generator simulation results are bit and cycle-accurate. This means results seen in simulation exactly match the results that are seen in hardware. System Generator simulations are considerably faster than those from traditional HDL simulators, and results are easier to analyze.</div>
+      <table class="ColumnNoTitleNoLines" style="text-align: left; width: 381.5114pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top; width: 148.8664pt">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.06.04.html#270820', '');" title="System-Level Modeling in System Generator" name="289008">System Generator Blocksets</a></span></div>
+          </td>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top; width: 232.645pt">
+            <div class="CellBody"><a name="289010">Describes how System Generator's blocks are </a>organized in libraries, and how the blocks can be parameterized and used. </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.06.04.html#319540', '');" title="System-Level Modeling in System Generator" name="289014">Signal Types</a></span></div>
+          </td>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="289017">Describes the data types used by System Generator </a>and ways in which data types can be automatically assigned by the tool. </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.06.04.html#542269', '');" title="System-Level Modeling in System Generator" name="289021">Bit-True and Cycle-True Modeling</a></span></div>
+          </td>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="289024">Specifies the relationship between the Simulink-based </a>simulation of a System Generator model and the behavior of the hardware that can be generated from it. </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.06.04.html#270824', '');" title="System-Level Modeling in System Generator" name="289035">Timing and Clocking</a></span></div>
+          </td>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="289038">Describes how clocks are implemented in hardware, </a>and how their implementation is controlled inside System Generator. Explains how System Generator translates a multirate Simulink model into working clock-synchronous hardware. </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.06.04.html#428090', '');" title="System-Level Modeling in System Generator" name="289042">Synchronization Mechanisms</a></span></div>
+          </td>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="289045">Describes mechanisms that can be used to </a>synchronize data flow across the data path elements in a high-level System Generator design, and describes how control path functions can be implemented.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.06.04.html#273123', '');" title="System-Level Modeling in System Generator" name="289333">Block Masks and Parameter Passing</a></span></div>
+          </td>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="289335">Explains how parameterized systems and subsystems </a>are created in Simulink.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.06.04.html#270827', '');" title="System-Level Modeling in System Generator" name="289049">Resource Estimation</a></span></div>
+          </td>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="289052">Describes how to generate estimates of the hardware </a>needed to implement a System Generator design.</div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="270820">System Generator Blocksets</a></div>
+      <div class="Body"><a name="271603">A </a><span class="Italic">Simulink blockset</span> is a library of blocks that can be connected in the Simulink block editor to create functional models of a dynamical system. For system modeling, System Generator blocksets are used like other Simulink blocksets. The blocks provide abstractions of mathematical, logic, memory, and DSP functions that can be used to build sophisticated signal processing (and other) systems. There are also blocks that provide interfaces to other software tools (e.g., FDATool, ModelSim) as well as the System Generator code generation software.  </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="271691"><img class="Default" src="images/HW_Design.06.04.01.jpg" width="341" height="232" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="271605">System Generator blocks are </a><span class="Italic">bit-accurate</span> and <span class="Italic">cycle-accurate</span>. Bit-accurate blocks produce values in Simulink that match corresponding values produced in hardware; cycle-accurate blocks produce corresponding values at corresponding times.</div>
+      <div class="Heading3"><a name="271609">Xilinx Blockset</a></div>
+      <div class="Body"><a name="271610">The Xilinx Blockset is a family of libraries that contain basic System Generator blocks. </a>Some blocks are low-level, providing access to device-specific hardware. Others are high- level, implementing (for example) signal processing and advanced communications algorithms. For convenience, blocks with broad applicability (e.g., the Gateway I/O blocks) are members of several libraries. Every block is contained in the Index library. The libraries are described below.</div>
+      <div class="Body"><a name="319468">&nbsp;</a></div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 394.1907pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 103.38pt">
+            <div class="CellHeadingLeft"><a name="319425">Library</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 290.8107pt">
+            <div class="CellHeadingLeft"><a name="319427">Description</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="558963">AXI4</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span style="font-size: 10.0pt"><a name="558965">Blocks with interfaces that conform to the AXI™4 specification</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="319433">Basic Elements</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="319435">Elements</a>	Standard building blocks for digital logic</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="319437">Communication</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="319439">Forward error correction and modulator blocks, commonly used in </a>digital communications systems</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="319441">Control Logic</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="319443">Blocks for control circuitry and state machines</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="559022">DSP</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="559024">Digital signal processing (DSP) blocks</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="559018">Data Types</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="559020">Blocks that convert data types (includes gateways)</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="559014">Floating-Point</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="559016">Blocks that support the Floating-Point data type</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="559026">Index</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="559028">Every block in the Xilinx Blockset.</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="319453">Math</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="319455">Blocks that implement mathematical functions</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="319457">Memory</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="319459">Blocks that implement and access memories</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="319461">Shared Memory</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="319463">Blocks that implement and access Xilinx shared memories</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="319465">Tools</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="319467">“Utility” blocks, e.g., code generation (System Generator token), </a>resource estimation, HDL co-simulation, etc</div>
+          </td>
+        </tr>
+      </table>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="319481">More information concerning blocks can be found in the topic </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.001.html#271758', '');" title="Xilinx Blockset">Xilinx Blockset</a></span> .</div>
+      <div class="Heading3"><a name="319486">Xilinx Reference Blockset</a></div>
+      <div class="Body"><a name="310776">The Xilinx Reference Blockset contains composite System Generator blocks that implement </a>a wide range of functions. Blocks in this blockset are organized by function into different libraries. The libraries are described below.</div>
+      <div class="Body"><a name="272171">&nbsp;</a></div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 394.1907pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 103.38pt">
+            <div class="CellHeadingLeft"><a name="272128">Library</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 290.8107pt">
+            <div class="CellHeadingLeft"><a name="272130">Description</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="272132">Communication</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="272134">	</a>Blocks commonly used in digital communications systems</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="272136">Control Logic</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="272138">Logic</a>	Blocks used for control circuitry and state machines</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="272140">DSP</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="272142">Digital signal processing (DSP) blocks</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="272144">Imaging</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="272146">Image processing blocks</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="272148">Math</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="272150">Blocks that implement mathematical functions</a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="271637">Each block in this blockset is a composite, i.e., is implemented as a masked subsystem, with </a>parameters that configure the block. </div>
+      <div class="Body"><a name="319526">You can use blocks from the Reference Blockset libraries as is, or as starting points when </a>constructing designs that have similar characteristics. Each reference block has a description of its implementation and hardware resource requirements. Individual documentation for each block is also provided in the topic <span class="XBlueLink" style="font-style: normal; font-weight: normal"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Reference_Blockset.12.01.html#271758', '');" title="Xilinx Reference Blockset">Xilinx Reference Blockset</a></span><span class="URL"> </span>.</div>
+      <div class="Body"><a name="319537">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="319536"><img class="Default" src="images/HW_Design.06.04.02.jpg" width="359" height="311" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="319540">Signal Types</a></div>
+      <div class="Body"><a name="289620">In order to provide bit-accurate simulation of hardware, System Generator blocks operate </a>on Boolean, floating-point, and arbitrary precision fixed-point values. By contrast, the fundamental scalar signal type in Simulink is double precision floating point. The connection between Xilinx blocks and non-Xilinx blocks is provided by <span class="Italic">gateway blocks</span>. The <span class="Italic">gateway in</span> converts a double precision signal into a Xilinx signal, and the <span class="Italic">gateway out</span> converts a Xilinx signal into double precision. Simulink continuous time signals must be sampled by the Gateway In block. </div>
+      <div class="Body"><a name="289622">Most Xilinx blocks are polymorphic, i.e., they are able to deduce appropriate output types </a>based on their input types. When <span class="Italic">full precision</span> is specified for a block in its parameters dialog box, System Generator chooses the output type to ensure no precision is lost. Sign extension and zero padding occur automatically as necessary. <span class="Italic">User-specified precision</span> is usually also available. This allows you to set the output type for a block and to specify how quantization and overflow should be handled. Quantization possibilities include unbiased rounding towards plus or minus infinity, depending on sign, or truncation. Overflow options include saturation, truncation, and reporting overflow as an error. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="289626">System Generator data types can be displayed by selecting </a><span class="Bold">Format &gt; Port Data Types</span> in Simulink. Displaying data types makes it easy to determine precision throughout a model. If, for example, the type for a port is Fix_11_9, then the signal is a two's complement signed 11-bit number having nine fractional bits. Similarly, if the type is <span class="Bold">Ufix_5_3</span>, then the signal is an unsigned 5-bit number having three fractional bits. </div>
+      <div class="Body"><a name="289630">In the System Generator portion of a Simulink model, every signal must be sampled. </a>Sample times may be inherited using Simulink's propagation rules, or set explicitly in a block customization dialog box. When there are feedback loops, System Generator is sometimes unable to deduce sample periods and/or signal types, in which case the tool issues an error message. <span class="Italic">Assert blocks</span> must be inserted into loops to address this problem. It is not necessary to add assert blocks at every point in a loop; usually it suffices to add an assert block at one point to “break” the loop. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="289634">Simulink can display a model by shading blocks and signals that run at different rates with </a>different colors (<span class="Bold">Format &gt; Sample Time Colors</span> in the Simulink pulldown menus). This is often useful in understanding multirate designs.</div>
+      <div class="Heading2"><a name="541381">Floating-Point Data Type</a></div>
+      <div class="Body"><a name="559068">System Generator blocks found in the Floating-Point library support the floating-point </a>data type.</div>
+      <div class="Body"><a name="559095">System Generator uses the Floating-Point Operator v6.0 IP core to leverage the </a>implementation of operations such as addition/subtraction, multiplication, comparisons and data type conversion.</div>
+      <div class="Body"><a name="559096">The floating-point data type support is in compliance with IEEE-754 Standard for Floating-</a>Point Arithmetic. Single precision, Double precision and Custom precision floating-point data types are supported for design input, data type display and for data rate and type propagation (RTP) across the supported System Generator blocks.</div>
+      <div class="Heading3"><a name="559100">IEEE-754 Standard for Floating-Point Data Type</a></div>
+      <div class="Body"><a name="559101">As shown below, floating-point data is represented using one Sign bit (S), X exponent bits </a>and Y fraction bits. The Sign bit is always the most-significant bit (MSB).<img class="Default" src="images/HW_Design.06.04.03.jpg" width="395" height="91" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></div>
+      <div class="Body"><a name="559164">According to the IEEE-754 standard, a floating-point value is represented and stored in the </a>normalized form. In the normalized form the exponent value E is a biased/normalized value. The normalized exponent, E, equals the sum of the actual exponent value and the exponent bias. In the normalized form, Y-1 bits are used to store the fraction value. The F<span style="vertical-align: sub">0</span> fraction bit is always a hidden bit and its value is assumed to be 1.</div>
+      <div class="Body"><a name="559165">S represents the value of the sign of the number. If S is 0 then the value is a positive </a>floating-point number; otherwise it is negative. The X bits that follow are used to store the normalized exponent value E and the last Y-1 bits are used to store the fraction/mantissa value in the normalized form.</div>
+      <div class="Body"><a name="559166">For the given exponent width, the exponent bias is calculated using the following </a>equation:</div>
+      <div class="Body"><a name="559167">                        Exponent_bias = 2</a><span class="Superscript">(X - 1)</span> - 1, where X is the exponent bit width.</div>
+      <div class="Body"><a name="559168">According to the IEEE standard, a single precision floating-point data is represented using </a>32 bits. The normalized exponent and fraction/mantissa are allocated 8 and 24 bits, respectively. The exponent bias for single precision is 127. Similarly, a double precision floating-point data is represented using a total of 64 bits where the exponent bit width is 11 and the fraction bit width is 53. The exponent bias value for double precision is 1023.</div>
+      <div class="Body"><a name="559169">The normalized floating-point number in the equation form is represented as follows:</a></div>
+      <div class="Body"><a name="559170">              Normalized Floating-Point Value = (-1)</a><span class="Superscript">S</span> x F<span style="vertical-align: sub">0</span>.F<span style="vertical-align: sub">1</span>F<span style="vertical-align: sub">2</span> …. F<span style="vertical-align: sub">Y-2</span>F<span style="vertical-align: sub">Y-1</span> x (2)<span class="Superscript">E</span></div>
+      <div class="Body"><a name="559171">The actual value of exponent (E_actual) = E - Exponent_bias. Considering 1 as the value for </a>the hidden bit F<span style="vertical-align: sub">0</span> and the E_actual value, a floating-point number can be calculated as follows:</div>
+      <div class="Body"><a name="559172">      FP_Value = (-1)</a><span class="Superscript">S</span> x 1.F<span style="vertical-align: sub">1</span>F<span style="vertical-align: sub">2</span> …. F<span style="vertical-align: sub">Y-2</span>F<span style="vertical-align: sub">Y-1</span> x (2)<span class="Superscript">(E_actual)</span></div>
+      <div class="Heading3"><a name="559173">Floating-Point Data Representation in System Generator</a></div>
+      <div class="Body"><a name="559174">The System Generator </a><span style="font-weight: bold">Gateway In</span> block previously only supported the Boolean and Fixed-point data types. As shown below, the <span class="Bold">Gateway In</span> block GUI and underlying mask parameters now support the Floating-point data type as well. You can select either a <span class="Bold">Single</span>, <span class="Bold">Double</span> or <span class="Bold">Custom</span> precision type after specifying the floating-point data type.</div>
+      <div class="Body"><a name="563089">For example, if Exponent width of 9 and Fraction width of 31 is specified then the floating-</a>point data value will be stored in total 40 bits where the MSB bit will be used for sign representation, the following 9 bits will be used to store biased exponent value and the 30 LSB bits will be used to store the fractional value.<img class="Default" src="images/HW_Design.06.04.04.jpg" width="322" height="247" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></div>
+      <div class="Body"><a name="559180">In compliance with the IEEE-754 standard, if </a><span class="Bold">Single</span> precision is selected then the total bit width is assumed to be 32; 8 bits for the exponent and 24 bits for the fraction. Similarly when <span class="Bold">Double</span> precision is selected, the total bit width is assumed to be 64 bits; 11 bits for the exponent and 53 bits for the fraction part. When <span class="Bold">Custom</span> precision is selected, the <span class="Bold">Exponent width</span> and <span class="Bold">Fraction width</span> fields are activated and you are free to specify values for these fields (8 and 24 are the default values). The total bit width for <span class="Bold">Custom</span> precision data is the summation of the number of exponent bits and the number of fraction bits. Similar to fraction bit width for <span class="Bold">Single</span> precision and <span class="Bold">Double</span> precision data types the fraction bit width for <span class="Bold">Custom</span> precision data type must include the hidden bit F<span style="vertical-align: sub">0</span></div>
+      <div class="Heading3"><a name="559181">Displaying the Data Type on Output Signals</a></div>
+      <div class="Body"><a name="559182">As shown below, after a successful rate and type propagation, the floating-point data type </a>is displayed on the output of each System Generator block.To display the signal data type as shown in the diagram below, you select the pulldown menu item <span class="Bold">Format &gt; Port/Signal </span><span class="Bold">Displays &gt; Port Data Types</span>.</div>
+      <div class="Body"><a name="559186"><img class="Default" src="images/HW_Design.06.04.05.jpg" width="395" height="247" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+      <div class="Body"><a name="559187">A floating-point data type is displayed using the format: </a><span class="Filename">XFloat_&lt;exponent_bit_width&gt;_&lt;fraction_bit_width&gt;</span>. Single and Double precision data types are displayed using the string “XFloat_8_24” and “XFloat_11_53”, respectively. </div>
+      <div class="Body"><a name="559188">If for a Custom precision data type the exponent bit width 9 and the fraction bit width 31 </a>are specified, then it will be displayed as “XFloat_9_31”. A total of 40 bits will be used to store the floating-point data value. Since floating-point data is stored in a normalized form, the fractional value will be stored in 30 bits.</div>
+      <div class="Body"><a name="559189">In System Generator the fixed-point data type is displayed using format </a><span class="Filename">XFix_&lt;total_data_width&gt;_&lt;binary_point_width&gt;</span>. For example, a fixed-point data type with the data width of 40 and binary point width of 31 is displayed as XFix_40_31.</div>
+      <div class="Body"><a name="559190">It is necessary to point out that in the fixed-point data type the actual number of bits used </a>to store the fractional value is different from that used for floating-point data type. In the example above, all 31 bits are used to store the fractional bits of the fixed-point data type.</div>
+      <div class="Body"><a name="559191">System Generator uses the exponent bit width and the fraction bit width to configure and </a>generate an instance of the Floating-Point Operator core.</div>
+      <div class="Heading3"><a name="559192">Rate and Type Propagation</a></div>
+      <div class="Body"><a name="559193">During data rate and type propagation across a System Generator block that supports </a>floating-point data, the following design rules are verified. The appropriate error is issued if one of the following violations is detected.</div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="559194">If a signal carrying floating-point data is connected to the port of a System Generator </a>block that doesn’t support the floating-point data type.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="559195">If the data input (both A and B data inputs, where applicable) and the data output of a </a>System Generator block are not of the same floating-point data type. The DRC check will be made between the two inputs of a block as well as between an input and an output of the block.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="559196">If a Custom precision floating-point data type is specified, the exponent bit width and </a>the fraction bit width of the two ports are compared to determine that they are of the same data type.</div>
+      <div class="Note2">
+        <span class="XNote">Note:&nbsp;</span><a name="559197">The Convert and Relational blocks are excluded from this check. The Convert block </a>supports Float-to-float data type conversion between two different floating-point data types. The Relational block output is always the Boolean data type because it gives a true or false result for a comparison operation.</div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="559198">If the data inputs are of the fixed-point data type and the data output is expected to be </a>floating-point and vice versa. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Note2">
+        <span class="XNote">Note:&nbsp;</span><a name="559199">The Convert and Relational blocks are excluded from this check. The Convert block </a>supports Fixed-to-float as well as Float-to-fixed data type conversion. The Relational block output is always the Boolean data type because it gives a true or false result for a comparison operation.</div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="563207">If User Defined precision is selected for the Output Type of blocks that support the </a>floating-point data type. For example, for blocks such as AddSub, Mult, CMult, and MUX, only Full output precision is supported if the data inputs are of the floating-point data type.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">5.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="559201">If the Carry In port or Carry Out port is used for the AddSub block when the operation </a>on a floating-point data type is specified.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">6.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="559202">If the Floating-Point Operator IP core gives an error for DRC rules defined for the IP.</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="559055">AXI Signal Groups</a></div>
+      <div class="Body"><a name="542263">System Generator blocks found in the AXI4 library contain interfaces that conform to the </a>AXI™ 4 specification. Blocks with AXI interfaces are drawn such that ports relating to a particular AXI interface are grouped and colored in similarly. This makes it easier to identify data and control signals pertaining to the same interface. Grouping similar AXI ports together also make it possible to use the Simulink Bus Creator and Simulink Bus Selector blocks to connect groups of signals together. More information on AXI can be found in the section entitled <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.06.17.html#541389', '');" title="AXI Interface">AXI Interface</a></span>. For more detailed information on the AMBA AXI4 specification, please refer to the Xilinx AMBA AXI4 documents found at the following location: <span class="URL"><a href="http://www.xilinx.com/ipcenter/axi4." target="external_window">http://www.xilinx.com/ipcenter/axi4</a></span></div>
+      <div class="Heading2"><a name="542269">Bit-True and Cycle-True Modeling</a></div>
+      <div class="Body"><a name="271563">Simulations in System Generator are </a><span class="Italic">bit-true</span> and <span class="Italic">cycle-true</span>. To say a simulation is bit-true means that at the boundaries (i.e., interfaces between System Generator blocks and non-System Generator blocks), a value produced in simulation is bit-for-bit identical to the corresponding value produced in hardware. To say a simulation is cycle-true means that at the boundaries, corresponding values are produced at corresponding times. The boundaries of the design are the points at which System Generator gateway blocks exist. When a design is translated into hardware, Gateway In (respectively, Gateway Out) blocks become top-level input (resp., output) ports.</div>
+      <div class="Heading2"><a name="270824">Timing and Clocking</a></div>
+      <div class="Heading3"><a name="272424">Discrete Time Systems</a></div>
+      <div class="Body"><a name="272425">Designs in System Generator are discrete time systems. In other words, the signals and the </a>blocks that produce them have associated sample rates. A block’s sample rate determines how often the block is awoken (allowing its state to be updated). System Generator sets most sample rates automatically. A few blocks, however, set sample rates explicitly or implicitly. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="272427">For an in-depth explanation of Simulink discrete time systems and sample times, consult the </a>Using Simulink reference manual from the MathWorks, Inc. </div>
+      <div class="Body"><a name="272429">A simple System Generator model illustrates the behavior of discrete time systems. </a>Consider the model shown below. It contains a gateway that is driven by a Simulink source (Sine Wave), and a second gateway that drives a Simulink sink (Scope). </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="272572"><img class="Default" src="images/HW_Design.06.04.06.jpg" width="249" height="103" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="272432">The Gateway In block is configured with a sample period of one second. The Gateway Out </a>block converts the Xilinx fixed-point signal back to a double (so it can analyzed in the Simulink scope), but does not alter sample rates. The scope output below shows the unaltered and sampled versions of the sine wave.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="272676"><img class="Default" src="images/HW_Design.06.04.07.jpg" width="200" height="175" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="272437">Multirate Models</a></div>
+      <div class="Body"><a name="272438">System Generator supports </a><span class="Italic">multirate</span> designs, i.e., designs having signals running at several sample rates. System Generator automatically compiles multirate models into hardware. This allows multirate designs to be implemented in a way that is both natural and straightforward in Simulink. </div>
+      <div class="Heading3"><a name="272440">Rate-Changing Blocks </a></div>
+      <div class="Body"><a name="290032">System Generator includes blocks that change sample rates. The most basic rate changers </a>are the Up Sample and Down Sample blocks. As shown in the figure below, these blocks explicitly change the rate of a signal by a fixed multiple that is specified in the block’s dialog box.  </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="290038"><img class="Default" src="images/HW_Design.06.04.08.jpg" width="160" height="28" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="272445">Other blocks (e.g., the Parallel To Serial and Serial To Parallel converters) change rates </a>implicitly in a way determined by block parameterization.</div>
+      <div class="Body"><a name="272447">Consider the simple multirate example below. This model has two sample periods, SP1 </a>and SP2. The Gateway In dialog box defines the sample period SP1. The Down Sample block causes a rate change in the model, creating a new rate SP2 which is half as fast as SP1.  </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="272852"><img class="Default" src="images/HW_Design.06.04.09.jpg" width="287" height="88" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="272453">Hardware Oversampling</a></div>
+      <div class="Body"><a name="272454">Some System Generator blocks are oversampled, i.e., their internal processing is done at a </a>rate that is faster than their data rates. In hardware, this means that the block requires more than one clock cycle to process a data sample. In Simulink such blocks do not have an observable effect on sample rates. </div>
+      <div class="Body"><a name="272456">One block that can be oversampled is the DAFIR FIR filter. An oversampled DAFIR </a>processes samples serially, thus running at a higher rate, but using less hardware. </div>
+      <div class="Body"><a name="272458">Although blocks that are oversampled do not cause an explicit sample rate change in </a>Simulink, System Generator considers the internal block rate along with all other sample rates when generating clocking logic for the hardware implementation. This means that you must consider the internal processing rates of oversampled blocks when you specify the Simulink system period value in the System Generator token dialog box. </div>
+      <div class="Heading3"><a name="272460">Asynchronous Clocking</a></div>
+      <div class="Body"><a name="272461">System Generator focuses on the design of hardware that is synchronous to a single clock. </a>It can, under some circumstances, be used to design systems that contain more than one clock. This is possible provided the design can be partitioned into individual clock domains with the exchange of information between domains being regulated by dual port memories and FIFOs. System Generator fully supports such multi-clock designs, including the ability to simulate them in Simulink and to generate complete hardware descriptions. Details are discussed in the topic <span class="XBlueLink" style="font-style: normal; font-weight: normal"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.06.15.html#312886', '');" title="Generating Multiple Cycle-True Islands for Distinct Clocks">Generating Multiple Cycle-True Islands for Distinct Clocks</a></span>. The remainder of this topic focuses exclusively on the clock-synchronous aspects of System Generator. This discussion is relevant to both single-clock and multiple-clock designs.</div>
+      <div class="Heading3"><a name="272463">Synchronous Clocking</a></div>
+      <div class="Body"><a name="418018">As shown in the figure below, when you use the System Generator token to compile a </a>design into hardware, there are three clocking options for Multirate implementation: (1) Clock Enables (the default), (2) Hybrid DCM-CE, and (3) Expose Clock Ports.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="418024"><img class="Default" src="images/HW_Design.06.04.10.jpg" width="280" height="210" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading4"><a name="418025">The Clock Enables </a>Option</div>
+      <div class="Body"><a name="418026">When System Generator compiles a model into hardware with the Clock Enable option </a>selected, System Generator preserves the sample rate information of the design in such a way that corresponding portions in hardware run at appropriate rates. In hardware, System Generator generates related rates by using a single clock in conjunction with clock enables, one enable per rate. The period of each clock enable is an integer multiple of the period of the system clock.</div>
+      <div class="Body"><a name="272466">Inside Simulink, neither clocks nor clock enables are required as explicit signals in a </a>System Generator design. When System Generator compiles a design into hardware, it uses the sample rates in the design to deduce what clock enables are needed. To do this, it employs two user-specified values from the System Generator token: the Simulink system period and FPGA clock period. These numbers define the scaling factor between time in a Simulink simulation, and time in the actual hardware implementation. The Simulink system period must be the greatest common divisor (gcd) of the sample periods that appear in the model, and the FPGA clock period is the period, in nanoseconds, of the system clock. If p represents the Simulink system period, and c represents the FPGA system clock period, then something that takes kp units of time in Simulink takes k ticks of the system clock (hence kc nanoseconds) in hardware.</div>
+      <div class="Body"><a name="272468">To illustrate this point, consider a model that has three Simulink sample periods 2, 3, and </a>4. The gcd of these sample periods is 1, and should be specified as such in the Simulink System Period field for the model. Assume the FPGA Clock Period is specified to be 10ns. With this information, the corresponding clock enable periods can be determined in hardware. </div>
+      <div class="Body"><a name="439070">In hardware, we refer to the clock enables corresponding to the Simulink sample periods 2, </a>3, and 4 as CE2, CE3, and CE4, respectively. The relationship of each clock enable period to the system clock period can be determined by dividing the corresponding Simulink sample period by the Simulink System Period value. Thus, the periods for CE2, CE3, and CE4 equal 2, 3, and 4 system clock periods, respectively. A timing diagram for the example clock enable signals is shown below:</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="439076"><img class="Default" src="images/HW_Design.06.04.11.jpg" width="335" height="74" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading4"><a name="439078">The Hybrid DCM-CE </a>Option</div>
+      <div class="Body"><a name="439079">If the implementation target is an FPGA with a Digital Clock Manager (DCM), you can </a>choose to drive the clock tree with a DCM. The DCM option is desirable when high fanout on clock enable nets make it difficult to achieve timing closure.</div>
+      <div class="Body"><a name="442288">System Generator instantiates the DCM in a top-level HDL clock wrapper and configures </a>the DCM to provide up to <span style="font-size: 9.5pt">three clock ports at different rates for Virtex®-4 and Virtex®-5 and </span><span style="font-size: 9.5pt">up to two clock ports for Spartan-3A DSP</span>. If the design has more clock ports than the DCM can support, the remaining clocks are supported with the CE (clock enable) configuration. The mapping of rates to the DCM outputs is done according to the following priority scheme: <br />CLK0 &gt; CLK2x &gt; CLKdv &gt; CLKfx. The DCM supports the higher clock rates first.</div>
+      <div class="Body"><a name="433245">A </a><span class="Filename">dcm_reset</span> input port is exposed on the top-level wrapper to allow the external design to reset the DCM after bitstream configuration. A <span class="Filename">dcm_locked</span> output port is also exposed to help the external design synchronize the input data with the single <span class="Filename">clk</span> input port. </div>
+      <div class="Body"><span class="Bold"><a name="445153">Known Limitations</a></span>: The following System Generator blocks are not supported by the Hybrid DCM-CE Option:</div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="445157">Clock Enable Probe</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="445420">Clock Probe</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="445431">DAFIR</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="445438">Downsample - when the Sample option </a><span class="Bold">First value of the frame</span> is selected</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="445434">FIR Compiler - when the core rate is not equal to the input sample rate</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="445446">Parallel to Serial- when the Latency option is specified as 0 (zero)</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="445441">Time Division De-Multiplexer</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="445443">Time Division Multiplexer</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="445433">Upsample - when the </a><span class="Bold">Copy samples (otherwise zeros are inserted)</span> option is <span class="Italic">not</span> selected.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading4"><a name="417926">The Expose Clock </a>Ports Option</div>
+      <div class="Body"><a name="417950">When you select this option, System Generator creates a top-level wrapper that exposes a </a>clock port for each rate. You can then manually instantiate a clock generator outside the design to drive the clock ports.</div>
+      <div class="Body"><span class="Bold"><a name="536940">Known Limitations</a></span>: The following System Generator blocks are not supported by the Expose Clock Ports Option:</div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="536941">Clock Enable Probe</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="536942">Clock Probe</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="536943">DAFIR</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="536944">Downsample - when the Sample option </a><span class="Bold">First value of the frame</span> is selected</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="536945">FIR Compiler - when the core rate is not equal to the input sample rate</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="536946">Parallel to Serial- when the Latency option is specified as 0 (zero)</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="536947">Time Division De-Multiplexer</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="536948">Time Division Multiplexer</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="536949">Upsample - when the </a><span class="Bold">Copy samples (otherwise zeros are inserted)</span> option is <span class="Italic">not</span> selected.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading4"><a name="419319">Tutorial Example: </a>Using the Hybrid DCM-CE Option</div>
+      <div class="Body"><a name="419345">The following step-by-step example will show you how to select the Hybrid DCM-CE </a>option, netlist the HDL design, implement the design in ISE®, simulate the design and examine the files and reports to verify that the DCM is properly instantiated and configured.</div>
+      <div class="Body"><a name="419374">The </a><span class="Bold">hybrid_dcm_ce_case1.mdl</span> design example is located at the following pathname <span class="Filename">...&lt;ISE_Design_Suite_tree&gt;/sysgen&gt;/examples/clocking_options/hybri</span><span class="Filename">d_dcm_ce_case1/hybrid_dcm_ce_case1.mdl</span></div><a href="javascript:void();" onClick="WWHFrame.WWHBrowser.fMLProtocol('cd(xilinx.environment.getpath(\'sysgen\'));cd examples/clocking_options/hybrid_dcm_ce_case1; open hybrid_dcm_ce_case1.mdl')">(Open this model)</a><div class="Numbered_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div></td><td width="100%"><div class="Numbered_inner"><a name="419755">Open the model in MATLAB and observe the following blocks:</a></div></td></tr></table></div><div class="Bulleted_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div></td><td width="100%"><div class="Bulleted_inner"><span class="Bold"><a name="419786">Addressable Shift Register (ASR)</a></span>: used to implement the input delay buffer. The address port runs n times faster than the data port, where n is the number of the filter taps (5 for this example)</div></td></tr></table></div><div class="Bulleted_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div></td><td width="100%"><div class="Bulleted_inner"><span class="Bold"><a name="419787">Coefficient ROM</a></span>: used to store the filter coefficients</div></td></tr></table></div><div class="Bulleted_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div></td><td width="100%"><div class="Bulleted_inner"><span class="Bold"><a name="419788">Counter</a></span>: used to generate addresses for the ROM and ASR</div></td></tr></table></div><div class="Bulleted_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div></td><td width="100%"><div class="Bulleted_inner"><span class="Bold"><a name="419789">Comparator</a></span>: used to generate the reset and enable signals </div></td></tr></table></div><div class="Bulleted_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div></td><td width="100%"><div class="Bulleted_inner"><span class="Bold"><a name="421229">MAC Engine</a></span>: used as a Multiply-Accumulator operator for the filter</div></td></tr></table></div><table class="FigureWideNoTitle" style="text-align: left; width: 504pt" cellspacing="0" summary=""><caption></caption><tr><td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504.0pt"><div class="Anchor"><a name="547230"><img class="Default" src="images/HW_Design.06.04.12.jpg" width="494" height="382" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div></td></tr></table><div class="NumberedCont_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div></td><td width="100%"><div class="NumberedCont_inner"><a name="421236">Double-click on the </a><span class="Bold">System Generator</span> token to bring up the following dialog box:</div></td></tr></table></div><table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary=""><caption></caption><tr><td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt"><div class="Anchor"><a name="421235"><img class="Default" src="images/HW_Design.06.04.13.jpg" width="419" height="200" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div></td></tr></table><div class="Body"><a name="421237">As shown, click on the the </a><span class="Bold">Clocking</span> tab, select <span class="Bold">Hybrid DCM-CE</span>, then click <span class="Bold">Generate</span>. After a few moments, a sub-directory named <span class="Bold">hdl_netlist_dcm</span> is created in the current working directory containing the generated files.</div><div class="NumberedCont_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div></td><td width="100%"><div class="NumberedCont_inner"><a name="443792">In the MATLAB Current Directory window, double-click on the file </a>hybrid_<span class="Filename">dcm_ce_case1_sysgen.log</span>. As shown below, the DCM clocks are listed first (highest rates first), followed by the CE driven clocks.</div></td></tr></table></div><table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary=""><caption></caption><tr><td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt"><div class="Anchor"><a name="443809"><img class="Default" src="images/HW_Design.06.04.14.jpg" width="375" height="97" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div></td></tr></table><div class="NumberedCont_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div></td><td width="100%"><div class="NumberedCont_inner"><a name="420957">Launch ISE, then load the ISE project at pathname </a><span class="Filename">./hdl_netlist_dcm/hybrid_dcm_ce_case1_dcm_mcw.ise</span></div></td></tr></table></div><div class="NumberedCont_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">5.	</div></td><td width="100%"><div class="NumberedCont_inner"><a name="428394">Under the Project Navigator </a><span class="Bold">Processes</span> view, double-click on <span class="Bold">Implement Design</span>.</div></td></tr></table></div><div class="NumberedCont_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">6.	</div></td><td width="100%"><div class="NumberedCont_inner"><a name="421292">From the Project Navigator Design Sources Hierarchy view, do the following:</a></div></td></tr></table></div><div class="NumberedSub_outer" style="margin-left: 18pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="NumberedSub_inner" style="width: 18pt; white-space: nowrap;">a.	</div></td><td width="100%"><div class="NumberedSub_inner"><a name="444077">Double-click on the file </a><span class="Filename">hybrid_dcm_ce_case1_dcm_mcw.vhd</span>, then scroll down to view the DCM component declaration as shown below by the VHDL code snippet:</div></td></tr></table></div><table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary=""><caption></caption><tr><td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt"><div class="Anchor"><a name="421319"><img class="Default" src="images/HW_Design.06.04.15.jpg" width="245" height="137" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div></td></tr></table><div class="NumberedSubCont_outer" style="margin-left: 18pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="NumberedSubCont_inner" style="width: 18pt; white-space: nowrap;">b.	</div></td><td width="100%"><div class="NumberedSubCont_inner"><a name="421410">Observe that System Generator automatically infers and instantiates the DCM </a>instance and its parameters according to the required clock outputs.</div></td></tr></table></div><div class="NumberedSubCont_outer" style="margin-left: 18pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="NumberedSubCont_inner" style="width: 18pt; white-space: nowrap;">c.	</div></td><td width="100%"><div class="NumberedSubCont_inner"><a name="429395">Close the VHDL file.</a></div></td></tr></table></div><div class="Body"><a name="476622">Next, you are going to examine the clock propagation by examining the ISE timing report. </a>First, you must generate the report.</div><div class="NumberedCont_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">7.	</div></td><td width="100%"><div class="NumberedCont_inner"><a name="476623">Open the following folder: </a><span class="Bold">Processes</span> view &gt;<span class="Bold"> Implement Design</span> &gt;<span class="Bold"> Place &amp; Route</span> &gt;<span class="Bold"> </span><span class="Bold">Generate Post-Place &amp; Route Static Timing</span></div></td></tr></table></div><div class="NumberedCont_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">8.	</div></td><td width="100%"><div class="NumberedCont_inner"><a name="422470">Double -click on </a><span class="Bold">Analyze Post-Place &amp; Route Static Timing</span> and you should see the information in the figure below:</div></td></tr></table></div><table class="FigureWideNoTitle" style="text-align: left; width: 504pt" cellspacing="0" summary=""><caption></caption><tr><td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504.0pt"><div class="Anchor"><a name="538087"><img class="Default" src="images/HW_Design.06.04.16.jpg" width="573" height="274" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div></td></tr></table><table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary=""><caption></caption><tr><td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt"><div class="Anchor"><a name="422502">&nbsp;</a></div></td></tr></table><div class="Body2"><a name="476667">This design is comprised of  six clock rates – 1, 2, 4, 8, 20, 40 with respect to the 10 ns </a>global clock constraint.  The timing report validates the correct clock generation and propagation by System Generator as follows:</div><div class="BulletedSub_outer" style="margin-left: 18pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div></td><td width="100%"><div class="BulletedSub_inner"><span class="Bold"><a name="476668">DCM-based clocks</a></span>: clk_1 (CLK0 -&gt;10 ns), clk_2 (CLKFX -&gt;20 ns) , clk_4 (CLKDIV -&gt;40 ns) generated by the DCM based on the 10 ns global clock input</div></td></tr></table></div><div class="BulletedSub_outer" style="margin-left: 18pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div></td><td width="100%"><div class="BulletedSub_inner"><span class="Bold"><a name="476669">Clock Enable-based clocks</a></span>: ce_8 (80 ns), ce_20 (200 ns), ce_40 (400 ns) generated by clock enables based on the clk_4  clock input</div></td></tr></table></div><div class="Body2"><a name="429400">Next you want to perform a behavior simulation using the ModelSim. </a></div><div class="NumberedCont_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">9.	</div></td><td width="100%"><div class="NumberedCont_inner"><a name="429733">As shown in the following figure, move to the </a><span class="Bold">Sources for</span> dialog box in the <span class="Bold">Sources</span> window, then select <span class="Bold">Behavioral Simulation</span></div></td></tr></table></div><div class="Note2"><span class="XNote">Note:&nbsp;</span><a name="423904">System Generator automatically creates the top-wrapper VHDL testbench, script file and </a>input/output stimulus data files. The<span class="Bold"> Processes</span> tab changes and displays according to the Sources type being selected.</div><table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary=""><caption></caption><tr><td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt"><div class="Anchor"><a name="424190"><img class="Default" src="images/HW_Design.06.04.17.jpg" width="253" height="213" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div></td></tr></table><div class="NumberedCont_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">10.	</div></td><td width="100%"><div class="NumberedCont_inner"><a name="424177">Simulate the design, as shown above, by double-click on </a><span class="Bold">Simulate Behavioral Model </span>in the <span class="Bold">Processes</span> window </div></td></tr></table></div><div class="NumberedCont_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">11.	</div></td><td width="100%"><div class="NumberedCont_inner"><a name="423911">After the simulation is finished, you should be able to observe the simulation </a>waveforms as shown in the figure below:</div></td></tr></table></div><table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary=""><caption></caption><tr><td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt"><div class="Anchor"><a name="423918"><img class="Default" src="images/HW_Design.06.04.18.jpg" width="348" height="253" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div></td></tr></table><div class="Body2"><a name="477709">All DCM clocks are included in the top-level wrapper testbench file </a>(hybrid_dcm_ce_case1_dcm_mcw_tb.vhd) – <span class="Bold">clk_1, clk_2 and clk_4</span>.</div><div class="Body"><span class="Bold"><a name="446915">Summary</a></span></div><div class="Body"><a name="446916">When you select the </a><span class="Bold">Hybrid DCM-CE</span> option, System Generator automatically infers and instantiates a DCM without further manual intervention. In addition, the tool intelligently generates different clock rates by using a combination of DCM and CE clock generation algorithms and by assigning appropriate clock rates to either the DCM or CE in order to obtain optimal Quality of Results and low power consumption. You do not have to set attributes or specify DCM clock outputs. You should expect minimal clock skew when selecting the <span class="Bold">Hybrid DCM-CE</span> option compared to the <span class="Bold">Clock Enables</span> option alone.</div><div class="Heading4"><a name="429874">Tutorial Example: </a>Using the Expose Clock Ports Option</div><div class="Body"><a name="429875">The following step-by-step example will show you how to select the </a><span class="Bold">Expose Clock Port</span>s option, netlist the HDL design, implement the design in ISE, simulate the design, then examine the files and reports to verify the design.</div><div class="Body"><a name="429876">The </a><span class="Bold">expose_clock_ports_case1</span> design example is located at the following pathname <span class="Filename">&lt;ISE_Design_Suite_tree&gt;/sysgen&gt;/examples/clocking_options/expose_c</span><span class="Filename">lock_ports_case1/expose_clock_ports_case1.mdl</span></div><a href="javascript:void();" onClick="WWHFrame.WWHBrowser.fMLProtocol('cd(xilinx.environment.getpath(\'sysgen\'));cd examples/clocking_options/expose_clock_ports_case1;open expose_clock_ports_case1.mdl')">(Open this model)</a><div class="Numbered_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div></td><td width="100%"><div class="Numbered_inner"><a name="430317">Open the model in MATLAB and observe the following blocks:</a></div></td></tr></table></div><div class="Bulleted_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div></td><td width="100%"><div class="Bulleted_inner"><span class="Bold"><a name="429879">Addressable Shift Register (ASR)</a></span>: used to implement the input delay buffer. The address port runs n times faster than the data port, where n is the number of the filter taps (5 for this example)</div></td></tr></table></div><div class="Bulleted_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div></td><td width="100%"><div class="Bulleted_inner"><span class="Bold"><a name="429880">Coefficient ROM</a></span>: used to store the filter coefficients</div></td></tr></table></div><div class="Bulleted_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div></td><td width="100%"><div class="Bulleted_inner"><span class="Bold"><a name="429881">Counter</a></span>: used to generate addresses for the ROM and ASR</div></td></tr></table></div><div class="Bulleted_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div></td><td width="100%"><div class="Bulleted_inner"><span class="Bold"><a name="429882">Comparator</a></span>: used to generate the reset and enable signals </div></td></tr></table></div><div class="Bulleted_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div></td><td width="100%"><div class="Bulleted_inner"><span class="Bold"><a name="549146">MAC Engine</a></span>: used as a Multiply-Accumulator operator for the filter</div></td></tr></table></div><table class="FigureWideNoTitle" style="text-align: left; width: 504pt" cellspacing="0" summary=""><caption></caption><tr><td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504.0pt"><div class="Anchor"><a name="549145"><img class="Default" src="images/HW_Design.06.04.19.jpg" width="481" height="245" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div></td></tr></table><div class="NumberedCont_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div></td><td width="100%"><div class="NumberedCont_inner"><a name="549160">Double-click on the </a><span class="Bold">System Generator</span> token to bring up the following dialog box:</div></td></tr></table></div><table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary=""><caption></caption><tr><td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt"><div class="Anchor"><a name="549159"><img class="Default" src="images/HW_Design.06.04.20.jpg" width="282" height="206" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div></td></tr></table><div class="Body"><a name="429898">As shown above, click on the </a><span class="Bold">Clocking</span> tab, select <span class="Bold">Expose Clock Ports</span>, then click <span class="Bold">Generate</span>. After a few moments, a sub-directory named <span class="Bold">hdl_netlist</span> is created in the current working directory containing the generated files.</div><div class="NumberedCont_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div></td><td width="100%"><div class="NumberedCont_inner"><a name="429899">Launch ISE, then load the ISE project at pathname </a><span class="Filename">./hdl_netlist/expose_clock_ports_case1_mcw.ise</span></div></td></tr></table></div><div class="NumberedCont_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div></td><td width="100%"><div class="NumberedCont_inner"><a name="429900">Under the Project Navigator </a><span class="Bold">Processes</span> view, double-click on <span class="Bold">Implement Design</span>.</div></td></tr></table></div><div class="NumberedCont_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">5.	</div></td><td width="100%"><div class="NumberedCont_inner"><a name="429901">From the Project Navigator </a><span class="Bold">Design Sources Hierarchy </span>view, do the following:</div></td></tr></table></div><div class="NumberedSub_outer" style="margin-left: 18pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="NumberedSub_inner" style="width: 18pt; white-space: nowrap;">a.	</div></td><td width="100%"><div class="NumberedSub_inner"><a name="444098">Double-click on the file </a><span class="Filename">expose_clock_ports_case1_mcw.vhd</span>, then scroll down to view the entity named expose_clock_ports_mcw, as shown below:</div></td></tr></table></div><table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary=""><caption></caption><tr><td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt"><div class="Anchor"><a name="429908"><img class="Default" src="images/HW_Design.06.04.21.jpg" width="333" height="118" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div></td></tr></table><div class="NumberedSubCont_outer" style="margin-left: 18pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="NumberedSubCont_inner" style="width: 18pt; white-space: nowrap;">b.	</div></td><td width="100%"><div class="NumberedSubCont_inner"><a name="429909">Observe that System Generator infers the clocks based on the different rates in the </a>design and brings the clock ports to the top-level wrapper. Since this design contains two clock rates, clocks <span class="Filename">clk_1</span> and <span class="Filename">clk_5</span> are pulled to the top-level wrapper. This will allow you to directly drive the multiple synchronous clocks from outside the System Generator design.</div></td></tr></table></div><div class="NumberedSubCont_outer" style="margin-left: 18pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="NumberedSubCont_inner" style="width: 18pt; white-space: nowrap;">c.	</div></td><td width="100%"><div class="NumberedSubCont_inner"><a name="429910">Close the VHDL file.</a></div></td></tr></table></div><div class="Body"><a name="429928">Next you want to perform a behavior simulation using the ModelSim. </a></div><div class="NumberedCont_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">6.	</div></td><td width="100%"><div class="NumberedCont_inner"><a name="429955">As shown below, move to the </a><span class="Bold">Sources for</span> dialog box in the <span class="Bold">Sources</span> window, then select <span class="Bold">Behavioral Simulation</span></div></td></tr></table></div><div class="Note2"><span class="XNote">Note:&nbsp;</span><a name="429956">System Generator automatically creates the top-wrapper VHDL testbench, script file and </a>input/output stimulus data files. The<span class="Bold"> Processes</span> tab changes and displays according to the Sources type being selected.</div><table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary=""><caption></caption><tr><td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt"><div class="Anchor"><a name="429979"><img class="Default" src="images/HW_Design.06.04.22.jpg" width="327" height="217" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div></td></tr></table><div class="NumberedCont_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">7.	</div></td><td width="100%"><div class="NumberedCont_inner"><a name="429980">Simulate the design, as shown above, by double-click on </a><span class="Bold">Simulate Behavioral Model </span>in the <span class="Bold">Processes</span> window </div></td></tr></table></div><div class="NumberedCont_outer" style="margin-left: 0pt"><table border="0" cellspacing="0" cellpadding="0" summary=""><tr style="vertical-align: baseline;"><td><div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">8.	</div></td><td width="100%"><div class="NumberedCont_inner"><a name="429981">After the simulation is finished, you should be able to observe the simulation </a>waveforms as shown in the figure below:</div></td></tr></table></div><table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary=""><caption></caption><tr><td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt"><div class="Anchor"><a name="429988"><img class="Default" src="images/HW_Design.06.04.23.jpg" width="338" height="152" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div></td></tr></table><div class="Body"><span class="Bold"><a name="429989">Summary</a></span></div><div class="Body"><a name="429990">When you select the </a><span class="Bold">Expose Clock Ports</span> option, System Generator automatically infers the correct clocks from the design rates and exposes the clock ports in the top-level wrapper. The clock rates are determined by the same methodology when you use the <span class="Bold">Clock Enables</span> option. You can now drive the exposed clock ports from an external synchronous clock source.</div><div class="Heading2"><a name="428090">Synchronization Mechanisms</a></div><div class="Body"><a name="428091">System Generator does not make implicit synchronization mechanisms available. Instead, </a>synchronization is the responsibility of the designer, and must be done explicitly.</div><div class="Heading3"><a name="273156">Valid Ports</a></div><div class="Body"><a name="273158">System Generator provides several blocks (in particular, a FIFO) that can be used for </a>synchronization. Several blocks provide input (respectively, output) ports that specify when an input (resp., output) sample is valid. Such ports can be chained, affording a primitive form of flow control. Blocks with such ports include the FFT, FIR, and Viterbi. </div><div class="Heading3"><a name="273160">Indeterminate Data </a></div><div class="Body"><a name="273162">Indeterminate values are common in many hardware simulation environments. Often they </a>are called “don’t cares” or “Xs”.   In particular, values in System Generator simulations can be indeterminate. A dual port memory block, for example, can produce indeterminate results if both ports of the memory attempt to write the same address simultaneously. What actually happens in hardware depends upon effectively random implementation details that determine which port sees the clock edge first. Allowing values to become indeterminate gives the system designer greater flexibility. Continuing the example, there is nothing wrong with writing to memory in an indeterminate fashion if subsequent processing does not rely on the indeterminate result.</div><div class="Body"><a name="273164">HDL modules that are brought into the simulation through HDL co-simulation are a </a>common source for indeterminate data samples. System Generator presents indeterminate values to the inputs of an HDL co-simulating module as the standard logic vector 'XXX . . . XX'.</div><div class="Body"><a name="273166">Indeterminate values that drive a Gateway Out become what are called NaNs. (NaN </a>abbreviates “not a number”.) In a Simulink scope, NaN values are not plotted. Conversely, NaNs that drive a Gateway In become indeterminate values. System Generator provides an Indeterminate Probe block that allows for the detection of indeterminate values. This probe cannot be translated into hardware.   </div><div class="Body"><a name="273168">In System Generator, any arithmetic signal can be indeterminate, but Boolean signals </a>cannot be. If a simulation reaches a condition that would force a Boolean to become indeterminate, the simulation is halted and an error is reported. Many Xilinx blocks have control ports that only allow Boolean signals as inputs. The rule concerning indeterminate Booleans means that such blocks never see an indeterminate on a control port</div><div class="Body"><a name="273170">A UFix_1_0 is a type that is equivalent to Boolean except for the above restriction </a>concerning indeterminate data. </div><div class="Heading2"><a name="273123">Block Masks and Parameter Passing</a></div><div class="Body"><a name="273319">The same scoping and parameter passing rules that apply to ordinary Simulink blocks </a>apply to System Generator blocks. Consequently, blocks in the Xilinx Blockset can be parameterized using MATLAB variables and expressions. This capability makes possible highly parametric designs that take advantage of the expressive and computational power of the MATLAB language. </div><div class="Heading3"><a name="273321">Block Masks</a></div><div class="Body"><a name="273322">In Simulink, blocks are parameterized through a mechanism called </a><span class="Italic">masking</span>. In essence, a block can be assigned <span class="Italic">mask variables</span> whose values can be specified by a user through dialog box prompts or can be calculated in mask initialization commands. Variables are stored in a <span class="Italic">mask workspace</span>. A mask workspace is local to the blocks under the mask and cannot be accessed by external blocks. </div><div class="Note"><span class="XNote">Note:&nbsp;</span><a name="273324">It is possible for a mask to access global variables and variables in the base workspace. To </a>access a base workspace variable, use the MATLAB evalin function. For more information on the MATLAB and Simulink scoping rules, refer to the manuals titled <span class="Italic">Using MATLAB and Using Simulink</span> from<span class="Italic"> The MathWorks, Inc</span>.</div><div class="Heading3"><a name="273326">Parameter Passing</a></div><div class="Body"><a name="273327">It is often desirable to pass variables to blocks inside a masked subsystem. Doing so allows </a>the block’s configuration to be determined by parameters on the enclosing subsystem. This technique can be applied to parameters on blocks in the Xilinx blockset whose values are set using a listbox, radio button, or checkbox. For example, when building a subsystem that consists of a multiply and accumulate block, you can create a parameter on the subsystem that allows you to specify whether to truncate or round the result. This parameter will be called trunc_round as shown in the figure below.</div><table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary=""><caption></caption><tr><td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt"><div class="Anchor"><a name="273417"><img class="Default" src="images/HW_Design.06.04.24.jpg" width="325" height="90" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div></td></tr></table><div class="Body"><a name="290502">As shown below, in the parameter editing dialog for the accumulator and multiplier </a>blocks, there are radio buttons that allow either the truncate or round option to be selected.</div><table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary=""><caption></caption><tr><td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt"><div class="Anchor"><a name="290508"><img class="Default" src="images/HW_Design.06.04.25.jpg" width="216" height="193" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div></td></tr></table><div class="Body"><a name="290511">In order to use a parameter rather than the radio button selection, right click on the radio </a>button and select: “Define With Expression”. A MATLAB expression can then be used as the parameter setting. In the example below, the trunc_round parameter from the subsystem mask can be used in both the accumulator and multiply blocks so that each block will use the same setting from the mask variable on the subsystem.</div><table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary=""><caption></caption><tr><td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt"><div class="Anchor"><a name="290517"><img class="Default" src="images/HW_Design.06.04.26.jpg" width="216" height="194" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div></td></tr></table><div class="Heading2"><a name="270827">Resource Estimation</a></div><div class="Body"><a name="318141">System Generator supplies tools that estimate the FPGA hardware resources needed to </a>implement a design. Estimates include numbers of slices, lookup tables, flip-flops, block memories, embedded multipliers, I/O blocks and tristate buffers. These estimates make it easy to determine how design choices affect hardware requirements. To estimate the resources needed for a subsystem, drag a <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.090.html#271164', '');" title="Resource Estimator">Resource Estimator</a></span>  block into the subsystem, double-click on the estimator, and press the <span class="Bold">Estimate</span> button.</div><script type="text/javascript" language="JavaScript1.2"><!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // --></script></blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

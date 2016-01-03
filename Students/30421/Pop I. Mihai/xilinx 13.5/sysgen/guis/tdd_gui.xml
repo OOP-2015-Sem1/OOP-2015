@@ -1,0 +1,43 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Time Division\nDemultiplexer" block_type="tdd">
+  <initialization file="xltdd_init.m"/>
+  <icon width="75" height="86" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="TDD_config"/>
+  <handlers enablement="xlmagicenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsBasic"/>
+  </libraries>
+  <blockgui label="Xilinx Time Division Demultiplexer">
+    <editbox name="infoedit" default="Samples presented at the input are selected and down-sampled according to the frame sampling pattern specified. The sampled input is presented either as a single or multiple channel at the output." read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <editbox name="frame_pattern" default="[1 1 1 1]" evaluate="true" label="Frame sampling pattern (example: [1 0 1 0]) " ctype="String"/>
+        <radiogroup name="impl_style" default="Multiple Channel" evaluate="true" label="Implementation" ctype="Int">
+          <item value="Single Channel" label="Single channel"/>
+          <item value="Multiple Channel" label="Multiple channel"/>
+        </radiogroup>
+        <etch label="Optional Ports">
+          <checkbox name="vin" default="off" evaluate="true" label="Provide valid port" ctype="Int"/>
+        </etch>
+      </tab>
+      <tab name="advtab" label="Advanced">
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <hiddenvar name="explicit_period" default="off" evaluate="true"/>
+    <hiddenvar name="period" default="1" evaluate="true" ctype="Double"/>
+    <workspacevar name="num_outputs" ctype="Int"/>
+    <workspacevar name="pattern" ctype="IntVector"/>
+  </blockgui>
+</sysgenblock>

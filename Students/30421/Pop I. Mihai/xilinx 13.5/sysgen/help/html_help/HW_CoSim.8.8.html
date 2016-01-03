@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Shared Memory Support</title>
+    <link rel="StyleSheet" href="css/HW_CoSim.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="HW_CoSim.8.1.html#270899">Using Hardware Co-Simulation</a> : Shared Memory Support</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="270899">Shared Memory Support</a></div>
+      <div class="Body"><a name="270988">System Generator's hardware co-simulation interfaces allow shared memory blocks and </a>shared memory block derivatives (e.g., Shared FIFO and Shared Registers) to be compiled and co-simulated in FPGA hardware. These interfaces make it possible for hardware-based shared memory resources to map transparently to common address spaces on the host PC. When applied to System Generator co-simulation hardware, shared memories can help facilitate high-speed data transfers between the host PC and FPGA, and further bolster the tool's real-time hardware co-simulation capabilities. This topic describes how shared memories can be used within the context of System Generator's hardware co-simulation framework. </div>
+      <table class="ColumnNoTitleNoLines" style="text-align: left; width: 358.7694pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top; width: 149.6863pt;">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.8.html#270900', '');" title="Shared Memory Support" name="282001">Compiling Shared Memories for Hardware Co-Simulation</a></span></div>
+          </td>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top; width: 209.0831pt;">
+            <div class="CellBody"><a name="282004">Describes how to compile a System Generator </a>design for hardware co-simulation when the design contains shared memory blocks. </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.8.html#280046', '');" title="Shared Memory Support" name="282009">Co-Simulating Unprotected Shared Memories</a></span></div>
+          </td>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="282011">Describes how shared memory blocks </a>configured with unprotected access mode behave during hardware co-simulation. </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.8.html#286614', '');" title="Shared Memory Support" name="282015">Co-Simulating Lockable Shared Memories</a></span></div>
+          </td>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="282018">Describes how shared memory blocks </a>configured with lockable access mode behave during hardware co-simulation. </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.8.html#270904', '');" title="Shared Memory Support" name="282023">Co-Simulating Shared Registers</a></span></div>
+          </td>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="282025">Describes how to compile a System Generator </a>design for hardware co-simulation when the design contains shared Registers. </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.8.html#292187', '');" title="Shared Memory Support" name="282030">Co-Simulating Shared FIFOs</a></span></div>
+          </td>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="282032">Describes how to compile a System Generator </a>design for hardware co-simulation when the design contains shared FIFOs. </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.8.html#280654', '');" title="Shared Memory Support" name="282036">Restrictions on Shared Memories</a></span></div>
+          </td>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="282039">Lists the restrictions that are imposed when </a>using shared memory blocks with hardware co-simulation.</div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="270900">Compiling Shared Memories for </a>Hardware Co-Simulation</div>
+      <div class="Body"><a name="279162">System Generator allows shared memory and shared memory derivative (e.g., shared </a>FIFO and shared register) blocks to be compiled for hardware co-simulation. Designs that include shared memories are compiled for hardware co-simulation the same way traditional System Generator designs are compiled – by selecting a compilation target and pressing the <span class="Bold">Generate</span> button on the System Generator dialog box. A design containing shared memory blocks may be compiled for hardware co-simulation provided the requirements described in the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.8.html#280654', '');" title="Shared Memory Support">Restrictions on Shared Memories</a></span> are satisfied. </div>
+      <div class="Body"><a name="279155">When a shared memory is compiled for hardware co-simulation, it is implemented in </a>hardware either by a core or HDL component. The table below shows how shared memory blocks are mapped to hardware implementations</div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 316.8pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 79.2pt;">
+            <div class="CellHeading"><a name="279190">To Block</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 79.2pt;">
+            <div class="CellHeading"><a name="279192">From Block</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 158.4pt;">
+            <div class="CellHeading"><a name="279194">Hardware Implementation</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="279196">Shared Memory</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="279217">Shared Memory</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="279200">Dual Port Block Memory</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="279202">To FIFO</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="279204">To FIFO</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="279206">Fifo Generator</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="279223">To Register</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="279237">To Register</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="279227">synth_reg_w_init.(vhd,v)</a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="279262">There are two ways in which shared memories are compiled for hardware co-simulation. </a>The type of compilation depends on whether the shared memory name is unique in the design, or if the shared memory has a partner who shares the same name. The following topics describe the two types of compilation behavior.</div>
+      <div class="Heading3"><a name="279282">Single Shared Memory Compilation</a></div>
+      <div class="Body"><a name="279275">A shared memory block is considered "single" if it has a unique name within a design. </a>When a single shared memory is compiled for hardware co-simulation, System Generator builds the other half of the memory and automatically wires it into the resulting netlist. Additional interfacing logic is attached to the memory that allows it to communicate with the PC. When you co-simulate the shared memory, one half of the memory is used by the logic in your System Generator design. The other half communicates with the PC interfacing logic as shown in the figure below. In this manner, it is possible to communicate with the shared memory embedded inside the FPGA while a simulation is running. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="279502"><img class="Default" src="images/HW_CoSim.8.8.1.jpg" width="459" height="220" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="279335">The shared memory hardware and interface logic are completely encapsulated by the </a>hardware co-simulation block that is generated for the design. By co-simulating a hardware co-simulation block that contains a shared memory, it is possible for your design logic and host PC software to share a common address space on the FPGA. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="279339">The name of the hardware shared memory is the same as the shared memory name used by </a>the original shared memory block. For example, if a shared memory block uses "my_memory," the hardware implementation of the block can be accessed using the "my_memory" name. </div>
+      <div class="Body"><a name="279343">All shared memories embedded inside the FPGA are automatically created and initialized </a>before the start of a simulation by their respective co-simulation blocks. This means that any other shared memory objects that wish to access the hardware shared memory must specify Ownership and initialization parameter as Owned and initialized elsewhere.   Doing so causes the software-based shared memories to attach automatically to the shared memories that reside inside the FPGA. </div>
+      <div class="Heading3"><a name="279346">Compiling Shared Memory Pairs</a></div>
+      <div class="Body"><a name="279351">It is also possible to compile a shared memory pair (i.e., two shared memories that specify </a>the same name) for hardware co-simulation. In this case, the two shared memory halves are merged into a single hardware implementation during compilation. Unlike single shared memories, both sides of a shared memory pair connect to System Generator user design logic. For example, the figure below shows the hardware implementation for a To / From FIFO shared memory pair. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="279528"><img class="Default" src="images/HW_CoSim.8.8.2.jpg" width="455" height="392" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="279363">Note that because both sides of the shared memory connect to user design logic, it is not </a>possible to communicate with these shared memories directly from the host PC. </div>
+      <div class="Heading3"><a name="279366">Viewing Shared Memory Information</a></div>
+      <div class="Body"><a name="279371">Hardware co-simulation blocks allow you to view information about the shared memories </a>that were compiled as part of the design. A hardware co-simulation block that contains shared memories will have an enabled <span class="Bold">Shared Memories</span> tab in the block configuration dialog box shown below. Clicking on this tab exposes a table of information about each shared memory in the design. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="279556"><img class="Default" src="images/HW_CoSim.8.8.3.jpg" width="309" height="291" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="279797">The shared memory information table describes the type, bit width, and depth of each </a>shared memory in the design. For Shared Memory blocks, it also specifies the <span class="Bold">Access </span><span class="Bold">Protection</span> mode. Clicking on the [+] or [-] symbol next to the shared memory icon expands or collapses the shared memory table, respectively. </div>
+      <div class="Body"><a name="279803">The icons associated with each shared memory type are shown in the table below.</a></div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 158.4pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 79.2pt;">
+            <div class="CellHeading"><a name="279854">Memory Type</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 79.2pt;">
+            <div class="CellHeading"><a name="279856">Icon</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="279858">Shared Memory</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="279860"><img class="Default" src="images/HW_CoSim.8.8.4.jpg" width="77" height="25" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="279862">Shared FIFO</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="279864"><img class="Default" src="images/HW_CoSim.8.8.5.jpg" width="77" height="25" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="279894">Shared Register</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="279896"><img class="Default" src="images/HW_CoSim.8.8.6.jpg" width="77" height="25" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="280046">Co-Simulating Unprotected </a>Shared Memories</div>
+      <div class="Body"><a name="280067">Unprotected shared memory blocks may be written to or read from at any time </a>– this type of memory has no notion of mutually exclusive access. Data transfers to and from an unprotected hardware shared memory occur a single-word at a time, unlike the high-speed data transfer mode used by lockable shared memories. To ensure data coherency between software and hardware, a single image of the shared memory data is shared between hardware and software. This image is stored in the FPGA using dual port memory. System Generator allows both hardware design logic and other software-based shared memory objects on the host PC to access the shared memory data concurrently. When software shared memory objects read or write data to the shared memory, a proxy seamlessly handles communication with the hardware memory resource. </div>
+      <div class="Body"><a name="280071">The following figure shows an example of unprotected shared memory implemented in </a>the FPGA that is communicating with three shared memory objects running on the host PC. In this example, the software shared memory objects access the hardware shared memory by specifying the same shared memory name, my_mem. From the perspective of the software shared memories, the implementation of the shared memory resource is irrelevant; the hardware shared memory is treated as any another shared memory object. Read and writes to the shared memory are handled by the shared memory API. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="286606">Not all shared memory objects need to be created or executed in the Simulink environment. </a>The C++ application in the figure below is just one example of an external application that may communicate with the hardware shared memory data using the shared memory API. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="286612"><img class="Default" src="images/HW_CoSim.8.8.7.jpg" width="266" height="308" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="286614">Co-Simulating Lockable </a>Shared Memories</div>
+      <div class="Body"><a name="286615">In lockable access mode, the System Generator co-simulation hardware must acquire lock </a>over the shared memory object before it may access its contents. When the hardware acquires (releases) lock of the shared memory, the memory contents are transferred to (from) the FPGA using a high-speed data transfer. Using this methodology, it is possible to implement System Generator hardware co-simulation designs with high memory bandwidth requirements. For more information on how to do this, refer to the tutorial entitled <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.11.html#286973', '');" title="Real-Time Signal Processing using Hardware Co-Simulation">Real-Time Signal Processing using Hardware Co-Simulation</a></span>. </div>
+      <div class="Body"><a name="280123">Unlike unprotected shared memories, two images of the shared memory data are used </a>when a lockable shared memory is co-simulated. One memory image is stored using dual port memory in the FPGA. This image is accessed by the System Generator hardware co-simulation design and co-simulation interfacing logic. The other image is implemented as a shared memory object on the host PC. This software shared memory image is accessed by any software shared memory objects used in a design. </div>
+      <div class="Body"><a name="280127">In lockable mode, a software process or hardware circuit that wishes to access the shared </a>memory must first obtain the lock. If the hardware has lock of the memory, no software objects may access the memory contents. Likewise, if a software object controls the memory, the hardware cannot read or write to the memory. Note that lockable hardware shared memories include additional logic to handle the mutual exclusion. The interaction between hardware and software lockable shared memories is shown in the figure below: . </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="280474"><img class="Default" src="images/HW_CoSim.8.8.8.jpg" width="295" height="312" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="280139">The red circle in the figure above represents a lock token. This token may be passed to any </a>shared memory object, regardless of whether it is implemented in hardware or software. The dashed circle represents lock placeholders and signifies that lock can be passed to the block it is associated with. The diamond in the figure above represents a modifiable token. This token illustrates that when hardware has lock of the memory, the hardware shared memory image may be modified. Likewise, when a software shared memory object has lock, the software shared memory image may be modified. </div>
+      <div class="Body"><a name="271053">Having two shared memory images requires synchronization between software and </a>hardware to ensure the images are coherent. This synchronization is accomplished by transferring the memory image between software and hardware upon lock transfer. System Generator performs high speed data transfers between the host PC and FPGA. The semantics associated with these transactions are shown in the figure below. .</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="280494"><img class="Default" src="images/HW_CoSim.8.8.9.jpg" width="480" height="310" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="270904">Co-Simulating </a>Shared Registers</div>
+      <div class="Body"><a name="280200">A </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.96.html#271185', '');" title="To Register">To Register</a></span> , <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.48.html#271537', '');" title="From Register">From Register</a></span>  or shared register pair may be generated and co-simulated in FPGA hardware. Here and throughout this topic, a shared register pair is defined as a To Register block and From Register block that specify the same name (e.g., 'Bar'). In hardware, a shared register is implemented using a synthesizable register component (for VHDL) or a module (for Verilog). This topic explains how single shared registers and shared register pairs behave during hardware co-simulation. </div>
+      <div class="Body"><a name="280204">When a design that includes a shared register pair is compiled for hardware co-simulation, </a>the pair is replaced by a single register instance. Both sides of the register attach to user design logic; that is, logic that originated from the original System Generator model. Unlike designs compiled using the <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.61.html#573408', '');" title="Multiple Subsystem Generator">Multiple Subsystem Generator</a></span>  block, all ports on the hardware register attach to signals in the same clock domain. In this case, control of the register is not shared between the PC and FPGA hardware since all register ports are attached to user design logic. Compiling a shared register pair into hardware is equivalent to compiling a System Generator <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.74.html#416506', '');" title="Register">Register</a></span>  or <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.28.html#387248', '');" title="Delay">Delay</a></span>  block. </div>
+      <div class="Body"><a name="280208">Compiling a single To Register or From Register block for hardware co-simulation results </a>in a different type of implementation. A single register is still created to replace the To or From Register block. Only in this case, the register connects to both the PC interface and FPGA logic. The side of the register in the original model remains connected to user design logic. The other side of the register attaches to data and control ports that interface with the PC. </div>
+      <div class="Body"><a name="280212">For example, in the following figure, when a From Register block is compiled for hardware </a>co-simulation, the <span class="Filename">dout</span> register port remains attached to the user design. The <span class="Filename">din</span>, <span class="Filename">ce</span>, and <span class="Bold">clk</span> register ports attach to control and data ports that interface with the PC. In this way, it is possible for the PC to write to the register using System Generator's hardware co-simulation interfaces. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="284849"><img class="Default" src="images/HW_CoSim.8.8.10.jpg" width="302" height="140" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="284840">When a To Register block is compiled for hardware co-simulation, as shown in the figure </a>below, the input ports are wired to user logic while the output port is wired to PC interface logic. You may access a shared register during hardware co-simulation using the other half of the shared register (i.e., using a To or From Register block), a C program or executable (System Generator API), or a MATLAB program.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="280566"><img class="Default" src="images/HW_CoSim.8.8.11.jpg" width="303" height="143" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="280232">For designs that use hardware co-simulation, shared register pairs are typically distributed </a>between software and FPGA hardware. In other words, one half of the pair is implemented in the FPGA while the other half is simulated in software using a To or From Register block. When data is written to a software To Register block, the hardware register is updated to with the same data. Similarly, when data is written into the hardware register, the same data is read by the From Register software block. A software shared register may connect to a hardware shared register simply by specifying the name of the shared register as it was compiled for hardware co-simulation. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="280236">You may find the names of all shared memories embedded inside an FPGA co-simulation </a>design by viewing the Shared Memories tab on a hardware co-simulation block. </div>
+      <div class="Body"><a name="280190">When a software / hardware shared memory pair is co-simulated, System Generator </a>transparently manages the interaction between the PC and FPGA hardware. This means that a shared register pair simulated in software should behave the same as a shared register pair distributed between the PC and FPGA hardware. </div>
+      <div class="Heading2"><a name="292187">Co-Simulating </a>Shared FIFOs</div>
+      <div class="Body"><a name="292194">A </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.95.html#271184', '');" title="To FIFO">To FIFO</a></span> , <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.47.html#686664', '');" title="From FIFO">From FIFO</a></span>  or <span class="Italic">shared FIFO pair</span> may be generated and co-simulated in hardware. Here and throughout this topic, a shared FIFO pair is defined as a To FIFO block and From FIFO block that specify the same name (e.g., 'Bar'). In hardware, a shared FIFO is implemented using the FIFO Generator core. The core is configured to use independent (asynchronous) clocks, and block memory for data storage. This topic explains why co-simulating shared FIFOs is useful, and also how these blocks behave in hardware. </div>
+      <div class="Body"><a name="280297">Asynchronous FIFOs are typically used in multi-clock applications to safely cross clock </a>domain boundaries. When a <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.5.html#271771', '');" title="Hardware Co-Simulation Clocking">Free-Running Clock</a></span> mode is used for hardware co-simulation, the FPGA operates asynchronously relative to the Simulink simulation. That is, the FPGA is not kept in lockstep with the simulation. Using the Free-Running Clock mode effectively establishes two clock domains: the Simulink simulation clock domain and the FPGA free-running clock domain. In these designs, Shared FIFOs provide a reliable and safe way to transfer data between the host PC and FPGA board. </div>
+      <div class="Body"><a name="283679">Shared FIFOs may also be used to support burst transfers during co-simulation. It is </a>possible to create vectors or frames of data, and transfer the data to the FPGA in a single transaction with the hardware. These interfaces can be used to further accelerate simulation speeds beyond what is typically possible with hardware co-simulation. For more information on how this is accomplished, refer to the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.10.html#286763', '');" title="Frame-Based Acceleration using Hardware Co-Simulation">Frame-Based Acceleration using Hardware Co-Simulation</a></span>. </div>
+      <div class="Body"><a name="283680">When a shared FIFO pair is generated for co-simulation, a single asynchronous FIFO core </a>replaces the two software shared FIFO blocks. As shown in the figure below, the read / write FIFO sides are attached to user design logic (i.e., logic derived from the original System Generator model) that attached to the From FIFO and To FIFO blocks. Because both FIFO sides attach to user logic in hardware, the PC does not share control of the FIFO with the design. Instead, the FIFO behavior is similar to a System Generator design that includes a traditional FIFO block. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="284882"><img class="Default" src="images/HW_CoSim.8.8.12.jpg" width="294" height="205" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="292204">Note that even though the FIFO exposes independent clock ports, the same co-simulation </a>clock drives both ports when a FIFO pair is compiled. This is different from compiling a shared FIFO pair using the <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.61.html#573408', '');" title="Multiple Subsystem Generator">Multiple Subsystem Generator</a></span> block, where the clocks are from distinct clock domains. </div>
+      <div class="Body"><a name="280319">Single shared FIFO blocks are treated differently than shared FIFO pairs. A single To FIFO </a>or From FIFO block is replaced by an asynchronous FIFO core when it is compiled for hardware co-simulation. One side of the FIFO (i.e., the unused shared FIFO half in System Generator) is connected to PC interface logic. The other side is connected to user design logic that attached to the original To or From FIFO block. In this manner, control over the FIFO is distributed between the PC and FPGA design. </div>
+      <div class="Body"><a name="280323">As shown in the following figure, when a To FIFO block is compiled for hardware co-</a>simulation, the write side of the FIFO is connected to the same logic that attached to To FIFO block in user design. The read side of the FIFO is connected to PC interface logic that allows the PC to read data from the FIFO during simulation.  </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="280626"><img class="Default" src="images/HW_CoSim.8.8.13.jpg" width="403" height="217" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="280333">In the figure below, the opposite wiring approach is used when a From FIFO block is </a>compiled for hardware co-simulation. In this case, the write side of the FIFO is connected to PC interface logic, while the read side is connected to the user design logic. The host PC writes data into the FIFO and the design logic may read data from the FIFO.  </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="280640"><img class="Default" src="images/HW_CoSim.8.8.14.jpg" width="410" height="261" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="280343">For designs that use hardware co-simulation, shared FIFO pairs are typically distributed </a>between software and FPGA hardware. In other words, one half of the pair is implemented in the FPGA while the other half is simulated in software using a To or From FIFO block. Together, the software and hardware portions form a fully functional asynchronous FIFO. When a software / hardware shared FIFO pair is co-simulated, System Generator transparently manages the necessary transactions between the PC and FPGA hardware. </div>
+      <div class="Body"><a name="280347">When data is written to a software To FIFO block during simulation, the same data is </a>written to the FIFO in hardware. The design in hardware may then retrieve this data by reading from the FIFO. Similarly, when data is written into the hardware FIFO by design logic, the data may be read by the From FIFO software block. Note that the empty, full, read and write count ports on the shared FIFO blocks pessimistically reflect the state of the hardware FIFO counterpart. A software shared FIFO may connect to a hardware shared FIFO simply by specifying the name of the shared FIFO as it was compiled for hardware co-simulation. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="271046">You may find the names of all shared memories embedded inside an FPGA co-simulation </a>design by viewing the Shared Memories tab on a hardware co-simulation block.</div>
+      <div class="Heading2"><a name="280654">Restrictions on Shared Memories</a></div>
+      <div class="Body"><a name="280674">The following restrictions apply to System Generator designs that use shared memory, </a>register, or FIFO blocks in conjunction with hardware co-simulation: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="280678">The access protection mode of a shared memory may not be modified once it has been </a>compiled for hardware co-simulation. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="280680">Shared memory address port widths are limited to 24-bits (or less), allowing an </a>address space of 16,777,216 words; </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="280682">Shared memory, register, and FIFO data port widths are currently limited to 32-bits or </a>less. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="280684">Shared memories and FIFOs are implemented in hardware using block memories; </a>neither distributed nor external memory implementations are currently supported. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="280686">No more than two shared memories with the same shared memory name may be </a>compiled for hardware co-simulation. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="280651">Two or more hardware co-simulation blocks that have shared memory names in </a>common may not concurrently be used in the same design.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

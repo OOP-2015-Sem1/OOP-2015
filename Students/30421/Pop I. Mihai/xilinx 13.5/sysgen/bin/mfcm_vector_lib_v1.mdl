@@ -1,0 +1,5349 @@
+Library {
+  Name			  "mfcm_vector_lib_v1"
+  Version		  6.1
+  MdlSubVersion		  0
+  SavedCharacterEncoding  "ibm-5348_P100-1997"
+  SaveDefaultBlockParams  on
+  LibraryLinkDisplay	  "none"
+  ShowLoopsOnError	  on
+  IgnoreBidirectionalLines off
+  CovSaveName		  "covdata"
+  CovMetricSettings	  "dw"
+  CovNameIncrementing	  off
+  CovHtmlReporting	  on
+  covSaveCumulativeToWorkspaceVar on
+  CovSaveSingleToWorkspaceVar on
+  CovCumulativeReport	  off
+  CovReportOnPause	  on
+  ScopeRefreshTime	  0.035000
+  OverrideScopeRefreshTime on
+  DisableAllScopes	  off
+  BlockNameDataTip	  off
+  BlockParametersDataTip  off
+  BlockDescriptionStringDataTip	off
+  ToolBar		  on
+  StatusBar		  on
+  BrowserShowLibraryLinks on
+  BrowserLookUnderMasks	  on
+  Created		  "Thu Jun 23 14:04:02 2005"
+  Creator		  "alexc"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "alexc"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Thu Mar 23 14:52:04 2006"
+  ModelVersionFormat	  "1.%<AutoIncrement:144>"
+  ConfigurationManager	  "None"
+  LinearizationMsg	  "none"
+  Profile		  off
+  ParamWorkspaceSource	  "MATLABWorkspace"
+  ExtModeBatchMode	  off
+  ExtModeEnableFloating	  on
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "normal"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigDurationFloating "auto"
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  on
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  on
+  ExtModeAutoUpdateStatusClock on
+  StrictBusMsg		  "None"
+  ProdHWDeviceType	  "32-bit Generic"
+  ShowModelReferenceBlockVersion off
+  ShowModelReferenceBlockIO off
+  BlockDefaults {
+    Orientation		    "right"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+  }
+  BlockParameterDefaults {
+    Block {
+      BlockType		      Inport
+      BusObject		      "BusObject"
+      BusOutputAsStruct	      off
+      PortDimensions	      "-1"
+      SampleTime	      "-1"
+      DataType		      "auto"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      Interpolate	      on
+    }
+    Block {
+      BlockType		      Outport
+      Port		      "1"
+      BusObject		      "BusObject"
+      BusOutputAsStruct	      off
+      PortDimensions	      "-1"
+      SampleTime	      "-1"
+      DataType		      "auto"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      OutputWhenDisabled      "held"
+      InitialOutput	      "[]"
+    }
+    Block {
+      BlockType		      RealImagToComplex
+      Input		      "Real and imag"
+      ConstantPart	      "0"
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      Reference
+    }
+    Block {
+      BlockType		      Selector
+      InputType		      "Vector"
+      IndexMode		      "One-based"
+      ElementSrc	      "Internal"
+      Elements		      "1"
+      RowSrc		      "Internal"
+      Rows		      "1"
+      ColumnSrc		      "Internal"
+      Columns		      "1"
+      InputPortWidth	      "-1"
+      IndexIsStartValue	      off
+      OutputPortSize	      "1"
+    }
+    Block {
+      BlockType		      SubSystem
+      ShowPortLabels	      on
+      Permissions	      "ReadWrite"
+      PermitHierarchicalResolution "All"
+      SystemSampleTime	      "-1"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      SimViewingDevice	      off
+      DataTypeOverride	      "UseLocalSettings"
+      MinMaxOverflowLogging   "UseLocalSettings"
+    }
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  System {
+    Name		    "mfcm_vector_lib_v1"
+    Location		    [202, 82, 1270, 1000]
+    Open		    on
+    ModelBrowserVisibility  on
+    ModelBrowserWidth	    200
+    ScreenColor		    "white"
+    PaperOrientation	    "landscape"
+    PaperPositionMode	    "auto"
+    PaperType		    "A4"
+    PaperUnits		    "centimeters"
+    ZoomFactor		    "100"
+    ReportName		    "simulink-default.rpt"
+    Block {
+      BlockType		      Reference
+      Name		      "Copyright"
+      Ports		      []
+      Position		      [467, 46, 666, 144]
+      DropShadow	      on
+      ShowName		      off
+      FontName		      "Arial"
+      FontSize		      12
+      SourceBlock	      "xbsCopyrightNotice_r4/Copyright"
+      SourceType	      ""
+      ShowPortLabels	      on
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "SCVEC source"
+      Ports		      [0, 3]
+      Position		      [60, 113, 200, 257]
+      TreatAsAtomicUnit	      off
+      MinAlgLoopOccurrences   off
+      RTWSystemCode	      "Auto"
+      MaskPromptString	      "Constant Data|Output Width|Output Binary Point|"
+"Frame Period (fd-to-fd time)|Fill with:|Sample Period"
+      MaskStyleString	      "edit,edit,edit,edit,popup(Zeros|Data),edit"
+      MaskTunableValueString  "off,off,off,off,off,off"
+      MaskCallbackString      "|||||"
+      MaskEnableString	      "on,on,on,on,on,on"
+      MaskVisibilityString    "on,on,on,on,on,on"
+      MaskToolTipString	      "on,on,on,on,on,on"
+      MaskVarAliasString      ",,,,,"
+      MaskVariables	      "DATA=@1;WIDTH=@2;BINPT=@3;TF=@4;REP_FILL=@5;TS="
+"@6;"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "magic(4)-j*magic(4)'|16|8|2*4*4|Data|1"
+      MaskTabNameString	      ",,,,,"
+      System {
+	Name			"SCVEC source"
+	Location		[202, 74, 1598, 1106]
+	Open			off
+	ModelBrowserVisibility	on
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Reference
+	  Name			  "Constant"
+	  Ports			  [0, 1]
+	  Position		  [30, 33, 80, 57]
+	  ShowName		  off
+	  SourceBlock		  "xbsIndex_r4/Constant"
+	  SourceType		  "Xilinx Constant Block"
+	  arith_type		  "Unsigned"
+	  const			  "0"
+	  n_bits		  "1"
+	  bin_pt		  "0"
+	  explicit_period	  "off"
+	  period		  "1"
+	  equ			  "P=C"
+	  opselect		  "C"
+	  inp2			  "PCIN>>17"
+	  opr			  "+"
+	  inp1			  "P"
+	  carry			  "CIN"
+	  dbl_ovrd		  "off"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "constant"
+	  sg_icon_stat		  "71,62,0,1,white,blue,0,c7c04a0c"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 50 50 0 ],[0 0 24 24 ],[0.77 0.82 0.91]);\npatch([19 15 21 15 19 "
+"25 27 29 36 31 26 22 28 22 26 31 36 29 27 25 19 ],[3 7 13 19 23 23 21 23 23 1"
+"8 23 19 13 7 3 8 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 50 50 0 ],[0 24 24"
+" 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT: b"
+"egin icon text ');\nport_label('output',1,'0');\nfprintf('','COMMENT: end ico"
+"n text');\nfprintf('','COMMENT: Make no changes above this line -- machine ge"
+"nerated code. ');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Constant1"
+	  Ports			  [0, 1]
+	  Position		  [295, 108, 345, 132]
+	  ShowName		  off
+	  SourceBlock		  "xbsIndex_r4/Constant"
+	  SourceType		  "Xilinx Constant Block"
+	  arith_type		  "Unsigned"
+	  const			  "2*size(DATA,1)-1"
+	  n_bits		  "ceil(log2(2*size(DATA,1)))"
+	  bin_pt		  "0"
+	  explicit_period	  "off"
+	  period		  "1"
+	  equ			  "P=C"
+	  opselect		  "C"
+	  inp2			  "PCIN>>17"
+	  opr			  "+"
+	  inp1			  "P"
+	  carry			  "CIN"
+	  dbl_ovrd		  "off"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "constant"
+	  sg_icon_stat		  "71,62,0,1,white,blue,0,af10f581"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 50 50 0 ],[0 0 24 24 ],[0.77 0.82 0.91]);\npatch([19 15 21 15 19 "
+"25 27 29 36 31 26 22 28 22 26 31 36 29 27 25 19 ],[3 7 13 19 23 23 21 23 23 1"
+"8 23 19 13 7 3 8 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 50 50 0 ],[0 24 24"
+" 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT: b"
+"egin icon text ');\nport_label('output',1,'7');\nfprintf('','COMMENT: end ico"
+"n text');\nfprintf('','COMMENT: Make no changes above this line -- machine ge"
+"nerated code. ');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Constant3"
+	  Ports			  [0, 1]
+	  Position		  [30, 258, 80, 282]
+	  ShowName		  off
+	  SourceBlock		  "xbsIndex_r4/Constant"
+	  SourceType		  "Xilinx Constant Block"
+	  arith_type		  "Unsigned"
+	  const			  "2*size(DATA,1)*double(REP_FILL==1)+TF*doubl"
+"e(REP_FILL==2)"
+	  n_bits		  "1+ceil(log2(TF))"
+	  bin_pt		  "0"
+	  explicit_period	  "off"
+	  period		  "1"
+	  equ			  "P=C"
+	  opselect		  "C"
+	  inp2			  "PCIN>>17"
+	  opr			  "+"
+	  inp1			  "P"
+	  carry			  "CIN"
+	  dbl_ovrd		  "off"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "constant"
+	  sg_icon_stat		  "71,62,0,1,white,blue,0,ca912cbc"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 50 50 0 ],[0 0 24 24 ],[0.77 0.82 0.91]);\npatch([19 15 21 15 19 "
+"25 27 29 36 31 26 22 28 22 26 31 36 29 27 25 19 ],[3 7 13 19 23 23 21 23 23 1"
+"8 23 19 13 7 3 8 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 50 50 0 ],[0 24 24"
+" 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT: b"
+"egin icon text ');\nport_label('output',1,'32');\nfprintf('','COMMENT: end ic"
+"on text');\nfprintf('','COMMENT: Make no changes above this line -- machine g"
+"enerated code. ');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Delay1"
+	  Ports			  [1, 1]
+	  Position		  [595, 49, 660, 71]
+	  ShowName		  off
+	  SourceBlock		  "xbsIndex_r4/Delay"
+	  SourceType		  "Xilinx Delay Block"
+	  infoedit		  "Hardware notes: A delay line is a chain, ea"
+"ch link of which is an SRL16 followed by a flip-flop. If register retiming is"
+" enabled, the delay line is a chain of flip-flops."
+	  en			  "off"
+	  latency		  "1"
+	  dbl_ovrd		  "off"
+	  reg_retiming		  "off"
+	  xl_use_area		  "off"
+	  xl_area		  "[0,0,0,0,0,0,0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "20,20,356,256"
+	  block_type		  "delay"
+	  sg_icon_stat		  "71,62,1,1,white,blue,0,fc531c0e"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 65 65 0 ],[0 0 22 22 ],[0.77 0.82 0.91]);\npatch([27 23 28 23 27 "
+"33 35 37 43 38 33 30 36 30 33 38 43 37 35 33 27 ],[2 6 11 16 20 20 18 20 20 1"
+"5 20 17 11 5 2 7 2 2 4 2 2 ],[0.98 0.96 0.92]);\nplot([0 0 65 65 0 ],[0 22 22"
+" 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT: b"
+"egin icon text ');\ndisp('z^{-1}','texmode','on');\nfprintf('','COMMENT: end "
+"icon text');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Delay2"
+	  Ports			  [1, 1]
+	  Position		  [295, 50, 465, 70]
+	  ShowName		  off
+	  SourceBlock		  "xbsIndex_r4/Delay"
+	  SourceType		  "Xilinx Delay Block"
+	  infoedit		  "Hardware notes: A delay line is a chain, ea"
+"ch link of which is an SRL16 followed by a flip-flop. If register retiming is"
+" enabled, the delay line is a chain of flip-flops."
+	  en			  "off"
+	  latency		  "2"
+	  dbl_ovrd		  "off"
+	  reg_retiming		  "off"
+	  xl_use_area		  "off"
+	  xl_area		  "[0,0,0,0,0,0,0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "20,20,356,256"
+	  block_type		  "delay"
+	  sg_icon_stat		  "71,62,1,1,white,blue,0,0a7a6cf1"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 170 170 0 ],[0 0 20 20 ],[0.77 0.82 0.91]);\npatch([79 76 81 76 7"
+"9 84 85 86 92 88 84 81 86 81 84 88 92 86 85 84 79 ],[2 5 10 15 18 18 17 18 18"
+" 14 18 15 10 5 2 6 2 2 3 2 2 ],[0.98 0.96 0.92]);\nplot([0 0 170 170 0 ],[0 2"
+"0 20 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMEN"
+"T: begin icon text ');\ndisp('z^{-2}','texmode','on');\nfprintf('','COMMENT: "
+"end icon text');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Delay3"
+	  Ports			  [1, 1]
+	  Position		  [290, 250, 460, 270]
+	  ShowName		  off
+	  SourceBlock		  "xbsIndex_r4/Delay"
+	  SourceType		  "Xilinx Delay Block"
+	  infoedit		  "Hardware notes: A delay line is a chain, ea"
+"ch link of which is an SRL16 followed by a flip-flop. If register retiming is"
+" enabled, the delay line is a chain of flip-flops."
+	  en			  "off"
+	  latency		  "2"
+	  dbl_ovrd		  "off"
+	  reg_retiming		  "off"
+	  xl_use_area		  "off"
+	  xl_area		  "[0,0,0,0,0,0,0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "20,20,356,256"
+	  block_type		  "delay"
+	  sg_icon_stat		  "71,62,1,1,white,blue,0,0a7a6cf1"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 170 170 0 ],[0 0 20 20 ],[0.77 0.82 0.91]);\npatch([79 76 81 76 7"
+"9 84 85 86 92 88 84 81 86 81 84 88 92 86 85 84 79 ],[2 5 10 15 18 18 17 18 18"
+" 14 18 15 10 5 2 6 2 2 3 2 2 ],[0.98 0.96 0.92]);\nplot([0 0 170 170 0 ],[0 2"
+"0 20 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMEN"
+"T: begin icon text ');\ndisp('z^{-2}','texmode','on');\nfprintf('','COMMENT: "
+"end icon text');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Delay4"
+	  Ports			  [1, 1]
+	  Position		  [510, 124, 550, 146]
+	  ShowName		  off
+	  SourceBlock		  "xbsIndex_r4/Delay"
+	  SourceType		  "Xilinx Delay Block"
+	  infoedit		  "Hardware notes: A delay line is a chain, ea"
+"ch link of which is an SRL16 followed by a flip-flop. If register retiming is"
+" enabled, the delay line is a chain of flip-flops."
+	  en			  "off"
+	  latency		  "1"
+	  dbl_ovrd		  "off"
+	  reg_retiming		  "off"
+	  xl_use_area		  "off"
+	  xl_area		  "[0,0,0,0,0,0,0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "20,20,356,256"
+	  block_type		  "delay"
+	  sg_icon_stat		  "71,62,1,1,white,blue,0,fc531c0e"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 40 40 0 ],[0 0 22 22 ],[0.77 0.82 0.91]);\npatch([14 10 15 10 14 "
+"20 22 24 30 25 20 17 23 17 20 25 30 24 22 20 14 ],[2 6 11 16 20 20 18 20 20 1"
+"5 20 17 11 5 2 7 2 2 4 2 2 ],[0.98 0.96 0.92]);\nplot([0 0 40 40 0 ],[0 22 22"
+" 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT: b"
+"egin icon text ');\ndisp('z^{-1}','texmode','on');\nfprintf('','COMMENT: end "
+"icon text');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Delay5"
+	  Ports			  [1, 1]
+	  Position		  [290, 284, 355, 306]
+	  ShowName		  off
+	  SourceBlock		  "xbsIndex_r4/Delay"
+	  SourceType		  "Xilinx Delay Block"
+	  infoedit		  "Hardware notes: A delay line is a chain, ea"
+"ch link of which is an SRL16 followed by a flip-flop. If register retiming is"
+" enabled, the delay line is a chain of flip-flops."
+	  en			  "off"
+	  latency		  "1"
+	  dbl_ovrd		  "off"
+	  reg_retiming		  "off"
+	  xl_use_area		  "off"
+	  xl_area		  "[0,0,0,0,0,0,0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "20,20,356,256"
+	  block_type		  "delay"
+	  sg_icon_stat		  "71,62,1,1,white,blue,0,fc531c0e"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 65 65 0 ],[0 0 22 22 ],[0.77 0.82 0.91]);\npatch([27 23 28 23 27 "
+"33 35 37 43 38 33 30 36 30 33 38 43 37 35 33 27 ],[2 6 11 16 20 20 18 20 20 1"
+"5 20 17 11 5 2 7 2 2 4 2 2 ],[0.98 0.96 0.92]);\nplot([0 0 65 65 0 ],[0 22 22"
+" 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT: b"
+"egin icon text ');\ndisp('z^{-1}','texmode','on');\nfprintf('','COMMENT: end "
+"icon text');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Expression"
+	  Ports			  [2, 1]
+	  Position		  [510, 234, 550, 336]
+	  ShowName		  off
+	  SourceBlock		  "xbsIndex_r4/Expression"
+	  SourceType		  "Xilinx expr Block"
+	  expression		  "a & ~b"
+	  align_bp		  "on"
+	  en			  "off"
+	  latency		  "1"
+	  precision		  "Full"
+	  arith_type		  "Unsigned"
+	  n_bits		  "16"
+	  bin_pt		  "0"
+	  dbl_ovrd		  "off"
+	  xl_use_area		  "off"
+	  xl_area		  "[0,0,0,0,0,0,0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "expr"
+	  sg_icon_stat		  "71,62,2,1,white,blue,0,b5afc95f"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 40 40 0 ],[0 0 102 102 ],[0.77 0.82 0.91]);\npatch([10 3 12 3 10 "
+"21 24 27 38 29 20 14 24 14 20 29 38 27 24 21 10 ],[35 42 51 60 67 67 64 67 67"
+" 58 67 61 51 41 35 44 35 35 38 35 35 ],[0.98 0.96 0.92]);\nplot([0 0 40 40 0 "
+"],[0 102 102 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf(''"
+",'COMMENT: begin icon text ');\nport_label('input',1,'a');\nport_label('input"
+"',2,'b');\ndisp('a & ~b');\nfprintf('','COMMENT: end icon text');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Logical"
+	  Ports			  [2, 1]
+	  Position		  [595, 104, 660, 146]
+	  ShowName		  off
+	  SourceBlock		  "xbsIndex_r4/Logical"
+	  SourceType		  "Xilinx [BLOCK NAME] Block"
+	  logical_function	  "OR"
+	  inputs		  "2"
+	  en			  "off"
+	  latency		  "1"
+	  precision		  "Full"
+	  arith_type		  "Unsigned"
+	  n_bits		  "16"
+	  bin_pt		  "0"
+	  align_bp		  "on"
+	  dbl_ovrd		  "off"
+	  xl_use_area		  "off"
+	  xl_area		  "[0,0,0,0,0,0,0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "logical"
+	  sg_icon_stat		  "71,62,2,1,white,blue,0,60344167"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 65 65 0 ],[0 0 42 42 ],[0.77 0.82 0.91]);\npatch([21 14 24 14 21 "
+"32 35 38 50 41 32 25 35 25 32 41 50 38 35 32 21 ],[5 12 22 32 39 39 36 39 39 "
+"30 39 32 22 12 5 14 5 5 8 5 5 ],[0.98 0.96 0.92]);\nplot([0 0 65 65 0 ],[0 42"
+" 42 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT"
+": begin icon text ');\ndisp('\\newlineor\\newlinez^{-1}','texmode','on');\nfp"
+"rintf('','COMMENT: end icon text');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "ROM"
+	  Ports			  [2, 1]
+	  Position		  [595, 157, 660, 328]
+	  SourceBlock		  "xbsIndex_r4/ROM"
+	  SourceType		  "Xilinx ROM Block"
+	  depth			  "2*numel(DATA)"
+	  initVector		  "reshape([real(reshape(DATA,1,[])); imag(res"
+"hape(DATA,1,[]))],[],1)"
+	  distributed_mem	  "Block RAM"
+	  rst			  "on"
+	  init_reg		  "0"
+	  en			  "off"
+	  latency		  "1"
+	  arith_type		  "Signed  (2's comp)"
+	  n_bits		  "WIDTH"
+	  bin_pt		  "BINPT"
+	  dbl_ovrd		  "off"
+	  use_rpm		  "on"
+	  xl_use_area		  "off"
+	  xl_area		  "[0,0,0,0,0,0,0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "sprom"
+	  sg_icon_stat		  "71,62,2,1,white,blue,0,d0f12e4a"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 65 65 0 ],[0 0 171 171 ],[0.77 0.82 0.91]);\npatch([15 4 19 4 15 "
+"32 37 42 60 45 31 21 36 21 31 45 60 42 37 32 15 ],[60 71 86 101 112 112 107 1"
+"12 112 97 111 101 86 71 61 75 60 60 65 60 60 ],[0.98 0.96 0.92]);\nplot([0 0 "
+"65 65 0 ],[0 171 171 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfp"
+"rintf('','COMMENT: begin icon text ');\nport_label('input',1,'addr');\nport_l"
+"abel('input',2,'rst');\ndisp('z^{-1}','texmode','on');\nfprintf('','COMMENT: "
+"end icon text');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "base_cnt"
+	  Ports			  [1, 1]
+	  Position		  [295, 197, 345, 223]
+	  SourceBlock		  "xbsIndex_r4/Counter"
+	  SourceType		  "Xilinx Count Block"
+	  infoedit		  "Hardware notes: Free running counters are t"
+"he least expensive in hardware.  A count limited counter is implemented by co"
+"mbining a counter with a comparator."
+	  cnt_type		  "Count Limited"
+	  cnt_to		  "TF*size(DATA,2)-1"
+	  operation		  "Up"
+	  start_count		  "-2*size(DATA,1)"
+	  cnt_by_val		  "2*size(DATA,1)"
+	  arith_type		  "Unsigned"
+	  n_bits		  "ceil(log2(2*numel(DATA)))"
+	  bin_pt		  "0"
+	  load_pin		  "off"
+	  rst			  "off"
+	  en			  "on"
+	  dbl_ovrd		  "off"
+	  explicit_period	  "off"
+	  period		  "1"
+	  xl_use_area		  "off"
+	  xl_area		  "[0,0,0,0,0,0,0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "353,332,356,524"
+	  block_type		  "counter"
+	  sg_icon_stat		  "71,62,1,1,white,blue,0,19c87f40"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 50 50 0 ],[0 0 26 26 ],[0.77 0.82 0.91]);\npatch([18 14 20 14 18 "
+"25 27 29 36 30 24 20 26 20 24 30 36 29 27 25 18 ],[3 7 13 19 23 23 21 23 23 1"
+"7 23 19 13 7 3 9 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 50 50 0 ],[0 26 26"
+" 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT: b"
+"egin icon text ');\nport_label('input',1,'en');\nport_label('output',1,'out')"
+";\nfprintf('','COMMENT: end icon text');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "elem_cnt"
+	  Ports			  [1, 1]
+	  Position		  [295, 132, 345, 158]
+	  SourceBlock		  "xbsIndex_r4/Counter"
+	  SourceType		  "Xilinx Count Block"
+	  infoedit		  "Hardware notes: Free running counters are t"
+"he least expensive in hardware.  A count limited counter is implemented by co"
+"mbining a counter with a comparator."
+	  cnt_type		  "Count Limited"
+	  cnt_to		  "2*size(DATA,1)-1"
+	  operation		  "Up"
+	  start_count		  "0"
+	  cnt_by_val		  "1"
+	  arith_type		  "Unsigned"
+	  n_bits		  "ceil(log2(2*size(DATA,1)))"
+	  bin_pt		  "0"
+	  load_pin		  "off"
+	  rst			  "on"
+	  en			  "off"
+	  dbl_ovrd		  "off"
+	  explicit_period	  "off"
+	  period		  "1"
+	  xl_use_area		  "off"
+	  xl_area		  "[0,0,0,0,0,0,0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "572,523,356,524"
+	  block_type		  "counter"
+	  sg_icon_stat		  "71,62,1,1,white,blue,0,fa73fe1c"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 50 50 0 ],[0 0 26 26 ],[0.77 0.82 0.91]);\npatch([18 14 20 14 18 "
+"25 27 29 36 30 24 20 26 20 24 30 36 29 27 25 18 ],[3 7 13 19 23 23 21 23 23 1"
+"7 23 19 13 7 3 9 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 50 50 0 ],[0 26 26"
+" 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT: b"
+"egin icon text ');\nport_label('input',1,'rst');\nport_label('output',1,'out'"
+");\nfprintf('','COMMENT: end icon text');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "fd_det"
+	  Ports			  [2, 1]
+	  Position		  [415, 283, 460, 332]
+	  SourceBlock		  "xbsIndex_r4/Register"
+	  SourceType		  "Xilinx Register Block"
+	  init			  "0"
+	  rst			  "off"
+	  en			  "on"
+	  dbl_ovrd		  "off"
+	  xl_use_area		  "off"
+	  xl_area		  "[0,0,0,0,0,0,0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "register"
+	  sg_icon_stat		  "71,62,2,1,white,blue,0,cc3303a0"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 45 45 0 ],[0 0 49 49 ],[0.77 0.82 0.91]);\npatch([10 3 14 3 10 22"
+" 25 28 41 31 21 14 25 14 21 31 41 28 25 22 10 ],[7 14 25 36 43 43 40 43 43 33"
+" 43 36 25 14 7 17 7 7 10 7 7 ],[0.98 0.96 0.92]);\nplot([0 0 45 45 0 ],[0 49 "
+"49 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT:"
+" begin icon text ');\nport_label('input',1,'d');\nport_label('input',2,'en');"
+"\nport_label('output',1,'q');\ndisp('\\bf{z^{-1}}','texmode','on');\nfprintf("
+"'','COMMENT: end icon text');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "fd_relop"
+	  Ports			  [2, 1]
+	  Position		  [140, 33, 180, 82]
+	  SourceBlock		  "xbsIndex_r4/Relational"
+	  SourceType		  "Xilinx Relational Block"
+	  mode			  "a=b"
+	  en			  "off"
+	  latency		  "1"
+	  dbl_ovrd		  "off"
+	  xl_use_area		  "off"
+	  xl_area		  "[0,0,0,0,0,0,0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "relational"
+	  sg_icon_stat		  "71,62,2,1,white,blue,0,1cf02e61"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 40 40 0 ],[0 0 49 49 ],[0.77 0.82 0.91]);\npatch([10 3 12 3 10 21"
+" 24 27 38 29 20 14 24 14 20 29 38 27 24 21 10 ],[9 16 25 34 41 41 38 41 41 32"
+" 41 35 25 15 9 18 9 9 12 9 9 ],[0.98 0.96 0.92]);\nplot([0 0 40 40 0 ],[0 49 "
+"49 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT:"
+" begin icon text ');\nport_label('input',1,'a');\nport_label('input',2,'b');"
+"\ndisp('\\newline\\bf{a=b}\\newlinez^{-1}','texmode','on');\nfprintf('','COMM"
+"ENT: end icon text');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "frame_cnt"
+	  Ports			  [0, 1]
+	  Position		  [30, 58, 80, 82]
+	  SourceBlock		  "xbsIndex_r4/Counter"
+	  SourceType		  "Xilinx Count Block"
+	  infoedit		  "Hardware notes: Free running counters are t"
+"he least expensive in hardware.  A count limited counter is implemented by co"
+"mbining a counter with a comparator."
+	  cnt_type		  "Count Limited"
+	  cnt_to		  "TF-1"
+	  operation		  "Up"
+	  start_count		  "0"
+	  cnt_by_val		  "1"
+	  arith_type		  "Unsigned"
+	  n_bits		  "ceil(log2(TF))"
+	  bin_pt		  "0"
+	  load_pin		  "off"
+	  rst			  "off"
+	  en			  "off"
+	  dbl_ovrd		  "off"
+	  explicit_period	  "off"
+	  period		  "TS"
+	  xl_use_area		  "off"
+	  xl_area		  "[0,0,0,0,0,0,0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "20,20,356,524"
+	  block_type		  "counter"
+	  sg_icon_stat		  "71,62,0,1,white,blue,0,115399eb"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 50 50 0 ],[0 0 24 24 ],[0.77 0.82 0.91]);\npatch([19 15 21 15 19 "
+"25 27 29 36 31 26 22 28 22 26 31 36 29 27 25 19 ],[3 7 13 19 23 23 21 23 23 1"
+"8 23 19 13 7 3 8 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 50 50 0 ],[0 24 24"
+" 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT: b"
+"egin icon text ');\nport_label('output',1,'out');\nfprintf('','COMMENT: end i"
+"con text');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "mask_relop"
+	  Ports			  [2, 1]
+	  Position		  [140, 233, 180, 282]
+	  SourceBlock		  "xbsIndex_r4/Relational"
+	  SourceType		  "Xilinx Relational Block"
+	  mode			  "a>=b"
+	  en			  "off"
+	  latency		  "1"
+	  dbl_ovrd		  "off"
+	  xl_use_area		  "off"
+	  xl_area		  "[0,0,0,0,0,0,0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "relational"
+	  sg_icon_stat		  "71,62,2,1,white,blue,0,48ab8ed9"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 40 40 0 ],[0 0 49 49 ],[0.77 0.82 0.91]);\npatch([10 3 12 3 10 21"
+" 24 27 38 29 20 14 24 14 20 29 38 27 24 21 10 ],[9 16 25 34 41 41 38 41 41 32"
+" 41 35 25 15 9 18 9 9 12 9 9 ],[0.98 0.96 0.92]);\nplot([0 0 40 40 0 ],[0 49 "
+"49 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT:"
+" begin icon text ');\nport_label('input',1,'a');\nport_label('input',2,'b');"
+"\ndisp('\\newline\\bf{a>=b}\\newlinez^{-1}','texmode','on');\nfprintf('','COM"
+"MENT: end icon text');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "radd"
+	  Ports			  [2, 1]
+	  Position		  [415, 172, 465, 223]
+	  SourceBlock		  "xbsIndex_r4/AddSub"
+	  SourceType		  "Xilinx AddSub Block"
+	  mode			  "Addition"
+	  use_carryin		  "off"
+	  use_carryout		  "off"
+	  en			  "off"
+	  latency		  "1"
+	  precision		  "User Defined"
+	  arith_type		  "Unsigned"
+	  n_bits		  "ceil(log2(2*numel(DATA)))"
+	  bin_pt		  "0"
+	  quantization		  "Truncate"
+	  overflow		  "Wrap"
+	  dbl_ovrd		  "off"
+	  use_behavioral_HDL	  "off"
+	  pipelined		  "off"
+	  use_rpm		  "on"
+	  xl_use_area		  "off"
+	  xl_area		  "[0,0,0,0,0,0,0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "addsub"
+	  sg_icon_stat		  "71,62,2,1,white,blue,0,d7118884"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 50 50 0 ],[0 0 51 51 ],[0.77 0.82 0.91]);\npatch([11 3 15 3 11 24"
+" 28 32 46 35 24 16 28 16 24 35 46 32 28 24 11 ],[6 14 26 38 46 46 42 46 46 35"
+" 46 38 26 14 6 17 6 6 10 6 6 ],[0.98 0.96 0.92]);\nplot([0 0 50 50 0 ],[0 51 "
+"51 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT:"
+" begin icon text ');\nport_label('input',1,'a');\nport_label('input',2,'b');"
+"\nport_label('output',1,'\\bf{a + b}','texmode','on');\ndisp('\\newline\\bf{}"
+"\\newlinez^{-1}','texmode','on');\nfprintf('','COMMENT: end icon text');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "rd_relop"
+	  Ports			  [2, 1]
+	  Position		  [415, 108, 465, 157]
+	  SourceBlock		  "xbsIndex_r4/Relational"
+	  SourceType		  "Xilinx Relational Block"
+	  mode			  "a=b"
+	  en			  "off"
+	  latency		  "1"
+	  dbl_ovrd		  "off"
+	  xl_use_area		  "off"
+	  xl_area		  "[0,0,0,0,0,0,0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "relational"
+	  sg_icon_stat		  "71,62,2,1,white,blue,0,1cf02e61"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 50 50 0 ],[0 0 49 49 ],[0.77 0.82 0.91]);\npatch([12 4 15 4 12 25"
+" 29 33 47 36 26 18 28 18 26 36 47 33 29 25 12 ],[5 13 24 35 43 43 39 43 43 32"
+" 42 34 24 14 6 16 5 5 9 5 5 ],[0.98 0.96 0.92]);\nplot([0 0 50 50 0 ],[0 49 4"
+"9 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT: "
+"begin icon text ');\nport_label('input',1,'a');\nport_label('input',2,'b');\n"
+"disp('\\newline\\bf{a=b}\\newlinez^{-1}','texmode','on');\nfprintf('','COMMEN"
+"T: end icon text');\n"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "out_fd"
+	  Position		  [735, 53, 765, 67]
+	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "out_rd"
+	  Position		  [735, 118, 765, 132]
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "out_reim"
+	  Position		  [735, 238, 765, 252]
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
+	}
+	Line {
+	  SrcBlock		  "Constant"
+	  SrcPort		  1
+	  DstBlock		  "fd_relop"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "frame_cnt"
+	  SrcPort		  1
+	  Points		  [0, 0; 40, 0]
+	  Branch {
+	    DstBlock		    "fd_relop"
+	    DstPort		    2
+	  }
+	  Branch {
+	    DstBlock		    "mask_relop"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "fd_relop"
+	  SrcPort		  1
+	  Points		  [0, 0; 45, 0]
+	  Branch {
+	    Points		    [0, 85]
+	    Branch {
+	      DstBlock		      "elem_cnt"
+	      DstPort		      1
+	    }
+	    Branch {
+	      Points		      [0, 65]
+	      Branch {
+		DstBlock		"base_cnt"
+		DstPort			1
+	      }
+	      Branch {
+		Points			[0, 85]
+		DstBlock		"Delay5"
+		DstPort			1
+	      }
+	    }
+	  }
+	  Branch {
+	    DstBlock		    "Delay2"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "ROM"
+	  SrcPort		  1
+	  DstBlock		  "out_reim"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Constant1"
+	  SrcPort		  1
+	  DstBlock		  "rd_relop"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "rd_relop"
+	  SrcPort		  1
+	  DstBlock		  "Delay4"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Delay2"
+	  SrcPort		  1
+	  Points		  [0, 0; 110, 0]
+	  Branch {
+	    DstBlock		    "Delay1"
+	    DstPort		    1
+	  }
+	  Branch {
+	    DstBlock		    "Logical"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "elem_cnt"
+	  SrcPort		  1
+	  Points		  [0, 0; 50, 0]
+	  Branch {
+	    DstBlock		    "rd_relop"
+	    DstPort		    2
+	  }
+	  Branch {
+	    DstBlock		    "radd"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "radd"
+	  SrcPort		  1
+	  DstBlock		  "ROM"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "base_cnt"
+	  SrcPort		  1
+	  DstBlock		  "radd"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Logical"
+	  SrcPort		  1
+	  DstBlock		  "out_rd"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Constant3"
+	  SrcPort		  1
+	  DstBlock		  "mask_relop"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "mask_relop"
+	  SrcPort		  1
+	  DstBlock		  "Delay3"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Expression"
+	  SrcPort		  1
+	  DstBlock		  "ROM"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Delay1"
+	  SrcPort		  1
+	  DstBlock		  "out_fd"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Delay4"
+	  SrcPort		  1
+	  DstBlock		  "Logical"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Delay5"
+	  SrcPort		  1
+	  Points		  [0, 0; 40, 0]
+	  Branch {
+	    DstBlock		    "fd_det"
+	    DstPort		    1
+	  }
+	  Branch {
+	    DstBlock		    "fd_det"
+	    DstPort		    2
+	  }
+	}
+	Line {
+	  SrcBlock		  "Delay3"
+	  SrcPort		  1
+	  DstBlock		  "Expression"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "fd_det"
+	  SrcPort		  1
+	  DstBlock		  "Expression"
+	  DstPort		  2
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "buffer 2SCVEC"
+      Ports		      [4, 3]
+      Position		      [240, 452, 380, 593]
+      TreatAsAtomicUnit	      off
+      MinAlgLoopOccurrences   off
+      RTWSystemCode	      "Auto"
+      MaskPromptString	      "Input Vector Size"
+      MaskStyleString	      "edit"
+      MaskTunableValueString  "off"
+      MaskEnableString	      "on"
+      MaskVisibilityString    "on"
+      MaskToolTipString	      "on"
+      MaskVariables	      "VEC_SIZE=@1;"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "4"
+      System {
+	Name			"buffer 2SCVEC"
+	Location		[202, 74, 1598, 1106]
+	Open			off
+	ModelBrowserVisibility	on
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "in_fd"
+	  Position		  [50, 133, 80, 147]
+	  Port			  "1"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "in_nd"
+	  Position		  [50, 173, 80, 187]
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "in_re"
+	  Position		  [50, 213, 80, 227]
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "in_im"
+	  Position		  [50, 253, 80, 267]
+	  Port			  "4"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "dpram"
+	  Ports			  [4, 1]
+	  Position		  [495, 116, 570, 284]
+	  SourceBlock		  "mfcm_misc_lib_v1/dpram"
+	  SourceType		  "Unknown"
+	  ShowPortLabels	  "on"
+	  MEM_DEPTH		  "2*(2^ceil(log2(2*VEC_SIZE)))"
+	  MEM_INIT		  "0"
+	  MEM_MAXDEPTH		  "16"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "fd_pipe"
+	  Ports			  [1, 1]
+	  Position		  [495, 28, 570, 52]
+	  SourceBlock		  "xbsIndex_r4/Delay"
+	  SourceType		  "Xilinx Delay Block"
+	  infoedit		  "Delay line having  configurable length.<P><"
+"P>Hardware notes: A delay line is a chain, each link of which is an SRL16 fol"
+"lowed by a flip-flop. If register retiming is enabled, the delay line is a ch"
+"ain of flip-flops."
+	  en			  "off"
+	  latency		  "2"
+	  dbl_ovrd		  "off"
+	  reg_retiming		  "off"
+	  xl_use_area		  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "delay"
+	  sg_icon_stat		  "73,64,1,1,white,blue,0,0a7a6cf1"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 75 75 0 ],[0 0 24 24 ],[0.77 0.82 0.91]);\npatch([31 27 33 27 31 "
+"37 39 41 48 43 38 34 40 34 38 43 48 41 39 37 31 ],[3 7 13 19 23 23 21 23 23 1"
+"8 23 19 13 7 3 8 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 75 75 0 ],[0 24 24"
+" 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT: b"
+"egin icon text ');\ndisp('z^{-2}','texmode','on');\nfprintf('','COMMENT: end "
+"icon text');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "rd_pipe"
+	  Ports			  [1, 1]
+	  Position		  [495, 78, 570, 102]
+	  SourceBlock		  "xbsIndex_r4/Delay"
+	  SourceType		  "Xilinx Delay Block"
+	  infoedit		  "Delay line having  configurable length.<P><"
+"P>Hardware notes: A delay line is a chain, each link of which is an SRL16 fol"
+"lowed by a flip-flop. If register retiming is enabled, the delay line is a ch"
+"ain of flip-flops."
+	  en			  "off"
+	  latency		  "2"
+	  dbl_ovrd		  "off"
+	  reg_retiming		  "off"
+	  xl_use_area		  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "delay"
+	  sg_icon_stat		  "73,64,1,1,white,blue,0,0a7a6cf1"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 75 75 0 ],[0 0 24 24 ],[0.77 0.82 0.91]);\npatch([31 27 33 27 31 "
+"37 39 41 48 43 38 34 40 34 38 43 48 41 39 37 31 ],[3 7 13 19 23 23 21 23 23 1"
+"8 23 19 13 7 3 8 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 75 75 0 ],[0 24 24"
+" 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT: b"
+"egin icon text ');\ndisp('z^{-2}','texmode','on');\nfprintf('','COMMENT: end "
+"icon text');\n"
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "read_control"
+	  Ports			  [1, 3]
+	  Position		  [355, 18, 435, 162]
+	  TreatAsAtomicUnit	  off
+	  MinAlgLoopOccurrences	  off
+	  RTWSystemCode		  "Auto"
+	  System {
+	    Name		    "read_control"
+	    Location		    [202, 55, 1598, 1106]
+	    Open		    off
+	    ModelBrowserVisibility  on
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "A4"
+	    PaperUnits		    "centimeters"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "in_fd"
+	      Position		      [70, 48, 100, 62]
+	      Port		      "1"
+	      IconDisplay	      "Port number"
+	      LatchInput	      off
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Concat"
+	      Ports		      [2, 1]
+	      Position		      [270, 232, 315, 283]
+	      ShowName		      off
+	      SourceBlock	      "xbsIndex_r4/Concat"
+	      SourceType	      "Xilinx concat Block"
+	      infoedit		      "Concatenates two or more inputs.  Outpu"
+"t will be cast to an unsigned value with the binary point at zero."
+	      num_inputs	      "2"
+	      dbl_ovrd		      "off"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "concat"
+	      sg_icon_stat	      "73,64,2,1,white,blue,0,59d62d82"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 45 45 0 ],[0 0 51 51 ],[0.77 0.82 0.91]);\npatch([10 3 14 3 1"
+"0 22 25 28 41 31 21 14 25 14 21 31 41 28 25 22 10 ],[8 15 26 37 44 44 41 44 4"
+"4 34 44 37 26 15 8 18 8 8 11 8 8 ],[0.98 0.96 0.92]);\nplot([0 0 45 45 0 ],[0"
+" 51 51 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMM"
+"ENT: begin icon text ');\nport_label('input',1,'hi');\nport_label('input',2,'"
+"lo');\nfprintf('','COMMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Constant1"
+	      Ports		      [0, 1]
+	      Position		      [290, 286, 315, 304]
+	      ShowName		      off
+	      SourceBlock	      "xbsIndex_r4/Constant"
+	      SourceType	      "Xilinx Constant Block"
+	      arith_type	      "Unsigned"
+	      const		      "1"
+	      n_bits		      "1"
+	      bin_pt		      "0"
+	      explicit_period	      "off"
+	      period		      "1"
+	      equ		      "P=C"
+	      opselect		      "C"
+	      inp2		      "PCIN>>17"
+	      opr		      "+"
+	      inp1		      "P"
+	      carry		      "CIN"
+	      dbl_ovrd		      "off"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "constant"
+	      sg_icon_stat	      "73,64,0,1,white,blue,0,85613821"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 55 55 0 ],[0 0 26 26 ],[0.77 0.82 0.91]);\npatch([20 16 22 16"
+" 20 27 29 31 38 32 26 22 28 22 26 32 38 31 29 27 20 ],[3 7 13 19 23 23 21 23 "
+"23 17 23 19 13 7 3 9 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 55 55 0 ],[0 2"
+"6 26 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMEN"
+"T: begin icon text ');\nport_label('output',1,'1');\nfprintf('','COMMENT: end"
+" icon text');\nfprintf('','COMMENT: Make no changes above this line -- machin"
+"e generated code. ');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "fd_det"
+	      Ports		      [2, 1]
+	      Position		      [160, 244, 210, 291]
+	      SourceBlock	      "xbsIndex_r4/Delay"
+	      SourceType	      "Xilinx Delay Block"
+	      infoedit		      "Delay line having  configurable length."
+"<P><P>Hardware notes: A delay line is a chain, each link of which is an SRL16"
+" followed by a flip-flop. If register retiming is enabled, the delay line is "
+"a chain of flip-flops."
+	      en		      "on"
+	      latency		      "1"
+	      dbl_ovrd		      "off"
+	      reg_retiming	      "off"
+	      xl_use_area	      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "delay"
+	      sg_icon_stat	      "73,64,2,1,white,blue,0,9c7d2b66"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 50 50 0 ],[0 0 47 47 ],[0.77 0.82 0.91]);\npatch([13 5 16 5 1"
+"3 25 28 31 44 33 23 16 27 16 23 33 44 31 28 25 13 ],[5 13 24 35 43 43 40 43 4"
+"3 32 42 35 24 13 6 16 5 5 8 5 5 ],[0.98 0.96 0.92]);\nplot([0 0 50 50 0 ],[0 "
+"47 47 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMME"
+"NT: begin icon text ');\nport_label('input',2,'en');\ndisp('z^{-1}','texmode'"
+",'on');\nfprintf('','COMMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "fd_pipe"
+	      Ports		      [1, 1]
+	      Position		      [160, 43, 210, 67]
+	      SourceBlock	      "xbsIndex_r4/Delay"
+	      SourceType	      "Xilinx Delay Block"
+	      infoedit		      "Delay line having  configurable length."
+"<P><P>Hardware notes: A delay line is a chain, each link of which is an SRL16"
+" followed by a flip-flop. If register retiming is enabled, the delay line is "
+"a chain of flip-flops."
+	      en		      "off"
+	      latency		      "1"
+	      dbl_ovrd		      "off"
+	      reg_retiming	      "off"
+	      xl_use_area	      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "delay"
+	      sg_icon_stat	      "73,64,1,1,white,blue,0,fc531c0e"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 50 50 0 ],[0 0 24 24 ],[0.77 0.82 0.91]);\npatch([19 15 21 15"
+" 19 25 27 29 36 31 26 22 28 22 26 31 36 29 27 25 19 ],[3 7 13 19 23 23 21 23 "
+"23 18 23 19 13 7 3 8 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 50 50 0 ],[0 2"
+"4 24 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMEN"
+"T: begin icon text ');\ndisp('z^{-1}','texmode','on');\nfprintf('','COMMENT: "
+"end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "radd"
+	      Ports		      [2, 1]
+	      Position		      [270, 86, 315, 184]
+	      SourceBlock	      "xbsIndex_r4/Concat"
+	      SourceType	      "Xilinx concat Block"
+	      infoedit		      "Concatenates two or more inputs.  Outpu"
+"t will be cast to an unsigned value with the binary point at zero."
+	      num_inputs	      "2"
+	      dbl_ovrd		      "off"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "concat"
+	      sg_icon_stat	      "73,64,2,1,white,blue,0,59d62d82"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 45 45 0 ],[0 0 98 98 ],[0.77 0.82 0.91]);\npatch([10 3 14 3 1"
+"0 22 25 28 41 31 21 14 25 14 21 31 41 28 25 22 10 ],[31 38 49 60 67 67 64 67 "
+"67 57 67 60 49 38 31 41 31 31 34 31 31 ],[0.98 0.96 0.92]);\nplot([0 0 45 45 "
+"0 ],[0 98 98 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf(''"
+",'COMMENT: begin icon text ');\nport_label('input',1,'hi');\nport_label('inpu"
+"t',2,'lo');\nfprintf('','COMMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "rd_relop"
+	      Ports		      [2, 1]
+	      Position		      [375, 243, 420, 312]
+	      SourceBlock	      "xbsIndex_r4/Relational"
+	      SourceType	      "Xilinx Relational Block"
+	      mode		      "a=b"
+	      en		      "off"
+	      latency		      "0"
+	      dbl_ovrd		      "off"
+	      xl_use_area	      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "relational"
+	      sg_icon_stat	      "73,64,2,1,white,blue,0,1b68ef8e"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 45 45 0 ],[0 0 69 69 ],[0.77 0.82 0.91]);\npatch([10 3 14 3 1"
+"0 22 25 28 41 31 21 14 25 14 21 31 41 28 25 22 10 ],[17 24 35 46 53 53 50 53 "
+"53 43 53 46 35 24 17 27 17 17 20 17 17 ],[0.98 0.96 0.92]);\nplot([0 0 45 45 "
+"0 ],[0 69 69 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf(''"
+",'COMMENT: begin icon text ');\nport_label('input',1,'a');\nport_label('input"
+"',2,'b');\ndisp('\\newline\\bf{a=b}\\newlinez^{-1}','texmode','on');\nfprintf"
+"('','COMMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "roff"
+	      Ports		      [1, 1]
+	      Position		      [160, 144, 210, 176]
+	      SourceBlock	      "xbsIndex_r4/Counter"
+	      SourceType	      "Xilinx Count Block"
+	      infoedit		      "Configurable up, down and up/down count"
+"er.<P><P>Hardware notes: Free running counters are the least expensive in har"
+"dware.  A count limited counter is implemented by combining a counter with a "
+"comparator."
+	      cnt_type		      "Count Limited"
+	      cnt_to		      "2*VEC_SIZE-1"
+	      operation		      "Up"
+	      start_count	      "0"
+	      cnt_by_val	      "1"
+	      arith_type	      "Unsigned"
+	      n_bits		      "ceil(log2(2*VEC_SIZE))"
+	      bin_pt		      "0"
+	      load_pin		      "off"
+	      rst		      "on"
+	      en		      "off"
+	      dbl_ovrd		      "off"
+	      explicit_period	      "off"
+	      period		      "1"
+	      xl_use_area	      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "counter"
+	      sg_icon_stat	      "73,64,1,1,white,blue,0,fa73fe1c"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 50 50 0 ],[0 0 32 32 ],[0.77 0.82 0.91]);\npatch([16 11 18 11"
+" 16 24 26 28 37 30 23 18 25 18 23 30 37 28 26 24 16 ],[3 8 15 22 27 27 25 27 "
+"27 20 27 22 15 8 3 10 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 50 50 0 ],[0 "
+"32 32 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMME"
+"NT: begin icon text ');\nport_label('input',1,'rst');\nport_label('output',1,"
+"'out');\nfprintf('','COMMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "rptr"
+	      Ports		      [1, 1]
+	      Position		      [160, 95, 210, 125]
+	      SourceBlock	      "xbsIndex_r4/Counter"
+	      SourceType	      "Xilinx Count Block"
+	      infoedit		      "Configurable up, down and up/down count"
+"er.<P><P>Hardware notes: Free running counters are the least expensive in har"
+"dware.  A count limited counter is implemented by combining a counter with a "
+"comparator."
+	      cnt_type		      "Free Running"
+	      cnt_to		      "2*VEC_SIZE-1"
+	      operation		      "Up"
+	      start_count	      "0"
+	      cnt_by_val	      "1"
+	      arith_type	      "Unsigned"
+	      n_bits		      "1"
+	      bin_pt		      "0"
+	      load_pin		      "off"
+	      rst		      "off"
+	      en		      "on"
+	      dbl_ovrd		      "off"
+	      explicit_period	      "off"
+	      period		      "1"
+	      xl_use_area	      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "counter"
+	      sg_icon_stat	      "73,64,1,1,white,blue,0,19c87f40"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 50 50 0 ],[0 0 30 30 ],[0.77 0.82 0.91]);\npatch([17 12 19 12"
+" 17 25 27 29 37 30 24 19 25 19 24 30 37 29 27 25 17 ],[3 8 15 22 27 27 25 27 "
+"27 20 26 21 15 9 4 10 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 50 50 0 ],[0 "
+"30 30 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMME"
+"NT: begin icon text ');\nport_label('input',1,'en');\nport_label('output',1,'"
+"out');\nfprintf('','COMMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "rd_fd"
+	      Position		      [495, 48, 525, 62]
+	      IconDisplay	      "Port number"
+	      BusOutputAsStruct	      off
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "rd_rd"
+	      Position		      [495, 273, 525, 287]
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	      BusOutputAsStruct	      off
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "rd_add"
+	      Position		      [495, 128, 525, 142]
+	      Port		      "3"
+	      IconDisplay	      "Port number"
+	      BusOutputAsStruct	      off
+	    }
+	    Line {
+	      SrcBlock		      "in_fd"
+	      SrcPort		      1
+	      Points		      [0, 0; 40, 0]
+	      Branch {
+		Points			[0, 55]
+		Branch {
+		  DstBlock		  "rptr"
+		  DstPort		  1
+		}
+		Branch {
+		  Points		  [0, 50]
+		  Branch {
+		    DstBlock		    "roff"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, 95]
+		    Branch {
+		    DstBlock		    "fd_det"
+		    DstPort		    2
+		    }
+		    Branch {
+		    DstBlock		    "fd_det"
+		    DstPort		    1
+		    }
+		  }
+		}
+	      }
+	      Branch {
+		DstBlock		"fd_pipe"
+		DstPort			1
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "radd"
+	      SrcPort		      1
+	      DstBlock		      "rd_add"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "roff"
+	      SrcPort		      1
+	      Points		      [40, 0]
+	      Branch {
+		DstBlock		"radd"
+		DstPort			2
+	      }
+	      Branch {
+		DstBlock		"Concat"
+		DstPort			1
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "rptr"
+	      SrcPort		      1
+	      DstBlock		      "radd"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Constant1"
+	      SrcPort		      1
+	      DstBlock		      "rd_relop"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "fd_det"
+	      SrcPort		      1
+	      DstBlock		      "Concat"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "Concat"
+	      SrcPort		      1
+	      DstBlock		      "rd_relop"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "rd_relop"
+	      SrcPort		      1
+	      DstBlock		      "rd_rd"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "fd_pipe"
+	      SrcPort		      1
+	      DstBlock		      "rd_fd"
+	      DstPort		      1
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "write_control"
+	  Ports			  [4, 4]
+	  Position		  [150, 116, 275, 284]
+	  TreatAsAtomicUnit	  off
+	  MinAlgLoopOccurrences	  off
+	  RTWSystemCode		  "Auto"
+	  System {
+	    Name		    "write_control"
+	    Location		    [202, 74, 1598, 1106]
+	    Open		    off
+	    ModelBrowserVisibility  on
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "A4"
+	    PaperUnits		    "centimeters"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "in_fd"
+	      Position		      [40, 28, 70, 42]
+	      Port		      "1"
+	      IconDisplay	      "Port number"
+	      LatchInput	      off
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "in_nd"
+	      Position		      [40, 58, 70, 72]
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	      LatchInput	      off
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "in_re"
+	      Position		      [45, 563, 75, 577]
+	      Port		      "3"
+	      IconDisplay	      "Port number"
+	      LatchInput	      off
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "in_im"
+	      Position		      [45, 533, 75, 547]
+	      Port		      "4"
+	      IconDisplay	      "Port number"
+	      LatchInput	      off
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "fd_and"
+	      Ports		      [2, 1]
+	      Position		      [450, 283, 495, 327]
+	      SourceBlock	      "xbsIndex_r4/Logical"
+	      SourceType	      "Xilinx [BLOCK NAME] Block"
+	      logical_function	      "AND"
+	      inputs		      "2"
+	      en		      "off"
+	      latency		      "1"
+	      precision		      "Full"
+	      arith_type	      "Unsigned"
+	      n_bits		      "8"
+	      bin_pt		      "2"
+	      align_bp		      "on"
+	      dbl_ovrd		      "off"
+	      xl_use_area	      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "logical"
+	      sg_icon_stat	      "73,64,2,1,white,blue,0,d60ce02c"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 45 45 0 ],[0 0 44 44 ],[0.77 0.82 0.91]);\npatch([10 3 13 3 1"
+"0 22 25 28 40 30 21 14 23 14 21 30 40 28 25 22 10 ],[5 12 22 32 39 39 36 39 3"
+"9 29 38 31 22 13 6 15 5 5 8 5 5 ],[0.98 0.96 0.92]);\nplot([0 0 45 45 0 ],[0 "
+"44 44 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMME"
+"NT: begin icon text ');\ndisp('\\newlineand\\newlinez^{-1}','texmode','on');"
+"\nfprintf('','COMMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "fd_pipe"
+	      Ports		      [2, 1]
+	      Position		      [190, 268, 240, 317]
+	      SourceBlock	      "xbsIndex_r4/Delay"
+	      SourceType	      "Xilinx Delay Block"
+	      infoedit		      "Delay line having  configurable length."
+"<P><P>Hardware notes: A delay line is a chain, each link of which is an SRL16"
+" followed by a flip-flop. If register retiming is enabled, the delay line is "
+"a chain of flip-flops."
+	      en		      "on"
+	      latency		      "VEC_SIZE"
+	      dbl_ovrd		      "off"
+	      reg_retiming	      "off"
+	      xl_use_area	      "off"
+	      xl_area		      "[0,0,0,0,0,0,0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "delay"
+	      sg_icon_stat	      "71,62,2,1,white,blue,0,f683d42d"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 50 50 0 ],[0 0 49 49 ],[0.77 0.82 0.91]);\npatch([12 4 15 4 1"
+"2 25 29 33 47 36 26 18 28 18 26 36 47 33 29 25 12 ],[5 13 24 35 43 43 39 43 4"
+"3 32 42 34 24 14 6 16 5 5 9 5 5 ],[0.98 0.96 0.92]);\nplot([0 0 50 50 0 ],[0 "
+"49 49 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMME"
+"NT: begin icon text ');\nport_label('input',2,'en');\ndisp('z^{-4}','texmode'"
+",'on');\nfprintf('','COMMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "im_pipe"
+	      Ports		      [1, 1]
+	      Position		      [205, 530, 235, 550]
+	      SourceBlock	      "xbsIndex_r4/Delay"
+	      SourceType	      "Xilinx Delay Block"
+	      infoedit		      "Delay line having  configurable length."
+"<P><P>Hardware notes: A delay line is a chain, each link of which is an SRL16"
+" followed by a flip-flop. If register retiming is enabled, the delay line is "
+"a chain of flip-flops."
+	      en		      "off"
+	      latency		      "1"
+	      dbl_ovrd		      "off"
+	      reg_retiming	      "off"
+	      xl_use_area	      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "delay"
+	      sg_icon_stat	      "73,64,1,1,white,blue,0,fc531c0e"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 30 30 0 ],[0 0 20 20 ],[0.77 0.82 0.91]);\npatch([9 6 11 6 9 "
+"14 15 16 22 18 14 11 16 11 14 18 22 16 15 14 9 ],[2 5 10 15 18 18 17 18 18 14"
+" 18 15 10 5 2 6 2 2 3 2 2 ],[0.98 0.96 0.92]);\nplot([0 0 30 30 0 ],[0 20 20 "
+"0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT: be"
+"gin icon text ');\ndisp('z^{-1}','texmode','on');\nfprintf('','COMMENT: end i"
+"con text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "nd_or"
+	      Ports		      [2, 1]
+	      Position		      [190, 428, 235, 472]
+	      SourceBlock	      "xbsIndex_r4/Logical"
+	      SourceType	      "Xilinx [BLOCK NAME] Block"
+	      logical_function	      "OR"
+	      inputs		      "2"
+	      en		      "off"
+	      latency		      "0"
+	      precision		      "Full"
+	      arith_type	      "Unsigned"
+	      n_bits		      "8"
+	      bin_pt		      "2"
+	      align_bp		      "on"
+	      dbl_ovrd		      "off"
+	      xl_use_area	      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "logical"
+	      sg_icon_stat	      "73,64,2,1,white,blue,0,f4a65842"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 45 45 0 ],[0 0 44 44 ],[0.77 0.82 0.91]);\npatch([10 3 13 3 1"
+"0 22 25 28 40 30 21 14 23 14 21 30 40 28 25 22 10 ],[5 12 22 32 39 39 36 39 3"
+"9 29 38 31 22 13 6 15 5 5 8 5 5 ],[0.98 0.96 0.92]);\nplot([0 0 45 45 0 ],[0 "
+"44 44 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMME"
+"NT: begin icon text ');\ndisp('\\newlineor\\newlinez^{-0}','texmode','on');\n"
+"fprintf('','COMMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "nd_pipe"
+	      Ports		      [1, 1]
+	      Position		      [120, 450, 150, 470]
+	      SourceBlock	      "xbsIndex_r4/Delay"
+	      SourceType	      "Xilinx Delay Block"
+	      infoedit		      "Delay line having  configurable length."
+"<P><P>Hardware notes: A delay line is a chain, each link of which is an SRL16"
+" followed by a flip-flop. If register retiming is enabled, the delay line is "
+"a chain of flip-flops."
+	      en		      "off"
+	      latency		      "1"
+	      dbl_ovrd		      "off"
+	      reg_retiming	      "off"
+	      xl_use_area	      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "delay"
+	      sg_icon_stat	      "73,64,1,1,white,blue,0,fc531c0e"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 30 30 0 ],[0 0 20 20 ],[0.77 0.82 0.91]);\npatch([9 6 11 6 9 "
+"14 15 16 22 18 14 11 16 11 14 18 22 16 15 14 9 ],[2 5 10 15 18 18 17 18 18 14"
+" 18 15 10 5 2 6 2 2 3 2 2 ],[0.98 0.96 0.92]);\nplot([0 0 30 30 0 ],[0 20 20 "
+"0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT: be"
+"gin icon text ');\ndisp('z^{-1}','texmode','on');\nfprintf('','COMMENT: end i"
+"con text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "reim_mux"
+	      Ports		      [3, 1]
+	      Position		      [320, 495, 370, 585]
+	      SourceBlock	      "xbsIndex_r4/Mux"
+	      SourceType	      "Xilinx Mux Block"
+	      inputs		      "2"
+	      en		      "off"
+	      latency		      "1"
+	      precision		      "Full"
+	      arith_type	      "Signed  (2's comp)"
+	      n_bits		      "8"
+	      bin_pt		      "2"
+	      quantization	      "Truncate"
+	      overflow		      "Wrap"
+	      dbl_ovrd		      "off"
+	      xl_use_area	      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "mux"
+	      sg_icon_stat	      "73,64,3,1,white,blue,3,03f9c9b9"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 50 50 0 ],[0 12.8571 77.1429 90 ],[0.77 0.82 0.91]);\npatch(["
+"11 3 15 3 11 24 28 32 46 35 24 16 28 16 24 35 46 32 28 24 11 ],[25 33 45 57 6"
+"5 65 61 65 65 54 65 57 45 33 25 36 25 25 29 25 25 ],[0.98 0.96 0.92]);\nplot("
+"[0 50 50 0 0 ],[0 12.8571 77.1429 90 0 ]);\nfprintf('','COMMENT: end icon gra"
+"phics');\n\nfprintf('','COMMENT: begin icon text ');\nport_label('input',1,'s"
+"el');\nport_label('input',2,'d0');\nport_label('input',3,'d1');\ndisp('\\bf{ "
+" z^{-1}}','texmode','on');\nfprintf('','COMMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "wadd"
+	      Ports		      [2, 1]
+	      Position		      [450, 371, 495, 469]
+	      SourceBlock	      "xbsIndex_r4/Concat"
+	      SourceType	      "Xilinx concat Block"
+	      infoedit		      "Concatenates two or more inputs.  Outpu"
+"t will be cast to an unsigned value with the binary point at zero."
+	      num_inputs	      "2"
+	      dbl_ovrd		      "off"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "concat"
+	      sg_icon_stat	      "73,64,2,1,white,blue,0,59d62d82"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 45 45 0 ],[0 0 98 98 ],[0.77 0.82 0.91]);\npatch([10 3 14 3 1"
+"0 22 25 28 41 31 21 14 25 14 21 31 41 28 25 22 10 ],[31 38 49 60 67 67 64 67 "
+"67 57 67 60 49 38 31 41 31 31 34 31 31 ],[0.98 0.96 0.92]);\nplot([0 0 45 45 "
+"0 ],[0 98 98 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf(''"
+",'COMMENT: begin icon text ');\nport_label('input',1,'hi');\nport_label('inpu"
+"t',2,'lo');\nfprintf('','COMMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "wen_fd"
+	      Ports		      [4, 1]
+	      Position		      [320, 23, 485, 137]
+	      SourceBlock	      "xbsIndex_r4/Expression"
+	      SourceType	      "Xilinx expr Block"
+	      expression	      "(nd | ndz) & (wens | fd)"
+	      align_bp		      "on"
+	      en		      "off"
+	      latency		      "1"
+	      precision		      "Full"
+	      arith_type	      "Unsigned"
+	      n_bits		      "8"
+	      bin_pt		      "2"
+	      dbl_ovrd		      "off"
+	      xl_use_area	      "off"
+	      xl_area		      "[0,0,0,0,0,0,0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "890,821,356,252"
+	      block_type	      "expr"
+	      sg_icon_stat	      "71,62,4,1,white,blue,0,22487231"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 165 165 0 ],[0 0 114 114 ],[0.77 0.82 0.91]);\npatch([52 33 6"
+"0 33 52 82 90 98 130 105 81 63 90 63 81 105 130 98 90 82 52 ],[12 31 58 85 10"
+"4 104 96 104 104 79 103 85 58 31 13 37 12 12 20 12 12 ],[0.98 0.96 0.92]);\np"
+"lot([0 0 165 165 0 ],[0 114 114 0 0 ]);\nfprintf('','COMMENT: end icon graphi"
+"cs');\n\nfprintf('','COMMENT: begin icon text ');\nport_label('input',1,'fd')"
+";\nport_label('input',2,'nd');\nport_label('input',3,'ndz');\nport_label('inp"
+"ut',4,'wens');\ndisp('(nd | ndz) & (wens | fd)');\nfprintf('','COMMENT: end i"
+"con text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "wen_fsm"
+	      Ports		      [3, 1]
+	      Position		      [320, 155, 405, 215]
+	      SourceBlock	      "xbsIndex_r4/Expression"
+	      SourceType	      "Xilinx expr Block"
+	      expression	      "a | (s & ~b)"
+	      align_bp		      "on"
+	      en		      "off"
+	      latency		      "1"
+	      precision		      "Full"
+	      arith_type	      "Unsigned"
+	      n_bits		      "8"
+	      bin_pt		      "2"
+	      dbl_ovrd		      "off"
+	      xl_use_area	      "off"
+	      xl_area		      "[0,0,0,0,0,0,0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "890,821,356,252"
+	      block_type	      "expr"
+	      sg_icon_stat	      "71,62,3,1,white,blue,0,077593a3"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 85 85 0 ],[0 0 60 60 ],[0.77 0.82 0.91]);\npatch([27 17 31 17"
+" 27 43 47 51 68 55 42 33 48 33 42 55 68 51 47 43 27 ],[6 16 30 44 54 54 50 54"
+" 54 41 54 45 30 15 6 19 6 6 10 6 6 ],[0.98 0.96 0.92]);\nplot([0 0 85 85 0 ],"
+"[0 60 60 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','CO"
+"MMENT: begin icon text ');\nport_label('input',1,'a');\nport_label('input',2,"
+"'b');\nport_label('input',3,'s');\ndisp('a | (s & ~b)');\nfprintf('','COMMENT"
+": end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "woff"
+	      Ports		      [2, 1]
+	      Position		      [320, 427, 370, 458]
+	      SourceBlock	      "xbsIndex_r4/Counter"
+	      SourceType	      "Xilinx Count Block"
+	      infoedit		      "Configurable up, down and up/down count"
+"er.<P><P>Hardware notes: Free running counters are the least expensive in har"
+"dware.  A count limited counter is implemented by combining a counter with a "
+"comparator."
+	      cnt_type		      "Count Limited"
+	      cnt_to		      "2*VEC_SIZE-1"
+	      operation		      "Up"
+	      start_count	      "0"
+	      cnt_by_val	      "1"
+	      arith_type	      "Unsigned"
+	      n_bits		      "ceil(log2(2*VEC_SIZE))"
+	      bin_pt		      "0"
+	      load_pin		      "off"
+	      rst		      "on"
+	      en		      "on"
+	      dbl_ovrd		      "off"
+	      explicit_period	      "off"
+	      period		      "1"
+	      xl_use_area	      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "counter"
+	      sg_icon_stat	      "73,64,2,1,white,blue,0,eceade92"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 50 50 0 ],[0 0 31 31 ],[0.77 0.82 0.91]);\npatch([17 12 19 12"
+" 17 25 27 29 38 31 24 19 26 19 24 31 38 29 27 25 17 ],[3 8 15 22 27 27 25 27 "
+"27 20 27 22 15 8 3 10 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 50 50 0 ],[0 "
+"31 31 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMME"
+"NT: begin icon text ');\nport_label('input',1,'rst');\nport_label('input',2,'"
+"en');\nport_label('output',1,'out');\nfprintf('','COMMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "wptr"
+	      Ports		      [1, 1]
+	      Position		      [320, 380, 370, 410]
+	      SourceBlock	      "xbsIndex_r4/Counter"
+	      SourceType	      "Xilinx Count Block"
+	      infoedit		      "Configurable up, down and up/down count"
+"er.<P><P>Hardware notes: Free running counters are the least expensive in har"
+"dware.  A count limited counter is implemented by combining a counter with a "
+"comparator."
+	      cnt_type		      "Free Running"
+	      cnt_to		      "2*VEC_SIZE-1"
+	      operation		      "Up"
+	      start_count	      "0"
+	      cnt_by_val	      "1"
+	      arith_type	      "Unsigned"
+	      n_bits		      "1"
+	      bin_pt		      "0"
+	      load_pin		      "off"
+	      rst		      "off"
+	      en		      "on"
+	      dbl_ovrd		      "off"
+	      explicit_period	      "off"
+	      period		      "1"
+	      xl_use_area	      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "counter"
+	      sg_icon_stat	      "73,64,1,1,white,blue,0,19c87f40"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 50 50 0 ],[0 0 30 30 ],[0.77 0.82 0.91]);\npatch([17 12 19 12"
+" 17 25 27 29 37 30 24 19 25 19 24 30 37 29 27 25 17 ],[3 8 15 22 27 27 25 27 "
+"27 20 26 21 15 9 4 10 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 50 50 0 ],[0 "
+"30 30 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMME"
+"NT: begin icon text ');\nport_label('input',1,'en');\nport_label('output',1,'"
+"out');\nfprintf('','COMMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "rd_fd"
+	      Position		      [610, 298, 640, 312]
+	      IconDisplay	      "Port number"
+	      BusOutputAsStruct	      off
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "wr_add"
+	      Position		      [610, 413, 640, 427]
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	      BusOutputAsStruct	      off
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "wr_data"
+	      Position		      [610, 533, 640, 547]
+	      Port		      "3"
+	      IconDisplay	      "Port number"
+	      BusOutputAsStruct	      off
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "wr_en"
+	      Position		      [610, 73, 640, 87]
+	      Port		      "4"
+	      IconDisplay	      "Port number"
+	      BusOutputAsStruct	      off
+	    }
+	    Line {
+	      SrcBlock		      "wptr"
+	      SrcPort		      1
+	      DstBlock		      "wadd"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "woff"
+	      SrcPort		      1
+	      DstBlock		      "wadd"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "fd_and"
+	      SrcPort		      1
+	      DstBlock		      "rd_fd"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "wadd"
+	      SrcPort		      1
+	      DstBlock		      "wr_add"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "in_im"
+	      SrcPort		      1
+	      DstBlock		      "im_pipe"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "im_pipe"
+	      SrcPort		      1
+	      DstBlock		      "reim_mux"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "in_re"
+	      SrcPort		      1
+	      DstBlock		      "reim_mux"
+	      DstPort		      3
+	    }
+	    Line {
+	      SrcBlock		      "in_nd"
+	      SrcPort		      1
+	      Points		      [30, 0]
+	      Branch {
+		DstBlock		"wen_fd"
+		DstPort			2
+	      }
+	      Branch {
+		Points			[0, 240]
+		Branch {
+		  Points		  [0, 135]
+		  Branch {
+		    DstBlock		    "nd_or"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, 20]
+		    Branch {
+		    Points		    [0, 50]
+		    DstBlock		    "reim_mux"
+		    DstPort		    1
+		    }
+		    Branch {
+		    DstBlock		    "nd_pipe"
+		    DstPort		    1
+		    }
+		  }
+		}
+		Branch {
+		  DstBlock		  "fd_pipe"
+		  DstPort		  2
+		}
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "in_fd"
+	      SrcPort		      1
+	      Points		      [40, 0]
+	      Branch {
+		Points			[180, 0]
+		Branch {
+		  DstBlock		  "wen_fd"
+		  DstPort		  1
+		}
+		Branch {
+		  Points		  [0, 130]
+		  Branch {
+		    DstBlock		    "wen_fsm"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, 230]
+		    Branch {
+		    Points		    [0, 40]
+		    DstBlock		    "woff"
+		    DstPort		    1
+		    }
+		    Branch {
+		    DstBlock		    "wptr"
+		    DstPort		    1
+		    }
+		  }
+		}
+	      }
+	      Branch {
+		Points			[0, 245]
+		DstBlock		"fd_pipe"
+		DstPort			1
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "nd_pipe"
+	      SrcPort		      1
+	      Points		      [0, 0; 20, 0]
+	      Branch {
+		DstBlock		"nd_or"
+		DstPort			2
+	      }
+	      Branch {
+		Points			[0, -125]
+		Branch {
+		  Points		  [260, 0]
+		  DstBlock		  "fd_and"
+		  DstPort		  2
+		}
+		Branch {
+		  Points		  [0, -240]
+		  DstBlock		  "wen_fd"
+		  DstPort		  3
+		}
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "reim_mux"
+	      SrcPort		      1
+	      DstBlock		      "wr_data"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "nd_or"
+	      SrcPort		      1
+	      DstBlock		      "woff"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "fd_pipe"
+	      SrcPort		      1
+	      Points		      [40, 0]
+	      Branch {
+		DstBlock		"fd_and"
+		DstPort			1
+	      }
+	      Branch {
+		Points			[0, -110]
+		DstBlock		"wen_fsm"
+		DstPort			2
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "wen_fsm"
+	      SrcPort		      1
+	      Points		      [40, 0; 0, 45; -145, 0; 0, -25]
+	      Branch {
+		DstBlock		"wen_fsm"
+		DstPort			3
+	      }
+	      Branch {
+		DstBlock		"wen_fd"
+		DstPort			4
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "wen_fd"
+	      SrcPort		      1
+	      DstBlock		      "wr_en"
+	      DstPort		      1
+	    }
+	    Annotation {
+	      Name		      "wen_fsm generate a gate pulse that \nis"
+" only high for valid in_nd pulses.\nThis is used to generate the correct\nnum"
+"ber of wen pulses"
+	      Position		      [567, 198]
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "out_fd"
+	  Position		  [635, 33, 665, 47]
+	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "out_rd"
+	  Position		  [635, 83, 665, 97]
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "out_reim"
+	  Position		  [635, 193, 665, 207]
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
+	}
+	Line {
+	  SrcBlock		  "read_control"
+	  SrcPort		  3
+	  DstBlock		  "dpram"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "write_control"
+	  SrcPort		  1
+	  Points		  [60, 0]
+	  DstBlock		  "read_control"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "fd_pipe"
+	  SrcPort		  1
+	  DstBlock		  "out_fd"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "dpram"
+	  SrcPort		  1
+	  DstBlock		  "out_reim"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "rd_pipe"
+	  SrcPort		  1
+	  DstBlock		  "out_rd"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "write_control"
+	  SrcPort		  2
+	  DstBlock		  "dpram"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "write_control"
+	  SrcPort		  3
+	  DstBlock		  "dpram"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "write_control"
+	  SrcPort		  4
+	  DstBlock		  "dpram"
+	  DstPort		  4
+	}
+	Line {
+	  SrcBlock		  "in_fd"
+	  SrcPort		  1
+	  DstBlock		  "write_control"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "in_nd"
+	  SrcPort		  1
+	  DstBlock		  "write_control"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "in_re"
+	  SrcPort		  1
+	  DstBlock		  "write_control"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "in_im"
+	  SrcPort		  1
+	  DstBlock		  "write_control"
+	  DstPort		  4
+	}
+	Line {
+	  SrcBlock		  "read_control"
+	  SrcPort		  2
+	  DstBlock		  "rd_pipe"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "read_control"
+	  SrcPort		  1
+	  DstBlock		  "fd_pipe"
+	  DstPort		  1
+	}
+	Annotation {
+	  Name			  "Very simple/shallow FIFO that reorders outp"
+"ut from raw matrix multiply\nallowing matrix ops to be chanined."
+	  Position		  [308, 424]
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "buffer 2SCVEC-subs"
+      Ports		      [4, 3]
+      Position		      [425, 451, 565, 594]
+      TreatAsAtomicUnit	      off
+      MinAlgLoopOccurrences   off
+      RTWSystemCode	      "Auto"
+      MaskPromptString	      "Sub Vector Size|Sub Vector Count|Row Repeat Cou"
+"nt"
+      MaskStyleString	      "edit,edit,edit"
+      MaskTunableValueString  "off,off,off"
+      MaskCallbackString      "||"
+      MaskEnableString	      "on,on,on"
+      MaskVisibilityString    "on,on,on"
+      MaskToolTipString	      "on,on,on"
+      MaskVarAliasString      ",,"
+      MaskVariables	      "SUB_SIZE=@1;SUB_COUNT=@2;REP_COUNT=@3;"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "4|3|4"
+      MaskTabNameString	      ",,"
+      System {
+	Name			"buffer 2SCVEC-subs"
+	Location		[202, 74, 1598, 1106]
+	Open			off
+	ModelBrowserVisibility	on
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "in_fd"
+	  Position		  [75, 213, 105, 227]
+	  Port			  "1"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "in_nd"
+	  Position		  [75, 258, 105, 272]
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "in_re"
+	  Position		  [75, 303, 105, 317]
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "in_im"
+	  Position		  [75, 348, 105, 362]
+	  Port			  "4"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "dpram"
+	  Ports			  [4, 1]
+	  Position		  [520, 196, 595, 379]
+	  SourceBlock		  "mfcm_misc_lib_v1/dpram"
+	  SourceType		  "Unknown"
+	  ShowPortLabels	  "on"
+	  MEM_DEPTH		  "2*(2^ceil(log2(2*SUB_SIZE*SUB_COUNT)))"
+	  MEM_INIT		  "0"
+	  MEM_MAXDEPTH		  "16"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "fd_pipe"
+	  Ports			  [1, 1]
+	  Position		  [520, 89, 595, 111]
+	  SourceBlock		  "xbsIndex_r4/Delay"
+	  SourceType		  "Xilinx Delay Block"
+	  infoedit		  "Delay line having  configurable length.<P><"
+"P>Hardware notes: A delay line is a chain, each link of which is an SRL16 fol"
+"lowed by a flip-flop. If register retiming is enabled, the delay line is a ch"
+"ain of flip-flops."
+	  en			  "off"
+	  latency		  "2"
+	  dbl_ovrd		  "off"
+	  reg_retiming		  "off"
+	  xl_use_area		  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "delay"
+	  sg_icon_stat		  "73,64,1,1,white,blue,0,0a7a6cf1"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 75 75 0 ],[0 0 22 22 ],[0.77 0.82 0.91]);\npatch([32 28 33 28 32 "
+"38 40 42 48 43 38 35 41 35 38 43 48 42 40 38 32 ],[2 6 11 16 20 20 18 20 20 1"
+"5 20 17 11 5 2 7 2 2 4 2 2 ],[0.98 0.96 0.92]);\nplot([0 0 75 75 0 ],[0 22 22"
+" 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT: b"
+"egin icon text ');\ndisp('z^{-2}','texmode','on');\nfprintf('','COMMENT: end "
+"icon text');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "rd_pipe"
+	  Ports			  [2, 1]
+	  Position		  [520, 134, 595, 156]
+	  SourceBlock		  "xbsIndex_r4/Delay"
+	  SourceType		  "Xilinx Delay Block"
+	  infoedit		  "Delay line having  configurable length.<P><"
+"P>Hardware notes: A delay line is a chain, each link of which is an SRL16 fol"
+"lowed by a flip-flop. If register retiming is enabled, the delay line is a ch"
+"ain of flip-flops."
+	  en			  "on"
+	  latency		  "2"
+	  dbl_ovrd		  "off"
+	  reg_retiming		  "off"
+	  xl_use_area		  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "delay"
+	  sg_icon_stat		  "73,64,2,1,white,blue,0,301e54e1"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 75 75 0 ],[0 0 22 22 ],[0.77 0.82 0.91]);\npatch([32 28 33 28 32 "
+"38 40 42 48 43 38 35 41 35 38 43 48 42 40 38 32 ],[2 6 11 16 20 20 18 20 20 1"
+"5 20 17 11 5 2 7 2 2 4 2 2 ],[0.98 0.96 0.92]);\nplot([0 0 75 75 0 ],[0 22 22"
+" 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT: b"
+"egin icon text ');\nport_label('input',2,'en');\ndisp('z^{-2}','texmode','on'"
+");\nfprintf('','COMMENT: end icon text');\n"
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "read_control"
+	  Ports			  [1, 4]
+	  Position		  [380, 84, 465, 236]
+	  TreatAsAtomicUnit	  off
+	  MinAlgLoopOccurrences	  off
+	  RTWSystemCode		  "Auto"
+	  System {
+	    Name		    "read_control"
+	    Location		    [202, 70, 1598, 1102]
+	    Open		    off
+	    ModelBrowserVisibility  on
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "A4"
+	    PaperUnits		    "centimeters"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "in_fd"
+	      Position		      [35, 48, 65, 62]
+	      Port		      "1"
+	      IconDisplay	      "Port number"
+	      LatchInput	      off
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Concat"
+	      Ports		      [2, 1]
+	      Position		      [620, 157, 670, 208]
+	      ShowName		      off
+	      SourceBlock	      "xbsIndex_r4/Concat"
+	      SourceType	      "Xilinx concat Block"
+	      infoedit		      "Concatenates two or more inputs.  Outpu"
+"t will be cast to an unsigned value with the binary point at zero."
+	      num_inputs	      "2"
+	      dbl_ovrd		      "off"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "concat"
+	      sg_icon_stat	      "73,64,2,1,white,blue,0,59d62d82"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 50 50 0 ],[0 0 51 51 ],[0.77 0.82 0.91]);\npatch([11 3 15 3 1"
+"1 24 28 32 46 35 24 16 28 16 24 35 46 32 28 24 11 ],[6 14 26 38 46 46 42 46 4"
+"6 35 46 38 26 14 6 17 6 6 10 6 6 ],[0.98 0.96 0.92]);\nplot([0 0 50 50 0 ],[0"
+" 51 51 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMM"
+"ENT: begin icon text ');\nport_label('input',1,'hi');\nport_label('input',2,'"
+"lo');\nfprintf('','COMMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Constant1"
+	      Ports		      [0, 1]
+	      Position		      [115, 297, 165, 313]
+	      ShowName		      off
+	      SourceBlock	      "xbsIndex_r4/Constant"
+	      SourceType	      "Xilinx Constant Block"
+	      arith_type	      "Unsigned"
+	      const		      "2*SUB_SIZE*REP_COUNT-1"
+	      n_bits		      "ceil(log2(2*SUB_SIZE*REP_COUNT))"
+	      bin_pt		      "0"
+	      explicit_period	      "off"
+	      period		      "1"
+	      equ		      "P=C"
+	      opselect		      "C"
+	      inp2		      "PCIN>>17"
+	      opr		      "+"
+	      inp1		      "P"
+	      carry		      "CIN"
+	      dbl_ovrd		      "off"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "constant"
+	      sg_icon_stat	      "73,64,0,1,white,blue,0,153fad44"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 55 55 0 ],[0 0 26 26 ],[0.77 0.82 0.91]);\npatch([20 16 22 16"
+" 20 27 29 31 38 32 26 22 28 22 26 32 38 31 29 27 20 ],[3 7 13 19 23 23 21 23 "
+"23 17 23 19 13 7 3 9 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 55 55 0 ],[0 2"
+"6 26 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMEN"
+"T: begin icon text ');\nport_label('output',1,'31');\nfprintf('','COMMENT: en"
+"d icon text');\nfprintf('','COMMENT: Make no changes above this line -- machi"
+"ne generated code. ');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Constant2"
+	      Ports		      [0, 1]
+	      Position		      [335, 97, 385, 113]
+	      ShowName		      off
+	      SourceBlock	      "xbsIndex_r4/Constant"
+	      SourceType	      "Xilinx Constant Block"
+	      arith_type	      "Unsigned"
+	      const		      "0"
+	      n_bits		      "1"
+	      bin_pt		      "0"
+	      explicit_period	      "off"
+	      period		      "1"
+	      equ		      "P=C"
+	      opselect		      "C"
+	      inp2		      "PCIN>>17"
+	      opr		      "+"
+	      inp1		      "P"
+	      carry		      "CIN"
+	      dbl_ovrd		      "off"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "constant"
+	      sg_icon_stat	      "73,64,0,1,white,blue,0,c7c04a0c"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 55 55 0 ],[0 0 26 26 ],[0.77 0.82 0.91]);\npatch([20 16 22 16"
+" 20 27 29 31 38 32 26 22 28 22 26 32 38 31 29 27 20 ],[3 7 13 19 23 23 21 23 "
+"23 17 23 19 13 7 3 9 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 55 55 0 ],[0 2"
+"6 26 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMEN"
+"T: begin icon text ');\nport_label('output',1,'0');\nfprintf('','COMMENT: end"
+" icon text');\nfprintf('','COMMENT: Make no changes above this line -- machin"
+"e generated code. ');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "fd_det"
+	      Ports		      [2, 1]
+	      Position		      [460, 369, 535, 416]
+	      SourceBlock	      "xbsIndex_r4/Delay"
+	      SourceType	      "Xilinx Delay Block"
+	      infoedit		      "Delay line having  configurable length."
+"<P><P>Hardware notes: A delay line is a chain, each link of which is an SRL16"
+" followed by a flip-flop. If register retiming is enabled, the delay line is "
+"a chain of flip-flops."
+	      en		      "on"
+	      latency		      "1"
+	      dbl_ovrd		      "off"
+	      reg_retiming	      "off"
+	      xl_use_area	      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "delay"
+	      sg_icon_stat	      "73,64,2,1,white,blue,0,9c7d2b66"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 75 75 0 ],[0 0 47 47 ],[0.77 0.82 0.91]);\npatch([25 17 28 17"
+" 25 37 40 43 56 45 35 28 39 28 35 45 56 43 40 37 25 ],[5 13 24 35 43 43 40 43"
+" 43 32 42 35 24 13 6 16 5 5 8 5 5 ],[0.98 0.96 0.92]);\nplot([0 0 75 75 0 ],["
+"0 47 47 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COM"
+"MENT: begin icon text ');\nport_label('input',2,'en');\ndisp('z^{-1}','texmod"
+"e','on');\nfprintf('','COMMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "fd_pipe1"
+	      Ports		      [1, 1]
+	      Position		      [235, 208, 280, 232]
+	      SourceBlock	      "xbsIndex_r4/Delay"
+	      SourceType	      "Xilinx Delay Block"
+	      infoedit		      "Delay line having  configurable length."
+"<P><P>Hardware notes: A delay line is a chain, each link of which is an SRL16"
+" followed by a flip-flop. If register retiming is enabled, the delay line is "
+"a chain of flip-flops."
+	      en		      "off"
+	      latency		      "1"
+	      dbl_ovrd		      "off"
+	      reg_retiming	      "off"
+	      xl_use_area	      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "delay"
+	      sg_icon_stat	      "73,64,1,1,white,blue,0,fc531c0e"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 45 45 0 ],[0 0 24 24 ],[0.77 0.82 0.91]);\npatch([16 12 18 12"
+" 16 22 24 26 33 28 23 19 25 19 23 28 33 26 24 22 16 ],[3 7 13 19 23 23 21 23 "
+"23 18 23 19 13 7 3 8 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 45 45 0 ],[0 2"
+"4 24 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMEN"
+"T: begin icon text ');\ndisp('z^{-1}','texmode','on');\nfprintf('','COMMENT: "
+"end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "fd_pipe2"
+	      Ports		      [1, 1]
+	      Position		      [235, 156, 385, 184]
+	      SourceBlock	      "xbsIndex_r4/Delay"
+	      SourceType	      "Xilinx Delay Block"
+	      infoedit		      "Delay line having  configurable length."
+"<P><P>Hardware notes: A delay line is a chain, each link of which is an SRL16"
+" followed by a flip-flop. If register retiming is enabled, the delay line is "
+"a chain of flip-flops."
+	      en		      "off"
+	      latency		      "2"
+	      dbl_ovrd		      "off"
+	      reg_retiming	      "off"
+	      xl_use_area	      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "delay"
+	      sg_icon_stat	      "73,64,1,1,white,blue,0,0a7a6cf1"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 150 150 0 ],[0 0 28 28 ],[0.77 0.82 0.91]);\npatch([68 63 70 "
+"63 68 75 77 79 87 81 75 71 79 71 75 81 87 79 77 75 68 ],[3 8 15 22 27 27 25 2"
+"7 27 21 27 23 15 7 3 9 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 150 150 0 ],"
+"[0 28 28 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','CO"
+"MMENT: begin icon text ');\ndisp('z^{-2}','texmode','on');\nfprintf('','COMME"
+"NT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "fd_pipe3"
+	      Ports		      [1, 1]
+	      Position		      [235, 43, 535, 67]
+	      SourceBlock	      "xbsIndex_r4/Delay"
+	      SourceType	      "Xilinx Delay Block"
+	      infoedit		      "Delay line having  configurable length."
+"<P><P>Hardware notes: A delay line is a chain, each link of which is an SRL16"
+" followed by a flip-flop. If register retiming is enabled, the delay line is "
+"a chain of flip-flops."
+	      en		      "off"
+	      latency		      "3"
+	      dbl_ovrd		      "off"
+	      reg_retiming	      "off"
+	      xl_use_area	      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "delay"
+	      sg_icon_stat	      "73,64,1,1,white,blue,0,eabd56db"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 300 300 0 ],[0 0 24 24 ],[0.77 0.82 0.91]);\npatch([144 140 1"
+"46 140 144 150 152 154 161 156 151 147 153 147 151 156 161 154 152 150 144 ],"
+"[3 7 13 19 23 23 21 23 23 18 23 19 13 7 3 8 3 3 5 3 3 ],[0.98 0.96 0.92]);\np"
+"lot([0 0 300 300 0 ],[0 24 24 0 0 ]);\nfprintf('','COMMENT: end icon graphics"
+"');\n\nfprintf('','COMMENT: begin icon text ');\ndisp('z^{-3}','texmode','on'"
+");\nfprintf('','COMMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "rbase"
+	      Ports		      [2, 1]
+	      Position		      [460, 196, 535, 289]
+	      SourceBlock	      "xbsIndex_r4/AddSub"
+	      SourceType	      "Xilinx AddSub Block"
+	      mode		      "Addition"
+	      use_carryin	      "off"
+	      use_carryout	      "off"
+	      en		      "off"
+	      latency		      "1"
+	      precision		      "User Defined"
+	      arith_type	      "Unsigned"
+	      n_bits		      "ceil(log2(2*SUB_SIZE*SUB_COUNT))"
+	      bin_pt		      "0"
+	      quantization	      "Truncate"
+	      overflow		      "Wrap"
+	      dbl_ovrd		      "off"
+	      use_behavioral_HDL      "on"
+	      pipelined		      "off"
+	      use_rpm		      "on"
+	      xl_use_area	      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "addsub"
+	      sg_icon_stat	      "73,64,2,1,white,blue,0,d7118884"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 75 75 0 ],[0 0 93 93 ],[0.77 0.82 0.91]);\npatch([17 5 23 5 1"
+"7 37 42 47 68 51 35 23 40 23 35 51 68 47 42 37 17 ],[17 29 47 65 77 77 72 77 "
+"77 60 76 64 47 30 18 34 17 17 22 17 17 ],[0.98 0.96 0.92]);\nplot([0 0 75 75 "
+"0 ],[0 93 93 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf(''"
+",'COMMENT: begin icon text ');\nport_label('input',1,'a');\nport_label('input"
+"',2,'b');\nport_label('output',1,'\\bf{a + b}','texmode','on');\ndisp('\\newl"
+"ine\\bf{}\\newlinez^{-1}','texmode','on');\nfprintf('','COMMENT: end icon tex"
+"t');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "rd_relop"
+	      Ports		      [2, 1]
+	      Position		      [460, 94, 535, 141]
+	      SourceBlock	      "xbsIndex_r4/Relational"
+	      SourceType	      "Xilinx Relational Block"
+	      mode		      "a=b"
+	      en		      "off"
+	      latency		      "1"
+	      dbl_ovrd		      "off"
+	      xl_use_area	      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "relational"
+	      sg_icon_stat	      "73,64,2,1,white,blue,0,1cf02e61"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 75 75 0 ],[0 0 47 47 ],[0.77 0.82 0.91]);\npatch([25 17 28 17"
+" 25 37 40 43 56 45 35 28 39 28 35 45 56 43 40 37 25 ],[5 13 24 35 43 43 40 43"
+" 43 32 42 35 24 13 6 16 5 5 8 5 5 ],[0.98 0.96 0.92]);\nplot([0 0 75 75 0 ],["
+"0 47 47 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COM"
+"MENT: begin icon text ');\nport_label('input',1,'a');\nport_label('input',2,'"
+"b');\ndisp('\\newline\\bf{a=b}\\newlinez^{-1}','texmode','on');\nfprintf('','"
+"COMMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "roff"
+	      Ports		      [1, 1]
+	      Position		      [335, 206, 385, 234]
+	      SourceBlock	      "xbsIndex_r4/Counter"
+	      SourceType	      "Xilinx Count Block"
+	      infoedit		      "Configurable up, down and up/down count"
+"er.<P><P>Hardware notes: Free running counters are the least expensive in har"
+"dware.  A count limited counter is implemented by combining a counter with a "
+"comparator."
+	      cnt_type		      "Count Limited"
+	      cnt_to		      "2*SUB_SIZE-1"
+	      operation		      "Up"
+	      start_count	      "0"
+	      cnt_by_val	      "1"
+	      arith_type	      "Unsigned"
+	      n_bits		      "ceil(log2(2*SUB_SIZE))"
+	      bin_pt		      "0"
+	      load_pin		      "off"
+	      rst		      "on"
+	      en		      "off"
+	      dbl_ovrd		      "off"
+	      explicit_period	      "off"
+	      period		      "1"
+	      xl_use_area	      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "counter"
+	      sg_icon_stat	      "73,64,1,1,white,blue,0,fa73fe1c"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 50 50 0 ],[0 0 28 28 ],[0.77 0.82 0.91]);\npatch([18 13 20 13"
+" 18 25 27 29 37 31 25 21 29 21 25 31 37 29 27 25 18 ],[3 8 15 22 27 27 25 27 "
+"27 21 27 23 15 7 3 9 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 50 50 0 ],[0 2"
+"8 28 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMEN"
+"T: begin icon text ');\nport_label('input',1,'rst');\nport_label('output',1,'"
+"out');\nfprintf('','COMMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "rptr"
+	      Ports		      [1, 1]
+	      Position		      [460, 158, 535, 182]
+	      SourceBlock	      "xbsIndex_r4/Counter"
+	      SourceType	      "Xilinx Count Block"
+	      infoedit		      "Configurable up, down and up/down count"
+"er.<P><P>Hardware notes: Free running counters are the least expensive in har"
+"dware.  A count limited counter is implemented by combining a counter with a "
+"comparator."
+	      cnt_type		      "Free Running"
+	      cnt_to		      "Inf"
+	      operation		      "Up"
+	      start_count	      "0"
+	      cnt_by_val	      "1"
+	      arith_type	      "Unsigned"
+	      n_bits		      "1"
+	      bin_pt		      "0"
+	      load_pin		      "off"
+	      rst		      "off"
+	      en		      "on"
+	      dbl_ovrd		      "off"
+	      explicit_period	      "off"
+	      period		      "1"
+	      xl_use_area	      "off"
+	      xl_area		      "[0,0,0,0,0,0,0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "counter"
+	      sg_icon_stat	      "73,64,1,1,white,blue,0,19c87f40"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 75 75 0 ],[0 0 24 24 ],[0.77 0.82 0.91]);\npatch([31 27 33 27"
+" 31 37 39 41 48 43 38 34 40 34 38 43 48 41 39 37 31 ],[3 7 13 19 23 23 21 23 "
+"23 18 23 19 13 7 3 8 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 75 75 0 ],[0 2"
+"4 24 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMEN"
+"T: begin icon text ');\nport_label('input',1,'en');\nport_label('output',1,'o"
+"ut');\nfprintf('','COMMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "rrep"
+	      Ports		      [1, 1]
+	      Position		      [115, 313, 165, 337]
+	      SourceBlock	      "xbsIndex_r4/Counter"
+	      SourceType	      "Xilinx Count Block"
+	      infoedit		      "Configurable up, down and up/down count"
+"er.<P><P>Hardware notes: Free running counters are the least expensive in har"
+"dware.  A count limited counter is implemented by combining a counter with a "
+"comparator."
+	      cnt_type		      "Count Limited"
+	      cnt_to		      "2*SUB_SIZE*REP_COUNT-1"
+	      operation		      "Up"
+	      start_count	      "0"
+	      cnt_by_val	      "1"
+	      arith_type	      "Unsigned"
+	      n_bits		      "ceil(log2(2*SUB_SIZE*REP_COUNT))"
+	      bin_pt		      "0"
+	      load_pin		      "off"
+	      rst		      "on"
+	      en		      "off"
+	      dbl_ovrd		      "off"
+	      explicit_period	      "off"
+	      period		      "1"
+	      xl_use_area	      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "counter"
+	      sg_icon_stat	      "73,64,1,1,white,blue,0,fa73fe1c"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 50 50 0 ],[0 0 24 24 ],[0.77 0.82 0.91]);\npatch([19 15 21 15"
+" 19 25 27 29 36 31 26 22 28 22 26 31 36 29 27 25 19 ],[3 7 13 19 23 23 21 23 "
+"23 18 23 19 13 7 3 8 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 50 50 0 ],[0 2"
+"4 24 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMEN"
+"T: begin icon text ');\nport_label('input',1,'rst');\nport_label('output',1,'"
+"out');\nfprintf('','COMMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "rrep_relop"
+	      Ports		      [2, 1]
+	      Position		      [235, 293, 280, 337]
+	      SourceBlock	      "xbsIndex_r4/Relational"
+	      SourceType	      "Xilinx Relational Block"
+	      mode		      "a=b"
+	      en		      "off"
+	      latency		      "1"
+	      dbl_ovrd		      "off"
+	      xl_use_area	      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "relational"
+	      sg_icon_stat	      "73,64,2,1,white,blue,0,1cf02e61"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 45 45 0 ],[0 0 44 44 ],[0.77 0.82 0.91]);\npatch([10 3 13 3 1"
+"0 22 25 28 40 30 21 14 23 14 21 30 40 28 25 22 10 ],[5 12 22 32 39 39 36 39 3"
+"9 29 38 31 22 13 6 15 5 5 8 5 5 ],[0.98 0.96 0.92]);\nplot([0 0 45 45 0 ],[0 "
+"44 44 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMME"
+"NT: begin icon text ');\nport_label('input',1,'a');\nport_label('input',2,'b'"
+");\ndisp('\\newline\\bf{a=b}\\newlinez^{-1}','texmode','on');\nfprintf('','CO"
+"MMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "rsub"
+	      Ports		      [2, 1]
+	      Position		      [335, 246, 385, 279]
+	      TreatAsAtomicUnit	      off
+	      MinAlgLoopOccurrences   off
+	      RTWSystemCode	      "Auto"
+	      System {
+		Name			"rsub"
+		Location		[202, 70, 1598, 1102]
+		Open			off
+		ModelBrowserVisibility	on
+		ModelBrowserWidth	200
+		ScreenColor		"white"
+		PaperOrientation	"landscape"
+		PaperPositionMode	"auto"
+		PaperType		"A4"
+		PaperUnits		"centimeters"
+		ZoomFactor		"100"
+		Block {
+		  BlockType		  Inport
+		  Name			  "rst"
+		  Position		  [65, 133, 95, 147]
+		  Port			  "1"
+		  IconDisplay		  "Port number"
+		  LatchInput		  off
+		}
+		Block {
+		  BlockType		  Inport
+		  Name			  "en"
+		  Position		  [65, 163, 95, 177]
+		  Port			  "2"
+		  IconDisplay		  "Port number"
+		  LatchInput		  off
+		}
+		Block {
+		  BlockType		  Reference
+		  Name			  "Constant"
+		  Ports			  [0, 1]
+		  Position		  [150, 54, 200, 76]
+		  ShowName		  off
+		  SourceBlock		  "xbsIndex_r4/Constant"
+		  SourceType		  "Xilinx Constant Block"
+		  arith_type		  "Boolean"
+		  const			  "double(SUB_COUNT~=1)"
+		  n_bits		  "1"
+		  bin_pt		  "0"
+		  explicit_period	  "off"
+		  period		  "1"
+		  equ			  "P=C"
+		  opselect		  "C"
+		  inp2			  "PCIN>>17"
+		  opr			  "+"
+		  inp1			  "P"
+		  carry			  "CIN"
+		  dbl_ovrd		  "off"
+		  block_version		  "VER_STRING_GOES_HERE"
+		  has_advanced_control	  "0"
+		  sggui_pos		  "277,454,403,311"
+		  block_type		  "constant"
+		  sg_icon_stat		  "73,64,0,1,white,blue,0,85613821"
+		  sg_mask_display	  "fprintf('','COMMENT: begin icon gra"
+"phics ');\npatch([0 55 55 0 ],[0 0 26 26 ],[0.77 0.82 0.91]);\npatch([20 16 2"
+"2 16 20 27 29 31 38 32 26 22 28 22 26 32 38 31 29 27 20 ],[3 7 13 19 23 23 21"
+" 23 23 17 23 19 13 7 3 9 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 55 55 0 ],"
+"[0 26 26 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','CO"
+"MMENT: begin icon text ');\nport_label('output',1,'1');\nfprintf('','COMMENT:"
+" end icon text');\nfprintf('','COMMENT: Make no changes above this line -- ma"
+"chine generated code. ');\n"
+		}
+		Block {
+		  BlockType		  Reference
+		  Name			  "Constant1"
+		  Ports			  [0, 1]
+		  Position		  [150, 100, 200, 120]
+		  ShowName		  off
+		  SourceBlock		  "xbsIndex_r4/Constant"
+		  SourceType		  "Xilinx Constant Block"
+		  arith_type		  "Unsigned"
+		  const			  "0"
+		  n_bits		  "ceil(log2(2*SUB_SIZE*SUB_COUNT))"
+		  bin_pt		  "0"
+		  explicit_period	  "off"
+		  period		  "1"
+		  equ			  "P=C"
+		  opselect		  "C"
+		  inp2			  "PCIN>>17"
+		  opr			  "+"
+		  inp1			  "P"
+		  carry			  "CIN"
+		  dbl_ovrd		  "off"
+		  block_version		  "VER_STRING_GOES_HERE"
+		  has_advanced_control	  "0"
+		  sggui_pos		  "-1,-1,-1,-1"
+		  block_type		  "constant"
+		  sg_icon_stat		  "73,64,0,1,white,blue,0,c7c04a0c"
+		  sg_mask_display	  "fprintf('','COMMENT: begin icon gra"
+"phics ');\npatch([0 55 55 0 ],[0 0 26 26 ],[0.77 0.82 0.91]);\npatch([20 16 2"
+"2 16 20 27 29 31 38 32 26 22 28 22 26 32 38 31 29 27 20 ],[3 7 13 19 23 23 21"
+" 23 23 17 23 19 13 7 3 9 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 55 55 0 ],"
+"[0 26 26 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','CO"
+"MMENT: begin icon text ');\nport_label('output',1,'0');\nfprintf('','COMMENT:"
+" end icon text');\nfprintf('','COMMENT: Make no changes above this line -- ma"
+"chine generated code. ');\n"
+		}
+		Block {
+		  BlockType		  Reference
+		  Name			  "Mux2"
+		  Ports			  [3, 1]
+		  Position		  [255, 42, 285, 178]
+		  ShowName		  off
+		  SourceBlock		  "xbsIndex_r4/Mux"
+		  SourceType		  "Xilinx Mux Block"
+		  inputs		  "2"
+		  en			  "off"
+		  latency		  "0"
+		  precision		  "Full"
+		  arith_type		  "Unsigned"
+		  n_bits		  "8"
+		  bin_pt		  "2"
+		  quantization		  "Truncate"
+		  overflow		  "Wrap"
+		  dbl_ovrd		  "off"
+		  xl_use_area		  "off"
+		  xl_area		  "[0,0,0,0,0,0,0]"
+		  block_version		  "VER_STRING_GOES_HERE"
+		  has_advanced_control	  "0"
+		  sggui_pos		  "-1,-1,-1,-1"
+		  block_type		  "mux"
+		  sg_icon_stat		  "73,64,3,1,white,blue,3,613f58e1"
+		  sg_mask_display	  "fprintf('','COMMENT: begin icon gra"
+"phics ');\npatch([0 30 30 0 ],[0 19.4286 116.571 136 ],[0.77 0.82 0.91]);\npa"
+"tch([7 2 9 2 7 15 17 19 27 20 14 9 15 9 14 20 27 19 17 15 7 ],[56 61 68 75 80"
+" 80 78 80 80 73 79 74 68 62 57 63 56 56 58 56 56 ],[0.98 0.96 0.92]);\nplot(["
+"0 30 30 0 0 ],[0 19.4286 116.571 136 0 ]);\nfprintf('','COMMENT: end icon gra"
+"phics');\n\nfprintf('','COMMENT: begin icon text ');\nport_label('input',1,'s"
+"el');\nport_label('input',2,'d0');\nport_label('input',3,'d1');\ndisp('\\bf{}"
+"','texmode','on');\nfprintf('','COMMENT: end icon text');\n"
+		}
+		Block {
+		  BlockType		  Reference
+		  Name			  "rsub"
+		  Ports			  [2, 1]
+		  Position		  [150, 127, 200, 183]
+		  SourceBlock		  "xbsIndex_r4/Counter"
+		  SourceType		  "Xilinx Count Block"
+		  infoedit		  "Configurable up, down and up/down c"
+"ounter.<P><P>Hardware notes: Free running counters are the least expensive in"
+" hardware.  A count limited counter is implemented by combining a counter wit"
+"h a comparator."
+		  cnt_type		  "Free Running"
+		  cnt_to		  "Inf"
+		  operation		  "Up"
+		  start_count		  "0"
+		  cnt_by_val		  "2*SUB_SIZE*double(SUB_COUNT~=1)+dou"
+"ble(SUB_COUNT==1)"
+		  arith_type		  "Unsigned"
+		  n_bits		  "ceil(log2(2*SUB_SIZE*SUB_COUNT))"
+		  bin_pt		  "0"
+		  load_pin		  "off"
+		  rst			  "on"
+		  en			  "on"
+		  dbl_ovrd		  "off"
+		  explicit_period	  "off"
+		  period		  "1"
+		  xl_use_area		  "off"
+		  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+		  block_version		  "VER_STRING_GOES_HERE"
+		  has_advanced_control	  "0"
+		  sggui_pos		  "603,377,356,537"
+		  block_type		  "counter"
+		  sg_icon_stat		  "73,64,2,1,white,blue,0,eceade92"
+		  sg_mask_display	  "fprintf('','COMMENT: begin icon gra"
+"phics ');\npatch([0 60 60 0 ],[0 0 60 60 ],[0.77 0.82 0.91]);\npatch([14 4 18"
+" 4 14 30 34 38 55 42 29 20 35 20 29 42 55 38 34 30 14 ],[6 16 30 44 54 54 50 "
+"54 54 41 54 45 30 15 6 19 6 6 10 6 6 ],[0.98 0.96 0.92]);\nplot([0 0 60 60 0 "
+"],[0 60 60 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','"
+"COMMENT: begin icon text ');\nport_label('input',1,'rst');\nport_label('input"
+"',2,'en');\nport_label('output',1,'out');\nfprintf('','COMMENT: end icon text"
+"');\n"
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "cnt"
+		  Position		  [340, 103, 370, 117]
+		  IconDisplay		  "Port number"
+		  BusOutputAsStruct	  off
+		}
+		Line {
+		  SrcBlock		  "en"
+		  SrcPort		  1
+		  DstBlock		  "rsub"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "rst"
+		  SrcPort		  1
+		  DstBlock		  "rsub"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "rsub"
+		  SrcPort		  1
+		  DstBlock		  "Mux2"
+		  DstPort		  3
+		}
+		Line {
+		  SrcBlock		  "Mux2"
+		  SrcPort		  1
+		  DstBlock		  "cnt"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Constant"
+		  SrcPort		  1
+		  DstBlock		  "Mux2"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Constant1"
+		  SrcPort		  1
+		  DstBlock		  "Mux2"
+		  DstPort		  2
+		}
+		Annotation {
+		  Name			  "Need to protect counter from 'silly"
+"' increments"
+		  Position		  [201, 215]
+		}
+	      }
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "rd_fd"
+	      Position		      [745, 48, 775, 62]
+	      IconDisplay	      "Port number"
+	      BusOutputAsStruct	      off
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "rd_rd"
+	      Position		      [745, 113, 775, 127]
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	      BusOutputAsStruct	      off
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "rd_en"
+	      Position		      [745, 388, 775, 402]
+	      Port		      "3"
+	      IconDisplay	      "Port number"
+	      BusOutputAsStruct	      off
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "rd_add"
+	      Position		      [745, 178, 775, 192]
+	      Port		      "4"
+	      IconDisplay	      "Port number"
+	      BusOutputAsStruct	      off
+	    }
+	    Line {
+	      SrcBlock		      "in_fd"
+	      SrcPort		      1
+	      Points		      [0, 0; 25, 0]
+	      Branch {
+		DstBlock		"fd_pipe3"
+		DstPort			1
+	      }
+	      Branch {
+		Points			[0, 115]
+		Branch {
+		  Points		  [125, 0]
+		  Branch {
+		    DstBlock		    "fd_pipe2"
+		    DstPort		    1
+		  }
+		  Branch {
+		    DstBlock		    "fd_pipe1"
+		    DstPort		    1
+		  }
+		}
+		Branch {
+		  Points		  [0, 155]
+		  DstBlock		  "rrep"
+		  DstPort		  1
+		}
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "Concat"
+	      SrcPort		      1
+	      DstBlock		      "rd_add"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "rrep"
+	      SrcPort		      1
+	      DstBlock		      "rrep_relop"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "Constant1"
+	      SrcPort		      1
+	      DstBlock		      "rrep_relop"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Constant2"
+	      SrcPort		      1
+	      DstBlock		      "rd_relop"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "fd_pipe3"
+	      SrcPort		      1
+	      DstBlock		      "rd_fd"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "fd_pipe1"
+	      SrcPort		      1
+	      Points		      [0, 0; 35, 0]
+	      Branch {
+		DstBlock		"roff"
+		DstPort			1
+	      }
+	      Branch {
+		DstBlock		"rsub"
+		DstPort			1
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "roff"
+	      SrcPort		      1
+	      Points		      [55, 0]
+	      Branch {
+		DstBlock		"rbase"
+		DstPort			1
+	      }
+	      Branch {
+		DstBlock		"rd_relop"
+		DstPort			2
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "rsub"
+	      SrcPort		      1
+	      DstBlock		      "rbase"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "rbase"
+	      SrcPort		      1
+	      Points		      [65, 0]
+	      DstBlock		      "Concat"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "rrep_relop"
+	      SrcPort		      1
+	      Points		      [35, 0]
+	      DstBlock		      "rsub"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "rd_relop"
+	      SrcPort		      1
+	      DstBlock		      "rd_rd"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "rptr"
+	      SrcPort		      1
+	      DstBlock		      "Concat"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "fd_pipe2"
+	      SrcPort		      1
+	      Points		      [45, 0]
+	      Branch {
+		DstBlock		"rptr"
+		DstPort			1
+	      }
+	      Branch {
+		Points			[0, 210]
+		Branch {
+		  DstBlock		  "fd_det"
+		  DstPort		  1
+		}
+		Branch {
+		  Points		  [0, 25]
+		  DstBlock		  "fd_det"
+		  DstPort		  2
+		}
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "fd_det"
+	      SrcPort		      1
+	      DstBlock		      "rd_en"
+	      DstPort		      1
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "write_control"
+	  Ports			  [4, 4]
+	  Position		  [175, 196, 300, 379]
+	  TreatAsAtomicUnit	  off
+	  MinAlgLoopOccurrences	  off
+	  RTWSystemCode		  "Auto"
+	  System {
+	    Name		    "write_control"
+	    Location		    [202, 74, 1598, 1106]
+	    Open		    off
+	    ModelBrowserVisibility  on
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "A4"
+	    PaperUnits		    "centimeters"
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "in_fd"
+	      Position		      [40, 28, 70, 42]
+	      Port		      "1"
+	      IconDisplay	      "Port number"
+	      LatchInput	      off
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "in_nd"
+	      Position		      [40, 58, 70, 72]
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	      LatchInput	      off
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "in_re"
+	      Position		      [45, 563, 75, 577]
+	      Port		      "3"
+	      IconDisplay	      "Port number"
+	      LatchInput	      off
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "in_im"
+	      Position		      [45, 533, 75, 547]
+	      Port		      "4"
+	      IconDisplay	      "Port number"
+	      LatchInput	      off
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "fd_and"
+	      Ports		      [2, 1]
+	      Position		      [450, 283, 495, 327]
+	      SourceBlock	      "xbsIndex_r4/Logical"
+	      SourceType	      "Xilinx [BLOCK NAME] Block"
+	      logical_function	      "AND"
+	      inputs		      "2"
+	      en		      "off"
+	      latency		      "1"
+	      precision		      "Full"
+	      arith_type	      "Unsigned"
+	      n_bits		      "8"
+	      bin_pt		      "2"
+	      align_bp		      "on"
+	      dbl_ovrd		      "off"
+	      xl_use_area	      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "logical"
+	      sg_icon_stat	      "73,64,2,1,white,blue,0,d60ce02c"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 45 45 0 ],[0 0 44 44 ],[0.77 0.82 0.91]);\npatch([10 3 13 3 1"
+"0 22 25 28 40 30 21 14 23 14 21 30 40 28 25 22 10 ],[5 12 22 32 39 39 36 39 3"
+"9 29 38 31 22 13 6 15 5 5 8 5 5 ],[0.98 0.96 0.92]);\nplot([0 0 45 45 0 ],[0 "
+"44 44 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMME"
+"NT: begin icon text ');\ndisp('\\newlineand\\newlinez^{-1}','texmode','on');"
+"\nfprintf('','COMMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "fd_pipe"
+	      Ports		      [2, 1]
+	      Position		      [190, 268, 240, 317]
+	      SourceBlock	      "xbsIndex_r4/Delay"
+	      SourceType	      "Xilinx Delay Block"
+	      infoedit		      "Delay line having  configurable length."
+"<P><P>Hardware notes: A delay line is a chain, each link of which is an SRL16"
+" followed by a flip-flop. If register retiming is enabled, the delay line is "
+"a chain of flip-flops."
+	      en		      "on"
+	      latency		      "SUB_SIZE*SUB_COUNT"
+	      dbl_ovrd		      "off"
+	      reg_retiming	      "off"
+	      xl_use_area	      "off"
+	      xl_area		      "[0,0,0,0,0,0,0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "delay"
+	      sg_icon_stat	      "71,62,2,1,white,blue,0,93f2fd3b"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 50 50 0 ],[0 0 49 49 ],[0.77 0.82 0.91]);\npatch([12 4 15 4 1"
+"2 25 29 33 47 36 26 18 28 18 26 36 47 33 29 25 12 ],[5 13 24 35 43 43 39 43 4"
+"3 32 42 34 24 14 6 16 5 5 9 5 5 ],[0.98 0.96 0.92]);\nplot([0 0 50 50 0 ],[0 "
+"49 49 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMME"
+"NT: begin icon text ');\nport_label('input',2,'en');\ndisp('z^{-12}','texmode"
+"','on');\nfprintf('','COMMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "im_pipe"
+	      Ports		      [1, 1]
+	      Position		      [205, 530, 235, 550]
+	      SourceBlock	      "xbsIndex_r4/Delay"
+	      SourceType	      "Xilinx Delay Block"
+	      infoedit		      "Delay line having  configurable length."
+"<P><P>Hardware notes: A delay line is a chain, each link of which is an SRL16"
+" followed by a flip-flop. If register retiming is enabled, the delay line is "
+"a chain of flip-flops."
+	      en		      "off"
+	      latency		      "1"
+	      dbl_ovrd		      "off"
+	      reg_retiming	      "off"
+	      xl_use_area	      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "delay"
+	      sg_icon_stat	      "73,64,1,1,white,blue,0,fc531c0e"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 30 30 0 ],[0 0 20 20 ],[0.77 0.82 0.91]);\npatch([9 6 11 6 9 "
+"14 15 16 22 18 14 11 16 11 14 18 22 16 15 14 9 ],[2 5 10 15 18 18 17 18 18 14"
+" 18 15 10 5 2 6 2 2 3 2 2 ],[0.98 0.96 0.92]);\nplot([0 0 30 30 0 ],[0 20 20 "
+"0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT: be"
+"gin icon text ');\ndisp('z^{-1}','texmode','on');\nfprintf('','COMMENT: end i"
+"con text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "nd_or"
+	      Ports		      [2, 1]
+	      Position		      [190, 428, 235, 472]
+	      SourceBlock	      "xbsIndex_r4/Logical"
+	      SourceType	      "Xilinx [BLOCK NAME] Block"
+	      logical_function	      "OR"
+	      inputs		      "2"
+	      en		      "off"
+	      latency		      "0"
+	      precision		      "Full"
+	      arith_type	      "Unsigned"
+	      n_bits		      "8"
+	      bin_pt		      "2"
+	      align_bp		      "on"
+	      dbl_ovrd		      "off"
+	      xl_use_area	      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "logical"
+	      sg_icon_stat	      "73,64,2,1,white,blue,0,f4a65842"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 45 45 0 ],[0 0 44 44 ],[0.77 0.82 0.91]);\npatch([10 3 13 3 1"
+"0 22 25 28 40 30 21 14 23 14 21 30 40 28 25 22 10 ],[5 12 22 32 39 39 36 39 3"
+"9 29 38 31 22 13 6 15 5 5 8 5 5 ],[0.98 0.96 0.92]);\nplot([0 0 45 45 0 ],[0 "
+"44 44 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMME"
+"NT: begin icon text ');\ndisp('\\newlineor\\newlinez^{-0}','texmode','on');\n"
+"fprintf('','COMMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "nd_pipe"
+	      Ports		      [1, 1]
+	      Position		      [120, 450, 150, 470]
+	      SourceBlock	      "xbsIndex_r4/Delay"
+	      SourceType	      "Xilinx Delay Block"
+	      infoedit		      "Delay line having  configurable length."
+"<P><P>Hardware notes: A delay line is a chain, each link of which is an SRL16"
+" followed by a flip-flop. If register retiming is enabled, the delay line is "
+"a chain of flip-flops."
+	      en		      "off"
+	      latency		      "1"
+	      dbl_ovrd		      "off"
+	      reg_retiming	      "off"
+	      xl_use_area	      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "delay"
+	      sg_icon_stat	      "73,64,1,1,white,blue,0,fc531c0e"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 30 30 0 ],[0 0 20 20 ],[0.77 0.82 0.91]);\npatch([9 6 11 6 9 "
+"14 15 16 22 18 14 11 16 11 14 18 22 16 15 14 9 ],[2 5 10 15 18 18 17 18 18 14"
+" 18 15 10 5 2 6 2 2 3 2 2 ],[0.98 0.96 0.92]);\nplot([0 0 30 30 0 ],[0 20 20 "
+"0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT: be"
+"gin icon text ');\ndisp('z^{-1}','texmode','on');\nfprintf('','COMMENT: end i"
+"con text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "reim_mux"
+	      Ports		      [3, 1]
+	      Position		      [320, 495, 370, 585]
+	      SourceBlock	      "xbsIndex_r4/Mux"
+	      SourceType	      "Xilinx Mux Block"
+	      inputs		      "2"
+	      en		      "off"
+	      latency		      "1"
+	      precision		      "Full"
+	      arith_type	      "Signed  (2's comp)"
+	      n_bits		      "8"
+	      bin_pt		      "2"
+	      quantization	      "Truncate"
+	      overflow		      "Wrap"
+	      dbl_ovrd		      "off"
+	      xl_use_area	      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "mux"
+	      sg_icon_stat	      "73,64,3,1,white,blue,3,03f9c9b9"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 50 50 0 ],[0 12.8571 77.1429 90 ],[0.77 0.82 0.91]);\npatch(["
+"11 3 15 3 11 24 28 32 46 35 24 16 28 16 24 35 46 32 28 24 11 ],[25 33 45 57 6"
+"5 65 61 65 65 54 65 57 45 33 25 36 25 25 29 25 25 ],[0.98 0.96 0.92]);\nplot("
+"[0 50 50 0 0 ],[0 12.8571 77.1429 90 0 ]);\nfprintf('','COMMENT: end icon gra"
+"phics');\n\nfprintf('','COMMENT: begin icon text ');\nport_label('input',1,'s"
+"el');\nport_label('input',2,'d0');\nport_label('input',3,'d1');\ndisp('\\bf{ "
+" z^{-1}}','texmode','on');\nfprintf('','COMMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "wadd"
+	      Ports		      [2, 1]
+	      Position		      [450, 371, 495, 469]
+	      SourceBlock	      "xbsIndex_r4/Concat"
+	      SourceType	      "Xilinx concat Block"
+	      infoedit		      "Concatenates two or more inputs.  Outpu"
+"t will be cast to an unsigned value with the binary point at zero."
+	      num_inputs	      "2"
+	      dbl_ovrd		      "off"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "concat"
+	      sg_icon_stat	      "73,64,2,1,white,blue,0,59d62d82"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 45 45 0 ],[0 0 98 98 ],[0.77 0.82 0.91]);\npatch([10 3 14 3 1"
+"0 22 25 28 41 31 21 14 25 14 21 31 41 28 25 22 10 ],[31 38 49 60 67 67 64 67 "
+"67 57 67 60 49 38 31 41 31 31 34 31 31 ],[0.98 0.96 0.92]);\nplot([0 0 45 45 "
+"0 ],[0 98 98 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf(''"
+",'COMMENT: begin icon text ');\nport_label('input',1,'hi');\nport_label('inpu"
+"t',2,'lo');\nfprintf('','COMMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "wen_fd"
+	      Ports		      [4, 1]
+	      Position		      [320, 23, 485, 137]
+	      SourceBlock	      "xbsIndex_r4/Expression"
+	      SourceType	      "Xilinx expr Block"
+	      expression	      "(nd | ndz) & (wens | fd)"
+	      align_bp		      "on"
+	      en		      "off"
+	      latency		      "1"
+	      precision		      "Full"
+	      arith_type	      "Unsigned"
+	      n_bits		      "8"
+	      bin_pt		      "2"
+	      dbl_ovrd		      "off"
+	      xl_use_area	      "off"
+	      xl_area		      "[0,0,0,0,0,0,0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "890,821,356,252"
+	      block_type	      "expr"
+	      sg_icon_stat	      "71,62,4,1,white,blue,0,22487231"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 165 165 0 ],[0 0 114 114 ],[0.77 0.82 0.91]);\npatch([52 33 6"
+"0 33 52 82 90 98 130 105 81 63 90 63 81 105 130 98 90 82 52 ],[12 31 58 85 10"
+"4 104 96 104 104 79 103 85 58 31 13 37 12 12 20 12 12 ],[0.98 0.96 0.92]);\np"
+"lot([0 0 165 165 0 ],[0 114 114 0 0 ]);\nfprintf('','COMMENT: end icon graphi"
+"cs');\n\nfprintf('','COMMENT: begin icon text ');\nport_label('input',1,'fd')"
+";\nport_label('input',2,'nd');\nport_label('input',3,'ndz');\nport_label('inp"
+"ut',4,'wens');\ndisp('(nd | ndz) & (wens | fd)');\nfprintf('','COMMENT: end i"
+"con text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "wen_fsm"
+	      Ports		      [3, 1]
+	      Position		      [320, 155, 405, 215]
+	      SourceBlock	      "xbsIndex_r4/Expression"
+	      SourceType	      "Xilinx expr Block"
+	      expression	      "a | (s & ~b)"
+	      align_bp		      "on"
+	      en		      "off"
+	      latency		      "1"
+	      precision		      "Full"
+	      arith_type	      "Unsigned"
+	      n_bits		      "8"
+	      bin_pt		      "2"
+	      dbl_ovrd		      "off"
+	      xl_use_area	      "off"
+	      xl_area		      "[0,0,0,0,0,0,0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "890,821,356,252"
+	      block_type	      "expr"
+	      sg_icon_stat	      "71,62,3,1,white,blue,0,077593a3"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 85 85 0 ],[0 0 60 60 ],[0.77 0.82 0.91]);\npatch([27 17 31 17"
+" 27 43 47 51 68 55 42 33 48 33 42 55 68 51 47 43 27 ],[6 16 30 44 54 54 50 54"
+" 54 41 54 45 30 15 6 19 6 6 10 6 6 ],[0.98 0.96 0.92]);\nplot([0 0 85 85 0 ],"
+"[0 60 60 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','CO"
+"MMENT: begin icon text ');\nport_label('input',1,'a');\nport_label('input',2,"
+"'b');\nport_label('input',3,'s');\ndisp('a | (s & ~b)');\nfprintf('','COMMENT"
+": end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "woff"
+	      Ports		      [2, 1]
+	      Position		      [320, 428, 370, 457]
+	      SourceBlock	      "xbsIndex_r4/Counter"
+	      SourceType	      "Xilinx Count Block"
+	      infoedit		      "Configurable up, down and up/down count"
+"er.<P><P>Hardware notes: Free running counters are the least expensive in har"
+"dware.  A count limited counter is implemented by combining a counter with a "
+"comparator."
+	      cnt_type		      "Count Limited"
+	      cnt_to		      "2*SUB_SIZE*SUB_COUNT-1"
+	      operation		      "Up"
+	      start_count	      "0"
+	      cnt_by_val	      "1"
+	      arith_type	      "Unsigned"
+	      n_bits		      "ceil(log2(2*SUB_SIZE*SUB_COUNT))"
+	      bin_pt		      "0"
+	      load_pin		      "off"
+	      rst		      "on"
+	      en		      "on"
+	      dbl_ovrd		      "off"
+	      explicit_period	      "off"
+	      period		      "1"
+	      xl_use_area	      "off"
+	      xl_area		      "[0, 0, 0, 0, 0, 0, 0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "counter"
+	      sg_icon_stat	      "73,64,2,1,white,blue,0,eceade92"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 50 50 0 ],[0 0 29 29 ],[0.77 0.82 0.91]);\npatch([17 12 19 12"
+" 17 25 27 29 37 31 25 20 27 20 25 31 37 29 27 25 17 ],[3 8 15 22 27 27 25 27 "
+"27 21 27 22 15 8 3 9 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 50 50 0 ],[0 2"
+"9 29 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMEN"
+"T: begin icon text ');\nport_label('input',1,'rst');\nport_label('input',2,'e"
+"n');\nport_label('output',1,'out');\nfprintf('','COMMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "wptr"
+	      Ports		      [1, 1]
+	      Position		      [320, 380, 370, 410]
+	      SourceBlock	      "xbsIndex_r4/Counter"
+	      SourceType	      "Xilinx Count Block"
+	      infoedit		      "Configurable up, down and up/down count"
+"er.<P><P>Hardware notes: Free running counters are the least expensive in har"
+"dware.  A count limited counter is implemented by combining a counter with a "
+"comparator."
+	      cnt_type		      "Free Running"
+	      cnt_to		      "Inf"
+	      operation		      "Up"
+	      start_count	      "0"
+	      cnt_by_val	      "1"
+	      arith_type	      "Unsigned"
+	      n_bits		      "1"
+	      bin_pt		      "0"
+	      load_pin		      "off"
+	      rst		      "off"
+	      en		      "on"
+	      dbl_ovrd		      "off"
+	      explicit_period	      "off"
+	      period		      "1"
+	      xl_use_area	      "off"
+	      xl_area		      "[0,0,0,0,0,0,0]"
+	      block_version	      "VER_STRING_GOES_HERE"
+	      has_advanced_control    "0"
+	      sggui_pos		      "-1,-1,-1,-1"
+	      block_type	      "counter"
+	      sg_icon_stat	      "73,64,1,1,white,blue,0,19c87f40"
+	      sg_mask_display	      "fprintf('','COMMENT: begin icon graphic"
+"s ');\npatch([0 50 50 0 ],[0 0 30 30 ],[0.77 0.82 0.91]);\npatch([17 12 19 12"
+" 17 25 27 29 37 30 24 19 25 19 24 30 37 29 27 25 17 ],[3 8 15 22 27 27 25 27 "
+"27 20 26 21 15 9 4 10 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 50 50 0 ],[0 "
+"30 30 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMME"
+"NT: begin icon text ');\nport_label('input',1,'en');\nport_label('output',1,'"
+"out');\nfprintf('','COMMENT: end icon text');\n"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "rd_fd"
+	      Position		      [610, 298, 640, 312]
+	      IconDisplay	      "Port number"
+	      BusOutputAsStruct	      off
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "wr_add"
+	      Position		      [610, 413, 640, 427]
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	      BusOutputAsStruct	      off
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "wr_data"
+	      Position		      [610, 533, 640, 547]
+	      Port		      "3"
+	      IconDisplay	      "Port number"
+	      BusOutputAsStruct	      off
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "wr_en"
+	      Position		      [610, 73, 640, 87]
+	      Port		      "4"
+	      IconDisplay	      "Port number"
+	      BusOutputAsStruct	      off
+	    }
+	    Line {
+	      SrcBlock		      "wptr"
+	      SrcPort		      1
+	      DstBlock		      "wadd"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "woff"
+	      SrcPort		      1
+	      DstBlock		      "wadd"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "fd_and"
+	      SrcPort		      1
+	      DstBlock		      "rd_fd"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "wadd"
+	      SrcPort		      1
+	      DstBlock		      "wr_add"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "in_im"
+	      SrcPort		      1
+	      DstBlock		      "im_pipe"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "im_pipe"
+	      SrcPort		      1
+	      DstBlock		      "reim_mux"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "in_re"
+	      SrcPort		      1
+	      DstBlock		      "reim_mux"
+	      DstPort		      3
+	    }
+	    Line {
+	      SrcBlock		      "in_nd"
+	      SrcPort		      1
+	      Points		      [30, 0]
+	      Branch {
+		Points			[0, 240]
+		Branch {
+		  Points		  [0, 135]
+		  Branch {
+		    DstBlock		    "nd_or"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, 20]
+		    Branch {
+		    Points		    [0, 50]
+		    DstBlock		    "reim_mux"
+		    DstPort		    1
+		    }
+		    Branch {
+		    DstBlock		    "nd_pipe"
+		    DstPort		    1
+		    }
+		  }
+		}
+		Branch {
+		  DstBlock		  "fd_pipe"
+		  DstPort		  2
+		}
+	      }
+	      Branch {
+		DstBlock		"wen_fd"
+		DstPort			2
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "in_fd"
+	      SrcPort		      1
+	      Points		      [40, 0]
+	      Branch {
+		Points			[180, 0; 0, 0]
+		Branch {
+		  DstBlock		  "wen_fd"
+		  DstPort		  1
+		}
+		Branch {
+		  Points		  [0, 130]
+		  Branch {
+		    DstBlock		    "wen_fsm"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, 230]
+		    Branch {
+		    Points		    [0, 40]
+		    DstBlock		    "woff"
+		    DstPort		    1
+		    }
+		    Branch {
+		    DstBlock		    "wptr"
+		    DstPort		    1
+		    }
+		  }
+		}
+	      }
+	      Branch {
+		Points			[0, 245]
+		DstBlock		"fd_pipe"
+		DstPort			1
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "nd_pipe"
+	      SrcPort		      1
+	      Points		      [0, 0; 20, 0]
+	      Branch {
+		DstBlock		"nd_or"
+		DstPort			2
+	      }
+	      Branch {
+		Points			[0, -125]
+		Branch {
+		  Points		  [260, 0]
+		  DstBlock		  "fd_and"
+		  DstPort		  2
+		}
+		Branch {
+		  Points		  [0, -240]
+		  DstBlock		  "wen_fd"
+		  DstPort		  3
+		}
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "reim_mux"
+	      SrcPort		      1
+	      DstBlock		      "wr_data"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "nd_or"
+	      SrcPort		      1
+	      DstBlock		      "woff"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "fd_pipe"
+	      SrcPort		      1
+	      Points		      [20, 0; 20, 0]
+	      Branch {
+		DstBlock		"fd_and"
+		DstPort			1
+	      }
+	      Branch {
+		Points			[0, -110]
+		DstBlock		"wen_fsm"
+		DstPort			2
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "wen_fd"
+	      SrcPort		      1
+	      DstBlock		      "wr_en"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "wen_fsm"
+	      SrcPort		      1
+	      Points		      [40, 0; 0, 45; -145, 0; 0, -25]
+	      Branch {
+		DstBlock		"wen_fsm"
+		DstPort			3
+	      }
+	      Branch {
+		DstBlock		"wen_fd"
+		DstPort			4
+	      }
+	    }
+	    Annotation {
+	      Name		      "wen_fsm generate a gate pulse that \nis"
+" only high for valid in_nd pulses.\nThis is used to generate the correct\nnum"
+"ber of wen pulses"
+	      Position		      [567, 198]
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "out_fd"
+	  Position		  [655, 93, 685, 107]
+	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "out_rd"
+	  Position		  [655, 138, 685, 152]
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "out_reim"
+	  Position		  [655, 283, 685, 297]
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
+	}
+	Line {
+	  SrcBlock		  "write_control"
+	  SrcPort		  1
+	  Points		  [60, 0]
+	  DstBlock		  "read_control"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "fd_pipe"
+	  SrcPort		  1
+	  DstBlock		  "out_fd"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "dpram"
+	  SrcPort		  1
+	  DstBlock		  "out_reim"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "write_control"
+	  SrcPort		  2
+	  DstBlock		  "dpram"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "write_control"
+	  SrcPort		  3
+	  DstBlock		  "dpram"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "write_control"
+	  SrcPort		  4
+	  DstBlock		  "dpram"
+	  DstPort		  4
+	}
+	Line {
+	  SrcBlock		  "in_fd"
+	  SrcPort		  1
+	  DstBlock		  "write_control"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "in_nd"
+	  SrcPort		  1
+	  DstBlock		  "write_control"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "in_re"
+	  SrcPort		  1
+	  DstBlock		  "write_control"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "in_im"
+	  SrcPort		  1
+	  DstBlock		  "write_control"
+	  DstPort		  4
+	}
+	Line {
+	  SrcBlock		  "read_control"
+	  SrcPort		  4
+	  DstBlock		  "dpram"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "read_control"
+	  SrcPort		  1
+	  DstBlock		  "fd_pipe"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "read_control"
+	  SrcPort		  2
+	  DstBlock		  "rd_pipe"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "rd_pipe"
+	  SrcPort		  1
+	  DstBlock		  "out_rd"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "read_control"
+	  SrcPort		  3
+	  Points		  [35, 0]
+	  DstBlock		  "rd_pipe"
+	  DstPort		  2
+	}
+	Annotation {
+	  Name			  "Similar in operation to 'buffer 2SCVEC' but"
+" allows the output repetition to apply to sub-vectors.\nif input is an M elem"
+"ent vector, 'buffer 2SCVEC' would produce R repetition of the whole M vector."
+"\n'buffer 2SCVEC-subs' produces R repetition of the first N elements of M, th"
+"en R reps of the next N, etc.\nThis form can be used to efficiently perform m"
+"atrix multiplies on sparse matrices."
+	  Position		  [144, 442]
+	  HorizontalAlignment	  "left"
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "convert 2SVEC to SCVEC"
+      Ports		      [4, 3]
+      Position		      [60, 452, 200, 593]
+      AncestorBlock	      "vector_lib_v1/multiply KCMAT by SCVEC/convert 2"
+"SVEC to SCVEC"
+      TreatAsAtomicUnit	      off
+      MinAlgLoopOccurrences   off
+      RTWSystemCode	      "Auto"
+      System {
+	Name			"convert 2SVEC to SCVEC"
+	Location		[202, 74, 1598, 1106]
+	Open			off
+	ModelBrowserVisibility	on
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "in_fd"
+	  Position		  [25, 28, 55, 42]
+	  Port			  "1"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "in_nd"
+	  Position		  [25, 133, 55, 147]
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "in_re"
+	  Position		  [25, 193, 55, 207]
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "in_im"
+	  Position		  [25, 163, 55, 177]
+	  Port			  "4"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "fd_pipe"
+	  Ports			  [1, 1]
+	  Position		  [170, 25, 215, 45]
+	  SourceBlock		  "xbsIndex_r4/Delay"
+	  SourceType		  "Xilinx Delay Block"
+	  infoedit		  "Delay line having  configurable length.<P><"
+"P>Hardware notes: A delay line is a chain, each link of which is an SRL16 fol"
+"lowed by a flip-flop. If register retiming is enabled, the delay line is a ch"
+"ain of flip-flops."
+	  en			  "off"
+	  latency		  "1"
+	  dbl_ovrd		  "off"
+	  reg_retiming		  "off"
+	  xl_use_area		  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "delay"
+	  sg_icon_stat		  "73,64,1,1,white,blue,0,fc531c0e"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 45 45 0 ],[0 0 20 20 ],[0.77 0.82 0.91]);\npatch([17 14 19 14 17 "
+"22 23 24 30 26 22 19 24 19 22 26 30 24 23 22 17 ],[2 5 10 15 18 18 17 18 18 1"
+"4 18 15 10 5 2 6 2 2 3 2 2 ],[0.98 0.96 0.92]);\nplot([0 0 45 45 0 ],[0 20 20"
+" 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT: b"
+"egin icon text ');\ndisp('z^{-1}','texmode','on');\nfprintf('','COMMENT: end "
+"icon text');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "im_pipe"
+	  Ports			  [1, 1]
+	  Position		  [100, 160, 130, 180]
+	  SourceBlock		  "xbsIndex_r4/Delay"
+	  SourceType		  "Xilinx Delay Block"
+	  infoedit		  "Delay line having  configurable length.<P><"
+"P>Hardware notes: A delay line is a chain, each link of which is an SRL16 fol"
+"lowed by a flip-flop. If register retiming is enabled, the delay line is a ch"
+"ain of flip-flops."
+	  en			  "off"
+	  latency		  "1"
+	  dbl_ovrd		  "off"
+	  reg_retiming		  "off"
+	  xl_use_area		  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "delay"
+	  sg_icon_stat		  "73,64,1,1,white,blue,0,fc531c0e"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 30 30 0 ],[0 0 20 20 ],[0.77 0.82 0.91]);\npatch([9 6 11 6 9 14 1"
+"5 16 22 18 14 11 16 11 14 18 22 16 15 14 9 ],[2 5 10 15 18 18 17 18 18 14 18 "
+"15 10 5 2 6 2 2 3 2 2 ],[0.98 0.96 0.92]);\nplot([0 0 30 30 0 ],[0 20 20 0 0 "
+"]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT: begin "
+"icon text ');\ndisp('z^{-1}','texmode','on');\nfprintf('','COMMENT: end icon "
+"text');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "nd_or"
+	  Ports			  [2, 1]
+	  Position		  [170, 63, 215, 107]
+	  SourceBlock		  "xbsIndex_r4/Logical"
+	  SourceType		  "Xilinx [BLOCK NAME] Block"
+	  logical_function	  "OR"
+	  inputs		  "2"
+	  en			  "off"
+	  latency		  "1"
+	  precision		  "Full"
+	  arith_type		  "Unsigned"
+	  n_bits		  "8"
+	  bin_pt		  "2"
+	  align_bp		  "on"
+	  dbl_ovrd		  "off"
+	  xl_use_area		  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "logical"
+	  sg_icon_stat		  "73,64,2,1,white,blue,0,60344167"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 45 45 0 ],[0 0 44 44 ],[0.77 0.82 0.91]);\npatch([10 3 13 3 10 22"
+" 25 28 40 30 21 14 23 14 21 30 40 28 25 22 10 ],[5 12 22 32 39 39 36 39 39 29"
+" 38 31 22 13 6 15 5 5 8 5 5 ],[0.98 0.96 0.92]);\nplot([0 0 45 45 0 ],[0 44 4"
+"4 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT: "
+"begin icon text ');\ndisp('\\newlineor\\newlinez^{-1}','texmode','on');\nfpri"
+"ntf('','COMMENT: end icon text');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "nd_pipe"
+	  Ports			  [1, 1]
+	  Position		  [100, 85, 130, 105]
+	  SourceBlock		  "xbsIndex_r4/Delay"
+	  SourceType		  "Xilinx Delay Block"
+	  infoedit		  "Delay line having  configurable length.<P><"
+"P>Hardware notes: A delay line is a chain, each link of which is an SRL16 fol"
+"lowed by a flip-flop. If register retiming is enabled, the delay line is a ch"
+"ain of flip-flops."
+	  en			  "off"
+	  latency		  "1"
+	  dbl_ovrd		  "off"
+	  reg_retiming		  "off"
+	  xl_use_area		  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "delay"
+	  sg_icon_stat		  "73,64,1,1,white,blue,0,fc531c0e"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 30 30 0 ],[0 0 20 20 ],[0.77 0.82 0.91]);\npatch([9 6 11 6 9 14 1"
+"5 16 22 18 14 11 16 11 14 18 22 16 15 14 9 ],[2 5 10 15 18 18 17 18 18 14 18 "
+"15 10 5 2 6 2 2 3 2 2 ],[0.98 0.96 0.92]);\nplot([0 0 30 30 0 ],[0 20 20 0 0 "
+"]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT: begin "
+"icon text ');\ndisp('z^{-1}','texmode','on');\nfprintf('','COMMENT: end icon "
+"text');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "reim_mux"
+	  Ports			  [3, 1]
+	  Position		  [170, 125, 215, 215]
+	  SourceBlock		  "xbsIndex_r4/Mux"
+	  SourceType		  "Xilinx Mux Block"
+	  inputs		  "2"
+	  en			  "off"
+	  latency		  "1"
+	  precision		  "Full"
+	  arith_type		  "Signed  (2's comp)"
+	  n_bits		  "8"
+	  bin_pt		  "2"
+	  quantization		  "Truncate"
+	  overflow		  "Wrap"
+	  dbl_ovrd		  "off"
+	  xl_use_area		  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "mux"
+	  sg_icon_stat		  "73,64,3,1,white,blue,3,03f9c9b9"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 45 45 0 ],[0 12.8571 77.1429 90 ],[0.77 0.82 0.91]);\npatch([10 3"
+" 14 3 10 22 25 28 41 31 21 14 25 14 21 31 41 28 25 22 10 ],[27 34 45 56 63 63"
+" 60 63 63 53 63 56 45 34 27 37 27 27 30 27 27 ],[0.98 0.96 0.92]);\nplot([0 4"
+"5 45 0 0 ],[0 12.8571 77.1429 90 0 ]);\nfprintf('','COMMENT: end icon graphic"
+"s');\n\nfprintf('','COMMENT: begin icon text ');\nport_label('input',1,'sel')"
+";\nport_label('input',2,'d0');\nport_label('input',3,'d1');\ndisp('\\bf{  z^{"
+"-1}}','texmode','on');\nfprintf('','COMMENT: end icon text');\n"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "out_fd"
+	  Position		  [275, 28, 305, 42]
+	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "out_nd"
+	  Position		  [275, 78, 305, 92]
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "out_reim"
+	  Position		  [275, 163, 305, 177]
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
+	}
+	Line {
+	  SrcBlock		  "in_im"
+	  SrcPort		  1
+	  DstBlock		  "im_pipe"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "im_pipe"
+	  SrcPort		  1
+	  DstBlock		  "reim_mux"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "in_re"
+	  SrcPort		  1
+	  DstBlock		  "reim_mux"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "in_nd"
+	  SrcPort		  1
+	  Points		  [0, 0; 25, 0]
+	  Branch {
+	    Points		    [0, -45]
+	    Branch {
+	      Points		      [0, -20]
+	      DstBlock		      "nd_or"
+	      DstPort		      1
+	    }
+	    Branch {
+	      DstBlock		      "nd_pipe"
+	      DstPort		      1
+	    }
+	  }
+	  Branch {
+	    DstBlock		    "reim_mux"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "in_fd"
+	  SrcPort		  1
+	  DstBlock		  "fd_pipe"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "nd_pipe"
+	  SrcPort		  1
+	  DstBlock		  "nd_or"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "fd_pipe"
+	  SrcPort		  1
+	  DstBlock		  "out_fd"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "reim_mux"
+	  SrcPort		  1
+	  DstBlock		  "out_reim"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "nd_or"
+	  SrcPort		  1
+	  DstBlock		  "out_nd"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "convert SCVEC to VEC"
+      Ports		      [3, 1]
+      Position		      [235, 113, 375, 257]
+      AncestorBlock	      "vector_lib_v1/convert PCVEC to VEC"
+      TreatAsAtomicUnit	      off
+      MinAlgLoopOccurrences   off
+      RTWSystemCode	      "Auto"
+      MaskPromptString	      "Input Vector Size|Output Repetition Count"
+      MaskStyleString	      "edit,edit"
+      MaskTunableValueString  "off,off"
+      MaskCallbackString      "|"
+      MaskEnableString	      "on,on"
+      MaskVisibilityString    "on,on"
+      MaskToolTipString	      "on,on"
+      MaskVarAliasString      ","
+      MaskVariables	      "VEC_SIZE=@1;REP=@2;"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "4|1"
+      MaskTabNameString	      ","
+      System {
+	Name			"convert SCVEC to VEC"
+	Location		[202, 74, 1598, 1106]
+	Open			off
+	ModelBrowserVisibility	on
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "in_fd"
+	  Position		  [90, 138, 120, 152]
+	  Port			  "1"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "in_rd"
+	  Position		  [90, 168, 120, 182]
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "in_reim"
+	  Position		  [90, 98, 120, 112]
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Downsample"
+	  Ports			  [1, 1]
+	  Position		  [575, 118, 610, 152]
+	  ShowName		  off
+	  SourceBlock		  "dspsigops/Downsample"
+	  SourceType		  "Downsample"
+	  N			  "2*VEC_SIZE*REP"
+	  phase			  "0"
+	  ic			  "0"
+	  smode			  "Allow multirate"
+	  fmode			  "Maintain input frame size"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Gateway Out4"
+	  Ports			  [1, 1]
+	  Position		  [250, 94, 305, 116]
+	  ShowName		  off
+	  SourceBlock		  "xbsIndex_r4/Gateway Out"
+	  SourceType		  "Xilinx Gateway Out"
+	  infoedit		  "Gateway out block.  Converts Xilinx fixed p"
+"oint inputs into ouputs of type Simulink integer, double, or fixed point.<P><"
+"P>Hardware notes:  In hardware these blocks become top level output ports or "
+"are discarded, depending on how they are configured."
+	  hdl_port		  "off"
+	  timing_constraint	  "None"
+	  locs_specified	  "off"
+	  LOCs			  "{}"
+	  xl_use_area		  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "gatewayout"
+	  sg_icon_stat		  "73,64,1,1,white,grey,0,422cd57d"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 55 55 0 ],[0 0 22 22 ],[0.88 0.88 0.88]);\npatch([22 18 23 18 22 "
+"28 30 32 38 33 28 25 31 25 28 33 38 32 30 28 22 ],[2 6 11 16 20 20 18 20 20 1"
+"5 20 17 11 5 2 7 2 2 4 2 2 ],[0.98 0.96 0.92]);\nplot([0 0 55 55 0 ],[0 22 22"
+" 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT: b"
+"egin icon text ');\nport_label('input',1,' ');\nport_label('output',1,'\\font"
+"size{11pt} Out ','texmode','on');\nfprintf('','COMMENT: end icon text');\nfpr"
+"intf('','COMMENT: Make no changes above this line -- machine generated code. "
+"');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Gateway Out5"
+	  Ports			  [1, 1]
+	  Position		  [250, 149, 305, 171]
+	  ShowName		  off
+	  SourceBlock		  "xbsIndex_r4/Gateway Out"
+	  SourceType		  "Xilinx Gateway Out"
+	  infoedit		  "Gateway out block.  Converts Xilinx fixed p"
+"oint inputs into ouputs of type Simulink integer, double, or fixed point.<P><"
+"P>Hardware notes:  In hardware these blocks become top level output ports or "
+"are discarded, depending on how they are configured."
+	  hdl_port		  "off"
+	  timing_constraint	  "None"
+	  locs_specified	  "off"
+	  LOCs			  "{}"
+	  xl_use_area		  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "gatewayout"
+	  sg_icon_stat		  "73,64,1,1,white,grey,0,422cd57d"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 55 55 0 ],[0 0 22 22 ],[0.88 0.88 0.88]);\npatch([22 18 23 18 22 "
+"28 30 32 38 33 28 25 31 25 28 33 38 32 30 28 22 ],[2 6 11 16 20 20 18 20 20 1"
+"5 20 17 11 5 2 7 2 2 4 2 2 ],[0.98 0.96 0.92]);\nplot([0 0 55 55 0 ],[0 22 22"
+" 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT: b"
+"egin icon text ');\nport_label('input',1,' ');\nport_label('output',1,'\\font"
+"size{11pt} Out ','texmode','on');\nfprintf('','COMMENT: end icon text');\nfpr"
+"intf('','COMMENT: Make no changes above this line -- machine generated code. "
+"');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Integer Delay"
+	  Ports			  [1, 1]
+	  Position		  [370, 143, 405, 177]
+	  ShowName		  off
+	  SourceBlock		  "simulink/Discrete/Integer Delay"
+	  SourceType		  "Integer Delay"
+	  vinit			  "0.0"
+	  samptime		  "-1"
+	  NumDelays		  "2*VEC_SIZE"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Logical"
+	  Ports			  [2, 1]
+	  Position		  [165, 128, 195, 192]
+	  ShowName		  off
+	  SourceBlock		  "xbsIndex_r4/Logical"
+	  SourceType		  "Xilinx [BLOCK NAME] Block"
+	  logical_function	  "AND"
+	  inputs		  "2"
+	  en			  "off"
+	  latency		  "0"
+	  precision		  "Full"
+	  arith_type		  "Unsigned"
+	  n_bits		  "8"
+	  bin_pt		  "2"
+	  align_bp		  "on"
+	  dbl_ovrd		  "off"
+	  xl_use_area		  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "logical"
+	  sg_icon_stat		  "73,64,2,1,white,blue,0,087b5522"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 30 30 0 ],[0 0 64 64 ],[0.77 0.82 0.91]);\npatch([7 2 9 2 7 15 17"
+" 19 27 20 14 9 15 9 14 20 27 19 17 15 7 ],[20 25 32 39 44 44 42 44 44 37 43 3"
+"8 32 26 21 27 20 20 22 20 20 ],[0.98 0.96 0.92]);\nplot([0 0 30 30 0 ],[0 64 "
+"64 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT:"
+" begin icon text ');\ndisp('\\newlineand\\newlinez^{-0}','texmode','on');\nfp"
+"rintf('','COMMENT: end icon text');\n"
+	}
+	Block {
+	  BlockType		  RealImagToComplex
+	  Name			  "Real-Imag to\nComplex"
+	  Ports			  [2, 1]
+	  Position		  [935, 106, 1010, 224]
+	  ShowName		  off
+	  Input			  "Real and imag"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Reshape"
+	  Ports			  [1, 1]
+	  Position		  [680, 117, 730, 153]
+	  ShowName		  off
+	  SourceBlock		  "simulink/Math\nOperations/Reshape"
+	  SourceType		  "Reshape"
+	  OutputDimensionality	  "Customize"
+	  OutputDimensions	  "[2,VEC_SIZE]"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Reshape2"
+	  Ports			  [1, 1]
+	  Position		  [1090, 156, 1120, 174]
+	  ShowName		  off
+	  SourceBlock		  "simulink/Math\nOperations/Reshape"
+	  SourceType		  "Reshape"
+	  OutputDimensionality	  "1-D array"
+	  OutputDimensions	  "[2,VEC_SIZE]"
+	}
+	Block {
+	  BlockType		  Selector
+	  Name			  "Selector0"
+	  Ports			  [1, 1]
+	  Position		  [820, 116, 860, 154]
+	  ShowName		  off
+	  InputType		  "Matrix"
+	  Elements		  "[1 3]"
+	  Columns		  "-1"
+	  InputPortWidth	  "3"
+	}
+	Block {
+	  BlockType		  Selector
+	  Name			  "Selector1"
+	  Ports			  [1, 1]
+	  Position		  [820, 176, 860, 214]
+	  ShowName		  off
+	  InputType		  "Matrix"
+	  Elements		  "[1 3]"
+	  Rows			  "2"
+	  Columns		  "-1"
+	  InputPortWidth	  "3"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Tapped Delay"
+	  Ports			  [1, 1]
+	  Position		  [370, 87, 405, 123]
+	  ShowName		  off
+	  SourceBlock		  "simulink/Discrete/Tapped Delay"
+	  SourceType		  "Tapped Delay Line"
+	  vinit			  "0.0"
+	  samptime		  "-1"
+	  NumDelays		  "2*VEC_SIZE"
+	  DelayOrder		  "Oldest"
+	  includeCurrent	  "off"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Unit Delay\nEnabled"
+	  Ports			  [2, 1]
+	  Position		  [475, 75, 515, 190]
+	  ShowName		  off
+	  SourceBlock		  "simulink/Additional Math\n& Discrete/Additi"
+"onal\nDiscrete/Unit Delay\nEnabled"
+	  SourceType		  "Unit Delay Enabled"
+	  ShowPortLabels	  "on"
+	  vinit			  "0.0"
+	  tsamp			  "-1"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "out"
+	  Position		  [1190, 158, 1220, 172]
+	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
+	}
+	Line {
+	  SrcBlock		  "Gateway Out4"
+	  SrcPort		  1
+	  DstBlock		  "Tapped Delay"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Gateway Out5"
+	  SrcPort		  1
+	  DstBlock		  "Integer Delay"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Integer Delay"
+	  SrcPort		  1
+	  DstBlock		  "Unit Delay\nEnabled"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Tapped Delay"
+	  SrcPort		  1
+	  DstBlock		  "Unit Delay\nEnabled"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Unit Delay\nEnabled"
+	  SrcPort		  1
+	  DstBlock		  "Downsample"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Downsample"
+	  SrcPort		  1
+	  DstBlock		  "Reshape"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Reshape"
+	  SrcPort		  1
+	  Points		  [0, 0; 65, 0]
+	  Branch {
+	    DstBlock		    "Selector0"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 60]
+	    DstBlock		    "Selector1"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "Selector0"
+	  SrcPort		  1
+	  DstBlock		  "Real-Imag to\nComplex"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Selector1"
+	  SrcPort		  1
+	  DstBlock		  "Real-Imag to\nComplex"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Real-Imag to\nComplex"
+	  SrcPort		  1
+	  DstBlock		  "Reshape2"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Reshape2"
+	  SrcPort		  1
+	  DstBlock		  "out"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "in_reim"
+	  SrcPort		  1
+	  DstBlock		  "Gateway Out4"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Logical"
+	  SrcPort		  1
+	  DstBlock		  "Gateway Out5"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "in_fd"
+	  SrcPort		  1
+	  DstBlock		  "Logical"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "in_rd"
+	  SrcPort		  1
+	  DstBlock		  "Logical"
+	  DstPort		  2
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "multiply KCMAT by SCVEC"
+      Ports		      [3, 3]
+      Position		      [60, 285, 200, 425]
+      TreatAsAtomicUnit	      off
+      MinAlgLoopOccurrences   off
+      RTWSystemCode	      "Auto"
+      MaskPromptString	      "Constant Matrix|Coefficient Width|Coefficient B"
+"inary Point|Output Width|Output Binary Point"
+      MaskStyleString	      "edit,edit,edit,edit,edit"
+      MaskTunableValueString  "off,off,off,off,off"
+      MaskCallbackString      "||||"
+      MaskEnableString	      "on,on,on,on,on"
+      MaskVisibilityString    "on,on,on,on,on"
+      MaskToolTipString	      "on,on,on,on,on"
+      MaskVarAliasString      ",,,,"
+      MaskVariables	      "MAT=@1;MAT_WIDTH=@2;MAT_BINPT=@3;OUT_WIDTH=@4;O"
+"UT_BINPT=@5;"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "eye(4,4)|18|17|18|17"
+      MaskTabNameString	      ",,,,"
+      System {
+	Name			"multiply KCMAT by SCVEC"
+	Location		[202, 74, 1598, 1176]
+	Open			off
+	ModelBrowserVisibility	on
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "in_fd"
+	  Position		  [105, 93, 135, 107]
+	  Port			  "1"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "in_rd"
+	  Position		  [105, 168, 135, 182]
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "in_reim"
+	  Position		  [105, 243, 135, 257]
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "buffer 2SCVEC"
+	  Ports			  [4, 3]
+	  Position		  [855, 61, 1040, 364]
+	  SourceBlock		  "mfcm_vector_lib_v1/buffer 2SCVEC"
+	  SourceType		  "Unknown"
+	  ShowPortLabels	  "on"
+	  VEC_SIZE		  "size(MAT,1)"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "comp_mac"
+	  Ports			  [3, 3]
+	  Position		  [655, 139, 775, 361]
+	  SourceBlock		  "mfcm_misc_lib_v1/comp_mac"
+	  SourceType		  "Unknown"
+	  ShowPortLabels	  "on"
+	  MULS			  "size(MAT,2)"
+	  OUT_WIDTH		  "OUT_WIDTH"
+	  OUT_BINPT		  "OUT_BINPT"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "fd_pipe"
+	  Ports			  [1, 1]
+	  Position		  [300, 85, 775, 115]
+	  SourceBlock		  "xbsIndex_r4/Delay"
+	  SourceType		  "Xilinx Delay Block"
+	  infoedit		  "Delay line having  configurable length.<P><"
+"P>Hardware notes: A delay line is a chain, each link of which is an SRL16 fol"
+"lowed by a flip-flop. If register retiming is enabled, the delay line is a ch"
+"ain of flip-flops."
+	  en			  "off"
+	  latency		  "2+2*size(MAT,2)+8"
+	  dbl_ovrd		  "off"
+	  reg_retiming		  "off"
+	  xl_use_area		  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "delay"
+	  sg_icon_stat		  "73,64,1,1,white,blue,0,0528234a"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 475 475 0 ],[0 0 30 30 ],[0.77 0.82 0.91]);\npatch([230 225 232 2"
+"25 230 238 240 242 250 243 237 232 238 232 237 243 250 242 240 238 230 ],[3 8"
+" 15 22 27 27 25 27 27 20 26 21 15 9 4 10 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot"
+"([0 0 475 475 0 ],[0 30 30 0 0 ]);\nfprintf('','COMMENT: end icon graphics');"
+"\n\nfprintf('','COMMENT: begin icon text ');\ndisp('z^{-18}','texmode','on');"
+"\nfprintf('','COMMENT: end icon text');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "mat_ROM"
+	  Ports			  [1, 1]
+	  Position		  [415, 302, 485, 348]
+	  SourceBlock		  "xbsIndex_r4/ROM"
+	  SourceType		  "Xilinx ROM Block"
+	  depth			  "2*size(MAT,1)*size(MAT,2)"
+	  initVector		  "reshape(transpose([reshape(transpose(real(M"
+"AT)),[],1) reshape(transpose(imag(MAT)),[],1)]),[],1)"
+	  distributed_mem	  "Distributed memory"
+	  rst			  "off"
+	  init_reg		  "0"
+	  en			  "off"
+	  latency		  "1"
+	  arith_type		  "Signed  (2's comp)"
+	  n_bits		  "MAT_WIDTH"
+	  bin_pt		  "MAT_BINPT"
+	  dbl_ovrd		  "off"
+	  use_rpm		  "on"
+	  xl_use_area		  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "sprom"
+	  sg_icon_stat		  "73,64,1,1,white,blue,0,a8b86474"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 70 70 0 ],[0 0 46 46 ],[0.77 0.82 0.91]);\npatch([23 15 26 15 23 "
+"35 38 41 54 44 34 27 39 27 34 44 54 41 38 35 23 ],[5 13 24 35 43 43 40 43 43 "
+"33 43 36 24 12 5 15 5 5 8 5 5 ],[0.98 0.96 0.92]);\nplot([0 0 70 70 0 ],[0 46"
+" 46 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMENT"
+": begin icon text ');\nport_label('input',1,'addr');\ndisp('z^{-1}','texmode'"
+",'on');\nfprintf('','COMMENT: end icon text');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "mat_cnt"
+	  Ports			  [1, 1]
+	  Position		  [300, 296, 345, 354]
+	  SourceBlock		  "xbsIndex_r4/Counter"
+	  SourceType		  "Xilinx Count Block"
+	  infoedit		  "Configurable up, down and up/down counter.<"
+"P><P>Hardware notes: Free running counters are the least expensive in hardwar"
+"e.  A count limited counter is implemented by combining a counter with a comp"
+"arator."
+	  cnt_type		  "Free Running"
+	  cnt_to		  "+Inf"
+	  operation		  "Up"
+	  start_count		  "0"
+	  cnt_by_val		  "1"
+	  arith_type		  "Unsigned"
+	  n_bits		  "ceil(log2(2*size(MAT,1)*size(MAT,2)))"
+	  bin_pt		  "0"
+	  load_pin		  "off"
+	  rst			  "on"
+	  en			  "off"
+	  dbl_ovrd		  "off"
+	  explicit_period	  "off"
+	  period		  "2"
+	  xl_use_area		  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "counter"
+	  sg_icon_stat		  "73,64,1,1,white,blue,0,fa73fe1c"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 45 45 0 ],[0 0 58 58 ],[0.77 0.82 0.91]);\npatch([10 3 14 3 10 22"
+" 25 28 41 31 21 14 25 14 21 31 41 28 25 22 10 ],[11 18 29 40 47 47 44 47 47 3"
+"7 47 40 29 18 11 21 11 11 14 11 11 ],[0.98 0.96 0.92]);\nplot([0 0 45 45 0 ],"
+"[0 58 58 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','CO"
+"MMENT: begin icon text ');\nport_label('input',1,'rst');\nport_label('output'"
+",1,'out');\nfprintf('','COMMENT: end icon text');\n"
+	  Port {
+	    PortNumber		    1
+	    Name		    "mat_index"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	    ShowSigGenPortName	    on
+	  }
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "rd_pipe"
+	  Ports			  [1, 1]
+	  Position		  [300, 160, 485, 190]
+	  SourceBlock		  "xbsIndex_r4/Delay"
+	  SourceType		  "Xilinx Delay Block"
+	  infoedit		  "Delay line having  configurable length.<P><"
+"P>Hardware notes: A delay line is a chain, each link of which is an SRL16 fol"
+"lowed by a flip-flop. If register retiming is enabled, the delay line is a ch"
+"ain of flip-flops."
+	  en			  "off"
+	  latency		  "2"
+	  dbl_ovrd		  "off"
+	  reg_retiming		  "off"
+	  xl_use_area		  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "delay"
+	  sg_icon_stat		  "73,64,1,1,white,blue,0,0a7a6cf1"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 185 185 0 ],[0 0 30 30 ],[0.77 0.82 0.91]);\npatch([85 80 87 80 8"
+"5 93 95 97 105 98 92 87 93 87 92 98 105 97 95 93 85 ],[3 8 15 22 27 27 25 27 "
+"27 20 26 21 15 9 4 10 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 185 185 0 ],["
+"0 30 30 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COM"
+"MENT: begin icon text ');\ndisp('z^{-2}','texmode','on');\nfprintf('','COMMEN"
+"T: end icon text');\n"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "vec_pipe"
+	  Ports			  [1, 1]
+	  Position		  [300, 235, 485, 265]
+	  SourceBlock		  "xbsIndex_r4/Delay"
+	  SourceType		  "Xilinx Delay Block"
+	  infoedit		  "Delay line having  configurable length.<P><"
+"P>Hardware notes: A delay line is a chain, each link of which is an SRL16 fol"
+"lowed by a flip-flop. If register retiming is enabled, the delay line is a ch"
+"ain of flip-flops."
+	  en			  "off"
+	  latency		  "2"
+	  dbl_ovrd		  "off"
+	  reg_retiming		  "off"
+	  xl_use_area		  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "delay"
+	  sg_icon_stat		  "73,64,1,1,white,blue,0,0a7a6cf1"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 185 185 0 ],[0 0 30 30 ],[0.77 0.82 0.91]);\npatch([85 80 87 80 8"
+"5 93 95 97 105 98 92 87 93 87 92 98 105 97 95 93 85 ],[3 8 15 22 27 27 25 27 "
+"27 20 26 21 15 9 4 10 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 185 185 0 ],["
+"0 30 30 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COM"
+"MENT: begin icon text ');\ndisp('z^{-2}','texmode','on');\nfprintf('','COMMEN"
+"T: end icon text');\n"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "out_fd"
+	  Position		  [1095, 108, 1125, 122]
+	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "out_rd"
+	  Position		  [1095, 208, 1125, 222]
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "out_reim"
+	  Position		  [1095, 308, 1125, 322]
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
+	}
+	Line {
+	  SrcBlock		  "in_rd"
+	  SrcPort		  1
+	  DstBlock		  "rd_pipe"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "buffer 2SCVEC"
+	  SrcPort		  2
+	  DstBlock		  "out_rd"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "buffer 2SCVEC"
+	  SrcPort		  1
+	  DstBlock		  "out_fd"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "in_fd"
+	  SrcPort		  1
+	  Points		  [0, 0; 145, 0]
+	  Branch {
+	    DstBlock		    "fd_pipe"
+	    DstPort		    1
+	  }
+	  Branch {
+	    DstBlock		    "mat_cnt"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "fd_pipe"
+	  SrcPort		  1
+	  DstBlock		  "buffer 2SCVEC"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "comp_mac"
+	  SrcPort		  1
+	  DstBlock		  "buffer 2SCVEC"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "comp_mac"
+	  SrcPort		  2
+	  DstBlock		  "buffer 2SCVEC"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "comp_mac"
+	  SrcPort		  3
+	  DstBlock		  "buffer 2SCVEC"
+	  DstPort		  4
+	}
+	Line {
+	  SrcBlock		  "mat_ROM"
+	  SrcPort		  1
+	  DstBlock		  "comp_mac"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "vec_pipe"
+	  SrcPort		  1
+	  DstBlock		  "comp_mac"
+	  DstPort		  2
+	}
+	Line {
+	  Name			  "mat_index"
+	  Labels		  [0, 0]
+	  SrcBlock		  "mat_cnt"
+	  SrcPort		  1
+	  DstBlock		  "mat_ROM"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "in_reim"
+	  SrcPort		  1
+	  DstBlock		  "vec_pipe"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "rd_pipe"
+	  SrcPort		  1
+	  DstBlock		  "comp_mac"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "buffer 2SCVEC"
+	  SrcPort		  3
+	  DstBlock		  "out_reim"
+	  DstPort		  1
+	}
+	Annotation {
+	  Name			  "Implement y=H.x\nWhere: \n    x is input ve"
+"ctor\n    H is constant matrix\n    y is result of matrix multiplication\n\nx"
+" is a serial complex vector [SCVEC]\nH is specified as a parameter\ny is a se"
+"rial complex vector [SCVEC]\n\nConstraints:\nThe number of elements in x must"
+" match the number of columns in H\nThe repetition count for x must match the "
+"number of rows in H\nThe number of elements in y will be the same as the numb"
+"er of rows in H\n"
+	  Position		  [45, 516]
+	  HorizontalAlignment	  "left"
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "multiply SCMAT by SCVEC"
+      Ports		      [4, 3]
+      Position		      [235, 287, 375, 428]
+      TreatAsAtomicUnit	      off
+      MinAlgLoopOccurrences   off
+      RTWSystemCode	      "Auto"
+      MaskPromptString	      "Matrix Height|Matrix Width|Output Width|Output "
+"Binary Point"
+      MaskStyleString	      "edit,edit,edit,edit"
+      MaskTunableValueString  "off,off,off,off"
+      MaskCallbackString      "|||"
+      MaskEnableString	      "on,on,on,on"
+      MaskVisibilityString    "on,on,on,on"
+      MaskToolTipString	      "on,on,on,on"
+      MaskVarAliasString      ",,,"
+      MaskVariables	      "MAT_H=@1;MAT_W=@2;OUT_WIDTH=@3;OUT_BINPT=@4;"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "4|4|18|15"
+      MaskTabNameString	      ",,,"
+      System {
+	Name			"multiply SCMAT by SCVEC"
+	Location		[206, 74, 1602, 1106]
+	Open			off
+	ModelBrowserVisibility	on
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "in_fd"
+	  Position		  [100, 88, 130, 102]
+	  Port			  "1"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "in_rd"
+	  Position		  [100, 163, 130, 177]
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "in_reim"
+	  Position		  [100, 238, 130, 252]
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "mat_reim"
+	  Position		  [100, 313, 130, 327]
+	  Port			  "4"
+	  IconDisplay		  "Port number"
+	  LatchInput		  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "buffer 2SCVEC"
+	  Ports			  [4, 3]
+	  Position		  [850, 56, 1035, 359]
+	  SourceBlock		  "mfcm_vector_lib_v1/buffer 2SCVEC"
+	  SourceType		  "Unknown"
+	  ShowPortLabels	  "on"
+	  VEC_SIZE		  "MAT_H"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "comp_mac"
+	  Ports			  [3, 3]
+	  Position		  [635, 133, 770, 357]
+	  SourceBlock		  "mfcm_misc_lib_v1/comp_mac"
+	  SourceType		  "Unknown"
+	  ShowPortLabels	  "on"
+	  MULS			  "MAT_W"
+	  OUT_WIDTH		  "OUT_WIDTH"
+	  OUT_BINPT		  "OUT_BINPT"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "fd_pipe"
+	  Ports			  [1, 1]
+	  Position		  [635, 81, 770, 109]
+	  SourceBlock		  "xbsIndex_r4/Delay"
+	  SourceType		  "Xilinx Delay Block"
+	  infoedit		  "Delay line having  configurable length.<P><"
+"P>Hardware notes: A delay line is a chain, each link of which is an SRL16 fol"
+"lowed by a flip-flop. If register retiming is enabled, the delay line is a ch"
+"ain of flip-flops."
+	  en			  "off"
+	  latency		  "2*MAT_W+8"
+	  dbl_ovrd		  "off"
+	  reg_retiming		  "off"
+	  xl_use_area		  "off"
+	  xl_area		  "[0, 0, 0, 0, 0, 0, 0]"
+	  block_version		  "VER_STRING_GOES_HERE"
+	  has_advanced_control	  "0"
+	  sggui_pos		  "-1,-1,-1,-1"
+	  block_type		  "delay"
+	  sg_icon_stat		  "73,64,1,1,white,blue,0,86c0f189"
+	  sg_mask_display	  "fprintf('','COMMENT: begin icon graphics ')"
+";\npatch([0 135 135 0 ],[0 0 28 28 ],[0.77 0.82 0.91]);\npatch([60 55 62 55 6"
+"0 67 69 71 79 73 67 63 71 63 67 73 79 71 69 67 60 ],[3 8 15 22 27 27 25 27 27"
+" 21 27 23 15 7 3 9 3 3 5 3 3 ],[0.98 0.96 0.92]);\nplot([0 0 135 135 0 ],[0 2"
+"8 28 0 0 ]);\nfprintf('','COMMENT: end icon graphics');\n\nfprintf('','COMMEN"
+"T: begin icon text ');\ndisp('z^{-16}','texmode','on');\nfprintf('','COMMENT:"
+" end icon text');\n"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "out_fd"
+	  Position		  [1090, 103, 1120, 117]
+	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "out_rd"
+	  Position		  [1090, 203, 1120, 217]
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "out_reim"
+	  Position		  [1090, 303, 1120, 317]
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
+	}
+	Line {
+	  SrcBlock		  "in_rd"
+	  SrcPort		  1
+	  DstBlock		  "comp_mac"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "comp_mac"
+	  SrcPort		  3
+	  DstBlock		  "buffer 2SCVEC"
+	  DstPort		  4
+	}
+	Line {
+	  SrcBlock		  "comp_mac"
+	  SrcPort		  2
+	  DstBlock		  "buffer 2SCVEC"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "comp_mac"
+	  SrcPort		  1
+	  DstBlock		  "buffer 2SCVEC"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "fd_pipe"
+	  SrcPort		  1
+	  DstBlock		  "buffer 2SCVEC"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "in_fd"
+	  SrcPort		  1
+	  DstBlock		  "fd_pipe"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "buffer 2SCVEC"
+	  SrcPort		  1
+	  DstBlock		  "out_fd"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "buffer 2SCVEC"
+	  SrcPort		  2
+	  DstBlock		  "out_rd"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "in_reim"
+	  SrcPort		  1
+	  DstBlock		  "comp_mac"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "mat_reim"
+	  SrcPort		  1
+	  DstBlock		  "comp_mac"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "buffer 2SCVEC"
+	  SrcPort		  3
+	  DstBlock		  "out_reim"
+	  DstPort		  1
+	}
+	Annotation {
+	  Name			  "Implement y=H.x\nWhere: \n    x is input ve"
+"ctor\n    H is input matrix\n    y is result of matrix multiplication\n\nx is"
+" a serial complex vector [SCVEC]\nH is a serial complex matrix [SCMAT]\ny is "
+"a serial complex vector [SCVEC]\n\nConstraints:\nThe number of elements in x "
+"must match the number of columns in H\nThe H matrix is presented in row major"
+" order.\nThe x and H streams must be time aligned.\nThe repetition count for "
+"x must match the number of rows in H\nThe number of elements in y will be the"
+" same as the number of rows in H\n"
+	  Position		  [40, 511]
+	  HorizontalAlignment	  "left"
+	}
+      }
+    }
+    Annotation {
+      Name		      "Low-level Vector/Matrix Operations"
+      Position		      [256, 55]
+      FontName		      "Arial"
+      FontSize		      18
+    }
+  }
+}

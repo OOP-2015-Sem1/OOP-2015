@@ -8,6 +8,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import game.Bet;
 import game.Card;
 import game.Deck;
 import game.HandValue;
@@ -79,7 +81,7 @@ class Interface extends JPanel {
 		leave.setActionCommand("Leave");
 		surrender.setActionCommand("Surrender");
 
-		newBet();
+		bet=Bet.newBet(yourMoney);
 		showCards();
 		isBlackJack();
 
@@ -112,7 +114,7 @@ class Interface extends JPanel {
 
 		if (card == null) {
 			try {
-				image = ImageIO.read(new File("back.jpg"));
+				image = ImageIO.read(new File("resources/back.jpg"));
 			} catch (IOException e) {
 			}
 
@@ -120,7 +122,7 @@ class Interface extends JPanel {
 		} else {
 
 			try {
-				image = ImageIO.read(new File(card.getValueAsString() + "_of_" + card.getSuitAsString() + ".png"));
+				image = ImageIO.read(new File("resources/"+card.getValueAsString() + "_of_" + card.getSuitAsString() + ".png"));
 			} catch (IOException e) {
 			}
 			if (image != null) {
@@ -154,28 +156,7 @@ class Interface extends JPanel {
 		}
 	}
 
-	void newBet() {
-		String betString;
-		if (yourMoney <= 0) {
-			JOptionPane.showMessageDialog(null, "You are out of money");
-			System.exit(0);
-		}
-
-		do {
-			betString = JOptionPane.showInputDialog("You have " + yourMoney + ". How much you want to bet?");
-
-			if (betString == null)
-				System.exit(0);
-			try {
-				bet = Integer.parseInt(betString);
-			} catch (Exception e) {
-			}
-
-			if ((bet < 1 || bet > yourMoney))
-				JOptionPane.showMessageDialog(null, "Your answer must be an integer number between 1 and " + yourMoney);
-
-		} while (bet < 1 || bet > yourMoney);
-	}
+	
 
 	private void showCards() {
 
@@ -212,7 +193,9 @@ class Interface extends JPanel {
 			text = "You have " + yourHand.getHandValue() + ". " + "You can Hit, Stand, Double down or Surrender.";
 
 		}
-		currentMoney(win, lose);
+		yourMoney=Bet.currentMoney(win, lose,yourMoney,bet);
+		text=Bet.message(win, lose,text);
+		bet=Bet.refreshBet(win, lose);
 		repaint();
 	}
 
@@ -231,7 +214,9 @@ class Interface extends JPanel {
 			win = false;
 			lose = true;
 			gameStatus = false;
-			currentMoney(win, lose);
+			yourMoney=Bet.currentMoney(win, lose,yourMoney,bet);
+			text=Bet.message(win, lose,text);
+			bet=Bet.refreshBet(win, lose);
 		} else
 			text = "You have " + yourHand.getHandValue() + ".  Hit, Double down or stand?";
 		repaint();
@@ -266,21 +251,13 @@ class Interface extends JPanel {
 			lose = false;
 			win = true;
 		}
-		currentMoney(win, lose);
+		yourMoney=Bet.currentMoney(win, lose,yourMoney,bet);
+		text=Bet.message(win, lose,text);
+		bet=Bet.refreshBet(win, lose);
 		repaint();
 	}
 
-	private void currentMoney(boolean win, boolean lose) {
-		if (win == true && lose == false) {
-			yourMoney = yourMoney + bet;
-			text = "You won " + bet;
-			bet = 0;
-		} else if (win == false && lose == true) {
-			yourMoney = yourMoney - bet;
-			text = "You lost " + bet;
-			bet = 0;
-		}
-	}
+	
 
 	private void pressSurrender() {
 		if (gameStatus == false) {
@@ -307,7 +284,7 @@ class Interface extends JPanel {
 			win = true;
 			lose = true;
 			canSurrender = true;
-			newBet();
+			bet=Bet.newBet(yourMoney);
 			showCards();
 			isBlackJack();
 		}

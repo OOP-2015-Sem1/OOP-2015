@@ -1,0 +1,689 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Automatic Code Generation</title>
+    <link rel="StyleSheet" href="css/HW_Design.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="HW_Design.06.01.html#270816">Hardware Design Using System Generator</a> : Automatic Code Generation</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="270816">Automatic Code Generation</a></div>
+      <div class="Body"><a name="291832">System Generator automatically compiles designs into low-level representations. The </a>ways in which System Generator compiles a model can vary, and depend on settings in the System Generator token. In addition to producing HDL descriptions of hardware, the tool generates auxiliary files. Some files (e.g., project files, constraints files) assist downstream tools, while others (e.g., VHDL testbench) are used for design verification.</div>
+      <table class="ColumnNoTitleNoLines" style="text-align: left; width: 381.5114pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top; width: 148.8664pt">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.06.05.html#273553', '');" title="Automatic Code Generation" name="291850">Compiling and Simulating Using the System Generator Token</a></span></div>
+          </td>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top; width: 232.645pt">
+            <div class="CellBody"><a name="291852">Describes how to use the System Generator token to </a>compile designs into equivalent low-level HDL. </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.06.05.html#283507', '');" title="Automatic Code Generation" name="291857">Compilation Results</a></span></div>
+          </td>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="291859">Describes the low-level files System Generator </a>produces when <span class="Bold">HDL Netlist </span>is selected on the System Generator token and <span class="Bold">Generate</span> is pushed.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.06.05.html#284113', '');" title="Automatic Code Generation" name="291863">HDL Testbench</a></span></div>
+          </td>
+          <td style="padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="291866">Describes the VHDL testbench that System Generator </a>can produce.</div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="273553">Compiling and Simulating Using the System Generator Token</a></div>
+      <div class="Body"><a name="273555">System Generator automatically compiles designs into low-level representations. Designs </a>are compiled and simulated using the <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.105.html#467900', '');" title="System Generator">System Generator</a></span> token. This topic describes how to use the block. </div>
+      <div class="Body"><a name="273557">Before a System Generator design can be simulated or translated into hardware, the design </a>must include a System Generator token. When creating a new design, it is a good idea to add a System Generator token immediately. The System Generator token is a member of the Xilinx Blockset’s Basic Elements and Tools libraries. As with all Xilinx blocks, the System Generator token can also be found in the Index library.</div>
+      <div class="Body"><a name="273559">A design must contain at least one System Generator token, but can contain several System </a>Generator tokens on different levels (one per level). A System Generator token that is underneath another in the hierarchy is a <span class="Italic">slave</span>; one that is not a slave is a <span class="Italic">master</span>. The scope of a System Generator token consists of the level of hierarchy into which it is embedded and all subsystems below that level. Certain parameters (e.g. <span class="Bold">Simulink System Period</span>) can be specified only in a master. </div>
+      <div class="Body"><a name="273561">Once a System Generator token is added, it is possible to specify how code generation and </a>simulation should be handled. The token’s dialog box is shown below:</div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504.0pt">
+            <div class="Anchor"><a name="551100"><img class="Default" src="images/HW_Design.06.05.1.jpg" width="501" height="365" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="273564">Compilation Type and the Generate Button</a></div>
+      <div class="Body"><a name="273568">Pressing the </a><span class="Bold">Generate</span> button instructs System Generator to compile a portion of the design into equivalent low-level results. The portion that is compiled is the sub-tree whose root is the subsystem containing the block. (To compile the entire design, use a System Generator token placed at the top of the design.)    The compilation type (under <span class="Bold">Compilation</span>) specifies the type of result that should be produced. The possible types are </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="273569">Two types of Netlists, </a><span class="Bold">HDL Netlist</span> and <span class="Bold">NGC Netlist</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="273570">Bitstream</a></span> - produces an FPGA configuration bitstream that is ready to run in a hardware FPGA platform</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="273571">EDK Export Tool</a></span> - for exporting to the Xilinx Embedded Development Kit</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="535428">Various varieties of hardware co-simulation</a></span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="273573">Timing and Power Analysis</a></span> - a report on the timing and power consumption of the design.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="273575">HDL Netlist is the type used most often. In this case, the result is a collection of HDL and </a>EDIF files, and a few auxiliary files that simplify downstream processing. The collection is ready to be processed by a synthesis tool (e.g., XST), and then fed to the Xilinx physical design tools (i.e., ngdbuild, map, par, and bitgen) to produce a configuration bitstream for a Xilinx FPGA. The files that are produced are described in more detail in <span class="XBlueLink" style="font-style: normal; font-weight: normal"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.06.05.html#283507', '');" title="Automatic Code Generation">Compilation Results</a></span>. </div>
+      <div class="Body"><a name="273577">NGC Netlist is similar to HDL Netlist but the resulting files are NGC files instead of HDL </a>files.         </div>
+      <div class="Body"><a name="273579">When the type is a variety of hardware co-simulation, then System Generator produces an </a>FPGA configuration bitstream that is ready to run in a hardware FPGA platform. The particular platform depends on the variety chosen. For example, when the variety is <span class="Bold">Hardware Co-simulation &gt; XtremeDSP Development Kit &gt; PCI and USB</span>, then the bitstream is suitable for the XtremeDSP board (available for separate purchase from Xilinx).   System Generator also produces a hardware co-simulation block to which the bitstream is associated. This block is able to participate in Simulink simulations. It is functionally equivalent to the portion of the design from which it was derived, but is implemented by its bitstream. In a simulation, the block delivers the same results as those produced by the portion, but the results are calculated in working hardware. </div>
+      <div class="Body"><a name="418151">The remaining compilation parameters are described in the table below.    Some are </a>available only when the compilation type is <span class="Bold">HDL Netlist</span>. For example, the clock pin location cannot be chosen for a hardware co-simulation compilation because it is fixed in each hardware FPGA platform.</div>
+      <div class="Body"><a name="418200">&nbsp;</a></div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 394.1907pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 103.38pt">
+            <div class="CellHeadingLeft"><a name="418154">Control</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 290.8107pt">
+            <div class="CellHeadingLeft"><a name="418156">Description</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="418158">Part</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="418160">Defines the FPGA part to be used.</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="418162">Target Directory</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="418164">Defines where System Generator should write compilation results. </a>Because System Generator and the FPGA physical design tools typically create many files, it is best to create a separate target directory, i.e., a directory other than the directory containing your Simulink model files. The directory can be an absolute path (e.g. c:\netlist) or a path relative to the directory containing the model (e.g. netlist).</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="418166">Synthesis tool</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="418168">Specifies the tool to be used to synthesize the design. The </a>possibilities are Synplify, Synplify Pro and Xilinx XST.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="418170">Hardware description </a>language</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="418172">Specifies the language to be used for HDL netlist of the design. The </a>possibilities are VHDL and Verilog.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="418174">Create testbench</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="418176">This instructs System Generator to create an HDL testbench. </a>Simulating the testbench in an HDL simulator compares Simulink simulation results with ones obtained from the compiled version of the design. To construct test vectors, System Generator simulates the design in Simulink, and saves the values seen at gateways. The top HDL file for the testbench is named &lt;name&gt;_testbench.vhd/.v, where &lt;name&gt; is a name derived from the portion of the design being tested and the extension is dependent on the hardware description language. </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="418178">Import as </a>configurable subsystem</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="418180">Tells System Generator to do two things: 1) Construct a block to </a>which the results of compilation are associated, and 2) Construct a configurable subsystem consisting of the block and the original subsystem from which the block was derived. See <span class="XBlueLink" style="font-style: normal; font-weight: normal"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.06.09.html#415518', '');" title="Configurable Subsystems and System Generator">Configurable Subsystems and System Generator</a></span> for details.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="418185">FPGA clock period</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span style="font-size: 10.0pt"><a name="418187">Defines the period in nanoseconds of the system clock. </a></span>The value need not be an integer. The period is passed to the Xilinx implementation tools through a constraints file, where it is used as the global PERIOD constraint. Multicycle paths are constrained to integer multiples of this value.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="418189">Clock pin location</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="418191">Defines the pin location for the hardware clock. This information is </a>passed to the Xilinx implementation tools through a constraints file.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="418193">Multirate </a>implementation</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Bold"><a name="418229">Clock Enables (default)</a></span>: Creates a clock enable generator circuit to drive a multirate design.</div>
+            <div class="CellBody"><span class="Bold" style="font-size: 10.0pt"><a name="418230">Hybrid DC</a></span><span class="Bold">M-CE</span>: Creates a clock wrapper with a DCM that can drive up to three clock ports at different rates for Virtex®-4 and Virtex®-5 and up to two clock ports for Spartan-3A DSP. The mapping of rates to the DCM output ports is done using the following priority scheme: CLK0 &gt; CLK2x &gt; CLKdv &gt; CLKfx. The DCM honors the higher clock rates first. If the design contains more clocks than the DCM can handle, the remaining clocks are implemented using the Clock Enable configuration. </div>
+            <div class="CellBody"><a name="484677">A </a><span class="Filename">reset</span> input port is exposed on the DCM clock wrapper to allow resetting the DCM and a <span class="Filename">locked</span> output port is exposed to help the external design synchronize the input data with the single <span class="Filename">clk</span> input pin.</div>
+            <div class="CellBody"><span class="Bold"><a name="418231">Expose Clock Ports</a></span>: This option exposes multiple clock ports on the top-level of the System Generator design so you can apply multiple synchronous clock inputs from outside the design.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="484736">DCM input clock </a>period(ns)</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="484738">Specify if different than the </a><span class="Bold">FPGA clock period(ns</span>) option (system clock). The FPGA clock period (system clock) will then be derived from this hardware-defined input.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="418197">Provide clock enable </a>clear pin</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="418199">This instructs System Generator to provide a ce_clr port on the top-</a>level clock wrapper. The ce_clr signal is used to reset the clock enable generation logic. Capability to reset clock enable generations logic allows designs to have dynamic control for specifying the beginning of data path sampling. See the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.06.12.html#282924', '');" title="Resetting Auto-Generated Clock Enable Logic">Resetting Auto-Generated Clock Enable Logic</a></span> for details.</div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="418203">Simulink System Period</a></div>
+      <div class="Body"><a name="273603">You must specify a value for </a><span class="Bold">Simulink system period </span>in the System Generator token dialog box. This value tells the underlying rate, in seconds, at which simulations of the design should run. The period must evenly divide all sample periods in the design. For example, if the design consists of blocks whose sample periods are 2, 6, and 8, then the largest acceptable sample period is 2, though other values such as 1 and 0.5 are also acceptable. Sample periods arise in three ways: some are specified explicitly, some are calculated automatically, and some arise implicitly within blocks that involve internal rate changes. For more information on how the system period setting affects the hardware clock, refer to <span class="XBlueLink" style="font-style: normal; font-weight: normal"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.06.04.html#270824', '');" title="System-Level Modeling in System Generator">Timing and Clocking</a></span>. </div>
+      <div class="Body"><a name="273605">Before running a simulation or compiling the design, System Generator verifies that the </a>period evenly divides every sample period in the design. If a problem is found, System Generator opens a dialog box suggesting an appropriate value. Clicking the button labeled <span class="Bold">Update</span> instructs System Generator to use the suggested value. To see a summary of period conflicts, click the button labeled <span class="Bold">View Conflict Summary</span>. If you allow System Generator to update the period, you must restart the simulation or compilation. </div>
+      <div class="Body"><a name="309326">It is possible to assemble a System Generator model that is inconsistent because its periods </a>cannot be reconciled. (For example, certain blocks require that they run at the system rate. Driving an up-sampler with such a block produces an inconsistent model.)   If, even after updating the system period, System Generator reports there are conflicts, then the model is inconsistent and must be corrected. </div>
+      <div class="Body"><a name="273609">The period control is hierarchical; see the discussion of hierarchical controls below for </a>details.</div>
+      <div class="Heading3"><a name="273611">Block Icon Display</a></div>
+      <div class="Body"><a name="273612">The options on this control affect the display of the block icons on the model. After </a>compilation (which occurs when <span class="Bold">Generating, Simulating</span>, or by pressing <span class="Bold">Control-D</span>) of the model various information about the block in your model can be displayed, depending on which option is chosen.</div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="273613">Default—basic information about port directions are shown</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="273614">Sample rates—the sample rates of each port are shown</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="273615">Pipeline stages—the number of pipeline stages are shown</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="273616">HDL port names—the names of the ports are shown</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="273820">Input data types—the input data types for each port are shown</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="273821">Output data types—output data types for each port are shown</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading3"><a name="273620">Hierarchical Controls</a></div>
+      <div class="Body"><a name="274178">The </a><span class="Bold">Simulink System Period</span> control (see the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.06.05.html#418203', '');" title="Automatic Code Generation">Simulink System Period</a></span> above) on the System Generator token is hierarchical. A hierarchical control on a System Generator token applies to the portion of the design within the scope of the token, but can be overridden on other System Generator tokens deeper in the design. For example, suppose <span class="Bold">Simulink </span><span class="Bold">System Period</span> is set in a System Generator token at the top of the design, but is changed in a System Generator token within a subsystem S. Then that subsystem will have the second period, but the rest of the design will use the period set in the top level.</div>
+      <div class="Heading2"><a name="488666">Viewing ISE Reports</a></div>
+      <div class="Body"><a name="488678">When the Compilation is finished, the</a><span class="Bold"> Compilation status</span> dialog box appears as shown below. If your compilation target wasBitstream or Timing and Power Analysis, you can click on the <span class="Bold">Show Reports</span> button and the associated ISE Reports will be avilable for your viewing:</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="488687"><img class="Default" src="images/HW_Design.06.05.2.jpg" width="372" height="277" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="283507">Compilation Results</a></div>
+      <div class="Body"><a name="283727">In topic discusses the low-level files System Generator produces when </a><span class="Bold">HDL Netlist</span> is selected on the System Generator token and <span class="Bold">Generate</span> is clicked. The files consist of HDL, NGC and EDIF that implement the design. In addition, System Generator produces auxiliary files that simplify downstream processing, e.g., bringing the design into Project Navigator, simulating using an HDL simulator, and synthesizing using various synthesis tools. All files are written to the target directory specified on the System Generator token. If no testbench is requested, then the key files produced by System Generator are the following:</div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 391.2459pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 121.9664pt">
+            <div class="CellHeadingLeft"><a name="283734">File Name or Type</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 269.2795pt">
+            <div class="CellHeadingLeft"><a name="283736">Description</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="283738">&lt;design&gt;.vhd/.v</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="283740">This contains most of the HDL for the design</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="283742">&lt;design&gt;_cw.vhd/.v</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="283744">This is a HDL wrapper for </a><span class="Filename">&lt;design&gt;_files.vhd/.v</span>. It drives clocks and clock enables.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><span class="Filename"><a name="283746">.edn</a></span> and <span class="Filename">.ngc</span> files</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="283748">Besides writing HDL, System Generator runs CORE </a>Generator<span style="font-size: 10.0pt">™</span> (coregen) to implement portions of the design. Coregen writes EDIF files whose names typically look something like <span class="Filename">multiplier_virtex2_6_0_83438798287b830b.edn</span>. Other required files may be supplied as .ngc files.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="283750">globals</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="283959">This file consists of key/value pairs that describe the design. </a>The file is organized as a Perl hash table so that the keys and values can be made available to Pearl scripts using Perl evals.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="283754">&lt;design&gt;_cw.xcf (or .ncf)</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="283756">This contains timing and port location constraints. These are </a>used by the Xilinx synthesis tool XST and the Xilinx implementation tools. If the synthesis tool is set to something other than XST, then the suffix is changed to .ncf.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="283758">&lt;design&gt;_cw.ise</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="283760">This allows the HDL and EDIF to be brought into the Xilinx </a>project management tool Project Navigator.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="283762">hdlFiles</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="283764">This contains the full list of HDL files written by System </a>Generator. The files are listed in the usual HDL dependency order.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="283841">synplify_&lt;design&gt;.prj, or </a></div>
+            <div class="CellBody"><a name="283766">xst_&lt;design&gt;.pr</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="283768">These files allow the design to be compiled by the synthesis </a>tool you specified.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="283770">vcom.do</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="283772">This script can be used in ModelSim to compile the HDL for a </a>behavioral simulation of the design. </div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="284166">If a testbench is requested, then, in addition to the above, System Generator produces files </a>that allow simulation results to be compared. The comparisons are between Simulink simulation results and corresponding results from ModelSim. The additional files are the following:</div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 391.2459pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 121.9664pt">
+            <div class="CellHeadingLeft"><a name="284126">File Name or Type</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 269.2795pt">
+            <div class="CellHeadingLeft"><a name="284128">Description</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="284130">Various .dat files</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="284132">These contain the simulation results from Simulink.</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="284134">&lt;design&gt;_tb.vhd/.v</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="284136">This is a testbench that wraps the design. When simulated in </a>ModelSim, this testbench compares simulation results from Simulink against those produced by ModelSim.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="284138">vsim.do</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="284140">This script can be used in ModelSim to run a testbench </a>simulation.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="284142">pn_behavioral.do, </a>pn_postmap.do, pn_postpar.do, pn_posttranslate.do</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="284144">These files allow various ModelSim simulations to be started </a>inside Project Navigator.</div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="284785">Using the System Generator Constraints File</a></div>
+      <div class="Body"><a name="284788">When a design is compiled, System Generator produces a </a><span class="Italic">constraints file</span> that tells downstream tools how to process the design. This enables the tools to produce a higher quality implementation, and to do so using considerably less time. Constraints supply the following: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="284792">The period to be used for the system clock; </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="284794">The speed, with respect to the system clock, at which various portions of the design </a>must run; </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="284796">The pin locations at which ports should be placed; </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="284798">The speed at which ports must operate. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="284802">The file format depends on the synthesis tool that is specified in the System Generator </a>token. When XST is selected, the file is written in the XCF format; for Synplify and Synplify Pro, the NCF format is used. The file name ends with<span class="Filename">.xcf</span> or <span class="Filename">.ncf</span>, as appropriate. </div>
+      <div class="Heading4"><a name="284805">System Clock Period</a></div>
+      <div class="Body"><a name="284808">The system clock period (i.e., the period of the fastest hardware clock in the design) can be </a>specified in the System Generator token. System Generator writes this period to the constraints file. Downstream tools use the period as a goal when implementing the design. </div>
+      <div class="Heading4"><a name="284811">Multicycle Path Constraints</a></div>
+      <div class="Body"><a name="311557">Many designs consist of parts that run at different clock rates. For the fastest part, the </a>system clock period is used. For the remaining parts, the clock period is an integer multiple of the system clock period. It is important that downstream tools know what speed each part of the design must achieve. With this information, efficiency and effectiveness of the tools are greatly increased, resulting in reduced compilation times and improved hardware realizations. The division of the design into parts, and the speed at which each part must run, are specified in the constraints file using multicycle path constraints.</div>
+      <div class="Heading4"><a name="311558">IOB Timing and Placement Constraints</a></div>
+      <div class="Body"><a name="318216">When translated into hardware, System Generator's Gateway In and Gateway Out blocks </a>become input and output ports. The locations of these ports and the speeds at which they must operate can be entered in the Gateway In and Out parameter dialog boxes. </div>
+      <div class="Body"><a name="318225">See the descriptions of the </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.057.html#2983260', '');" title="Gateway In">Gateway In</a></span>  block and the <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.058.html#2983300', '');" title="Gateway Out">Gateway Out</a></span>  block for more information. Port location and speed are specified in the constraints file by IOB timing. </div>
+      <div class="Heading4"><a name="285383">Constraints Example</a></div>
+      <div class="Body"><a name="285355">The figure below shows a small multirate design and the constraints System Generator </a>produces for it.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="292040"><img class="Default" src="images/HW_Design.06.05.3.jpg" width="367" height="153" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="285611">The up sampler doubles the rate, and the down sampler divides the rate by three. Assume </a>the system clock period is 10 ns. Then the clock periods are 10 ns for the FIR, 20 ns for the input register, and 30 ns for the output register. The following text describes the constraints that convey this information. </div>
+      <div class="Body"><a name="285615">The lines that indicate the system clock period is10 ns are the following: </a></div>
+      <div class="Code"><a name="285619"># Global period constraint </a></div>
+      <div class="Code"><a name="285621">NET "clk" TNM_NET = "clk_392b7670"; </a></div>
+      <div class="Code"><a name="285623">TIMESPEC "TS_clk_392b7670" = PERIOD "clk_392b7670" 10.0 ns HIGH 50 %; </a></div>
+      <div class="Body"><a name="285627">To build timing constraints, the blocks in the design are partitioned into timing groups. </a>Two blocks are in the same timing group if and only if they run at the same sample rate. In this design there are three timing groups, corresponding to the three rates. The nature of constraints dictates that no name is needed for the fastest group. The remaining groups are named <span class="Italic">ce_2_392b7670_group</span> and <span class="Italic">ce_3_392b7670_group</span>; they correspond to periods 20 ns and 30 ns respectively. </div>
+      <div class="Body"><a name="285631">The FIR runs at the system (i.e., fastest) rate and therefore is constrained using the global </a>period constraint shown above. The logic used to generate clocks always runs at the system rate and is also constrained to the system rate. </div>
+      <div class="Body"><a name="285635">The </a><span class="Italic">ce_2_392b7670_group</span> consists of the blocks that operate at half the system rate, i.e., the input register and the up sampler. Every block in the group is driven by the clock enable net named <span class="Italic">ce2_sysgen</span>. The constraints that define the group are the following: </div>
+      <div class="Code"><a name="285639"># ce_2_392b7670_group and inner group constraint </a></div>
+      <div class="Code"><a name="285641">Net "ce_2_sg_x0*" TNM_NET = "ce_2_392b7670_group"; </a></div>
+      <div class="Code"><a name="285643">TIMESPEC "TS_ce_2_392b7670_group_to_ce_2_392b7670_group" = FROM </a>"ce_2_392b7670_group" TO "ce_2_392b7670_group" 20.0 ns; </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="285647">A wildcard character is added to the net name to constrain any additional copies of this net </a>that may be generated when clock enable logic is replicated. The maximum fanout of a clock enable net can be controlled in the synthesis tool. </div>
+      <div class="Body"><a name="285651">The </a><span class="Italic">ce_3_392b7670_group</span> operates at one third the system rate. It contains the down sampler and the output register, and is defined in a similar manner to the <span class="Italic">ce2_group</span>. </div>
+      <div class="Code"><a name="285655"># ce_3_392b7670_group and inner group constraint </a></div>
+      <div class="Code"><a name="285657">Net "ce_3_sg_x0*" TNM_NET = "ce_3_392b7670_group"; </a></div>
+      <div class="Code"><a name="285659">TIMESPEC "TS_ce_3_392b7670_group_to_ce_3_392b7670_group" = FROM </a>"ce_3_392b7670_group" TO "ce_3_392b7670_group" 30.0 ns; </div>
+      <div class="Body"><a name="285663">Group to group constraints establish relative speeds. Here are the constraints that relate </a>the speeds of <span class="Italic">ce_2_392b7670_group</span> and <span class="Italic">ce_3_392b7670_group</span>: </div>
+      <div class="Code"><a name="285667"># Group-to-group constraints </a></div>
+      <div class="Code"><a name="285669">TIMESPEC "TS_ce_2_392b7670_group_to_ce_3_392b7670_group" = FROM </a>"ce_2_392b7670_group" TO "ce_3_392b7670_group" 20.0 ns; </div>
+      <div class="Code"><a name="285671">TIMESPEC "TS_ce_3_392b7670_group_to_ce_2_392b7670_group" = FROM </a>"ce_3_392b7670_group" TO "ce_2_392b7670_group" 20.0 ns; </div>
+      <div class="Body"><a name="285675">Port timing requirements can be set in the parameter dialog boxes for gateways. These </a>requirements are translated into port constraints such as those shown below. In this example, the 3-bit <span class="Italic">din</span> input is constrained to operate at its gateway's sample rate (corresponding to a period of 20 ns). The "FAST" attributes indicate the ports should be implemented using hardware that reduces delay. The reduction comes at a cost of increased noise and power consumption. </div>
+      <div class="Code"><a name="285679"># Offset in constraints </a></div>
+      <div class="Code"><a name="285681">NET "din(0)" OFFSET = IN : 20.0 : BEFORE "clk"; </a></div>
+      <div class="Code"><a name="285683">NET "din(0)" FAST; </a></div>
+      <div class="Code"><a name="285685">NET "din(1)" OFFSET = IN : 20.0 : BEFORE "clk"; </a></div>
+      <div class="Code"><a name="285687">NET "din(1)" FAST; </a></div>
+      <div class="Code"><a name="285689">NET "din(2)" OFFSET = IN : 20.0 : BEFORE "clk"; </a></div>
+      <div class="Code"><a name="285691">NET "din(2)" FAST; </a></div>
+      <div class="Body"><a name="285695">Selecting </a><span class="Bold">Specify IOB Location Constraints</span> for a gateway allows port locations to be specified. The locations must be entered as a cell array of strings in the box labeled <span class="Bold">IOB </span><span class="Bold">Pad Locations</span>. Locations are package-specific; in this example a Virtex®-E 2000 in a FG680 package is used. The location constraints for the din bus are provided in the dialog box as "{'D35', 'B36', 'C35' }". This is translated into constraints in the .xcf  (or .ncf) file in the following way: </div>
+      <div class="Code"><a name="285699"># Loc constraints </a></div>
+      <div class="Code"><a name="285701">NET "din(2)" LOC = "D35"; </a></div>
+      <div class="Code"><a name="285703">NET "din(1)" LOC = "B36"; </a></div>
+      <div class="Code"><a name="285705">NET "din(0)" LOC = "C35"; </a></div>
+      <div class="Code"><a name="285708">Clock Handling in HDL</a></div>
+      <div class="Heading3"><a name="285711">Clock Handling in HDL</a></div>
+      <div class="Body"><a name="292763">This topic describes how System Generator handles hardware clocks in the HDL it </a>generates. Assume the design is named <span class="Filename">&lt;design&gt;</span>, and <span class="Filename">&lt;design&gt;</span> is an acceptable HDL identifier. When System Generator compiles the design, it writes a collection of HDL entities or modules, the topmost of which is named <span class="Filename">&lt;design&gt;</span>, and is stored in a file named <span class="Filename">&lt;design&gt;.vhd/.v</span>. </div>
+      <div class="Heading4"><a name="487061">The “Clock Enables” Multirate Implementation</a></div>
+      <div class="Body"><a name="285715">Clock and clock enables appear in pairs throughout the HDL. Typical clock names are </a><span class="Italic">clk_1</span>, <span class="Italic">clk_2</span>, and <span class="Italic">clk_3</span>, and the names of the companion clock enables are <span class="Italic">ce_1</span>, <span class="Italic">ce_2</span>, and <span class="Italic">ce_3</span> respectively. The name tells the rate for the clock/clock enable pair; logic driven by <span class="Italic">clk_1</span> and<span class="Italic"> ce_1</span> runs at the system (i.e., fastest) rate, while logic driven by (say) <span class="Italic">clk_2</span> and <span class="Italic">ce_2</span> runs at half the system rate. Clocks and clock enables are not driven in the entity or module named &lt;design&gt; or any subsidiary entities; instead, they are exposed as top-level input ports </div>
+      <div class="Body"><a name="293356">Of course, there must be a way to generate these clocks and clock enables. System </a>Generator produces a separate <span class="Italic">clock wrapper </span>(written to a file named <span class="Filename">&lt;design&gt;_cw.vhd/.v</span>) to do this. This wrapper is external to the files described above. The idea is to make the HDL flexible. In some applications, the files described above are added to a larger design, but the clock wrapper is omitted. In this case, you are responsible for generating clocks and clock enables, but a finer degree of control is obtained. If, on the other hand, the clock wrapper is suitable for the application, then include it. </div>
+      <div class="Body"><a name="285733">The names of the clocks and clock enables in System Generator HDL suggest that clocking </a>is completely general, but this is not the case. To illustrate this, assume a design has clocks named clk_1 and clk_2, and companion clock enables named <span class="Italic">ce_1</span> and<span class="Italic"> ce_2</span> respectively. You might expect that working hardware could be produced if the <span class="Italic">ce_1</span> and <span class="Italic">ce_2</span> signals were tied high, and <span class="Italic">clk_2</span> were driven by a clock signal whose rate is half that of <span class="Italic">clk_1</span>. For most System Generator designs this does not work. Instead, <span class="Italic">clk_1</span> and <span class="Italic">clk_2</span> must be driven by the same clock, <span class="Italic">ce_1</span> must be tied high, and <span class="Italic">ce_2</span> must vary at a rate half that of <span class="Italic">clk_1</span> and <span class="Italic">clk_2</span>. </div>
+      <div class="Body"><a name="285607">The clock wrapper consists of two components: one for the design itself, and one </a><span class="Italic">clock </span><span class="Italic">driver component</span> that generate clocks and clock enables. The clock driver is contained in a file named <span class="Filename">&lt;design&gt;_cw.vhd/.v</span>. The logic within the <span class="Filename">&lt;design&gt;_cw</span> generates the <span class="Filename">ce_x</span> signals. The optional <span class="Filename">ce_clr</span> port would be generated if the design was generated by selecting <span class="Bold">Provide clock enable clear pin</span> on the System Generator token. The ports that are not clocks or clock enables are passed through to the exterior of the clock wrapper. Schematically, the clock wrapper looks like the diagram below.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="293421"><img class="Default" src="images/HW_Design.06.05.4.jpg" width="286" height="182" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="293538">The clock wrapper exposes a port named ce. The port does nothing except to serve as a </a>companion to the clk port on the wrapper. The reason for having the port is to allow the clock wrapper to be used as a black box in System Generator designs.</div>
+      <div class="Heading4"><a name="487072">The “Hybrid DCM-CE” Multirate Implementation</a></div>
+      <div class="Body"><a name="487078">If the implementation target is an FPGA with a Digital Clock Manager (DCM), you can </a>choose to drive the clock tree with a DCM. The DCM option is desirable when high fanout on clock enable nets make it difficult to achieve timing closure.</div>
+      <div class="Body"><a name="487070">System Generator instantiates the DCM in a top-level HDL clock wrapper ( with a suffix </a><span class="Filename">_dcm_mcw</span>) and configures the DCM to provide up to <span style="font-size: 9.5pt">three clock ports at different rates for </span><span style="font-size: 9.5pt">Virtex®-4 and Virtex®-5 and up to two clock ports for Spartan-3A DSP</span>. If the design has more clock ports than the DCM can support, the remaining clocks are supported with the CE (clock enable) configuration as described in the previous topic.</div>
+      <div class="Body"><a name="487082">For a detailed examination of the files produced by this option, refer to the topic </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.06.04.html#419319', '');" title="System-Level Modeling in System Generator">Tutorial Example: Using the Hybrid DCM-CE Option</a></span>.</div>
+      <div class="Heading4"><a name="487312">The “Expose Clock Ports” Multirate Implementation</a></div>
+      <div class="Body"><a name="487098">When you select this option, System Generator creates a top-level wrapper that exposes a </a>clock port for each rate. You can then manually instantiate a clock generator outside the design to drive the clock ports.</div>
+      <div class="Body"><a name="487321">For a detailed examination of the files produced by this option, refer to the topic </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.06.04.html#429874', '');" title="System-Level Modeling in System Generator">Tutorial Example: Using the Expose Clock Ports Option</a></span>.</div>
+      <div class="Heading3"><a name="293550">Core Caching</a></div>
+      <div class="Body"><a name="293553">System Generator uses cores produced by Xilinx CORE Generator™ (coregen) to </a>implement parts of designs. Generating cores can be expensive, so System Generator caches previously generated ones. Before coregen is called, System Generator looks in the cache, and if the core has already been generated, System Generator reuses it.</div>
+      <div class="Body"><a name="293557">By default, the cache is the directory </a><span class="Filename">$TEMP/sg_core_cache</span>. And by default, System Generator caches no more than 2,000 cores. When the limit is reached, System Generator deletes cached cores to make room for new ones.</div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="293547">Environment variables can be used to change the location of the cache and the cache size </a>limit. The variables are described below. </div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 391.2459pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 121.9664pt">
+            <div class="CellHeadingLeft"><a name="293677">Environment Variable</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 269.2795pt">
+            <div class="CellHeadingLeft"><a name="293679">Description</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="293681">SGCORECACHE</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="293683">Location to store cached files. Setting this variable to a string of </a>blanks instructs System Generator not to cache cores.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="293685">SGCORECACHELIMIT</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="293687">Maximum number of cores to cache.</a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="284113">HDL Testbench</a></div>
+      <div class="Body"><a name="293790">Ordinarily, System Generator designs are bit and cycle-accurate, so Simulink simulation </a>results exactly match those seen in hardware. There are, however, times when it is useful to compare Simulink simulation results against those obtained from an HDL simulator. In particular, this makes sense when the design contains black boxes. The <span class="Bold">Create Testbench</span> checkbox in the System Generator token makes this possible. </div>
+      <div class="Body"><a name="293794">Suppose the design is named </a><span class="Filename">&lt;design&gt;</span>, and a System Generator token is placed at the top of the design. Suppose also that in the token the <span class="Bold">Compilation</span> field is set to <span class="Bold">HDL Netlist</span>, and the <span class="Bold">Create Testbench</span> checkbox is selected. When the <span class="Bold">Generate</span> button is clicked, System Generator produces the usual files for the design, and in addition writes the following: </div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="293798">A file named </a><span class="Filename">&lt;design&gt;_tb.vhd/.v</span> that contains a testbench HDL entity; </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="293800">Various </a><span class="Filename">.dat</span> files that contain test vectors for use in an HDL testbench simulation. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="293802">Scripts </a><span class="Filename">vcom.do</span> and <span class="Filename">vsim.do</span> that can be used in ModelSim to compile and simulate the testbench, comparing Simulink test vectors against those produced in HDL. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="284299">System Generator generates the </a><span class="Filename">.dat</span> files by saving the values that pass through gateways. In the HDL simulation, input values from the <span class="Filename">.dat</span> files are stimuli, and output values are expected results. The testbench is simply a wrapper that feeds the stimuli to the HDL for the design, then compares HDL results against expected ones.</div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

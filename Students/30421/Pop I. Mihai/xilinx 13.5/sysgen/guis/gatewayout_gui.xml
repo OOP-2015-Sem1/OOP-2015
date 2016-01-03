@@ -1,0 +1,35 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Gateway Out" block_type="gatewayout">
+  <icon width="60" height="20" wmark_color="white" bg_color="yellow"/>
+  <dll name="sysgen_blockset" entry_point="gateway_out_config"/>
+  <handlers enablement="gatewayoutenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsBasic"/>
+    <library name="xbsTypes"/>
+    <library name="xbsFloatingPoint"/>
+  </libraries>
+  <blockgui label="Xilinx Gateway Out">
+    <editbox name="infoedit" default="Gateway out block.  Converts Xilinx fixed-point or floating-point type inputs into ouputs of type Simulink integer, single, double, or fixed point.&lt;br&gt;&lt;br&gt;Hardware notes:  In hardware these blocks become top level output ports or are discarded, depending on how they are configured." read_only="true" evaluate="false" multi_line="true"/>
+    <etch label="Output Type">
+    	<checkbox name="inherit_from_input" default="off" evaluate="true" label="Propagate data type to output" ctype="Int"/>
+    </etch>
+    <checkbox name="hdl_port" default="on" evaluate="true" label="Translate into output port" ctype="Int"/>
+    <radiogroup name="timing_constraint" default="None" evaluate="true" label="IOB timing constraint" ctype="Int">
+      <item value="None" label="None"/>
+      <item value="Data Rate" label="Data rate"/>
+      <item value="Data Rate;  Set 'FAST' Attribute" label="Data rate;  set 'FAST' attribute"/>
+    </radiogroup>
+    <checkbox name="locs_specified" default="off" evaluate="true" label="Specify IOB location constraints" ctype="Int"/>
+    <editbox name="LOCs" default="{}" evaluate="true" label="IOB pad locations (cell array {'MSB', ..., 'LSB'})" ctype="StringVector" top_label="true"/>
+    <etch label="FPGA Area Estimation">
+      <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+      <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+    </etch>
+    <checkbox name="UseAsDAC" default="off" evaluate="true" label="Drive DAC Input" ctype="Int"/>
+    <editbox name="DACChannel" default="'1'" evaluate="true" label="DAC Channel ID" ctype="String"/>
+    <hiddenvar name="sginterface" default="" evaluate="false" ctype="String"/>
+  </blockgui>
+</sysgenblock>

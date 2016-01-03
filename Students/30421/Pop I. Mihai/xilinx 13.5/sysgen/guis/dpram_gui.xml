@@ -1,0 +1,75 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Dual Port RAM" block_type="dpram">
+  <initialization file="xldpram_init.m"/>
+  <icon width="75" height="163" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="Dpram_config"/>
+  <handlers enablement="dpramenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsControl"/>
+    <library name="xbsMemory"/>
+    <library name="xbsFloatingPoint"/>
+  </libraries>
+  <blockgui label="Xilinx Dual Port Random Access Memory">
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <editbox name="depth" default="16" evaluate="true" label="Depth" ctype="Int"/>
+        <editbox name="initVector" default="sin(pi*(0:15)/16)" evaluate="true" label="Initial value vector" ctype="DoubleVector"/>
+        <radiogroup name="distributed_mem" default="Block RAM" evaluate="true" label="Memory Type" ctype="Int">
+          <item value="Distributed memory" label="Distributed memory"/>
+          <item value="Block RAM" label="Block RAM"/>
+        </radiogroup>
+        <editbox name="init_a" default="0" evaluate="true" label="Initial value for port &lt;tt&gt;A&lt;/tt&gt; output register" ctype="Double"/>
+        <editbox name="init_b" default="0" evaluate="true" label="Initial value for port &lt;tt&gt;B&lt;/tt&gt; output register" ctype="Double"/>
+        <etch label="Optional Ports">
+          <checkbox name="rst_a" default="off" evaluate="true" label="Provide synchronous reset port for port &lt;tt&gt;A&lt;/tt&gt; output register" ctype="Int"/>
+          <checkbox name="rst_b" default="off" evaluate="true" label="Provide synchronous reset port for port &lt;tt&gt;B&lt;/tt&gt; output register" ctype="Int"/>
+          <checkbox name="en_a" default="off" evaluate="true" label="Provide enable port for port &lt;tt&gt;A&lt;/tt&gt;" ctype="Int"/>
+          <checkbox name="en_b" default="off" evaluate="true" label="Provide enable port for port &lt;tt&gt;B&lt;/tt&gt;" ctype="Int"/>
+        </etch>
+        <editbox name="latency" default="1" evaluate="true" label="Latency" ctype="Int"/>
+      </tab>
+      <tab name="advancedtab" label="Advanced">
+        <etch label="Write Modes">
+          <radiogroup name="write_mode_A" default="Read After Write" evaluate="true" label="Port &lt;tt&gt;A&lt;/tt&gt;" ctype="Int">
+            <item value="Read After Write" label="Read after write"/>
+            <item value="Read Before Write" label="Read before write"/>
+            <item value="No Read On Write" label="No read on write"/>
+          </radiogroup>
+          <radiogroup name="write_mode_B" default="Read After Write" evaluate="true" label="Port &lt;tt&gt;B&lt;/tt&gt;" ctype="Int">
+            <item value="Read After Write" label="Read after write"/>
+            <item value="Read Before Write" label="Read before write"/>
+            <item value="No Read On Write" label="No read on write"/>
+          </radiogroup>
+        </etch>
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <radiogroup name="optimize" default="Area" evaluate="true" label="Optimize for" ctype="Int">
+            <item value="Area" label="Area"/>
+            <item value="Speed" label="Speed"/>
+            <item value="Power" label="Power"/>
+          </radiogroup>
+        <etch label="Core Parameters">
+          <checkbox name="use_rpm" default="on" evaluate="true" label="Use core placement information" ctype="Int"/>
+        </etch>
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <workspacevar name="init" ctype="DoubleVector"/>
+    <workspacevar name="write_mode_a" ctype="Int"/>
+    <workspacevar name="write_mode_b" ctype="Int"/>
+    <workspacevar name="dblOvrd" ctype="Int"/>
+    <workspacevar name="sim_engine" ctype="Int"/>
+    <hiddenvar name="explicit_period"/>
+    <hiddenvar name="period"/>
+    <hiddenvar name="infoedit"/>
+  </blockgui>
+</sysgenblock>

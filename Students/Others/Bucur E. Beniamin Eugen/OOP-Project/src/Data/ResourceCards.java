@@ -2,7 +2,7 @@ package Data;
 
 import java.io.Serializable;
 
-public class ResourceCards implements Serializable{
+public class ResourceCards implements Serializable {
     int numberOfBrick;
     int numberOfLumber;
     int numberOfWool;
@@ -19,21 +19,26 @@ public class ResourceCards implements Serializable{
 
     public void incrementResourceCounter(ResourceType resourceType, int increment) {
         switch (resourceType) {
-            case BRICK:
+            case BRICK: {
                 numberOfBrick += increment;
                 break;
-            case LUMBER:
+            }
+            case LUMBER: {
                 numberOfLumber += increment;
                 break;
-            case WOOL:
+            }
+            case WOOL: {
                 numberOfWool += increment;
                 break;
-            case GRAIN:
+            }
+            case GRAIN: {
                 numberOfGrain += increment;
                 break;
-            case ORE:
+            }
+            case ORE: {
                 numberOfOre += increment;
                 break;
+            }
         }
     }
 
@@ -54,6 +59,8 @@ public class ResourceCards implements Serializable{
             case ORE:
                 numberOfOre -= decrement;
                 break;
+            case NULL:
+                break;
         }
     }
 
@@ -69,9 +76,43 @@ public class ResourceCards implements Serializable{
                 return numberOfGrain;
             case ORE:
                 return numberOfOre;
+            case NULL:
+                break;
         }
-        return 0;
+        return 19;
     }
 
+    public boolean verifyResourceAvailability(int numberOfBrick, int numberOfLumber, int numberOfWool, int numberOfGrain, int numberOfOre) {
+        if (this.numberOfBrick < numberOfBrick)
+            return false;
+        if (this.numberOfLumber < numberOfLumber)
+            return false;
+        if (this.numberOfWool < numberOfWool)
+            return false;
+        if (this.numberOfGrain < numberOfGrain)
+            return false;
+        if (this.numberOfOre < numberOfOre)
+            return false;
+        return true;
+    }
 
+    public void spendResources(int numberOfBrick, int numberOfLumber, int numberOfWool, int numberOfGrain, int numberOfOre) {
+        this.numberOfBrick -= numberOfBrick;
+        this.numberOfLumber -= numberOfLumber;
+        this.numberOfWool -= numberOfWool;
+        this.numberOfGrain -= numberOfGrain;
+        this.numberOfOre -= numberOfOre;
+    }
+
+    public int countAllResources(){
+        return numberOfBrick + numberOfLumber + numberOfWool + numberOfGrain + numberOfOre;
+    }
+
+    public void setResourcesToNine(){
+        numberOfBrick = 9;
+        numberOfOre = 9;
+        numberOfGrain = 9;
+        numberOfWool = 9;
+        numberOfLumber = 9;
+    }
 }

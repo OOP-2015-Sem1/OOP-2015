@@ -1,0 +1,210 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Fast Fourier Transform 6.0 " block_type="xfft_v6_0">
+  <icon width="95" height="142" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen" entry_point="coregenimport_config"/>
+  <initialization file="xlfft_v6_0_init.m"/>
+  <handlers enablement="xlipmagiccallback" action="xlipmagicaction"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsDSP"/>
+  </libraries>
+  <blockgui label="Xilinx Fast Fourier Transform 6.0">
+    <!-- <editbox name="infoedit" default="Fast Fourier Transform 6.0" read_only="true" evaluate="false" multi_line="true"/> -->
+    <tabpane>
+        <tab name="Basic" label="Basic">
+          <!-- <listbox name="channels" default="1" evaluate="false" label="Channels" ctype="String" allow_advanced="false"> -->
+          <!-- <item value="1"/> -->
+          <!-- <item value="2"/> -->
+          <!-- <item value="3"/> -->
+          <!-- <item value="4"/> -->
+          <!-- <item value="5"/> -->
+          <!-- <item value="6"/> -->
+          <!-- <item value="7"/> -->
+          <!-- <item value="8"/> -->
+          <!-- <item value="9"/> -->
+          <!-- <item value="10"/> -->
+          <!-- <item value="11"/> -->
+          <!-- <item value="12"/> -->
+          <!-- </listbox> -->
+          <listbox name="transform_length" default="1024" evaluate="false" label="Transform length" ctype="String" allow_advanced="false">
+            <item value="8"/>
+            <item value="16"/>
+            <item value="32"/>
+            <item value="64"/>
+            <item value="128"/>
+            <item value="256"/>
+            <item value="512"/>
+            <item value="1024"/>
+            <item value="2048"/>
+            <item value="4096"/>
+            <item value="8192"/>
+            <item value="16384"/>
+            <item value="32768"/>
+            <item value="65536"/>
+          </listbox>
+          <!-- <editbox name="target_clock_frequency" default="250" evaluate="true" label="Target clock frequency" ctype="Int"/> -->
+          <etch label="Implementation Options">
+            <radiogroup name="implementation_options" default="pipelined_streaming_io" evaluate="false" label="Implementation options" ctype="String" allow_advanced="false">
+              <!-- <item value="automatically_select"/> -->
+              <item label="Pipelined, Streaming I/O" value="pipelined_streaming_io"/>
+              <item label="Radix-4, Burst I/O" value="radix_4_burst_io"/>
+              <item label="Radix-2, Burst I/O" value="radix_2_burst_io"/>
+              <item label="Radix-2 Lite, Burst I/O" value="radix_2_lite_burst_io"/>
+            </radiogroup>        
+          </etch>
+          <etch label="Transform Length Options">
+            <checkbox name="run_time_configurable_transform_length" default="off" label="Run time configurable transform length" ctype="Bool" allow_advanced="false"/>
+          </etch>
+        </tab>
+        <!-- <listbox name="input_width" default="16" evaluate="false" label="Input width (Number of bits in each input sample's real and imaginary parts)" ctype="String" allow_advanced="false"> -->
+        <!--  <item value="8"/> -->
+        <!--  <item value="9"/> -->
+        <!--  <item value="10"/> -->
+        <!--  <item value="11"/> -->
+        <!-- <item value="12"/> -->
+        <!-- <item value="13"/> -->
+        <!-- <item value="14"/> -->
+        <!-- <item value="15"/> -->
+        <!-- <item value="16"/> -->
+        <!-- <item value="17"/> -->
+        <!-- <item value="18"/> -->
+        <!-- <item value="19"/> -->
+        <!-- <item value="20"/> -->
+        <!-- <item value="21"/> -->
+        <!-- <item value="22"/> -->
+        <!-- <item value="23"/> -->
+        <!-- <item value="24"/> -->
+        <!-- <item value="25"/> -->
+        <!-- <item value="26"/> -->
+        <!-- <item value="27"/> -->
+        <!-- <item value="28"/> -->
+        <!-- <item value="29"/> -->
+        <!-- <item value="30"/> -->
+        <!--  <item value="31"/> -->
+        <!--  <item value="32"/> -->
+        <!--  <item value="33"/> -->
+        <!--  <item value="34"/> -->
+        <!-- </listbox> -->
+        <tab name="Advanced" label="Advanced">
+          <etch label="Precision Options">
+              <listbox name="phase_factor_width" default="16" evaluate="false" label="Phase factor width" ctype="String" allow_advanced="false">
+                <item value="8"/>
+                <item value="9"/>
+                <item value="10"/>
+                <item value="11"/>
+                <item value="12"/>
+                <item value="13"/>
+                <item value="14"/>
+                <item value="15"/>
+                <item value="16"/>
+                <item value="17"/>
+                <item value="18"/>
+                <item value="19"/>
+                <item value="20"/>
+                <item value="21"/>
+                <item value="22"/>
+                <item value="23"/>
+                <item value="24"/>
+                <item value="25"/>
+                <item value="26"/>
+                <item value="27"/>
+                <item value="28"/>
+                <item value="29"/>
+                <item value="30"/>
+                <item value="31"/>
+                <item value="32"/>
+                <item value="33"/>
+                <item value="34"/>
+              </listbox>
+          </etch>
+          <radiogroup name="scaling_options" default="scaled" evaluate="false" label="Scaling options" ctype="String" allow_advanced="false">
+            <item label="Unscaled" value="unscaled"/>
+            <item label="Scaled" value="scaled"/>
+            <item label="Block floating point" value="block_floating_point"/>
+          </radiogroup>
+          <radiogroup name="rounding_modes" default="truncation" evaluate="false" label="Rounding modes" ctype="String" allow_advanced="false">
+            <item label="Truncation" value="truncation"/>
+            <item label="Convergent rounding" value="convergent_rounding"/>
+          </radiogroup>
+          <!-- <radiogroup name="input_ordering" default="natural_order" evaluate="false" label="Input ordering" ctype="String" allow_advanced="false"> -->
+          <!--  <item value="bit_reversed_order"/> -->
+          <!--  <item value="natural_order"/> -->
+          <!-- </radiogroup> -->
+          <etch label="Output Ordering">
+            <radiogroup name="output_ordering" default="bit_reversed_order" evaluate="false" label="Output ordering" ctype="String" allow_advanced="false">
+              <item label="Bit/Digit reversed order" value="bit_reversed_order"/>
+              <item label="Natural order" value="natural_order"/>
+            </radiogroup>
+            <checkbox name="cyclic_prefix_insertion" default="off" label="Cyclic prefix insertion" ctype="Bool" allow_advanced="false"/>
+          </etch>
+          <etch label="Optional Pins">
+              <!-- <checkbox name="ce" default="off" label="CE (Add a Clock Enable input pin)" ctype="Bool" allow_advanced="false"/> -->
+              <checkbox name="en" default="off" label="en" ctype="Bool" allow_advanced="false"/>
+              <checkbox name="rst" default="off" label="rst" ctype="Bool" allow_advanced="false"/>              
+              <checkbox name="ovflo" default="off" label="ovflo" ctype="Bool" allow_advanced="false"/>
+          </etch>
+       </tab>
+       <tab name="Implementation" label="Implementation">         
+         <etch label="Memory Options">
+            <radiogroup name="memory_options_data" default="block_ram" evaluate="false" label="Data" ctype="String" allow_advanced="false">
+              <item label="Block RAM" value="block_ram"/>
+              <item label="Distributed RAM" value="distributed_ram"/>
+            </radiogroup>
+            <radiogroup name="memory_options_phase_factors" default="block_ram" evaluate="false" label="Phase factors" ctype="String" allow_advanced="false">
+              <item label="Block RAM" value="block_ram"/>
+              <item label="Distributed RAM" value="distributed_ram"/>
+            </radiogroup>
+            <listbox name="number_of_stages_using_block_ram_for_data_and_phase_factors" default="1" evaluate="false" label="Number of stages using Block RAM" ctype="String" allow_advanced="false">
+              <item value="0"/>
+              <item value="1"/>
+              <item value="2"/>
+              <item value="3"/>
+              <item value="4"/>
+              <item value="5"/>
+              <item value="6"/>
+              <item value="7"/>
+              <item value="8"/>
+              <item value="9"/>
+              <item value="10"/>
+              <item value="11"/>
+            </listbox>
+            <radiogroup name="memory_options_reorder" default="block_ram" evaluate="false" label="Reorder buffer" ctype="String" allow_advanced="false">
+              <item label="Block RAM" value="block_ram"/>
+              <item label="Distributed RAM" value="distributed_ram"/>
+            </radiogroup>
+         </etch>
+         <etch label="Optimize Options">
+            <checkbox name="memory_options_hybrid" default="off" label="Optimize Block RAM count using hybrid memories" ctype="Bool" allow_advanced="false"/>
+            <checkbox name="optimize_for_speed_using_xtreme_dsp_slices" default="off" label="Optimize for speed using xtreme dsp slices" ctype="Bool" allow_advanced="false"/>
+            <checkbox name="fast_complex_mult" default="off" label="Complex multiplication" ctype="Bool" allow_advanced="false"/>
+            <checkbox name="fast_butterfly" default="off" label="Butterfly arithmetic" ctype="Bool" allow_advanced="false"/>
+         </etch>
+         <etch label="FPGA Area Estimation">
+           <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation" ctype="Bool" allow_advanced="false"/>
+           <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" evaluate="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]" />
+         </etch>
+       </tab>
+      <!-- <tab name="Implementation_tab" label="Implementation"> -->
+      <!-- </tab> -->
+    </tabpane>
+    <hiddenvar name="target_clock_frequency" default="250" evaluate="true" ctype="Int"/>
+    <hiddenvar name="simulation_type" default="external_xfix" evaluate="false" ctype="String"/>
+    <hiddenvar name="simulation_model" default="fftv6_CModel:fftv6_cmodel" evaluate="false" ctype="String"/>
+    <hiddenvar name="ip_name" default="Fast Fourier Transform" evaluate="false" ctype="String"/>
+    <hiddenvar name="ip_version" default="6.0" evaluate="false" ctype="String"/>
+    <hiddenvar name="dsptool_ready" default="true" evaluate="true" ctype="Bool"/>    
+    <hiddenvar name="input_ordering" default="natural_order" evaluate="false" ctype="String"/> 
+    <hiddenvar name="ce" default="true" ctype="Bool" evaluate="true" />
+    <hiddenvar name="sclr" default="0" ctype="Bool" evaluate="true"/>
+    <hiddenvar name="wrapper_available" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="port_translation_map" default="{ 'ce' => 'en', 'sclr' => 'rst' }" evaluate="false" ctype="String"/>
+    <hiddenvar name="ipcore_fpga_part" default="xlipgetpartsetting(gcb, {'virtex4', 'xc4vsx35', '-10', 'ff668'})" evaluate="true" ctype="StringVector" />
+    <!-- Hide this variable -->
+    <hiddenvar name="target_data_throughput" default="50" evaluate="true" ctype="Int"/>
+    <hiddenvar name="channels" default="1" evaluate="false" ctype="String"/>
+    <hiddenvar name="input_width" default="16" evaluate="false" ctype="String" />
+  </blockgui>
+</sysgenblock>
+

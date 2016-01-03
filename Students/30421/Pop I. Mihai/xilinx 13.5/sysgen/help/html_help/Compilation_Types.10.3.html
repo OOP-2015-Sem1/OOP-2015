@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>NGC Netlist Compilation</title>
+    <link rel="StyleSheet" href="css/Compilation_Types.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Compilation_Types.10.1.html#275343">System Generator Compilation Types</a> : NGC Netlist Compilation</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="275343">NGC Netlist Compilation</a></div>
+      <div class="Body"><a name="275344">The </a><span class="Bold">NGC Netlist</span> compilation target allows you to compile your design into a standalone Xilinx NGC binary netlist file. The NGC netlist file that System Generator produces contains the logical and optional constraint information for your design. This means the HDL, cores, and constraints file information corresponding to a System Generator design are self-contained within a single file. </div>
+      <div class="Body"><a name="271112">If you have chosen to include clock wrapper logic in your design, the netlist file is saved as </a><span class="Filename">&lt;design&gt;_cw.ngc</span>. Otherwise, the file is saved as <span class="Filename">&lt;design&gt;.ngc</span>. Here <span class="Filename">&lt;design&gt;</span> is derived from the portion of the design being compiled. This file can be used as a module in a larger design, or as input to <span class="Bold">NGDBuild</span> when the netlist constitutes the complete design. For an example showing how a System Generator design can be used as a component in a larger design, refer to the topic titled <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.06.07.html#278406', '');" title="Importing a System Generator Design into a Bigger System">Importing a System Generator Design into a Bigger System</a></span>.</div>
+      <div class="Body"><a name="271116">The NGC compilation target generates an HDL component instantiation template that </a>makes it easy to include your System Generator design as a component in a larger design. For VHDL compilation, the template is saved as <span class="Filename">&lt;design&gt;_cw.vho</span> when the clock wrapper is included. Otherwise it is saved as <span class="Filename">&lt;design&gt;.vho</span> . Alternatively, a <span class="Filename">.veo</span> extension is used for Verilog compilation. The instantiation template is saved in the design's target directory. </div>
+      <div class="Body"><a name="271120">System Generator produces the NGC netlist file by performing the following steps during </a>compilation: </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="271126">Runs the selected synthesis tool to produce a lower-level netlist. The type of netlist </a>(e.g., EDIF for Synplify or Synplify Pro, NGC for XST) depends on which synthesis tool is chosen for compilation. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Note2">
+        <span class="XNote">Note:&nbsp;</span><a name="274995">Note: IO buffers are not inserted in the design during synthesis. </a></div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="271128">Combines synthesis results, core netlists, black box netlists, and optionally the </a>constraints files into a single NGC file. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="270939">As shown below, you may select the NGC compilation target by left-clicking the </a><span class="Bold">Compilation</span> submenu control on the System Generator token dialog box, and selecting the <span class="Bold">NGC Netlist</span> target.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="271451"><img class="Default" src="images/Compilation_Types.10.3.1.jpg" width="283" height="140" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="271318">You may access additional compilation settings specific to </a><span class="Bold">NGC Netlist</span> compilation by clicking on the <span class="Bold">Settings...</span> button when <span class="Bold">NGC Netlis</span>t is selected as the compilation type in the System Generator token dialog box. Parameters specific to the NGC Netlist Settings dialog box include: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="271351">Include Clock Wrapper</a></span>: Selecting this checkbox tells System Generator whether the clock wrapper portion of your design should be included in the NGC netlist file. Refer to the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.06.05.html#283507', '');" title="Automatic Code Generation">Compilation Results</a></span> for more information on the clock wrapper. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Note2">
+        <span class="XNote">Note:&nbsp;</span><a name="275535">If you exclude the clock wrapper from multirate designs, you will need to drive the clock </a>enable ports with appropriate signals from your own top-level design. </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="271331">Include Constraints File</a></span>: Selecting this checkbox tells System Generator whether the constraints file associated with the design should be included in the NGC netlist file. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Note2">
+        <span class="XNote">Note:&nbsp;</span><a name="275542">When the constraints file is excluded, you should supply your own constraints to ensure </a>the multi-cycle paths in the System Generator design are appropriately constrained.</div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

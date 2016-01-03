@@ -1,0 +1,71 @@
+## Copyright (c) 1995-2010 Xilinx, Inc.  All rights reserved.
+
+## You may copy and modify these files for your own internal use solely with
+## Xilinx programmable logic devices and  Xilinx EDK system or create IP
+## modules solely for Xilinx programmable logic devices and Xilinx EDK system.
+## No rights are granted to distribute any files unless they are distributed in
+## Xilinx programmable logic devices.
+
+BEGIN $T.pcoreName$
+
+## Peripheral Options
+OPTION RUN_NGCBUILD = TRUE
+OPTION IMP_NETLIST = TRUE
+OPTION STYLE = $T.style$
+OPTION HDL = $T.hdl$
+OPTION IPTYPE = PERIPHERAL
+OPTION LAST_UPDATED = $T.version$
+OPTION USAGE_LEVEL = BASE_USER
+OPTION ARCH_SUPPORT_MAP = ( $T.part_family$=$if(T.is_development)$DEVELOPMENT$else$PRODUCTION$endif$ )
+
+## Bus Interfaces
+$T.bus_interfaces:{BUS_INTERFACE BUS = $it.bus$, BUS_STD = $it.bus_std$, BUS_TYPE = $it.bus_type$};separator="\n"$
+
+## Generics for VHDL or Parameters for Verilog
+PARAMETER C_BASEADDR = 0xffffffff, DT = std_logic_vector(31 downto 0), BUS = $T.bus_info.name$, ADDRESS = BASE, PAIR = C_HIGHADDR, MIN_SIZE = $T.memmap_info.min_size$, ASSIGNMENT = REQUIRE
+PARAMETER C_HIGHADDR = 0x00000000, DT = std_logic_vector(31 downto 0), BUS = $T.bus_info.name$, ADDRESS = HIGH, PAIR = C_BASEADDR, ASSIGNMENT = REQUIRE
+$if(T.isimportmode)$
+PARAMETER C_CODEBUG = SYSGEN, DT = String, ASSIGNMENT = CONSTANT 
+
+$endif$
+$T.bus_info.params.keys:{$mpd_ports_attr(attr_name="PARAMETER",name=it,param=T.bus_info.params.(it))$, BUS = $T.bus_info.name$};separator="\n"$
+
+# Bus specific parameters
+$T.params:{$mpd_params(param=it)$};separator="\n"$
+
+# Memory Map Information
+# From Registers
+$T.memmap_info.fromregs:{PARAMETER C_MEMMAP_$it.name;format="toUpper"$ = $it.offset_addr$, DT = integer, ASSIGNMENT = CONSTANT, TYPE = NON_HDL 
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_N_BITS = $it.n_bits$, DT = integer, ASSIGNMENT = CONSTANT, TYPE = NON_HDL 
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_BIN_PT = $it.bin_pt$, DT = integer, ASSIGNMENT = CONSTANT, TYPE = NON_HDL};separator="\n"$
+# To Registers
+$T.memmap_info.toregs:{PARAMETER C_MEMMAP_$it.name;format="toUpper"$ = $it.offset_addr$, DT = integer, ASSIGNMENT = CONSTANT, TYPE = NON_HDL
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_N_BITS = $it.n_bits$, DT = integer, ASSIGNMENT = CONSTANT, TYPE = NON_HDL
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_BIN_PT = $it.bin_pt$, DT = integer, ASSIGNMENT = CONSTANT, TYPE = NON_HDL};separator="\n"$
+# From FIFOs
+$T.memmap_info.fromfifos:{PARAMETER C_MEMMAP_$it.name;format="toUpper"$ = $it.offset_addr$, DT = integer, ASSIGNMENT = CONSTANT, TYPE = NON_HDL 
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_PERCENTFULL = $it.pfull.offset_addr$, DT = integer, ASSIGNMENT = CONSTANT, TYPE = NON_HDL 
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_EMPTY = $it.empty.offset_addr$, DT = integer, ASSIGNMENT = CONSTANT, TYPE = NON_HDL 
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_N_BITS = $it.n_bits$, DT = integer, ASSIGNMENT = CONSTANT, TYPE = NON_HDL 
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_BIN_PT = $it.bin_pt$, DT = integer, ASSIGNMENT = CONSTANT, TYPE = NON_HDL 
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_DEPTH = $it.depth$, DT = integer, ASSIGNMENT = CONSTANT, TYPE = NON_HDL};separator="\n"$
+# To FIFOs
+$T.memmap_info.tofifos:{PARAMETER C_MEMMAP_$it.name;format="toUpper"$ = $it.offset_addr$, DT = integer, ASSIGNMENT = CONSTANT, TYPE = NON_HDL
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_PERCENTFULL = $it.pfull.offset_addr$, DT = integer, ASSIGNMENT = CONSTANT, TYPE = NON_HDL
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_FULL = $it.full.offset_addr$, DT = integer, ASSIGNMENT = CONSTANT, TYPE = NON_HDL
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_N_BITS = $it.n_bits$, DT = integer, ASSIGNMENT = CONSTANT, TYPE = NON_HDL
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_BIN_PT = $it.bin_pt$, DT = integer, ASSIGNMENT = CONSTANT, TYPE = NON_HDL
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_DEPTH = $it.depth$, DT = integer, ASSIGNMENT = CONSTANT, TYPE = NON_HDL};separator="\n"$
+# Shared RAMs
+$T.memmap_info.shmems:{PARAMETER C_MEMMAP_$it.name;format="toUpper"$ = $it.offset_addr$, DT = integer, ASSIGNMENT = CONSTANT, TYPE = NON_HDL
+# PARAMETER C_MEMMAP_$it.name;format="toUpper"$_GRANT = $it.grant$, DT = integer, ASSIGNMENT = CONSTANT, TYPE = NON_HDL
+# PARAMETER C_MEMMAP_$it.name;format="toUpper"$_REQ = $it.req$, DT = integer, ASSIGNMENT = CONSTANT, TYPE = NON_HDL
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_N_BITS = $it.n_bits$, DT = integer, ASSIGNMENT = CONSTANT, TYPE = NON_HDL
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_BIN_PT = $it.bin_pt$, DT = integer, ASSIGNMENT = CONSTANT, TYPE = NON_HDL
+PARAMETER C_MEMMAP_$it.name;format="toUpper"$_DEPTH = $it.depth$, DT = integer, ASSIGNMENT = CONSTANT, TYPE = NON_HDL};separator="\n"$
+
+# Ports
+$[T.inports,T.outports]:{$ports_attr(attr_name="PORT",ports=it)$};separator="\n"$
+$[T.sginports,T.sgoutports]:{$ports_attr(attr_name="PORT",ports=it)$};separator="\n"$
+
+END

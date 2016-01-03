@@ -1,0 +1,70 @@
+<!--  *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.            -->
+<!--  *  Reproduction or reuse, in any form, without the explicit written  -->
+<!--  *  consent of Xilinx, Inc., is strictly prohibited.                  -->
+<sysgenblock simulinkname=" System Generator" tag="genX" block_type="sysgen" has_userdata="true">
+  <icon width="50" height="50" wmark_color="token" bg_color="white" caption_format="System\nGenerator"/>
+  <callbacks DeleteFcn="xlSysgenGUI('delete', gcs, gcbh);" ModelCloseFcn="xlSysgenGUI('Close',gcs,gcbh);" OpenFcn="xlSysgenGUI('startup',gcs,gcbh);" PostSaveFcn="xlSysgenGUI('Save')" LoadFcn="xlUpdateSgTokenIconStats(gcbh);xlBlockLoadCallback(gcbh);" />
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsBasic"/>
+    <library name="xbsTools"/>
+  </libraries>
+  <subsystem_model file="system_generator_subsystem.mdl"/>
+  <blockgui label="Xilinx System Generator">
+    <editbox name="infoedit" default=" System Generator" read_only="true" multi_line="true" evaluate="false"/>
+    <editbox name="xilinxfamily" label="Xilinx family" default="Virtex6" evaluate="false"/>
+    <editbox name="part" label="Part" default="xc6vsx315t" evaluate="false"/>
+    <editbox name="speed" label="Speed" default="-3" evaluate="false"/>
+    <editbox name="package" label="Package" default="ff1156" evaluate="false"/>
+    <listbox name="synthesis_tool" label="Synthesis tool" default="XST" evaluate="true">
+      <item value="Spectrum"/>
+      <item value="Synplify"/>
+      <item value="Synplify Pro"/>
+      <item value="XST"/>
+      <item value="RDS"/>
+      <item value="Precision"/>
+    </listbox>
+    <listbox name="clock_wrapper" label="Clock Wrapper" default="Clock Enables" evaluate="true">
+      <item value="Clock Enables"/>
+      <item value="Clock Generator(DCM)"/>
+      <item value="Expose Clock Ports"/>
+    </listbox>
+    <editbox name="directory" label="Target directory" default="./netlist" evaluate="false"/>
+    <listbox name="proj_type" label="Project Type" default="Project Navigator" evaluate="true">
+      <item value="Project Navigator"/>
+      <item value="PlanAhead"/>
+    </listbox>
+    <listbox name="Synth_file" label="Synthesis strategy" default="XST Defaults" evaluate="true">
+      <item value="XST Defaults"/>
+      <item value="PlanAhead Defaults"/>
+      <item value="Rodin Synthesis Defaults"/>
+    </listbox>
+    <listbox name="Impl_file" label="Implementation strategy" default="ISE Defaults" evaluate="true">
+      <item value="ISE Defaults"/>
+      <item value="Rodin Implementation Defaults"/>
+    </listbox>
+    <checkbox name="testbench" label="Testbench" default="off" evaluate="true"/>
+    <editbox name="simulink_period" label="Simulink period" default="1" evaluate="true"/>
+    <editbox name="sysclk_period" label="System clock period" default="10" evaluate="true"/>
+    <editbox name="dcm_input_clock_period" label="DCM input clock period" default="10" evaluate="true"/>
+    <checkbox name="incr_netlist" label="Incremental netlisting" default="off" evaluate="true"/>
+    <listbox name="trim_vbits" label="Trim valid bits" default="Everywhere in SubSystem" evaluate="true">
+      <item value="According to Block Masks"/>
+      <item value="Everywhere in SubSystem"/>
+      <item value="No Where in SubSystem"/>
+    </listbox>
+    <listbox name="dbl_ovrd" label="Override with doubles" default="According to Block Masks" evaluate="true">
+      <item value="According to Block Masks"/>
+      <item value="Everywhere in SubSystem"/>
+      <item value="No Where in SubSystem"/>
+    </listbox>
+    <listbox name="core_generation" label="Generate cores" default="According to Block Masks" evaluate="true">
+      <item value="According to Block Masks"/>
+      <item value="Everywhere Available"/>
+      <item value="Not Needed - Already Generated"/>
+    </listbox>
+    <checkbox name="run_coregen" label="Run CoreGen" default="off" evaluate="true"/>
+    <checkbox name="deprecated_control" label="Show deprecated controls" default="off" evaluate="true"/>
+    <hiddenvar name="eval_field" default="0" evaluate="true"/>
+  </blockgui>
+</sysgenblock>

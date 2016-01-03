@@ -1,0 +1,630 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Design Styles for the DSP48</title>
+    <link rel="StyleSheet" href="css/HW_Design.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="HW_Design.6.1.html#312626">Hardware Design Using System Generator</a> : Design Styles for the DSP48</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="312626">Design Styles for the DSP48</a></div>
+      <div class="Heading2"><a name="312627">About the DSP48</a></div>
+      <div class="Body"><a name="312628">Xilinx Virtex® and Spartan® devices offer an efficient building block for DSP applications </a>called the DSP48 (also known as the Xtreme DSP Slice). The DSP48 is available as a System Generator block which is a wrapper for the DSP48 UNISIM primitive. Architectural and usage information for this primitive can be found in the DSP48 Users Guide for your device.  </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="312634"><img class="Default" src="images/HW_Design.6.12.1.jpg" width="522" height="223" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="312635">The DSP48 combines an 18-bit by 18-bit signed multiplier with a 48-bit adder and a </a>programmable mux to select the adder's inputs. It implements the basic operation: "p=a*b +(c+cin);", however other operations can be selected dynamically. Optional input and multiplier pipeline registers are also included and must be used to achieve maximum speed. Also included with the DSP48 are high performance local interconnects between adjacent DSP48 blocks (BCIN-BCOUT and PCIN-PCOUT). The DSP48 also includes support for symmetric rounding. This combination of features enables DSP systems which use the higher-speedDSP48 devices to be clocked at over 500 MHz.</div>
+      <div class="Body"><a name="312636">There are three ways to program a DSP48 in System Generator: </a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="312637">Use Standard Components</a></span> - Map designs to Mult and AddSub blocks or use higher-level IP such as the MACFIR filter generator blocks. This approach is useful if the design uses a lower-speed clock and the mapping to DSP48s is not required. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="312638">Use Synthesizable Blocks</a></span> - Structure the design to map onto the DSP48's internal architecture and compose the design from synthesizable Mult, AddSub, Mux and Delay blocks. This approach relies on logic synthesis to infer DSP48 blocks where appropriate. This approach gives the compiler the most freedom and can often achieve full-rate performance. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="312639">Use DSP48 Blocks</a></span> - Use System Generator's DSP48 and DSP48 Macro blocks to directly implement DSP48-based designs. This is the highest performance design technique. Be aware however that obtaining maximum performance and minimum area for designs using DSP48s may require careful mapping of the target algorithm to the DSP48's internal architecture, as well as the physical planning of the design. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="312640">Designs Using Standard Components </a></div>
+      <div class="Body"><a name="312641">Designs for Xilinx FPGAs such as Spartan®-3 will compile to the Virtex®-4 devices. </a>Multipliers will be mapped into the DSP48 block, however, logic synthesis tools cannot pack adders and muxes into the DSP48 block since these blocks are delivered as cores which prevents synthesis from optimizing the logic. Place and route tools do place the MULT18x18S and MULT18x18 into the DSP48 block but do not pack the adder, or mux into the DSP48 block. (PAR will however pack the mux into the LUT-based adder).  </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="312647"><img class="Default" src="images/HW_Design.6.12.2.jpg" width="522" height="98" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="312648">To obtain the best possible performance, you should set the multiplier latency to 3 and </a>include an input register to cover the delay from the DSP48's output to the adder. In Virtex®-4, unlike Spartan®-3 devices, the multiply speed in nearly independent of bit width. For medium speed designs, this approach works fine. </div>
+      <div class="Body"><a name="312649">An additional way to use the DSP48 is to use IP blocks optimized for the DSP48 such as the </a>MACFIR block available from coregen, or to use the architecture wizard to generate a custom configured DSP48. Both of these approached require importing the logic containing the DSP48 as a black box into System Generator. Simulation will require ModelSim HDL cosim. </div>
+      <div class="Heading2"><a name="312650">Designs Using Synthesizable Mult, Mux and AddSub Blocks </a></div>
+      <div class="Body"><a name="312651">Synthesis tools now have the ability to infer DSP48 logic. This enables the tools to pack </a>adders, multipliers and muxes into the DSP48 block, as well as to enable the application of retiming and other synthesis techniques such as register duplication. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="312657"><img class="Default" src="images/HW_Design.6.12.3.jpg" width="522" height="112" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="312658">If the design is composed of synthesizable blocks, both Synplify Pro and XST have </a>demonstrated the ability to infer DSP48s and to make use of the DSP48's local interconnect buses (PCOUT-PCIN and BCOUT-BCIN). In the above example, three blocks have been built using the MCode blocks which are defined by the following M-functions. </div>
+      <div class="Code"><a name="312659">function o = xlsynmux2(i0,i1,sel) </a></div>
+      <div class="Code"><a name="312660">if (sel==0) o=i0; else  o=i1; end </a></div>
+      <div class="Code"><a name="312661">&nbsp;</a></div>
+      <div class="Code"><a name="312662">function p = xlsynmult(a,b) </a></div>
+      <div class="Code"><a name="312663">p=a*b; </a></div>
+      <div class="Code"><a name="312664">&nbsp;</a></div>
+      <div class="Code"><a name="312665">function s = xlsynadd(a,b) </a></div>
+      <div class="Code"><a name="312666">s=a+b; </a></div>
+      <div class="Body"><a name="312667">For synthesis to work, the circuit must be mappable to the DSP48 and signal bitwidths </a>must be less than the equivalent buses in the DPS48. </div>
+      <div class="Body"><a name="484118">You should kept in mind that the logic synthesis tools are rapidly evolving and that </a>inferring DPS48 configurations is more of an art than a science. This means that some mappable designs may not be mapped efficiently, or that the mapping results may not be consistent. It will be necessary to inspect the post synthesis netlist using a tool similar to Synplify Pro's gate-level technology viewer to determine if the design is being correctly mapped. If not, it may be possible to recast it to be correctly inferred. Click on the following link to open a Simulink model containing a fully synthesizable FIR filter. <a href="javascript:void();" onClick="WWHFrame.WWHBrowser.fMLProtocol('cd(xilinx.environment.getpath(\'sysgen\'));cd examples/dsp48/synth_fir;open synth_fir_tb.mdl')">(dsp48/synth_fir_tb)</a></div>
+      <div class="Body"><a name="359338">&nbsp;</a></div>
+      <div class="Heading2"><a name="312670">Designs that Use DSP48 and DSP48 Macro Blocks</a></div>
+      <div class="Heading3"><a name="312671">DSP48 Block</a></div>
+      <div class="Body"><a name="312678">&nbsp;</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="312677"><img class="Default" src="images/HW_Design.6.12.4.jpg" width="522" height="191" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="484180">The </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.33.html#271125', '');" title="DSP48">DSP48</a></span>  block is effectively a wrapper for the DSP48 UNISIM primitive. Because of this, any possible DSP48 design can be implemented. This low-level implementation however requires an 11-bit binary opmode to be routed to the DSP48's control ports in order to configure its function. The <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.20.html#271115', '');" title="Constant">Constant</a></span>  block has a special mode enabling it to generate a DSP48 control field. The DSP48's parameters dialog box is used to configure the pipelining mode of the DSP48 as well as the use of the DSP48's local interconnect buses named PCOUT-PCIN and BCOUT-BCIN. Click on the following link to open a Simulink model and try out the DSP48 block. <a href="javascript:void();" onClick="WWHFrame.WWHBrowser.fMLProtocol('cd(xilinx.environment.getpath(\'sysgen\'));cd examples/dsp48;open dsp48_primitive.mdl')">(dsp48/dsp48)</a></div>
+      <div class="Heading3"><a name="334025">Dynamic Control of the DSP48</a></div>
+      <div class="Body"><a name="312688">The DSP48 has the unique capability of being able to change its operation on a per cycle </a>basis. This is useful in applications where the DSP48 is used in a 'resource shared' mode such as a FIR filter where multiple taps are implemented by the same multiplier. A simple method of generating this type of control pattern is to use a mux to select the DSP48 instruction on a clock by clock basis.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="312694"><img class="Default" src="images/HW_Design.6.12.5.jpg" width="522" height="265" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="484198">The above example illustrates the use of a DSP48 and Constant blocks to implement a 35-</a>bit by 35-bit multiplier over 4 clock cycles. During synthesis, the mux and constant logic is reduced by logic optimization. In the example above, the DSP48 block and the 4:1 mux are reduced to just two 4-LUTs. Click on the following link to open a Simulink model that illustrates how to implement both parallel and sequential 35*35-bit multipliers using dynamic operation for the sequential mode of operation. <a href="javascript:void();" onClick="WWHFrame.WWHBrowser.fMLProtocol('cd(xilinx.environment.getpath(\'sysgen\'));cd examples/dsp48/mult35x35;open mult35x35_tb.mdl')">(dsp48/mult35x35_tb)</a></div>
+      <div class="Body"><a name="359473">&nbsp;</a></div>
+      <div class="Heading3"><a name="312697">DSP48 Macro Block</a></div>
+      <div class="Body"><a name="312704">&nbsp;</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="312703"><img class="Default" src="images/HW_Design.6.12.6.jpg" width="522" height="214" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="484238">The </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.34.html#708569', '');" title="DSP48 Macro">DSP48 Macro</a></span>  block is a wrapper for the DSP48 block which makes it simple to implement a sequence of DSP48 instructions (known as dynamic instructions). In addition, it provides support for specifying input and output types. For example, in the model above, a DSP48 Macro block is configured to implement a complex multiplier using a sequence of four different instructions. The instructions are entered in a text window in the DSP48 Macro's dialog menu. Click on the following link to open a Simulink model and try out the DSP48 Macro block. <a href="javascript:void();" onClick="WWHFrame.WWHBrowser.fMLProtocol('cd(xilinx.environment.getpath(\'sysgen\'));cd examples/dsp48;open dsp48_macro.mdl')">(dsp48/dsp48_mac)</a></div>
+      <div class="Body"><a name="359552">&nbsp;</a></div>
+      <div class="Heading3"><a name="497388">Replacing a DSP48 Macro Block with DSP48 Macro 2.0 Block</a></div>
+      <div class="Body"><a name="497389">In Release 11.4, Xilinx introduced version 2.0 of the DSP Macro block. The following text </a>describes how to replace an existing DSP Macro block with a DSP Macro 2.0 block. </div>
+      <div class="Body"><a name="497399">One fundamental difference of the new DSP48 Macro 2.0 block compared to the previous </a>version is that internal input multiplexer circuits are removed from the core in order to streamline and minimize the size of logic for this IP. This has some implications when migrating from an existing design with DSP48 Macro to the new DSP48 Macro 2.0. You can no longer specify multiple input operands (i.e. A1, A2, B1, B2, etc…). Because of this, you must add a simple MUX circuit when designing with the new DSP48 Macro 2.0 if there is more than one unique input operand as shown in the following example. </div>
+      <div class="Heading4"><a name="497401">DSP48 Macro-Based Signed 35x35 Multiplier </a></div>
+      <div class="Body"><a name="497403">The following DSP48 Macro consists of multiple 18-bit input operands such as alo, ahi for </a>input to port A and blo, bhi for input to port B. The input operands and Opcode instructions are specified as shown below. Notice that the multiple input operands are handled internally by the DSP48 Macro block. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="497438"><img class="Default" src="images/HW_Design.6.12.7.jpg" width="384" height="264" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="497547">&nbsp;</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="497546"><img class="Default" src="images/HW_Design.6.12.8.jpg" width="390" height="462" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading4"><a name="497558">DSP48 Macro 2.0-Based Signed 35x35 Multiplier </a></div>
+      <div class="Body"><a name="497559">The same model shown above can be migrated to the new DSP48 Macro 2.0 block. The </a>following simple steps and design guidelines are required when updating the design.</div>
+      <div class="Numbered_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="497561">Make sure that input and output pipeline register selections between the old and the </a>new block are the same. You can do this by examining and comparing the Pipeline Options settings.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="497562">If there is more than one unique input operand required, you must provide MUX </a>circuits as shown in the fugure below.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="497563">Ensure that the new design provides the same functionality correctness and quality of </a>results compared to the old version. This can be accomplished by performing a quick Simulink simulation and implementing the design.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="497687">When configuring and specifying a pre-adder mode using the DSP48 Macro 2.0 block </a>in System Generator, certain design parameters such as data width input operands are device dependent. Refer to the <a href="javascript:void(0);" onClick="WWHFrame.WWHBrowser.fXilinxLink('coregen/ip/xilinx/dsp/com/xilinx/ip/xbip_dsp48_macro_v2_0/doc/dsp48_macro_ds754.pdf','')">LogiCORE IP DSP48 Macro v2.0 Product Specification</a> for details on all the parameters on this LogicCore IP.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="497688">4 inputs and 2 ouputs MUX circuit can be decoded as the following:</a></div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 316.8pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 79.2pt;">
+            <div class="CellHeading"><a name="536529">sel</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 79.2pt;">
+            <div class="CellHeading"><a name="536531">A inputs</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 79.2pt;">
+            <div class="CellHeading"><a name="536533">B inputs</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 79.2pt;">
+            <div class="CellHeading"><a name="536535">Opode</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="536537">0</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="536539">alo</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="536541">blo</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="536543">A*B</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="536545">1</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="536547">alo</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="536549">bhi</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="536551">A*B+P&gt;&gt;17</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="536553">2</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="536555">ahi</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="536557">blo</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="536559">A*B+P</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="536561">3</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="536563">ahi</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="536565">bhi</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="536567">A*B+P&gt;&gt;17</a></div>
+          </td>
+        </tr>
+      </table>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="497715"><img class="Default" src="images/HW_Design.6.12.9.jpg" width="612" height="685" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body2"><a name="497799">You can find the above complete model at the following pathname:</a><br /><span class="Filename">&lt;sysgen_path&gt;/examples/dsp48/mult35x35/dsp48macro_mult35x35.mdl</span></div>
+      <div class="Heading2"><a name="497692">DSP48 Design Techniques</a></div>
+      <div class="Heading3"><a name="312710">Designing Filters with the DSP48</a></div>
+      <div class="Body"><a name="484256">The DSP48 is an ideal block to implement FIR filters. </a>Click on the following link to open a model that demonstrates how to use the DSP48 block for Type 1 and Type 2 FIR filters, as well as sequential and semi/parallel FIR filters. <a href="javascript:void();" onClick="WWHFrame.WWHBrowser.fMLProtocol('cd(xilinx.environment.getpath(\'sysgen\'));cd examples/dsp48/firs;open dsp48_firs_tb.mdl')">(dsp48/dsp48_firs_tb)</a></div>
+      <div class="Body"><a name="359617">&nbsp;</a></div>
+      <div class="Heading3"><a name="312712">Design Techniques for Very-High Performance Designs</a></div>
+      <div class="Body"><a name="312713">DSP48-based designs usually require I/O, BRAMS and SLICE logic. Typically, this </a>associated SLICE logic is used to implement delay registers, SRL16s, muxes, counters, and control logic. Since the DSP48 block is expected to operate at speeds greater than 500 MHz, other components will also be required to operate at the same speed. This generally requires special design techniques for the non-DSP48 logic. </div>
+      <div class="Body"><a name="312714">At 500 MHz only 2 ns is available in each clock. For V4-11 devices, roughly 300 ps are </a>required for register clock to out and 300 ps for setup. For comparison, a LUT delay is 166 ps. Special inputs and outputs such as clock enables and DSP48 and BRAM signals generally have setup and clock to out times closer to 500 ps. With clock skew and jitter, roughly 1 ns is available for net delays. This restriction will generally allow only 1 net in each path and it must be fairly short. </div>
+      <div class="Body"><a name="312715">There are a number of guidelines that can be used to insure the operation at DSP48 speeds. </a>Some of these guidelines are outlined below. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="312721"><img class="Default" src="images/HW_Design.6.12.10.jpg" width="522" height="240" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Numbered_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="312722">Always use DSP48, BRAM16, FIFO16 with input, mult and output registers </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="312723">Use additional FF to buffer DSP48 and BRAM outputs if necessary </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="312724">Plan out the usage of the PCOUT-PCIN bus to allow DSP48 chaining </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="312725">Add registers to any path that is greater than 20 - 40 slices long </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">5.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="312726">Limit fanout to 32 loads located within a 20 slice distance </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">6.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="312727">Add output registers to any LUT-based logic </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">7.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="312728">Limit LUTs to 1 level or a 4:1 MUX and insure a local register for input or output </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">8.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="312729">Use RAMs, SRL16 to clock out control patterns instead of state machines </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">9.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="312730">Use DSP48 to implement counters and adders greater than 8-16 bits </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">10.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="312731">Use area constraints </a>– "INST ff1*  LOC = SLICE_X0Y8:SLICE_X1Y23;"</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading3"><a name="312732">Physical Planning for DSP48-Based Designs</a></div>
+      <div class="Body"><a name="312733">The DSP48 requires correct placement to achieve dense, high performance designs. While </a>the automatic place and route tools do a good job, the best results may require manual placement of DSP48 and RAM blocks. There are several additional issues with the DSP48s. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="312739"><img class="Default" src="images/HW_Design.6.12.11.jpg" width="522" height="223" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading4"><a name="312740">Cascade Routing Buses</a></div>
+      <div class="Body"><a name="312741">Adjacent DSP48 blocks are connected with two local buses called PCOUT, and BCOUT. </a>The PCOUT bus is used to pass accumulation data from one DSP48 to the next. The BCOUT bus is used to pass delayed B input data to the next DSP48. The DSP48 and DSP48 Macro block both support PCOUT and BCOUT buses. The use of the buses is shown in the figure above, which illustrates a pipelined 4-Tap Type 1 FIR filter. </div>
+      <div class="Heading4"><a name="312742">C-Input Sharing </a></div>
+      <div class="Body"><a name="312743">Each pair of DSP48s share a single C input. You should be aware of this when you do </a>resource planning. Since the placer will not always find the most optimal placement to share C inputs, DSP48s should avoid using C inputs if possible. </div>
+      <div class="Heading4"><a name="312744">Adder Trees Planning</a></div>
+      <div class="Body"><a name="312745">Tree-based filter topologies are problematic for efficient DSP48 implementation. An adder </a>tree requires isolated 2-input adders. Two input 36-bit adders can be implemented using a single DSP48, however this requires a C input and precludes the use of the multiplier. In addition, the long signals between DSP48s may require additional pipeline stages. A better approach is to convert the tree into a pipelined cascade. </div>
+      <div class="Heading4"><a name="312746">Placement</a></div>
+      <div class="Body"><a name="312747">Most designs will benefit from some placement of DSP48 and BRAMs. Use of area </a>constraints to constrain LUT fabric logic placement may also be beneficial. </div>
+      <div class="Heading4"><a name="312748">Signal Length Planning</a></div>
+      <div class="Body"><a name="312749">At 500 MHz, signal lengths should be limited to around 20 slices. This means that long </a>signals should have multiple pipeline stages. </div>
+      <div class="Heading4"><a name="312750">Clock Enable Planning</a></div>
+      <div class="Body"><a name="312751">When using the </a><span class="Bold">Clock Enables</span> clocking option, the clock enables are often the limiting path at high frequencies. This is partially due to System Generator's use of LUTs to gate clocks at the destination. To avoid clock enables in the critical path, avoid using the System Generator upsampled and downsampled clock domains. This requires the manual use of clock enables for logic that runs at less than the system clock rate. </div>
+      <div class="Heading4"><a name="312752">Place and Route Flow</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="312753">Use the command </a><span class="Filename">map -timing</span> with effort level high for both map and place </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="312754">Use trce </a>–v 100 to get a good sense of the failing nets and inspect the <span class="Filename">xflow/design.twr</span> file to understand the nature of the design's timing. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="312755">The file</a><span class="Filename"> bitstream_v4.opt</span> is available in the <span class="Filename">examples/dsp48</span> directory. This file can be used with the <span class="Bold">Bitstream</span> compile target to set the PAR options mentioned above. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading4"><a name="312756">Synthesis Flow</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="312757">Use Synplify Pro with retiming and pipelining enabled to avoid having to manually </a>pipeline every LUT and signal. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="312758">Use Synplify Pro with the fanout limit set around 32 to avoid long net delays. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="312759">Open compiled projects in Synplify Pro and inspect the generated logic using the </a>RTL- and Gate-level views to get a good idea of what logic is being generated. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="312760">The file </a><span class="Filename">syn.pl</span> is available in the <span class="Filename">examples/dsp48</span> directory. Place this file in <span class="Filename">&lt;ISE_Design_Suite_tree&gt;/sysgen/scripts</span> directory to modify the synthesis options in System Generator</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading4"><a name="312761">Logic Depth Planning</a></div>
+      <div class="Body"><a name="312762">The following rules seem to allow the LUT fabric to run at 450 MHz using a -11 V4 device:</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="312763">Only one net can be allowed in a critical path at 450 MHz. This allows a 4:1 mux to a </a>reg a 4_input LUT to a reg or a net through a LUT directly to a DSP48 </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="312764">Counters up to 16-bits can be used, but do not use count limited counters without </a>additional pipelining </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="312765">If accumulators or counters are used, invert the enable line to an active-low condition </a>to prevent a extra LUT from being inserted in the critical path </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="312766">Any adders must have local input registers. It may be necessary to place control </a>counters in the DSP48 to insure speed. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading4"><a name="312767">Fanout Planning</a></div>
+      <div class="Body"><a name="312768">Avoid fanouts of more than 32 LUTs or 8 DSP48s or BRAMs. This can be avoided by </a>inserting additional pipeline registers in these signals paths. </div>
+      <div class="Heading4"><a name="312769">Register Retiming</a></div>
+      <div class="Body"><a name="312770">Check retiming on delay blocks to allow them to be used as registers for pipelining. Then </a>use Synplify Pro or XST with retiming enabled to allow the synthesis tool to move registers into optimal positions.</div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

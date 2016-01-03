@@ -1,0 +1,57 @@
+<!--   *  Copyright (c) 2008, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="_hwcosim" block_type="xtremedspcosim">
+  <initialization file="xlxtremedspcosim_init.m"/>
+  <icon width="92" height="95" wmark_color="white" bg_color="gray" file="xtremedspcosim_icon.m"/>
+  <dll name="sysgen" entry_point="hwcosim_block_config"/>
+  <handlers enablement="XtremeDSPEnablement" action="XtremeDSPGuiAction"/>
+  <libraries>
+    <library name="XtremeDSPRuntimeCosim_r4"/>
+  </libraries>
+  <doc htmlname="XtremeDSP Co-Simulation"/>
+  <blockgui label="XtremeDSP Development Kit Hardware Co-simulation">
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <etch name="clocketch" label="Clocking">
+          <radiogroup name="clkSrc" default="Single Stepped" evaluate="true" label="Clock source" ctype="Int">
+            <item value="Single Stepped" label="Single stepped"/>
+            <item value="Free Running" label="Free running"/>
+          </radiogroup>
+          <editbox name="prgClkFreq" default="40 " evaluate="true" label="Frequency (MHz)" ctype="Double"/>
+        </etch>
+        <etch name="ifaceetch" label="Interface">
+          <listbox name="cardNumber" default="1 (first card found)" evaluate="true" label="Card number" ctype="Int">
+            <item value="1 (first card found)"/>
+            <item value="2"/>
+            <item value="3"/>
+            <item value="4"/>
+            <item value="5"/>
+            <item value="6"/>
+            <item value="7"/>
+            <item value="8"/>
+          </listbox>
+          <radiogroup name="busType" default="PCI" evaluate="true" label="Bus" ctype="Int">
+            <item value="PCI" label="PCI"/>
+            <item value="USB" label="USB"/>
+          </radiogroup>
+        </etch>
+        <checkbox name="hasCombinationalPath" default="on" evaluate="true" label="Has combinational path" ctype="Int"/>
+        <glayout cols="2">
+          <editbox name="bitFileName" default="example.bit " evaluate="false" label="Bitstream file" ctype="String"/>
+          <browsebutton name="bitfiledialog" label="..." filter="Configuraton Bitstream (*.bit)"/>
+        </glayout>
+      </tab>
+      <tab name="sharedmemories" label="Shared Memories">
+        <editbox name="treeview" read_only="true" top_label="false" evaluate="false" multi_line="true"/>
+      </tab>
+    </tabpane>
+    <workspacevar name="engineDll" ctype="String"/>
+    <workspacevar name="binDir" ctype="String"/>
+    <hiddenvar name="cached_clk_src" default="Single Stepped" evaluate="true"/>
+    <hiddenvar name="last_bus_type" default="PCI" evaluate="true"/>
+    <hiddenvar name="Scheme" default="Cosim" evaluate="true"/>
+    <hiddenvar name="design_xtable" default="{'clocksGcd' =&gt; 1, 'ports' =&gt; { }}" evaluate="false" ctype="String"/>
+    <hiddenvar name="memxtable" default="" evaluate="false"/>
+  </blockgui>
+</sysgenblock>

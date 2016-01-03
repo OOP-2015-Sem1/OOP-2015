@@ -9,17 +9,16 @@ import uno.java.entities.Card;
 import uno.java.game.Game;
 
 public class PlayerCardsPanelHorizontal extends PlayerCardsPanel {
-	public PlayerCardsPanelHorizontal(Dimension dimension){
+	public PlayerCardsPanelHorizontal(Dimension dimension) {
 		super(dimension);
 		this.setLayout(null);
 	}
-	public void arrangeCards(ArrayList<Card> cards){
-		for(Card card: cards){
-			//if(this.player.isTurn()){
-				card.addMouseListener(Constants.gameHandler);
-				card.addMouseListener(this.handler);
-			//}
-			card.setBounds(new Rectangle(this.x,this.y,95,152));
+
+	public void arrangeCards(ArrayList<Card> cards) {
+		for (Card card : cards) {
+			card.addMouseListener(Constants.gameHandler);
+			card.addMouseListener(this.handler);
+			card.setBounds(new Rectangle(this.x, this.y, 95, 152));
 			this.add(card);
 			card.repaint();
 			this.x = this.x + 25;

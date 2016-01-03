@@ -1,0 +1,176 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="FIR Compiler 4.0 " block_type="fir_compiler_v4_0">
+  <icon width="95" height="142" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="fir_compiler_adaptor"/>
+  <handlers enablement="xlfircv4enablement" action="xlipmagicaction"/>  
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsDSP"/>
+  </libraries>
+  <blockgui label="Xilinx FIR Compiler 4.0">
+    <!-- <editbox name="infoedit" default="FIR Compiler 4.0&lt;br&gt;&lt;br&gt;The Xilinx FIR Compiler LogiCORE is a module for generation of high speed, compact filter implementations that can be configured to implement many different filtering functions." read_only="true" evaluate="false" multi_line="true"/> -->
+    <tabpane>
+      <tab name="Coregen_Parameters_tab" label="Filter Specification">
+        <etch label="Filter Coefficients" name="Load_Filter_Coefficients">
+         <editbox name="coefficient_file" default="[1,2,3,4]" top_label="true" evaluate="true" label="Coefficients" ctype="DoubleVector" />
+         <editbox name="coefficient_sets" default="1" top_label="true" evaluate="true" label="Number of coefficient sets " ctype="Int"/>
+         </etch>
+         <etch label="Filter Specification">
+           <listbox name="filter_type" default="Single_Rate" evaluate="false" label="Filter type " ctype="String" allow_advanced="false">
+             <item value="Single_Rate"/>
+             <item value="Interpolation"/>
+             <item value="Decimation"/>
+             <item value="Interpolated"/>
+             <item value="Polyphase_Filter_Bank_Transmitter"/>
+             <item value="Polyphase_Filter_Bank_Receiver"/>
+           </listbox>           
+           <radiogroup name="rate_change_type" default="Integer" evaluate="false" label="Rate change type " ctype="String" allow_advanced="false">
+             <item value="Integer"/>
+             <item value="Fixed_Fractional"/>         
+           </radiogroup>
+           <editbox name="interpolation_rate" default="1" top_label="true" evaluate="true" label="Interpolation rate value" ctype="Int"/>
+           <editbox name="decimation_rate" default="1" top_label="true" evaluate="true" label="Decimation rate value" ctype="Int"/>
+           <editbox name="zero_pack_factor" default="1" top_label="true" evaluate="true" label="Zero pack factor" ctype="Int"/>
+           <editbox name="number_channels" default="1" top_label="true" evaluate="true" label="Number of channels " ctype="Int"/>
+           <editbox name="ipcore_input_sample_period" default="1" top_label="true" evaluate="true" label="Effective input sample period (clock_frequency / (sample_frequency * number_channels))" ctype="Int"/>
+         </etch>
+       </tab>
+       <tab name="Coregen_Parameters_tab2" label="Implementation"> 
+         <listbox name="filter_architecture" default="Systolic_Multiply_Accumulate" evaluate="false" label="Filter architecture" ctype="String" allow_advanced="false">
+           <item value="Systolic_Multiply_Accumulate"/>
+           <item value="Transpose_Multiply_Accumulate"/>
+           <item value="Distributed_Arithmetic"/>
+         </listbox>
+         <etch label="Coefficient Options">
+           <checkbox name="coefficient_reload" default="off" label="Use reloadable coefficients" ctype="Bool" allow_advanced="false"/>
+           <listbox name="coefficient_structure" default="Inferred" evaluate="false" label="Coefficient structure" ctype="String" allow_advanced="false">
+             <item value="Inferred"/>
+             <item value="Non_Symmetric"/>
+             <item value="Symmetric"/>
+             <item value="Negative_Symmetric"/>
+             <item value="Half_Band"/>
+             <item value="Hilbert"/>
+           </listbox>
+           <radiogroup name="coefficient_sign" default="Unsigned" evaluate="false" label="Coefficient type" ctype="String" allow_advanced="false">
+             <item value="Signed"/>
+             <item value="Unsigned"/>
+           </radiogroup>
+           <listbox name="quantization" default="Integer_Coefficients" evaluate="false" label="Quantization " ctype="String" allow_advanced="false">
+             <item value="Integer_Coefficients"/>
+             <item value="Quantize_Only"/>
+             <item value="Maximize_Dynamic_Range"/>
+           </listbox>
+           <editbox name="coefficient_width" default="17" top_label="false" evaluate="true" label="Coefficient width " ctype="Int"/>
+           <editbox name="coefficient_fractional_bits" default="17" top_label="false" evaluate="true" label="Coefficient fractional bits " ctype="Int"/>
+         </etch>
+         <etch label="Datapath Options">
+           <editbox name="number_paths" default="1" top_label="true" evaluate="true" label="Number of paths" ctype="Int"/>
+           <listbox name="output_rounding_mode" default="Full_Precision" evaluate="false" label="Output rounding mode" ctype="String" allow_advanced="false">
+             <item value="Full_Precision"/>
+             <item value="Truncate_LSBs"/>
+             <item value="Non_Symmetric_Rounding_Down"/>
+             <item value="Non_Symmetric_Rounding_Up"/>
+             <item value="Symmetric_Rounding_to_Zero"/>
+             <item value="Symmetric_Rounding_to_Infinity"/>
+             <item value="Convergent_Rounding_to_Even"/>
+             <item value="Convergent_Rounding_to_Odd"/>
+           </listbox>        
+           <editbox name="output_width" default="36" top_label="true" evaluate="true" label="Output width " ctype="Int"/>
+           <checkbox name="allow_rounding_approximation" default="off" label="Allow rounding approximation " ctype="Bool" allow_advanced="false"/>
+           <!-- <checkbox name="registered_output" default="on" label="Registered output " ctype="Bool" allow_advanced="false"/> -->
+         </etch>
+         <etch label="FPGA Area Estimation">
+           <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation" ctype="Bool" allow_advanced="false"/>
+           <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" evaluate="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]" />
+         </etch>
+       </tab>
+       <tab name="Coregen_Parameters_tab3" label="Detailed Implementation"> 
+         <radiogroup name="optimization_goal" default="Area" evaluate="false" label="Optimization goal" ctype="String" allow_advanced="false">
+           <item value="Area"/>
+           <item value="Speed"/>
+         </radiogroup>
+         <etch label="Control Options">
+           <checkbox name="rst" default="off" label="rst" ctype="Bool" allow_advanced="false"/>
+           <checkbox name="sclr_deterministic" default="on" label="Use deterministic rst behavior" ctype="Bool" evaluate="true" allow_advanced="false"/> 
+           <checkbox name="en" default="off" label="en" ctype="Bool" allow_advanced="false"/>
+           <checkbox name="has_nd" default="off" label="nd" ctype="Bool" allow_advanced="false"/>
+           <checkbox name="has_data_valid" default="off" label="data_valid" ctype="Bool" allow_advanced="false"/>
+         </etch>
+         <etch label="Chan In options">
+           <checkbox name="usechan_in_adv" default="off" label="Generate chan_in value in advance" ctype="Bool" allow_advanced="false"/>
+           <editbox name="chan_in_adv" default="0" top_label="true" evaluate="true" label="Number of samples" ctype="Int"/>
+         </etch>
+         <etch label="Memory Options">         
+           <listbox name="data_buffer_type" default="Automatic" evaluate="false" label="Data buffer type " ctype="String" allow_advanced="false">
+             <item value="Automatic"/>
+             <item value="Block"/>
+             <item value="Distributed"/>
+             <item value="Not_Applicable"/>
+           </listbox>
+           <listbox name="coefficient_buffer_type" default="Automatic" evaluate="false" label="Coefficient buffer type" ctype="String" allow_advanced="false">
+             <item value="Automatic"/>
+             <item value="Block"/>
+             <item value="Distributed"/>
+             <item value="Not_Applicable"/>
+           </listbox>
+           <listbox name="input_buffer_type" default="Automatic" evaluate="false" label="Input buffer type" ctype="String" allow_advanced="false">
+              <item value="Automatic"/>
+              <item value="Block"/>
+              <item value="Distributed"/>
+              <item value="Not_Applicable"/>
+           </listbox>
+           <listbox name="output_buffer_type" default="Automatic" evaluate="false" label="Output buffer type" ctype="String" allow_advanced="false">
+             <item value="Automatic"/>
+             <item value="Block"/>
+             <item value="Distributed"/>
+             <item value="Not_Applicable"/>
+           </listbox>
+           <listbox name="preference_for_other_storage" default="Automatic" evaluate="false" label="Preference for other storage" ctype="String" allow_advanced="false">
+             <item value="Automatic"/>
+             <item value="Block"/>
+             <item value="Distributed"/>
+             <item value="Not_Applicable"/>
+           </listbox>
+         </etch>
+         <etch label="DSP Slice Column options">
+           <radiogroup name="multi_column_support" default="Automatic" evaluate="false" label="Multi-column support " ctype="String" allow_advanced="false">
+             <item value="Disabled"/>
+             <item value="Automatic"/>
+             <item value="Custom"/>
+           </radiogroup>
+           <editbox name="first_column_length" default="32" top_label="true" evaluate="true" label="First column length " ctype="Int"/>
+           <editbox name="column_wrap_length" default="32" top_label="true" evaluate="true" label="Column wrap length " ctype="Int"/>
+           <editbox name="inter_column_pipe_length" default="4" top_label="true" evaluate="true" label="Inter-column pipe length " ctype="Int"/>
+         </etch>
+      </tab>
+    </tabpane>
+    <hiddenvar name="passband_min" default="0.0" evaluate="true" ctype="Double"/>
+    <hiddenvar name="passband_max" default="0.5" evaluate="true" ctype="Double"/>
+    <hiddenvar name="stopband_min" default="0.5" evaluate="true" ctype="Double"/>
+    <hiddenvar name="stopband_max" default="1.0" evaluate="true" ctype="Double"/>
+    <hiddenvar name="filter_selection" default="1" evaluate="true" ctype="Int"/>    
+    <!-- <hiddenvar name="has_ce" default="true" ctype="Bool" evaluate="true"/> -->
+    <hiddenvar name="has_sclr" default="true" ctype="Bool" evaluate="true"/>
+    <hiddenvar name="sample_frequency" default="1.0" evaluate="true" ctype="Double"/>
+    <hiddenvar name="clock_frequency" default="1.0"  evaluate="true" ctype="Double"/>
+    <hiddenvar name="data_sign" default="Signed" evaluate="false" ctype="String"/>
+    <hiddenvar name="data_width" default="16" evaluate="true" ctype="Int"/>    
+    <!-- core import specific parameters -->   
+    <hiddenvar name="params_always_enabled" default="{'usechan_in_adv','chan_in_adv'}" evaluate="false" ctype="String" />
+    <hiddenvar name="wrapper_available" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="ip_wrap_arbitrary_binary_point" default="true" evaluate="true" ctype="Bool"/>    
+    <hiddenvar name="ip_name" default="FIR Compiler" evaluate="false" ctype="String"/>
+    <hiddenvar name="ip_version" default="4.0" evaluate="false" ctype="String"/>
+    <hiddenvar name="dsptool_ready" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="ipcore_usecache" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="ipcore_useipmodelcache" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="ipcore_verbose" default="0" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="ipcore_xco_need_fpga_part" default="true" evaluate="true" ctype="Bool" />
+    <hiddenvar name="port_translation_map" default="{ 'ce' => 'en', 'sclr' => 'rst', 'nd' => 'src_ce' }" evaluate="false" ctype="String"/>
+    <hiddenvar name="run_core_at_system_period" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="ipcore_fpga_part" default="xlipgetpartsetting(gcb, {'virtex4', 'xc4vsx35', '-10', 'ff668'})" evaluate="true" ctype="StringVector" />
+ </blockgui>
+</sysgenblock>
+

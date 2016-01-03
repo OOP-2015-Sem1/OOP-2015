@@ -1,0 +1,59 @@
+FLOWTYPE = FPGA;
+##############################################################################
+#                                                                            #
+#  Filename   : eth_cosim_impl.opt                                           #
+#                                                                            #
+#  Description: Defines the FPGA implementation flow options for the         #
+#               Ethernet co-simulation compilation.                          #
+#                                                                            #
+##############################################################################
+
+#
+# Options for Translator
+#
+# Type "ngdbuild -h" for a detailed list of ngdbuild command line options
+#
+Program ngdbuild
+-p <partname>;           # Partname to use - picked from xflow commandline
+-nt timestamp;           # NGO File generation. Regenerate only when
+                         # source netlist is newer than existing
+                         # NGO file (default)
+-intstyle xflow;         # Message Reporting Style: ise, xflow, or silent
+-uc <design>.ucf;        # User constraint file
+-bm <design>.bmm;        # Block RAM memory map file
+<userdesign>;            # User design - pick from xflow command line
+<design>.ngd;            # Name of NGD file. Filebase same as design filebase
+End Program ngdbuild
+
+#
+# Options for Mapper
+#
+# Type "map -h <arch>" for a detailed list of map command line options
+#
+Program map
+-o <design>_map.ncd;     # Output Mapped ncd file
+-intstyle xflow;         # Message Reporting Style: ise, xflow, or silent
+-timing;                 # Perform Timing-Driven Packing and Placement
+-pr b;                   # Pack internal flops/latches into input (i),
+                         # output (o), or both (b) types of IOBs.
+-ol high;                # Map Effort Levels. -ol [std|med|high]
+                         # Note: If -timing is not specified, -ol switch
+                         # is ignored.
+-cm speed;               # Cover mode
+<inputdir><design>.ngd;  # Input NGD file
+<inputdir><design>.pcf;  # Physical constraints file
+END Program map
+
+#
+# Options for Placer and Router
+#
+# Type "par -h" for a detailed list of par command line options
+#
+Program par
+-w;                      # Overwrite existing placed and routed ncd
+-ol high;                # Overall effort level
+-intstyle xflow;         # Message Reporting Style: ise, xflow, or silent
+<design>_map.ncd;        # Input mapped NCD file
+<inputdir><design>.ncd;  # Output placed and routed NCD
+<inputdir><design>.pcf;  # Input physical constraints file
+END Program par

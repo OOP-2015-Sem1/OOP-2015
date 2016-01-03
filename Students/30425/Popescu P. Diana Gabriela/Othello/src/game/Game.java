@@ -1,19 +1,17 @@
 package game;
 
-import io.OthelloFrame;
+import io.DimensionOfBoardFrame;
 
 public class Game {
 
-	public BoardConfiguration boardConfiguration;
-	public OthelloFrame othelloFrame;
+	public DimensionOfBoardFrame dimensionOfBoardFrame;
 
 	public Game() {
-		boardConfiguration = new BoardConfiguration();
-		othelloFrame = new OthelloFrame();
+		dimensionOfBoardFrame = new DimensionOfBoardFrame();
 	}
 
 	public void run() {
-		new Controller(othelloFrame, boardConfiguration);
+		new Controller(dimensionOfBoardFrame);
 	}
 
 }

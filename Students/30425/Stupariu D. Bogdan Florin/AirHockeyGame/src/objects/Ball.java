@@ -7,7 +7,7 @@ import java.util.Random;
 
 import theGame.MainGame;
 
-public class Ball extends GameObjects {
+public class Ball extends GameObject {
 
 	public boolean collided = false;
 	private boolean collideMargins;

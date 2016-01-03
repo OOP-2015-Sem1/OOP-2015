@@ -30,19 +30,29 @@ public class GamePanelP extends JPanel {
 	private ArrayList solution = new ArrayList();
 
 	private ButtonSegments lastButton = new ButtonSegments();
+
 	public static int rows, cols, dimension;
 
-	public GamePanelP(String pathImage) throws URISyntaxException {
-		createGamePanel(pathImage);
+	public GamePanelP(String pathImage, String difficulty) throws URISyntaxException {
+		createGamePanel(pathImage, difficulty);
 	}
 
-	public void createGamePanel(String pathImage) throws URISyntaxException {
+	public void createGamePanel(String pathImage, String difficulty) throws URISyntaxException {
 
-		if (!PuzzleFrame.SMALLER_OR_BIGGER_BOARDSIZE) {
+		/*
+		 * if (!PuzzleFrame.SMALLER_OR_BIGGER_BOARDSIZE) { rows =
+		 * Constants.DEFAULT1_ROW; cols = Constants.DEFAULT1_COLS; dimension =
+		 * Constants.DEFAULT1_BOARD_SEGMENTS; } else { rows =
+		 * Constants.DEFAULT2_ROW; cols = Constants.DEFAULT2_COLS; dimension =
+		 * Constants.DEFAULT2_BOARD_SEGMENTS; }
+		 */
+
+		if (difficulty.equals("easy")) {
 			rows = Constants.DEFAULT1_ROW;
 			cols = Constants.DEFAULT1_COLS;
 			dimension = Constants.DEFAULT1_BOARD_SEGMENTS;
 		} else {
+
 			rows = Constants.DEFAULT2_ROW;
 			cols = Constants.DEFAULT2_COLS;
 			dimension = Constants.DEFAULT2_BOARD_SEGMENTS;
@@ -132,8 +142,10 @@ public class GamePanelP extends JPanel {
 
 		if (compareList(solution, currentListOfButtonSegments)) {
 			File clap = new File("applause.WAV");
-			SoundPlayer.PlaySound(clap);
-			JOptionPane.showMessageDialog(this, "Congratulation dear Gamer !!! ", "Message", JOptionPane.INFORMATION_MESSAGE);
+			SoundPlayer.playSound(clap, true);
+			String name = QuariesFromUser.queryForName();
+			JOptionPane.showMessageDialog(this, "Congratulations dear " + name + "!", "Message",
+					JOptionPane.INFORMATION_MESSAGE);
 
 		}
 	}

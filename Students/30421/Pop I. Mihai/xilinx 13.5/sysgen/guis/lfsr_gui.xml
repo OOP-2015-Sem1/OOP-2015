@@ -1,0 +1,66 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="LFSR" block_type="lfsr">
+  <initialization file="xllfsr_init.m"/>
+  <icon width="60" height="60" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="LFSR_config"/>
+  <handlers enablement="lfsrenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsBasic"/>
+    <library name="xbsDSP"/>
+    <library name="xbsMemory"/>
+  </libraries>
+  <blockgui label="Xilinx Linear Feedback Shift Register">
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <radiogroup name="lfsr_type" default="Fibonacci" evaluate="true" label="Type" ctype="Int">
+          <item value="Fibonacci" label="Fibonacci"/>
+          <item value="Galois" label="Galois"/>
+        </radiogroup>
+        <radiogroup name="gate_type" default="XOR" evaluate="true" label="Gate type" ctype="Int">
+          <item value="XOR" label="XOR"/>
+          <item value="XNOR" label="XNOR"/>
+        </radiogroup>
+        <editbox name="n_bits" default="6" evaluate="true" label="Number of bits in LFSR" ctype="Int"/>
+        <editbox name="polynomial" default="'11'" evaluate="true" label="Feedback polynomial (enter hex value enclosed with ticks)" ctype="String"/>
+        <editbox name="rst_value" default="'3F'" evaluate="true" label="Initial value (enter hex value enclosed with ticks)" ctype="String"/>
+        <etch label="Optional Ports">
+          <checkbox name="rst" default="off" evaluate="true" label="Provide synchronous reset port" ctype="Int"/>
+          <checkbox name="en" default="off" evaluate="true" label="Provide enable port" ctype="Int"/>
+        </etch>
+      </tab>
+      <tab name="advtab" label="Advanced">
+        <checkbox name="reloadable_seed" default="off" evaluate="true" label="Use reloadable seed values" ctype="Int"/>
+        <checkbox name="input_type" default="off" evaluate="true" label="Parallel input" ctype="Int"/>
+        <checkbox name="output_type" default="off" evaluate="true" label="Parallel output" ctype="Int"/>
+        <etch name="popetch" label="Parallel Output Precision">
+          <radiogroup name="arith_type" default="Signed  (2's comp)" evaluate="true" label="Output type" ctype="Int">
+            <item value="Signed  (2's comp)" label="Signed  (2's comp)"/>
+            <item value="Unsigned" label="Unsigned"/>
+          </radiogroup>
+          <editbox name="bin_pt" default="4" evaluate="true" label="Binary point" ctype="Int"/>
+        </etch>
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles" ctype="Int"/>
+        </etch>
+        <etch name="periodetch" label="Explicit Sample Period">
+          <checkbox name="explicit_period" default="off" label="Specify explicit sample period" ctype="Int"/>
+          <editbox name="period" default="1" top_label="true" label="" ctype="Double"/>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation" ctype="Int"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <workspacevar name="sysgen_root" ctype="String"/>
+    <workspacevar name="init" ctype="String"/>
+    <workspacevar name="infoedit" ctype="String"/>
+    <workspacevar name="rst_vale" ctype="String"/>
+    <workspacevar name="sim_engine" ctype="Int"/>
+  </blockgui>
+</sysgenblock>

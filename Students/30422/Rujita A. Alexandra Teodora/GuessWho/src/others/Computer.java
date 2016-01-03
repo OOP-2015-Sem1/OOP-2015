@@ -22,7 +22,7 @@ public class Computer {
 
 		while (it.hasNext()) {
 			if (it.next() == randomQuestion)
-				askQuestions();
+				return askQuestions();
 			else
 				askedQuestions.add(randomQuestion);
 		}

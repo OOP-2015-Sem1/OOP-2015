@@ -1,0 +1,1208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>MCode</title>
+    <link rel="StyleSheet" href="css/Xilinx_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Blockset.11.001.html#271146">Xilinx Blockset</a> : MCode</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="271146">MCode</a></div>
+      <div class="Body"><span class="Italic"><a name="276414">This block is listed in the following Xilinx Blockset libraries: Control Logic, Math, and Index.</a></span></div>
+      <div class="OneLiner"><a name="408101"><img class="Default" src="images/Xilinx_Blockset.11.066.01.jpg" width="53" height="55" style="display: block; float: none; left: 0.0; top: 0.0" alt="" />The Xilinx </a><span class="Bold">MCode</span> block is a container for executing a user-supplied MATLAB function within Simulink. A parameter on the block specifies the M-function name. The block executes the M-code to calculate block outputs during a Simulink simulation. The same code is translated in a straightforward way into equivalent behavioral VHDL/Verilog when hardware is generated. </div>
+      <div class="Body"><a name="1104522">The block's Simulink interface is derived from the MATLAB function signature, and from </a>block mask parameters. There is one input port for each parameter to the function, and one output port for each value the function returns. Port names and ordering correspond to the names and ordering of parameters and return values. </div>
+      <div class="Body"><a name="408105">The </a><span class="Bold">MCode</span> block supports a limited subset of the MATLAB language that is useful for implementing arithmetic functions, finite state machines and control logic. </div>
+      <div class="Body"><a name="944373">The </a><span class="Bold">MCode</span> block has the following three primary coding guidelines that must be followed:</div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="944395">All block inputs and outputs must be of Xilinx fixed-point type.</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="952514">The block must have at least one output port.</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="952515">The code for the block must exist on the MATLAB path or in the same directory as the </a>directory as the model that uses the block.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="952519">The topic </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.06.06.html#274179', '');" title="Compiling MATLAB into an FPGA">Compiling MATLAB into an FPGA</a></span>  shows three examples of functions for the <span class="Bold">MCode</span> block. The first example (also described below) consists of a function <span class="Filename">xlmax</span> which returns the maximum of its inputs. The second illustrates how to do simple arithmetic. The third shows how to build a finite state machine. These examples are linked from the topic titled <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Getting%20Started.05.8.html#286336', '');" title="Additional Examples and Tutorials">Additional Examples and Tutorials</a></span> .</div>
+      <div class="Heading2"><a name="276418">Configuring an MCode Block</a></div>
+      <div class="Body"><a name="408170">The </a><span class="Bold">MATLAB Function</span> parameter of an <span class="Bold">MCode</span> block specifies the name of the block's M- code function. This function must exist in one of the three locations at the time this parameter is set. The three possible locations are: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="408172">The directory where the model file is located. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="408174">A subdirectory of the model directory named private. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="408176">A directory in the MATLAB path. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="408180">The block icon displays the name of the M-function. To illustrate these ideas, consider the </a>file <span class="Filename">xlmax.m</span> containing function <span class="Filename">xlmax</span>: </div>
+      <div class="Code"><span class="XBlueLink"><a name="408184">function</a></span> z = xlmax(x, y) </div>
+      <div class="Code"><a name="408186">&nbsp;</a>&nbsp;<span class="XBlueLink">if</span> x &gt; y </div>
+      <div class="Code"><a name="408188">&nbsp;</a>&nbsp;&nbsp;&nbsp;z = x; </div>
+      <div class="Code"><a name="1100738">&nbsp;</a>&nbsp;<span class="XBlueLink">else</span> </div>
+      <div class="Code"><a name="1100739">&nbsp;</a>&nbsp;z = y; </div>
+      <div class="Code"><a name="1100740">&nbsp;</a>&nbsp;<span class="XBlueLink">end</span> </div>
+      <div class="Body"><a name="902288">An </a><span class="Bold">MCode</span> block based on the function <span class="Filename">xlmax</span> will have input ports <span class="Filename">x</span> and <span class="Filename">y</span> and output port <span class="Filename">z</span>.</div>
+      <div class="Body"><a name="902320">The following figure shows how to set up an </a><span class="Bold">MCode</span> block to use function <span class="Filename">xlmax</span>.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="902287"><img class="Default" src="images/Xilinx_Blockset.11.066.02.jpg" width="185" height="251" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="902368">Once the model is compiled, the xlmax </a><span class="Bold">MCode</span> block will appear like the block illustrated below.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="902374"><img class="Default" src="images/Xilinx_Blockset.11.066.03.jpg" width="148" height="52" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="902390">MATLAB Language Support </a></div>
+      <div class="Body"><a name="902391">The </a><span class="Bold">MCode</span> block supports the following MATLAB language constructs:</div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="902395">Assignment statements</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="902399">Simple and compound </a><span class="Filename">if/else/elseif</span> end statements </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Filename"><a name="902403">switch</a></span> statements</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="902407">Arithmetic expressions involving only addition and subtraction</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="902411">Addition</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="902415">Subtraction</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="902419">Multiplication</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="902423">Division by a power of two</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="902427">Relational operators:</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 238.4pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top; width: 80.0pt">
+            <div class="CellBodyIndent"><a name="906325">&lt;</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top; width: 158.4pt">
+            <div class="CellBodyIndent"><a name="906327">Less than</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><a name="906329">&lt;=</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><a name="906331">Less than or equal to</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><a name="906333">&gt;</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><a name="906335">Greater than</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><a name="906337">&gt;=</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><a name="906339">Greater than or equal to</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><a name="906341">==</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><a name="906343">Equal to</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><a name="906345">~=</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><a name="906347">Not equal to</a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="902457">Logical operators:</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 238.4pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top; width: 80.0pt">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="907895">&amp;</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top; width: 158.4pt">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="907897">And</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="907899">|</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="907901">Or</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="907903">~</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="907905">Not</a></span></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="902472">The </a><span class="Bold">MCode</span> block supports the following MATLAB functions.</div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="902476">Type conversion. The only supported data type is </a><span class="Filename">xfix</span>, the Xilinx fixed-point type. The <span class="Filename">xfix()</span> type conversion function is used to convert to this type. The conversion is done implicitly for integers but must be done explicitly for floating point constants. All values must be scalar; arrays are not supported.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="902480">Functions that return </a><span class="Filename">xfix</span> properties: </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 270.0771pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top; width: 80.0pt">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="909809">xl_nbits()</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top; width: 190.0771pt">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="909811">Returns number of bits</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="909813">xl_binpt()</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="909815">Returns binary point position</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="910150">xl_arith()</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="910152">Returns arithmetic type</a></span></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="902498">Bit-wise logical functions:</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 270.0771pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top; width: 80.0pt">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="911720">xl_and()</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top; width: 190.0771pt">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="911722">Bit-wise and</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="911724">xl_or()</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="911726">Bit-wise or</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="911728">xl_xor()</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="911730">Bit-wise xor</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="912081">xl_not()</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="912083">Bit-wise not</a></span></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="902520">Shift functions: </a><span class="Filename">xl_lsh()</span> and <span class="Filename">xl_rsh()</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="902524">Slice function: </a><span class="Filename">xl_slice()</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="902528">Concatenate function: </a><span class="Filename">xl_concat()</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="902532">Reinterpret function: </a><span class="Filename">xl_force()</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="902536">Internal state variables: </a><span class="Filename">xl_state()</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="902540">MATLAB Functions:</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 270.0771pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top; width: 80.0pt">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="913627">disp()</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top; width: 190.0771pt">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="913629">Displays variable values</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="913631">error()</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="913633">Displays message and abort function</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="913635">isnan()</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="913637">Tests whether a number is NaN</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="913639">NaN()</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="913641">Returns Not-a-Number</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="913984">num2str()</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="913986">Converts a number to string</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="913980">ones(1,N)</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="913982">Returns 1-by-N vector of ones</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="913976">pi()</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="913978">Returns pi</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="913972">zeros(1,N)</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="913974">Returns 1-by-N vector of zeros</a></span></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="902575">Data Types</a></div>
+      <div class="Body"><a name="902576">There are three kinds of </a><span class="Filename">xfix</span> data types: unsigned fixed-point (<span class="Filename">xlUnsigned</span>), signed fixed-point(<span class="Filename">xlSigned</span>), and boolean (<span class="Filename">xlBoolean</span>). Arithmetic operations on these data types produce signed and unsigned fixed-point values. Relational operators produce a boolean result. Relational operands can be any <span class="Filename">xfix</span> type, provided the mixture of types makes sense. Boolean variables can be compared to boolean variables, but not to fixed-point numbers; boolean variables are incompatible with arithmetic operators. Logical operators can only be applied to boolean variables. Every operation is performed in full precision, i.e., with the minimum precision needed to guarantee that no information is lost.</div>
+      <div class="Heading3"><a name="902577">Literal Constants </a></div>
+      <div class="Body"><a name="902578">Integer, floating-point, and boolean literals are supported. Integer literals are </a>automatically converted to <span class="Filename">xfix</span> values of appropriate width having a binary point position at zero. Floating-point literals must be converted to the <span class="Filename">xfix</span> type explicitly with the <span class="Filename">xfix()</span> conversion function. The predefined MATLAB values <span class="Filename">true</span> and <span class="Filename">false</span> are automatically converted to boolean literals.</div>
+      <div class="Heading3"><a name="902579">Assignment</a></div>
+      <div class="Body"><a name="902580">The left-hand side of an assignment can only contain one variable. A variable can be </a>assigned more than once.</div>
+      <div class="Heading3"><a name="902581">Control Flow</a></div>
+      <div class="Body"><a name="902582">The conditional expression of an </a><span class="Filename">if</span> statement must evaluate to a boolean. Switch statements can contain a <span class="Filename">case</span> clause and an <span class="Filename">otherwise</span> clause. The types of a switch selector and its cases must be compatible; thus, the selector can be boolean provided its cases are. All cases in a <span class="Filename">switch</span> must be constant; equivalently, no <span class="Filename">case</span> can depend on an input value.</div>
+      <div class="Body"><a name="902583">When the same variable is assigned in several branches of a control statement, the types </a>being assigned must be compatible. For example,</div>
+      <div class="Code"><span class="XBlueLink"><a name="923513">if</a></span> (u &gt; v)</div>
+      <div class="Code"><a name="923603">&nbsp;</a>&nbsp;x = a;</div>
+      <div class="Code"><span class="XBlueLink"><a name="923620">else</a></span> </div>
+      <div class="Code"><a name="923654">&nbsp;</a>&nbsp;x = b; </div>
+      <div class="Code"><span class="XBlueLink"><a name="923637">end</a></span></div>
+      <div class="Body"><a name="902585">is acceptable only if </a><span class="Filename">a</span> and <span class="Filename">b</span> are both boolean or both arithmetic.</div>
+      <div class="Heading3"><a name="902586">Constant Expressions</a></div>
+      <div class="Body"><a name="902587">An expression is constant provided its value does not depend on the value of any input </a>argument. Thus, for example, the variable <span class="Filename">c</span> defined by</div>
+      <div class="Code"><a name="902588">a = 1;</a></div>
+      <div class="Code"><a name="923663">b = a + 2;</a></div>
+      <div class="Code"><a name="923664">c = xfix({xlSigned, 10, 2}, b + 3.345);</a></div>
+      <div class="Body"><a name="902589">can be used in any context that demands a constant.</a></div>
+      <div class="Heading3"><a name="902590">xfix() Conversion</a></div>
+      <div class="Body"><a name="902591">The </a><span class="Filename">xfix()</span> conversion function converts a <span class="Filename">double</span> to an <span class="Filename">xfix</span>, or changes one <span class="Filename">xfix</span> into another having different characteristics. A call on the conversion function looks like the following</div>
+      <div class="Code"><a name="902592">x = xfix(</a><span style="font-style: normal">type_spec</span>, value)</div>
+      <div class="Body"><a name="902593">Here </a><span class="Filename">x</span> is the variable that receives the <span class="Filename">xfix</span>. <span class="Italic">type_spec</span> is a cell array that specifies the type of <span class="Filename">xfix</span> to create, and value is the value being operated on. The<span class="Filename"> value</span> can be floating point or <span class="Filename">xfix</span> type. The <span class="Italic">type_spec</span> cell array is defined using curly braces in the usual MATLAB method. For example,</div>
+      <div class="Code"><a name="902594">xfix({xlSigned, 20, 16, xlRound, xlWrap}, 3.1415926)</a></div>
+      <div class="Body"><a name="902595">returns an </a><span class="Filename">xfix</span> approximation to <span class="Filename">pi</span>. The approximation is signed, occupies 20 bits (16 fractional), quantizes by rounding, and wraps on overflow. </div>
+      <div class="Body"><a name="902596">The </a><span class="Italic">type_spec</span> consists of 1, 3, or 5 elements. Some elements can be omitted. When elements are omitted, default element settings are used. The elements specify the following properties (in the order presented): <span class="Filename">data type</span>, <span class="Filename">width</span>, <span class="Filename">binary point position</span>, <span class="Filename">quantization mode</span>, and <span class="Filename">overflow mode</span>. The <span class="Filename">data type</span> can be <span class="Filename">xlBoolean</span>, <span class="Filename">xlUnsigned</span>, or <span class="Filename">xlSigned</span>. When the type is <span class="Filename">xlBoolean</span>, additional elements are not needed (and must not be supplied). For other types, <span class="Filename">width</span> and <span class="Filename">binary point </span><span class="Filename">position</span> must be supplied. The <span class="Filename">quantization</span> and <span class="Filename">overflow mode</span>s are optional, but when one is specified, the other must be as well. Three values are possible for quantization: <span class="Filename">xlTruncate</span>, <span class="Filename">xlRound</span>, and <span class="Filename">xlRoundBanker</span>. The default is <span class="Filename">xlTruncate</span>. Similarly, three values are possible for overflow: <span class="Filename">xlWrap</span>, <span class="Filename">xlSaturate</span>, and <span class="Filename">xlThrowOverflow</span>. For <span class="Filename">xlThrowOverflow</span>, if an overflow occurs during simulation, an exception occurs. </div>
+      <div class="Body"><a name="902597">All values in a </a><span class="Italic">type_spec</span> must be known at compilation time; equivalently, no <span class="Italic">type_spec</span> value can depend on an input to the function.</div>
+      <div class="Body"><a name="902598">The following is a more elaborate example of an </a><span class="Filename">xfix()</span> conversion:</div>
+      <div class="Code"><a name="902599">width = 10, binpt = 4; </a></div>
+      <div class="Code"><a name="902600">z = xfix({xlUnsigned, width, binpt}, x + y);</a></div>
+      <div class="Body"><a name="902601">This assignment to </a><span class="Filename">x</span> is the result of converting <span class="Filename">x + y</span> to an unsigned fixed-point number that is 10 bits wide with 4 fractional bits using <span class="Filename">xlTruncate</span> for quantization and <span class="Filename">xlWrap</span> for overflow.</div>
+      <div class="Body"><a name="902602">If several </a><span class="Filename">xfix()</span> calls need the same <span class="Italic">type_spec</span> value, you can assign the <span class="Italic">type_spec</span> to a variable, then use the variable for <span class="Filename">xfix()</span> calls. For example, the following is allowed:</div>
+      <div class="Code"><a name="902603">proto = {xlSigned, 10, 4};</a></div>
+      <div class="Code"><a name="902604">x = xfix(proto, a);</a></div>
+      <div class="Code"><a name="902605">y = xfix(proto, b);</a></div>
+      <div class="Heading3"><a name="902606">xfix Properties: xl_arith, xl_nbits, and xl_binpt</a></div>
+      <div class="Body"><a name="902607">Each </a><span class="Filename">xfix</span> number has three properties: the arithmetic type, the bit width, and the binary point position. The <span class="Bold">MCode</span> blocks provide three functions to get these properties of a fixed- point number. The results of these functions are constants and will be evaluated when Simulink compiles the model.</div>
+      <div class="Body"><a name="902608">Function </a><span class="Filename">a = xl_arith(x)</span> returns the arithmetic type of the input number <span class="Filename">x</span>. The return value is either <span class="Filename">1</span>, <span class="Filename">2</span>, or <span class="Filename">3</span> for <span class="Filename">xlUnsigned</span>, <span class="Filename">xlSigned</span>, or <span class="Filename">xlBoolean</span> respectively.</div>
+      <div class="Body"><a name="902609">Function </a><span class="Filename">n = xl_nbits(x)</span> returns the width of the input number <span class="Filename">x</span>. </div>
+      <div class="Body"><a name="902610">Function </a><span class="Filename">b = xl_binpt(x)</span> returns the binary point position of the input number <span class="Filename">x</span>.</div>
+      <div class="Heading3"><a name="902611">Bit-wise Operators: xl_or, xl_and, xl_xor, and xl_not</a></div>
+      <div class="Body"><a name="902612">The </a><span class="Bold">MCode</span> block provides four built-in functions for bit-wise logical operations: <span class="Filename">xl_or</span>, <span class="Filename">xl_and</span>, <span class="Filename">xl_xor</span>, and <span class="Filename">xl_not</span>.</div>
+      <div class="Body"><a name="902613">Function </a><span class="Filename">xl_or</span>, <span class="Filename">xl_and</span>, and <span class="Filename">xl_xor</span> perform bit-wise logical or, and, and xor operations respectively. Each function is in the form of </div>
+      <div class="Code"><a name="902614">x = xl_op(a, b, …).</a></div>
+      <div class="Body"><a name="927331">Each function takes at least two fixed-point numbers and returns a fixed-point number. All </a>the input arguments are aligned at the binary point position.</div>
+      <div class="Body"><a name="902615">Function </a><span class="Filename">xl_not</span> performs a bit-wise logical not operation. It is in the form of <span class="Filename">x = </span><span class="Filename">xl_not(a)</span>. It only takes one <span class="Filename">xfix</span> number as its input argument and returns a fixed- point number.</div>
+      <div class="Body"><a name="902616">The following are some examples of these function calls:</a></div>
+      <div class="Code"><a name="902617">X = xl_and(a, b);</a></div>
+      <div class="Code"><a name="902618">Y = xl_or(a, b, c);</a></div>
+      <div class="Code"><a name="902619">Z = xl_xor(a, b, c, d);</a></div>
+      <div class="Code"><a name="902620">N = xl_not(x);</a></div>
+      <div class="Heading3"><a name="902621">Shift Operators: xl_rsh, and xl_lsh</a></div>
+      <div class="Body"><a name="902622">Functions </a><span class="Filename">xl_lsh</span> and <span class="Filename">xl_rsh</span> allow you to shift a sequence of bits of a fixed-point number. The function is in the form: </div>
+      <div class="Body"><span class="Filename"><a name="902623">x = xl_lsh(a, n)</a></span> and <span class="Filename">x = xl_rsh(a, n)</span> where <span class="Filename">a</span> is a <span class="Filename">xfix</span> value and <span class="Filename">n</span> is the number of bits to shift. </div>
+      <div class="Body"><a name="902624">Left or right shift the fixed-point number by </a><span class="Filename">n</span> number of bits. The right shift (<span class="Filename">xl_rsh</span>) moves the fixed-point number toward the least significant bit. The left shift (<span class="Filename">xl_lsh</span>) function moves the fixed-point number toward the most significant bit. Both shift functions are a full precision shift. No bits are discarded and the precision of the output is adjusted as needed to accommodate the shifted position of the binary point.</div>
+      <div class="Body"><a name="902625">Here are some examples: </a></div>
+      <div class="Code"><a name="902626">% left shift a 5 bits </a></div>
+      <div class="Code"><a name="902627">a = xfix({xlSigned, 20, 16, xlRound, xlWrap}, 3.1415926)</a></div>
+      <div class="Code"><a name="902628">b = xl_rsh(a, 5); </a></div>
+      <div class="Body"><a name="902629">The output </a><span class="Filename">b</span> is of type <span class="Filename">xlSigned</span> with 21 bits and the binary point located at bit 21.</div>
+      <div class="Heading3"><a name="902630">Slice Function: xl_slice</a></div>
+      <div class="Body"><a name="902631">Function </a><span class="Filename">xl_slice</span> allows you to access a sequence of bits of a fixed-point number. The function is in the form:</div>
+      <div class="Code"><a name="902632">x = xl_slice(a, from_bit, to_bit).</a></div>
+      <div class="Body"><a name="902633">Each bit of a fixed-point number is consecutively indexed from zero for the LSB up to the </a>MSB. For example, given an 8-bit wide number with binary point position at zero, the LSB is indexed as 0 and the MSB is indexed as 7. The block will throw an error if the <span class="Filename">from_bit</span> or <span class="Filename">to_bit</span> arguments are out of the bit index range of the input number. The result of the function call is an unsigned fixed-point number with zero binary point position.</div>
+      <div class="Body"><a name="902634">Here are some examples:</a></div>
+      <div class="Code"><a name="902635">% slice 7 bits from bit 10 to bit 4</a></div>
+      <div class="Code"><a name="902636">b = xl_slice(a, 10, 4); </a></div>
+      <div class="Code"><a name="902637">% to get MSB </a></div>
+      <div class="Code"><a name="902638">c = xl_slice(a, xl_nbits(a)-1, xl_nbits(a)-1); </a></div>
+      <div class="Heading3"><a name="902639">Concatenate Function: xl_concat</a></div>
+      <div class="Body"><a name="902640">Function </a><span class="Filename">x = xl_concat(hi, mid, ..., low)</span> concatenates two or more fixed-point numbers to form a single fixed-point number. The first input argument occupies the most significant bits, and the last input argument occupies the least significant bits. The output is an unsigned fixed-point number with binary point position at zero.</div>
+      <div class="Heading3"><a name="902641">Reinterpret Function: xl_force</a></div>
+      <div class="Body"><a name="902642">Function </a><span class="Filename">x = xl_force(a, arith, binpt)</span> forces the output to a new type with <span class="Filename">arith</span> as its new arithmetic type and <span class="Filename">binpt</span> as its new binary point position. The <span class="Filename">arith</span> argument can be one of <span class="Filename">xlUnsigned</span>, <span class="Filename">xlSigned</span>, or <span class="Filename">xlBoolean</span>. The <span class="Filename">binpt</span> argument must be from 0 to the bit width inclusively. Otherwise, the block will throw an error.</div>
+      <div class="Heading3"><a name="902643">State Variables: xl_state </a></div>
+      <div class="Body"><a name="902644">An </a><span class="Bold">MCode</span> block can have internal state variables that hold their values from one simulation step to the next. A state variable is declared with the MATLAB keyword <span class="XBlueLink" style="font-family: &quot;Microsoft Sans Serif&quot;; font-size: 9.0pt">persistent</span> and must be initially assigned with an <span class="Filename">xl_state</span> function call. </div>
+      <div class="Body"><a name="902645">The following code models a 4-bit accumulator:</a></div>
+      <div class="Code"><span class="XBlueLink"><a name="902646">function</a></span> q = accum(din, rst)</div>
+      <div class="Code"><a name="902647">&nbsp;</a>&nbsp;init = 0;<br />&nbsp;&nbsp;<span class="XBlueLink">persistent</span> s, s = xl_state(init, {xlSigned, 4, 0});</div>
+      <div class="Code"><a name="902648">&nbsp;</a>&nbsp;q = s;</div>
+      <div class="Code"><a name="902649">&nbsp;</a>&nbsp;<span class="XBlueLink">if</span> rst</div>
+      <div class="Code"><a name="902650">&nbsp;</a>&nbsp;&nbsp;&nbsp;s = init;</div>
+      <div class="Code"><a name="902651">	</a><span class="XBlueLink">else</span></div>
+      <div class="Code"><a name="902652">&nbsp;</a>&nbsp;&nbsp;&nbsp;s = s + din;</div>
+      <div class="Code"><a name="902653">	</a><span class="XBlueLink">end</span></div>
+      <div class="Body"><a name="902654">The state variable </a><span class="Filename">s</span> is declared as <span class="XBlueLink" style="font-family: &quot;Microsoft Sans Serif&quot;; font-size: 9.0pt">persistent</span>, and the first assignment to <span class="Filename">s</span> is the result of the <span class="Filename">xl_state</span> invocation. The <span class="Filename">xl_state</span> function takes two arguments. The first is the initial value and must be a constant. The second is the precision of the state variable. It can be a type cell array as described in the <span class="Filename">xfix</span> function call. It can also be an <span class="Filename">xfix</span> number. In the above code, if <span class="Filename">s = xl_state(init, din)</span>, then state variable s will use <span class="Filename">din</span> as the precision. The <span class="Filename">xl_state</span> function must be assigned to a <span class="XBlueLink" style="font-family: &quot;Microsoft Sans Serif&quot;; font-size: 9.0pt">persistent</span> variable.</div>
+      <div class="Body"><a name="902655">The </a><span class="Filename">xl_state</span> function behaves in the following way:</div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="902656">In the first cycle of simulation, the </a><span class="Filename">xl_state</span> function initializes the state variable with the specified precision.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="902657">In the following cycles of simulation, the </a><span class="Filename">xl_state </span>function retrieves the state value left from the last clock cycle and assigns the value to the corresponding variable with the specified precision.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><span class="Filename"><a name="931246">v = xl_state(init, precision)</a></span> returns the value of a state variable. The first input argument <span class="Filename">init</span> is the initial value, the second argument <span class="Filename">precision</span> is the precision for this state variable. The argument <span class="Filename">precision</span> can be a cell arrary in the form of <span class="Filename">{type, </span><span class="Filename">nbits, binpt}</span> or <span class="Filename">{type, nbits, binpt, quantization,overflow}</span>. The <span class="Filename">precision</span> argument can also be an <span class="Filename">xfix</span> number.</div>
+      <div class="Body"><span class="Filename"><a name="931249">v = xl_state(init, precision, maxlen)</a></span> returns a vector object. The vector will be initialized with <span class="Filename">init</span> and will have <span class="Filename">maxlen</span> for the maximum length it can be. The vector will be initialized with <span class="Filename">init</span>. For example, <span class="Filename">v = xl_state(zeros(1, 8), </span><span class="Filename">prec, 8)</span> creates a vector of 8 zeros, <span class="Filename">v = xl_state([], prec, 8)</span> creates an empty vector with 8 as maximum length, <span class="Filename">v = xl_state(0, prec, 8)</span> creates a vector of one zero as content and with 8 as the maximum length.</div>
+      <div class="Body"><a name="902659">Conceptually, a vector state variable is a double ended queue. It has two ends, the front </a>which is the element at address 0 and the back which is the element at length – 1.</div>
+      <div class="Body"><a name="902375">Methods available for vector are:</a></div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 388.077pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top; width: 174.2385pt">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="931705">val = v(idx);</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top; width: 213.8385pt">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="931703">Returns the value of element at address idx.</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="931583">v(idx) = val;</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="931585">Assigns the element at address idx with val.</a></span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="931591">f = v.front;</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="931593">Returns the value of the front end. An error will </a></span><span class="Size9Type">be thrown if the vector is empty.</span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="931595">v.push_front(val);</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="931597">Pushes val to the front and then increases the </a></span><span class="Size9Type">vector length by 1. An error will be thrown if the </span><span class="Size9Type">vector is full.</span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="931599">v.pop_front;</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="931601">Pops one element from the front and decreases </a></span><span class="Size9Type">the vector length by 1. An error will be thrown if </span><span class="Size9Type">the vector is empty.</span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="931603">b = v.back;</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="931605">Returns the value of the back end. An error will </a></span><span class="Size9Type">be thrown if the vector is empty.</span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="931607">v.push_back(val);</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="931609">Pushes val to the back and the increases the </a></span><span class="Size9Type">vector length by 1. An error will be thrown if the </span><span class="Size9Type">vector is full.</span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="931611">v.pop_back;</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="931613">Pops one element from the back and decreases </a></span><span class="Size9Type">the vector length by 1. An error will be thrown if </span><span class="Size9Type">the vector is empty.</span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="931615">v.push_front_pop_back(val);</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="931617">Pushes val to the front and pops one element out </a></span><span class="Size9Type">from the back. It's a shift operation. The length of </span><span class="Size9Type">the vector is unchanged. The vector cannot be </span><span class="Size9Type">empty to perform this operation.</span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="931619">full = v.full;</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="931621">Returns </a></span><span class="Filename" style="font-size: 9.5pt">true</span><span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;"> if the vector is full, otherwise, </span><span class="Filename" style="font-size: 9.5pt">false</span><span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">.</span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="931623">empty = v.empty;</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="931625">Returns </a></span><span class="Filename" style="font-size: 9.5pt">true</span><span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;"> if the vector is empty, otherwise, </span><span class="Filename" style="font-size: 9.5pt">false</span><span class="Size9Type" style="font-family: &quot;Microsoft Sans Serif&quot;">.</span></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="931627">len = v.length;</a></span></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBodyIndent"><span class="Size9Type"><a name="931629">Returns the number of elements in the vector.</a></span></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="915590">A method of a vector that queries a state variable is called a </a><span class="Italic">query method</span>. It has a return value. The following methods are query method: <span class="Filename">v(idx)</span>, <span class="Filename">v.front</span>, <span class="Filename">v.back</span>, <span class="Filename">v.full</span>, <span class="Filename">v.empty</span>, <span class="Filename">v.length</span>, <span class="Filename">v.maxlen</span>. A method of a vector that changes a state variable is called an <span class="Italic">update method</span>. An update method does not return any value. The following methods are update methods: <span class="Filename">v(idx) = val</span>, <span class="Filename">v.push_front(val)</span>, <span class="Filename">v.pop_front</span>, <span class="Filename">v.push_back(val)</span>, <span class="Filename">v.pop_back</span>, and <span class="Filename">v.push_front_pop_back(val)</span>. All query methods of a vector must be invoked before any update method is invocation during any simulation cycle. An error will be thrown during model compilation if this rule is broken.</div>
+      <div class="Body"><a name="915591">The </a><span class="Bold">MCode</span> block may map a vector state variable into a vector of registers, a delay line, an addressable shift register, a single port ROM, or a single port RAM based on the usage of the state variable. The <span class="Filename">xl_state</span> function can also be used to convert a MATLAB 1-D array into a zero-indexed constant array. If the <span class="Bold">MCode</span> block cannot map a vector state variable into an FPGA device, an error message will be issued during model netlist time. The following are examples of using vector state variables.</div>
+      <div class="Heading4"><a name="915593">Delay Line</a></div>
+      <div class="Body"><a name="915594">The state variable in the following function will be mapped into a delay line.</a></div>
+      <div class="Code"><span class="XBlueLink"><a name="915595">function</a></span> q = delay(d, lat)</div>
+      <div class="Code"><a name="915596">&nbsp;</a>&nbsp;<span class="XBlueLink">persistent</span> r, r = xl_state(zeros(1, lat), d, lat);</div>
+      <div class="Code"><a name="915597">&nbsp;</a>&nbsp;q = r.back;</div>
+      <div class="Code"><a name="915598">&nbsp;</a>&nbsp;r.push_front_pop_back(d);</div>
+      <div class="Heading4"><a name="915599">Line of Registers</a></div>
+      <div class="Body"><a name="915600">The state variable in the following function will be mapped into a line of registers.</a></div>
+      <div class="Code"><span class="XBlueLink"><a name="915601">function</a></span> s = sum4(d)</div>
+      <div class="Code"><a name="915602">&nbsp;</a>&nbsp;<span class="XBlueLink">persistent</span> r, r = xl_state(zeros(1, 4), d);</div>
+      <div class="Code"><a name="915603">&nbsp;</a>&nbsp;S = r(0) + r(1) + r(2) + r(3);</div>
+      <div class="Code"><a name="915604">&nbsp;</a>&nbsp;r.push_front_pop_back(d);</div>
+      <div class="Heading4"><a name="915605">Vector of Constants</a></div>
+      <div class="Body"><a name="915606">The state variable in the following function will be mapped into a vector of constants.</a></div>
+      <div class="Code"><span class="XBlueLink"><a name="915607">function</a></span> s = myadd(a, b, c, d, nbits, binpt)</div>
+      <div class="Code"><a name="915608">&nbsp;</a>&nbsp;p = {xlSigned, nbits, binpt, xlRound, xlSaturate};</div>
+      <div class="Code"><a name="915609">&nbsp;</a>&nbsp;<span class="XBlueLink">persistent</span> coef, coef = xl_state([3, 7, 3.5, 6.7], p);</div>
+      <div class="Code"><a name="915610">&nbsp;</a>&nbsp;s = a*coef(0) + b*coef(1) + c*coef(2) + c*coef(3);</div>
+      <div class="Heading4"><a name="915611">Addressable Shift Register</a></div>
+      <div class="Body"><a name="915612">The state variable in the following function will be mapped into an addressable shift </a>register. </div>
+      <div class="Code"><span class="XBlueLink"><a name="915613">function</a></span> q = addrsr(d, addr, en, depth)</div>
+      <div class="Code"><a name="915614">&nbsp;</a>&nbsp;<span class="XBlueLink">persistent</span> r, r = xl_state(zeros(1, depth), d);</div>
+      <div class="Code"><a name="915615">&nbsp;</a>&nbsp;q = r(addr);</div>
+      <div class="Code"><a name="915616">&nbsp;</a><span class="XBlueLink">&nbsp;</span><span class="XBlueLink">if</span> en</div>
+      <div class="Code"><a name="915617">&nbsp;</a>&nbsp;&nbsp;&nbsp;r.push_front_pop_back(d);</div>
+      <div class="Code"><a name="915618">&nbsp;</a>&nbsp;<span class="XBlueLink">end</span></div>
+      <div class="Heading4"><a name="915619">Single Port ROM</a></div>
+      <div class="Body"><a name="915620">The state variable in the following function will be mapped into a single port ROM.</a></div>
+      <div class="Code"><span class="XBlueLink"><a name="915621">function</a></span> q = addrsr(contents, addr, arith, nbits, binpt)</div>
+      <div class="Code"><a name="915622">&nbsp;</a>&nbsp;proto = {arith, nbits, binpt};</div>
+      <div class="Code"><a name="915623">&nbsp;</a>&nbsp;<span class="XBlueLink">persistent</span> mem, mem = xl_state(contents, proto);</div>
+      <div class="Code"><a name="915624">&nbsp;</a>&nbsp;q = mem(addr);</div>
+      <div class="Heading4"><a name="915625">Single Port RAM</a></div>
+      <div class="Body"><a name="915626">The state variable in the following function will be mapped to a single port RAM in fabric </a>(Distributed RAM).</div>
+      <div class="Code"><span class="XBlueLink"><a name="915627">function</a></span> dout = ram(addr, we, din, depth, nbits, binpt)</div>
+      <div class="Code"><a name="915628">&nbsp;</a>&nbsp;proto = {xlSigned, nbits, binpt};</div>
+      <div class="Code"><a name="915629">&nbsp;</a>&nbsp;<span class="XBlueLink">persistent</span> mem, mem = xl_state(zeros(1, depth), proto);</div>
+      <div class="Code"><a name="915630">&nbsp;</a>&nbsp;dout = mem(addr);</div>
+      <div class="Code"><a name="915631">&nbsp;</a>&nbsp;<span class="XBlueLink">if</span> we</div>
+      <div class="Code"><a name="915632">&nbsp;</a>&nbsp;&nbsp;&nbsp;mem(addr) = din;</div>
+      <div class="Code"><a name="915633">&nbsp;</a>&nbsp;<span class="XBlueLink">end</span></div>
+      <div class="Body"><a name="1683446">The state variable in the following function will be mapped to BlockRAM as a single port </a>RAM.</div>
+      <div class="Code"><span class="XBlueLink"><a name="1683447">function</a></span> dout = ram(addr, we, din, depth, nbits, binpt,ram_enable)</div>
+      <div class="Code"><a name="1683448">&nbsp;</a>&nbsp;proto = {xlSigned, nbits, binpt};</div>
+      <div class="Code"><a name="1683449">&nbsp;</a>&nbsp;<span class="XBlueLink">persistent</span> mem, mem = xl_state(zeros(1, depth), proto);</div>
+      <div class="Code"><a name="1683893">&nbsp;</a>&nbsp;<span class="XBlueLink">persistent</span> dout_temp, dout_temp = xl_state(0,proto);</div>
+      <div class="Code"><a name="1683894">&nbsp;</a>&nbsp;dout = dout_temp;</div>
+      <div class="Code"><a name="1683943">&nbsp;</a>&nbsp;dout_temp = mem(addr);</div>
+      <div class="Code"><a name="1683944">&nbsp;</a>&nbsp;<span class="XBlueLink">if</span> we</div>
+      <div class="Code"><a name="1683945">&nbsp;</a>&nbsp;&nbsp;&nbsp;mem(addr) = din;</div>
+      <div class="Code"><a name="1683887">&nbsp;</a>&nbsp;<span class="XBlueLink">end</span></div>
+      <div class="Code"><a name="1683951">&nbsp;</a></div>
+      <div class="Body"><a name="1683882">MATLAB Functions</a></div>
+      <div class="Heading4"><a name="915635">disp()</a></div>
+      <div class="Body"><a name="915636">Displays the expression value. In order to see the printing on the MATLAB console, the </a>option <span class="Bold">Enable printing with disp</span> must be checked on the <span class="Bold">Advanced</span> tab of the <span class="Bold">MCode</span> block parameters dialog box. The argument can be a string, an <span class="Filename">xfix</span> number, or an <span class="Bold">MCode</span> state variable. If the argument is an <span class="Filename">xfix</span> number, it will print the type, binary value, and double precision value. For example, if variable <span class="Filename">x</span> is assigned with <span class="Filename">xfix({xlSigned, </span><span class="Filename">10, 7}, 2.75)</span>, the <span class="Filename">disp(x)</span> will print the following line:</div>
+      <div class="Code"><a name="915637">type: Fix_10_7, binary: 010.1100000, double: 2.75</a></div>
+      <div class="Body"><a name="915638">If the argument is a vector state variable, </a><span class="Filename">disp()</span> will print out the type, maximum length, current length, and the binary and double values of all the elements. For each simulation step, when <span class="Bold">Enable printing with disp</span> is on and when a <span class="Bold">disp()</span> function is invoked, a title line will be printed for the corresponding block. The title line includes the block name, Simulink simulation time, and FPGA clock number.</div>
+      <div class="Body"><a name="915639">The following </a><span class="Bold">MCode</span> function shows several examples of using the <span class="Filename">disp()</span> function.</div>
+      <div class="Code"><span class="XBlueLink"><a name="915640">function</a></span> x = testdisp(a, b)</div>
+      <div class="Code"><span class="XBlueLink"><a name="915641">persistent</a></span> dly, dly = xl_state(zeros(1, 8), a);</div>
+      <div class="Code"><span class="XBlueLink"><a name="915642">persistent</a></span> rom, rom = xl_state([3, 2, 1, 0], a);</div>
+      <div class="Code"><a name="915643">disp('Hello World!');</a></div>
+      <div class="Code"><a name="915644">disp(['num2str(dly) is ', num2str(dly)]);</a></div>
+      <div class="Code"><a name="915645">disp('disp(dly) is ');</a></div>
+      <div class="Code"><a name="915646">disp(dly);</a></div>
+      <div class="Code"><a name="915647">disp('disp(rom) is ');</a></div>
+      <div class="Code"><a name="915648">disp(rom);</a></div>
+      <div class="Code"><a name="915649">a2 = dly.back;</a></div>
+      <div class="Code"><a name="915650">dly.push_front_pop_back(a);</a></div>
+      <div class="Code"><a name="915651">x = a + b;</a></div>
+      <div class="Code"><a name="915652">disp(['a = ', num2str(a), ', ', ...</a></div>
+      <div class="Code"><a name="915653">'b = ', num2str(b), ', ', ...</a></div>
+      <div class="Code"><a name="915654">'x = ', num2str(x)]);</a></div>
+      <div class="Code"><a name="915655">disp(num2str(true));</a></div>
+      <div class="Code"><a name="915656">disp('disp(10) is');</a></div>
+      <div class="Code"><a name="915657">disp(10);</a></div>
+      <div class="Code"><a name="915658">disp('disp(-10) is');</a></div>
+      <div class="Code"><a name="915659">disp(-10);</a></div>
+      <div class="Code"><a name="915660">disp('disp(a) is ');</a></div>
+      <div class="Code"><a name="915661">disp(a);</a></div>
+      <div class="Code"><a name="915662">disp('disp(a == b)');</a></div>
+      <div class="Code"><a name="915663">disp(a==b);</a></div>
+      <div class="Body"><a name="915664">The following lines are the result for the first simulation step.</a></div>
+      <div class="Code"><a name="915665">xlmcode_testdisp/MCode (Simulink time: 0.000000, FPGA clock: 0)</a></div>
+      <div class="Code"><a name="915666">Hello World!</a></div>
+      <div class="Code"><a name="915667">num2str(dly) is [0.000000, 0.000000, 0.000000, 0.000000, 0.000000, </a>0.000000, 0.000000, 0.000000]</div>
+      <div class="Code"><a name="915668">disp(dly) is </a></div>
+      <div class="Code"><a name="915669">type: Fix_11_7,</a></div>
+      <div class="Code"><a name="915670">maxlen: 8,</a></div>
+      <div class="Code"><a name="915671">length: 8,</a></div>
+      <div class="Code"><a name="915672">0: binary 0000.0000000, double 0.000000,</a></div>
+      <div class="Code"><a name="915673">1: binary 0000.0000000, double 0.000000,</a></div>
+      <div class="Code"><a name="915674">2: binary 0000.0000000, double 0.000000,</a></div>
+      <div class="Code"><a name="915675">3: binary 0000.0000000, double 0.000000,</a></div>
+      <div class="Code"><a name="915676">4: binary 0000.0000000, double 0.000000,</a></div>
+      <div class="Code"><a name="915677">5: binary 0000.0000000, double 0.000000,</a></div>
+      <div class="Code"><a name="915678">6: binary 0000.0000000, double 0.000000,</a></div>
+      <div class="Code"><a name="915679">7: binary 0000.0000000, double 0.000000,</a></div>
+      <div class="Code"><a name="915680">disp(rom) is </a></div>
+      <div class="Code"><a name="915681">type: Fix_11_7,</a></div>
+      <div class="Code"><a name="915682">maxlen: 4,</a></div>
+      <div class="Code"><a name="915683">length: 4,</a></div>
+      <div class="Code"><a name="915684">0: binary 0011.0000000, double 3.0, </a></div>
+      <div class="Code"><a name="915685">1: binary 0010.0000000, double 2.0, </a></div>
+      <div class="Code"><a name="915686">2: binary 0001.0000000, double 1.0, </a></div>
+      <div class="Code"><a name="915687">3: binary 0000.0000000, double 0.0, </a></div>
+      <div class="Code"><a name="915688">a = 0.000000, b = 0.000000, x = 0.000000</a></div>
+      <div class="Code"><a name="915689">1</a></div>
+      <div class="Code"><a name="915690">disp(10) is</a></div>
+      <div class="Code"><a name="915691">type: UFix_4_0, binary: 1010, double: 10.0</a></div>
+      <div class="Code"><a name="915692">disp(-10) is</a></div>
+      <div class="Code"><a name="915693">type: Fix_5_0, binary: 10110, double: -10.0</a></div>
+      <div class="Code"><a name="915694">disp(a) is </a></div>
+      <div class="Code"><a name="915695">type: Fix_11_7, binary: 0000.0000000, double: 0.000000</a></div>
+      <div class="Code"><a name="915696">disp(a == b)</a></div>
+      <div class="Code"><a name="915697">type: Bool, binary: 1, double: 1</a></div>
+      <div class="Body"><a name="915698">You can find the above example in the topic </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.06.06.html#274179', '');" title="Compiling MATLAB into an FPGA">Compiling MATLAB into an FPGA</a></span> .</div>
+      <div class="Heading4"><a name="915699">error()</a></div>
+      <div class="Body"><a name="915700">Displays message and abort function. See Matlab help on this function for more detailed </a>information. Message formatting is not supported by the MCode block. For example:</div>
+      <div class="Code"><span class="XBlueLink"><a name="915701">if</a></span> latency &lt;=0</div>
+      <div class="Code"><a name="915702">&nbsp;</a>&nbsp;error('latency must be a positive');</div>
+      <div class="Code"><span class="XBlueLink"><a name="915703">end</a></span></div>
+      <div class="Heading4"><a name="915704">isnan()</a></div>
+      <div class="Body"><a name="915705">Returns true for Not-a-Number. </a><span class="Filename">isnan(X)</span> returns true when <span class="Filename">X</span> is Not-a-Number. <span class="Filename">X</span> must be a scalar value of double or Xilinx fixed-point number. This function is not supported for vectors or matrices. For example:</div>
+      <div class="Code"><span class="XBlueLink"><a name="915706">if</a></span> isnan(incr) &amp; incr == 1</div>
+      <div class="Code"><a name="915707">&nbsp;</a>&nbsp;cnt = cnt + 1;</div>
+      <div class="Code"><span class="XBlueLink"><a name="915708">end</a></span></div>
+      <div class="Heading4"><a name="915709">NaN()</a></div>
+      <div class="Body"><a name="915710">The </a><span class="Filename">NaN()</span> function generates an IEEE arithmetic representation for Not-a-Number. A NaN is obtained as a result of mathematically undefined operations like 0.0/0.0 and inf-inf. NaN(1,N) generates a 1-by-N vector of NaN values. Here are examples of using NaN.</div>
+      <div class="Code"><span class="XBlueLink"><a name="915711">if</a></span> x &lt; 0</div>
+      <div class="Code"><a name="915712">&nbsp;</a>&nbsp;z = NaN;</div>
+      <div class="Code"><span class="XBlueLink"><a name="915713">else</a></span></div>
+      <div class="Code"><a name="915714">&nbsp;</a>&nbsp;z = x + y;</div>
+      <div class="Code"><span class="XBlueLink"><a name="915715">end</a></span></div>
+      <div class="Heading4"><a name="915716">num2Str()</a></div>
+      <div class="Body"><a name="915717">Converts a number to a string. </a><span class="Filename">num2str(X)</span> converts the <span class="Filename">X</span> into a string. <span class="Filename">X</span> can be a scalar value of double, a Xilinx fixed-point number, or a vector state variable. The default number of digits is based on the magnitude of the elements of <span class="Filename">X</span>. Here's an example of <span class="Filename">num2str</span>:</div>
+      <div class="Code"><span class="XBlueLink"><a name="915718">if</a></span> opcode &lt;=0 | opcode &gt;= 10</div>
+      <div class="Code"><a name="915719">&nbsp;</a>&nbsp;error(['opcode is out of range: ', num2str(opcode)]);</div>
+      <div class="Code"><span class="XBlueLink"><a name="915720">end</a></span></div>
+      <div class="Heading4"><a name="915721">ones()</a></div>
+      <div class="Body"><a name="915722">The </a><span class="Filename">ones()</span> function generates a specified number of one values. <span class="Filename">ones(1,N)</span> generates a 1-by-N vector of ones. <span class="Filename">ones(M,N)</span> where <span class="Filename">M</span> must be 1. It's usually used with <span class="Filename">xl_state()</span> function call. For example, the following line creates a 1-by-4 vector state variable initialized to [1, 1, 1, 1].</div>
+      <div class="Code"><span class="XBlueLink"><a name="915723">persitent</a></span> m, m = xl_state(ones(1, 4), proto)</div>
+      <div class="Heading4"><a name="915724">zeros()</a></div>
+      <div class="Body"><a name="915725">The </a><span class="Filename">zeros()</span> function generates a specified number of zero values. <span class="Filename">zeros(1,N)</span> generates a 1-by-N vector of zeros. <span class="Filename">zero(M,N)</span> where <span class="Filename">M</span> must be 1. It's usually used with <span class="Filename">xl_state()</span> function call. For example, the following line creates a 1-by-4 vector state variable initialized to [0, 0, 0, 0].</div>
+      <div class="Code"><span class="XBlueLink"><a name="915726">persitent</a></span> m, m = xl_state(zeros(1, 4), proto)</div>
+      <div class="Heading3"><a name="915727">FOR Loop</a></div>
+      <div class="Body"><span class="Filename"><a name="915728">FOR</a></span> statement is fully unrolled. The following function sums <span class="Filename">n</span> samples.</div>
+      <div class="Code"><span class="XBlueLink"><a name="915729">function</a></span> q = sum(din, n)</div>
+      <div class="Code"><a name="915730">&nbsp;</a>&nbsp;<span class="XBlueLink">persistent</span> regs, regs = xl_state(zeros(1, 4), din);</div>
+      <div class="Code"><a name="915731">&nbsp;</a>&nbsp;q = reg(0);</div>
+      <div class="Code"><a name="915732">&nbsp;</a>&nbsp;<span class="XBlueLink">for</span> i = 1:n-1</div>
+      <div class="Code"><a name="915733">&nbsp;</a>&nbsp;&nbsp;&nbsp;q = q + reg(i);</div>
+      <div class="Code"><a name="915734">&nbsp;</a>&nbsp;<span class="XBlueLink">end</span></div>
+      <div class="Code"><a name="935278">&nbsp;</a>&nbsp;regs.push_front_pop_back(din);</div>
+      <div class="Body"><a name="935284">The following function does a bit reverse.</a></div>
+      <div class="Code"><span class="XBlueLink"><a name="915737">function</a></span> q = bitreverse(d)</div>
+      <div class="Code"><a name="915738">&nbsp;</a>&nbsp;q = xl_slice(d, 0, 0);</div>
+      <div class="Code"><a name="915739">&nbsp;</a>&nbsp;<span class="XBlueLink">for</span> i = 1:xl_nbits(d)-1</div>
+      <div class="Code"><a name="915740">&nbsp;</a>&nbsp;&nbsp;&nbsp;q = xl_concat(q, xl_slice(d, i, i));</div>
+      <div class="Code"><a name="915741">&nbsp;</a>&nbsp;<span class="XBlueLink">end</span></div>
+      <div class="Heading3"><a name="915742">Variable Availability</a></div>
+      <div class="Body"><a name="915743">MATLAB code is sequential (i.e., statements are executed in order). The </a><span class="Bold">MCode</span> block requires that every possible execution path assigns a value to a variable before it is used (except as a left-hand side of an assignment). When this is the case, we say the variable is <span class="Italic">available</span> for use. The <span class="Bold">MCode</span> block will throw an error if its M-code function accesses unavailable variables.</div>
+      <div class="Body"><a name="915744">Consider the following M-code:</a></div>
+      <div class="Code"><span class="XBlueLink"><a name="915745">function</a></span> [x, y, z] = test1(a, b)<br />&nbsp;&nbsp;x = a;<br />&nbsp;&nbsp;<span class="XBlueLink">if</span> a&gt;b<br />&nbsp;&nbsp;&nbsp;&nbsp;x = a + b; y = a; <br />&nbsp;&nbsp;<span class="XBlueLink">end</span><span class="XBlueLink"><br /></span>&nbsp;&nbsp;<span class="XBlueLink">switch</span> a<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="XBlueLink">case</span> 0 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z = a + b; <br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="XBlueLink">case</span> 1 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z = a – b;<br />&nbsp;&nbsp;<span class="XBlueLink">end</span></div>
+      <div class="Body"><a name="935295">Here </a><span class="Filename">a</span>, <span class="Filename">b</span>, and <span class="Filename">x</span> are available, but <span class="Filename">y</span> and <span class="Filename">z</span> are not. Variable <span class="Filename">y</span> is not available because the <span class="Bold">if</span> statement has no <span class="Bold">else</span>, and variable <span class="Filename">z</span> is not available because the <span class="Bold">switch</span> statement has no <span class="Bold">otherwise</span> part. </div>
+      <div class="Heading3"><a name="915747">DEBUG MCode</a></div>
+      <div class="Body"><a name="952694">There are two ways to debug your </a><span class="Bold">MCode</span>. One is to insert <span class="Filename">disp()</span> functions in your code and enable printing; the other is to use the MATLAB debugger. For usage of the disp() function, please reference the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.066.html#915635', '');" title="MCode">disp()</a></span>.</div>
+      <div class="Body"><a name="952698">If you want to use the MATLAB debugger, you need to check the </a><span class="Bold">Enable MATLAB </span><span class="Bold">debugging</span> option on the <span class="Bold">Advanced</span> tab of the <span class="Bold">MCode</span> block parameters dialog box. Then you can open your MATLAB function with the MATLAB editor, set break points, and debug your M-function. Just be aware that every time you modify your script, you need to execute a <span class="Filename">clear functions</span> command in the MATLAB console.</div>
+      <div class="Body"><a name="902376">To start debugging your M-function, you need to first check the </a><span class="Bold">Enable MATLAB </span><span class="Bold">debugging</span> checkbox on the <span class="Bold">Advanced</span> tab of the <span class="Bold">MCode</span> block parameters dialog, then click the <span class="Bold">OK</span> or <span class="Bold">Apply</span> button.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="947051"><img class="Default" src="images/Xilinx_Blockset.11.066.04.jpg" width="184" height="255" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="935664">Now you can edit the M-file with the MATLAB editor and set break points as needed.</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="947069"><img class="Default" src="images/Xilinx_Blockset.11.066.05.jpg" width="222" height="137" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="935683">During the Simulink simulation, the MATLAB debugger will stop at the break points you </a>set when the break points are reached. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="947081"><img class="Default" src="images/Xilinx_Blockset.11.066.06.jpg" width="220" height="133" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="954879">When debugging, you can also examine the values of the variables by typing the variable </a>names in the MATLAB console.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="954885"><img class="Default" src="images/Xilinx_Blockset.11.066.07.jpg" width="279" height="158" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="954886">There is one special case to consider when the function for an </a><span class="Bold">MCode</span> block is executed from the MATLAB debugger. A <span class="Filename">switch/case</span> expression inside an <span class="Bold">MCode</span> block must be type <span class="Filename">xfix</span>, however, executing a <span class="Filename">switch/case</span> expression from the MATLAB console requires that the expression be a <span class="Filename">double</span> or <span class="Filename">char</span>. To facilitate execution in the MATLAB console, a call to <span class="Filename">double()</span> must be added. For example, consider the follwing:</div>
+      <div class="Code"><span class="XBlueLink"><a name="935704">switch</a></span> i</div>
+      <div class="Code"><a name="935705">&nbsp;</a>&nbsp;<span class="XBlueLink">case</span> 0</div>
+      <div class="Code"><a name="935706">&nbsp;</a>&nbsp;&nbsp;&nbsp;x = 1</div>
+      <div class="Code"><a name="935707">&nbsp;</a>&nbsp;<span class="XBlueLink">case</span> 1</div>
+      <div class="Code"><a name="935708">&nbsp;</a>&nbsp;&nbsp;&nbsp;x = 2</div>
+      <div class="Code"><a name="935709">&nbsp;</a>&nbsp;<span class="XBlueLink">end</span></div>
+      <div class="Body"><a name="935710">where </a><span class="Filename">i</span> is type <span class="Filename">xfix</span>. To run from the console this code must changed to</div>
+      <div class="Code"><span class="XBlueLink"><a name="935711">switch</a></span> double(i)</div>
+      <div class="Code"><a name="935712">&nbsp;</a>&nbsp;<span class="XBlueLink">case</span> 0</div>
+      <div class="Code"><a name="935713">&nbsp;</a>&nbsp;&nbsp;&nbsp;x = 1</div>
+      <div class="Code"><a name="935714">&nbsp;</a>&nbsp;<span class="XBlueLink">case</span> 1</div>
+      <div class="Code"><a name="935715">&nbsp;</a>&nbsp;&nbsp;&nbsp;x = 2</div>
+      <div class="Code"><span class="XBlueLink"><a name="935716">end</a></span></div>
+      <div class="Body"><a name="935701">The </a><span class="Filename">double()</span> function call only has an effect when the M code is run from the console. The <span class="Bold">MCode</span> block ignores the <span class="Filename">double()</span> call.</div>
+      <div class="Heading3"><a name="935746">Passing Parameters</a></div>
+      <div class="Body"><a name="949077">It is possible to use the same M-function in different </a><span class="Bold">MCode</span> blocks, passing different parameters to the M-function so that each block may behave differently. This is achieved by binding input arguments to some values. To bind the input arguments, select the <span class="Bold">Interface</span> tab on the block GUI. After you bind those arguments to some values, these M-function arguments will not be shown as input ports of the <span class="Bold">MCode</span> block.</div>
+      <div class="Body"><a name="949078">Consider for example, the following M-function:</a></div>
+      <div class="Code"><a name="935749">function dout = xl_sconvert(din, nbits, binpt)</a></div>
+      <div class="Code"><a name="935750">proto = {xlSigned, nbits, binpt};</a></div>
+      <div class="Code"><a name="935751">dout = xfix(proto, din);</a></div>
+      <div class="Body"><a name="935744">The following figures shows how the bindings are set for the </a><span class="Bold">din</span> input of two separate <span class="Filename">xl_sconvert</span> blocks.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="949061"><img class="Default" src="images/Xilinx_Blockset.11.066.08.jpg" width="184" height="199" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="939822">&nbsp;</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="949429"><img class="Default" src="images/Xilinx_Blockset.11.066.09.jpg" width="185" height="199" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="939828">The following figure shows the block diagram after the model is compiled.</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="949447"><img class="Default" src="images/Xilinx_Blockset.11.066.10.jpg" width="188" height="96" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="939834">The parameters can only be of type double or they can be logical numbers.</a></div>
+      <div class="Heading3"><a name="939835">Optional Input Ports</a></div>
+      <div class="Body"><a name="939836">The parameter passing mechanism allows the </a><span class="Bold">MCode</span> block to have optional input ports. Consider for example, the following M-function:</div>
+      <div class="Code"><span class="XBlueLink"><a name="939837">function</a></span> s = xl_m_addsub(a, b, sub)</div>
+      <div class="Code"><a name="939838">&nbsp;</a>&nbsp;<span class="XBlueLink">if</span> sub</div>
+      <div class="Code"><a name="939839">&nbsp;</a>&nbsp;&nbsp;&nbsp;s = a – b;</div>
+      <div class="Code"><a name="939840">&nbsp;</a>&nbsp;<span class="XBlueLink">else</span></div>
+      <div class="Code"><a name="939841">&nbsp;</a>&nbsp;&nbsp;&nbsp;s = a + b;</div>
+      <div class="Code"><a name="939842">&nbsp;</a>&nbsp;<span class="XBlueLink">end</span></div>
+      <div class="Body"><a name="939843">If </a><span class="Filename">sub</span> is set to be <span class="Filename">false</span>, the <span class="Bold">MCode</span> block that uses this M-function will have two input ports <span class="Filename">a</span> and <span class="Filename">b</span> and will perform full precision addition. If it is set to an empty cell array <span class="Bold">{}</span>, the block will have three input ports <span class="Filename">a</span>, <span class="Filename">b</span>, and <span class="Filename">sub</span> and will perform full precision addition or subtraction based on the value of input port <span class="Filename">sub</span>.</div>
+      <div class="Body"><a name="939832">The following figure shows the block diagram of two blocks using the same </a><span class="Filename">xl_m_addsub</span> function, one having two input ports and one having three input ports.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="949476"><img class="Default" src="images/Xilinx_Blockset.11.066.11.jpg" width="253" height="120" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="939982">Constructing a State Machine</a></div>
+      <div class="Body"><a name="939983">There are two ways to build a state machine using an </a><span class="Bold">MCode</span> block. One way is to specify a stateless transition function using a MATLAB function and pair an <span class="Bold">MCode</span> block with one or more state register blocks. Usually the <span class="Bold">MCode</span> block drives a register with the value representing the next state, and the register feeds back the current state into the <span class="Bold">MCode</span> block. For this to work, the precision of the state output from the <span class="Bold">MCode</span> block must be static, that is, independent of any inputs to the block. Occasionally you may find you need to use <span class="Filename">xfix()</span> conversions to force static precision. The following code illustrates this:</div>
+      <div class="Code"><span class="XBlueLink"><a name="939984">function</a></span> nextstate = fsm1(currentstate, din)</div>
+      <div class="Code"><a name="939985">&nbsp;</a>&nbsp;% some other code</div>
+      <div class="Code"><a name="939986">&nbsp;</a>&nbsp;nextstate = currentstate;</div>
+      <div class="Code"><a name="939987">&nbsp;</a>&nbsp;<span class="XBlueLink">switch</span> currentstate</div>
+      <div class="Code"><a name="939988">&nbsp;</a>&nbsp;&nbsp;&nbsp;<span class="XBlueLink">case</span> 0, if din==1, nextstate = 1; end</div>
+      <div class="Code"><a name="939980">&nbsp;</a>&nbsp;<span class="XBlueLink">end</span></div>
+      <div class="Code"><a name="942200">&nbsp;</a>&nbsp;% a xfix call should be used at the end</div>
+      <div class="Code"><a name="942201">&nbsp;</a>&nbsp;nextstate = xfix({xlUnsigned, 2, 0}, nextstate);</div>
+      <div class="Body"><a name="942202">Another way is to use state variables. The above function can be re-written as follows:</a></div>
+      <div class="Code"><span class="XBlueLink"><a name="942203">function</a></span> currentstate = fsm1(din)</div>
+      <div class="Code"><a name="942204">&nbsp;</a>&nbsp;<span class="XBlueLink">persistent</span> state, state=xl_state(0,{xlUnsigned,2,0});</div>
+      <div class="Code"><a name="942205">&nbsp;</a>&nbsp;currentstate = state;</div>
+      <div class="Code"><a name="942206">&nbsp;</a>&nbsp;<span class="XBlueLink">switch</span> double(state)</div>
+      <div class="Code"><a name="942207">&nbsp;</a>&nbsp;&nbsp;&nbsp;<span class="XBlueLink">case</span> 0, if din==1; state = 1; end</div>
+      <div class="Code"><a name="942208">&nbsp;</a>&nbsp;<span class="XBlueLink">end</span></div>
+      <div class="Heading3"><a name="942209">Reset and Enable Signals for State Variables</a></div>
+      <div class="Body"><a name="942210">The </a><span class="Bold">MCode</span> block can automatically infer register reset and enable signals for state variables when conditional assignments to the variables contain two or fewer branches.</div>
+      <div class="Body"><a name="942211">For example, the following M-code infers an enable signal for conditional assignment of </a><span class="XBlueLink" style="font-family: &quot;Microsoft Sans Serif&quot;; font-size: 9.0pt">persistent</span> state variable <span class="Filename">r1</span>:</div>
+      <div class="Code"><span class="XBlueLink"><a name="942212">function</a></span> myFn = aFn(en, a)</div>
+      <div class="Code"><a name="942213">&nbsp;</a>&nbsp;<span class="XBlueLink">persistent</span> r1, r1 = xl_state(0, {xlUnsigned, 2, 0});</div>
+      <div class="Code"><a name="942214">&nbsp;</a>&nbsp;myFn = r1;</div>
+      <div class="Code"><a name="942215">&nbsp;</a>&nbsp;<span class="XBlueLink">if</span> en</div>
+      <div class="Code"><a name="942216">&nbsp;</a>&nbsp;&nbsp;&nbsp;r1 = r1 + a</div>
+      <div class="Code"><a name="942217">&nbsp;</a>&nbsp;<span class="XBlueLink">else</span></div>
+      <div class="Code"><a name="942218">&nbsp;</a>&nbsp;&nbsp;&nbsp;r1 = r1</div>
+      <div class="Code"><a name="942219">&nbsp;</a>&nbsp;<span class="XBlueLink">end</span></div>
+      <div class="Body"><a name="942220">There are two branches in the conditional assignment to persistent state variable </a><span class="Filename">r1</span>. A register is used to perform the conditional assignment. The input of the register is connected to <span class="Filename">r1 + a</span>, the output of the register is <span class="Filename">r1</span>. The register's enable signal is inferred; the enable signal is connected to <span class="Filename">en</span>, when <span class="Filename">en</span> is asserted. Persistent state variable <span class="Filename">r1</span> is assigned to <span class="Filename">r1 + a</span> when <span class="Filename">en</span> evaluates to <span class="Filename">false</span>, the enable signal on the register is de-asserted resulting in the assignment of <span class="Filename">r1</span> to <span class="Filename">r1</span>. </div>
+      <div class="Body"><a name="944284">The following M-code will also infer an enable signal on the register used to perform the </a>conditional assignment:</div>
+      <div class="Code"><span class="XBlueLink"><a name="942221">function</a></span> myFn = aFn(en, a)</div>
+      <div class="Code"><a name="942222">&nbsp;</a>&nbsp;<span class="XBlueLink">persistent</span> r1, r1 = xl_state(0, {xlUnsigned, 2, 0});</div>
+      <div class="Code"><a name="942223">&nbsp;</a>&nbsp;myFn = r1;</div>
+      <div class="Code"><a name="942224">&nbsp;</a>&nbsp;<span class="XBlueLink">if</span> en</div>
+      <div class="Code"><a name="942225">&nbsp;</a>&nbsp;&nbsp;&nbsp;r1 = r1 + a</div>
+      <div class="Code"><a name="942226">&nbsp;</a>&nbsp;<span class="XBlueLink">end</span></div>
+      <div class="Body"><a name="942227">An enable is inferred instead of a reset because the conditional assignment of persistent </a>state variable <span class="Filename">r1</span> is to a non-constant value, <span class="Filename">r1 + a</span>.</div>
+      <div class="Body"><a name="942228">If there were three branches in the conditional assignment of persistent state variable </a><span class="Filename">r1</span>, the enable signal would not be inferred. The following M-code illustrates the case where there are three branches in the conditional assignment of persistent state variable <span class="Filename">r1</span> and the enable signal is not inferred:</div>
+      <div class="Code"><span class="XBlueLink"><a name="942229">function</a></span> myFn = aFn(en, en2, a, b)</div>
+      <div class="Code"><a name="942230">&nbsp;</a>&nbsp;<span class="XBlueLink">persistent</span> r1, r1 = xl_state(0, {xlUnsigned, 2, 0});</div>
+      <div class="Code"><a name="942231">&nbsp;</a>&nbsp;<span class="XBlueLink">if</span> en</div>
+      <div class="Code"><a name="942232">&nbsp;</a>&nbsp;&nbsp;&nbsp;r1 = r1 + a</div>
+      <div class="Code"><a name="942233">&nbsp;</a>&nbsp;<span class="XBlueLink">elseif</span> en2</div>
+      <div class="Code"><a name="942234">&nbsp;</a>&nbsp;&nbsp;&nbsp;r1 = r1 + b</div>
+      <div class="Code"><a name="942235">&nbsp;</a>&nbsp;<span class="XBlueLink">else</span></div>
+      <div class="Code"><a name="942236">&nbsp;</a>&nbsp;&nbsp;&nbsp;r1 = r1</div>
+      <div class="Code"><a name="942237">&nbsp;</a>&nbsp;v</div>
+      <div class="Body"><a name="942238">The reset signal can be inferred if a persistent state variable is conditionally assigned to a </a>constant; the reset is synchronous. Consider the following M-code example which infers a reset signal for the assignment of persistent state variable <span class="Filename">r1</span> to <span class="Filename">init</span>, a constant, when <span class="Filename">rst</span> evaluates to true and <span class="Filename">r1 + 1</span> otherwise:</div>
+      <div class="Code"><span class="XBlueLink"><a name="942239">function</a></span> myFn = aFn(rst)</div>
+      <div class="Code"><a name="942240">&nbsp;</a>&nbsp;<span class="XBlueLink">persistent</span> r1, r1 = xl_state(0, {xlUnsigned, 4, 0});</div>
+      <div class="Code"><a name="942241">&nbsp;</a>&nbsp;myFn = r1;</div>
+      <div class="Code"><a name="942242">&nbsp;</a>&nbsp;init = 7;</div>
+      <div class="Code"><a name="942243">&nbsp;</a>&nbsp;<span class="XBlueLink">if</span> (rst)</div>
+      <div class="Code"><a name="942244">&nbsp;</a>&nbsp;&nbsp;&nbsp;r1 = init</div>
+      <div class="Code"><a name="942245">&nbsp;</a>&nbsp;<span class="XBlueLink">else</span></div>
+      <div class="Code"><a name="942246">&nbsp;</a>&nbsp;&nbsp;&nbsp;r1 = r1 + 1</div>
+      <div class="Code"><a name="942247">&nbsp;</a>&nbsp;<span class="XBlueLink">end</span></div>
+      <div class="Body"><a name="942248">The M-code example above which infers reset can also be written as:</a></div>
+      <div class="Code"><span class="XBlueLink"><a name="942249">function</a></span> myFn = aFn(rst)</div>
+      <div class="Code"><a name="942250">&nbsp;</a>&nbsp;<span class="XBlueLink">persistent</span> r1, r1 = xl_state(0, {xlUnsigned,4,0});</div>
+      <div class="Code"><a name="942251">&nbsp;</a>&nbsp;init = 1;</div>
+      <div class="Code"><a name="942252">&nbsp;</a>&nbsp;myFn = r1;</div>
+      <div class="Code"><a name="942253">&nbsp;</a>&nbsp;r1 = r1 +1</div>
+      <div class="Code"><a name="942254">&nbsp;</a>&nbsp;<span class="XBlueLink">if</span> (rst)</div>
+      <div class="Code"><a name="942255">&nbsp;</a>&nbsp;&nbsp;&nbsp;r1 = init</div>
+      <div class="Code"><a name="942256">&nbsp;</a>&nbsp;<span class="XBlueLink">end</span></div>
+      <div class="Body"><a name="942257">In both code examples above, the reset signal of the register containing persistent state </a>variable <span class="Filename">r1</span> is assigned to <span class="Filename">rst</span>. When <span class="Filename">rst</span> evaluates to <span class="Filename">true</span>, the register's reset input is asserted and the persistent state variable is assigned to constant <span class="Filename">init</span>. When <span class="Filename">rst</span> evaluates to <span class="Filename">false</span>, the register's reset input is de-asserted and persistent state variable <span class="Filename">r1</span> is assigned to <span class="Filename">r1 + 1</span>. Again, if the conditional assignment of a persistent state variable contains three or more branches, a reset signal is not inferred on the persistent state variable's register.</div>
+      <div class="Body"><a name="942258">It is possible to infer reset and enable signals on the register of a single persistent state </a>variable. The following M-code example illustrates simultaneous inference of reset and enable signals for the persistent state variable <span class="Filename">r1</span>:</div>
+      <div class="Code"><span class="XBlueLink"><a name="942259">function</a></span> myFn = aFn(rst,en)</div>
+      <div class="Code"><a name="942260">&nbsp;</a>&nbsp;<span class="XBlueLink">persistent</span> r1, r1 = xl_state(0, {xlUnsigned, 4, 0});</div>
+      <div class="Code"><a name="942261">&nbsp;</a>&nbsp;myFn = r1;</div>
+      <div class="Code"><a name="942262">&nbsp;</a>&nbsp;init = 0;</div>
+      <div class="Code"><a name="942263">&nbsp;</a>&nbsp;<span class="XBlueLink">if</span> rst</div>
+      <div class="Code"><a name="942264">&nbsp;</a>&nbsp;&nbsp;&nbsp;r1 = init</div>
+      <div class="Code"><a name="942265">&nbsp;</a>&nbsp;<span class="XBlueLink">else</span></div>
+      <div class="Code"><a name="942266">&nbsp;</a>&nbsp;&nbsp;&nbsp;<span class="XBlueLink">if</span> en</div>
+      <div class="Code"><a name="942267">&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r1 = r1 + 1</div>
+      <div class="Code"><a name="942268">&nbsp;</a>&nbsp;&nbsp;&nbsp;<span class="XBlueLink">end</span></div>
+      <div class="Code"><a name="942269">&nbsp;</a>&nbsp;<span class="XBlueLink">end</span></div>
+      <div class="Body"><a name="942270">The reset input for the register of persistent state variable </a><span class="Filename">r1</span> is connected to <span class="Filename">rst</span>; when <span class="Filename">rst</span> evaluates to <span class="Filename">true</span>, the register's reset input is asserted and <span class="Filename">r1</span> is assigned to <span class="Filename">init</span>. The enable input of the register is connected to <span class="Filename">en</span>; when <span class="Filename">en</span> evaluates to <span class="Filename">true</span>, the register's enable input is asserted and <span class="Filename">r1</span> is assigned to <span class="Filename">r1 + 1</span>. It is important to note that an inferred reset signal takes precedence over an inferred enable signal regardless of the order of the conditional assignment statements. Consider the second code example above; if both <span class="Filename">rst</span> and <span class="Filename">en</span> evaluate to <span class="Filename">true</span>, persistent state variable <span class="Filename">r1</span> would be assigned to <span class="Filename">init</span>.</div>
+      <div class="Body"><a name="942271">Inference of reset and enable signals also works for conditional assignment of persistent </a>state variables using switch statements, provided the switch statements contain two or less branches. </div>
+      <div class="Body"><a name="942272">The </a><span class="Bold">MCode</span> block performs dead code elimination and constant propagation compiler optimizations when generating code for the FPGA. This can result in the inference of reset and/or enable signals in conditional assignment of persistent state variables, when one of the branches is never executed. For this to occur, the conditional must contain two branches that are executed after dead code is eliminated and constant propagation is performed.</div>
+      <div class="Heading3"><a name="3269747">Inferring Registers</a></div>
+      <div class="Body"><a name="3269748">Registers are inferred in hardware by using persistent variables, however, the right coding </a>style must be used. Consider the two code segments in the following function:</div>
+      <div class="Code"><a name="3269749">function [out1, out2] = persistent_test02(in1, in2) </a></div>
+      <div class="Code"><a name="3269750">persistent ff1, ff1 = xl_state(0, {xlUnsigned, 2, 0});</a></div>
+      <div class="Code"><a name="3269751">persistent ff2, ff2 = xl_state(0, {xlUnsigned, 2, 0});</a></div>
+      <div class="Code"><a name="3269752">%code segment 1</a></div>
+      <div class="Code"><a name="3269753">out1 = ff1; %these two statements infer a register for ff1</a></div>
+      <div class="Code"><a name="3269754">ff1  = in1;</a></div>
+      <div class="Code"><a name="3269755">%code segment 2</a></div>
+      <div class="Code"><a name="3269756">ff2  = in2; %these two statements do NOT infer a register for ff2</a></div>
+      <div class="Code"><a name="3269757">out2 = ff2;</a></div>
+      <div class="Code"><a name="3269758">end</a></div>
+      <div class="Body"><a name="3269759">In code segment 1, the value of persistent variable ff1 is assigned to out1. Since ff1 is </a>persistent , it is assumed that its current value was assigned in the previous cycle. In the next statement, the value of in1 is assigned to ff1 so it can be saved for the next cycle. This infers a register for ff1.</div>
+      <div class="Body"><a name="3271158">In code segment 2, the value of in2 is first assigned to persistent variable ff2, then assigned </a>to out2. These two statements can be completed in one cycle, so a register is not inferred. If you need to insert delay into combinational logic, refer to the next topic.</div>
+      <div class="Heading3"><a name="3271159">Pipelining Combinational Logic</a></div>
+      <div class="Body"><a name="942274">The generated FPGA bitstream for an MCode block may contain many levels of </a>combinational logic and hence a large critical path delay. To allow a downstream logic synthesis tool to automatically pipeline the combinational logic, you can add delay blocks before the MCode block inputs or after the MCode block outputs. These delay blocks should have the parameter <span class="Bold">Implement using behavioral HDL</span> set, which instructs the code generator to implement delay with synthesizable HDL. You can then instruct the downstream logic synthesis tool to implement register re-timing or register balancing. As an alternative approach, you can use the vector state variables to model delays.</div>
+      <div class="Heading3"><a name="942275">Shift Operations with Multiplication and Division</a></div>
+      <div class="Body"><a name="942276">The </a><span class="Bold">MCode</span> block can detect when a number is multiplied or divided by constants that are powers of two. If detected, the <span class="Bold">MCode</span> block will perform a shift operation. For example, multiplying by 4 is equivalent to left shifting 2 bits and dividing by 8 is equivalent to right shifting 3 bits. A shift is implemented by adjusting the binary point, expanding the <span class="Filename">xfix</span> container as needed. For example, a <span class="Filename">Fix_8_4</span> number multiplied by 4 will result in a <span class="Filename">Fix_8_2</span> number, and a <span class="Filename">Fix_8_4</span> number multiplied by 64 will result in a <span class="Filename">Fix_10_0</span> number.</div>
+      <div class="Heading3"><a name="942277">Using the xl_state Function with Rounding Mode</a></div>
+      <div class="Body"><a name="942278">The </a><span class="Filename">xl_state</span> function call creates an <span class="Filename">xfix</span> container for the state variable. The container's precision is specified by the second argument passed to the <span class="Filename">xl_state</span> function call. If precision uses <span class="Filename">xlRound</span> for its rounding mode, hardware resources will be added to accomplish the rounding. If rounding the initial value is all that is required, an <span class="Filename">xfix</span> call to round a constant does not require additional hardware resources. The rounded value can then be passed to the <span class="Filename">xl_state</span> function. For example:</div>
+      <div class="Code"><a name="942279">init = xfix({xlSigned,8,5,xlRound,xlWrap}, 3.14159);</a></div>
+      <div class="Code"><a name="942280">persistent s, s = xl_state(init, {xlSigned, 8, 5});</a></div>
+      <div class="Heading2"><a name="942281">Block Parameters Dialog Box</a></div>
+      <div class="Body"><a name="949668">The block parameters dialog box can be invoked by double-clicking the block icon in a </a>Simulink model. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="949667"><img class="Default" src="images/Xilinx_Blockset.11.066.12.jpg" width="184" height="239" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="944349">As described earlier in this topic, the </a><span class="Bold">MATLAB function</span> parameter on an <span class="Bold">MCode</span> block tells the name of the block's function, and the <span class="Bold">Interface</span> tab specifies a list of constant inputs and their values. </div>
+      <div class="Body"><a name="1282889">Other parameters used by this block are explained in the topic</a><br /><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.003.html#271277', '');" title="Common Options in Block Parameter Dialog Boxes">Common Options in Block Parameter Dialog Boxes</a></span>. </div>
+      <div class="Body"><a name="628196">&nbsp;</a></div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

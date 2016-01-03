@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Convert</title>
+    <link rel="StyleSheet" href="css/Xilinx_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Blockset.11.1.html#271116">Xilinx Blockset</a> : Convert</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="271116">Convert</a></div>
+      <div class="Body"><span class="Italic"><a name="275534">This block is listed in the following Xilinx Blockset libraries: Basic Elements, Data Types, Math, and </a></span><span class="Italic">Index.</span></div>
+      <div class="OneLiner"><a name="275537"><img class="Default" src="images/Xilinx_Blockset.11.21.1.jpg" width="61" height="61" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" />The Xilinx Convert block converts each input sample to a number of a desired </a>arithmetic type. For example, a number can be converted to a signed (two's complement) or unsigned value. </div>
+      <div class="Heading2"><a name="275540">Block Parameters</a></div>
+      <div class="Body"><a name="275541">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model.</div>
+      <div class="Heading3"><a name="1061733">Basic tab</a></div>
+      <div class="Body"><a name="1053151">The Type parameter in this block uses the same description as the Arithmetic Type </a>description in the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.3.html#271277', '');" title="Common Options in Block Parameter Dialog Boxes">Common Options in Block Parameter Dialog Boxes</a></span>.</div>
+      <div class="Heading4"><a name="1061746">Quantization</a></div>
+      <div class="Body"><a name="1061756">Quantization errors occur when the number of fractional bits is insufficient to represent the </a>fractional portion of a value. The options are to <span class="Bold">Truncate</span> (i.e., to discard bits to the right of the least significant representable bit), or to <span class="Bold">Round(unbiased: +/- inf)</span> or <span class="Bold">Round (unbiased: </span><span class="Bold">even values).</span></div>
+      <div class="Body"><span class="Bold"><a name="2164088">Round(unbiased: +/- inf) </a></span>also known as "Symmetric Round (towards +/- inf)" or "Symmetric Round (away from zero)". This is similar to the Matlab round() function. This method rounds the value to the nearest desired bit away from zero and when there is a value at the midpoint between two possible rounded values, the one with the larger magnitude is selected. For example, to round 01.0110 to a Fix_4_2, this yields 01.10, since 01.0110 is exactly between 01.01 and 01.10 and the latter is further from zero.</div>
+      <div class="Body"><span class="Bold"><a name="2164086">Round (unbiased: even values)</a></span> also known as "Convergent Round (toward even)" or "Unbiased Rounding". Symmetric rounding is biased because it rounds all ambiguous midpoints away from zero which means the average magnitude of the rounded results is larger than the average magnitude of the raw results. Convergent rounding removes this by alternating between a symmetric round toward zero and symmetric round away from zero. That is, midpoints are rounded toward the nearest even number. For example, to round 01.0110 to a Fix_4_2, this yields 01.10, since 01.0110 is exactly between 01.01 and 01.10 and the latter is even. To round 01.1010 to a Fix_4_2, this yields 01.10, since 01.1010 is exactly between 01.10 and 01.11 and the former is even.</div>
+      <div class="Heading4"><a name="1061757">Overflow</a></div>
+      <div class="Body"><a name="1061752">Overflow errors occur when a value lies outside the representable range. For overflow the </a>options are to<span class="Bold"> Saturate</span> to the largest positive/smallest negative value, to <span class="Bold">Wrap</span> (i.e., to discard bits to the left of the most significant representable bit), or to <span class="Bold">Flag as error</span> (an overflow as a Simulink error) during simulation. <span class="Bold">Flag as error</span> is a simulation only feature. The hardware generated is the same as when <span class="Bold">Wrap</span> is selected.</div>
+      <div class="Heading4"><a name="2429879">Optional Ports</a></div>
+      <div class="Body"><span class="Bold"><a name="2429877">Provide enable port</a></span>: Activates an optional enable (en) pin on the block. When the enable signal is not asserted the block holds its current state until the enable signal is asserted again or the reset signal is asserted. </div>
+      <div class="Heading3"><a name="1053136">Implementation tab</a></div>
+      <div class="Body"><a name="529507">Parameters specific to the Implementation tab are as follows: </a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="373909">Pipeline for maximum performance</a></span>: directs the block to use pipeline registers to achive the maximum performance. Block latency may incrrease.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="1282478">Other parameters used by this block are explained in the topic</a><br /><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.3.html#271277', '');" title="Common Options in Block Parameter Dialog Boxes">Common Options in Block Parameter Dialog Boxes</a></span>. </div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+//////////////////////////////////////////////////////////////////////////////
+//
+// Filename   : eth_cosim_top.bmm
+//
+// Description: Block RAM memory mapping for Ethernet hardware co-simulation.
+//
+//////////////////////////////////////////////////////////////////////////////
+
+ADDRESS_BLOCK sysgen_hwcosim_ppethernet RAMB16 [0x0000:0x17ff]
+  BUS_BLOCK
+    ehwc_iface/U_client_eccpi/rxblk/rx_mem_s_00 [7:0];
+  END_BUS_BLOCK;
+  BUS_BLOCK
+    ehwc_iface/U_client_eccpi/rxblk/rx_mem_s_01 [7:0];
+  END_BUS_BLOCK;
+  BUS_BLOCK
+    ehwc_iface/U_client_eccpi/txblk/tx_mem_s_0 [7:0];
+  END_BUS_BLOCK;
+END_ADDRESS_BLOCK;

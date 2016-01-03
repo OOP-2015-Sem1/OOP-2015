@@ -74,7 +74,7 @@ public class NewGameScene {
                     if (namesRespectLength()) {
                         Game newGame = new Game(playerList(), colorsUsed());
                         GameScene scene = new GameScene(newGame);
-                        GameEngine.startingSequence(newGame);
+                        newGame.gameEngine.startingSequence();
                     } else {
                         MessageBox.display("Error", "Names must have at most 10 characters");
                     }

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>HDL Co-Simulation</title>
+    <link rel="StyleSheet" href="css/Importing_HDL_Modules.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Importing_HDL_Modules.09.1.html#270769">Importing HDL Modules</a> : HDL Co-Simulation</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="270769">HDL Co-Simulation</a></div>
+      <div class="Heading2"><a name="281194">Introduction</a></div>
+      <div class="Body"><a name="274418">This topic describes how a mixed language/mixed flow design that includes Xilinx blocks, </a>HDL modules, and a Simulink block diagram can be simulated in its entirety. </div>
+      <div class="Body"><a name="274408">System Generator simulates black boxes by automatically launching an HDL simulator, </a>generating additional HDL as needed (analogous to an HDL testbench), compiling HDL, scheduling simulation events, and handling the exchange of data between the Simulink and the HDL simulator. This is called<span class="Italic"> HDL co-simulation</span>. </div>
+      <div class="Heading2"><a name="270770">Configuring the HDL Simulator </a></div>
+      <div class="Body"><a name="274509">Black box HDL can be co-simulated with Simulink using the System Generator interface to </a>either ISE® Simulator or the ModelSim simulation software from Model Technology, Inc. </div>
+      <div class="Heading3"><a name="274512">ISE Simulator</a></div>
+      <div class="Body"><a name="274501">To use the ISE® Simulator for co-simulating the HDL associated with the black box, select </a><span class="Bold">ISE Simulator</span> as the option for the <span class="Bold">Simulation mode</span> parameter on the black box as shown in the following figure. The model is then ready to be simulated and the HDL co-simulation takes place automatically.</div>
+      <div class="Body"><a name="291359">&nbsp;</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="274625"><img class="Default" src="images/Importing_HDL_Modules.09.5.1.jpg" width="261" height="286" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="274554">ModelSim Simulator</a></div>
+      <div class="Body"><a name="274547">To use the ModelSim simulator by Model Technology, Inc., you must first add the </a>ModelSim block that appears in the Tools library of the Xilinx Blockset to your Simulink diagram. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="274646"><img class="Default" src="images/Importing_HDL_Modules.09.5.2.jpg" width="50" height="51" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="274599">For each black box that you wish to have co-simulated using ModelSim simulator, you </a>need to open its block parameterization dialog and set it to use the ModelSim session represented by the black box that was just added. You do this by making the following two settings: </div>
+      <div class="Body"><a name="274603">1. Change the Simulation Mode field from Inactive to External co-simulator. </a></div>
+      <div class="Body"><a name="274587">2. Enter the name of the ModelSim block (e.g., ModelSim) in the HDL Co-Simulator to use </a>field. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="274663"><img class="Default" src="images/Importing_HDL_Modules.09.5.3.jpg" width="264" height="289" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="290410">The block parameter dialog for the ModelSim block includes some parameters that you </a>can use to control various options for the ModelSim session. See the <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.067.html#618404', '');" title="ModelSim">ModelSim</a></span>  block help pages for details. The model is then ready to be simulated with these options, and the HDL co-simulation takes place automatically.</div>
+      <div class="Heading2"><a name="270771">Co-Simulating Multiple Black Boxes </a></div>
+      <div class="Body"><a name="274697">System Generator allows many black boxes to share a common ModelSim co-simulation </a>session. I.e., many black boxes can be set to "use" the same ModelSim block. In this case, System Generator automatically combines all black box HDL components into a single shared top-level co-simulation component. This is transparent to the user. It does mean, however, that only one ModelSim simulation license is needed to co-simulate several black boxes in the Simulink simulation.</div>
+      <div class="Body"><a name="274771">For an example of how to do this, see </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Importing_HDL_Modules.09.6.html#270750', '');" title="Black Box Examples">Simulating Several Black Boxes Simultaneously</a></span>. </div>
+      <div class="Body"><a name="274772">Multiple black boxes can also be co-simulated with ISE® Simulator by just selecting </a><span class="Italic">ISE </span><span class="Italic">Simulator</span> as the option for <span class="Italic">Simulation mode</span> on each black box.</div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

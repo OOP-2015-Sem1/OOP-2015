@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Using FDATool in Digital Filter Applications</title>
+    <link rel="StyleSheet" href="css/HW_Design.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="HW_Design.06.01.html#312772">Hardware Design Using System Generator</a> : Using FDATool in Digital Filter Applications</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="312772">Using FDATool in Digital Filter Applications</a></div>
+      <div class="Body"><a name="312773">The following example demonstrates one way of specifying, implementing, and </a>simulating a FIR filter using the FDATool block. The FDATool block is used to define the filter order and coefficients and the Xilinx Blocksets are used to implement a MAC-based FIR filter using a single MAC (Multiply-ACcumulate) engine. The quality of frequency response is then validated by comparing it to a double-precision Simulink filter model.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="312779"><img class="Default" src="images/HW_Design.06.14.01.jpg" width="350" height="413" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="312780">Although a single MAC engine FIR filter is used for this example, we strongly recommend </a>that you look at the DSP Reference Library provided as a part of the Xilinx Reference Blockset. The DSP Reference Library consists of multi-MAC, as well as, multi-channel implementation examples with variations on the type of memory used. </div>
+      <div class="Body"><a name="312781">A demo included in the System Generator demos library also shows an efficient way to </a>implement a MAC-based interpolation filter. To see the demo, type the following in the MATLAB command window: </div>
+      <div class="Code"><a name="312782">&gt;&gt; demo blockset xilinx </a></div>
+      <div class="Body"><a name="312783">then select FIR filtering: Polyphase 1:8 filter using SRL16Es from the list of demo designs. </a></div>
+      <div class="Heading2"><a name="312784">Design Overview</a></div>
+      <div class="Body"><a name="312785">This design uses the random number source block from the DSP Blockset library to drive </a>two different implementations of a FIR filter: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="312786">The first filter is the one that could be implemented in a Xilinx device. It is a fixed-</a>point FIR filter implemented with a dual-port Block memory and a single multiply-accumulator. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="312787">The second filter is what is referred to as reference filter. It is a double-precision, </a>direct-form II transpose filter. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="312794">The frequency response of each filter is then plotted in a transfer function scope.</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="312793"><img class="Default" src="images/HW_Design.06.14.02.jpg" width="354" height="287" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="312795">Open and Generate the Coefficients for this FIR Filter</a></div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="312796">From the MATLAB console window, </a><span class="Filename">cd</span> into the directory <span class="Filename">&lt;ISE_Design_Suite_tree&gt;/sysgen/sysgen/examples/mac_fir</span>. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="312797">Open the design model by typing </a><span class="Filename">mac_df2t</span> from your MATLAB command window. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="312798">For the purpose of this tutorial, the variables </a><span class="Filename">coef</span>, <span class="Filename">coef_width</span>, <span class="Filename">coef_binpt</span>, <span class="Filename">data_width</span>, <span class="Filename">data_binpt</span> and <span class="Filename">Fs</span> are not defined. You will first use these variables as mask parameters to the MAC Based FIR block and then design and assign the filter coefficients using the FDATool. The fully functional model is available in the current directory and is called <span class="Filename">mac_df2t_soln.mdl</span>. </div>
+      <div class="Heading2"><a name="312799">Parameterize the MAC-Based FIR Block</a></div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="312800">Right Click on the MAC-Based FIR block and select </a><span class="Bold">Edit Mask</span> as shown in the figure below. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="312806"><img class="Default" src="images/HW_Design.06.14.03.jpg" width="242" height="219" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="312813">Double-click on the Parameters tab and add the parameters coef, data_width and </a>data_binpt as shown below. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="312812"><img class="Default" src="images/HW_Design.06.14.04.jpg" width="328" height="281" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="312814">Generate and Assign Coefficients for the FIR Filter</a></div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="312815">Drag and drop the FDATool block into your model from the DSP Xilinx Blockset </a>Library. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="487736">Double-click on the FDATool block and enter the following specifications in the Filter </a>Design &amp; Analysis Tool for a low-pass filter designed to eliminate high-frequency noise in audio systems: </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="487737">Response Type: </a><span class="Bold">Lowpass</span> </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="487738">Filter Order: </a><span class="Bold">Minimum order</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="487739">Frequency Specifications</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSubSub_outer" style="margin-left: 36pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSubSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSubSub_inner"><a name="487740">Units: </a><span class="Bold">Hz</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSubSub_outer" style="margin-left: 36pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSubSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSubSub_inner"><a name="487770">Fs: </a><span class="Bold">44100</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSubSub_outer" style="margin-left: 36pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSubSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSubSub_inner"><a name="487771">Fpass:</a><span class="Bold"> 6000</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSubSub_outer" style="margin-left: 36pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSubSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSubSub_inner"><a name="487772">Fstop: </a><span class="Bold">7725</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSub_inner"><a name="487741">Magnitude Specifications</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSubSub_outer" style="margin-left: 36pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSubSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSubSub_inner"><a name="487784">Units: </a><span class="Bold">dB</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSubSub_outer" style="margin-left: 36pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSubSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSubSub_inner"><a name="487786">Apass:</a><span class="Bold"> 1</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="BulletedSubSub_outer" style="margin-left: 36pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="BulletedSubSub_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="BulletedSubSub_inner"><a name="487787">Astop: </a><span class="Bold">48</span> </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="487806"><img class="Default" src="images/HW_Design.06.14.05.jpg" width="323" height="272" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="487742">Click on </a><span class="Bold">Design Filter</span> at the bottom of the tool window to find out the filter order and observe the magnitude response. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="312823">You can also view the phase response, impulse response, coefficients and more by </a>selecting the appropriate icon at the top-right of the GUI. Based on the FDATool, a 43-tap FIR filter (order 0-42) is required in order to meet the design specifications listed above. </div>
+      <div class="Body2"><a name="312824">The filter coefficients can be displayed in the MATLAB workspace by typing: </a></div>
+      <div class="Code"><a name="312825">&gt;&gt; xlfda_numerator('FDATool') </a></div>
+      <div class="Body2"><a name="312826">These useful functions help you find the maximum and minimum coefficient value in </a>order to adequately specify the coefficient width and binary point: </div>
+      <div class="Code"><a name="312827">&gt;&gt; max(xlfda_numerator('FDATool'))</a></div>
+      <div class="Code"><a name="312828">&gt;&gt; min(xlfda_numerator('FDATool')) </a></div>
+      <div class="Body2"><a name="312829">For this tutorial, the coefficient type has been set to be Fix_12_12, which is a 12-bit </a>number with the binary point to the left of the twelfth bit. The result of the max() function above shows that the largest coefficient is 0.3022, which means that the binary point may be positioned to the left of the most significant bit. How do you reason that? A Fix_12_12 number has a range of -0.5 to 0.4998, meaning the dynamic range is maximized by putting the binary point left of the most significant bit. If you moved the binary point to the right (by using a Fix_12_11 number) you would lose one bit of dynamic range because a Fix_12_11 number has a range of -1 to 0.9995, which is more than you require to represent the coefficients. </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="312830">Click on the Reference Filter block and the MAC Based FIR block and verify the </a>parameter values for coef, coef_width, coef_binpt, data_width, data_binpt and Fs as shown below.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="312836"><img class="Default" src="images/HW_Design.06.14.06.jpg" width="368" height="195" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body2"><a name="312837">Click OK on each dialog box</a></div>
+      <div class="Heading2"><a name="312838">Browse Through and Understand the Xilinx Filter Block</a></div>
+      <div class="Body"><a name="312839">The following block diagram showing how the MAC-based FIR filter has been </a>implemented for this tutorial.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="312845"><img class="Default" src="images/HW_Design.06.14.07.jpg" width="366" height="195" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="312846">At this point, the MAC filter is set up for a 10-bit signed input data (Fix_10_8), a 12-bit </a>signed coefficient (Fix_12_12), and 43 taps. All these parameters can be modified directly from the MAC block GUI. The coefficients and data need to be stored in a memory system. For the tutorial, you choose to use a dual-port memory to store the data and coefficients, with the data being captured and read out using a circular RAM buffer. The RAM is used in a mixed-mode configuration: values are written and read from port A (RAM mode), and the coefficients are only read from port B (ROM mode). </div>
+      <div class="Body"><a name="312847">The multiplier is set up to use the embedded multiplier resource available in Xilinx </a>Virtex® devices as well as three levels of latency in order to achieve the fastest performance possible. The precision required for the multiplier and the accumulator is a function of the filter taps (coefficients) and the number of taps. Since these are fixed at design time, it is possible to tailor the hardware resources to the filter specification. The accumulator need only have sufficient precision to accumulate maximal input against the filter taps, which is calculated as follows: </div>
+      <div class="Code"><a name="312848">acc_nbits = ceil(log2(sum(abs(coef*2^coef_width_bp)))) + data_width+ 1; </a></div>
+      <div class="Body"><a name="312849">Upon reset, the accumulator re-initializes to its current input value rather than zero, which </a>allows the MAC engine to stream data without stalling. A capture register is required for streaming operation since the MAC engine reloads its accumulator with an incoming sample after computing the last partial product for an output sample. </div>
+      <div class="Body"><a name="312850">Finally, a downsampler reduces the capture register sample period to the output sample </a>period. The block is configured with latency to obtain the most efficient hardware implementation. The downsampling rate is equal to the coefficient array length. </div>
+      <div class="Heading2"><a name="312851">Run the Simulation</a></div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="312852">Change the simulation time to 0.05, then run the simulation</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="487970">You should get the message shown in the figure below. </a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="487914"><img class="Default" src="images/HW_Design.06.14.08.jpg" width="345" height="159" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body2"><a name="487979">System Generator gets its input sample period from the din </a><span class="Bold">Gateway In</span> block which has 1/Fs specified as the data input sample period. As the MAC-based FIR filter is over-sampled according to the number of taps, the System Clock Period will always be equal to 1/(Filter Taps * Fs). </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="487975">Double click on the System Generator token and change the Simulink system period to </a>specify the System Clock Period as 5.273427e-007 = 1/(43 * 44100) as shown below.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="312858"><img class="Default" src="images/HW_Design.06.14.09.jpg" width="268" height="91" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="312859">Run the simulation again and notice that the Xilinx implementation of the MAC-based </a>FIR filter meets the original filter specifications and that its frequency response is almost identical to the double precision Simulink models. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="312860">As you can see, the filter passband response measurement as well as zeros can clearly </a>be seen. You should get similar frequency responses as shown in the following figure.</div>
+      <div class="Body"><a name="487997">&nbsp;</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="312866"><img class="Default" src="images/HW_Design.06.14.10.jpg" width="260" height="427" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="312867">It is possible to increase or decrease the precision of the Xilinx Filter in order to reach the </a>perfect area/performance/quality trade off required by your design specifications. </div>
+      <div class="Body"><a name="312868">Stop the simulation and modify the coefficient width to </a><span class="Bold">FIX_10_10</span> and the data width to <span class="Bold">FIX_8_6</span> from the block GUI. Update the model (<span class="Filename">Ctrl-d</span>) and push into the MAC engine block. You should now notice that the datapath has been automatically updated to only eighteen bits on the output of the multiplier and twenty on the output of the accumulator. </div>
+      <div class="Body"><a name="488150">Restart the simulation and observe how the frequency response has been affected. The </a>attenuation has indeed degraded (less than 40dB) due to the fixed-wordlength effects.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="488156"><img class="Default" src="images/HW_Design.06.14.11.jpg" width="332" height="321" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

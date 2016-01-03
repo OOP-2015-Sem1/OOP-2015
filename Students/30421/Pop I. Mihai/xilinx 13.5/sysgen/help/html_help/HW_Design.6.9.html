@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Notes for Higher Performance FPGA Design</title>
+    <link rel="StyleSheet" href="css/HW_Design.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="HW_Design.6.1.html#274165">Hardware Design Using System Generator</a> : Notes for Higher Performance FPGA Design</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="274165">Notes for Higher Performance FPGA Design</a></div>
+      <div class="Body"><a name="281111">When you use the following design practices, it helps System Generator produce efficient </a>and high performance hardware realizations.</div>
+      <div class="Heading2"><a name="406813">Review the Hardware Notes Included in Block Dialog Boxes</a></div>
+      <div class="Body"><a name="281113">Pay close attention to the Hardware Notes included in the block dialog boxes. Many blocks </a>in the Xilinx Blockset library have notes that explain how to achieve the most hardware efficient implementation. For example, the notes point out that the Scale block costs nothing in hardware. By contrast, the Shift block (which is sometimes used for the same purpose) can use hardware. </div>
+      <div class="Heading2"><a name="406846">Register the Inputs and Outputs of Your Design</a></div>
+      <div class="Body"><a name="406847">Register inputs and outputs of your design. This can be done by placing a Delay block </a>having latency 1 or a Register block after the Gateway In and before Gateway Out blocks. Selecting any of the Register block features adds hardware.</div>
+      <div class="Body"><a name="281117">Double registering the I/Os may also be beneficial. This can be performed by instantiating </a>two separate Register blocks, or by instantiating two Delay blocks, each having latency 1. This allows one of the registers to be packed into the IOB and the other to be placed next to the logic in the FPGA fabric. A Delay block with latency 2 does not give the same result since this block is implemented using an SRL16 and cannot be packed into an IOB.</div>
+      <div class="Heading2"><a name="406865">Insert Pipeline Registers</a></div>
+      <div class="Body"><a name="281121">Insert pipeline registers wherever possible. Deep pipelines are efficiently implemented </a>with the Delay blocks since the SRL16 primitive is used. If an initial value is needed on a register, the Register block should be used. </div>
+      <div class="Heading2"><a name="406871">Use Saturation Arithmetic and Rounding Only When Necessary</a></div>
+      <div class="Body"><a name="281123">Saturation arithmetic and rounding have area and performance costs. Use only if </a>necessary.</div>
+      <div class="Heading2"><a name="406877">Use the System Generator Timing and Power Analysis Tools</a></div>
+      <div class="Body"><a name="331126">You can use System Generator Timing and Power Analysis Tools to Meet Timing </a>Requirements. System Generator provides a Timing Analysis tool that can help resolve timing related issues. The timing analysis tool shows you the slowest paths and those paths which are failing to meet the timing requirements. The power analysis tool XPower can be used to provide a quick, less accurate analysis or a complete analysis using a full HDL simulation run. For more information, refer to topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Compilation_Types.10.7.html#280960', '');" title="Timing and Power Analysis Compilation">Timing and Power Analysis Compilation</a></span>.</div>
+      <div class="Heading2"><a name="406906">Set the Data Rate Option on All Gateway Blocks</a></div>
+      <div class="Body"><a name="406860">Select the IOB timing constraint option </a><span class="Bold">Data Rate</span> on all Gateway In and Gateway Out blocks. When <span class="Bold">Data Rate</span> is selected, the IOBs are constrained at the data rate at which the IOBs operate. The rate is determined by the <span class="Bold">Simulink system period(sec)</span> field in the System Generator block and the sample rate of the Gateway relative to the other sample periods in the design.</div>
+      <div class="Heading2"><a name="407365">Reduce the Clock Enable (CE) Fanout</a></div>
+      <div class="Body"><a name="407611">An algorithm in the ISE® Mapper uses register duplication and placement based on </a>recursive partitioning of loads on high fanout nets. This means improved FMAX on System Generator designs with large CE fanout. </div>
+      <div class="Body"><a name="407491">Although this feature is enabled in System Generator by default, the fanout reduction </a>occurs downstream during the ISE mapping operation and the following MAP options must be turned on:</div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="407492">Perform Timing-Driven Packing and Placement</a></span> : on</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="407493">Map Effort Level</a></span> : High</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="407494">Register Duplication</a></span> : on</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="407495">If you are using the ISE Project Navigator flow, these MAP options are also on by default. </a>However, if you are using a System Generator flow like Bitstream, you must turn on these MAP options by modifying the bitstream .opt file or by providing you own .opt file. See the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Compilation_Types.10.4.html#271637', '');" title="Bitstream Compilation">XFLOW Option Files</a></span> for more information.</div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

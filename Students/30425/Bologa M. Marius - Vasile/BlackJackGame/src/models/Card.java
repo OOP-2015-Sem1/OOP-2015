@@ -4,9 +4,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 public class Card {
 
@@ -36,13 +33,5 @@ public class Card {
 			e.printStackTrace();
 		}
 		return null;
-	}
-	public static void main(String[] args){
-		Card c= new Card(12, 3);
-		JFrame f= new JFrame();
-		f.add(new JLabel(new ImageIcon(c.getImage())));
-		f.setSize(200,200);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setVisible(true);
 	}
 }

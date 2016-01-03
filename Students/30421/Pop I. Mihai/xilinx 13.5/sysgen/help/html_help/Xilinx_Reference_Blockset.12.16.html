@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>CORDIC SQRT</title>
+    <link rel="StyleSheet" href="css/Xilinx_Reference_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Reference_Blockset.12.01.html#632383">Xilinx Reference Blockset</a> : CORDIC SQRT</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="632383">CORDIC SQRT</a></div>
+      <div class="Body"><a name="632387"><img class="Default" src="images/Xilinx_Reference_Blockset.12.16.1.jpg" width="68" height="76" style="display: block; float: none; left: 0.0; top: 0.0" alt="" />The Xilinx CORDIC SQRT reference block implements a square root </a>circuit using a fully parallel CORDIC  (COordinate Rotation DIgital Computer) algorithm in Hyperbolic Vectoring mode. </div>
+      <div class="Body"><a name="632388">That is, given input x, it computes the output sqrt (x). The CORDIC </a>processor is implemented using building blocks from the Xilinx blockset. </div>
+      <div class="Body"><a name="632389">The square root is calculated indirectly by the CORDIC algorithm by </a>applying the identity listed as follows. sqrt (w) = sqrt { (w + 0.25)<span class="Superscript">2</span> - (w - 0.25)<span class="Superscript">2</span> } </div>
+      <div class="Body"><a name="632390">The CORDIC square root algorithm is implemented in the following 4 steps: </a></div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><span class="Bold"><a name="632391">Co-ordinate Rotation</a></span>: The CORDIC algorithm converges only for positive values of x. If x &lt; zero, the input data is converted to a non-negative number. If x = 0, a zero detect flag is passed to the co-ordinate correction stage. The square root circuit has been designed to converge for all values of x, except for the most negative value. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><span class="Bold"><a name="632392">Normalization</a></span>: The CORDIC algorithm converges only for x between 0.25 (inclusive) and 1. During normalization, the input x is shifted to the left till it has a 1 in the most significant non-signed bit. If the left shift results in an odd number of shift values, a right shift is performed resulting in an even number of left shifts. The shift value is divided by 2 and passed on to the co-ordinate correction stage. The square root is derived using the identity sqrt (w) = sqrt {(w + 0.25)<span class="Superscript">2</span> - (w - 0.25)<span class="Superscript">2</span>}. Based on this identity the input x gets mapped to, X = x + 0.25 and Y = x - 0.25. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><span class="Bold"><a name="632393">Hyperbolic Rotations</a></span>: For sqrt (X<span class="Superscript">2</span> - Y<span class="Superscript">2</span>) calculation, the resulting vector is rotated through progressively smaller angles, such that Ygoes to zero. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><span class="Bold"><a name="632394">Co-ordinate Correction</a></span>: If the input was negative and a left shift was applied to x, this step assigns the appropriate sign to the output and multiplies it with 2<span class="Superscript">-shift</span>. If the input was zero, the zero detect flag is used to set the output to 0.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="632395">Block Parameters</a></div>
+      <div class="Body"><a name="632396">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model. </div>
+      <div class="Body"><a name="632397">Parameters specific to this reference block are as follows:</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632398">Number of Processing Elements (integer value starting from 1)</a></span>: specifies the number of iterative stages used for linear rotation. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632399">Input Data Width</a></span>: specifies the width of the inputs x. The input x should be signed data type with the same data width as specified. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632400">Input Binary Point Position</a></span>: specifies the binary point position for input x. The input x should be signed data type with the specified binary point position. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632401">Latency for each Processing Element [1001]</a></span>: This parameter sets the pipeline latency after each iterative hyperbolic rotation stage. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="632402">The latency of the CORDIC square root block is calculated based on the formula </a>specified below: </div>
+      <div class="Body2"><a name="632403">Latency = 7 + (data width – binary point) </a></div>
+      <div class="Body2"><a name="632404">  + mod { (data width – binary point) , 2 } </a></div>
+      <div class="Body2"><a name="632405">  + sum (latency of Processing Elements) </a></div>
+      <div class="Heading2"><a name="632406">Reference</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="632407">1) J. E. Volder, </a><span class="Italic">The CORDIC Trigonometric Computing Technique</span>, IRE Trans. On Electronic Computers, Vol. EC-8, 1959, pp. 330-334. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="632408">2) J. S. Walther, </a><span class="Italic">A Unified Algorithm for Elementary Functions</span>, Spring Joint Computer Conference (1971) pp. 379-385. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="632409">3) Yu Hen Hu, </a><span class="Italic">CORDIC-Based VLSI Architectures for Digital Signal Processing</span>, IEEE Signal Processing Magazine, pp. 17-34, July 1992.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

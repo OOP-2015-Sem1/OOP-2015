@@ -12,9 +12,11 @@ public class TetrisController implements KeyListener {
 
 	public TetrisController() {
 		game = new Game();
-		game.Game.addKeyListener(this);
+		game.getGame().addKeyListener(this);
 	}
-
+	public Game getGame(){
+		return game;
+	}
 	public void keyPressed(KeyEvent e) {
 		int keyCode = e.getKeyCode();
 

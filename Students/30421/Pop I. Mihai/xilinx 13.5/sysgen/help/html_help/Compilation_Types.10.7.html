@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Timing and Power Analysis Compilation</title>
+    <link rel="StyleSheet" href="css/Compilation_Types.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Compilation_Types.10.1.html#280960">System Generator Compilation Types</a> : Timing and Power Analysis Compilation</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="280960">Timing and Power Analysis Compilation</a></div>
+      <div class="Body"><a name="280961">Sometimes the hardware created by System Generator may not meet the requested timing </a>requirements. System Generator provides a Timing and Power Analysis tool flow that can help you resolve timing and power related issues. The timing analysis tool shows you, both in graphical and textual formats, the slowest system paths and those paths that are failing to meet the timing requirements. This allows you to concentrate on methods of speeding up those paths. Methods for doing so will be discussed. Underlying the System Generator Timing Analysis tool is Trace, a software application delivered as part of the ISE® software used to analyze timing paths. </div>
+      <div class="Body"><a name="273505">As shown below, you invoke the Timing Analyzer by double-clicking on the System </a>Generator token and selecting the <span class="Bold">Timing and Power Analysis</span> option from the <span class="Bold">Compilation</span> submenu. Specify the optional <span class="Bold">Power Analysis </span>option and the the exact device you wish to target as the size and speed of the device will affect the path delays. Result files will be put in the <span class="Bold">Target Directory</span>. The value in the <span class="Bold">FPGA Clock Period</span> box is the value that will be used during place &amp; route:</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="273781"><img class="Default" src="images/Compilation_Types.10.7.1.jpg" width="395" height="272" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="273518">After filling out the dialog box, click the </a><span class="Bold">Generate</span> button and System Generator will perform the following steps: </div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="273520">The design is compiled using Simulink then netlisted by Sysgen into HDL source. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="281512">If you selected the Power Analysis option </a><span class="Bold">Full simulation-based analysis</span>, the ISim simulator is called to simulate the HDL design. The HDL <span class="Bold">Synthesis Tool</span> is then called to turn the HDL into an EDIF (Synplify/Synplify Pro) or NGC (XST) netlist. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="273899">NGD Build is called to next to turn the netlist into an NGD file. The ISE Mapper </a>software is then called to map elements of logic together into slices; this creates an NCD file. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="273906">The ISE Place &amp; Route software is then called to place the slices and other elements on </a>the Xilinx die and to route the connections between the slices. This creates another NCD file.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">5.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="273924">The ISE Trace software is then called to analyze the second NCD file and find the paths </a>with the worst slack. This creates a trace report. The System Generator Timing Analyzer tool appears, displaying the data from the trace report. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="276153">If timing data is generated using this method and you wish to view it again at a later time, then </a>you can enter the following command at the MATLAB command line:<br /><br />&gt;&gt;xlTimingAnalysis('timing') <br /><br />where 'timing' is the name of the target directory in which a prior analysis was carried out. </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">6.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="280966">As shown below, you can click the </a><span class="Bold">Power Analysis</span> button on the Timing Analyzer window to bring up the Xilinx XPower Analysis tool report.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504.0pt">
+            <div class="Anchor"><a name="281582"><img class="Default" src="images/Compilation_Types.10.7.2.jpg" width="499" height="318" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="276000">Timing Analysis Concepts Review</a></div>
+      <div class="Body"><a name="276087">This brief topic is intended for those with little or no knowledge of logic path analysis.</a></div>
+      <div class="Heading3"><a name="276002">Period and Slack</a></div>
+      <div class="Body"><a name="276003">A timing failure usually means there is a setup time violation in the design. A setup time </a>violation means that a particular signal cannot get from the output of one synchronous element to the input of another synchronous element within the requested clock period and subject to the second synchronous element's setup time requirement. A typical path is shown in the following schematic:</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="276009"><img class="Default" src="images/Compilation_Types.10.7.3.jpg" width="372" height="104" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="276010">The path shown is from the Q output of the register on the left (</a><span class="Italic">register3</span>) to the D input of the register on the right (<span class="Italic">parity_reg</span>). The path goes through two LUTs (lookup tables) that are configured as 4-input XOR gates. This path has two levels of logic. That means that it goes through two separate combinational elements (the two LUTs). </div>
+      <div class="Body"><a name="276011">The requested period for this path is 10ns. This path easily meets timing. The second of the </a>two red comma-separated numbers above each logic elements shows the <span class="Italic">slack</span> for the path. The slack is the amount of time by which the path 'meets timing'. In this case the slack is 7.79ns. That means that the path could be 7.79ns slower and still meet the 10ns period requirement. A negative slack value indicates that the path does not meet timing and has a setup (or hold) time violation. </div>
+      <div class="Heading3"><a name="276012">Path Analysis Example</a></div>
+      <div class="Body"><a name="276013">Let us examine this path in more detail. The first value on the top of </a><span class="Italic">register3</span> is 0.35ns. This means that the clk-to-out time of the register is 0.35ns, so the data will appear on the Q output 0.35ns after the rising edge of the clock signal. (The clock signal, not shown, drives the C inputs of both registers.) </div>
+      <div class="Body"><a name="276014">The input of the </a><span class="Italic">LUT y_4[0]</span> shows two numbers on each input. The first is the arrival time of the signal. This value is 0.98ns. This means that the signal arrives at the input 0.98ns after the rising edge of the clock. Therefore the net delay is (0.98ns-0.35ns)=0.63ns. Any path delay is divided into net delays and logic delays. In an FPGA, the net delays are normally the predominant type of delay. This is because the configurable routing fabric of the FPGA requires that a net traverse many delay-inducing switchboxes in order to reach its destination. </div>
+      <div class="Body"><a name="276015">The path leaves </a><span class="Italic">y_4[0]</span> and travels along another net to <span class="Italic">y[0]</span>. The first of the two values at the output of<span class="Italic"> y[0]</span> shows the arrival time of the signal at the output of that LUT. This value is 1.62ns. The signal travels along the final net, incurring a net delay of 0.26ns to arrive at the D input of <span class="Italic">parity_reg</span> at 1.88ns after the clock edge. This register has a required <span class="Italic">setup </span><span class="Italic">time</span>. The setup time for this register is 0.33ns. This means that the signal must arrive at the D input 0.33ns before the rising edge of the next clock. Therefore the total path requires (1.88ns+0.33ns)=2.21ns. Subtracted from 10ns, this yields the 7.79ns slack value. </div>
+      <div class="Heading3"><a name="276016">Clock Skew and Jitter</a></div>
+      <div class="Body"><a name="276017">The net delay values shown here are estimates provided by Synplify. The synthesizer </a>doesn't know the actual net delay values because these are not determined until after the place &amp; route process. An actual path contains other variables which must be accounted for, including clock skew and clock jitter. <span class="Italic">Clock skew</span> is the amount of time between clock arrival at the source and destination synchronous elements. <span class="Italic">Clock jitter</span> is a variation of the clock period from cycle to cycle. Jitter is created by the DCMs (digital clock managers) and by other means. The timing analysis is carried out with worst-case values for the given part's delay values, jitter, skew, and temperature derating. </div>
+      <div class="Heading2"><a name="275578">Timing Analyzer Features</a></div>
+      <div class="Heading3"><a name="273533">Observing the Slow Paths</a></div>
+      <div class="Body"><a name="273510">Clicking on the Slow Paths icon displays the paths with the least slack for each timing </a>constraint. An example is shown below:</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="273790"><img class="Default" src="images/Compilation_Types.10.7.4.jpg" width="383" height="164" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="273564">The top section of the display shows a list of slow paths, while the bottom section of the </a>display shows details of the path that is selected. The elements of this display are explained here: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="273954">Timing Constraint</a></span>: You may opt to view the paths from all timing constraints or just a single constraint. A typical System Generator design has but a single timing constraint which defines the period of the system clock. This is the constraint shown in this example. TS_clk_a5c9593d is the name of the constraint; the (sometimes confusing) suffix is a hash meant to make the identifier unique when multiple System Generator designs are used as components inside a larger design. The timing group clk_a5c9593 is a group of synchronous logic, again with a hash suffix. The group in this case contains all the synchronous elements in the design. The period of the clock here is 10ns with a 50% duty cycle. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="273959">Source</a></span>: The System Generator block that drives the path. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="273975">Destination</a></span>: This is the System Generator block that is the terminus of the path. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="273976">Slack</a></span>: The slack for this particular path. See the topic entitled <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Compilation_Types.10.7.html#276002', '');" title="Timing and Power Analysis Compilation">Period and Slack</a></span> for more details. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="273977">Delay (Path)</a></span>: The delay of the entire path, including the setup time requirement. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="273978">% Route Delay</a></span>: This is the percentage of the path that is consumed by routing (net) delay. The remainder portion of the path is consumed by logic delay. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="273979">Levels of Logic</a></span>: The number of levels of combinatorial logic in the path. The combinatorial logic typically comprises LUTs, F5 muxes, and carry chain muxes. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="273980">Path Element</a></span>: This shows the logic and net elements in the highlighted path. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="273981">Delay (Element)</a></span>: This shows the delay through the logic and net elements in the highlighted path. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="273982">Type of Delay</a></span>: This is the kind of delay incurred by the given path element. These values are defined in the Xilinx part's data sheet. In the example shown above, <span class="Italic">Tcko</span> is the clk-to-out time of a flip-flop; <span class="Italic">net</span> is a net delay; <span class="Italic">Tilo</span> is the delay through a LUT, and <span class="Italic">Tas</span> is the setup time of a flip-flop. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="273568">You may click on the column headings to reorder the paths or elements according to delay, </a>slack, path name, or other column headings. Failing paths are highlighted in red/pink. </div>
+      <div class="Heading4"><a name="273569">Name Unmunging and Displaying Low-Level Names</a></div>
+      <div class="Body"><a name="273572">Part of the magic of the timing analyzer lies in its ability to perform the un-glorious task of </a><span class="Italic">name unmunging</span>, the task of automatically correlating System Generator components with the low-level component names produced by the Xilinx implementation tools. The names of these components often differ considerably. In fact, the logic blocks and wires that appear in a System Generator diagram may have only a loose relation to the actual logic that gets generated during the synthesis process. The System Generator timing analyzer must correlate the names of logic elements and nets in the trace report to blocks and wires in the System Generator diagram. </div>
+      <div class="Body"><a name="273576">The timing analyzer cannot always perform this un-munging process. In the path shown in </a>the screen capture above, path elements #2 and #5 have a question mark displayed in the name field. This means that the timing analyzer could not un-munge the name from the trace report and correlate it to a System Generator block. </div>
+      <div class="Body"><a name="273580">To see the actual names from the trace report, check the </a><span class="Italic">Display low-level names</span> box. This will show the trace report names. You may be able to correlate them to System Generator elements by observation. </div>
+      <div class="Heading4"><a name="273560">Cross-Probing</a></div>
+      <div class="Body"><a name="273599">Highlighting a path in the </a><span class="Italic">Slow Paths</span> view will highlight the blocks in the path in the System Generator diagram. The path's source and destination blocks, as well as combinational blocks through which the path passes, will be highlighted in red. The diagram below shows how the model appears when the path that has Registerc as its source and parity_reg as its destination is highlighted. The blocks xor_1b, xor_2a, and xor_3a are also highlighted because they are part of the path.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="273799"><img class="Default" src="images/Compilation_Types.10.7.5.jpg" width="281" height="293" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="273607">Histogram Charts</a></div>
+      <div class="Body"><a name="273604">Clicking on the Charts icon displays a histogram of the slow paths. This histogram is a </a>useful metric in analyzing the design. You may know that the design will only run at, for example, 99MHz in your part when you wish it to run at 100MHz. But how close is the design to meeting timing and how much work is involved in meeting this requirement? The histogram will quickly give you an estimate of the work involved. For example, look at the histogram of the results of a simple design below:</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="273808"><img class="Default" src="images/Compilation_Types.10.7.6.jpg" width="338" height="272" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="273621">This shows that most of the slow paths are concentrated about 1.5ns. The slowest path is </a>about 2.35ns. The numbers at the tops of the bins show the number of paths in each bin. There is only one path in the bin which encompasses the time range 2.31ns-2.39ns. The bins to the right of it are empty. This shows that the slowest path is an outlier and that if your timing requirement were for a period of, for example, 2ns, you would need only to speed up this single path to meet your timing requirements. </div>
+      <div class="Heading4"><a name="273622">Histogram Detail</a></div>
+      <div class="Body"><a name="273617">The slider bar allows you to adjust the width of the bins in the histogram. This allows you </a>to get more detail about the paths if desired. The display below shows the results of a different design with a larger number of bins than the diagram above:</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="273829"><img class="Default" src="images/Compilation_Types.10.7.7.jpg" width="319" height="283" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="273636">This diagram shows the paths grouped into three regions, with each forming a rough bell </a>curve distribution. These groups are probably from different portions of the circuit or from different timing constraints that are from different clock regions. If you wish to analyze the paths from a single timing constraint, you may select a single constraint for viewing from the Timing constraint pulldown menu at the top of the display. </div>
+      <div class="Body"><a name="273640">Note the bins and portions thereof shown in red. These are the paths that have negative </a>slack; i.e., they do not meet the timing constraint. In this example you can see that some paths have failed but not by a large margin so it seems reasonable that with some work this design could be reworked to meet timing. </div>
+      <div class="Heading4"><a name="273641">Statistics</a></div>
+      <div class="Body"><a name="273644">Clicking on the Statistics icon displays several design statistics, including the number of </a>constraints, paths analyzed, and maximum frequency of the design. </div>
+      <div class="Heading4"><a name="273645">Trace Report</a></div>
+      <div class="Body"><a name="273632">Clicking on the Trace icon shows the raw text report from the Trace program. This file gives </a>considerable detail about the paths analyzed. Each path analyzed contains information about every net and logic delay, clock skew, and clock uncertainty. The box at the bottom left of this display shows the path name of the timing report.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="273845"><img class="Default" src="images/Compilation_Types.10.7.8.jpg" width="368" height="177" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="275593">Improving Failing Paths</a></div>
+      <div class="Body"><a name="273665">"Now I have information about my failing paths; but what do I do now?" you may ask </a>yourself. This is the trick for which there is no simple answer, and this is where you may need to delve into the lower-level aspects of FPGA design. </div>
+      <div class="Body"><a name="273669">In general, steps that may be taken to meet timing are, in this order: </a></div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><span class="Bold"><a name="274227">Change the source design</a></span>. Just about any timing problem can be solved by changing the source design and this is the easiest way to speed up the circuit. Unfortunately, this is often the last step taken by designers, who often look for a quick solution such as using a faster part. The source design may be changed in several ways: </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedSub_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedSub_inner" style="width: 18pt; white-space: nowrap;">a.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedSub_inner"><span class="Bold"><a name="274234">Pipelining</a></span>. This is the surest way to improve speed, but may also be tricky. Adding pipelining registers increases latency. For designs with feedback, this may require great care since portions of the design may require pipeline rebalancing. See the later example for more details on pipelining. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedSubCont_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedSubCont_inner" style="width: 18pt; white-space: nowrap;">b.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedSubCont_inner"><span class="Bold"><a name="274556">Parallelization</a></span>. This is probably the second most-important improvement you can make. Do you have a FIR filter that won't operate at the correct speed? You can use two FIR filters in parallel, each operating at half-rate, and interleave the outputs. This is the classic speed/area tradeoff. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedSubCont_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedSubCont_inner" style="width: 18pt; white-space: nowrap;">c.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedSubCont_inner"><span class="Bold"><a name="274557">Retiming</a></span>. This involves taking existing registers and moving them to different points within the combinational logic to rob from Peter to pay Paul, so to speak. This works if, to stretch the maxim, Paul is bereft of slack, while Peter has a surfeit. Some synthesis tools can perform a degree of retiming automatically. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedSubCont_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedSubCont_inner" style="width: 18pt; white-space: nowrap;">d.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedSubCont_inner"><span class="Bold"><a name="274252">Replication</a></span>. Replication of registers or buffers increases the amount of logic but reduces the fanout on the replicated objects. This decreases the capacitance of the net and reduces net delay. The replicated registers may also be floorplanned to place them closer to the logic groups they drive. Replication is often performed automatically by the tools and manual replication is not a common practice in a high-level design environment like System Generator. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedSubCont_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedSubCont_inner" style="width: 18pt; white-space: nowrap;">e.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedSubCont_inner"><span class="Bold"><a name="274256">Shannon Expansion</a></span>. This method involves replicating the faster logic in a critical path in order to remove dependencies on slower logic. This is sometimes done automatically by the synthesizer. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedSubCont_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedSubCont_inner" style="width: 18pt; white-space: nowrap;">f.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedSubCont_inner"><span class="Bold"><a name="274260">Using Hard Cores</a></span>. Are you using a ROM that is implemented in distributed RAM when it would operate much faster in a block memory hard core? Do you have a wide adder that would benefit from being put in a DSP48 block, which can operate at 500MHz? Take advantage of the embedded hard cores. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedSubCont_outer" style="margin-left: 18pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedSubCont_inner" style="width: 18pt; white-space: nowrap;">g.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedSubCont_inner"><span class="Bold"><a name="274264">New Paradigms</a></span>. Do you need to create a large delay? Instead of using a counter with a long carry chain, why not build a delay out of cascaded Johnson rings using SRL16s? Or how about using an LFSR? Neither requires a carry chain and can operate much faster. Sometimes you have to rethink certain design elements completely. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><span class="Bold"><a name="274268">Eliminate overconstraints</a></span>. Ensure that elements of your design that only need to be operated at a subsampled rate are designed that way by using the downsample and upsample blocks in System Generator. If these blocks are not used, then the timing analyzer is not aware that these sections of the circuit are subsampled, and the design is overconstrainted. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><span class="Bold"><a name="274275">Change the constraints</a></span>. Is it possible to run the design at a lower clock speed? If so, this is an easy way to meet your requirements. Unfortunately, this is rarely possible due to design requirements. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><span class="Bold"><a name="274279">Increase PAR effort levels</a></span>. The mapper and place &amp; route tools (PAR) in ISE take effort levels as arguments. When using ISE (from the Project Navigator GUI), try the –timing option in MAP. You may also increase the PAR effort levels which will increase the PAR execution time but may also result in a faster design. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">5.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><span class="Bold"><a name="284886">Multipass PAR using SmartXplorer</a></span>. PAR is an iterative process and is somewhat chaotic in that the initial conditions can vastly influence the final result. SmartXplorer can be invoked from Project Navigator and allows you to run multiple implementation flows using different sets of implementation properties designed to optimize design performance.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">6.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><span class="Bold"><a name="274287">Floorplanning</a></span>. This step should be avoided if possible, but can yield huge improvements. The automatic placer in PAR can be improved upon by human intervention. Floorplanning places critical elements close to each other on the Xilinx die, reducing net delays. The PACE tool in ISE may be used for CPLD. A more advanced tool, PlanAhead™ software, is used for FPGA.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">7.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><span class="Bold"><a name="276227">Use a faster part</a></span>. This is often the first solution seized upon, but is also expensive. If you are using an old Xilinx part, porting your design to a newer, faster Xilinx part may often save money because the new parts may be cheaper on account of Moore's Law. However, moving to a faster part in the same family incurs significant extra costs, and often isn't necessary if the previous steps are followed. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

@@ -1,0 +1,290 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="DDS Compiler 5.0 " block_type="dds_compiler_v5_0">
+  <icon width="245" height="262" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen" entry_point="coregenimport_config"/>
+  <handlers enablement="xlipmagiccallback" action="dds_compiler_5_0_action"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsDSP"/>
+    <library name="xbsAXI4"/>
+  </libraries>
+  <blockgui label="Xilinx DDS Compiler 5.0">
+    <!-- <editbox name="infoedit" default="DDS Compiler 5.0" read_only="true" evaluate="false" multi_line="true"/> -->
+    <tabpane>
+      <tab name="Basic_Parameters_tab_1" label="Basic">
+        <listbox name="partspresent" default="Phase_Generator_and_SIN_COS_LUT" evaluate="false" label="Configuration Options" ctype="String" allow_advanced="false">
+          <item value="Phase_Generator_and_SIN_COS_LUT"/>
+          <item value="Phase_Generator_only"/>
+          <item value="SIN_COS_LUT_only"/>
+        </listbox>
+        <etch label="System Requirements">
+          <editbox name="dds_clock_rate" default="100" top_label="false" evaluate="true" label="System Clock (MHz)" ctype="Double"/>
+          <listbox name="channels" default="1" evaluate="false" label="Number of Channels" ctype="String" allow_advanced="false">
+            <item value="1"/>
+            <item value="2"/>
+            <item value="3"/>
+            <item value="4"/>
+            <item value="5"/>
+            <item value="6"/>
+            <item value="7"/>
+            <item value="8"/>
+            <item value="9"/>
+            <item value="10"/>
+            <item value="11"/>
+            <item value="12"/>
+            <item value="13"/>
+            <item value="14"/>
+            <item value="15"/>
+            <item value="16"/>
+          </listbox>
+        </etch>
+        <listbox name="parameter_entry" default="System_Parameters" evaluate="false" label="Parameter Selection" ctype="String" allow_advanced="false">
+          <item value="System_Parameters"/>
+          <item value="Hardware_Parameters"/>
+        </listbox>
+        <etch label="System Parameters">
+          <editbox name="spurious_free_dynamic_range" default="36" top_label="false" evaluate="true" label="Spurious Free Dynamic Range (dB)" ctype="Double"/>
+          <editbox name="frequency_resolution" default="0.4" top_label="false" evaluate="true" label="Frequency Resolution (Hz)" ctype="Double"/>
+        </etch>
+        <listbox name="noise_shaping" default="None" evaluate="false" label="Noise Shaping" ctype="String" allow_advanced="false">
+          <item value="None"/>
+          <item value="Phase_Dithering"/>
+          <item value="Taylor_Series_Corrected"/>
+          <item value="Auto"/>
+        </listbox>
+        <etch label="Hardware Parameters">
+          <editbox name="phase_width" default="28" top_label="false" evaluate="true" label="Phase Width" ctype="Int"/>
+          <editbox name="output_width" default="6" top_label="false" evaluate="true" label="Output Width" ctype="Int"/>          
+        </etch>
+        <etch label="Output Selection">
+          <radiogroup name="output_selection" default="Sine_and_Cosine" evaluate="false" label="" ctype="String" allow_advanced="false">            
+            <item value="Sine_and_Cosine"/>
+            <item value="Sine"/>
+            <item value="Cosine"/>
+          </radiogroup>
+          <etch label="Polarity">
+            <checkbox name="negative_sine" default="off" label="Negative Sine" ctype="Bool" allow_advanced="false"/>
+            <checkbox name="negative_cosine" default="off" label="Negative Cosine" ctype="Bool" allow_advanced="false"/>
+          </etch>
+          <listbox name="amplitude_mode" default="Full_Range" evaluate="false" label="Amplitude Mode" ctype="String" allow_advanced="false">
+            <item value="Full_Range"/>
+            <item value="Unit_Circle"/>
+          </listbox>
+        </etch>
+      </tab> 
+      <tab name="Implementation_Parameters_tab" label="Implementation">
+        <etch label="Implementation Options">
+          <listbox name="memory_type" default="Auto" evaluate="false" label="Memory Type" ctype="String" allow_advanced="false">
+            <item value="Auto"/>
+            <item value="Distributed_ROM"/>
+            <item value="Block_ROM"/>
+          </listbox>
+          <listbox name="optimization_goal" default="Auto" evaluate="false" label="Optimization Goal" ctype="String" allow_advanced="false">
+            <item value="Auto"/>
+            <item value="Area"/>
+            <item value="Speed"/>
+          </listbox>
+          <listbox name="dsp48_use" default="Minimal" evaluate="false" label="DSP48 Use" ctype="String" allow_advanced="false">
+            <item value="Minimal"/>
+            <item value="Maximal"/>
+          </listbox>
+        </etch>
+        <etch label="Latency Options">
+          <radiogroup name="latency_configuration" default="Auto" evaluate="false" label="" ctype="String" allow_advanced="false">
+            <item value="Auto"/>
+            <item value="Configurable"/>
+          </radiogroup>
+          <listbox name="latency" default="1" evaluate="false" label="Latency" ctype="String" allow_advanced="false">
+            <item value="1"/>
+            <item value="2"/>
+            <item value="3"/>
+            <item value="4"/>
+            <item value="5"/>
+            <item value="6"/>
+            <item value="7"/>
+            <item value="8"/>
+            <item value="9"/>
+            <item value="10"/>
+            <item value="11"/>
+            <item value="12"/>
+            <item value="13"/>
+            <item value="14"/>
+            <item value="15"/>
+          </listbox>
+        </etch>
+        <etch label="Control Signals">
+          <checkbox name="has_phase_out" default="on" label="Has phase out" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="has_aclken" default="off" label="ACLKEN" ctype="Bool" allow_advanced="false"/>
+          <checkbox name="has_aresetn" default="off" label="ARESETn" ctype="Bool" allow_advanced="false"/>
+        </etch>
+
+        <etch label="Explicit Sample Period">
+          <checkbox name="explicit_period" default="off" label="Use explicit period" ctype="Bool" allow_advanced="false"/>
+          <editbox name="period" default="1" top_label="true" evaluate="true" label="Explicit Period" ctype="Double"/>
+        </etch>
+      </tab>
+
+<tab name="AXI_Channel_Options_tab" label="AXI Channel Options">        
+	<etch label="AXI Channel Options">
+          <etch label="TLAST">
+            <listbox name="data_has_tlast" default="Not_Required" evaluate="false" label="" ctype="String" allow_advanced="false">
+              <item value="Not_Required"/>
+              <item value="Vector_Framing"/>
+              <item value="Packet_Framing"/>
+              <item value="Config_Triggered"/>
+            </listbox>
+          </etch>
+          <etch label="TREADY">
+            <checkbox name="has_tready" default="on" label="Output TREADY" ctype="Bool" allow_advanced="false"/>
+          </etch>
+          <etch label="TUSER Options">
+            <listbox name="s_phase_has_tuser" default="Not_Required" evaluate="false" label="Input" ctype="String" allow_advanced="false">
+              <item value="Not_Required"/>
+              <item value="Chan_ID_Field"/>
+              <item value="User_Field"/>
+              <item value="User_and_Chan_ID_Field"/>
+            </listbox>
+            <listbox name="m_data_has_tuser" default="Not_Required" evaluate="false" label="DATA Output" ctype="String" allow_advanced="false">
+              <item value="Not_Required"/>
+              <item value="Chan_ID_Field"/>
+              <item value="User_Field"/>
+              <item value="User_and_Chan_ID_Field"/>
+            </listbox>
+            <listbox name="m_phase_has_tuser" default="Not_Required" evaluate="false" label="PHASE Output" ctype="String" allow_advanced="false">
+              <item value="Not_Required"/>
+              <item value="Chan_ID_Field"/>
+              <item value="User_Field"/>
+              <item value="User_and_Chan_ID_Field"/>
+            </listbox>
+            <editbox name="s_phase_tuser_width" default="1" top_label="false" evaluate="true" label="User Field Width" ctype="Int"/>
+          </etch>
+          <etch label="Config Channel Options">
+            <listbox name="s_config_sync_mode" default="On_Vector" evaluate="false" label="Synchronization Mode" ctype="String" allow_advanced="false">
+              <item value="On_Vector"/>
+              <item value="On_Packet"/>
+            </listbox>
+          </etch>
+        </etch>
+   </tab>
+
+      <tab name="Output_Frequency_Tab" label="Output Frequency">
+        <etch label="Phase Increment Programmability">
+          <radiogroup name="phase_increment" default="Fixed" evaluate="false" label="" ctype="String" allow_advanced="false">
+            <item value="Fixed"/>
+            <item value="Programmable"/>
+            <item value="Streaming"/>
+          </radiogroup>
+        </etch>
+        <hlayout>
+          <etch label="Output Frequencies(Mhz)">
+            <editbox name="output_frequency1" default="0" top_label="false" evaluate="true" label="Channel 1" ctype="Double"/>
+            <editbox name="output_frequency2" default="0" top_label="false" evaluate="true" label="Channel 2" ctype="Double"/>
+            <editbox name="output_frequency3" default="0" top_label="false" evaluate="true" label="Channel 3" ctype="Double"/>
+            <editbox name="output_frequency4" default="0" top_label="false" evaluate="true" label="Channel 4" ctype="Double"/>
+            <editbox name="output_frequency5" default="0" top_label="false" evaluate="true" label="Channel 5" ctype="Double"/>
+            <editbox name="output_frequency6" default="0" top_label="false" evaluate="true" label="Channel 6" ctype="Double"/>
+            <editbox name="output_frequency7" default="0" top_label="false" evaluate="true" label="Channel 7" ctype="Double"/>
+            <editbox name="output_frequency8" default="0" top_label="false" evaluate="true" label="Channel 8" ctype="Double"/>
+            <editbox name="output_frequency9" default="0" top_label="false" evaluate="true" label="Channel 9" ctype="Double"/>
+            <editbox name="output_frequency10" default="0" top_label="false" evaluate="true" label="Channel 10" ctype="Double"/>
+            <editbox name="output_frequency11" default="0" top_label="false" evaluate="true" label="Channel 11" ctype="Double"/>
+            <editbox name="output_frequency12" default="0" top_label="false" evaluate="true" label="Channel 12" ctype="Double"/>
+            <editbox name="output_frequency13" default="0" top_label="false" evaluate="true" label="Channel 13" ctype="Double"/>
+            <editbox name="output_frequency14" default="0" top_label="false" evaluate="true" label="Channel 14" ctype="Double"/>
+            <editbox name="output_frequency15" default="0" top_label="false" evaluate="true" label="Channel 15" ctype="Double"/>
+            <editbox name="output_frequency16" default="0" top_label="false" evaluate="true" label="Channel 16" ctype="Double"/>
+          </etch>
+          <etch label="Phase Angle Increment Values">
+            <editbox name="pinc1" default="'0'" top_label="false" evaluate="true" label="Channel 1" ctype="String"/>
+            <editbox name="pinc2" default="'0'" top_label="false" evaluate="true" label="Channel 2" ctype="String"/>
+            <editbox name="pinc3" default="'0'" top_label="false" evaluate="true" label="Channel 3" ctype="String"/>
+            <editbox name="pinc4" default="'0'" top_label="false" evaluate="true" label="Channel 4" ctype="String"/>
+            <editbox name="pinc5" default="'0'" top_label="false" evaluate="true" label="Channel 5" ctype="String"/>
+            <editbox name="pinc6" default="'0'" top_label="false" evaluate="true" label="Channel 6" ctype="String"/>
+            <editbox name="pinc7" default="'0'" top_label="false" evaluate="true" label="Channel 7" ctype="String"/>
+            <editbox name="pinc8" default="'0'" top_label="false" evaluate="true" label="Channel 8" ctype="String"/>
+            <editbox name="pinc9" default="'0'" top_label="false" evaluate="true" label="Channel 9" ctype="String"/>
+            <editbox name="pinc10" default="'0'" top_label="false" evaluate="true" label="Channel 10" ctype="String"/>
+            <editbox name="pinc11" default="'0'" top_label="false" evaluate="true" label="Channel 11" ctype="String"/>
+            <editbox name="pinc12" default="'0'" top_label="false" evaluate="true" label="Channel 12" ctype="String"/>
+            <editbox name="pinc13" default="'0'" top_label="false" evaluate="true" label="Channel 13" ctype="String"/>
+            <editbox name="pinc14" default="'0'" top_label="false" evaluate="true" label="Channel 14" ctype="String"/>
+            <editbox name="pinc15" default="'0'" top_label="false" evaluate="true" label="Channel 15" ctype="String"/>
+            <editbox name="pinc16" default="'0'" top_label="false" evaluate="true" label="Channel 16" ctype="String"/>
+          </etch>
+        </hlayout>
+      </tab>
+      <tab name="Phase_Offset_Angles_Tab" label="Phase Offset Angles">
+        <etch label="Phase Offset Programmability">
+          <radiogroup name="phase_offset" default="None" evaluate="false" label="" ctype="String" allow_advanced="false">
+            <item value="None"/>
+            <item value="Fixed"/>
+            <item value="Programmable"/>
+            <item value="Streaming"/>
+          </radiogroup>
+        </etch>
+        <hlayout>
+          <etch label="Phase Offset Angle(x2pi Radians)">
+            <editbox name="phase_offset_angles1" default="0" top_label="false" evaluate="true" label="Channel 1" ctype="Double"/>
+            <editbox name="phase_offset_angles2" default="0" top_label="false" evaluate="true" label="Channel 2" ctype="Double"/>
+            <editbox name="phase_offset_angles3" default="0" top_label="false" evaluate="true" label="Channel 3" ctype="Double"/>
+            <editbox name="phase_offset_angles4" default="0" top_label="false" evaluate="true" label="Channel 4" ctype="Double"/>
+            <editbox name="phase_offset_angles5" default="0" top_label="false" evaluate="true" label="Channel 5" ctype="Double"/>
+            <editbox name="phase_offset_angles6" default="0" top_label="false" evaluate="true" label="Channel 6" ctype="Double"/>
+            <editbox name="phase_offset_angles7" default="0" top_label="false" evaluate="true" label="Channel 7" ctype="Double"/>
+            <editbox name="phase_offset_angles8" default="0" top_label="false" evaluate="true" label="Channel 8" ctype="Double"/>
+            <editbox name="phase_offset_angles9" default="0" top_label="false" evaluate="true" label="Channel 9" ctype="Double"/>
+            <editbox name="phase_offset_angles10" default="0" top_label="false" evaluate="true" label="Channel 10" ctype="Double"/>
+            <editbox name="phase_offset_angles11" default="0" top_label="false" evaluate="true" label="Channel 11" ctype="Double"/>
+            <editbox name="phase_offset_angles12" default="0" top_label="false" evaluate="true" label="Channel 12" ctype="Double"/>
+            <editbox name="phase_offset_angles13" default="0" top_label="false" evaluate="true" label="Channel 13" ctype="Double"/>
+            <editbox name="phase_offset_angles14" default="0" top_label="false" evaluate="true" label="Channel 14" ctype="Double"/>
+            <editbox name="phase_offset_angles15" default="0" top_label="false" evaluate="true" label="Channel 15" ctype="Double"/>
+            <editbox name="phase_offset_angles16" default="0" top_label="false" evaluate="true" label="Channel 16" ctype="Double"/>
+          </etch>
+          <etch label="Phase Angle Offset Values">
+            <editbox name="poff1" default="'0'" top_label="false" evaluate="true" label="Channel 1" ctype="String"/>
+            <editbox name="poff2" default="'0'" top_label="false" evaluate="true" label="Channel 2" ctype="String"/>
+            <editbox name="poff3" default="'0'" top_label="false" evaluate="true" label="Channel 3" ctype="String"/>
+            <editbox name="poff4" default="'0'" top_label="false" evaluate="true" label="Channel 4" ctype="String"/>
+            <editbox name="poff5" default="'0'" top_label="false" evaluate="true" label="Channel 5" ctype="String"/>
+            <editbox name="poff6" default="'0'" top_label="false" evaluate="true" label="Channel 6" ctype="String"/>
+            <editbox name="poff7" default="'0'" top_label="false" evaluate="true" label="Channel 7" ctype="String"/>
+            <editbox name="poff8" default="'0'" top_label="false" evaluate="true" label="Channel 8" ctype="String"/>
+            <editbox name="poff9" default="'0'" top_label="false" evaluate="true" label="Channel 9" ctype="String"/>
+            <editbox name="poff10" default="'0'" top_label="false" evaluate="true" label="Channel 10" ctype="String"/>
+            <editbox name="poff11" default="'0'" top_label="false" evaluate="true" label="Channel 11" ctype="String"/>
+            <editbox name="poff12" default="'0'" top_label="false" evaluate="true" label="Channel 12" ctype="String"/>
+            <editbox name="poff13" default="'0'" top_label="false" evaluate="true" label="Channel 13" ctype="String"/>
+            <editbox name="poff14" default="'0'" top_label="false" evaluate="true" label="Channel 14" ctype="String"/>
+            <editbox name="poff15" default="'0'" top_label="false" evaluate="true" label="Channel 15" ctype="String"/>
+            <editbox name="poff16" default="'0'" top_label="false" evaluate="true" label="Channel 16" ctype="String"/>          
+          </etch>
+        </hlayout>
+      </tab>
+      <tab name="Advanced_tab" label="Advanced">
+        <etch label="Block Icon Display">
+          <checkbox name="trim_axipin_name" default="on" label="Display shortened port names" ctype="Int" evaluate="true" allow_advanced="false"/>
+        </etch> 
+      </tab>
+
+    </tabpane>
+    <!-- Parameters with fixed values-->
+    <hiddenvar name="por_mode" default="false" ctype="Bool" evaluate="true" />
+    <hiddenvar name="gui_behaviour" default="Sysgen" evaluate="false" ctype="String"/>
+    <!-- core import specific parameters -->   
+    <hiddenvar name="ip_name" default="DDS Compiler" evaluate="false" ctype="String"/>
+    <hiddenvar name="ip_version" default="5.0" evaluate="false" ctype="String"/>
+    <hiddenvar name="dsptool_ready" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="wrapper_available" default="true" evaluate="true" ctype="Bool"/> 
+    <hiddenvar name="port_translation_map" default="{ 'aclken' => 'en', 'aresetn' => 'rst' }" evaluate="false" ctype="String"/>
+    <hiddenvar name="ipcore_xco_need_fpga_part" default="true" evaluate="true" ctype="Bool" />
+    <hiddenvar name="ipcore_fpga_part" default="xlipgetpartsetting(gcb, {'virtex6', 'xc6vlx75t', '-3', 'ff784'})" evaluate="true" ctype="StringVector" />
+    <hiddenvar name="ipcore_usecache" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="ipcore_useipmodelcache" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="ipcore_verbose" default="false" evaluate="true" ctype="Bool"/>
+  </blockgui>
+</sysgenblock>
+

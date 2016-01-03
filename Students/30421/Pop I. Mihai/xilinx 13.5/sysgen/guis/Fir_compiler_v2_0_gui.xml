@@ -1,0 +1,109 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="FIR Compiler v2_0 " block_type="Fir_compiler_v2_0">
+  <initialization file="xlFir_compiler_v2_0_init.m"/>
+  <icon width="90" height="134" wmark_color="white" bg_color="blue"/>
+  <dll name="Fir_compiler_v2_0" entry_point="Fir_compiler_v2_0_config"/>
+  <handlers enablement="xlFir_compiler_v2_0_enablement" action="xlFir_compiler_v2_0_action"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsDSP"/>
+  </libraries>
+  <blockgui label="Xilinx FIR Compiler v2_0">
+    <editbox name="infoedit" default="Implements a high-speed multi-channel FIR filter.&lt;br&gt;&lt;br&gt;Hardware  notes: Implemented using DSP48s hence only Virtex 4 and Virtex 5 devices are supported." read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab label="Basic">
+        <etch name="Mode" label="Mode">
+          <listbox name="u_fir_type" default="SingleRate" evaluate="true" label="Filter type" ctype="Int">
+            <item value="SingleRate"/>
+            <item value="Decimation"/>
+            <item value="Interpolation"/>
+          </listbox>
+          <editbox name="u_rate_change" default="1" evaluate="true" label="Sample rate change" ctype="Int"/>
+        </etch>
+        <editbox name="u_channels" default="1" evaluate="true" label="Number of channels" ctype="Int"/>
+        <editbox name="u_clks_samp" default="1" evaluate="true" label="Hardware over-sampling rate" ctype="Int"/>
+        <etch label="Coefficients">
+          <editbox name="u_coefs" default="[1 2 3]" evaluate="true" label="Coefficient vector" ctype="DoubleVector"/>
+          <radiogroup name="u_coef_arith" default="Signed" evaluate="true" label="Arithmetic type" ctype="Int">
+            <item value="Signed" label="Signed"/>
+            <item value="Unsigned" label="Unsigned"/>
+          </radiogroup>
+          <editbox name="u_coef_bits" default="16" evaluate="true" label="Number of bits" ctype="Int"/>
+          <editbox name="u_coef_point" default="8" evaluate="true" label="Binary point" ctype="Int"/>
+          <listbox name="u_coef_struct" default="Inferred from Coefficients" evaluate="true" label="Structure" ctype="Int">
+            <item value="Inferred from Coefficients"/>
+            <item value="Non-Symmetric"/>
+            <item value="Symmetric"/>
+            <item value="Negative-Symmetric"/>
+            <item value="Half Band"/>
+          </listbox>
+          <checkbox name="reload_coef" default="off" evaluate="true" label="Use reloadable coefficients" ctype="Int"/>
+        </etch>
+        <checkbox name="u_display_info" default="off" evaluate="true" label="Display filter information on block icon" ctype="Int"/>
+      </tab>
+      <tab label="Ports">
+        <checkbox name="u_valid_ports" default="off" evaluate="true" label="Provide valid ports" ctype="Int"/>
+        <checkbox name="u_en_port" default="off" evaluate="true" label="Provide &lt;tt&gt;en&lt;/tt&gt; port" ctype="Int"/>
+        <checkbox name="u_core_rdy_port" default="off" evaluate="true" label="Provide &lt;tt&gt;core_rdy&lt;/tt&gt; port" ctype="Int"/>
+        <checkbox name="u_rst_rfd_port" default="off" evaluate="true" label="Provide &lt;tt&gt;rst&lt;/tt&gt; and &lt;tt&gt;rfd&lt;/tt&gt; ports" ctype="Int"/>
+      </tab>
+      <tab label="Advanced">
+        <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+      </tab>
+      <tab label="Implementation">
+        <etch name="storage" label="Storage options">
+          <listbox name="u_storage" default="Automatic" evaluate="true" ctype="Int">
+            <item value="Automatic"/>
+            <item value="Custom"/>
+          </listbox>
+          <radiogroup name="u_data_buf" default="dist_mem" evaluate="true" label="Data buffer" ctype="Int">
+            <item value="dist_mem" label="Distributed Memory"/>
+            <item value="block_mem" label="Block Memory"/>
+          </radiogroup>
+          <radiogroup name="u_coef_buf" default="dist_mem" evaluate="true" label="Coefficient buffer" ctype="Int">
+            <item value="dist_mem" label="Distributed Memory"/>
+            <item value="block_mem" label="Block Memory"/>
+          </radiogroup>
+        </etch>
+        <etch name="v4_options" label="Multiple DSP48 column support">
+          <listbox name="u_v4_options" default="Disabled" evaluate="true" ctype="Int">
+            <item value="Disabled"/>
+            <item value="Custom"/>
+          </listbox>
+          <listbox name="u_xcol_pipe" default="4" evaluate="true" label="Cross column pipelining" ctype="Int">
+            <item value="1"/>
+            <item value="2"/>
+            <item value="3"/>
+            <item value="4"/>
+            <item value="5"/>
+            <item value="6"/>
+            <item value="7"/>
+            <item value="8"/>
+            <item value="9"/>
+            <item value="10"/>
+            <item value="11"/>
+            <item value="12"/>
+            <item value="13"/>
+            <item value="14"/>
+            <item value="15"/>
+            <item value="16"/>
+          </listbox>
+          <editbox name="u_first_length" default="32" evaluate="true" label="First column length" ctype="Int"/>
+          <editbox name="u_wrap_length" default="32" evaluate="true" label="Column wrap length" ctype="Int"/>
+        </etch>
+        <etch label="FPGA area estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <hiddenvar name="u_coef_rows" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="u_coef_cols" default="3" evaluate="true" ctype="Int"/>
+    <hiddenvar name="u_coef_sets" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="u_coef_type" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="u_latency" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="enable_debug" default="0" evaluate="true" ctype="Int"/>
+  </blockgui>
+</sysgenblock>

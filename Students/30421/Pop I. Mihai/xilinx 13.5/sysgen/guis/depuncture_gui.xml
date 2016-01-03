@@ -1,0 +1,23 @@
+<!--   *  Copyright (c) 2006, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Depuncture" block_type="insert">
+  <icon width="65" height="32" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="Depuncture_config"/>
+  <handlers enablement="xlmagicenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsComm"/>
+  </libraries>
+  <blockgui label="Xilinx Depuncturer">
+    <editbox name="infoedit" default="Depunctures convolutional codes.  Reads values from the input port, inserts symbols at the locations specified by zeros in the puncture code, and presents the results at the output port. &lt;br&gt;&lt;br&gt;Hardware notes: In hardware this block costs nothing." read_only="true" evaluate="false" multi_line="true"/>
+    <editbox name="insert_char" default="[1 0 0]" evaluate="true" label="Depuncture code" ctype="IntVector"/>
+    <editbox name="insert_string" default="'100'" evaluate="true" label="Symbol to insert" ctype="String"/>
+    <etch label="Simulation">
+      <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+    </etch>
+    <workspacevar name="insert_code" ctype="String"/>
+    <workspacevar name="string_int" ctype="Int"/>
+    <workspacevar name="insert_int" ctype="Int"/>
+  </blockgui>
+</sysgenblock>

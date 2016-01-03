@@ -1,0 +1,44 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Relational" block_type="relational">
+  <icon width="55" height="56" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="Relational_config"/>
+  <handlers enablement="xlmagicenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsBasic"/>
+    <library name="xbsControl"/>
+    <library name="xbsMath"/>
+    <library name="xbsFloatingPoint"/>
+  </libraries>
+  <blockgui label="Xilinx Arithmetic Relational Operator">
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <listbox name="mode" default="a=b" evaluate="true" label="Comparison:" ctype="Int">
+          <item value="a=b"/>
+          <item value="a!=b"/>
+          <item value="a&lt;b"/>
+          <item value="a&gt;b"/>
+          <item value="a&lt;=b"/>
+          <item value="a&gt;=b"/>
+        </listbox>
+        <etch label="Optional Ports">
+          <checkbox name="en" default="off" evaluate="true" label="Provide enable port" ctype="Int"/>
+        </etch>
+        <editbox name="latency" default="0" evaluate="true" label="Latency" ctype="Int"/>
+      </tab>
+      <tab name="advancedtab" label="Advanced">
+        <etch name="simetch" label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles" ctype="Int"/>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+  </blockgui>
+</sysgenblock>

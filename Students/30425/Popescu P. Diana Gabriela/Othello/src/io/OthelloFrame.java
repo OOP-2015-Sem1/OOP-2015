@@ -4,7 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
-import game.BoardConfiguration;
+import methods.constants.auxiliary.Constants;
 
 public class OthelloFrame {
 
@@ -16,15 +16,19 @@ public class OthelloFrame {
 	private final JLabel labelForScore1;
 	private JLabel labelForScore2;
 	private JLabel labelForTurn;
+	private int ROWS;
+	private int COLS;
 
 	public JButton[][] buttonsForGame;
 
-	public OthelloFrame() {
+	public OthelloFrame(int ROWS, int COLS) {
 
+		this.ROWS = ROWS;
+		this.COLS = COLS;
 		frame = new JFrame("Othello");
 		gamePanel = new JPanel();
 		scoreTurnPanel = new JPanel();
-		buttonsForGame = new JButton[BoardConfiguration.ROWS][BoardConfiguration.COLS];
+		buttonsForGame = new JButton[ROWS][COLS];
 
 		labelForScore1 = new JLabel("WHITE:BLACK", JLabel.CENTER);
 		labelForScore2 = new JLabel();
@@ -33,20 +37,19 @@ public class OthelloFrame {
 		labelForTurn = new JLabel();
 		labelForTurn.setHorizontalAlignment(JLabel.CENTER);
 
-		for (int i = 0; i < BoardConfiguration.ROWS; i++) {
-			for (int j = 0; j < BoardConfiguration.COLS; j++) {
+		for (int i = 0; i < ROWS; i++) {
+			for (int j = 0; j < COLS; j++) {
 				buttonsForGame[i][j] = new JButton();
 				buttonsForGame[i][j].setBorder(new LineBorder(Color.DARK_GRAY, LINE_BORDER_THICKNESS));
 				buttonsForGame[i][j].setPreferredSize(new Dimension(50, 50));
 
-				// buttonsForGame[i][j].addActionListener((ActionListener)
-				// this);
+				// buttonsForGame[i][j].addActionListener((ActionListener)this);
 				gamePanel.add(buttonsForGame[i][j]);
 			}
 		}
 
 		gamePanel.setPreferredSize(new Dimension(500, 500));
-		gamePanel.setLayout(new GridLayout(BoardConfiguration.ROWS, BoardConfiguration.COLS));
+		gamePanel.setLayout(new GridLayout(ROWS, COLS));
 		scoreTurnPanel.add(labelForScore1);
 		scoreTurnPanel.add(labelForScore2);
 		scoreTurnPanel.add(labelForTurn);
@@ -59,6 +62,7 @@ public class OthelloFrame {
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(800, 500);
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
 
@@ -69,11 +73,11 @@ public class OthelloFrame {
 	}
 
 	public void setColorsOnGameButtons(int[][] boardConfiguration) {
-		for (int i = 0; i < BoardConfiguration.ROWS; i++) {
-			for (int j = 0; j < BoardConfiguration.COLS; j++) {
+		for (int i = 0; i < ROWS; i++) {
+			for (int j = 0; j < COLS; j++) {
 				if (boardConfiguration[i][j] == 0)
 					buttonsForGame[i][j].setBackground(Color.green);
-				else if (boardConfiguration[i][j] == BoardConfiguration.WHITE)
+				else if (boardConfiguration[i][j] == Constants.WHITE)
 					buttonsForGame[i][j].setBackground(Color.white);
 				else
 					buttonsForGame[i][j].setBackground(Color.black);
@@ -86,16 +90,16 @@ public class OthelloFrame {
 	}
 
 	public void setLabelForTurn(int currentTurn) {
-		if (currentTurn == BoardConfiguration.WHITE)
+		if (currentTurn == Constants.WHITE)
 			labelForTurn.setText("WHITE's TURN");
-		else if (currentTurn == BoardConfiguration.BLACK)
+		else if (currentTurn == Constants.BLACK)
 			labelForTurn.setText("BLACK's TURN");
-		else if (currentTurn == BoardConfiguration.GAME_OVER)
+		else if (currentTurn == Constants.GAME_OVER)
 			labelForTurn.setText("GAME OVER");
 	}
 
 	public void writeTheResultOnFrame(int nrGreen, int scoreWhite, int scoreBlack) {
-		setLabelForTurn(BoardConfiguration.GAME_OVER);
+		setLabelForTurn(Constants.GAME_OVER);
 		if (nrGreen == 0) {
 			if (scoreWhite > scoreBlack) {
 				buttonsForGame[3][1].setText("W");
@@ -139,39 +143,3 @@ public class OthelloFrame {
 		}
 	}
 }
-/*
- * ACTION LISTENER FOR EVERY BUTTON button.addActionListener(new
- * ActionListener() { public void actionPerformed(ActionEvent e) { //button is
- * pressed System.out.println("You clicked the button"); }});
- */
-
-/**
- * very important!!!!!!!!!!!!!!!!!!!
- * 
- * public class DontExtendJFrame implements ActionListener {
- * 
- * private enum Actions { HELLO, GOODBYE }
- * 
- * public static void main(String[] args) {
- * 
- * DontExtendJFrame instance = new DontExtendJFrame();
- * 
- * JFrame frame = new JFrame("Test"); frame.setLayout(new FlowLayout());
- * frame.setSize(200, 100);
- * 
- * JButton hello = new JButton("Hello");
- * hello.setActionCommand(Actions.HELLO.name());
- * hello.addActionListener(instance); frame.add(hello);
- * 
- * JButton goodbye = new JButton("Goodbye");
- * goodbye.setActionCommand(Actions.GOODBYE.name());
- * goodbye.addActionListener(instance); frame.add(goodbye);
- * 
- * frame.setVisible(true); }
- * 
- * @Override public void actionPerformed(ActionEvent evt) { if
- *           (evt.getActionCommand() == Actions.HELLO.name()) {
- *           JOptionPane.showMessageDialog(null, "Hello"); } else if
- *           (evt.getActionCommand() == Actions.GOODBYE.name()) {
- *           JOptionPane.showMessageDialog(null, "Goodbye"); } } }
- */

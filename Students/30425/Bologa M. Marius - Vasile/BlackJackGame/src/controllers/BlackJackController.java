@@ -172,7 +172,7 @@ public class BlackJackController {
 			frame.repaint();
 			return;
 		} else if (money <= 0) {
-			MessageDialogs.optionPane();
+			MessageDialogs.optionPane(playerWins, dealerWins);
 		}
 		frame.playerScore.setText(Integer.toString(playerWins));
 		frame.dealerScore.setText(Integer.toString(dealerWins));
@@ -183,7 +183,7 @@ public class BlackJackController {
 		playerHand = new BlackJackHand();
 		deck.shuffle();
 		getFirstTwoCards(deck, playerHand, dealerHand);
-		frame.showmoney.setText("Your money:"+Integer.toString(money));
+		frame.showmoney.setText("Your money:" + Integer.toString(money));
 		setBet(MessageDialogs.queryForBet());
 		if (dealerHand.getBlackjackValue() == 21) {
 			frame.showmsg.setText("You lost! Dealer has Blackjack!");

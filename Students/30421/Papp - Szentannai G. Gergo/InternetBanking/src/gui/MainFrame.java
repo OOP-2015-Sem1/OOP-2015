@@ -2,6 +2,16 @@ package gui;
 
 import javax.swing.*;
 
+/**
+ * Opens a frame which is the graphical support of the application. The frame is
+ * empty by default, but several JPanewls can be added during runtime. All
+ * panels are public static, so the content can be changed from any class.
+ * 
+ * Only one instance of this class should be in memory.
+ * 
+ * @author gergo_000
+ *
+ */
 public class MainFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;

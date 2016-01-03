@@ -1,10 +1,12 @@
 package Data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Tile implements Serializable {
 
-    Node[] adjacentNodes = new Node[6];
+    private List<Node> adjacentNodes = new ArrayList<>(6);
     private int tileHeight;
     private int tileWidth;
     private int tileX;
@@ -19,7 +21,6 @@ public class Tile implements Serializable {
     private boolean hasRobber = false;
     String tilePath;
     String tokenPath;
-    private Node[] nodes;
 
     public Tile(TileType tileType) {
         this.tileType = tileType;
@@ -66,9 +67,11 @@ public class Tile implements Serializable {
             case MOUNTAIN:
                 resourceType = ResourceType.ORE;
                 break;
-            case DESERT:
+            case DESERT: {
+                resourceType = ResourceType.NULL;
                 hasRobber = true;
                 break;
+            }
         }
     }
 
@@ -202,11 +205,15 @@ public class Tile implements Serializable {
         this.hasRobber = hasRobber;
     }
 
-    public Node[] getNodes() {
-        return nodes;
-    }
-
     public ResourceType getResourceType() {
         return resourceType;
+    }
+
+    public void addAdjacentNode(Node node) {
+        adjacentNodes.add(node);
+    }
+
+    public List<Node> getAdjacentNodes() {
+        return adjacentNodes;
     }
 }

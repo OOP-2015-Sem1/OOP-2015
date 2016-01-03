@@ -16,6 +16,11 @@ public class Ghosts {
 	
 	private int right = 0, left = 1, up = 2, down = 3;
 	
+	private int smart = 0, next = 1;
+	private int state = smart;
+	
+	private int lastDir = -1;
+	
 	private int dirBlue = 0;
 	private int dirRed = 0;
 	private int dirPurp = 0;
@@ -75,115 +80,264 @@ public class Ghosts {
   		g.drawImage(purp, column[2]*STEP-14, row[2]*STEP-14, null);
 	}
 	
-	public void tick(){
+	private void randomMove(){
+		//BLUE
+
+		/*
+		if(dirBlue == right){
 			
-			//BLUE
+			if(charAt(row[0],column[0]+1) != '0'){
+				column[0]+= 1;
+			}else{
+				dirBlue = randomGen.nextInt(4);
+			}
 			
-			if(dirBlue == right){
-				
+		}else if(dirBlue == left){
+			
+			if(charAt(row[0],column[0]-1) != '0'){
+				column[0] -= 1;
+			}else{
+				dirBlue = randomGen.nextInt(4);
+			}
+			
+		}else if(dirBlue == up){
+			
+			if(charAt(row[0]-1,column[0]) != '0'){
+				row[0] -= 1;
+			}else{
+				dirBlue = randomGen.nextInt(4);
+			}
+			
+		}else if(dirBlue == down){
+			
+			if(charAt(row[0]+1,column[0]) != '0'){
+				row[0] += 1;
+			}else{
+				dirBlue = randomGen.nextInt(4);
+			}
+		
+		}
+		
+		*/
+		
+		//RED
+		
+		if(dirRed == right){
+			
+			if(charAt(row[1],column[1]+1) != '0'){
+				column[1]+= 1;
+			}else{
+				dirRed = randomGen.nextInt(4);
+			}
+			
+		}else if(dirRed == left){
+			
+			if(charAt(row[1],column[1]-1) != '0'){
+				column[1] -= 1;
+			}else{
+				dirRed = randomGen.nextInt(4);
+			}
+			
+		}else if(dirRed == up){
+			
+			if(charAt(row[1]-1,column[1]) != '0'){
+				row[1] -= 1;
+			}else{
+				dirRed = randomGen.nextInt(4);
+			}
+			
+		}else if(dirRed == down){
+			
+			if(charAt(row[1]+1,column[1]) != '0'){
+				row[1] += 1;
+			}else{
+				dirRed = randomGen.nextInt(4);
+			}
+		
+		}
+		
+		//PURPLE
+		
+		if(dirPurp == right){
+			
+			if(charAt(row[2],column[2]+1) != '0'){
+				column[2]+= 1;
+			}else{
+				dirPurp = randomGen.nextInt(4);
+			}
+			
+		}else if(dirPurp == left){
+			
+			if(charAt(row[2],column[2]-1) != '0'){
+				column[2] -= 1;
+			}else{
+				dirPurp = randomGen.nextInt(4);
+			}
+			
+		}else if(dirPurp == up){
+			
+			if(charAt(row[2]-1,column[2]) != '0'){
+				row[2] -= 1;
+			}else{
+				dirPurp = randomGen.nextInt(4);
+			}
+			
+		}else if(dirPurp == down){
+			
+			if(charAt(row[2]+1,column[2]) != '0'){
+				row[2] += 1;
+			}else{
+				dirPurp = randomGen.nextInt(4);
+			}
+		
+		}
+	}
+	
+	private void followPac(){
+		
+		boolean move = false;
+		
+		if(state == smart){
+			if(column[0] < Pacman.column){
 				if(charAt(row[0],column[0]+1) != '0'){
-					column[0]+= 1;
-				}else{
-					dirBlue = randomGen.nextInt(4);
+				column[0]+= 1;
+				move = true;
+				lastDir = right;
 				}
-				
-			}else if(dirBlue == left){
-				
+			}
+			
+			if(column[0] > Pacman.column){
 				if(charAt(row[0],column[0]-1) != '0'){
-					column[0] -= 1;
-				}else{
-					dirBlue = randomGen.nextInt(4);
+				column[0] -= 1;
+				move = true;
+				lastDir = left;
 				}
-				
-			}else if(dirBlue == up){
-				
-				if(charAt(row[0]-1,column[0]) != '0'){
-					row[0] -= 1;
-				}else{
-					dirBlue = randomGen.nextInt(4);
-				}
-				
-			}else if(dirBlue == down){
-				
-				if(charAt(row[0]+1,column[0]) != '0'){
-					row[0] += 1;
-				}else{
-					dirBlue = randomGen.nextInt(4);
-				}
-			
 			}
 			
-			//RED
-			
-			if(dirRed == right){
-				
-				if(charAt(row[1],column[1]+1) != '0'){
-					column[1]+= 1;
-				}else{
-					dirRed = randomGen.nextInt(4);
+			if(row[0] < Pacman.row){
+			if(charAt(row[0]+1,column[0]) != '0'){
+				row[0] += 1;
+				move = true;
+				lastDir = down;
 				}
-				
-			}else if(dirRed == left){
-				
-				if(charAt(row[1],column[1]-1) != '0'){
-					column[1] -= 1;
-				}else{
-					dirRed = randomGen.nextInt(4);
+			}
+
+			if(row[0] > Pacman.row){
+			if(charAt(row[0]-1,column[0]) != '0'){
+				row[0] -= 1;
+				move = true;
+				lastDir = up;
 				}
-				
-			}else if(dirRed == up){
-				
-				if(charAt(row[1]-1,column[1]) != '0'){
-					row[1] -= 1;
-				}else{
-					dirRed = randomGen.nextInt(4);
-				}
-				
-			}else if(dirRed == down){
-				
-				if(charAt(row[1]+1,column[1]) != '0'){
-					row[1] += 1;
-				}else{
-					dirRed = randomGen.nextInt(4);
-				}
-			
 			}
 			
-			//PURPLE
-			
-			if(dirPurp == right){
+			if(!move){
 				
-				if(charAt(row[2],column[2]+1) != '0'){
-					column[2]+= 1;
-				}else{
-					dirPurp = randomGen.nextInt(4);
-				}
-				
-			}else if(dirPurp == left){
-				
-				if(charAt(row[2],column[2]-1) != '0'){
-					column[2] -= 1;
-				}else{
-					dirPurp = randomGen.nextInt(4);
-				}
-				
-			}else if(dirPurp == up){
-				
-				if(charAt(row[2]-1,column[2]) != '0'){
-					row[2] -= 1;
-				}else{
-					dirPurp = randomGen.nextInt(4);
-				}
-				
-			}else if(dirPurp == down){
-				
-				if(charAt(row[2]+1,column[2]) != '0'){
-					row[2] += 1;
-				}else{
-					dirPurp = randomGen.nextInt(4);
-				}
-			
+				state = next;
 			}
+			
+		}else if(state == next){
+				
+				if(lastDir == right){
+					
+					if(row[0] < Pacman.row){
+						if(charAt(row[0]+1,column[0]) != '0'){
+							row[0] += 1;
+							state = smart;
+							}
+						}else{
+								if(charAt(row[0]-1,column[0]) != '0'){
+									row[0] -= 1;
+									state = smart;
+									}
+						}
+					
+					if(charAt(row[0],column[0]+1) != '0'){
+						column[0]+= 1;
+					}else if(charAt(row[0]-1,column[0]) != '0'){
+						lastDir = up;
+					}else if(charAt(row[0]+1,column[0]) != '0'){
+						lastDir = down;
+					}
+					
+					
+				}else if(lastDir == left){
+					
+					if(row[0] < Pacman.row){
+						if(charAt(row[0]+1,column[0]) != '0'){
+							row[0] += 1;
+							state = smart;
+							}
+						}else{
+								if(charAt(row[0]-1,column[0]) != '0'){
+									row[0] -= 1;
+									state = smart;
+									}
+						}
+					
+					if(charAt(row[0],column[0]-1) != '0'){
+						column[0]-= 1;
+					}else if(charAt(row[0]-1,column[0]) != '0'){
+						lastDir = up;
+					}else if(charAt(row[0]+1,column[0]) != '0'){
+						lastDir = down;
+					}
+
+					
+				}else if(lastDir == down){
+					
+					
+					if(column[0] < Pacman.column){
+						if(charAt(row[0],column[0]+1) != '0'){
+							column[0] += 1;
+							state = smart;
+							}
+						}else if(column[0] > Pacman.column){
+								if(charAt(row[0],column[0]-1) != '0'){
+									column[0] -= 1;
+									state = smart;
+									}
+						}
+					
+					if(charAt(row[0]+1,column[0]) != '0'){
+						row[0]+= 1;
+					}else if(charAt(row[0],column[0]+1) != '0'){
+						lastDir = right;
+					}else if(charAt(row[0],column[0]-1) != '0'){
+						lastDir = left;
+					}
+					
+				}else if(lastDir == up){
+					
+					if(column[0] < Pacman.column){
+						if(charAt(row[0],column[0]+1) != '0'){
+							column[0] += 1;
+							state = smart;
+							}
+						}else{
+								if(charAt(row[0],column[0]-1) != '0'){
+									column[0] -= 1;
+									state = smart;
+									}
+						}
+					
+					if(charAt(row[0]-1,column[0]) != '0'){
+						row[0]-= 1;
+					}else if(charAt(row[0],column[0]+1) != '0'){
+						lastDir = right;
+					}else if(charAt(row[0],column[0]-1) != '0'){
+						lastDir = left;
+					}
+					
+				}
+			}
+		}
+		
+	
+	public void tick(){
+
+		randomMove();
+		followPac();
+
 	}
 
 	public char charAt (int row, int column){

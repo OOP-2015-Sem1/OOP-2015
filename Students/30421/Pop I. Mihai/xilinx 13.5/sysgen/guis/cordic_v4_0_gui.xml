@@ -1,0 +1,122 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="CORDIC 4.0 " block_type="cordic_v4_0">
+  <icon width="95" height="142" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen" entry_point="coregenimport_config"/>
+  <handlers enablement="xlipmagiccallback_pass_evaluate_params" action="xlipmagicaction"/>
+  <!-- <handlers enablement="xlcordicv4enablement/xlipmagiccallback" action="xlipmagicaction"/>  --> 
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsMath"/>
+    <library name="xbsDSP"/>
+  </libraries>
+  <blockgui label="Xilinx CORDIC 4.0">
+    <!-- <editbox name="infoedit" default="CORDIC 4.0" read_only="true" evaluate="false" multi_line="true"/> -->
+    <tabpane>
+      <tab name="Coregen_Parameters_tab" label="Page 1">
+        <etch label="Functional selection">
+        <listbox name="functional_selection" default="Square_Root" evaluate="false" label="" ctype="String" allow_advanced="false">
+          <item value="Rotate"/>
+          <item value="Translate"/>
+          <item value="Sin_and_Cos"/>
+          <item value="Sinh_and_Cosh"/>
+          <item value="Arc_Tan"/>
+          <item value="Arc_Tanh"/>
+          <item value="Square_Root"/>
+        </listbox>
+        </etch>
+        <etch label="Architectural configuration">
+        <radiogroup name="architectural_configuration" default="Parallel" evaluate="false" label="" ctype="String" allow_advanced="false">
+          <item value="Word_Serial"/>
+          <item value="Parallel"/>
+        </radiogroup>
+        </etch>
+        <etch label="Pipelining mode">
+        <radiogroup name="pipelining_mode" default="Maximum" evaluate="false" label="" ctype="String" allow_advanced="false">
+          <item value="No_Pipelining"/>
+          <item value="Optimal"/>
+          <item value="Maximum"/>
+        </radiogroup>
+        </etch>
+      </tab>
+      <tab name="Coregen_Parameters_tab2" label="Page 2">
+        <etch label="Data format">
+        <radiogroup name="data_format" default="UnsignedFraction" evaluate="false" label="" ctype="String" allow_advanced="false">
+          <item value="SignedFraction"/>
+          <item value="UnsignedFraction"/>
+          <item value="UnsignedInteger"/>
+        </radiogroup>
+        </etch>
+        <etch label="Phase format">
+        <radiogroup name="phase_format" default="Radians" evaluate="false" label="" ctype="String" allow_advanced="false">
+          <item value="Radians"/>
+          <item value="Scaled_Radians"/>
+        </radiogroup>
+        </etch>
+        <!-- <editbox name="input_width" default="16" top_label="true" evaluate="true" label="Input width (Specifies the binary bit width of the input data representation)" ctype="Int"/> -->
+        
+        <etch label="Output Options">
+        <!-- <checkbox name="register_inputs" default="on" label="Register inputs" ctype="Bool" allow_advanced="false"/> -->
+        <editbox name="output_width" default="16" top_label="true" evaluate="true" label="Output width" ctype="Int"/>
+        <!-- <checkbox name="register_outputs" default="on" label="Register outputs" ctype="Bool" allow_advanced="false"/> -->
+        </etch>
+        <etch label="Round mode">
+        <listbox name="round_mode" default="Truncate" evaluate="false" label="" ctype="String" allow_advanced="false">
+          <item value="Truncate"/>
+          <item value="Round_Pos_Inf"/>
+          <item value="Round_Pos_Neg_Inf"/>
+          <item value="Nearest_Even"/>
+        </listbox>
+        </etch>
+      </tab>
+      <tab name="Coregen_Parameters_tab3" label="Page 3">
+        <etch label="Advanced Configuration Parameters">
+        <editbox name="iterations" default="0" top_label="true" evaluate="true" label="Iterations" ctype="Int"/>
+        <editbox name="precision" default="0" top_label="true" evaluate="true" label="Precision" ctype="Int"/>
+        <checkbox name="coarse_rotation" default="on" label="Coarse rotation" ctype="Bool" allow_advanced="false"/>
+        <listbox name="compensation_scaling" default="No_Scale_Compensation" evaluate="false" label="Compensation scaling" ctype="String" allow_advanced="false">
+          <item value="No_Scale_Compensation"/>
+          <item value="LUT_based"/>
+          <item value="BRAM"/>
+          <item value="Embedded_Multiplier"/>
+        </listbox>
+        </etch>
+        <!-- <checkbox name="ce" default="off" label="CE (Specifies if the core has a Clock Enable input)" ctype="Bool" allow_advanced="false"/> -->
+        <etch label="Optional Pins">
+        <!-- <checkbox name="en" default="off" label="en" ctype="Bool" allow_advanced="false"/>
+        <checkbox name="rst" default="off" label="rst" ctype="Bool" allow_advanced="false"/> -->
+        <checkbox name="ce" default="off" label="en" ctype="Bool" allow_advanced="false"/>
+        <checkbox name="sclr" default="off" label="rst" ctype="Bool" allow_advanced="false"/>
+        <checkbox name="nd" default="off" label="nd" ctype="Bool" allow_advanced="false"/>
+        <checkbox name="rdy" default="off" label="rdy" ctype="Bool" allow_advanced="false"/>
+        <checkbox name="x_out" default="on" label="X out" ctype="Bool" allow_advanced="false"/>
+        <checkbox name="y_out" default="on" label="Y out" ctype="Bool" allow_advanced="false"/>
+        <checkbox name="phase_output" default="off" label="Phase output" ctype="Bool" allow_advanced="false"/>
+        </etch>
+      </tab>
+      <tab name="Implementation_tab" label="Implementation">
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation" ctype="Bool" allow_advanced="false"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" evaluate="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]" />
+        </etch>
+      </tab>
+    </tabpane>
+    <!-- Parameters with fixed values: ce always need-->
+    <!-- <hiddenvar name="ce" default="true"  evaluate="true" ctype="Bool"/> -->
+    <!-- <hiddenvar name="sclr" default="false"  evaluate="true" ctype="Bool"/> -->
+    <hiddenvar name="register_inputs" default="true"  evaluate="true" ctype="Bool"/>
+    <hiddenvar name="register_outputs" default="true"  evaluate="true" ctype="Bool"/>
+    <!-- core import specific parameters -->   
+    <hiddenvar name="ipcore_usecache" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="ipcore_useipmodelcache" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="ipcore_verbose" default="false" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="wrapper_available" default="true" evaluate="true" ctype="Bool"/> 
+    <hiddenvar name="ip_name" default="CORDIC" evaluate="false" ctype="String"/>
+    <hiddenvar name="ip_version" default="4.0" evaluate="false" ctype="String"/>
+    <hiddenvar name="dsptool_ready" default="true" evaluate="true" ctype="Bool"/>
+    <hiddenvar name="port_translation_map" default="{ 'ce' => 'en', 'sclr' => 'rst' }" evaluate="false" ctype="String"/>
+    <hiddenvar name="structural_sim" default="false" evaluate="true" ctype="Bool"/>
+  </blockgui>
+</sysgenblock>
+

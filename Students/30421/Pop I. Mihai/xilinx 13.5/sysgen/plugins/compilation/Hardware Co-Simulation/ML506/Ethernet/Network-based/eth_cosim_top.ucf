@@ -1,0 +1,263 @@
+##############################################################################
+#                                                                            #
+#  Filename   : eth_cosim_top.ucf                                            #
+#                                                                            #
+#  Description: Defines the constraints for the Ethernet co-simulation       #
+#               platform.                                                    #
+#                                                                            #
+##############################################################################
+
+##############################################################################
+#  System Clock Constraints.                                                 #
+##############################################################################
+NET "sys_clk_p"               TNM_NET = "T_sys_clk_p";
+TIMESPEC "TS_sys_clk_p"       = PERIOD "T_sys_clk_p" 5 ns HIGH 50 %;
+
+##############################################################################
+#  System ACE Clock Constraints.                                             #
+##############################################################################
+NET  "sysace_clk"             TNM_NET = "T_sysace_clk";
+TIMESPEC "TS_sysace_clk"      = PERIOD "T_sysace_clk" 30 ns;
+
+##############################################################################
+#  GMII: IODELAY Constraints                                                 #
+##############################################################################
+INST "*delay_gmii_rx_clk"     IDELAY_TYPE = FIXED;
+INST "*delay_gmii_rx_clk"     IDELAY_VALUE = 10;
+INST "*delay_gmii_rx_clk"     REFCLK_FREQUENCY = 200.0;
+INST "*delayctrl_rx_clk"      LOC = IDELAYCTRL_X1Y4;
+
+##############################################################################
+#  IOB Constraints for HWCosim Top-level.                                    #
+##############################################################################
+NET  "sys_clk_p"              LOC = L19;
+NET  "sys_clk_p"              IOSTANDARD = LVDS_25;
+NET  "sys_clk_n"              LOC = K19;
+NET  "sys_clk_n"              IOSTANDARD = LVDS_25;
+NET  "ethernet_phy_rst_n"     LOC = J14;
+NET  "ethernet_phy_rst_n"     IOSTANDARD = LVCMOS25;
+NET  "ethernet_phy_rst_n"     TIG;
+NET  "ethernet_phy_intr_n"    LOC = H20;
+NET  "ethernet_phy_intr_n"    IOSTANDARD = LVCMOS25;
+NET  "ethernet_phy_intr_n"    PULLUP;
+NET  "ethernet_phy_intr_n"    TIG;
+NET  "ethernet_phy_gtx_clk"   LOC = J16;
+NET  "ethernet_phy_gtx_clk"   IOSTANDARD = LVCMOS25;
+NET  "ethernet_phy_gtx_clk"   SLEW = FAST;
+NET  "ethernet_phy_tx_clk"    LOC = K17;
+NET  "ethernet_phy_tx_clk"    IOSTANDARD = LVCMOS25;
+NET  "ethernet_phy_txd(0)"    LOC = AF11;
+NET  "ethernet_phy_txd(0)"    IOSTANDARD = LVCMOS33;
+NET  "ethernet_phy_txd(0)"    SLEW = FAST;
+NET  "ethernet_phy_txd(1)"    LOC = AE11;
+NET  "ethernet_phy_txd(1)"    IOSTANDARD = LVCMOS33;
+NET  "ethernet_phy_txd(1)"    SLEW = FAST;
+NET  "ethernet_phy_txd(2)"    LOC = AH9;
+NET  "ethernet_phy_txd(2)"    IOSTANDARD = LVCMOS33;
+NET  "ethernet_phy_txd(2)"    SLEW = FAST;
+NET  "ethernet_phy_txd(3)"    LOC = AH10;
+NET  "ethernet_phy_txd(3)"    IOSTANDARD = LVCMOS33;
+NET  "ethernet_phy_txd(3)"    SLEW = FAST;
+NET  "ethernet_phy_txd(4)"    LOC = AG8;
+NET  "ethernet_phy_txd(4)"    IOSTANDARD = LVCMOS33;
+NET  "ethernet_phy_txd(4)"    SLEW = FAST;
+NET  "ethernet_phy_txd(5)"    LOC = AH8;
+NET  "ethernet_phy_txd(5)"    IOSTANDARD = LVCMOS33;
+NET  "ethernet_phy_txd(5)"    SLEW = FAST;
+NET  "ethernet_phy_txd(6)"    LOC = AG10;
+NET  "ethernet_phy_txd(6)"    IOSTANDARD = LVCMOS33;
+NET  "ethernet_phy_txd(6)"    SLEW = FAST;
+NET  "ethernet_phy_txd(7)"    LOC = AG11;
+NET  "ethernet_phy_txd(7)"    IOSTANDARD = LVCMOS33;
+NET  "ethernet_phy_txd(7)"    SLEW = FAST;
+NET  "ethernet_phy_tx_en"     LOC = AJ10;
+NET  "ethernet_phy_tx_en"     IOSTANDARD = LVCMOS33;
+NET  "ethernet_phy_tx_en"     SLEW = FAST;
+NET  "ethernet_phy_tx_er"     LOC = AJ9;
+NET  "ethernet_phy_tx_er"     IOSTANDARD = LVCMOS33;
+NET  "ethernet_phy_tx_er"     SLEW = FAST;
+NET  "ethernet_phy_rxd(0)"    LOC = A33;
+NET  "ethernet_phy_rxd(0)"    IOSTANDARD = LVCMOS25;
+NET  "ethernet_phy_rxd(1)"    LOC = B33;
+NET  "ethernet_phy_rxd(1)"    IOSTANDARD = LVCMOS25;
+NET  "ethernet_phy_rxd(2)"    LOC = C33;
+NET  "ethernet_phy_rxd(2)"    IOSTANDARD = LVCMOS25;
+NET  "ethernet_phy_rxd(3)"    LOC = C32;
+NET  "ethernet_phy_rxd(3)"    IOSTANDARD = LVCMOS25;
+NET  "ethernet_phy_rxd(4)"    LOC = D32;
+NET  "ethernet_phy_rxd(4)"    IOSTANDARD = LVCMOS25;
+NET  "ethernet_phy_rxd(5)"    LOC = C34;
+NET  "ethernet_phy_rxd(5)"    IOSTANDARD = LVCMOS25;
+NET  "ethernet_phy_rxd(6)"    LOC = D34;
+NET  "ethernet_phy_rxd(6)"    IOSTANDARD = LVCMOS25;
+NET  "ethernet_phy_rxd(7)"    LOC = F33;
+NET  "ethernet_phy_rxd(7)"    IOSTANDARD = LVCMOS25;
+NET  "ethernet_phy_rx_clk"    LOC = H17;
+NET  "ethernet_phy_rx_clk"    IOSTANDARD = LVCMOS25;
+NET  "ethernet_phy_rx_dv"     LOC = E32;
+NET  "ethernet_phy_rx_dv"     IOSTANDARD = LVCMOS25;
+NET  "ethernet_phy_rx_er"     LOC = E33;
+NET  "ethernet_phy_rx_er"     IOSTANDARD = LVCMOS25;
+NET  "ethernet_phy_col"       LOC = B32;
+NET  "ethernet_phy_col"       IOSTANDARD = LVCMOS25;
+NET  "ethernet_phy_crs"       LOC = E34;
+NET  "ethernet_phy_crs"       IOSTANDARD = LVCMOS25;
+NET  "ethernet_phy_mdc"       LOC = H19;
+NET  "ethernet_phy_mdc"       IOSTANDARD = LVCMOS25;
+NET  "ethernet_phy_mdio"      LOC = H13;
+NET  "ethernet_phy_mdio"      IOSTANDARD = LVCMOS25;
+NET  "gpio_lcd(0)"            LOC = T9;
+NET  "gpio_lcd(0)"            IOSTANDARD = LVCMOS33;
+NET  "gpio_lcd(1)"            LOC = G7;
+NET  "gpio_lcd(1)"            IOSTANDARD = LVCMOS33;
+NET  "gpio_lcd(2)"            LOC = G6;
+NET  "gpio_lcd(2)"            IOSTANDARD = LVCMOS33;
+NET  "gpio_lcd(3)"            LOC = T11;
+NET  "gpio_lcd(3)"            IOSTANDARD = LVCMOS33;
+NET  "gpio_lcd(4)"            LOC = AC10;
+NET  "gpio_lcd(4)"            IOSTANDARD = LVCMOS33;
+NET  "gpio_lcd(5)"            LOC = J17;
+NET  "gpio_lcd(5)"            IOSTANDARD = LVCMOS25;
+NET  "gpio_lcd(6)"            LOC = AC9;
+NET  "gpio_lcd(6)"            IOSTANDARD = LVCMOS33;
+NET  "gpio_lcd(6)"            PULLDOWN;
+NET  "reset_n"                LOC = E9;
+NET  "reset_n"                IOSTANDARD = LVCMOS33;
+NET  "reset_n"                PULLUP;
+NET  "reset_n"                TIG;
+NET  "sysace_clk"             LOC = AH17;
+NET  "sysace_clk"             IOSTANDARD = LVCMOS33;
+NET  "sysace_mpa(0)"          LOC = G5;
+NET  "sysace_mpa(0)"          IOSTANDARD = LVCMOS33;
+NET  "sysace_mpa(1)"          LOC = N7;
+NET  "sysace_mpa(1)"          IOSTANDARD = LVCMOS33;
+NET  "sysace_mpa(2)"          LOC = N5;
+NET  "sysace_mpa(2)"          IOSTANDARD = LVCMOS33;
+NET  "sysace_mpa(3)"          LOC = P5;
+NET  "sysace_mpa(3)"          IOSTANDARD = LVCMOS33;
+NET  "sysace_mpa(4)"          LOC = R6;
+NET  "sysace_mpa(4)"          IOSTANDARD = LVCMOS33;
+NET  "sysace_mpa(5)"          LOC = M6;
+NET  "sysace_mpa(5)"          IOSTANDARD = LVCMOS33;
+NET  "sysace_mpa(6)"          LOC = L6;
+NET  "sysace_mpa(6)"          IOSTANDARD = LVCMOS33;
+NET  "sysace_mpd(0)"          LOC = P9;
+NET  "sysace_mpd(0)"          IOSTANDARD = LVCMOS33;
+NET  "sysace_mpd(1)"          LOC = T8;
+NET  "sysace_mpd(1)"          IOSTANDARD = LVCMOS33;
+NET  "sysace_mpd(2)"          LOC = J7;
+NET  "sysace_mpd(2)"          IOSTANDARD = LVCMOS33;
+NET  "sysace_mpd(3)"          LOC = H7;
+NET  "sysace_mpd(3)"          IOSTANDARD = LVCMOS33;
+NET  "sysace_mpd(4)"          LOC = R7;
+NET  "sysace_mpd(4)"          IOSTANDARD = LVCMOS33;
+NET  "sysace_mpd(5)"          LOC = U7;
+NET  "sysace_mpd(5)"          IOSTANDARD = LVCMOS33;
+NET  "sysace_mpd(6)"          LOC = P7;
+NET  "sysace_mpd(6)"          IOSTANDARD = LVCMOS33;
+NET  "sysace_mpd(7)"          LOC = P6;
+NET  "sysace_mpd(7)"          IOSTANDARD = LVCMOS33;
+NET  "sysace_mpd(8)"          LOC = R8;
+NET  "sysace_mpd(8)"          IOSTANDARD = LVCMOS33;
+NET  "sysace_mpd(9)"          LOC = L5;
+NET  "sysace_mpd(9)"          IOSTANDARD = LVCMOS33;
+NET  "sysace_mpd(10)"         LOC = L4;
+NET  "sysace_mpd(10)"         IOSTANDARD = LVCMOS33;
+NET  "sysace_mpd(11)"         LOC = K6;
+NET  "sysace_mpd(11)"         IOSTANDARD = LVCMOS33;
+NET  "sysace_mpd(12)"         LOC = J5;
+NET  "sysace_mpd(12)"         IOSTANDARD = LVCMOS33;
+NET  "sysace_mpd(13)"         LOC = T6;
+NET  "sysace_mpd(13)"         IOSTANDARD = LVCMOS33;
+NET  "sysace_mpd(14)"         LOC = K7;
+NET  "sysace_mpd(14)"         IOSTANDARD = LVCMOS33;
+NET  "sysace_mpd(15)"         LOC = J6;
+NET  "sysace_mpd(15)"         IOSTANDARD = LVCMOS33;
+NET  "sysace_cen"             LOC = M5;
+NET  "sysace_cen"             IOSTANDARD = LVCMOS33;
+NET  "sysace_oen"             LOC = N8;
+NET  "sysace_oen"             IOSTANDARD = LVCMOS33;
+NET  "sysace_wen"             LOC = R9;
+NET  "sysace_wen"             IOSTANDARD = LVCMOS33;
+NET  "sysace_mpirq"           LOC = M7;
+NET  "sysace_mpirq"           IOSTANDARD = LVCMOS33;
+NET  "sysace_mpirq"           TIG;
+
+##############################################################################
+#  IOB Constraints for Non-memory Mapped Ports.                              #
+##############################################################################
+NET  "uart_rxd"               LOC = AG15;                # uart_rxd contingent
+NET  "uart_rxd"               IOSTANDARD = LVCMOS33;     # uart_rxd contingent
+NET  "uart_rxd"               TIG;                       # uart_rxd contingent
+NET  "uart_txd"               LOC = AG20;                # uart_txd contingent
+NET  "uart_txd"               IOSTANDARD = LVCMOS33;     # uart_txd contingent
+NET  "uart_txd"               TIG;                       # uart_txd contingent
+NET  "dipsw(0)"               LOC = U25;                 # dipsw contingent
+NET  "dipsw(0)"               IOSTANDARD = LVCMOS18;     # dipsw contingent
+NET  "dipsw(1)"               LOC = AG27;                # dipsw contingent
+NET  "dipsw(1)"               IOSTANDARD = LVCMOS18;     # dipsw contingent
+NET  "dipsw(2)"               LOC = AF25;                # dipsw contingent
+NET  "dipsw(2)"               IOSTANDARD = LVCMOS18;     # dipsw contingent
+NET  "dipsw(3)"               LOC = AF26;                # dipsw contingent
+NET  "dipsw(3)"               IOSTANDARD = LVCMOS18;     # dipsw contingent
+NET  "dipsw(4)"               LOC = AE27;                # dipsw contingent
+NET  "dipsw(4)"               IOSTANDARD = LVCMOS18;     # dipsw contingent
+NET  "dipsw(5)"               LOC = AE26;                # dipsw contingent
+NET  "dipsw(5)"               IOSTANDARD = LVCMOS18;     # dipsw contingent
+NET  "dipsw(6)"               LOC = AC25;                # dipsw contingent
+NET  "dipsw(6)"               IOSTANDARD = LVCMOS18;     # dipsw contingent
+NET  "dipsw(7)"               LOC = AC24;                # dipsw contingent
+NET  "dipsw(7)"               IOSTANDARD = LVCMOS18;     # dipsw contingent
+NET  "leds(0)"                LOC = H18;                 # leds contingent
+NET  "leds(0)"                IOSTANDARD = LVCMOS25;     # leds contingent
+NET  "leds(0)"                SLEW = SLOW;               # leds contingent
+NET  "leds(0)"                PULLUP;                    # leds contingent
+NET  "leds(0)"                TIG;                       # leds contingent
+NET  "leds(1)"                LOC = L18;                 # leds contingent
+NET  "leds(1)"                IOSTANDARD = LVCMOS25;     # leds contingent
+NET  "leds(1)"                SLEW = SLOW;               # leds contingent
+NET  "leds(1)"                PULLUP;                    # leds contingent
+NET  "leds(1)"                TIG;                       # leds contingent
+NET  "leds(2)"                LOC = G15;                 # leds contingent
+NET  "leds(2)"                IOSTANDARD = LVCMOS25;     # leds contingent
+NET  "leds(2)"                SLEW = SLOW;               # leds contingent
+NET  "leds(2)"                PULLUP;                    # leds contingent
+NET  "leds(2)"                TIG;                       # leds contingent
+NET  "leds(3)"                LOC = G16;                 # leds contingent
+NET  "leds(3)"                IOSTANDARD = LVCMOS25;     # leds contingent
+NET  "leds(3)"                SLEW = SLOW;               # leds contingent
+NET  "leds(3)"                PULLUP;                    # leds contingent
+NET  "leds(3)"                TIG;                       # leds contingent
+NET  "leds(4)"                LOC = AD26;                # leds contingent
+NET  "leds(4)"                IOSTANDARD = LVCMOS18;     # leds contingent
+NET  "leds(4)"                SLEW = SLOW;               # leds contingent
+NET  "leds(4)"                PULLUP;                    # leds contingent
+NET  "leds(4)"                TIG;                       # leds contingent
+NET  "leds(5)"                LOC = AD25;                # leds contingent
+NET  "leds(5)"                IOSTANDARD = LVCMOS18;     # leds contingent
+NET  "leds(5)"                SLEW = SLOW;               # leds contingent
+NET  "leds(5)"                PULLUP;                    # leds contingent
+NET  "leds(5)"                TIG;                       # leds contingent
+NET  "leds(6)"                LOC = AD24;                # leds contingent
+NET  "leds(6)"                IOSTANDARD = LVCMOS18;     # leds contingent
+NET  "leds(6)"                SLEW = SLOW;               # leds contingent
+NET  "leds(6)"                PULLUP;                    # leds contingent
+NET  "leds(6)"                TIG;                       # leds contingent
+NET  "leds(7)"                LOC = AE24;                # leds contingent
+NET  "leds(7)"                IOSTANDARD = LVCMOS18;     # leds contingent
+NET  "leds(7)"                SLEW = SLOW;               # leds contingent
+NET  "leds(7)"                PULLUP;                    # leds contingent
+NET  "leds(7)"                TIG;                       # leds contingent
+NET  "pbutton_c(0)"           LOC = U8;                  # pbutton_c contingent
+NET  "pbutton_c(0)"           IOSTANDARD = LVCMOS33;     # pbutton_c contingent
+NET  "pbutton_c(1)"           LOC = AK7;                 # pbutton_c contingent
+NET  "pbutton_c(1)"           IOSTANDARD = LVCMOS33;     # pbutton_c contingent
+NET  "pbutton_c(2)"           LOC = AJ7;                 # pbutton_c contingent
+NET  "pbutton_c(2)"           IOSTANDARD = LVCMOS33;     # pbutton_c contingent
+NET  "pbutton_c(3)"           LOC = V8;                  # pbutton_c contingent
+NET  "pbutton_c(3)"           IOSTANDARD = LVCMOS33;     # pbutton_c contingent
+NET  "pbutton_c(4)"           LOC = AJ6;                 # pbutton_c contingent
+NET  "pbutton_c(4)"           IOSTANDARD = LVCMOS33;     # pbutton_c contingent
+
+##############################################################################
+

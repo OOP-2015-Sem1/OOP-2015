@@ -14,19 +14,19 @@ import javax.swing.event.ListSelectionListener;
 
 import uno.java.constants.Constants;
 
-public class NrOfPlayersFrame extends JFrame implements Designer{
-	
+public class NrOfPlayersFrame extends JFrame implements Designer {
+
 	private JLabel nrPlayers;
-	private Rectangle messageBounds = new Rectangle (50,50,300,20);
+	private Rectangle messageBounds = new Rectangle(50, 50, 300, 20);
 	private JList players = new JList(Constants.PLAYERS);
-	private Rectangle playersListBounds = new Rectangle(75,75,50,60);
+	private Rectangle playersListBounds = new Rectangle(75, 75, 50, 60);
 	private JButton okBtn = new JButton(Constants.ConfirmBtn);
-	private Rectangle okBtnBounds = new Rectangle(130,75,70,30);
+	private Rectangle okBtnBounds = new Rectangle(130, 75, 70, 30);
 	private PlayersSelectHandler handler = new PlayersSelectHandler();
-	
-	public NrOfPlayersFrame(){
+
+	public NrOfPlayersFrame() {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setSize(500,200);
+		this.setSize(500, 200);
 		this.setVisible(true);
 		this.setLayout(null);
 		this.setTitle("Nr Of Players");
@@ -34,14 +34,15 @@ public class NrOfPlayersFrame extends JFrame implements Designer{
 		this.players.addListSelectionListener(handler);
 		this.okBtn.addActionListener(handler);
 	}
-	
-	public JLabel setLabelText(String message){
+
+	public JLabel setLabelText(String message) {
 		JLabel txt;
 		txt = new JLabel(message);
-		txt.setFont(new Font("Times New Roman", Font.BOLD,18));
+		txt.setFont(new Font("Times New Roman", Font.BOLD, 18));
 		return txt;
 	}
-	public void setPlayerList(JList list){
+
+	public void setPlayerList(JList list) {
 		list.setVisibleRowCount(1);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	}
@@ -55,16 +56,15 @@ public class NrOfPlayersFrame extends JFrame implements Designer{
 	public void arrangeItems() {
 		this.nrPlayers = this.setLabelText(Constants.NR_OF_PLAYERS_MESSAGE);
 		this.componentSetBounds(this.nrPlayers, this.messageBounds);
-		this.add(this.nrPlayers);		
-		
+		this.add(this.nrPlayers);
+
 		this.componentSetBounds(this.players, this.playersListBounds);
 		this.setPlayerList(this.players);
-		
+
 		this.add(this.players);
-		
+
 		this.componentSetBounds(this.okBtn, this.okBtnBounds);
 		this.add(this.okBtn);
 	}
 
-	
 }

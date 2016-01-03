@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>xlGetReloadOrder</title>
+    <link rel="StyleSheet" href="css/SysGen_Utilities.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="SysGen_Utilities.14.01.html#296536">System Generator Utilities</a> : xlGetReloadOrder</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="296536">xlGetReloadOrder</a></div>
+      <div class="Body"><a name="296537">The xlGetReloadOrder function obtains the reload order of the FIR Compiler block </a>(versions 5.0 and greater).</div>
+      <div class="Heading2"><a name="296538">Syntax</a></div>
+      <div class="Code"><a name="296539">A = xlGetReloadOrder(block_handle, paramStruct, returnType))</a></div>
+      <div class="Heading2"><a name="296540">Description</a></div>
+      <div class="Heading3"><a name="296636">block_handle</a></div>
+      <div class="Body"><a name="297099">FIR Compiler block handle in the design. If a FIR Compiler block is selected, then this </a>function can be invoked as follows:</div>
+      <div class="Code"><a name="296638">xlGetReloadOrder(gcbh)</a></div>
+      <div class="Body"><a name="296639">This is the only mandatory parameter for this function</a></div>
+      <div class="Heading3"><a name="296640">paramStruct</a></div>
+      <div class="Body"><a name="297180">Name value pairs of abstracted parameters. For example, if "Hardware Oversampling </a>Specification" format is set to "Maximum_Possible" then the reload order returned could be incorrect unless the "hardwareoversamplingrate" is explicitly specified as say 4. e.g &gt;&gt;options = ...</div>
+      <div class="Body"><a name="296646">struct('ratespecification','Hardware_Oversampling_Rate','hardwareoversamplingrate',4)</a></div>
+      <div class="Code"><a name="296647">&gt;&gt; xlGetReloadOrder(gcbh, options)</a></div>
+      <div class="Body"><a name="296648">This parameter is an optional parameter and the default value is struct()</a></div>
+      <div class="Heading3"><a name="296649">returnType</a></div>
+      <div class="Body"><a name="297583">This specifies the reload order information format. This can either be an 'address_vector' or </a>'transform_matrix'. For example if A is a row vector of coefficients, then coefficients sorted in reload order can be obtained as :</div>
+      <div class="Body"><a name="296653">reload_order_coefficients = ...</a></div>
+      <div class="Code"><a name="296654">A(xlGetReloadOrder(gcbh, struct(), 'address_vector'))</a></div>
+      <div class="Body"><a name="296655">Here reload_order_coefficients specifies the order in which coefficients contained in A </a>should be passed to the FIR Compiler through the reload channel. </div>
+      <div class="Body"><a name="296657">Alternatively transform matrix can also be used :</a></div>
+      <div class="Code"><a name="296658">reload_order_coefficients = xlGetReloadOrder(gcbh,...</a></div>
+      <div class="Code"><a name="296659">struct(),'transform_matrix')*A'</a></div>
+      <div class="Body"><a name="296541">This is an optional parameter and the default value is 'transform_matrix'</a></div>
+      <div class="Heading3"><a name="298041">Example</a></div>
+      <div class="Body"><a name="298168">To illustrate how the xlGetReloadOrder can be used, do the following:</a></div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="298125">Open the model located at the following pathname:</a><br /><span class="Filename">&lt;sysgen_path&gt;/examples/demos/sysgenReloadable.mdl</span> </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="298126">Select the FIR Compiler block. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="298127">From the MATLAB command line, type </a><span class="Filename">xlGetReloadOrder(gcbh)</span>, <br />The following reload order of coefficients should appear: </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Code"><a name="298188">0 </a>		0		1</div>
+      <div class="Code"><a name="298195">0 </a>		1		0</div>
+      <div class="Code"><a name="298198">1</a>		0		0</div>
+      <div class="Note2">
+        <span class="XNote">Note:&nbsp;</span><a name="298130">Note: the Return type was not specified and it defaulted to </a><span class="Filename">‘tranform_matrix’</span>. The specified coefficients are “1 2 3 2 1”. Since the filter is inferred as a symmetric filter, only 3 out of 5 coefficients need to be loaded. Then the order should be the 3rd element first, followed by the 2nd, then the 1st, i.e. 3 2 1.</div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="298132">With the same FIR Compiler settings, change the Return type from </a><span class="Filename">‘transform_matrix’</span> to <span class="Filename">‘address_vector’</span> as follows:<br /><span class="Filename">xlGetReloadOrder(gcbh, struct(), 'address_vector')</span>, </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Code"><a name="298214">The same reload order of coefficients should appear but with a different </a>format:<br />		ans =</div>
+      <div class="Code"><a name="298238">&nbsp;</a></div>
+      <div class="Code"><a name="298227">	</a>				3</div>
+      <div class="Code"><a name="298228">	</a>				2</div>
+      <div class="Code"><a name="298233">	</a>				1</div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">5.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="298138">Now, try to change the filter’s coefficient structure. Double click on the FIR Compiler </a>block, click on the Implementation tab, select “Non_Symmetric” for the Coefficient Structure, then Click OK.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">6.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="298140">Verify that the FIR Compiler b is selected and enter the same command from the </a>previous step. Observe the different loading order and numbers of coefficient being loaded:</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Code"><a name="298253">	</a>	ans =</div>
+      <div class="Code"><a name="298254">&nbsp;</a></div>
+      <div class="Code"><a name="298255">	</a>				5</div>
+      <div class="Code"><a name="298256">	</a>				4</div>
+      <div class="Code"><a name="298257">	</a>				3</div>
+      <div class="Code"><a name="298248">	</a>				2</div>
+      <div class="Code"><a name="298264">	</a>				1</div>
+      <div class="Note2">
+        <span class="XNote">Note:&nbsp;</span><a name="298143">The specified coefficients are “1 2 3 2 1”. Since the filter is now explicitly set to </a>non_symmetric filter, all 5 coefficients are loaded with the reload order as shown above (5th(1), 4th(2), 3rd(3), 2nd(2), 1st(1))</div>
+      <div class="Heading2"><a name="296542">See Also</a></div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.052.html#1957719', '');" title="FIR Compiler 5.0" name="296546">FIR Compiler 5.0</a></span> block</div>
+      <div class="Body"><a name="296532">&nbsp;</a></div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

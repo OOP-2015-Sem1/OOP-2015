@@ -1,0 +1,81 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Reed-Solomon Decoder 6.1 " block_type="rs_decoder_v6_1">
+  <icon width="95" height="142" wmark_color="white" bg_color="green"/>
+  <dll name="sysgen_blockset" entry_point="rs_decoder_v6_1_config"/>
+  <handlers enablement="xlipmagiccallback" action="xlipmagicaction"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsComm"/>
+  </libraries>
+  <blockgui label="Xilinx Reed-Solomon Decoder 6.1">
+    <editbox name="infoedit" default="Reed-Solomon Decoder 6.1. Decodes systematically encoded RS codes. The decoder supports making received data symbols as erasure." read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="Basic_tab" label="Basic">
+        <listbox name="code_specification" default="Custom" evaluate="false" label="Code specification (Predefined settings for popular standards)" ctype="String">
+          <item value="Custom"/>
+          <item value="DVB"/>
+          <item value="ATSC"/>
+          <item value="CCSDS"/>
+          <item value="IESS-308(All)"/>
+          <item value="IESS-308(126)"/>
+          <item value="IESS-308(194)"/>
+          <item value="IESS-308(208)"/>
+          <item value="IESS-308(219)"/>
+          <item value="IESS-308(225)"/>
+          <item value="IEEE-802.16"/>
+        </listbox>
+        <editbox name="number_of_channels" default="1" top_label="true" evaluate="true" label="Number of channels (Symbols for each channel are interlaced on DATA_IN and DATA_OUT)" ctype="Int"/>
+        <editbox name="clocks_per_symbol" default="1" top_label="true" evaluate="true" label="Clocks per symbol (Number of clock periods per input sample. Use to reduce Processing Delay (measured in SAMPLE periods))" ctype="Int"/>
+        <etch label="Optional Ports">
+          <checkbox name="erase" default="off" label="ERASE" ctype="Bool"/>
+          <checkbox name="original_delayed_data" default="off" label="Original delayed data (DATA_DEL outputs DATA_IN with no error correction. Latency is identical to DATA_OUT)" ctype="Bool"/>
+          <checkbox name="variable_block_length" default="off" label="Variable block length (Adds N_IN port)" ctype="Bool"/>
+          <checkbox name="rst" default="off" label="RST" ctype="Bool"/>
+          <checkbox name="en" default="off" label="EN" ctype="Bool"/>
+        </etch>
+      </tab>
+      <tab name="Custom_Specification_tab" label="Custom Specification">
+        <listbox name="symbol_width" default="8" evaluate="false" label="Symbol width (Bus width of DATA_IN and DATA_OUT)" ctype="String">
+          <item value="3"/>
+          <item value="4"/>
+          <item value="5"/>
+          <item value="6"/>
+          <item value="7"/>
+          <item value="8"/>
+          <item value="9"/>
+          <item value="10"/>
+          <item value="11"/>
+          <item value="12"/>
+        </listbox>
+        <editbox name="symbols_per_block" default="255" top_label="true" evaluate="true" label="Symbols per block (Total number of symbols in an encoded block, including check symbols)" ctype="Int"/>
+        <editbox name="data_symbols" default="239" top_label="true" evaluate="true" label="Data symbols (Number of original information symbols in block, prior to encoding)" ctype="Int"/>
+        <editbox name="field_polynomial" default="0" top_label="true" evaluate="true" label="Field polynomial (Galois Field primitive polynomial (enter in decimal))" ctype="Int"/>
+        <editbox name="generator_start" default="0" top_label="true" evaluate="true" label="Generator start (Galois Field logarithm of the first root of the Generator Polynomial)" ctype="Int"/>
+        <editbox name="scaling_factor" default="1" top_label="true" evaluate="true" label="Scaling factor (Scaling factor for Generator Polynomial root index)" ctype="Int"/>
+      </tab>
+      <tab name="Implementation_tab" label="Implementation">
+        <etch label="Core Parameters">
+          <radiogroup name="memory_style" default="Automatic" evaluate="false" label="Memory style (Force core to use this style of internal memory. 'Automatic' means let core decide)" ctype="String">
+            <item value="Automatic"/>
+            <item value="Block"/>
+            <item value="Distributed"/>
+          </radiogroup>
+          <radiogroup name="optimization" default="Area" evaluate="false" label="Optimization (Core is only slightly larger with speed setting)" ctype="String">
+            <item value="Area"/>
+            <item value="Speed"/>
+          </radiogroup>
+          <checkbox name="self_recovering" default="off" label="Self recovering ('Self Recovering' adds internal sync reset if lock up detected)" ctype="Bool"/>
+        </etch>
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation" ctype="Bool"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" evaluate="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]" />
+        </etch>
+      </tab>
+    </tabpane>
+    <hiddenvar name="ip_name" default="Reed-Solomon Decoder" evaluate="false" ctype="String"/>
+    <hiddenvar name="ip_version" default="6.1" evaluate="false" ctype="String"/>
+  </blockgui>
+</sysgenblock>
+

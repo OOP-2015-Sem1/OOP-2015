@@ -1,0 +1,32 @@
+<sysgenblock simulinkname="Assert True" block_type="assert_true">
+  <dll name="sysgen_blockset" entry_point="mcode_block_config"/>
+  <initialization file="xlassert_true_init.m"/>
+  <icon width="120" height="50" wmark_color="white" bg_color="orange"/>
+  <libraries>
+    <library name="xbsTest"/>
+  </libraries>
+  <blockgui label="Xilinx Assert True Block">
+    <editbox name="infoedit"
+             default="Assert the input port is true or throw an error.  Used for unit testing during simulation."
+             read_only="true" evaluate="false" multi_line="true"/>
+    <editbox label="Delay" name="delay" ctype="Int" default="0"/>
+    <checkbox label="Disable" name="disable" ctype="Int" default="off"/>
+
+
+    <workspacevar name="mfilename" ctype="String"/>
+    <workspacevar name="drawport" ctype="String"/>
+    <workspacevar name="icontext" ctype="String"/>
+    <workspacevar name="sgpfilename" ctype="String"/>
+    <workspacevar name="explicit_period" ctype="Int"/>
+
+    <workspacevar name="param_names_bool" ctype="StringVector"/>
+    <workspacevar name="param_values_bool" ctype="IntVector"/>
+    <workspacevar name="param_names_double" ctype="StringVector"/>
+    <workspacevar name="param_values_double" ctype="DoubleVector"/>
+    <workspacevar name="mfile_dir" ctype="String"/>
+    <workspacevar name="sysgen_root" ctype="String"/>
+    <workspacevar name="block_fullname" ctype="String"/>
+    <hiddenvar name="mfname" default="xlAssertTrue" evaluate="false" ctype="String"/>
+
+  </blockgui>
+</sysgenblock>

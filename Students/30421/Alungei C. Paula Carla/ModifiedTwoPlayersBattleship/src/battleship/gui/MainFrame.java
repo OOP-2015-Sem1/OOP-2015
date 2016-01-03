@@ -1,7 +1,7 @@
 package battleship.gui;
 
 import java.awt.BorderLayout;
-
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,6 +23,7 @@ public class MainFrame extends JFrame {
 		player2Panel = new PlayerDetailPanel("Player 2", false, player1Panel);
 
 		startButton = new JButton("Start");
+		startButton.setBackground(new Color(100,100,100));
 		startButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

@@ -1,0 +1,22 @@
+<!--  *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.            -->
+<!--  *  Reproduction or reuse, in any form, without the explicit written  -->
+<!--  *  consent of Xilinx, Inc., is strictly prohibited.                  -->
+<sysgenblock simulinkname="PicoBlaze Instruction\nDisplay" block_type="picoblaze_instruction_display">
+  <icon width="95" height="80" wmark_color="blue" bg_color="white" file="picoblaze_instruction_display_icon.m"/>
+  <callbacks LoadFcn="global xl_pb_trace;"/>
+  <libraries>
+    <library name="xbsIndex"/>
+  </libraries>
+  <subsystem_model file="picoblaze_instruction_display_subsystem.mdl"/>
+  <blockgui label="Xilinx PicoBlaze Microcontroller Instruction Display">
+    <editbox name="infoedit" default="PicoBlaze Instruction\nDisplay" read_only="true" multi_line="true" evaluate="false"/>
+    <hiddenvar name="xl_pb_inst" default="LOAD s6, s7" evaluate="false"/>
+    <hiddenvar name="xl_pb_pc" default="28" evaluate="true"/>
+    <listbox name="xl_pb_version" label="Version" default="Must Specify" evaluate="true">
+      <item value="Must Specify"/>
+      <item value="PicoBlaze 2"/>
+      <item value="PicoBlaze 3"/>
+    </listbox>
+    <checkbox name="xl_pb_disable" label="Disable Display" default="off" evaluate="true"/>
+  </blockgui>
+</sysgenblock>

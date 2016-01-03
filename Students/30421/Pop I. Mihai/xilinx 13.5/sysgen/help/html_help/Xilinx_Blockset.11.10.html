@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Black Box</title>
+    <link rel="StyleSheet" href="css/Xilinx_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Blockset.11.1.html#327797">Xilinx Blockset</a> : Black Box</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="327797">Black Box</a></div>
+      <div class="Body"><span class="Italic"><a name="327877">This block is listed in the following Xilinx Blockset libraries: Basic Elements, Control Logic, and </a></span><span class="Italic">Index.</span></div>
+      <div class="OneLiner"><a name="327881"><img class="Default" src="images/Xilinx_Blockset.11.10.1.jpg" width="96" height="96" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" />The System Generator Black Box block provides a way to incorporate </a>hardware description language (HDL) models into System Generator. </div>
+      <div class="Body"><a name="1101069">The block is used to specify both the simulation behavior in Simulink </a>and the implementation files to be used during code generation with System Generator. A black box's ports produce and consume the same sorts of signals as other System Generator blocks. When a black box is translated into hardware, the associated HDL entity is automatically incorporated and wired to other blocks in the resulting design.</div>
+      <div class="Body"><a name="752094">The black box can be used to incorporate either VHDL or Verilog into a Simulink model. </a>Black box HDL can be co-simulated with Simulink using the System Generator interface to either ISE® Simulator or the ModelSim simulation software from Model Technology, Inc. You can find more information on this topic in the documentation for the <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.59.html#618404', '');" title="ModelSim">ModelSim</a></span> block and in the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Importing_HDL_Modules.9.5.html#270769', '');" title="HDL Co-Simulation">HDL Co-Simulation</a></span><span class="URL"> </span>.</div>
+      <div class="Body"><a name="752116">In addition to incorporating HDL into a System Generator model, the black box can be </a>used to define the implementation associated with an external simulation model (e.g., <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.4.html#270890', '');" title="Hardware Co-Simulation Blocks">Hardware Co-Simulation Blocks</a></span> ). System Generator also includes several <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Importing_HDL_Modules.9.6.html#270772', '');" title="Black Box Examples">Black Box Examples</a></span> that demonstrate the capabilities and use of the black box.</div>
+      <div class="Heading2"><a name="287068">Requirements on HDL for Black Boxes</a></div>
+      <div class="Body"><a name="330248">Every HDL component associated with a black box must adhere to the following System </a>Generator requirements and conventions: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="330252">The entity name must not collide with any entity name that is reserved by System </a>Generator (e.g., xlfir, xlregister). </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="1341972">Bi-directional ports are supported in HDL black boxes; however they will not be </a>displayed in the System Generator as ports, they will only appear in the generated HDL after netlisting. Please refer to the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Importing_HDL_Modules.9.4.html#280204', '');" title="Black Box Configuration M-Function">Black Box Configuration M-Function</a></span> for more infromation.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="330256">Top level ports should be ordered most significant bit down to least significant bit, as </a>in std_logic_vector(7 downto 0), and not std_logic_vector(0 to 7). </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="330258">For Verilog black boxes, the module and port names must be lower case and follow </a>standard VHDL naming conventions. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="330260">Clock and clock enable ports must be named according to the conventions described </a>below. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="330262">Any port that is a clock or clock enable must be of type std_logic. (For Verilog black </a>boxes, such ports must be non-vector inputs, e.g., input clk.) </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="330264">Clock and clock enable ports on a black box are not treated like other ports. When a </a>black box is translated into hardware, System Generator drives the clock and clock enable ports with signals whose rates can be specified according to the block's configuration and the sample rates that drive it in Simulink. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="1386289">Falling-edge triggered output data cannot be used.</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="330268">To understand how clocks work for black boxes, it helps to understand how System </a>Generator handles <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.6.4.html#270824', '');" title="System-Level Modeling in System Generator">Timing and Clocking</a></span><span class="URL"> </span> in general. To produce multiple rates in hardware, System Generator uses a single clock along with multiple clock enables, one enable for each rate. The enables activate different portions of hardware at the appropriate times. Each clock enable rate is related to a corresponding sample period in Simulink. Every System Generator block that requires a clock has at least one clock and clock enable port in its HDL counterpart. Blocks having multiple rates have additional clock and clock enable ports. </div>
+      <div class="Body"><a name="330240">Clocks for black boxes work like those for other System Generator blocks. The black box </a>HDL must have a separate clock and clock enable port for each associated sample rate in Simulink. Clock and clock enable ports in black box HDL should be expressed as follows:</div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="477832">Clock and clock enables must appear as pairs (i.e., for every clock, there is a </a>corresponding clock enable, and vice-versa). Although a black box may have more than one clock port, a single clock source is used to drive each clock port. Only the clock enable rates differ. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="477834">Each clock name (respectively, clock enable name) must contain the substring clk </a>(resp., ce). </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="477836">The name of a clock enable must be the same as that for the corresponding clock, but </a>with ce substituted for clk. For example, if the clock is named src_clk_1, then the clock enable must be named src_ce_1. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="477815">Clock and clock enable ports are not visible on the black box block icon. A work around is </a>required to make the top-level HDL clock enable port visible in System Generator; the work around is to add a separate enable port to the top-level HDL and AND this signal with the actual clock enable signal.</div>
+      <div class="Heading2"><a name="330237">The Black Box Configuration Wizard</a></div>
+      <div class="Body"><a name="327921">The Configuration Wizard is a tool that makes it easy to associate a Verilog or VHDL </a>component to a black box. The wizard is invoked whenever a black box is added to a model. To use the wizard, copy the file that defines the HDL component for a black box into the directory that contains the model. When a new black box is added to a model, the Configuration Wizard opens automatically. An example is shown in the figure below.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="287074"><img class="Default" src="images/Xilinx_Blockset.11.10.2.jpg" width="531" height="354" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="332375">From this wizard choose the HDL file that should be associated to the black box, then press </a>the <span class="Bold">Open</span> button. The wizard generates a configuration M-function (described below) for the black box, and associates the function with the block. The configuration M-function produced by the wizard can usually be used without change, but occasionally the function must be tailored by hand. Whether the configuration M-function needs to be modified depends on how complex the HDL is.</div>
+      <div class="Heading2"><a name="332396">The Black Box Configuration M-Function</a></div>
+      <div class="Body"><a name="332451">A black box must describe its interface (e.g., ports and generics) and its implementation to </a>System Generator. It does this through the definition of a MATLAB M-function (or p-function) called the block's configuration . The name of this function must be specified in the block parameter dialog box under the Block Configuration  parameter. </div>
+      <div class="Body"><a name="332459">The configuration M-function does the following: </a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="332463">It specifies the top-level entity name of the HDL component that should be associated </a>with the black box; </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="332465">It selects the language (i.e., VHDL or Verilog); </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="332467">It describes ports, including type, direction, bit width, binary point position, name, </a>and sample rate. Ports can be static or dynamic. Static ports do not change; dynamic ports change in response to changes in the design. For example, a dynamic port might vary its width and type to suit the signal that drives it. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="332469">It defines any necessary port type and data rate checking; </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="332471">It defines any generics required by the black box HDL; </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="332473">It specifies the black box HDL and other files (e.g., EDIF) that are associated with the </a>block; </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="332475">It defines the clocks and clock enables for the block (see the following topic on clock </a>conventions). </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="332477">It declares whether the HDL has any combinational feed-through paths. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="332481">System Generator provides an object-based interface for configuring black boxes </a>consisting of two types of objects: SysgenBlockDescriptors, used to define entity characteristics, and SysgenPortDescriptors, used to define port characteristics. This interface is used to provide System Generator information in the configuration M-function for black box about the block's interface, simulation model, and implementation. </div>
+      <div class="Body"><a name="332485">If the HDL for a black box has at least one combinational path (i.e., a direct feed-through </a>from an input to an output port), the block must be tagged as combinational in its configuration M-function using the tagAsCombinational method. A black box can be a mixture (i.e., some paths can be combinational while others are not). <span class="Bold">It is essential that a </span><span class="Bold">block containing a combinational path be tagged as such. Doing so allows System </span><span class="Bold">Generator to identify such blocks to the Simulink simulator. If this is not done, </span><span class="Bold">simulation results will be incorrect. </span></div>
+      <div class="Body"><a name="332489">The configuration M-function for a black box is invoked several times when a model is </a>compiled. The function typically includes code that depends on the block's input ports. For example, sometimes it is necessary to set the data type and/or rate of an output port based on the attributes on an input port. It is sometimes also necessary to check the type and rate on an input port. At certain times when the function is invoked, Simulink may not yet know enough for such code to be executed. </div>
+      <div class="Body"><a name="332493">To avoid the problems that arise when information is not yet known (in particular, </a>exceptions), BlockDescriptor members <span class="Italic">inputTypesKnown</span> and<span class="Italic"> inputRatesKnown</span> can be used. These are used to determine if Simulink is able, at the moment, to provide information about the input port types and rates respectively. The following code illustrates this point. </div>
+      <div class="Code"><a name="332497">if (this_block.inputTypesKnown) </a></div>
+      <div class="Code"><a name="332499">% set dynamic output port types </a></div>
+      <div class="Code"><a name="332501">&nbsp;</a>&nbsp;% set generics that depend on input port types </div>
+      <div class="Code"><a name="332503">&nbsp;</a>&nbsp;% check types of input ports </div>
+      <div class="Code"><a name="332505">end </a></div>
+      <div class="Body"><a name="332509">If all input rates are known, this code sets types for dynamic output ports, sets generics </a>that depend on input port types, and verifies input port types are appropriate. Avoid the mistake of including code in these conditional blocks (e.g., a variable definition) that is needed by code outside of the conditional block. </div>
+      <div class="Body"><a name="332513">Note that the code shown above uses an object named this_block. Every black box </a>configuration M-function automatically makes this_block available through an input argument. In MATLAB, this_block is the object that represents the black box, and is used inside the configuration M-function to test and configure the black box. Every this_block object is an instance of the <span class="Italic">SysgenBlockDescriptor </span>MATLAB class. The methods that can be applied to this_block are specified in Appendix A. A good way to generate example configuration M-function is to run the Configuration Wizard (described below) on simple VHDL entities. </div>
+      <div class="Body"><a name="332439">The </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Importing_HDL_Modules.9.6.html#270772', '');" title="Black Box Examples">Black Box Examples</a></span><span class="URL"> </span> are an excellent way to become familiar with black box configuration options.</div>
+      <div class="Heading2"><a name="332430">Sample Periods</a></div>
+      <div class="Body"><a name="334781">The output ports, clocks, and clock enables on a black box must be assigned sample </a>periods in the configuration M-function. If these periods are dynamic, or the black box needs to check rates, then the function must obtain the input port sample periods. Sample periods in the black box are expressed as integer multiples of the system rate as specified by the<span class="Italic"> Simulink System Period</span> field on the master System Generator block. For example, if the <span class="Italic">Simulink System Period</span> is 1/8, and a black box input port runs at the system rate (i.e., at 1/8), then the configuration M-function sees 1 reported as the port's rate. Likewise, if the <span class="Italic">Simulink System Period</span> is specified as pi, and an output port should run four times as fast as the system rate (i.e., at 4*pi), then the configuration M-function should set the rate on the output port to 4. The appropriate rate for constant ports is Inf.</div>
+      <div class="Body"><a name="1387271">As an example of how to set the output rate on each output port, consider the following </a>code segment:</div>
+      <div class="Code"><a name="1387273">block.outport(1).setRate(theInputRate); </a></div>
+      <div class="Code"><a name="1387274">block.outport(2).setRate(theInputRate*5); </a></div>
+      <div class="Code"><a name="1387275">block.outport(3).setRate(theInputRate*5);</a></div>
+      <div class="Body"><a name="1387277">The frist line sets the first output port to the same rate as the input port. The next two lines </a>set the output rate to 5 times the rate of the input. </div>
+      <div class="Heading2"><a name="287076">Block Parameters</a></div>
+      <div class="Body"><a name="287077">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model. </div>
+      <div class="Heading3"><a name="322934">Basic tab</a></div>
+      <div class="Body"><a name="521975">Parameters specific to the Basic tab are as follows: </a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="334843">Block Configuration M-Function</a></span>: Specifies the name of the configuration M-function that is associated to the black box. Ordinarily the file containing the function is stored in the directory containing the model, but it can be stored anywhere on the MATLAB path. Note that MATLAB limits all function names (including those for configuration M-functions) to 63 characters. Do not include the file extension (".m" or ".p") in the edit box. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="479311">Simulation Mode</a></span>: Tells the mode (Inactive, ISE® Simulator or External co-simulator) to use for simulation. When the mode is Inactive, the black box ignores all input data and writes zeroes to its output ports. Usually for this mode the black box should be coupled, using a Configurable Subsystem as described in the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_Design.6.8.html#415518', '');" title="Configurable Subsystems and System Generator">Configurable Subsystems and System Generator</a></span> .</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="479312">System Generator uses Configurable Subsystems to allow two paths to be identified </a>– one for producing simulation results, and the other for producing hardware. This approach gives the best simulation speed, but requires that a simulation model be constructed. When the mode is<span class="Bold"> ISE Simulator</span> or <span class="Bold">External co-simulator</span>, simulation results for the black box are produced using co-simulation on the HDL associated with the black box. When the mode is <span class="Bold">External co-simulator</span>, it is necessary to add a ModelSim HDL co-simulation block to the design, and to specify the name of the ModelSim block in the field labeled <span class="Bold">HDL Co-</span><span class="Bold">Simulator To Use</span>. An example is shown below:</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="479318"><img class="Default" src="images/Xilinx_Blockset.11.10.3.jpg" width="531" height="400" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="335184">System Generator supports the ModelSim simulator from Mentor Graphics®, Inc. for HDL </a>co-simulation. For co-simulation of Verilog black boxes, a mixed mode license is required. This is necessary because the portion of the design that System Generator writes is VHDL. </div>
+      <div class="Body"><a name="335180">Usually the co-simulator block for a black box is stored in the same subsystem that </a>contains the black box, but it is possible to store the block elsewhere. The path to a co-simulation block can be absolute, or can be relative to the subsystem containing the black box (e.g., "../ModelSim"). When simulating, each co-simulator block uses one license. To avoid running out of licenses, several black boxes can share the same co-simulation block. System Generator automatically generates and uses the additional VHDL needed to allow multiple blocks to be combined into a single ModelSim simulation.</div>
+      <div class="Heading2"><a name="337165">Data Type Translation for HDL Co-Simulation </a></div>
+      <div class="Body"><a name="949875">During co-simulation, ports in System Generator drive ports in the HDL simulator, and </a>vice-versa. Types of signals in the tools are not identical, and must be translated. The rules used for translation are the following. </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="949876">A signal in System Generator can be Boolean, unsigned or signed fixed point. Fixed-</a>point signals can have indeterminate values, but Boolean signals cannot. If the signal's value is indeterminate in System Generator, then all bits of the HDL signal become 'X', otherwise the bits become 0's and 1's that represent the signal's value. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="337174">To bring HDL signals back into System Generator, standard logic types are translated </a>into Booleans and fixed-point values as instructed by the black box configuration M-function. When there is a width mismatch, an error is reported. Indeterminate signals of all varieties (weak high, weak low, etc.) are translated to System Generator indeterminates. Any signal that is partially indeterminate in HDL simulation (e.g., a bit vector in which only the topmost bit is indeterminate) becomes entirely indeterminate in System Generator. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="337176">HDL to System Generator translations can be tailored by adding a custom simulation-</a>only top-level wrapper to the VHDL component. Such a wrapper might, for example, translate every weak low signal to 0 or every indeterminate signal to 0 or 1 before it is returned to System Generator. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="337179">An Example</a></div>
+      <div class="Body"><a name="337182">The following is an example VHDL entity that can be associated to a System Generator </a>black box. (This entity is taken from black box example <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Importing_HDL_Modules.9.6.html#270774', '');" title="Black Box Examples">Importing a VHDL Module</a></span><span class="URL"> </span>). </div>
+      <div class="Code"><a name="337186">library IEEE; </a></div>
+      <div class="Code"><a name="337188">use IEEE.std_logic_1164.all; </a></div>
+      <div class="Code"><a name="337190">use IEEE.numeric_std.all; </a></div>
+      <div class="Code"><a name="337194">entity word_parity_block is </a></div>
+      <div class="Code"><a name="337196">&nbsp;</a>&nbsp;generic (width : integer := 8); </div>
+      <div class="Code"><a name="337198">port (din : in std_logic_vector(width-1 downto 0); </a></div>
+      <div class="Code"><a name="337200">&nbsp;</a>&nbsp;parity : out std_logic); </div>
+      <div class="Code"><a name="337202">end word_parity_block; </a></div>
+      <div class="Code"><a name="337206">architecture behavior of word_parity_block is </a></div>
+      <div class="Code"><a name="337210">begin </a></div>
+      <div class="Code"><a name="337212">&nbsp;</a>&nbsp;WORD_PARITY_Process : process (din) </div>
+      <div class="Code"><a name="337214">&nbsp;</a>&nbsp;variable partial_parity : std_logic := '0'; </div>
+      <div class="Code"><a name="337216">&nbsp;</a>&nbsp;begin </div>
+      <div class="Code"><a name="337218">&nbsp;</a>&nbsp;partial_parity := '0'; </div>
+      <div class="Code"><a name="337220">&nbsp;</a>&nbsp;XOR_BIT_LOOP: for N in din'range loop </div>
+      <div class="Code"><a name="337222">&nbsp;</a>&nbsp;partial_parity := partial_parity xor din(N); </div>
+      <div class="Code"><a name="337224">&nbsp;</a>&nbsp;end loop; -- N </div>
+      <div class="Code"><a name="337228">&nbsp;</a>&nbsp;parity &lt;= partial_parity after 1 ns ; </div>
+      <div class="Code"><a name="337230">&nbsp;</a>&nbsp;end process WORD_PARITY_Process; </div>
+      <div class="Code"><a name="337232">end behavior; </a></div>
+      <div class="Body"><a name="337236">The following is an example configuration M-function. It makes the VHDL shown above </a>available inside a System Generator black box. </div>
+      <div class="Code"><a name="337240">function word_parity_block_config(this_block)</a></div>
+      <div class="Code"><a name="337244">this_block.setTopLevelLanguage('VHDL'); </a></div>
+      <div class="Code"><a name="337246">&nbsp;</a>&nbsp;this_block.setEntityName('word_parity_block'); </div>
+      <div class="Code"><a name="337248">&nbsp;</a>&nbsp;this_block.tagAsCombinational; </div>
+      <div class="Code"><a name="337250">&nbsp;</a>&nbsp;this_block.addSimulinkInport('din'); </div>
+      <div class="Code"><a name="337252">&nbsp;</a>&nbsp;this_block.addSimulinkOutport('parity'); </div>
+      <div class="Code"><a name="337254">&nbsp;</a>&nbsp;parity = this_block.port('parity'); </div>
+      <div class="Code"><a name="337256">&nbsp;</a>&nbsp;parity.setWidth(1); </div>
+      <div class="Code"><a name="337258">&nbsp;</a>&nbsp;parity.useHDLVector(false);</div>
+      <div class="Code"><a name="337262">&nbsp;</a>&nbsp;% ----------------------------- </div>
+      <div class="Code"><a name="337264">&nbsp;</a>&nbsp;if (this_block.inputTypesKnown) </div>
+      <div class="Code"><a name="337266">&nbsp;</a>&nbsp;this_block.addGeneric('width', </div>
+      <div class="Code"><a name="337268">&nbsp;</a>&nbsp;this_block.port('din').width); </div>
+      <div class="Code"><a name="337270">&nbsp;</a>&nbsp;end  % if(inputTypesKnown) </div>
+      <div class="Code"><a name="337272">&nbsp;</a>&nbsp;% ----------------------------- </div>
+      <div class="Code"><a name="337276">&nbsp;</a>&nbsp;% ----------------------------- </div>
+      <div class="Code"><a name="337278">&nbsp;</a>&nbsp;if (this_block.inputRatesKnown) </div>
+      <div class="Code"><a name="337280">&nbsp;</a>&nbsp;din = this_block.port('din'); </div>
+      <div class="Code"><a name="337282">&nbsp;</a>&nbsp;parity.setRate(din.rate); </div>
+      <div class="Code"><a name="337284">&nbsp;</a>&nbsp;end  % if(inputRatesKnown) </div>
+      <div class="Code"><a name="337286">&nbsp;</a>&nbsp;% ----------------------------- </div>
+      <div class="Code"><a name="337290">&nbsp;</a>&nbsp;this_block.addFile('word_parity_block.vhd');</div>
+      <div class="Code"><a name="337294">&nbsp;</a>&nbsp;return; </div>
+      <div class="Heading2"><a name="337297">See Also</a></div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Importing_HDL_Modules.9.1.html#279243', '');" title="Importing HDL Modules" name="337156">Importing HDL Modules</a></span> </div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

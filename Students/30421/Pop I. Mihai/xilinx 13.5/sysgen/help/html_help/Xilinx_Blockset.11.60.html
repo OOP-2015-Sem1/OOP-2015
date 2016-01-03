@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Mult</title>
+    <link rel="StyleSheet" href="css/Xilinx_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Blockset.11.1.html#271149">Xilinx Blockset</a> : Mult</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="271149">Mult</a></div>
+      <div class="Body"><span class="Italic"><a name="276480">This block is listed in the following Xilinx Blockset libraries: Math and Index.</a></span></div>
+      <div class="OneLiner"><a name="276483"><img class="Default" src="images/Xilinx_Blockset.11.60.1.jpg" width="66" height="71" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" />The Xilinx Mult block implements a multiplier. It computes the product of the </a>data on its two input ports, producing the result on its output port.</div>
+      <div class="Heading2"><a name="573344">Block Parameters</a></div>
+      <div class="Body"><a name="573345">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model.</div>
+      <div class="Heading3"><a name="1279084">Basic tab</a></div>
+      <div class="Body"><a name="1279085">Parameters specific to the Basic tab are as follows:</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="1279130">Latency</a></span>: This defines the number of sample periods by which the block's output is delayed.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><span class="Bold"><a name="1279204">Saturation and Rounding of User Data Types in a Multiplier</a></span></div>
+      <div class="Body2"><a name="1279302">When saturation or rounding is selected on the user data type of a multiplier, latency </a>is also distributed so as to pipeline the saturation/rounding logic first and then additional registers are added to the core. For example, if a latency of three is selected and rounding/saturation is selected, then the first register will be placed after the rounding or saturation logic and two registers will be placed to pipeline the core. Registers will be added to the core until optimum pipelining is reached and then further registers will be placed after the rounding/saturation logic. However, if the data type you select does not require additional saturation/rounding logic, then all the registers will be used to pipeline the core.</div>
+      <div class="Heading3"><a name="573346">Implementation tab</a></div>
+      <div class="Body"><a name="573347">Parameters specific to the Implementation tab are as follows:</a></div>
+      <div class="Body"><span class="Bold"><a name="1667175">Use behavioral HDL (otherwise use core)</a></span>: The block is implemented using behavioral HDL. This gives the downstream logic synthesis tool maximum freedom to optimize for performance or area.</div>
+      <div class="Body"><a name="1667164">Core Parameters</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2177301">Optimize for Speed|Area: </a></span>directs the block to be optimized for either Speed or Area</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2177302">Use embedded multipliers</a></span>: This field specifies that if possible, use the XtremeDSP slice (DSP48 type embedded multiplier) in the target device.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="2177303">Test for optimum pipelining</a></span>: Checks if the Latency provided is at least equal to the optimum pipeline length. Latency values that pass this test imply that the core produced will be optimized for speed.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="1282905">Other parameters used by this block are explained in the topic</a><br /><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.3.html#271277', '');" title="Common Options in Block Parameter Dialog Boxes">Common Options in Block Parameter Dialog Boxes</a></span>. </div>
+      <div class="Body"><a name="2026043">&nbsp;</a></div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

@@ -22,12 +22,11 @@ public class PlayersSelectHandler implements ListSelectionListener, ActionListen
 	@Override
 	public void valueChanged(ListSelectionEvent list) {
 		nrOfPlayers = Constants.PLAYERS[((JList) list.getSource()).getSelectedIndex()];
-		// System.out.println(this.nrOfPlayers);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent btn) {
-		Game.enterName= new EnterPlayerNameFrame();
+		Game.enterName = new EnterPlayerNameFrame();
 		Game.nrOfPlayersFrame.setVisible(false);
 	}
 
@@ -36,28 +35,24 @@ public class PlayersSelectHandler implements ListSelectionListener, ActionListen
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			this.playerName = ((TextField) e.getSource()).getText();
 			((TextField) e.getSource()).setText(null);
-			
+
 			Player player = new Player();
 			player.setNickname(this.playerName);
 			Game.addPlayers(player);
-			
-			
-			
-			if(Game.nrOfPlayers == Integer.parseInt(this.nrOfPlayers)){
+
+			if (Game.nrOfPlayers == Integer.parseInt(this.nrOfPlayers)) {
 				Game.dealCards();
-				
+
 				Game.gameWindow = new GameWindow();
-				Game.gameWindow.placePlayers(Game.nrOfPlayers,Game.players);
-				//Game.gameWindow.arrangeItems();
-				
+				Game.gameWindow.placePlayers(Game.nrOfPlayers, Game.players);
+
 				Game.enterName.setVisible(false);
 				Game.players.get(0).setTurn(true);
-				
-			}
-			else{
+
+			} else {
 				Game.nrOfPlayers++;
 			}
-	}
+		}
 
 	}
 

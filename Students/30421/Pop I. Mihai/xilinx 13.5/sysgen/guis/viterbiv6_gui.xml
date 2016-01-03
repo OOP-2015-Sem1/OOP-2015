@@ -1,0 +1,72 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Viterbi Decoder v6_0 " block_type="viterbiv6">
+  <icon width="60" height="56" wmark_color="white" bg_color="green"/>
+  <dll name="sysgen_blockset" entry_point="Viterbi_config"/>
+  <handlers enablement="viterbienablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsComm"/>
+  </libraries>
+  <blockgui label="Xilinx Viterbi Decoder">
+    <editbox name="infoedit" default="Decodes convolutionally encoded data. Number of input ports equals the length of the convolution code array." read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <editbox name="clength" default="7" evaluate="true" label="Constraint length" ctype="Int"/>
+        <checkbox name="dual_decoding" default="off" evaluate="true" label="Use dual decoder" ctype="Int"/>
+        <editbox name="conv_codes" default="[7 7]" evaluate="true" label="Convolution code array 1 (octal)" ctype="IntVector"/>
+        <editbox name="conv_codes2" default="[117 127]" evaluate="true" label="Convolution code array 2 (octal)" ctype="IntVector"/>
+        <editbox name="tb_length" default="36" evaluate="true" label="Traceback length" ctype="Int"/>
+        <radiogroup name="coding" default="Soft" evaluate="true" label="Coding" ctype="Int">
+          <item value="Soft" label="Soft"/>
+          <item value="Hard" label="Hard"/>
+        </radiogroup>
+        <radiogroup name="data_format" default="Signed Magnitude" evaluate="true" label="Data format" ctype="Int">
+          <item value="Signed Magnitude" label="Signed magnitude"/>
+          <item value="Offset Binary" label="Offset binary"/>
+        </radiogroup>
+        <etch label="Optional Ports">
+          <checkbox name="has_ber" default="off" evaluate="true" label="Provide bit error rate port" ctype="Int"/>
+          <editbox name="ber_rate" default="20" evaluate="true" label="Number of input samples for error count" ctype="Int"/>
+          <checkbox name="has_norm" default="off" evaluate="true" label="Provide normalization port" ctype="Int"/>
+          <checkbox name="rst" default="off" evaluate="true" label="Provide synchronous reset port" ctype="Int"/>
+          <checkbox name="en" default="off" evaluate="true" label="Provide enable port" ctype="Int"/>
+        </etch>
+      </tab>
+      <tab name="advancedtab" label="Advanced">
+        <checkbox name="puncturing" default="off" evaluate="true" label="Use external puncturing" ctype="Int"/>
+        <checkbox name="best_state" default="off" evaluate="true" label="Use best state" ctype="Int"/>
+        <listbox name="best_state_wr" default="0" evaluate="true" label="Width reduction" ctype="Int">
+          <item value="0"/>
+          <item value="1"/>
+          <item value="2"/>
+          <item value="3"/>
+        </listbox>
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <etch label="Core Parameters">
+          <radiogroup name="architecture" default="Parallel" evaluate="true" label="Architecture type" ctype="Int">
+            <item value="Parallel" label="Parallel"/>
+            <item value="Serial" label="Serial"/>
+          </radiogroup>
+          <radiogroup name="optimization" default="Area" evaluate="true" label="Optimization" ctype="Int">
+            <item value="Area" label="Area"/>
+            <item value="Speed" label="Speed"/>
+          </radiogroup>
+          <checkbox name="red_latency" default="off" evaluate="true" label="Reduce latency" ctype="Int"/>
+          <checkbox name="use_rpm" default="on" evaluate="true" label="Use core placement information"/>
+        </etch>
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <workspacevar name="block_valid" ctype="Int"/>
+    <hiddenvar name="version" default="6" evaluate="true" ctype="Int"/>
+  </blockgui>
+</sysgenblock>

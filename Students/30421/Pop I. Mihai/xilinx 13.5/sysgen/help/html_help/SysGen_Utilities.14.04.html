@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>xlConfigureSolver</title>
+    <link rel="StyleSheet" href="css/SysGen_Utilities.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="SysGen_Utilities.14.01.html#287983">System Generator Utilities</a> : xlConfigureSolver</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="287983">xlConfigureSolver</a></div>
+      <div class="Body"><a name="287984">The xlConfigureSolver function configures the Simulink solver settings of a model to </a>provide optimal performance during System Generator simulation. </div>
+      <div class="Heading2"><a name="287986">Syntax</a></div>
+      <div class="Body"><a name="287987">xlConfigureSolver(&lt;model_handle&gt;); </a></div>
+      <div class="Heading2"><a name="287988">Description</a></div>
+      <div class="Body"><a name="287989">The xlConfigureSolver function configures the model referred to by &lt;model_handle&gt;. </a>&lt;model_handle&gt; maybe a string or numeric handle to a Simulink model. Library models are not supported by this function since they have no simulation solver parameters to configure. </div>
+      <div class="Body"><a name="291779">For optimal performance during System Generator simulation, the following Simulink </a>simulation configuration parameters are set: <br /><span class="Filename">'SolverType' = 'Variable-step' </span><span class="Filename"><br /></span><span class="Filename">'Solver' = 'VariableStepDiscrete' </span><span class="Filename"><br /></span><span class="Filename">'SolverMode' = 'SingleTasking' </span><span class="Filename"><br /></span></div>
+      <div class="Heading2"><a name="288099">Examples</a></div>
+      <div class="Body"><a name="288100">To illustrate how the xlConfigureSolver function works, do the following:</a></div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="288101">Open the following MDL file: </a><span class="Filename">sysgen/examples/chipscope/chip.mdl</span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="288103">Enter the following at the MATLAB command line: </a><span class="Filename">gcs</span><span class="Filename"><br /></span><span class="Filename">ans = chip</span><span class="Filename"><br /></span>this is the Model “string” handle</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="288104">Now enter the following from the MATLAB command line: </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Code"><a name="288294"><br /></a><span class="Filename">&gt;&gt; xlConfigureSolver(gcs)</span><span class="Filename"><br /></span>Set 'SolverType' to 'Variable-step'</div>
+      <div class="Code"><a name="288295">Set 'Solver' to 'VariableStepDiscrete'</a></div>
+      <div class="Code"><a name="288296">Set 'SolverMode' to 'SingleTasking'</a></div>
+      <div class="Code"><a name="288297">Set 'SingleTaskRateTransMsg' to 'None'</a></div>
+      <div class="Code"><a name="288291">Set 'InlineParams' to 'on'</a></div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>xlgetparam and xlsetparam</title>
+    <link rel="StyleSheet" href="css/SysGen_Utilities.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="SysGen_Utilities.14.01.html#274001">System Generator Utilities</a> : xlgetparam and xlsetparam</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="274001">xlgetparam and xlsetparam</a></div>
+      <div class="Body"><a name="274461">Used to get and set parameter values in the </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.105.html#467900', '');" title="System Generator">System Generator</a></span> token. Both functions are similar to the Simulink get_param and set_param commands and should be used for the System Generator token instead of the Simulink functions. </div>
+      <div class="Heading2"><a name="274464">Syntax</a></div>
+      <div class="Code"><a name="274469">[value1, value2, ...] = xlgetparam(sysgenblock, param1, param2, ...)</a></div>
+      <div class="Code"><a name="276933">&nbsp;</a></div>
+      <div class="Code"><a name="274473">xlsetparam(sysgenblock, param1, value1, param2, value2, ...) </a></div>
+      <div class="Heading2"><a name="274478">Description</a></div>
+      <div class="Body"><a name="274483">The </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.105.html#467900', '');" title="System Generator">System Generator</a></span> token differs from other blocks in one significant manner; multiple sets of parameters are stored for an instance of a System Generator token. The different sets of parameters stored correspond to different compilation targets available to the System Generator token. The 'compilation' parameter is the switch used to toggle between different compilation targets stored in the System Generator token. In order to get or set parameters associated with a particular compilation type, it is necessary to first use xlsetparam to change the 'compilation' parameter to the correct compilation target, before getting or setting further values. </div>
+      <div class="Code"><a name="274487">[value1, value2, ...] = xlgetparam(sysgenblock, param1, param2, ...) </a></div>
+      <div class="Body"><a name="274491">The first input argument of </a><span class="Filename">xlgetparam</span> should be a handle to the <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.105.html#467900', '');" title="System Generator">System Generator</a></span> block. Subsequent arguments are taken as names of parameters. The output returned will be an array that matched the number of input parameters. If a requested parameter does not exist, the returned value of <span class="Filename">xlgetparam</span> will be empty. The <span class="Filename">xlgetparams</span> function can be used to get all the parameters for the current compilation target. </div>
+      <div class="Code"><a name="274497">xlsetparam(sysgenblock, param1, value1, param2, value2, ...) </a></div>
+      <div class="Body"><a name="274501">The </a><span class="Filename">xlsetparam</span> function also takes a handle to a System Generator token as the first argument. Subsequent arguments must be provided in pairs, the first should be the parameter name and the second the parameter value. </div>
+      <div class="Heading3"><a name="291727">Specifying the Compilation Parameter</a></div>
+      <div class="Body"><a name="291663">The 'compilation' parameter on the System Generator token captures the compilation type </a>chosen; for example 'HDL Netlist' or 'NGC Netlist'. As previously stated, when a compilation type is changed, the System Generator token will remember all the options chosen for that particular compilation type. For example, when 'HDL Netlist' is chosen, the corresponding target directory could be set to 'hdl_dir', but when 'NGC Netlist' is chosen, the target directory could point to a different location, for example 'ngc_dir'. Changing the compilation type causes the System Generator token to recall previous options made for that compilation type. If the compilation type is selected for the first time, default values will be use to populate the rest of the options on the System Generator Token.</div>
+      <div class="Body"><a name="291673">When using xlsetparam to set the compilation type of a System Generator token, be aware </a>of the above behaviour, since the order in which parameters are set is important; be careful to first set a block's 'compilation' type before setting any other parameters.</div>
+      <div class="Body"><a name="291677">When xlsetparam is used to set the 'compilation' parameter, it must be the only parameter </a>that is being set on that command. For example. the form below is not permitted:</div>
+      <div class="CodeWide"><a name="291680">    xlsetparam(sysgenblock,'compilation','HDL Netlist', 'synthesis_tool', 'XST') </a></div>
+      <div class="Heading2"><a name="274504">Examples</a></div>
+      <div class="Body"><span class="Bold"><a name="274507">Example 1</a></span>: Changing the synthesis tool used for HDL netlist. </div>
+      <div class="Code"><a name="274511">xlsetparam(sysgenblock, 'compilation', 'HDL Netlist'); </a></div>
+      <div class="Code"><a name="274513">xlsetparam(sysgenblock, 'synthesis_tool', 'XST') </a></div>
+      <div class="Body"><a name="274517">The first </a><span class="Filename">xlsetparam</span> is used to set the compilation target to 'HDL Netlist'. The second <span class="Filename">xlsetparam</span> is used to change the synthesis tool used to 'XST'. </div>
+      <div class="Body"><span class="Bold"><a name="274523">Example 2</a></span>: Getting family and part information. </div>
+      <div class="Code"><a name="274527">[fam,part]=xlgetparam(sysgenblock,'xilinxfamily','part') </a></div>
+      <div class="Code"><a name="274531">fam = </a></div>
+      <div class="Code"><a name="274535">Virtex2 </a></div>
+      <div class="Code"><a name="274541">part = </a></div>
+      <div class="Code"><a name="274545">xc2v1000 </a></div>
+      <div class="Heading2"><a name="274548">See Also</a></div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'SysGen_Utilities.14.07.html#278402', '');" title="xlGenerateButton" name="274456">xlGenerateButton</a></span>, <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'SysGen_Utilities.14.09.html#285771', '');" title="xlgetparams">xlgetparams</a></span></div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

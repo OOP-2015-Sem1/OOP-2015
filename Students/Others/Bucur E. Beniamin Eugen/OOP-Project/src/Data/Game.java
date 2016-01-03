@@ -2,9 +2,8 @@ package Data;
 
 import Data.Board;
 import Data.Player;
-import Gui.GameSceneComponents.GameBoard;
-import Gui.GameSceneComponents.RollDice;
-import Gui.GameSceneComponents.Stats;
+import Gui.GameSceneComponents.*;
+import Logic.GameEngine;
 
 import java.io.Serializable;
 import java.util.Collections;
@@ -18,10 +17,13 @@ public class Game implements Serializable{
     List<Player> startingSequence = new LinkedList<>();
     Board board;
     Dice dice;
+    public GameEngine gameEngine;
 
     transient Stats stats;
     transient GameBoard gameBoard;
     transient RollDice rollDice;
+    transient Controls controls;
+    transient EndTurn endTurn;
 
     public Game(List<String> playerNames, List<PlayerColor> colorsUsed) {
         for (int i = 0; i < playerNames.size(); i++) {
@@ -31,6 +33,7 @@ public class Game implements Serializable{
         board = new Board();
         dice = new Dice();
         generateStartingSequence();
+        gameEngine = new GameEngine(this);
     }
 
     private void generateStartingSequence() {
@@ -68,6 +71,10 @@ public class Game implements Serializable{
         return activePlayer;
     }
 
+    public List<Player> getPlayersInTheGame() {
+        return playersInTheGame;
+    }
+
     public Board getBoard(){
         return board;
     }
@@ -83,4 +90,22 @@ public class Game implements Serializable{
     public void setRollDice(RollDice rollDice) {
         this.rollDice = rollDice;
     }
+
+    public EndTurn getEndTurn() {
+        return endTurn;
+    }
+
+    public void setEndTurn(EndTurn endTurn) {
+        this.endTurn = endTurn;
+    }
+
+    public Controls getControls() {
+        return controls;
+    }
+
+    public void setControls(Controls controls) {
+        this.controls = controls;
+    }
+
+
 }

@@ -1,0 +1,33 @@
+<html>
+<body>
+<h3><font size=+1 color="#990000">2D DWT filter</font></h3>
+<p>
+The test bench for this wavelet design consists of a processor (built with the
+Xilinx Blockset for implementation in a Spartan-II
+FPGA) and behavioral models for a pair of external, dual-port memories.  The two
+memories are initialized with the pixel values
+of a grayscale image.  The pixels from the initial image are interleaved into
+the two banks in a column first indexing strategy.
+If the image contained a checkerboard of black and white pixels, then all of the
+black pixels will end up in the one bank, and all of 
+the white pixels in the other.  The processor includes a memory controller that
+schedules the reads and writes to memory, and
+an image processing filter kernel that computes the 2D DWT decomposition of the
+image.  The processor has been configured
+to compute two levels of decomposition on a 64 x 64 pixel image. The computation
+is done "in place" in the single image memory
+space, and the initial pixel ordering is preserved throughout.
+</p>
+<p>
+The design occupies 348 LUTs (22%), 478 flip-flops (31%), and 317 slices (41%) 
+of an xc2s50-5 and runs at 160.26 MHz (processing 320 MPixels per second) in an 
+xc2s50-5, a low-cost, high-volume, Spartan-II device. 
+(Device speed data version: PRODUCTION 1.27 2005-11-04, ISE 8.1i software, 
+VHDL synthesized with XST).
+</p>
+<p>
+A full color version of the design would easily fit in the same part as only the
+DWT datapath would require replication (the memory control could remain unchanged).
+</p>
+</body>
+</html> 

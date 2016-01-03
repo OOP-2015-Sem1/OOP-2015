@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>MicroBlaze Processor</title>
+    <link rel="StyleSheet" href="css/Xilinx_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Blockset.11.1.html#902340">Xilinx Blockset</a> : MicroBlaze Processor</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="902340">MicroBlaze Processor</a></div>
+      <div class="OneLiner"><a name="409437">This block is now obsolete. Please use the EDK Processor block instead.</a></div>
+      <div class="Body"><a name="276439"><img class="Default" src="images/Xilinx_Blockset.11.58.1.jpg" width="101" height="154" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" />The Xilinx MicroBlaze™ Processor block provides a way to design and </a>simulate peripherals created to target the EDK MicroBlaze Processor. As shown in the figure below, you can connect customized IP to the MicroBlaze processor via Fast Simplex Links (FSLs) that are available on the processor. FSLs can be thought of as unidirectional FIFOs. The MicroBlaze processor can include a maximum of eight input and eight output FSLs (a total of 16). Both synchronous and asynchronous FIFOs can be used; users can create System Generator peripherals that run synchronously or asynchronously to the MicroBlaze processor. As depicted in the figure below, instancing of the FSL FIFOs is left to the <span class="URL"><a href="http://www.xilinx.com/ise/embedded/edk_pstudio.htm" target="external_window">EDK tool</a></span> (Embedded Development Kit). Simulation of such systems may be done via hardware co-simulation. Creation, management and configuration of the simulation model is accessed via the block parameter mask and will be explained in further detail in the following text. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="612812"><img class="Default" src="images/Xilinx_Blockset.11.58.2.jpg" width="406" height="183" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="612819">Block Interface</a></div>
+      <div class="Body"><a name="612822">In the following discussion, the symbol # represents a number from 0 to 7. The block has a </a>user-configurable number of input and output interfaces. For each input interface, 4 ports are created: 3 input ports (<span class="Filename">In#_data</span>, <span class="Filename">In#_control</span> and <span class="Filename">In#_write</span>) and 1 output port (<span class="Filename">In#_full</span>). Similarly, 4 ports are also created for each output interface: 1 input port (<span class="Filename">Out#_read</span>) and 3 output ports (<span class="Filename">Out#_data</span>, <span class="Filename">Out#_control</span> and <span class="Filename">Out#_exists</span>). A maximum of 8 input and 8 output interfaces are supported. An optional <span class="Filename">Rst</span> port is made available on selecting the <span class="Bold">Provide Reset Port</span> option. Note that the Rst port will appear as an output port on the MicroBlaze™ Processor block. This port can be connected to any of the asynchronous reset ports/pins on the MicroBlaze processor (from the EDK environment), and provides a way for the MicroBlaze to reset any connected System Generator designs. </div>
+      <div class="Heading3"><a name="612816">Port Descriptions</a></div>
+      <div class="Body"><a name="617165">Descriptions of the ports are available in the table below.</a></div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 380.1583pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 71.2795pt;">
+            <div class="CellHeadingLeft"><a name="614559">Port Name</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 43.5596pt;">
+            <div class="CellHeadingLeft"><a name="614561">Port </a>Type</div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 35.6397pt;">
+            <div class="CellHeadingLeft"><a name="614563">Port </a>Width (Bits)</div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 150.4795pt;">
+            <div class="CellHeadingLeft"><a name="614895">Port Description</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 79.2pt;">
+            <div class="CellHeadingLeft"><a name="614897">FSL Connection</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614565">In#)data</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614567">Input</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="614569">32</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614899">Data to be written to the FSL FIFO</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;" rowspan="4">
+            <div class="CellBodyCenterMid"><a name="614901">Masters the FSL </a>connection, i.e. writing to the FSL FIFO.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614571">In#_control</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614573">Input</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="614575">1</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614903">Flag bit. High indicates that data </a>written onto the FIFO is a control word</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614967">In#_write</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614969">Input</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="614971">1</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614973">High enables writing to an FSL </a>FIFO on which the EDK MicroBlaze <span style="font-size: 10.0pt;">processor </span>is connected as a Slave Peripheral</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614957">In#_full</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614959">Output</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="614961">1</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614963">High indicates that the FSL FIFO </a>is full</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614947">Out#_data</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614949">Output</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="614951">32</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614953">Data read from the FSL FIFO</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;" rowspan="4">
+            <div class="CellBodyCenterMid"><a name="614955">Slave to the FSL </a>connection, i.e. reading from the FSL FIFO.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614937">Out#_control</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614939">Output</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="614941">1</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614943">Flag bit. High indicates that data </a>read from the FIFO is a control word</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614927">Out#_read</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614929">Input</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="614931">1</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614933">High enables reading from an FSL </a>FIFO on which the EDK MicroBlaze <span style="font-size: 10.0pt;">processor </span>is connected as a Master Peripheral</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614917">Out#exists</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614919">Output</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="614921">1</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614923">High indicates that the FIFO is </a>non-empty.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614907">Rst</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614909">Output</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle;">
+            <div class="CellBodyCenterMid"><a name="614911">1</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614913">Indicates the state of an </a>asynchronous Reset port/pin</div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="614915">N/A</a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="613143">The timing relationship between the various signals on the ports for successful read and </a>write operations are depicted in timing diagrams that follow.</div>
+      <div class="Heading3"><a name="617178">Write Operations</a></div>
+      <div class="Body"><a name="617193">As shown in the timing diagram for a Write operation below, if In#_full is low and </a>In#_write is driven high, the value of In#_data is written into the FIFO. The In#_full signal is high when the FIFO is full, writes to the FIFO when In#_full is high will be ignored. In# ports Masters the FSL that it connects to, and must be configured as a Master peripheral in the EDK project.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="615070"><img class="Default" src="images/Xilinx_Blockset.11.58.3.jpg" width="522" height="177" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="617186">Read Operations</a></div>
+      <div class="Body"><a name="617227">As shown in the timing diagram for a Read operation below, setting Out#_read to high </a>when Out#_exists is also high, causes the first data item in the FIFO to be read. The data read is available on the Out#_data port. The Out#_exists signal goes low when the FIFO is empty. Reading from an empty FIFO returns an undefined value. Out# ports are Slaves to the FSL that it connects to, and must be configured as a Slave peripheral in the EDK project</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="617134"><img class="Default" src="images/Xilinx_Blockset.11.58.4.jpg" width="522" height="185" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="617087">After designing the FSL peripherals in System Generator, the model must be exported to </a>the EDK environment using the EDK Export Tool. System Generator, in addition to VHDL source code, generates a Microprocessor Peripheral Definition (MPD) file, a Peripheral Analyze Order (PAO) file and a Black Box Definition (BBD) file for this block. Refer to the <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Compilation_Types.10.5.html#279433', '');" title="EDK Export Tool">EDK Export Tool</a></span>  for more information. </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="617091">The mapping of In# and Out# to FSLs is completely controlled by the user from within the </a>EDK environment. That is, In0 will not necessarily be connected to SFSL0, Out0 will not necessarily be connected to MSFL0 and so on. </div>
+      <div class="Heading2"><a name="616781">Block Parameters </a></div>
+      <div class="Body"><a name="617555">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model.</div>
+      <div class="Heading3"><a name="617573">General tab</a></div>
+      <div class="Body"><a name="617574">The General tab contains parameters that customizes the MicroBlaze™ Processor, and </a>enables the hardware co-simulation feature of the block.</div>
+      <div class="Body"><a name="617575">Parameters specific to the General tab are as follows:</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="617587">Number of Input Interfaces</a></span>: Determines the number of System Generator to MicroBlaze FSL interfaces. The block interface is appropriately configured with a number of input and output ports. The number of input interfaces must be less than or equal to 8. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="617589">Number of Output Interfaces</a></span>: Determines the number of MicroBlaze to System Generator FSL interfaces. The block interface is appropriately configured with a number of input and output ports. The number of output interfaces must be less than or equal to 8. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="617591">Provide Reset Port</a></span>: Adds an output port "Rst" on the block interface. This provides a way for you to allow the System Generator design to be reset by the MicroBlaze processor. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="617241">Provide Processor Model</a></span>: Enables the hardware co-simulation feature of the MicroBlaze. Selecting the Provide Processor Model checkbox will enable the Hardware and Software tabs</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading3"><a name="617627">Hardware tab</a></div>
+      <div class="Body"><a name="617628">The General tab contains parameters that customizes the MicroBlaze Processor, and </a>enables the hardware co-simulation feature of the block.</div>
+      <div class="Body"><a name="617629">Parameters specific to the Hardware tab are as follows:</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="617650">Simulation Model</a></span>: The System Generator processor core cache will be empty when the block is first used, so no simulation models will be available in the 'Simulation Model' pull down menu. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body2"><a name="617651">A simulation model must be tied to a hardware platform (board) so that the </a>MicroBlaze processor is aware of board specific information, such as whether a RS232 port is available. If a simulation model is present in the core cache, it will be listed in the 'Simulation Model' pull down menu under its compilation target (board) name, e.g. companyxyz_boardnm_partnm_packagenum_rev_1. </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="617653">Add Simulation Model</a></span>: Clicking on the <span class="Bold">Add Simulation Model</span> button causes the 'Hardware Co-Simulation Targets' dialog box to appear. This allows a compilation target to be specified. (Refer tp the topic <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Compilation_Types.10.1.html#205969', '');" title="System Generator Compilation Types">System Generator Compilation Types</a></span>  for more information.) Clicking the <span class="Bold">Generate</span> button sets in motion the following series of compilations that may take sometime to complete:</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedSub_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedSub_inner" style="width: 18pt; white-space: nowrap;">a.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedSub_inner"><a name="617654">An EDK project is created in the Target Directory specified in the System </a>Generator token block. (XPS)</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedSubCont_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedSubCont_inner" style="width: 18pt; white-space: nowrap;">b.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedSubCont_inner"><a name="617655">The EDK project is netlisted. (EDK+XFlow)</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedSubCont_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedSubCont_inner" style="width: 18pt; white-space: nowrap;">c.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedSubCont_inner"><a name="617656">A hardware co-simulation token is created out of the EDK netlists, and saved in </a>the System Generator core cache. (System Generator, XFlow)</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedSubCont_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedSubCont_inner" style="width: 18pt; white-space: nowrap;">d.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedSubCont_inner"><a name="617657">EDK software libraries are compiled. (EDK) </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="617661">When you create a new board support package (topic </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_CoSim.8.14.html#315382', '');" title="Supporting New Boards through JTAG Hardware Co-Simulation">Supporting New Boards</a></span> ), it is important to specify the board's system Reset and RS232 ports as non-memory mapped ports, otherwise they will not be correctly routed. Further, the port name for the reset port should be labeled as 'Reset', the port name for the receive port of the RS232 port should be labeled as 'RXD' and the transmit port should be labeled as 'TXD'. Labeling these ports in this manner allows System Generator to correctly detect and route the signals to the relevant pins. </div>
+      <div class="Body"><a name="617665">If a RS232 port is available, a UART with the following parameters is created in the </a>MicroBlaze processor: </div>
+      <div class="Body"><a name="617625">Baud rate (bits per second): 115200, Data bits: 8, Parity: None, Stop bits: 1, Flow control: </a>none. The stdin and stdout channels will be mapped to the UART, allowing for input and output via the RS232</div>
+      <div class="Heading3"><a name="618030">Software tab</a></div>
+      <div class="Body"><a name="618043">The Software Tab provides buttons to edit and compile the source code that will execute in </a>the simulation model. </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="618394">Edit Source Code</a></span>: Clicking on the <span class="Bold">Edit Source Code</span> button will bring up the source code associated with this MicroBlaze block. This code is used only by the simulation model. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="618400"><img class="Default" src="images/Xilinx_Blockset.11.58.5.jpg" width="522" height="181" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body2"><a name="619796">The figure above shows the directory structure created by System Generator. In this </a>case, <span class="Bold">MBPingPongRAM</span> is the name of the Simulink model and <span class="Bold">netlist</span> is the user specified Target Directory. The EDK project is generated under a directory created by appending the model name to the MicroBlaze's full path. The source code associated with the block is kept in the highlighted directory; SGTestApp, and is called MainProg.c.</div>
+      <div class="Body2"><a name="619798">The default MATLAB editor is used to edit the source file. This is a user configurable </a>option in MATLAB and can be edited from the MATLAB menu bar: <span class="Bold">File &gt; Preferences</span>, under the <span class="Bold">Editor/Debugger</span> section. </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="619802">Compile Source Code</a></span>: Clicking on 'Compile Source Code' compiled the source code and updates the hardware co-simulation bit file with the binary code created. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="619807">MicroBlaze Software Issues</a></div>
+      <div class="Heading3"><a name="619811">Accessing FSL Peripherals from Software</a></div>
+      <div class="Body"><a name="618401">System Generator peripherals can be accessed by the MicroBlaze™ processor through </a>assembly instructions that access the relevant FSLs. The EDK provides eight C macros that simplifies read and writes to FSLs. Please refer to the <span class="URL"><a href="http://www.xilinx.com/ise/embedded/edk_docs.htm" target="external_window">EDK documentation</a></span> for more details.</div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 190.0771pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 190.0771pt;">
+            <div class="CellHeadingLeft"><a name="622368">Non-Blocking Data Read and Write</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="622370">microblaze_nbread_datafsl(val,id);</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="622372">microblaze_nbwrite_datafsl(val,id);</a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="623830">&nbsp;</a></div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 190.0771pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 190.0771pt;">
+            <div class="CellHeadingLeft"><a name="623825">Non-Blocking Control Read and Write</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="623827">microblaze_nbread_cntlfsl(val,id);</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="623829">microblaze_nbwrite_cntlfsl(val,id);</a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="623842">&nbsp;</a></div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 190.0771pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 190.0771pt;">
+            <div class="CellHeadingLeft"><a name="623837">Blocking Data Read and Write</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="623839">microblaze_bread_datafsl(val,id);</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="623841">microblaze_bwrite_datafsl(val,id);</a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="624152">&nbsp;</a></div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 190.0771pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 190.0771pt;">
+            <div class="CellHeadingLeft"><a name="624147">Blocking Control Read and write</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="624149">microblaze_bread_cntlfsl(val,id);</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top;">
+            <div class="CellBody"><a name="624151">microblaze_bwrite_cntlfsl(val,id);</a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="621843">In the macro calls shown above, val refers to the 32-bit data value that will be read or </a>written to the FSL. The id parameter refers to the FSL being accessed. Blocking read or write will stall the MicroBlaze processor until a read or write can occur. Non-blocking read or writes will not stall the MicroBlaze even if a read or write was unable to complete. A data write will write val to the FSL's data port and a 0 (zero) to the FSL's control port. A control write will write val to the FSL's data port and a 1 (one) to the FSL's control port. Please refer to the <span class="URL"><a href="http://www.xilinx.com/ise/embedded/edk_docs.htm" target="external_window">EDK MicroBlaze documentation</a></span> and the following System Generator tutorials for more information: </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_SW_CoDesign.7.5.html#272906', '');" title="Designing with Embedded Processors and Microcontrollers" name="621847">Designing and Exporting MicroBlaze Processor Peripherals</a></span> </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_SW_CoDesign.7.5.html#270769', '');" title="Designing with Embedded Processors and Microcontrollers" name="621849">Tutorial Example - Designing and Simulating MicroBlaze Processor Systems</a></span> </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading3"><a name="621855">Correspondence Between EDK FSL Buses and System Generator Ports </a></div>
+      <div class="Body"><a name="621859">It is important to understand the difference between FSL instances and FSL bus </a>connections in the EDK. The MicroBlaze processor contains sixteen bus connections that can connect to FSLs (or any peripheral that mimics the FSL interface). Eight of these bus connections are inputs and are called SFSL (for Slave FSL) in the EDK. The other eight bus connections are outputs and are called MFSL (for Master FSL) in the EDK. FSL instances refer to the physical implementation of the FIFO hardware which makes up an FSL. </div>
+      <div class="Body"><a name="621541">In the EDK, the SFSL and MFSL bus connection numbers are independent to FSL instances. </a>In other words, SFSL0 need not be connect to instance 0 of an FSL and similarly MFSL1 need not be connected to instance 1 of an FSL. This means that in a System Generator block, port In0_* need not be connected to SFSL0. The consequence of this is that a user has to be aware of the FSL connectivity to write correct software code. The assumption that a <span class="Filename">microblaze_nbwrite_datafsl</span> instruction to FSL0 will output data to System Generator in Out0_*, is not necessarily correct. </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="624241"><img class="Default" src="images/Xilinx_Blockset.11.58.6.jpg" width="522" height="150" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="624251">The access functions provided by the EDK for accessing FSLs, refer to FSL bus connections </a>and not FSL instances. The figure above shows a System Generator MicroBlaze block, with a MicroBlaze that has been manually configured (the inner box). The MicroBlaze processor that the System Generator block represents is also shown (the outer box). Here In0 is connected to bus connection SFSL2 and In1 to SFSL3. </div>
+      <div class="Body"><a name="624255">In the case shown above, software code written to access data from In0 should access </a>SFSL2. A non-blocking data read from In0 would thus be: </div>
+      <div class="Code"><a name="624259">int val; </a></div>
+      <div class="Code"><a name="624261">microblaze_nbread_datafsl(val,2); </a></div>
+      <div class="Body"><a name="624265">Similarly a non-block write to Out0 would be: </a></div>
+      <div class="Code"><a name="624269">microblaze_nbwrite_datafsl(val,0); </a></div>
+      <div class="Heading3"><a name="624275">Reading and Writing to FSLs During Simulation </a></div>
+      <div class="Body"><a name="624279">Normally, when exporting to the EDK, it is your responsibility to wire up bus connections. </a>During simulation, System Generator provides a pre-configured MicroBlaze; In 0-7 is connected to SFSL 0-7, Out 0-7 is connected to MFSL 0-7. </div>
+      <div class="Body"><a name="624283">During simulation, reading from FSL id 0, corresponds to reading from In0. Writing to FSL </a>id 0 corresponds to writing to Out0. </div>
+      <div class="Heading3"><a name="624288">FSL Read and Write Errors</a></div>
+      <div class="Body"><a name="624293">The MicroBlaze EDK documentation uses the big-endian naming convention to label </a>buses. To be consistent with that document, the following discussions will also use the big-endian naming convention; bit 0 corresponds to the most significant bit. </div>
+      <div class="Body"><a name="624297">The MicroBlaze Status Register (MSR) stores status conditions in the MicroBlaze processor </a>and can be used to determine if errors have occurred. </div>
+      <div class="Heading4"><a name="624303">Reading the MSR Register for Error Condition </a></div>
+      <div class="Body"><a name="624307">Errors that occur during FSL read and write operations are returned to the MicroBlaze </a>MSR register. The MSR register can be read using the mfs MicroBlaze assembly instruction. It is recommended that the following macro be used to read the MSR register. </div>
+      <div class="Code"><a name="624311">#define readmsr(val, dep) asm("mfs %0,rmsr" : "=d" (##val##) : "d" </a>(dep)) </div>
+      <div class="Body"><a name="624315">Define the macro at the top of your C program and use it in the following manner: </a></div>
+      <div class="Code"><a name="624319">int val, mymsr; </a></div>
+      <div class="Code"><a name="624321">microblaze_nbread_cntlfsl(val,0); </a></div>
+      <div class="Code"><a name="624323">readmsr(mymsr,val); </a></div>
+      <div class="Body"><a name="624327">The macro establishes dependence between the writing of the </a><span class="Filename">val</span> register and the reading of the MSR register. This is especially important when used within a loop; if a dependency is not created, the compiler may move the <span class="Filename">mfs</span> instruction out of the loop, when it performs software code optimizations. </div>
+      <div class="Heading4"><a name="624333">FSL Read Errors </a></div>
+      <div class="Body"><a name="624337">Reads from FSLs can fail in two possible ways: </a><span class="Italic">data invalid and FSL error</span>. A <span class="Italic">data invalid</span> occurs when a blocking or non-blocking read fails because there is no data in the FSL. An <span class="Italic">FSL error</span> occurs when a blocking or non-blocking control read is used to read a data value that does not have the control flag set to one. Similarly, an <span class="Italic">FSL error</span> also occurs when a blocking or non-blocking data read is used to read a data value that has the control flag set to one. </div>
+      <div class="Body"><a name="624341">When a </a><span class="Italic">data invalid</span> error occurs, the MSR's carry flag is set high. The mask for the carry flag is 0x4 and corresponds to bit 29. The carry flag is also replicated on the most significant bit (bit 0) of the MSR register. </div>
+      <div class="Body"><a name="624345">When an </a><span class="Italic">FSL error</span> occurs, the FSL flag is set high. The mask for the FSL flag is 0x10 and corresponds to bit 27. </div>
+      <div class="Heading4"><a name="624351">FSL Write Errors </a></div>
+      <div class="Body"><a name="624355">Writes to FSLs fail if the FSL being written is full. Both blocking and non-blocking writes </a>return a <span class="Italic">data invalid</span> error when attempts to write to a full FSL are detected. </div>
+      <div class="Body"><a name="624359">When a </a><span class="Italic">data invalid</span> error occurs, the MSR's carry flag is set high. The mask for the carry flag is 0x4 and corresponds to bit 29. The carry flag is also replicated on the most significant bit (bit 0) of the MSR register. </div>
+      <div class="Heading2"><a name="624362">Known Issues</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="624365">Only one MicroBlaze block per design is supported. However, it is possible to connect </a>multiple MicroBlaze blocks to the created FSL interfaces from the EDK side. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="1065079">The MicroBlaze must be instantiated on the top level when exporting to EDK. When </a>using hardware co-simulation model, it is important to guard FSL reads and writes and check for error conditions. When simulation starts, the MicroBlaze program will execute in hardware and may read or write from FSLs before the System Generator model has a chance to execute. Refer to the topics <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_SW_CoDesign.7.5.html#270769', '');" title="Designing with Embedded Processors and Microcontrollers">Tutorial Example - Designing and Simulating MicroBlaze Processor Systems</a></span>  and <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Compilation_Types.10.5.html#279433', '');" title="EDK Export Tool">EDK Export Tool</a></span>  for a full explanation. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="624369">Verilog netlisting is not supported for this block. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="624374">Online Documentation for the MicroBlaze Processor</a></div>
+      <div class="Body"><a name="624377">More information for the MicroBlaze™ can be found at </a></div>
+      <div class="Body" style="color: #0000ff; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: normal; text-transform: none; vertical-align: baseline;"><span class="URL"><a href="http://www.xilinx.com/technology/embedded.htm" target="external_window" name="624379">http://www.xilinx.com/technology/embedded.htm</a></span></div>
+      <div class="Heading2"><a name="624382">See Also</a></div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_SW_CoDesign.7.5.html#272906', '');" title="Designing with Embedded Processors and Microcontrollers" name="624247">Designing and Exporting MicroBlaze Processor Peripherals</a></span> </div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'HW_SW_CoDesign.7.5.html#270769', '');" title="Designing with Embedded Processors and Microcontrollers" name="628222">Tutorial Example - Designing and Simulating MicroBlaze Processor Systems</a></span> </div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Compilation_Types.10.5.html#279433', '');" title="EDK Export Tool" name="628224">EDK Export Tool</a></span> </div>
+      <div class="Body"><a name="628196">&nbsp;</a></div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

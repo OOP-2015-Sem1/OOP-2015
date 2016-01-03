@@ -1,0 +1,170 @@
+;
+; This code is compiled from the Matlab prompt
+; by running the picoblaze assembler as shown below.
+; >> xlpb_as -v pattern_gen.psm
+;
+; The assembler creates Matlab code fill_pattern_gen_program_store.m
+; which populates the ROM block with the instructions for Picoblaze block.
+
+; This code is designed to run with a memory controller although using it without
+; a board is possible.  The port_id output port is used by the external logic to identify
+; what type of data is being written to the out_port output port.  The settings are:
+;  port_id == FB => address
+;  port_id == FF => reserved
+;  port_id == FE => Blue 
+;  port_id == FD => Green 
+;  port_id == FC => Red
+;  port_id == 2  => next row
+;  port_id == FA => Done with color
+
+; This program is written to assume a 1024x786 size monitor.  The data burst size is 16 32-bit data words.
+; Each 32-bit word represents an unpacked pixel, where bits [23:16] are the 8-bit red value, 
+; and bits [15:8] and [7:0]are green and blue, respectively.  
+
+; These internal registers are reserved for the following uses:
+; register s5 contains burst count
+; register s1 contains address
+; register s8 contains counter for block 8 pattern address
+; register s7 contains input data on which row (row/4)
+
+CONSTANT RED_LOC, 08 	;   store intensity of RED in this memory location
+CONSTANT BLUE_LOC, 07 	;
+CONSTANT GREEN_LOC, 06	;
+
+
+start:	CALL reset_screen
+	LOAD s7, 00  ; start on row 0
+	LOAD s2, 0F
+	LOAD s5, 04
+	LOAD sF, 00
+	LOAD s8, 00
+
+start1:	
+; write out each color value sequentially
+; use external logic to build the data word
+	CALL write_red
+	CALL write_blue
+	CALL write_green
+	CALL color_done
+	CALL burst_over
+
+	JUMP start1
+
+; --------------------- End Main routine ---------------------
+
+write_red:
+	FETCH sF, RED_LOC
+	LOAD s7, 04
+	AND s7, s8
+	JUMP NZ, red_on
+	LOAD s7, 00
+	OUTPUT s7, FC
+	;OUTPUT sF, FC
+	ADD sF, 01
+	STORE sF, RED_LOC
+	JUMP end_red
+red_on:
+	LOAD sD, FF
+	OUTPUT sD, FC		; RED output PORT
+end_red:
+	RETURN
+
+write_blue:
+	FETCH sF, BLUE_LOC	; get blue value from memory
+	LOAD s7, 02
+	AND s7, s8
+	JUMP NZ, blue_on
+	LOAD s7, 00
+	OUTPUT s7, FE
+	ADD sF, 01
+	STORE sF, BLUE_LOC
+	JUMP end_blue
+blue_on:
+	LOAD sD, FF
+	OUTPUT sD, FE		; BLUE value port
+end_blue:
+	RETURN
+	
+write_green:
+	FETCH sF, GREEN_LOC	; get red value from memory
+	LOAD s7, 01
+	AND s7, s8
+	JUMP NZ, green_on
+	LOAD s7, 00
+	OUTPUT s7, FD
+	ADD sF, 01
+	STORE sF, GREEN_LOC
+	JUMP end_green
+green_on:
+	LOAD sD, FF
+	OUTPUT sD, FD
+	LOAD sD, 00
+end_green:
+	RETURN
+
+; burst length of 16 (e.g. 16 pixels are the same color)
+; write 16 data_we's when color is done
+
+color_done:
+	LOAD s7, 00
+	ADD s8, 01
+data_we:	
+	LOAD sF, 00
+	OUTPUT sF, FB 
+	ADD s7, 01
+	COMPARE s7, 10		; modify this line if using a different burst size
+	JUMP NZ, data_we
+no_reload:	
+	RETURN
+
+; after writing the data write enables, write an address 
+; which will tell the memory controller where to start
+; writing the pixels to the screen
+; Address is on a pixel by pixel basis so it increases by 16
+; after each data write series
+burst_over:
+	CALL write_address
+	RETURN 
+
+write_address:
+	OUTPUT s1,  FA  	; address goes out on port FA which triggers addr_we
+	ADD s1, 01
+	COMPARE s1, 40		; compare to 64 (i.e. 16*61=1024 is the end of the row)
+	JUMP Z, next_row
+	RETURN
+
+; to make a striped pattern clear out the memory values for each color and start again
+; with the new row.  Modify the code here if what a different pattern
+
+next_row:
+	OUTPUT s1, 02
+	LOAD s1, 00
+	LOAD s8, 00
+	LOAD s7, 00
+	STORE s1, BLUE_LOC
+	STORE s1, RED_LOC
+	STORE s1, GREEN_LOC
+	RETURN
+
+which_row:
+	INPUT s7, 00
+	RETURN
+
+reset_screen:
+	DISABLE INTERRUPT
+	OUTPUT s0, FF		; red port
+	OUTPUT s0, FE 		; blue port
+	OUTPUT s0, FD 		; green port
+	ENABLE INTERRUPT
+	RETURN
+
+; do nothing after having written the entire pattern 
+int_routine:
+	LOAD s0, 00
+done:
+	OUTPUT s0, 00
+	JUMP done
+
+
+ADDRESS 3FF ; set interrupt vector
+	JUMP int_routine

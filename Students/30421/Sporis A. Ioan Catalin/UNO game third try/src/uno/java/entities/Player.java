@@ -8,15 +8,15 @@ import uno.java.GUI.PlayerCardsPanel;
 import uno.java.constants.Constants;
 
 public class Player {
-	
+
 	private String Nickname;
 	private int nrOfCards;
 	private boolean isTurn = false;
 	private ArrayList<Card> hand = new ArrayList<Card>();
-	
+
 	private ImageIcon avatar = new ImageIcon();
 	public PlayerCardsPanel playerCardsPanel;
-	
+
 	public boolean isTurn() {
 		return isTurn;
 	}
@@ -48,18 +48,21 @@ public class Player {
 	public void setAvatar(ImageIcon avatar) {
 		this.avatar = avatar;
 	}
-	
-	public void setFirstHand(ArrayList<Card> hand){
+
+	public void setFirstHand(ArrayList<Card> hand) {
 		this.hand.addAll(hand);
 		this.nrOfCards = Constants.FIRST_HAND;
 	}
-	public ArrayList<Card> getHand(){
+
+	public ArrayList<Card> getHand() {
 		return this.hand;
 	}
-	public void drawCard(Card card){
+
+	public void drawCard(Card card) {
 		this.hand.add(card);
 	}
-	public Card removeCard(Card card){
+
+	public Card removeCard(Card card) {
 		this.hand.remove(card);
 		return card;
 	}

@@ -12,9 +12,10 @@ import gui.Snake;
 
 public class KeyController implements KeyListener {
 
-	private Snake snake = new Snake();
+	Snake snake = new Snake();
 
 	public void keyPressed(KeyEvent e) {
+
 		int key = e.getKeyCode();
 
 		if (key == KeyEvent.VK_RIGHT) {
@@ -29,7 +30,6 @@ public class KeyController implements KeyListener {
 		} else if (key == KeyEvent.VK_DOWN) {
 			snake.moveSnake(DOWN);
 		}
-
 	}
 
 	@Override
@@ -44,4 +44,5 @@ public class KeyController implements KeyListener {
 
 	}
 
+	
 }

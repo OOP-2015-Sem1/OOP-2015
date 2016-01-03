@@ -1,0 +1,116 @@
+###########################################################################
+#                                                                                                  
+#         Configuration and Netlisting of the Core
+#                                                                                                  
+###########################################################################                        
+# Add this core to the IP model
+
+#Calling IPModel
+
+###########################################################################
+#
+#           Include all the IP/Coregen Related Globals
+#
+###########################################################################
+variable simParameters                                                                             
+variable preferences
+
+###########################################################################
+#
+#            Setting up the IP Preamble
+#
+###########################################################################
+set ipkey [lindex [file split [file dirname [file dirname [info script]]]] end]
+set ipDir [file dirname [file dirname [info script]]]
+set ipGuiDir [file join $ipDir gui]
+set ipUtil [file join $ipGuiDir ${ipkey}_util.tcl]
+source $ipUtil
+
+message DEBUG " -- IP related variables initialized  --"
+
+###########################################################################
+#
+#             Setting up the SysGen Preamble                               
+#
+###########################################################################
+set sysgenbuild [GetSysgenInstallDir]
+set sysgen_coregen_util_dir [file join $sysgenbuild sysgen coregen util]
+set sysgen_coregen_model_util_tcl [file join $sysgen_coregen_util_dir sysgen_coregen_model_util.tcl]
+source $sysgen_coregen_model_util_tcl
+message DEBUG " -- SysGen Scripts Loaded --"
+
+###########################################################################
+#
+#             Setup SysGen Environment For Netlisting
+#
+###########################################################################
+set env_settings [list]
+# Execute the sysgen_environment script
+sysgen_environment
+message DEBUG " -- System Environment Updated --"
+
+
+###########################################################################
+#
+#             Collect Generation Settings
+#
+###########################################################################
+set platform_dir [::xilinx::dsptool::getPlatformTag]
+set ipLibDir [file join [file join $ipDir lib] $platform_dir]
+setGenerationSettings env_settings $ipLibDir $ipDir
+message DEBUG " -- Generation Settings Collected --"
+
+###########################################################################
+#
+#               Collect Port Information
+#
+############################################################################
+set core_ports [list]
+set ipcore_setenv ${ipkey}_setenv
+set ipcore_setenv_tcl [file join [file join $ipDir gui] ${ipcore_setenv}.tcl]
+source $ipcore_setenv_tcl
+$ipcore_setenv env_settings core_ports $ipLibDir
+message DEBUG " -- Port information collected successfully -- "
+
+###########################################################################
+#
+#                Display core parameters                                   
+#
+###########################################################################
+set core_parameters [list]
+foreach {generic value} [array get simParameters] {
+    lappend core_parameters [list $generic $value]
+    message DEBUG "Parameter $generic = $value\n \n"
+}
+
+###########################################################################
+#
+#                Generate Netlist
+#
+###########################################################################
+message DEBUG " -- Calling SysGen Generation Flow -- "
+callSysgenGeneration $env_settings $core_parameters $core_ports
+
+###########################################################################
+#
+#                 Setup NGC wrapper flow
+#
+###########################################################################
+set ComponentName $simParameters(component_name)                                                   
+set coreName ${ComponentName}_cw                                                                   
+addCore $coreName                                                                                  
+                                                                                                   
+set TopLevel "root"                                                                              
+addTopLevel $coreName $TopLevel                                                                    
+addPort $coreName $TopLevel "clk"  "in" "NET" {DEFAULT}                                      
+addPort $coreName $TopLevel "ce"  "in" "NET" {DEFAULT}                                       
+                                                                                                   
+########################################################################### 
+#
+#                 Port specification for ngcbuild
+#
+###########################################################################
+set sysgenNetlistDir [getSysgenTargetDir]
+set port_interface_tcl [file join $sysgenNetlistDir ${ComponentName}_port_interface.tcl]
+source $port_interface_tcl
+message DEBUG "-- Created port interface for NGC build --"

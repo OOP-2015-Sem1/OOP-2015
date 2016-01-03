@@ -1,0 +1,234 @@
+#
+# Filename:    virtex4_vsk.ucf
+#
+# Description: Defines the clock input pin, clock speed, and
+#              non-memory mapped ports for the Virtex4 VSK.
+#
+
+NET  "sys_clk"                LOC = AE14;
+NET  "sys_clk"                PERIOD = 100 MHz HIGH 50%;
+NET  "sys_clk"                IOSTANDARD = LVCMOS33;
+
+NET  "reset_n"                LOC = D6;               # reset_n contingent
+NET  "reset_n"                IOSTANDARD = LVCMOS25;  # reset_n contingent
+NET  "reset_n"                PULLUP;                 # reset_n contingent
+NET  "reset_n"                TIG;                    # reset_n contingent
+
+# RS232 UART
+NET  "uart_rxd"               LOC = W2;               # uart_rxd contingent
+NET  "uart_rxd"               IOSTANDARD = LVCMOS33;  # uart_rxd contingent
+
+NET  "uart_txd"               LOC = W1;               # uart_txd contingent
+NET  "uart_txd"               IOSTANDARD = LVCMOS33;  # uart_txd contingent
+
+# GPIO 4-bit LEDs
+NET  "leds(0)"                LOC = G5;               # leds contingent
+NET  "leds(1)"                LOC = G6;               # leds contingent
+NET  "leds(2)"                LOC = A11;              # leds contingent
+NET  "leds(3)"                LOC = A12;              # leds contingent
+NET  "leds(*)"                IOSTANDARD = LVCMOS25;  # leds contingent
+NET  "leds(*)"                PULLUP;                 # leds contingent
+NET  "leds(*)"                SLEW = SLOW;            # leds contingent
+NET  "leds(*)"                TIG;                    # leds contingent
+
+# DDR
+NET  "ddr_addr(0)"            LOC = C26;              # ddr_addr contingent
+NET  "ddr_addr(1)"            LOC = E17;              # ddr_addr contingent
+NET  "ddr_addr(2)"            LOC = D18;              # ddr_addr contingent
+NET  "ddr_addr(3)"            LOC = C19;              # ddr_addr contingent
+NET  "ddr_addr(4)"            LOC = F17;              # ddr_addr contingent
+NET  "ddr_addr(5)"            LOC = B18;              # ddr_addr contingent
+NET  "ddr_addr(6)"            LOC = B20;              # ddr_addr contingent
+NET  "ddr_addr(7)"            LOC = C20;              # ddr_addr contingent
+NET  "ddr_addr(8)"            LOC = D20;              # ddr_addr contingent
+NET  "ddr_addr(9)"            LOC = C21;              # ddr_addr contingent
+NET  "ddr_addr(10)"           LOC = A18;              # ddr_addr contingent
+NET  "ddr_addr(11)"           LOC = B21;              # ddr_addr contingent
+NET  "ddr_addr(12)"           LOC = A24;              # ddr_addr contingent
+NET  "ddr_addr(*)"            IOSTANDARD = SSTL2_I;   # ddr_addr contingent
+
+NET  "ddr_bankaddr(0)"        LOC = B12;              # ddr_bankaddr contingent
+NET  "ddr_bankaddr(1)"        LOC = A16;              # ddr_bankaddr contingent
+NET  "ddr_bankaddr(*)"        IOSTANDARD = SSTL2_I;   # ddr_bankaddr contingent
+
+NET  "ddr_casn"               LOC = F23;              # ddr_casn contingent
+NET  "ddr_casn"               IOSTANDARD = SSTL2_I;   # ddr_casn contingent
+
+NET  "ddr_cke"                LOC = G22;              # ddr_cke contingent
+NET  "ddr_cke"                IOSTANDARD = SSTL2_I;   # ddr_cke contingent
+
+NET  "ddr_csn"                LOC = G21;              # ddr_csn contingent
+NET  "ddr_csn"                IOSTANDARD = SSTL2_I;   # ddr_csn contingent
+
+NET  "ddr_rasn"               LOC = F24;              # ddr_rasn contingent
+NET  "ddr_rasn"               IOSTANDARD = SSTL2_I;   # ddr_rasn contingent
+
+NET  "ddr_wen"                LOC = A23;              # ddr_wen contingent
+NET  "ddr_wen"                IOSTANDARD = SSTL2_I;   # ddr_wen contingent
+
+NET  "ddr_clock"              LOC = A10;              # ddr_clock contingent
+NET  "ddr_clock"              IOSTANDARD = SSTL2_I;   # ddr_clock contingent
+
+NET  "ddr_clockn"             LOC = B10;              # ddr_clockn contingent
+NET  "ddr_clockn"             IOSTANDARD = SSTL2_I;   # ddr_clockn contingent
+
+NET  "ddr_dm(0)"              LOC = G19;              # ddr_dm contingent
+NET  "ddr_dm(1)"              LOC = G24;              # ddr_dm contingent
+NET  "ddr_dm(2)"              LOC = G20;              # ddr_dm contingent
+NET  "ddr_dm(3)"              LOC = C22;              # ddr_dm contingent
+NET  "ddr_dm(*)"              IOSTANDARD = SSTL2_I;   # ddr_dm contingent
+
+NET  "ddr_dqs(0)"             LOC = D25;              # ddr_dqs_i contingent
+NET  "ddr_dqs(1)"             LOC = G18;              # ddr_dqs_i contingent
+NET  "ddr_dqs(2)"             LOC = G17;              # ddr_dqs_i contingent
+NET  "ddr_dqs(3)"             LOC = D26;              # ddr_dqs_i contingent
+NET  "ddr_dqs(*)"             IOSTANDARD = SSTL2_II;  # ddr_dqs_i contingent
+
+NET  "ddr_dq(0)"              LOC = H20;              # ddr_dq_i contingent
+NET  "ddr_dq(1)"              LOC = E23;              # ddr_dq_i contingent
+NET  "ddr_dq(2)"              LOC = H26;              # ddr_dq_i contingent
+NET  "ddr_dq(3)"              LOC = H22;              # ddr_dq_i contingent
+NET  "ddr_dq(4)"              LOC = E25;              # ddr_dq_i contingent
+NET  "ddr_dq(5)"              LOC = E26;              # ddr_dq_i contingent
+NET  "ddr_dq(6)"              LOC = F26;              # ddr_dq_i contingent
+NET  "ddr_dq(7)"              LOC = E24;              # ddr_dq_i contingent
+NET  "ddr_dq(8)"              LOC = E20;              # ddr_dq_i contingent
+NET  "ddr_dq(9)"              LOC = A22;              # ddr_dq_i contingent
+NET  "ddr_dq(10)"             LOC = C23;              # ddr_dq_i contingent
+NET  "ddr_dq(11)"             LOC = C24;              # ddr_dq_i contingent
+NET  "ddr_dq(12)"             LOC = A20;              # ddr_dq_i contingent
+NET  "ddr_dq(13)"             LOC = A21;              # ddr_dq_i contingent
+NET  "ddr_dq(14)"             LOC = D24;              # ddr_dq_i contingent
+NET  "ddr_dq(15)"             LOC = E18;              # ddr_dq_i contingent
+NET  "ddr_dq(16)"             LOC = F18;              # ddr_dq_i contingent
+NET  "ddr_dq(17)"             LOC = A19;              # ddr_dq_i contingent
+NET  "ddr_dq(18)"             LOC = F19;              # ddr_dq_i contingent
+NET  "ddr_dq(19)"             LOC = B23;              # ddr_dq_i contingent
+NET  "ddr_dq(20)"             LOC = E21;              # ddr_dq_i contingent
+NET  "ddr_dq(21)"             LOC = D22;              # ddr_dq_i contingent
+NET  "ddr_dq(22)"             LOC = D23;              # ddr_dq_i contingent
+NET  "ddr_dq(23)"             LOC = B24;              # ddr_dq_i contingent
+NET  "ddr_dq(24)"             LOC = E22;              # ddr_dq_i contingent
+NET  "ddr_dq(25)"             LOC = F20;              # ddr_dq_i contingent
+NET  "ddr_dq(26)"             LOC = H23;              # ddr_dq_i contingent
+NET  "ddr_dq(27)"             LOC = G25;              # ddr_dq_i contingent
+NET  "ddr_dq(28)"             LOC = G26;              # ddr_dq_i contingent
+NET  "ddr_dq(29)"             LOC = H25;              # ddr_dq_i contingent
+NET  "ddr_dq(30)"             LOC = H24;              # ddr_dq_i contingent
+NET  "ddr_dq(31)"             LOC = H21;              # ddr_dq_i contingent
+NET  "ddr_dq(*)"              IOSTANDARD = SSTL2_II;  # ddr_dq_i contingent
+
+# VGA
+NET  "vga_r(0)"               LOC = N23;              # vga_r contingent
+NET  "vga_r(0)"               IOSTANDARD = LVCMOS33;  # vga_r contingent
+NET  "vga_r(1)"               LOC = N24;              # vga_r contingent
+NET  "vga_r(1)"               IOSTANDARD = LVCMOS33;  # vga_r contingent
+NET  "vga_r(2)"               LOC = N25;              # vga_r contingent
+NET  "vga_r(2)"               IOSTANDARD = LVCMOS33;  # vga_r contingent
+NET  "vga_r(3)"               LOC = C2;               # vga_r contingent
+NET  "vga_r(3)"               IOSTANDARD = LVCMOS25;  # vga_r contingent
+NET  "vga_r(4)"               LOC = G7;               # vga_r contingent
+NET  "vga_r(4)"               IOSTANDARD = LVCMOS25;  # vga_r contingent
+NET  "vga_r(5)"               LOC = F7;               # vga_r contingent
+NET  "vga_r(5)"               IOSTANDARD = LVCMOS25;  # vga_r contingent
+NET  "vga_r(6)"               LOC = E5;               # vga_r contingent
+NET  "vga_r(6)"               IOSTANDARD = LVCMOS25;  # vga_r contingent
+NET  "vga_r(7)"               LOC = E6;               # vga_r contingent
+NET  "vga_r(7)"               IOSTANDARD = LVCMOS25;  # vga_r contingent
+NET  "vga_r(*)"               SLEW = FAST;            # vga_r contingent
+
+NET  "vga_g(0)"               LOC = M22;              # vga_g contingent
+NET  "vga_g(0)"               IOSTANDARD = LVCMOS33;  # vga_g contingent
+NET  "vga_g(1)"               LOC = M23;              # vga_g contingent
+NET  "vga_g(1)"               IOSTANDARD = LVCMOS33;  # vga_g contingent
+NET  "vga_g(2)"               LOC = M20;              # vga_g contingent
+NET  "vga_g(2)"               IOSTANDARD = LVCMOS33;  # vga_g contingent
+NET  "vga_g(3)"               LOC = E4;               # vga_g contingent
+NET  "vga_g(3)"               IOSTANDARD = LVCMOS25;  # vga_g contingent
+NET  "vga_g(4)"               LOC = D3;               # vga_g contingent
+NET  "vga_g(4)"               IOSTANDARD = LVCMOS25;  # vga_g contingent
+NET  "vga_g(5)"               LOC = H7;               # vga_g contingent
+NET  "vga_g(5)"               IOSTANDARD = LVCMOS25;  # vga_g contingent
+NET  "vga_g(6)"               LOC = H8;               # vga_g contingent
+NET  "vga_g(6)"               IOSTANDARD = LVCMOS25;  # vga_g contingent
+NET  "vga_g(7)"               LOC = C1;               # vga_g contingent
+NET  "vga_g(7)"               IOSTANDARD = LVCMOS25;  # vga_g contingent
+NET  "vga_g(*)"               SLEW = FAST;            # vga_g contingent
+
+NET  "vga_b(0)"               LOC = M26;              # vga_b contingent
+NET  "vga_b(0)"               IOSTANDARD = LVCMOS33;  # vga_b contingent
+NET  "vga_b(1)"               LOC = M21;              # vga_b contingent
+NET  "vga_b(1)"               IOSTANDARD = LVCMOS33;  # vga_b contingent
+NET  "vga_b(2)"               LOC = L26;              # vga_b contingent
+NET  "vga_b(2)"               IOSTANDARD = LVCMOS33;  # vga_b contingent
+NET  "vga_b(3)"               LOC = C5;               # vga_b contingent
+NET  "vga_b(3)"               IOSTANDARD = LVCMOS25;  # vga_b contingent
+NET  "vga_b(4)"               LOC = C7;               # vga_b contingent
+NET  "vga_b(4)"               IOSTANDARD = LVCMOS25;  # vga_b contingent
+NET  "vga_b(5)"               LOC = B7;               # vga_b contingent
+NET  "vga_b(5)"               IOSTANDARD = LVCMOS25;  # vga_b contingent
+NET  "vga_b(6)"               LOC = G8;               # vga_b contingent
+NET  "vga_b(6)"               IOSTANDARD = LVCMOS25;  # vga_b contingent
+NET  "vga_b(7)"               LOC = F8;               # vga_b contingent
+NET  "vga_b(7)"               IOSTANDARD = LVCMOS25;  # vga_b contingent
+NET  "vga_b(*)"               SLEW = FAST;            # vga_b contingent
+
+NET  "vga_psave_n"            LOC = M25;              # vga_psave_n contingent
+NET  "vga_psave_n"            IOSTANDARD = LVCMOS33;  # vga_psave_n contingent
+NET  "vga_psave_n"            SLEW = FAST;            # vga_psave_n contingent
+
+NET  "vga_blank_n"            LOC = M24;              # vga_blank_n contingent
+NET  "vga_blank_n"            IOSTANDARD = LVCMOS33;  # vga_blank_n contingent
+NET  "vga_blank_n"            SLEW = FAST;            # vga_blank_n contingent
+
+NET  "vga_sync_n"             LOC = L23;              # vga_sync_n contingent
+NET  "vga_sync_n"             IOSTANDARD = LVCMOS33;  # vga_sync_n contingent
+NET  "vga_sync_n"             SLEW = FAST;            # vga_sync_n contingent
+
+NET  "vga_hsync"              LOC = C10;              # vga_hsync contingent
+NET  "vga_hsync"              IOSTANDARD = LVCMOS25;  # vga_hsync contingent
+NET  "vga_hsync"              SLEW = FAST;            # vga_hsync contingent
+
+NET  "vga_vsync"              LOC = A8;               # vga_vsync contingent
+NET  "vga_vsync"              IOSTANDARD = LVCMOS25;  # vga_vsync contingent
+NET  "vga_vsync"              SLEW = FAST;            # vga_vsync contingent
+
+NET  "vga_clk"                LOC = AF8;              # vga_clk contingent
+NET  "vga_clk"                IOSTANDARD = LVCMOS33;  # vga_clk contingent
+NET  "vga_clk"                SLEW = FAST;            # vga_clk contingent
+
+# DIP Switches
+NET  "dipsw(0)"               LOC = R20;              # dipsw contingent
+NET  "dipsw(1)"               LOC = R19;              # dipsw contingent
+NET  "dipsw(2)"               LOC = T26;              # dipsw contingent
+NET  "dipsw(3)"               LOC = U26;              # dipsw contingent
+NET  "dipsw(4)"               LOC = U23;              # dipsw contingent
+NET  "dipsw(5)"               LOC = V23;              # dipsw contingent
+NET  "dipsw(6)"               LOC = U25;              # dipsw contingent
+NET  "dipsw(7)"               LOC = U24;              # dipsw contingent
+NET  "dipsw(*)"               IOSTANDARD = LVCMOS33;  # dipsw contingent
+
+# Push Buttons (0:N, 1:E, 2:W, 3:S, 4:C)
+NET  "pbutton_c(0)"           LOC = E7;               # pbutton_c contingent
+NET  "pbutton_c(1)"           LOC = F10;              # pbutton_c contingent
+NET  "pbutton_c(2)"           LOC = E9;               # pbutton_c contingent
+NET  "pbutton_c(3)"           LOC = A6;               # pbutton_c contingent
+NET  "pbutton_c(4)"           LOC = B6;               # pbutton_c contingent
+NET  "pbutton_c(*)"           IOSTANDARD = LVCMOS25;  # pbutton_c contingent
+
+# Audio
+NET  "audio_bit_clk"          LOC = AE10;             # audio_bit_clk contingent
+NET  "audio_bit_clk"          IOSTANDARD = LVCMOS33;  # audio_bit_clk contingent
+
+NET  "audio_reset_n"          LOC = AD10;             # audio_reset_n contingent
+NET  "audio_reset_n"          IOSTANDARD = LVCMOS33;  # audio_reset_n contingent
+NET  "audio_reset_n"          TIG;                    # audio_reset_n contingent
+
+NET  "audio_sdata_in"         LOC = AD16;             # audio_sdata_in contingent
+NET  "audio_sdata_in"         IOSTANDARD = LVCMOS33;  # audio_sdata_in contingent
+
+NET  "audio_sdata_out"        LOC = C8;               # audio_sdata_out contingent
+NET  "audio_sdata_out"        IOSTANDARD = LVCMOS25;  # audio_sdata_out contingent
+
+NET  "audio_sync"             LOC = D9;               # audio_sync contingent
+NET  "audio_sync"             IOSTANDARD = LVCMOS25;  # audio_sync contingent

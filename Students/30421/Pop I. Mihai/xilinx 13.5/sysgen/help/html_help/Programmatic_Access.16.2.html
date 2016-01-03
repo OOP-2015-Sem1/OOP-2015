@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>PG API Examples</title>
+    <link rel="StyleSheet" href="css/Programmatic_Access.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Programmatic_Access.16.1.html#307646">Programmatic Access</a> : PG API Examples</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="307646">PG API Examples</a></div>
+      <div class="Heading2"><a name="307647">Hello World</a></div>
+      <div class="Body"><a name="300328">In this example, you will be running the PG API in the </a><span class="Italic">learning</span> mode where you can type the commands in the MATLAB command shell. </div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="300330">To start a new learning session, in MATLAB command console, run: </a><span class="Filename">xBlock</span>.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="300332">Type the following three commands in MATLAB command console to create a new </a>subsystem named '<span class="Filename">Subsystem</span>' inside a new model named '<span class="Filename">untitled</span>'. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Code"><a name="300334">[a, b] = xInport('a', 'b'); </a></div>
+      <div class="Code"><a name="300335">s = xOutport('s'); </a></div>
+      <div class="Code"><a name="301418">adder = xBlock('AddSub', struct('latency', 1), {a, b}, {s}); </a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="301417"><img class="Default" src="images/Programmatic_Access.16.2.1.jpg" width="383" height="186" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="301477">The above commands create the subsystem with two Simulink Inports </a><span class="Filename">a</span> and <span class="Filename">b</span>, an adder block having a latency of one, and a Simulink Outport <span class="Filename">s</span>. The two Inports source the adder which in turn sources the subsystem outport. The <span class="Filename">AddSub</span> parameter refers to the AddSub block inside the <span class="Bold">xbsIndex_r4</span> library. By default, if the full block path is not specified, <span class="Filename">xBlock</span> will search xbsIndex_r4 and built-in libraries in turn. The library must be loaded before using <span class="Filename">xBlock</span>. So please use load_system to load the library before invoking xBlock.</div>
+      <div class="Body"><span class="Bold"><a name="301438">Debugging tip</a></span>: If you type <span class="Filename">adder</span> in the MATLAB console, System Generator will print a brief description of the adder block to the MATLAB console and the block will be highlighted in the Simulink diagram. Similarly, you can type <span class="Filename">a</span>, <span class="Filename">b</span>, and <span class="Filename">s</span> to highlight subsystem Inports and Outports. </div>
+      <div class="Heading2"><a name="301428">MACC</a></div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="301429">Run this example in the learning mode. To start a new learning session, run:</a><span class="Filename"> xBlock</span>. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="301645">Type the following commands in the MATLAB console window to create a multiply-</a>accumulate function in a new subsystem. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Code"><a name="301646">[a, b] = xInport('a', 'b'); </a></div>
+      <div class="Code"><a name="301647">mac = xOutport('mac'); </a></div>
+      <div class="Code"><a name="301648">m = xSignal; </a></div>
+      <div class="Code"><a name="301649">mult = xBlock('Mult', struct('latency', 0, 'use_behavioral_HDL', 'on'), </a>{a, b}, {m}); </div>
+      <div class="Code"><a name="301650">acc = xBlock('Accumulator', struct('rst', 'off', 'use_behavioral_HDL', </a>'on'), {m}, {mac}); </div>
+      <div class="Body"><a name="301652">By directing System Generator to generate behavioral HDL, the two blocks should be </a>packed into a single DSP48 block. As of this writing, XST will do so only if you force the multiplier block to be combinational.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="301662"><img class="Default" src="images/Programmatic_Access.16.2.2.jpg" width="383" height="195" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Note">
+        <span class="XNote">Note:&nbsp;</span><a name="301669">If you don’t close the model that is created in example 1, example 2 will be created in a model </a>named <span class="Italic">untiltled1</span>. Otherwise, a new model <span class="Italic">untitled</span> will be created for this example.</div>
+      <div class="Body"><span class="Bold"><a name="301670">Debugging tip</a></span>: The PG API provides functions to get information about blocks and signals in the generated subsystem. After each of the following commands, observe the output in the MATLAB console and the effect on the Simulink diagram. </div>
+      <div class="Code"><a name="301671">mult_ins = mult.getInSignals </a></div>
+      <div class="Code"><a name="301672">mult_ins{1} </a></div>
+      <div class="Code"><a name="301673">mult_ins{2} </a></div>
+      <div class="Code"><a name="301674">src_a = mult_ins{1}.getSrc </a></div>
+      <div class="Code"><a name="301675">src_a{1} </a></div>
+      <div class="Code"><a name="301676">m_dst = m.getDst </a></div>
+      <div class="Code"><a name="301677">m_dst{1} </a></div>
+      <div class="Code"><a name="301678">m_dst{1}.block </a></div>
+      <div class="Code"><a name="301679">&nbsp;</a></div>
+      <div class="Heading2"><a name="301680">MACC in a Masked </a>Subsystem</div>
+      <div class="Body"><a name="301682">If you want a particular subsystem to be generated by the PG API and pass parameters </a>from the mask parameters of that subsystem to PG API, you need to run the PG API in <span class="Italic">production</span> mode, where you need to have a physical M-function file and pass that function to the <span class="Filename">xBlock</span> constructor.</div>
+      <div class="Numbered_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_inner"><a name="301684">First create the top-level PG API M-function file MACC_sub.m with the following </a>lines. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Code"><a name="301685">function MACC_sub(latency, nbits) </a></div>
+      <div class="Code"><a name="301686">[a, b] = xInport('a', 'b'); </a></div>
+      <div class="Code"><a name="301687">mac = xOutport('mac'); </a></div>
+      <div class="Code"><a name="301688">if latency &lt;= 0 </a></div>
+      <div class="Code"><a name="301689">   error('latency must be positive'); </a></div>
+      <div class="Code"><a name="301690">elseif latency == 1 </a></div>
+      <div class="Code"><a name="301691">   a_in = a; b_in = b; </a></div>
+      <div class="Code"><a name="301692">else </a></div>
+      <div class="Code"><a name="301693">   [a_in, b_in] = xSignal; </a></div>
+      <div class="Code"><a name="301694">   dblock1 = xBlock('Delay', struct('latency', latency - 1, </a>'reg_retiming', 'on'), {a}, {a_in}); </div>
+      <div class="Code"><a name="301695">   block2 = xBlock('Delay', struct('latency', latency - 1, </a>'reg_retiming', 'on'), {b}, {b_in}); </div>
+      <div class="Code"><a name="301696">end </a></div>
+      <div class="Code"><a name="301697">m = xSignal; </a></div>
+      <div class="Code"><a name="301698">mult = xBlock('Mult', struct('latency', 0, 'use_behavioral_HDL', 'on'), </a>{a_in, b_in}, {m}); </div>
+      <div class="Code"><a name="301699">acc = xBlock('Accumulator', struct('rst', 'off', 'n_bits', nbits, </a>'use_behavioral_HDL', 'on'), {m}, {mac});</div>
+      <div class="Code"><a name="301420">&nbsp;</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="301898"><img class="Default" src="images/Programmatic_Access.16.2.3.jpg" width="395" height="207" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="301902">To mask the subsystem defined by the script, add two mask parameters latency and </a>nbits.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="301912"><img class="Default" src="images/Programmatic_Access.16.2.4.jpg" width="383" height="200" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="302082">Then put the following lines to the mask initialization of the subsystem. </a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Code"><a name="302083">config.source = str2func('MACC_sub'); </a></div>
+      <div class="Code"><a name="302084">config.toplevel = gcb; </a></div>
+      <div class="Code"><a name="302085">xBlock(config, {latency, nbits}); </a></div>
+      <div class="Body"><a name="302087">In the </a><span class="Italic">production</span> mode, the first argument of the <span class="Filename">xBlock</span> constructor is a MATLAB struct for configuration, which must have a source field and a toplevel field. The source field is a function pointer points to the M-function and the toplevel is string specifying the Simulink subsystem. If the top-level field is 1, an untitled model will be created and a subsystem inside that model will be created.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="302109"><img class="Default" src="images/Programmatic_Access.16.2.5.jpg" width="383" height="173" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="302119">Alternatively you can use the MATLAB struct call to create the toplevel configuration: </a></div>
+      <div class="Code"><a name="302120">xBlock(struct('source', str2func(MACC_sub), 'toplevel', gcb),{latency, </a><br />																																					nbits});</div>
+      <div class="Body"><a name="302121">Then click </a><span class="Bold">OK</span>.</div>
+      <div class="Body"><a name="302123">You’ll get the following subsystem.</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="302302"><img class="Default" src="images/Programmatic_Access.16.2.6.jpg" width="383" height="201" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="NumberedCont_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="NumberedCont_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="NumberedCont_inner"><a name="302117">Set the mask parameters as shown in the following figure, then click </a><span class="Bold">OK</span>:</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="302318"><img class="Default" src="images/Programmatic_Access.16.2.7.jpg" width="383" height="127" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="302331">The following diagram is generated:</a></div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396.0pt">
+            <div class="Anchor"><a name="302338"><img class="Default" src="images/Programmatic_Access.16.2.8.jpg" width="383" height="213" style="display: block; float: none; left: 0.0; top: 0.0" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><span class="Bold"><a name="302500">Debugging Tip</a></span>: Open <span class="Filename">MACC_sub.m</span> in the MATLAB editor to debug the function. By default the <span class="Filename">xBlock</span> constructor will do an auto layout in the end. If you want to see the auto layout every time a block is added, invoke the toplevel <span class="Filename">xBlock</span> as the following: </div>
+      <div class="Code"><a name="302501">config.source = str2func('MACC_sub'); </a></div>
+      <div class="Code"><a name="302502">config.toplevel = gcb; </a></div>
+      <div class="Code"><a name="302503">config.debug = 1; </a></div>
+      <div class="Code"><a name="302504">xBlock(config, {latency, nbits}); </a></div>
+      <div class="Body"><a name="302506">By setting the debug field of the configuration struct to be 1, you’re running the PG API in </a>debug mode where every action will trigger an auto layout.</div>
+      <div class="Body"><span class="Bold"><a name="302508">Caching Tip</a></span>: Most often you only want to re-generate the subsystem if needed. The <span class="Filename">xBlock</span> constructor has a caching mechanism. You can specify the list of dependent files in a cell array, and set the 'depend' field of the toplevel configuration with this list. If any file in the 'depend' list is changed, or the argument list that passed to the toplevel function is changed, the subsystem will be re-generated. If you want to have the caching capability for the MACC_sub, invoke the toplevel xBlock as the following: </div>
+      <div class="Code"><a name="302509">config.source = str2func('MACC_sub'); </a></div>
+      <div class="Code"><a name="302510">config.toplevel = gcb; </a></div>
+      <div class="Code"><a name="302511">config.depend = {'MACC_sub.m'}; </a></div>
+      <div class="Code"><a name="302512">xBlock(config, {latency, nbits}); </a></div>
+      <div class="Body"><a name="302514">The depend field of the configuration struct is a cell array. Each element of the array is a file </a>name. You can put a p-file name or an M-file name. You can also put a name without a suffix. The <span class="Filename">xBlock</span> will use the first in the path.</div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

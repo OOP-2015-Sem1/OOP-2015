@@ -1,5 +1,5 @@
 package project.memorygame.views;
-
+import project.memorygame.controllers.Constants;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -75,11 +75,11 @@ public class DifficultyMenu extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			if (event.getSource() == easy)
-				game.enterGame(4);
+				game.enterGame(Constants.EASY);
 			else if (event.getSource() == medium)
-				game.enterGame(6);
+				game.enterGame(Constants.MEDIUM);
 			else if (event.getSource()==hard)
-				game.enterGame(10);
+				game.enterGame(Constants.HARD);
 		}
 	}
 }

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Down Sample</title>
+    <link rel="StyleSheet" href="css/Xilinx_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Blockset.11.1.html#1412278">Xilinx Blockset</a> : Down Sample</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="1412278">Down Sample</a></div>
+      <div class="Body"><span class="Italic"><a name="1412279">This block is listed in the following Xilinx Blockset libraries: Basic Elements and Index.</a></span></div>
+      <div class="OneLiner"><a name="1412284"><img class="Default" src="images/Xilinx_Blockset.11.32.1.jpg" width="61" height="65" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" />The Xilinx Down Sample block reduces the sample rate at the point where the </a>block is placed in your design. </div>
+      <div class="Body"><a name="1412285">The input signal is sampled at even intervals, at either the beginning (first </a>value) or end (last value) of a frame. The sampled value is presented on the output port and held until the next sample is taken.</div>
+      <div class="Body"><a name="1412286">A Down Sample frame consists of l input samples, where l is sampling rate. An example </a>frame for a Down Sample block configured with a sampling rate of 4 is shown below.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="1412292"><img class="Default" src="images/Xilinx_Blockset.11.32.2.jpg" width="517" height="154" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="1412293">The Down Sample block is realized in hardware using one of three possible </a>implementations that vary in terms of implementation efficiency. The block receives two clock enable signals in hardware, <span class="Filename">Src_CE</span> and <span class="Filename">Dest_CE</span>. <span class="Filename">Src_CE</span> is the faster clock enable signal and corresponds to the input data stream rate. <span class="Filename">Dest_CE</span> is the slower clock enable, corresponding to the output stream rate, i.e., down sampled data. These enable signals control the register sampling in hardware. </div>
+      <div class="Heading2"><a name="1412294">Zero Latency Down Sample </a></div>
+      <div class="Body"><a name="1412295">The zero latency Down Sample block must be configured to sample the first value of the </a>frame. The first sample in the input frame passes through the mux to the output port. A register samples this value during the first sample duration and the mux switches to the register output at the start of the second sample of the frame. The result is that the first sample in a frame is present on the output port for the entire frame duration. This is the least efficient hardware implementation as the mux introduces a combinational path from Din to Dout. A single bit register adjusts the timing of the destination clock enable, so that it is asserted at the start of the sample period, instead of the end. The hardware implementation is shown below:</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="1412301"><img class="Default" src="images/Xilinx_Blockset.11.32.3.jpg" width="517" height="161" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="1412302">Down Sample with Latency</a></div>
+      <div class="Body"><a name="1412303">If the Down Sample block is configured with latency greater than zero, a more efficient </a>implementation is used. One of two implementations is selected depending on whether the Down Sample block is set to sample the first or last value in a frame. </div>
+      <div class="Heading3"><a name="1412304">Sample First Value in Frame</a></div>
+      <div class="Body"><a name="1412305">In this case, two registers are required to correctly sample the input stream. The first </a>register is enabled by the adjusted clock enable signal so that it samples the input at the start of the input frame. The second register samples the contents of the first register at the end of the sample period to ensure output data is aligned correctly.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="1412311"><img class="Default" src="images/Xilinx_Blockset.11.32.4.jpg" width="517" height="134" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="1412312">Sample Last Value in Frame</a></div>
+      <div class="Body"><a name="1412313">The most efficient implementation is used when the Down Sample block is configured to </a>sample the last value of the frame. In this case, a register samples the data input data at the end of the frame. The sampled value is presented for the duration of the next frame.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="1412319"><img class="Default" src="images/Xilinx_Blockset.11.32.5.jpg" width="245" height="83" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="1412320">Block Parameters</a></div>
+      <div class="Body"><a name="1412321">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model. </div>
+      <div class="Heading3"><a name="1412322">Basic tab</a></div>
+      <div class="Body"><a name="1412323">Parameters specific to the Basic tab are: </a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="1412324">Sampling Rate (number of input samples per output sample)</a></span>: must be an integer greater or equal to 2. This is the ratio of the output sample period to the input, and is essentially a sample rate divider. For example, a ratio of 2 indicates a 2:1 division of the input sample rate. If a non-integer ratio is desired, the Up Sample block can be used in combination with the Down Sample block. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="1412325">Sample</a></span>: The Down Sample block can sample either the first or last value of a frame. This parameter will determine which of these two values is sampled. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="1412326">Other parameters used by this block are explained in the topic</a><br /><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.3.html#271277', '');" title="Common Options in Block Parameter Dialog Boxes">Common Options in Block Parameter Dialog Boxes</a></span>. </div>
+      <div class="Heading2"><a name="1412330">Xilinx LogiCORE</a></div>
+      <div class="Body"><a name="1412331">The Down Sample block does not use a Xilinx LogiCORE™.</a></div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

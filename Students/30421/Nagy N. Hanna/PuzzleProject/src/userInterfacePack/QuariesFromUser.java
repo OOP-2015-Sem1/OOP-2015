@@ -15,4 +15,9 @@ public class QuariesFromUser {
 		return (reply == JOptionPane.YES_OPTION);
 	}
 
+	public static String queryForName() {
+		String name = JOptionPane.showInputDialog("What's your name?");
+		return name;
+	}
+
 }

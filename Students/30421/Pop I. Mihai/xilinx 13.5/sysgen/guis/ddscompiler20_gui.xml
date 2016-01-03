@@ -1,0 +1,119 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="DDS Compiler v2_0 " block_type="dds_compilerv20">
+  <icon width="60" height="60" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="DDS_Compilerv20_config"/>
+  <handlers enablement="dds_compilerv11_enablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsDSP"/>
+  </libraries>
+  <blockgui label="Xilinx DDS Compiler v2_0">
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <etch label="Performance Options">
+          <editbox name="dds_clock_rate" default="100.0" evaluate="true" label="DDS clock rate (MHz)" ctype="Double"/>
+          <editbox name="sfdr" default="36.0" evaluate="true" label="Spurious free dynamic range (dB)" ctype="Double"/>
+          <editbox name="frequency_resolution" default="0.4" evaluate="true" label="Frequency resolution (Hz)" ctype="Double"/>
+        </etch>
+        <etch label="Output Function">
+          <radiogroup name="mode" default="Sine" evaluate="true" label="Function" ctype="Int">
+            <item value="Sine" label="Sine"/>
+            <item value="Cosine" label="Cosine"/>
+            <item value="Sine and Cosine" label="Sine and cosine"/>
+          </radiogroup>
+          <checkbox name="neg_sin" default="off" evaluate="true" label="Negative sine" ctype="Int"/>
+          <checkbox name="neg_cos" default="off" evaluate="true" label="Negative cosine" ctype="Int"/>
+          <listbox name="channels" default="1" label="Channels" ctype="Int">
+            <item value="1"/>
+            <item value="2"/>
+            <item value="3"/>
+            <item value="4"/>
+            <item value="5"/>
+            <item value="6"/>
+            <item value="7"/>
+            <item value="8"/>
+            <item value="9"/>
+            <item value="10"/>
+            <item value="11"/>
+            <item value="12"/>
+            <item value="13"/>
+            <item value="14"/>
+            <item value="15"/>
+            <item value="16"/>
+          </listbox>
+        </etch>
+        <etch label="Output Frequencies">
+          <radiogroup name="output_frequency_type" default="Fixed" evaluate="true" label="Type" ctype="Int">
+            <item value="Fixed" label="Fixed"/>
+            <item value="Programmable" label="Programmable"/>
+          </radiogroup>
+          <editbox name="output_frequency_array" default="[1.0]" evaluate="true" label="Output frequency array (MHz)" ctype="DoubleVector"/>
+        </etch>
+        <etch label="Phase Offset">
+          <radiogroup name="phase_offset_type" default="None" evaluate="true" label="Type" ctype="Int">
+            <item value="Fixed" label="Fixed"/>
+            <item value="Programmable" label="Programmable"/>
+            <item value="None" label="None"/>
+          </radiogroup>
+          <editbox name="phase_offset_array" default="[0.0]" evaluate="true" label="Phase offset angle array (x 2pi Radians)" ctype="DoubleVector"/>
+        </etch>
+           <etch name="periodetch" label="Explicit Sample Period">
+          <radiogroup name="explicit_period" default="on" evaluate="true" label="Sample period source" ctype="Int">
+            <item value="on" label="Explicit"/>
+            <item value="off" label="Inferred from inputs"/>
+          </radiogroup>
+          <editbox name="period" default="1" label="Explicit period" ctype="Double"/>
+        </etch>
+      </tab>
+      <tab name="advancedtab" label="Advanced">
+        <listbox name="noise_shaping" default="None" label="Noise Shaping" ctype="Int">
+          <item value="None"/>
+          <item value="Phase dithering"/>
+          <item value="Taylor series corrected"/>
+          <item value="Auto"/>
+        </listbox>
+        <etch label="Optional Ports">
+          <checkbox name="channel_port" default="off" evaluate="true" label="Provide channel port" ctype="Int"/>
+          <checkbox name="RFD" default="off" evaluate="true" label="Provide rfd port" ctype="Int"/>
+          <checkbox name="RDY" default="off" evaluate="true" label="Provide rdy port" ctype="Int"/>
+          <checkbox name="rst" default="off" evaluate="true" label="Provide synchronous reset port" ctype="Int"/>
+          <checkbox name="en" default="on" evaluate="true" label="Provide enable port" ctype="Int"/>
+        </etch>
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <etch label="Core Parameters">
+          <radiogroup name="mem_type" default="Block RAM" evaluate="true" label="Memory type" ctype="Int">
+            <item value="Distributed Memory" label="Distributed memory"/>
+            <item value="Block RAM" label="Block RAM"/>
+          </radiogroup>
+	      <listbox name="dsp48_use" default="Minimal" label="DSP48 Use" ctype="Int">
+            <item value="Minimal"/>
+            <item value="Maximal"/>
+          </listbox>
+	      <etch label="Latency Options">
+	        <listbox name="latency_configuration" default="Auto" evaluate="true" label="Latency configuration" ctype="Int">
+              <item value="Auto" />
+              <item value="Configurable"/>
+            </listbox>
+	        <editbox name="latency" default="1" evaluate="true" label="Latency" ctype="Int"/>
+	        <radiogroup name="accum_latency" default="One Cycle" evaluate="true" label="Accumulator latency" ctype="Int"> 
+              <item value="Zero Cycle" label="Zero cycle"/>
+              <item value="One Cycle" label="One cycle"/>
+            </radiogroup>                              
+          </etch>
+        </etch>
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <hiddenvar name="version" default="1" evaluate="true" ctype="Int"/>
+    <hiddenvar name="acc_latency" default="2" evaluate="false"/>
+  </blockgui>
+</sysgenblock>

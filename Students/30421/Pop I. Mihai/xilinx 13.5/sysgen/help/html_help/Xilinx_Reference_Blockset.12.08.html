@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>5x5Filter</title>
+    <link rel="StyleSheet" href="css/Xilinx_Reference_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Reference_Blockset.12.01.html#632114">Xilinx Reference Blockset</a> : 5x5Filter</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="632114">5x5Filter</a></div>
+      <div class="Body"><a name="632118"><img class="Default" src="images/Xilinx_Reference_Blockset.12.08.1.jpg" width="67" height="91" style="display: block; float: none; left: 0.0; top: 0.0" alt="" />The Xilinx 5x5 Filter reference block is implemented using 5 n-tap MAC </a>FIR Filters. The filters can be found in the DSP library of the Xilinx Reference Blockset. </div>
+      <div class="Body"><a name="632119">Nine different 2-D filters have been provided to filter grayscale images. </a>The filter can be selected by changing  the mask parameter on the 5x5 Filter block  The 2-D filter coefficients are stored in a block RAM, and the model makes no specific optimizations for these coefficients. You can substitute your own coefficients and scale factor by modifying the mask of the 5x5 filter block, under the Initialization tab. </div>
+      <div class="Body"><a name="632120">The coefficients used are shown below for the 9 filters. The output of the filter is multiplied </a>by the scale factor named &lt;filter name&gt;Div.</div>
+      <div class="Code"><a name="632121">edge = [ 0  0  0  0 0; ... </a></div>
+      <div class="Code"><a name="632122">0 -1 -1 -1 0; ... </a></div>
+      <div class="Code"><a name="632123">0 -1 -1 -1 0; ... </a></div>
+      <div class="Code"><a name="632124">0  0  0  0 0]; </a></div>
+      <div class="Code"><a name="632125">edgeDiv = 1; </a></div>
+      <div class="Code"><a name="632126">&nbsp;</a></div>
+      <div class="Code"><a name="632127">sobelX = [ 0  0  0  0 0; ... </a></div>
+      <div class="Code"><a name="632128">0 -1  0  1 0; ... </a></div>
+      <div class="Code"><a name="632129">0 -2  0  2 0; ... </a></div>
+      <div class="Code"><a name="632130">0 -1  0  1 0; ... </a></div>
+      <div class="Code"><a name="632131">0  0  0  0 0]; </a></div>
+      <div class="Code"><a name="632132">sobelXDiv = 1; </a></div>
+      <div class="Code"><a name="632133">&nbsp;</a></div>
+      <div class="Code"><a name="632134">sobelY = [ 0  0  0  0 0; ... </a></div>
+      <div class="Code"><a name="632135">0  1  2  1 0; ... </a></div>
+      <div class="Code"><a name="632136">0  0  0  0 0; ... </a></div>
+      <div class="Code"><a name="632137">0 -1 -2 -1 0; ... </a></div>
+      <div class="Code"><a name="632138">0  0  0  0 0]; </a></div>
+      <div class="Code"><a name="632139">sobelYDiv = 1; </a></div>
+      <div class="Code"><a name="632140">&nbsp;</a></div>
+      <div class="Code"><a name="632141">  </a></div>
+      <div class="Code"><a name="632142">&nbsp;</a></div>
+      <div class="Code"><a name="632143">sobelXY = [ 0  0  0  0 0; ... </a></div>
+      <div class="Code"><a name="632144">0  0 -1 -1 0; ... </a></div>
+      <div class="Code"><a name="632145">0  1  0 -1 0; ... </a></div>
+      <div class="Code"><a name="632146">0  1  1  0 0; ... </a></div>
+      <div class="Code"><a name="632147">0  0  0  0 0]; </a></div>
+      <div class="Code"><a name="632148">sobelXYDiv = 1; </a></div>
+      <div class="Code"><a name="632149">&nbsp;</a></div>
+      <div class="Code"><a name="632150">blur = [ 1  1  1  1 1; ... </a></div>
+      <div class="Code"><a name="632151">1  0  0  0 1; ... </a></div>
+      <div class="Code"><a name="632152">1  0  0  0 1; ... </a></div>
+      <div class="Code"><a name="632153">1  0  0  0 1; ... </a></div>
+      <div class="Code"><a name="632154">1  1  1  1 1]; </a></div>
+      <div class="Code"><a name="632155">blurDiv = 1/16; </a></div>
+      <div class="Code"><a name="632156">&nbsp;</a></div>
+      <div class="Code"><a name="632157">smooth = [ 1  1  1  1 1; ... </a></div>
+      <div class="Code"><a name="632158">1  5  5  5 1; ... </a></div>
+      <div class="Code"><a name="632159">1  5 44  5 1; ... </a></div>
+      <div class="Code"><a name="632160">1  5  5  5 1; ... </a></div>
+      <div class="Code"><a name="632161">1  1  1  1 1]; </a></div>
+      <div class="Code"><a name="632162">smoothDiv = 1/100; </a></div>
+      <div class="Code"><a name="632163">&nbsp;</a></div>
+      <div class="Code"><a name="632164">sharpen = [ 0  0  0  0 0; ... </a></div>
+      <div class="Code"><a name="632165">0 -2 -2 -2 0; ... </a></div>
+      <div class="Code"><a name="632166">0 -2 32 -2 0; ... </a></div>
+      <div class="Code"><a name="632167">0 -2 -2 -2 0; ... </a></div>
+      <div class="Code"><a name="632168">0  0  0  0 0]; </a></div>
+      <div class="Code"><a name="632169">sharpenDiv = 1/16; </a></div>
+      <div class="Code"><a name="632170">&nbsp;</a></div>
+      <div class="Code"><a name="632171">gaussian = [1 1 2 1 1; ... </a></div>
+      <div class="Code"><a name="632172">1 2 4 2 1; ... </a></div>
+      <div class="Code"><a name="632173">2 4 8 4 2; ... </a></div>
+      <div class="Code"><a name="632174">1 2 4 2 1; ... </a></div>
+      <div class="Code"><a name="632175">1 1 2 1 1]; </a></div>
+      <div class="Code"><a name="632176">gaussianDiv = 1/52; </a></div>
+      <div class="Code"><a name="632177">&nbsp;</a></div>
+      <div class="Code"><a name="632178">identity = [ 0  0  0  0 0; ... </a></div>
+      <div class="Code"><a name="632179">0  0  0  0 0; ... </a></div>
+      <div class="Code"><a name="632180">0  0  1  0 0; ... </a></div>
+      <div class="Code"><a name="632181">0  0  0  0 0; ... </a></div>
+      <div class="Code"><a name="632182">0  0  0  0 0]; </a></div>
+      <div class="Code"><a name="632183">identityDiv = 1; </a></div>
+      <div class="Body"><a name="632184">This filter occupies 309 slices, 5 dedicated multipliers, and 5 block rams of a Xilinx xc2v250-</a>6 part and operates at 213 MHz (advanced speeds files 1.96, ISE® 4.2.01i software). </div>
+      <div class="Body"><a name="632185">The underlying 5-tap MAC FIR filters are clocked 5 times faster than the input rate. </a>Therefore the throughput of the design is 213 MHz / 5 = 42.6 million pixels/ second. For a 64x64 image, this is 42.6x10^6/(64x64) = 10,400 frames/sec. For a 256x256 image the throughput would be 650 frames /sec, and for a 512x512 image it would be 162 frames/sec.</div>
+      <div class="Heading2"><a name="632186">Block Parameters</a></div>
+      <div class="Body"><a name="632187">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model. </div>
+      <div class="Body"><a name="632188">Parameters specific to this reference block are as follows:</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632189">5x5 Mask</a></span>: The coefficients for an Edge, Sobel X, Sobel Y, Sobel X-Y, Blur, Smooth, Sharpen, Gaussian, or Identity filter can be selected. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><span class="Bold"><a name="632190">Sample Period</a></span>: The sample period at which the input signal runs at is required</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

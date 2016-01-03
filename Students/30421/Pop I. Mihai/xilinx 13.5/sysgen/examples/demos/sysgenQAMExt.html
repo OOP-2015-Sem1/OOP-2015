@@ -1,0 +1,56 @@
+<html>
+<body>
+<h3><font size=+1 color="#990000">A QAM system with packet framing and FEC for
+telemetry channels</font></h3>
+<p>
+This design implements a QAM system with packet framing and FEC for telemetry
+channels.  
+The system is implemented according to the specifications provided by the
+Consultative 
+Committee for Space Data Systems for telemetry channel coding specification 
+(CCSDS 101.0-B-5).  
+<p>
+
+A sinusoidal source provides 8-bit samples to the 'FEC and QAM Symbol Mapping'
+subsystem. 
+Forward Error Correction (FEC) is applied to the samples and an attached
+synchronization
+marker (ASM) is asserted at the start of each code block.   The data is mapped
+into 16-QAM 
+symbols and then interpolated.  Doppler content, ISI, and white Guassian noise
+are introduced
+into the signal before it enters the receiver subsystem.  
+<p>
+
+The receiver employs a 16-QAM demodulator that performs adaptive channel
+equalization
+and carrier recovery on a QAM input source.  The ASM is stripped from the
+demodulated data 
+before concatenated FEC is applied.  A PicoBlaze microcontroller controls the RS
+decoder, 
+maintains frame alignment of the received packects, and performs periodic
+adjustments of
+the de-mapping QAM-16 quadrant reference.   
+<p>
+
+The CCSDS specification document can be found at the following URL:
+http://nssdcftp.gsfc.nasa.gov/standards/ccsds/pdf/CCSDS-101.0-B-5.pdf
+<p>
+
+For more information on the 16-QAM demodulator implementation and FPGA
+software-defined radios 
+in general, consult the following references:
+<p>
+
+Chris H. Dick and Fred Harris, "FPGA QAM Demodulator Design," Field Programmable
+Logic 
+Conference (FPL), Sept. 2-4 Montpellier, France, 2002.
+<p>
+
+Chris H. Dick, "Design and implementation of high-performance FPGA signal
+processing 
+datapaths for software-defined radios" VMEbus Systems, August 2001
+
+</p>
+</body>
+</html> 

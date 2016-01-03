@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Lesson 1 - Design Creation Basics</title>
+    <link rel="StyleSheet" href="css/Getting%20Started.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Getting%20Started.5.1.html#274120">Getting Started</a> : Lesson 1 - Design Creation Basics</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="274120">Lesson 1 - Design Creation Basics</a></div>
+      <div class="Heading2"><a name="273271">The System Generator Design Flow</a></div>
+      <div class="BodyWide"><a name="274454">System Generator works within the Simulink model-based design methodology. Often an executable spec is created </a>using the standard Simulink block sets. This spec can be designed using floating-point numerical precision and without hardware detail. Once the functionality and basic dataflow issues have been defined, System Generator can be used to specify the hardware implementation details for the Xilinx devices. System Generator uses the Xilinx DSP blockset for Simulink and will automatically invoke Xilinx Core Generator™ to generate highly-optimized netlists for the DSP building blocks. System Generator can execute all the downstream implementation tools to product a bitstream for programming the FPGA. An optional testbench can be created using test vectors extracted from the Simulink environment for use with ModelSim or the Xilinx ISE<span style="font-size: 9.5pt;">®</span> Simulator.</div>
+      <div class="BodyWide"><a name="274445">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="273417"><img class="Default" src="images/Getting%20Started.5.2.1.jpg" width="660" height="470" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="273431">The Xilinx DSP Blockset</a></div>
+      <div class="BodyWide"><a name="274477">The Xilinx DSP blockset is accessed via the Simulink Library browser which can be launched from the standard </a>MATLAB toolbar. The blocks are separated into sub-categories for easier searching. One sub-category, “Index” includes all the block and is often the quickest way to access a block you are already familiar with. Over 90 DSP building blocks are available for constructing you DSP system.</div>
+      <div class="BodyWide"><a name="275049">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="273443"><img class="Default" src="images/Getting%20Started.5.2.2.jpg" width="670" height="454" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="273680">Defining the FPGA Boundary</a></div>
+      <div class="BodyWide"><a name="274609">System Generator works with standard Simulink models. Two blocks called “Gateway In” and “Gateway Out” </a>define the boundary of the FPGA from the Simulink simulation model. The Gateway In block converts the floating point input to a fixed-point number. You double-click on the block to bring up the properties editor which is where the fixed-point number can be fully specified.</div>
+      <div class="BodyWide"><a name="275045">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="273679"><img class="Default" src="images/Getting%20Started.5.2.3.jpg" width="667" height="466" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="273688">Adding the System Generator Token</a></div>
+      <div class="BodyWide"><a name="274627">Every System Generator diagram requires that at least one System Generator token be placed on the diagram. This </a>token is not connected to anything but serves to drive the FPGA implementation process. The property editor for this token allows you to specify the target netlist, device, performance targets and system period. System Generator will issue an error if this token is absent.</div>
+      <div class="BodyWide"><a name="275044">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="273687"><img class="Default" src="images/Getting%20Started.5.2.4.jpg" width="668" height="464" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="273495">Creating the DSP Design</a></div>
+      <div class="BodyWide"><a name="274641">Once the FPGA boundaries have been established using the Gateway blocks, the DSP design can be constructed </a>using blocks from the Xilinx DSP blockset. Standard Simulink blocks are not supported for use within the Gateway In / Gateway out blocks. You will find a rich set of filters, FFTs, FEC cores, memories, arithmetic, logical and bitwise blocks available for use in constructing DSP designs. Each of these blocks are cycle and bit accurate.</div>
+      <div class="BodyWide"><a name="275043">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="273494"><img class="Default" src="images/Getting%20Started.5.2.5.jpg" width="665" height="451" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="273509">Generating the HDL Code</a></div>
+      <div class="BodyWide"><a name="274700">Once the design is completed, the hardware implementation files can be generated using the </a><span class="Bold">Generate</span> button available on the System Generator token properties editor. One option is to select <span class="Bold">HDL Netlist</span> which allows the FPGA implementation steps of RTL synthesis and place and route to be performed interactively using tool specific user interfaces. Alternatively, you can select <span class="Bold">Bitstream</span> as the Compilation target and System Generator will automatically perform all implementation steps. </div>
+      <div class="BodyWide"><a name="274898">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="274782"><img class="Default" src="images/Getting%20Started.5.2.6.jpg" width="665" height="444" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="BodyWide"><a name="277689">If the </a><span class="Bold">Create Testbench</span> option is selected, then System Generator will save and write test vector files that are extracted from the Simulink simulation and generate an HDL testbench and script files for ModelSim. This is an optional step that simply verifies that the generated hardware is functionally equivalent to the Simulink simulation. The script files must be used with ModelSim interactively.</div>
+      <div class="Heading2"><a name="274789">Model-Based Design using System Generator</a></div>
+      <div class="BodyWide"><a name="274923">Model-based design refers the design practice of creating a high-level executable specification using the standard </a>Simulink blocksets or MATLAB first to define the desired functional behavior with minimal hardware detail. This executable spec is then used as a reference model while the hardware representation is specified using the Xilinx DSP blockset.</div>
+      <div class="BodyWide"><a name="275039">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="274788"><img class="Default" src="images/Getting%20Started.5.2.7.jpg" width="653" height="461" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="273766">Creating Input Vectors using MATLAB</a></div>
+      <div class="BodyWide"><a name="274937">Simulink is built on top of MATLAB allowing the use of the full MATLAB language for input signal generation and </a>output analysis. You can use the “From Workspace” and “To Workspace” blocks from the Simulink Source and Sink libraries. Input values must be specified as an n rows x 2 column matrix where the first column is the simulation time and the second column includes the input values. This is a very popular way to generate input vectors for System Generator designs.</div>
+      <div class="BodyWide"><a name="275040">&nbsp;</a></div>
+      <table class="FigureWideNoTitle" style="text-align: left; width: 504pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 504pt;">
+            <div class="Anchor"><a name="273765"><img class="Default" src="images/Getting%20Started.5.2.8.jpg" width="660" height="457" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading2"><a name="273768">Lesson 1 Summary</a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="273454">You partition the FPGA design from the Simulink “system” using Gateway In / </a>Gateway Out blocks.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="273785">You always include a System Generator token on each sheet</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="273786">You should only use blocks from the Xilinx DSP blockset between the gateway blocks</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="273787">You should consider using the From / To workspace blocks to use MATLAB for input </a>generation and output analysis</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Heading2"><a name="273793">Lab Exercise: Using Simulink</a></div>
+      <div class="Body"><a name="274966">In this lab, you will learn the basics of Simulink. You will use a Simulink blockset to </a>generate a simple design and take it through simulation. You will then change the sampling settings to see its effect on the output. You will then learn how to create a subsystem.</div>
+      <div class="Body"><a name="274974">The lab instructions are located in the System Generator software tree at the following </a>pathname:</div>
+      <div class="Body" style="color: #000000; font-size: 9.0pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 5.0pt; margin-top: 5.0pt; text-transform: none; vertical-align: baseline;"><span class="Filename"><a name="290076">&lt;ISE_Design_Suite_tree&gt;/sysgen/examples/getting_started_training/lab1/lab</a></span><span class="Filename">1.pdf</span></div>
+      <div class="Body"><a name="291272">&nbsp;</a></div><a href="javascript:void();" onClick="WWHFrame.WWHBrowser.fMLProtocol(&quot;cd(xilinx.environment.getpath(\'sysgen\'));cd examples/getting_started_training/lab1;open ('lab1.pdf')&quot;)">(Open Lab Instructions)</a><div class="Heading2"><a name="290079">Lab Exercise: Getting Started with System Generator</a></div><div class="Body"><a name="274991">This lab introduces you to the basic concepts of creating a design using System Generator </a>within the model-based design flow provided through Simulink. The design is a simple multiply-add circuit.</div><div class="Body"><a name="275006">The lab instructions and lab design are located in the System Generator software tree at the </a>following pathname:</div><div class="Body" style="color: #000000; font-size: 9.0pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 5.0pt; margin-top: 5.0pt; text-transform: none; vertical-align: baseline;"><span class="Filename"><a name="291550">&lt;ISE_Design_Suite_tree&gt;/sysgen/examples/getting_started_training/lab2/</a></span></div>Lab Instructions<a href="javascript:void();" onClick="WWHFrame.WWHBrowser.fMLProtocol(&quot;cd(xilinx.environment.getpath(\'sysgen\'));cd examples/getting_started_training/lab2;open ('lab2.pdf')&quot;)">(Open Lab Instructions) </a> Lab Design<a href="javascript:void();" onClick="WWHFrame.WWHBrowser.fMLProtocol('cd(xilinx.environment.getpath(\'sysgen\'));cd examples/getting_started_training/lab2;open lab2.mdl')">(Open Lab Design)</a><script type="text/javascript" language="JavaScript1.2"><!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // --></script></blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

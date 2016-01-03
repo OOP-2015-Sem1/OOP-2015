@@ -2,6 +2,9 @@ package battleship.model;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import battleship.gui.PlayerDetailPanel;
@@ -72,16 +75,19 @@ public class BoardPosition {
 			}
 		});
 	}
-
+	
+	
 	public void setButtonTitle() {
 		if (positionValue == -1) {
-			button.setText("~");
+			button.setIcon(new ImageIcon("D:\\Multimedia\\UTCN\\proiect oop\\water.gif"));
 		} else if (positionValue == 0) {
-			button.setText("*");
+			button.setIcon(new ImageIcon("D:\\Multimedia\\UTCN\\proiect oop\\splash.gif"));
+			//button.setText("*");
 		} else if (positionValue == 1) {
-			button.setText("X");
+			button.setIcon(new ImageIcon("D:\\Multimedia\\UTCN\\proiect oop\\fire.gif"));
+			//button.setText("X");
 		} else if (positionValue == 2) {
-			button.setText("s");
+			button.setIcon(new ImageIcon("D:\\Multimedia\\UTCN\\proiect oop\\battleshipv.gif"));
 		}
 	}
 

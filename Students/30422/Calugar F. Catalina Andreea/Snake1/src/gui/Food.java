@@ -13,8 +13,7 @@ public class Food {
 	private ArrayList<FoodPart> apple;
 
 	public int score = 0;
-	private int size = 5;
-	ScoreButton scoreButton = new ScoreButton();
+	private int snakeSize = 5;
 
 	Food() {
 		apple = new ArrayList<FoodPart>();
@@ -31,13 +30,13 @@ public class Food {
 		}
 		for (int i = 0; i < apple.size(); i++) {
 			if (xCoor == apple.get(i).getxCoor() && yCoor == apple.get(i).getyCoor()) {
-				size++;
-				setSnakeSize(size);
-				score++;
-				setScore(score);
-				scoreButton.setCurrentScore(getScore());
+				snakeSize++;
+				setSnakeSize(snakeSize);
 				apple.remove(i);
 				i--;
+				score++;
+				setScore(score);
+				GameFrame.showScoreButton.setText(String.valueOf("Score: " + score));
 			}
 		}
 	}
@@ -58,7 +57,7 @@ public class Food {
 	}
 
 	public int getSnakeSize() {
-		return size;
+		return snakeSize;
 	}
 
 	public void setScore(int score) {
@@ -66,7 +65,7 @@ public class Food {
 	}
 
 	public void setSnakeSize(int size) {
-		this.size = size;
+		this.snakeSize = size;
 	}
 
 }

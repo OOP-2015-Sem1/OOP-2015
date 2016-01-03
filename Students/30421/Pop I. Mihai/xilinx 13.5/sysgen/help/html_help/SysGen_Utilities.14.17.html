@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>xlTBUtils</title>
+    <link rel="StyleSheet" href="css/SysGen_Utilities.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="SysGen_Utilities.14.01.html#278480">System Generator Utilities</a> : xlTBUtils</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="278480">xlTBUtils</a></div>
+      <div class="Body"><a name="278484">The xlTBUtils command provides access to several features of the Xilinx </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.111.html#271186', '');" title="Toolbar">Toolbar</a></span> block. This includes access to the layout, rerouting functions and to functions that return selected blocks and lines. </div>
+      <div class="Heading2"><a name="274808">Syntax</a></div>
+      <div class="Code"><a name="274813">xlTBUtils(function, args) </a></div>
+      <div class="Code"><a name="274817">e.g. </a></div>
+      <div class="Code"><a name="274819">xlTBUtils('ToolBar') </a></div>
+      <div class="Code"><a name="274823">xlTBUtils('Layout',struct('verbose',1,'autoroute',0)) </a></div>
+      <div class="Code"><a name="274825">xlTBUtils('Layout',optionStruct) </a></div>
+      <div class="Code"><a name="274829">xlTBUtils('Redrawlines',struct('autoroute',0)) </a></div>
+      <div class="Code"><a name="274831">xlTBUtils('RedrawLines',optionStruct) </a></div>
+      <div class="Code"><a name="274835">[lines,blks]=xlTBUtils('GetSelected','All') </a></div>
+      <div class="Heading2"><a name="274838">Description</a></div>
+      <div class="Heading3"><a name="274843">xlTBUtils(function [,args]) </a></div>
+      <div class="Body"><a name="274847">xlTBUtils is a collection of functions that are used by the Xilinx Toolbar block. The function </a>argument specifies the name of the function to execute. Further arguments (if required) can be tagged on as supplementary arguments to the function call. Note that the function argument string is not case sensitive. Possible values are enumerated below and explained further in the relevant subtopics. </div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 388.8952pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 75.2666pt">
+            <div class="CellHeadingLeft"><a name="277741">Function</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 313.6286pt">
+            <div class="CellHeadingLeft"><a name="277743">Description</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="277745">'ToolBar'</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="277747">Launches the Xilinx Toolbar GUI. If the GUI is already open, it will be </a>brought to the front.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="277749">'Layout'</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="277751">Runs the layout algorithm on a model to place and reroute lines on the </a>model. Layout can be customized using the option structure that is detailed below.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="277753">'RedrawLines' </a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="277755">Runs the routing algorithm on a model to reroute lines on the model. </a>RedrawLines can be customized using the option structure detailed below.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="277757">'GetSelected'</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="277759">Returns MATLAB Simulink handles to blocks and lines that are selected </a>on the system in focus</div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="274877">'xlTBUtils('Layout',optionStruct) </a></div>
+      <div class="Body"><a name="274881">Automatically places and routes a Simulink model. optionStruct is a MATLAB struct data-</a>type, that contains the parameters for Layout. The optionStruct argument is optional. </div>
+      <div class="Body"><a name="274885">Layout expects circuits to be placed left to right. After placement, Layout uses Simulink to </a>autoroute the wire connections. Simulink will route avoiding anything visible on screen, including block labels. Setting "ignore_labels" will 'allow' Simulink to route over labels – after which it is possible to manually move the labels to a more reasonable location. Note that field names are case sensitive. </div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 388.8952pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 75.2666pt">
+            <div class="CellHeadingLeft"><a name="277832">Field Names</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 313.6286pt">
+            <div class="CellHeadingLeft"><a name="277834">Description [Default values]</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="Body"><a name="277857">x_pitch, </a><br />y_pitch </div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="Body"><a name="277864">The gaps (pitch) between block (pixels). x_pitch specifies the amount of </a>spacing to leave between blocks horizontally, and y_pitch specifies vertical spacing. [30].</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="Body"><a name="277872">x_start, </a><br />y_start </div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="277842">Left (x_start) and top(y_start) margin spacing (pixels). The amount of </a>spacing to leave on the left and top of a model. [10].</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="277844">autoroute </a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="Body"><a name="277887">Turns on Simulink auto-routing of lines. (1 | 0) [1]</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="277848">ignore_labels</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="Body"><a name="277907">When auto-routing lines, Simulink will attempt to auto-route around </a>text labels. Setting ignore_labels to 1 will minimize text label size during the routing process.</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="277897">sys</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="277899">Name of the system to layout. [gcs]</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="277893">verbose</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="Body"><a name="277924">When set to 1, a wait bar will be shown during the layout process.</a></div>
+            <div class="CellBody"><a name="277895">&nbsp;</a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="274927">xlTBUtils('RedrawLines',optionStruct) </a></div>
+      <div class="Body"><a name="274931">The RedrawLines command will redraw all lines in a Simulink model. If there are lines </a>selected, only selected lines are redrawn otherwise all lines are redrawn. If a branch is selected, the entire line will be redrawn; main trunk and all other sub-branches. </div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 388.8952pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 75.2666pt">
+            <div class="CellHeadingLeft"><a name="277937">Field Names</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 313.6286pt">
+            <div class="CellHeadingLeft"><a name="277939">Description [Default values]</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="277969">autoroute </a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="Body"><a name="277971">Turns on Simulink auto-routing of lines. (1 | 0) [1]</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="277973">sys</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="277975">Name of the system to layout. [gcs]</a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3"><a name="274955">[lines,blks]=xlTBUtils('GetSelected',arg) </a></div>
+      <div class="Body"><a name="274959">The GetSelected command returns handles to selected blocks and lines of the system in </a>focus. The argument arg is optional. It should be a one of the string values described in the table below. </div>
+      <table class="ColumnNoTitle" style="text-align: left; width: 388.8952pt" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 75.2666pt">
+            <div class="CellHeadingLeft"><a name="278001">Field Names</a></div>
+          </td>
+          <td style="border-bottom-color: #b50042; border-bottom-style: solid; border-bottom-width: 1.5pt; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: middle; width: 313.6286pt">
+            <div class="CellHeadingLeft"><a name="278003">Description [Default values]</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="278005">'all' </a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #b50042; border-top-style: solid; border-top-width: 1.5pt; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="Body"><a name="278037">Gets both selected lines and blocks (default).</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="278009">'lines'</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="Body"><a name="278043">Gets only selected lines.</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="Body"><a name="278031">'blocks'</a></div>
+          </td>
+          <td style="border-bottom-color: #000000; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: solid; border-left-width: 1px; border-right-color: #000000; border-right-style: solid; border-right-width: 1px; border-top-color: #000000; border-top-style: solid; border-top-width: 1px; padding-bottom: 2pt; padding-left: 1.5pt; padding-right: 1.5pt; padding-top: 3pt; vertical-align: top">
+            <div class="CellBody"><a name="278021">Gets only selected blocks.</a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="274981">The GetSelected command will return an array with two items, an array of a structure </a>containing line information (lines) and an array of block handles (blks). If the 'lines' argument is used, blks will be an empty array; similarly when the 'blocks' argument is used, lines will be an empty array. </div>
+      <div class="Heading2"><a name="274983">Examples</a></div>
+      <div class="Body"><span class="Bold"><a name="274989">Example 1a</a></span>: Performing Layouts </div>
+      <div class="Code"><a name="274993">a.verbose = 1; </a></div>
+      <div class="Code"><a name="274995">a.autoroute= 0; </a></div>
+      <div class="Code"><a name="274997">xlTBUtils('Layout',a); </a></div>
+      <div class="Body"><a name="275001">This will invoke the layout tool with verbose on and autoroute off. </a></div>
+      <div class="Body"><span class="Bold"><a name="275005">Example 1b</a></span>: Performing Layouts </div>
+      <div class="Code"><a name="275009">xlTBUtils('Layout',struct('verbose',1,'autoroute',0)); </a></div>
+      <div class="Body"><a name="275013">This will also invoke the layout tool with verbose on and autoroute off. </a></div>
+      <div class="Body"><span class="Bold"><a name="275019">Example 2</a></span>: Redrawing lines </div>
+      <div class="Code"><a name="275023">xlTBUtils('Redrawlines',struct('autoroute',0)); </a></div>
+      <div class="Body"><a name="275027">This will redraw the lines of the current system, with auto-routing off. </a></div>
+      <div class="Body"><span class="Bold"><a name="275033">Example 3</a></span>: Getting selected lines and blocks </div>
+      <div class="Code"><a name="275037">[lines,blks]=xlTBUtils('GetSelected') </a></div>
+      <div class="Code"><a name="275039">lines = </a></div>
+      <div class="Code"><a name="278148">&nbsp;</a></div>
+      <div class="Code"><a name="275043">1x3 struct array with fields: </a></div>
+      <div class="Code"><a name="275045">&nbsp;</a>&nbsp;Handle </div>
+      <div class="Code"><a name="275047">&nbsp;</a>&nbsp;Name </div>
+      <div class="Code"><a name="275049">&nbsp;</a>&nbsp;Parent </div>
+      <div class="Code"><a name="275051">&nbsp;</a>&nbsp;SrcBlock </div>
+      <div class="Code"><a name="275053">&nbsp;</a>&nbsp;SrcPort </div>
+      <div class="Code"><a name="275055">&nbsp;</a>&nbsp;DstBlock </div>
+      <div class="Code"><a name="275057">&nbsp;</a>&nbsp;DstPort </div>
+      <div class="Code"><a name="275059">&nbsp;</a>&nbsp;Points </div>
+      <div class="Code"><a name="275061">&nbsp;</a>&nbsp;Branch </div>
+      <div class="Code"><a name="278149">&nbsp;</a></div>
+      <div class="Code"><a name="275065">blks = </a></div>
+      <div class="Code"><a name="278150">&nbsp;</a></div>
+      <div class="Code"><a name="275069">1.0e+003 * </a></div>
+      <div class="Code"><a name="278151">&nbsp;</a></div>
+      <div class="Code"><a name="275073">3.0320 </a></div>
+      <div class="Code"><a name="275075">3.0480 </a></div>
+      <div class="Body"><a name="275079">This will return all selected lines and blocks in the current system. In this case, 3 lines and </a>2 blocks were selected. The first line handle can be accessed via the command </div>
+      <div class="Code"><a name="275083">lines(1).Handle</a></div>
+      <div class="Code"><a name="278156">&nbsp;</a></div>
+      <div class="Code"><a name="275087">ans = </a></div>
+      <div class="Code"><a name="278158">&nbsp;</a></div>
+      <div class="Code"><a name="275091">3.0740e+003 </a></div>
+      <div class="Body"><a name="275095">The handle to the first block can be accessed via the command </a></div>
+      <div class="Code"><a name="275099">blks(1) </a></div>
+      <div class="Code"><a name="275103">ans = </a></div>
+      <div class="Code"><a name="275107">3.0320e+003 </a></div>
+      <div class="Heading2"><a name="275110">Remarks</a></div>
+      <div class="Body"><a name="275113">The actions performed by Layout and RedrawLines will not be in the undo stack. Save a </a>copy of the model before performing the actions, in order to revert to the original model.</div>
+      <div class="Body"><a name="284988">This product contains certain software code or other information ("AT&amp;T  Software")  </a>proprietary  to  AT&amp;T  Corp.  ("AT&amp;T").  The  AT&amp;T Software is provided to you "AS IS". YOU ASSUME TOTAL RESPONSIBILITY AND RISK FOR USE OF THE AT&amp;T SOFTWARE. AT&amp;T DOES NOT MAKE, AND EXPRESSLY DISCLAIMS, ANY EXPRESS OR IMPLIED WARRANTIES OF ANY KIND WHATSOEVER, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE, WARRANTIES OF TITLE OR NON-INFRINGEMENT OF ANY INTELLECTUAL PROPERTY RIGHTS, ANY WARRANTIES ARISING BY USAGE OF TRADE, COURSE OF DEALING OR COURSE OF PERFORMANCE, OR ANY WARRANTY THAT THE AT&amp;T SOFTWARE IS "ERROR FREE" OR WILL MEET YOUR REQUIREMENTS.</div>
+      <div class="Body"><a name="285000">Unless you accept a license to use the AT&amp;T Software, you shall not reverse compile, </a>disassemble or otherwise reverse engineer this product to ascertain the source code for any AT&amp;T Software.</div>
+      <div class="Body"><a name="285004">© AT&amp;T Corp. All rights reserved. AT&amp;T is a registered trademark of AT&amp;T Corp.</a></div>
+      <div class="Heading2"><a name="275116">See Also</a></div>
+      <div class="Body"><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.111.html#271186', '');" title="Toolbar" name="275119">Toolbar</a></span>, <span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'SysGen_Utilities.14.02.html#270918', '');" title="xlAddTerms">xlAddTerms</a></span> </div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

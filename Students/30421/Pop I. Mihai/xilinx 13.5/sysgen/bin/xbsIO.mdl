@@ -1,0 +1,427 @@
+Library {
+  Name			  "xbsIO"
+  Version		  4.00
+  LibraryLinkDisplay	  "none"
+  CovSaveName		  "covdata"
+  CovNameIncrementing	  off
+  CovHtmlReporting	  on
+  BlockNameDataTip	  off
+  BlockParametersDataTip  on
+  BlockDescriptionStringDataTip	on
+  ToolBar		  on
+  StatusBar		  on
+  BrowserShowLibraryLinks off
+  BrowserLookUnderMasks	  off
+  Created		  "Tue Aug 25 11:58:34 1998"
+  Creator		  "Administrator"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "haibing"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Tue Mar 26 16:03:02 2002"
+  ModelVersionFormat	  "1.%<AutoIncrement:368>"
+  ConfigurationManager	  "none"
+  SimParamPage		  "Solver"
+  AlgebraicLoopMsg	  "warning"
+  MinStepSizeMsg	  "warning"
+  UnconnectedInputMsg	  "warning"
+  UnconnectedOutputMsg	  "warning"
+  UnconnectedLineMsg	  "warning"
+  InheritedTsInSrcMsg	  "warning"
+  SingleTaskRateTransMsg  "none"
+  MultiTaskRateTransMsg	  "error"
+  IntegerOverflowMsg	  "warning"
+  CheckForMatrixSingularity "none"
+  UnnecessaryDatatypeConvMsg "none"
+  Int32ToFloatConvMsg	  "warning"
+  SignalLabelMismatchMsg  "none"
+  LinearizationMsg	  "none"
+  VectorMatrixConversionMsg "none"
+  SfunCompatibilityCheckMsg "none"
+  BlockPriorityViolationMsg "warning"
+  ArrayBoundsChecking	  "none"
+  ConsistencyChecking	  "none"
+  Profile		  off
+  SimulationMode	  "normal"
+  RTWRetainRTWFile	  off
+  RTWMakeCommand	  "make_rtw"
+  RTWGenerateCodeOnly	  off
+  TLCProfiler		  off
+  TLCDebug		  off
+  TLCCoverage		  off
+  ExtModeMexFile	  "ext_comm"
+  ExtModeBatchMode	  off
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "normal"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  on
+  ExtModeLogAll		  on
+  BlockDefaults {
+    Orientation		    "right"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  System {
+    Name		    "xbsIO"
+    Location		    [148, 207, 720, 661]
+    Open		    on
+    ModelBrowserVisibility  off
+    ModelBrowserWidth	    212
+    ScreenColor		    "white"
+    PaperOrientation	    "landscape"
+    PaperPositionMode	    "auto"
+    PaperType		    "usletter"
+    PaperUnits		    "inches"
+    ZoomFactor		    "100"
+    AutoZoom		    on
+    ReportName		    "simulink-default.rpt"
+    Block {
+      BlockType		      "S-Function"
+      Name		      "Clear Quantization Error"
+      Ports		      [1, 1]
+      Position		      [325, 275, 345, 295]
+      ShowName		      off
+      FunctionName	      "xldeprecated"
+      Parameters	      "num_inports num_outports"
+      PortCounts	      "[]"
+      SFunctionModules	      "''"
+      MaskType		      "Xilinx Error Clearing Block"
+      MaskDescription	      "Clear the quantization error tracking mechanism"
+" on a trace. Inserting this block will have no effect on the computation outs"
+"ide of error analysis sections. The clear function can also be applied interm"
+"ittently."
+      MaskHelp		      "web(xldoclink('Clear Quantization Error'));"
+      MaskPromptString	      "Add Optional Clear Port|Version - do not edit"
+      MaskStyleString	      "checkbox,edit"
+      MaskTunableValueString  "on,on"
+      MaskCallbackString      "|"
+      MaskEnableString	      "on,on"
+      MaskVisibilityString    "on,off"
+      MaskToolTipString	      "on,on"
+      MaskVariables	      "opt_port=@1;version=&2;"
+      MaskInitialization      "num_inports = 1 + opt_port;\nnum_outports = 1;"
+"\n\n[bg,fg] = xlcmap('XBlock',1);\niPos = get_param(gcb,'Position');\niWidth="
+"iPos(3)-iPos(1); iHeight=iPos(4)-iPos(2);\niCx=iWidth/2;\niCy=iHeight/2;\nif "
+"(opt_port==0)\n  bg = [1 1 1];\n  shapeX = iCx* (1 + cos(0:pi/6:2*pi));\n  sh"
+"apeY = iCy* (1 + sin(0:pi/6:2*pi));\n  borderX = [];\n  borderY = [];\n  bgX "
+"= [];\n  bgY = [];\n  pnum=1;\n  pstr='';\nelse\n  pnum=2;\n  pstr='*clrE';\n"
+"  shapeX = .8*iCx* (1.25 + cos(0:pi/6:2*pi));\n  shapeY = .5*iCy* (2.5 + sin("
+"0:pi/6:2*pi));\n  borderX = [0 0 iWidth iWidth 0 0 iWidth];\n  borderY = [0 i"
+"Height iHeight 0 0 0.75*iHeight 0.5*iHeight];\n  bgX=[0 iWidth iWidth 0];  bg"
+"Y=[0 0 iHeight iHeight];\nend\n"
+      MaskDisplay	      "patch(bgX,bgY,bg);\npatch(shapeX,shapeY, [.2 .5"
+" .3]);\nplot(shapeX,shapeY);\nplot(borderX, borderY);\nport_label('input',pnu"
+"m,pstr);"
+      MaskSelfModifiable      on
+      MaskIconFrame	      off
+      MaskIconOpaque	      off
+      MaskIconRotate	      "port"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "off|1.1"
+      MaskVariableAliases     ","
+    }
+    Block {
+      BlockType		      Display
+      Name		      "Display"
+      Ports		      [1]
+      Position		      [255, 373, 335, 397]
+      ShowName		      off
+      Format		      "short"
+      Decimation	      "1"
+      Floating		      off
+      SampleTime	      "-1"
+      MaskHelp		      "web(xldoclink('Display'));"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+    }
+    Block {
+      BlockType		      "S-Function"
+      Name		      "Enable Adapter"
+      Ports		      [1, 1]
+      Position		      [424, 150, 456, 180]
+      Orientation	      "down"
+      NamePlacement	      "alternate"
+      ShowName		      off
+      FunctionName	      "xldeprecated"
+      Parameters	      "-1 -1"
+      PortCounts	      "[]"
+      SFunctionModules	      "''"
+      MaskType		      "Xilinx Enable Adapter Block"
+      MaskDescription	      "Adapter block for driving enabled subsystems wi"
+"th the Xilinx fixed point data type."
+      MaskHelp		      "web(xldoclink('Enable Adapter'));"
+      MaskPromptString	      "Version - do not edit"
+      MaskStyleString	      "edit"
+      MaskTunableValueString  "on"
+      MaskEnableString	      "on"
+      MaskVisibilityString    "off"
+      MaskToolTipString	      "on"
+      MaskVariables	      "version=&1;"
+      MaskInitialization      "[bg,fg] = xlcmap('IO');\niPos = get_param(gcb,'"
+"Position');\niWidth=iPos(3)-iPos(1); iHeight=iPos(4)-iPos(2);\niCx=iWidth/2;"
+"\niCy=iHeight/2;\n[logoX, logoY] = xlogo(iPos);\n"
+      MaskDisplay	      "patch([0 iWidth iWidth 0],[0 0 iHeight iHeight]"
+" , bg);\npatch(logoX,logoY , fg);\nplot([.32*iWidth .42*iWidth .42*iWidth .58"
+"*iWidth .58*iWidth .68*iWidth ],[.45*iHeight .45*iHeight .7*iHeight .7*iHeigh"
+"t .45*iHeight .45*iHeight])\n;plot([0 0 iWidth iWidth 0], [0 iHeight iHeight "
+"0 0]);\n"
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "1.1"
+    }
+    Block {
+      BlockType		      "S-Function"
+      Name		      "Gateway In"
+      Ports		      [1, 1]
+      Position		      [195, 149, 250, 171]
+      FunctionName	      "xldeprecated"
+      Parameters	      "-1 -1"
+      PortCounts	      "[]"
+      SFunctionModules	      "''"
+      MaskType		      "Xilinx Gateway In Block"
+      MaskDescription	      "Gateway in block for the  Xilinx Block Set.  Co"
+"nverts 'double' type inputs to the Xilinx Fixed point type. In the hardware d"
+"escription, these blocks become top level input ports."
+      MaskHelp		      "web(xldoclink('Gateway In'));"
+      MaskPromptString	      "Output Data Type|Number of Bits|Binary Point|Qu"
+"antization|Overflow|Sample Period|Override output with double|IOB Timing Cons"
+"traint|Specify IOB Location Constraints|IOB Pad Locations, e.g.,  {'Valid Bit"
+"', 'MSB', ..., 'LSB'}"
+      MaskStyleString	      "popup(Unsigned|Signed  (2's comp)),edit,edit,po"
+"pup(Truncate|Round  (unbiased: +/- Inf)),popup(Wrap|Saturate|Flag as Error),e"
+"dit,checkbox,popup(None|Data Rate|Data Rate;  Set 'FAST' Attribute),checkbox,"
+"edit"
+      MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on"
+      MaskCallbackString      "|||||||||"
+      MaskEnableString	      "on,on,on,on,on,on,on,on,on,on"
+      MaskVisibilityString    "on,on,on,on,on,on,on,on,on,off"
+      MaskToolTipString	      "on,on,on,on,on,on,on,on,on,on"
+      MaskVariables	      "arith_type=@1;n_bits=@2;bin_pt=@3;quantization="
+"@4;overflow=@5;period=@6;dbl_ovrd=@7;timing_constraint=@8;locs_specified=@9;L"
+"OCs=@10;"
+      MaskInitialization      "dbl_ovrd = xlDblOvrdState(gcb);\n[bg,fg] = xlcm"
+"ap('IO',dbl_ovrd);\niPos = get_param(gcb,'Position');\niWidth=iPos(3)-iPos(1)"
+"; iHeight=iPos(4)-iPos(2);\niCx=iWidth/2;\niCy=iHeight/2;\n[logoX, logoY] = x"
+"logo(iPos);\n\n"
+      MaskDisplay	      "patch([0 iWidth iWidth 0],[0 0 iHeight iHeight]"
+" , bg);\npatch(logoX,logoY , fg);\nport_label('input',1,'dbl');\nport_label('"
+"output',1,'fpt');\n\n;plot([0 0 iWidth iWidth 0], [0 iHeight iHeight 0 0]);\n"
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "Signed  (2's comp)|8|2|Truncate|Wrap|1|off|None"
+"|off|{}"
+      MaskVariableAliases     ",,,,,,,,,"
+    }
+    Block {
+      BlockType		      "S-Function"
+      Name		      "Gateway Out"
+      Ports		      [1, 1]
+      Position		      [300, 149, 355, 171]
+      FunctionName	      "xldeprecated"
+      Parameters	      "-1 -1"
+      PortCounts	      "[]"
+      SFunctionModules	      "''"
+      MaskType		      "Xilinx Gateway Out Block"
+      MaskDescription	      "Gateway out block for the  Xilinx Block Set.  C"
+"onverts Xilinx Fixed point type inputs into 'double' ouputs. In the hardware "
+"description, these blocks can either become top level output ports or be trim"
+"med away, depending on how they are configured."
+      MaskHelp		      "web(xldoclink('Gateway Out'));"
+      MaskPromptString	      "Translate into Output Port|IOB Timing Constrain"
+"t|Specify IOB Location Constraints|IOB Pad Locations, e.g.,  {'Valid Bit', 'M"
+"SB', ..., 'LSB'}"
+      MaskStyleString	      "checkbox,popup(None|Data Rate|Data Rate;  Set '"
+"FAST' Attribute),checkbox,edit"
+      MaskTunableValueString  "on,on,on,on"
+      MaskCallbackString      "|||"
+      MaskEnableString	      "on,on,on,on"
+      MaskVisibilityString    "on,on,on,off"
+      MaskToolTipString	      "on,on,on,on"
+      MaskVariables	      "hdl_port=@1;timing_constraint=@2;locs_specified"
+"=@3;LOCs=@4;"
+      MaskInitialization      "[bg,fg] = xlcmap('IO');\nif (~hdl_port)\n  [bg,"
+"fg]=xlcmap('XBlock',1);\nend\niPos = get_param(gcb,'Position');\niWidth=iPos("
+"3)-iPos(1); iHeight=iPos(4)-iPos(2);\niCx=iWidth/2;\niCy=iHeight/2;\n[logoX, "
+"logoY] = xlogo(iPos);\n"
+      MaskDisplay	      "patch([0 iWidth iWidth 0],[0 0 iHeight iHeight]"
+" , bg);\npatch(logoX,logoY , fg);\nport_label('input',1,'fpt');\nport_label('"
+"output',1,'dbl');\n\n;plot([0 0 iWidth iWidth 0], [0 iHeight iHeight 0 0]);\n"
+      MaskIconFrame	      off
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "on|None|off|{}"
+      MaskVariableAliases     ",,,"
+    }
+    Block {
+      BlockType		      "S-Function"
+      Name		      "Quantization Error"
+      Ports		      [1, 1]
+      Position		      [420, 273, 460, 297]
+      ShowName		      off
+      FunctionName	      "xldeprecated"
+      Parameters	      "-1 -1"
+      PortCounts	      "[]"
+      SFunctionModules	      "''"
+      MaskType		      "Xilinx Quantization-Error Extractor"
+      MaskDescription	      "Extracts the quantization error from a Xilinx f"
+"ixed point signal. The quantization error  is tracked as the difference betwe"
+"en expected value (exact to machine precision) and the actual value represent"
+"ed by the fixed point data."
+      MaskHelp		      "web(xldoclink('Quantization Error'));"
+      MaskPromptString	      "Version - do not edit"
+      MaskStyleString	      "edit"
+      MaskTunableValueString  "on"
+      MaskEnableString	      "on"
+      MaskVisibilityString    "off"
+      MaskToolTipString	      "on"
+      MaskVariables	      "version=&1;"
+      MaskInitialization      "[bg,fg] = xlcmap('IO');\niPos = get_param(gcb,'"
+"Position');\niWidth=iPos(3)-iPos(1); iHeight=iPos(4)-iPos(2);\niCx=iWidth/2;"
+"\niCy=iHeight/2;\n[logoX, logoY] = xlogo(iPos);\n"
+      MaskDisplay	      "patch([0 iWidth iWidth 0],[0 0 iHeight iHeight]"
+" , bg);\npatch(logoX,logoY , fg);\nport_label('output',1,'err');\n\n;plot([0 "
+"0 iWidth iWidth 0], [0 iHeight iHeight 0 0]);\n"
+      MaskIconFrame	      off
+      MaskIconOpaque	      off
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "1.1"
+    }
+    Block {
+      BlockType		      "S-Function"
+      Name		      "Sample Time"
+      Ports		      [1, 1]
+      Position		      [205, 374, 225, 396]
+      ShowName		      off
+      FunctionName	      "xldeprecated"
+      Parameters	      "-1 -1"
+      PortCounts	      "[]"
+      SFunctionModules	      "''"
+      MaskType		      "Xilinx Sample Time Reporter"
+      MaskDescription	      "Reports the input sample time as a double outpu"
+"t."
+      MaskHelp		      "web(xldoclink('Sample Time'));"
+      MaskPromptString	      "Version - do not edit"
+      MaskStyleString	      "edit"
+      MaskTunableValueString  "on"
+      MaskEnableString	      "on"
+      MaskVisibilityString    "off"
+      MaskToolTipString	      "on"
+      MaskVariables	      "version=&1;"
+      MaskInitialization      "[bg,fg] = xlcmap('IO');\niPos = get_param(gcb,'"
+"Position');\niWidth=iPos(3)-iPos(1); iHeight=iPos(4)-iPos(2);\niCx=iWidth/2;"
+"\niCy=iHeight/2;\nshapeX = iCx* (1 + cos(0:pi/6:2*pi));\nshapeY = iCy* (1 + s"
+"in(0:pi/6:2*pi));\n\n\n"
+      MaskDisplay	      "patch(shapeX,shapeY, bg);\nplot(shapeX,shapeY);"
+"\ndisp('ST');"
+      MaskIconFrame	      off
+      MaskIconOpaque	      off
+      MaskIconRotate	      "port"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "1.1"
+    }
+    Line {
+      SrcBlock		      "Sample Time"
+      SrcPort		      1
+      DstBlock		      "Display"
+      DstPort		      1
+    }
+    Annotation {
+      Position		      [312, 44]
+      Text		      "Xilinx Blockset v2.1\n(c) 2001 Xilinx, Inc.\n\n"
+"I/O Library"
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      Position		      [162, 249]
+      Text		      "Quantization Error Analysis Blocks:"
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      Position		      [442, 249]
+      Text		      "Report"
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      Position		      [112, 124]
+      Text		      "Gateway Blocks:"
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      Position		      [217, 124]
+      Text		      "In"
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      Position		      [327, 124]
+      Text		      "Out"
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      Position		      [127, 359]
+      Text		      "Report Sample Time:"
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      Position		      [447, 124]
+      Text		      "Enable Adapter"
+      FontName		      "Arial"
+      FontSize		      12
+    }
+    Annotation {
+      Position		      [332, 249]
+      Text		      "Clear"
+      FontName		      "Arial"
+      FontSize		      12
+    }
+  }
+}

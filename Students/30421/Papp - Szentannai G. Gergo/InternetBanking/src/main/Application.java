@@ -1,10 +1,15 @@
 package main;
 
 import javax.swing.SwingUtilities;
-
 import db.manager.DatabaseConnect;
 import gui.MainFrame;
 
+/**
+ * This class is used to connect to the database and to start the MainFrame.
+ * 
+ * @author gergo_000
+ *
+ */
 public class Application {
 
 	public static MainFrame mainFrame;

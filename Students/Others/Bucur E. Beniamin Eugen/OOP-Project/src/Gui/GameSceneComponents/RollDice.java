@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 
 public class RollDice extends HBox {
 
-    Button rollDiceButton = new Button("Roll Dice");
+    public Button rollDiceButton = new Button("Roll Dice");
 
     public RollDice(Game game){
         this.setPadding(new Insets(10, 10, 10, 10));
@@ -34,6 +34,20 @@ public class RollDice extends HBox {
             game.getDice().rollDice();
             redDieView.setImage(new Image(game.getDice().getRedDieImage(game.getDice().getRedDie())));
             yellowDieView.setImage(new Image(game.getDice().getYellowDieImage(game.getDice().getYellowDie())));
+            if (game.getDice().getValue() != 7) {
+                game.gameEngine.dispatchResources();
+
+                //just for demonstration purposes
+                game.getActivePlayer().getResources().setResourcesToNine();
+
+                game.getStats().update("You can now play your turn");
+                game.getControls().setEnable();
+                game.getEndTurn().setEnable();
+                this.setDisable();
+            } else {
+                game.gameEngine.halfResourcesOverSeven();
+                game.gameEngine.moveRobber();
+            }
         });
 
         this.getChildren().addAll(diceContainer, rollDiceButton);

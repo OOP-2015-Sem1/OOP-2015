@@ -1,0 +1,116 @@
+
+namespace eval ::sysgen_util {
+    set environment_is_set false
+}
+
+
+#
+#LoadLibraries
+#Loads the requisite CoreGen libraries to perform platform inspection
+#
+proc LoadLibraries { } {
+
+   set extension [info sharedlibextension]
+   load "libCit_CoreStub${extension}"
+   load "libPrjrep_CommonStub${extension}"
+   load "libDpm_SupportStub${extension}"
+   load "libDpm_RunTTICStub${extension}"
+
+}
+
+#
+#sysgen_environment
+#Description : Sets up enevironment variables as required by the tools
+#
+proc sysgen_environment { } {
+    if { $::sysgen_util::environment_is_set } {
+        return
+    }
+    set ::sysgen_util::environment_is_set true
+    set sysgeninstalldir [GetSysgenInstallDir]
+    source [file join $sysgeninstalldir "sysgen" "scripts" "DSPAPI.tcl"]
+    ::xilinx::dsptool::sysgen_ipexport_environment
+}
+
+
+#
+#Description : Returns a platform specific installation location
+#
+proc GetSysgenInstallDirImpl { {SYSROOT ""} } {
+    if { $SYSROOT != "" } {
+		set sysgenInstallDir [file normalize $SYSROOT]
+		if { [file exists "$sysgenInstallDir/sysgen"] } {
+			return $sysgenInstallDir
+		}
+    }
+    return ""
+}
+
+#
+#Description : Performs standard XILINX environment variable based lookup
+#for SysGen installation
+#
+proc GetSysgenInstallDir { } {
+    #XILINX_DSP
+    set XILINX_DSP ""
+    catch {
+        set XILINX_DSP $::env(XILINX_DSP)
+    }
+    set sysgenInstallDir [GetSysgenInstallDirImpl $XILINX_DSP]
+    if { $sysgenInstallDir != "" } {
+        return $sysgenInstallDir
+    }
+	    
+    #XILINX
+    catch {
+		set XILINX $::env(XILINX)
+		set XILINX_DSP $XILINX
+	}
+	set sysgenInstallDir [GetSysgenInstallDirImpl $XILINX_DSP]
+	if { $sysgenInstallDir != "" } {
+	    return $sysgenInstallDir
+	}
+	
+	#SYSGENBUILD
+	catch {
+		set XILINX_DSP $::env(SYSGENBUILD)
+	}
+	set sysgenInstallDir [GetSysgenInstallDirImpl $XILINX_DSP]
+	return $sysgenInstallDir
+}
+
+#
+#Description : Verifies existence of SysGen
+#
+proc standardSysgenSetup { } {   
+    set sysgenbuildnotfound "Could not find System Generator Installation. Please check XILINX environment setting and ensure that it points to a valid ISE installation. Alternatively, ensure XILINX_DSP points to a valid DSPTools installation. If not, then fix the environment settings and restart CoreGen."
+    set platformnotsupported "This core is only supported on Windows 32-bit, Linux 32-bit and Linux 64-bit operating systems." 
+	set sysgenbuild [GetSysgenInstallDir]
+	set err_msg ""
+    sysgen_environment
+    if {$sysgenbuild == ""} {
+        set err_msg $sysgenbuildnotfound 
+    } ;# end validate_IpModel
+    set platform [::xilinx::dsptool::getPlatformTag]
+    if {$platform != "nt" && $platform != "lin64" && $platform != "lin"} {
+		set err_msg $platformnotsupported 
+	}
+	return [list $sysgenbuild $err_msg]
+}
+
+#
+#Description : Standard Error message for unavailability of SysGen
+#
+proc standardSetupAssert { } {
+    global Component_Name    
+    set st [standardSysgenSetup]
+	set errmsg [lindex $st 1]
+    if {$errmsg != ""} {
+        $Component_Name SetErrorMessage $errmsg 
+        return false		
+    } ;# end validate_IpModel
+    return true
+}
+
+LoadLibraries
+

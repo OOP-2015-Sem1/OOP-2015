@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Time Division Demultiplexer</title>
+    <link rel="StyleSheet" href="css/Xilinx_Blockset.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body class="" style="" onload="WWHUpdate();" onunload="WWHUnload();" onkeydown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onkeypress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onkeyup="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <table align="left" summary="">
+      <tr>
+        <td class="WebWorks_Company_Logo_Top">
+          <img src="logo.gif" alt="" />
+        </td>
+      </tr>
+    </table>
+    <br clear="all" />
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="Xilinx_Blockset.11.1.html#597068">Xilinx Blockset</a> : Time Division Demultiplexer</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="597068">Time Division Demultiplexer</a></div>
+      <div class="Body"><span class="Italic"><a name="277206">This block is listed in the following Xilinx Blockset libraries: Basic Elements and Index.</a></span></div>
+      <div class="OneLiner"><a name="277209"><img class="Default" src="images/Xilinx_Blockset.11.93.1.jpg" width="116" height="98" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" />The Xilinx Time Division Demultiplexer block accepts input serially </a>and presents it to multiple outputs at a slower rate.</div>
+      <div class="Heading2"><a name="277210">Block Interface</a></div>
+      <div class="Body"><a name="597364">The block has one data input port and a user-configurable number of data outputs, ranging </a>from 1 to 32. The data output ports have the same arithmetic type and precision as the input data port. The time division demultiplexer block also has optional input-valid port (vin) and output-valid port (vout). Both the valid ports are of type Bool. The block has two possible implementations, single or multiple channel. </div>
+      <div class="Heading3"><a name="597368">Single Channel Implementation </a></div>
+      <div class="Body"><a name="277211">For single channel implementation, the time division demultiplexer block has one data </a>input and output port. Optional data valid input and output ports are also allowed. The length of the frame sampling pattern establishes the length of the input data frame. The position of 1 indicates the input value to be downsampled and the number of 1's correspond to the downsampling factor. The behavior of the demultiplexer block in single channel mode can best be illustrated with the help of the figure below. Based on the frame sampling pattern entered, the first and second input values of every input data frame are sampled and presented to the output at the rate of 2.</div>
+      <table class="FigureNoTitle" style="text-align: left; width: 396pt;" cellspacing="0" summary="">
+        <caption></caption>
+        <tr>
+          <td style="padding-bottom: 0pt; padding-left: 0pt; padding-right: 0pt; padding-top: 0pt; vertical-align: top; width: 396pt;">
+            <div class="Anchor"><a name="1294461"><img class="Default" src="images/Xilinx_Blockset.11.93.2.jpg" width="520" height="174" style="display: block; float: none; left: 0.0; top: 0.0;" alt="" /></a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Body"><a name="597391">For single channel implementation, the number of values to be sampled from a data frame </a>should evenly divide the size of the input frame. Every input data frame value can also be qualified by using the optional valid port. </div>
+      <div class="Heading3"><a name="597395">Multiple Channel Implementation </a></div>
+      <div class="Body"><a name="597387">For multiple channel implementation, the time division demultiplexer block has one data </a>input port and multiple output ports equal to the number of 1's in the frame sampling pattern. Optional data valid input and output ports are also allowed. The length of the frame sampling pattern establishes the length of the input data frame. The position of 1 indicates the input value to be downsampled and presented to the corresponding output data channel. The behavior of the demultiplexer block in multiple channel mode can best be illustrated with the help of the figure below. Based on the frame sampling pattern entered, the first and second input values of every input data frame are sampled and presented to the corresponding output channel at the rate of 4. </div>
+      <div class="Body"><a name="597624">For multiple channel implementation, the down sampling factor is always equal to the size </a>of the input frame. Every input data frame value can also be qualified by using the optional valid port. </div>
+      <div class="Heading2"><a name="597627">Block Parameters</a></div>
+      <div class="Body"><a name="597620">The block parameters dialog box can be invoked by double-clicking the icon in your </a>Simulink model.</div>
+      <div class="Body"><a name="597886">Parameters specific to this block are: </a></div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="597888"> Frame sampling pattern: specifies the size of the serial input data frame. The frame </a>sampling pattern must be a MATLAB vector containing only 1's and 0's. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="597890"> Implementation: specifies the demultiplexer behavior to be either in single or </a>multiple channel mode. The behaviors of these modes are explained above. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bulleted_outer" style="margin-left: 0pt;">
+        <table border="0" cellspacing="0" cellpadding="0" summary="">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bulleted_inner" style="width: 18pt; white-space: nowrap;">•      </div>
+            </td>
+            <td width="100%">
+              <div class="Bulleted_inner"><a name="597892"> Provide valid Port: when selected, the demultiplexer has optional input and output </a>valid ports (vin / vout). The vin port allows to qualify every input data value as part of the serial input data frame. The vout port marks the state of the output ports as valid or not. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body"><a name="597850">Parameters used by this block are explained in the topic </a><span class="XBlueLink"><a href="javascript:WWHClickedPopup('sysgen', 'Xilinx_Blockset.11.3.html#271277', '');" title="Common Options in Block Parameter Dialog Boxes">Common Options in Block Parameter Dialog Boxes</a></span>.</div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>

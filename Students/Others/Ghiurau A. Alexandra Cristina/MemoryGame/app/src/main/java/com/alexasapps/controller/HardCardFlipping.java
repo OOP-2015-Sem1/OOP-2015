@@ -11,28 +11,21 @@ import com.alexasapps.multiplecardsflippingdemo.R;
 
 public class HardCardFlipping extends CardFlipping {
 
+    final int nrOfCards = 30;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hard_layout);
 
-        Resources res = getResources();
-        frontImages = new ImageView[30];
-        backImages = new ImageView[30];
-
-        for (int i = 0; i < 30; i++) {
-            int idFrontImage = res.getIdentifier("imgBack" + (i + 1), "id", getApplicationContext().getPackageName());
-            int idBackImage = res.getIdentifier("img" + (i + 1), "id", getApplicationContext().getPackageName());
-
-            frontImages[i] = (ImageView) findViewById(idFrontImage);
-            backImages[i] = (ImageView) findViewById(idBackImage);
-
-        }
-
+        super.setImages();
         setCards(frontImages, backImages, "peng");
-
         setFrontImagesClickListeners();
 
+    }
+
+    @Override
+    int getNumberOfCards() {
+        return nrOfCards;
     }
 }

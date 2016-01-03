@@ -1,0 +1,130 @@
+<sysgenblock simulinkname="DSP48 Macro" block_type="dsp48macro" block_version="8.2.1">
+  <initialization file="xldsp48macro_init.m"/>
+  <icon width="90" height="138" wmark_color="white" bg_color="blue"/>
+  <callbacks CopyFcn="tmp_gcbh = gcbh;set_param(tmp_gcbh,'linkstatus','none');%s" merge_defaults="true"/>
+  <handlers enablement="dsp48macroenablement" action="dsp48macroaction"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsDSP"/>
+  </libraries>
+  <subsystem_model file="dsp48macro_subsystem.mdl" label_ports_on_icon="false"/>
+  <blockgui label="Xilinx DSP48 Macro">
+    <editbox name="infoedit" default="Macro function to simplify use of the DSP48 primitive, especially as a dynamic operator" read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="ProgrammingModel" label="Basic">
+        <editbox name="portalist" default="Xo" read_only="false" top_label="true" evaluate="false" label="Inputs to port &lt;tt&gt;A&lt;/tt&gt;"/>
+        <editbox name="portblist" default="Yo" read_only="false" top_label="true" evaluate="false" label="Inputs to port &lt;tt&gt;B&lt;/tt&gt;"/>
+        <editbox name="portclist" default="No" read_only="false" top_label="true" evaluate="false" label="Inputs to port &lt;tt&gt;C&lt;/tt&gt;"/>
+        <editbox name="instrlist" default="&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot;font-size:8pt;font-family:MS Shell Dlg&quot;&gt;
+&lt;p&gt;P=Xo*Yo+No&lt;/p&gt;
+&lt;/body&gt;&lt;/html&gt;" read_only="false" top_label="true" evaluate="false" multi_line="true" label="Instructions"/>
+      </tab>
+      <tab name="PipeliningModel" label="Pipelining">
+        <listbox name="pipeline" default="Custom" evaluate="true" label="Pipeline options">
+          <item value="External Registers"/>
+          <item value="No External Registers"/>
+          <item value="Custom"/>
+        </listbox>
+        <etch name="custompipelineetch" label="Custom Pipeline Options">
+          <hlayout>
+            <etch label="DSP48">
+              <listbox name="pipeachoices" default="1" evaluate="true" label="&lt;tt&gt;A&lt;/tt&gt;">
+                <item value="0"/>
+                <item value="1"/>
+                <item value="2"/>
+              </listbox>
+              <listbox name="pipebchoices" default="1" evaluate="true" label="&lt;tt&gt;B&lt;/tt&gt;">
+                <item value="0"/>
+                <item value="1"/>
+                <item value="2"/>
+              </listbox>
+              <checkbox name="pipecchoices" default="on" evaluate="true" label="&lt;tt&gt;C&lt;/tt&gt;"/>
+              <checkbox name="pipepchoices" default="on" evaluate="true" label="&lt;tt&gt;P&lt;/tt&gt;"/>
+              <checkbox name="pipemchoices" default="on" evaluate="true" label="Multiplier"/>
+              <checkbox name="pipectrlchoices" default="on" evaluate="true" label="Controls (&lt;tt&gt;opmode&lt;/tt&gt;, &lt;tt&gt;subtract&lt;/tt&gt;,&lt;br&gt; &lt;tt&gt;carry_in&lt;/tt&gt;, &lt;tt&gt;carry_in_sel&lt;/tt&gt;)"/>
+            </etch>
+            <etch label="External Multiplexers">
+              <radiogroup name="pipemuxachoices" default="0" evaluate="true" label="MuxA">
+                <item value="0"/>
+                <item value="1"/>
+                <item value="2"/>
+              </radiogroup>
+              <radiogroup name="pipemuxbchoices" default="0" evaluate="true" label="MuxB">
+                <item value="0"/>
+                <item value="1"/>
+                <item value="2"/>
+              </radiogroup>
+              <radiogroup name="pipemuxcchoices" default="0" evaluate="true" label="MuxC">
+                <item value="0"/>
+                <item value="1"/>
+                <item value="2"/>
+              </radiogroup>
+              <radiogroup name="pipemuxctrlchoices" evaluate="true" label="MuxCtrl">
+                <item value="0"/>
+                <item value="1"/>
+                <item value="2"/>
+              </radiogroup>
+            </etch>
+          </hlayout>
+          <checkbox name="pipeline_array_flag" evaluate="true" label="Define Using Array"/>
+          <editbox name="custom_pipeline_cache" default="[1,1,1,1,1,1,0,0,0,0]" top_label="true" evaluate="true" label="Custom Pipeline Options([A,B,C,P,Ctrl,M,MuxA,MuxB,MuxC,MuxCtrl])"/>
+        </etch>
+      </tab>
+      <tab name="outputprecision" label="Output Type">
+        <radiogroup name="precision" default="Full" evaluate="true" label="Precision">
+          <item value="Full"/>
+          <item value="User Defined"/>
+        </radiogroup>
+        <etch name="userprecisionetch" label="User Defined Precision">
+          <radiogroup name="arith_type" default="Unsigned" evaluate="true" label="Output type">
+            <item value="Signed  (2's comp)"/>
+            <item value="Unsigned"/>
+          </radiogroup>
+          <editbox name="n_bits" default="8" evaluate="true" label="Number of bits"/>
+          <editbox name="bin_pt" default="2" evaluate="true" label="Binary point"/>
+        </etch>
+      </tab>
+      <tab name="portoptions" label="Ports">
+        <checkbox name="bcout" evaluate="true" label="&lt;tt&gt;BCOUT&lt;/tt&gt;"/>
+        <checkbox name="acout" evaluate="true" label="&lt;tt&gt;ACOUT&lt;/tt&gt;"/>
+        <checkbox name="carryout" evaluate="true" label="&lt;tt&gt;CARRYOUT&lt;/tt&gt;"/>
+        <checkbox name="carrycascout" evaluate="true" label="&lt;tt&gt;CARRYCASCOUT&lt;/tt&gt;"/>
+        <checkbox name="pcout" evaluate="true" label="&lt;tt&gt;PCOUT&lt;/tt&gt;"/>
+        <hlayout>
+          <etch label="Reset Ports">
+            <checkbox name="rst_all" evaluate="true" label="&lt;tt&gt;Global Reset&lt;/tt&gt;"/>
+            <checkbox name="rst_a" evaluate="true" label="Reset port for &lt;tt&gt;A&lt;/tt&gt;"/>
+            <checkbox name="rst_b" evaluate="true" label="Reset port for &lt;tt&gt;B&lt;/tt&gt;"/>
+            <checkbox name="rst_c" evaluate="true" label="Reset port for &lt;tt&gt;C&lt;/tt&gt;"/>
+            <checkbox name="rst_m" evaluate="true" label="Reset port for multiplier"/>
+            <checkbox name="rst_p" evaluate="true" label="Reset port for &lt;tt&gt;P&lt;/tt&gt;"/>
+            <checkbox name="rst_ctrl" evaluate="true" label="Reset port for controls &lt;br&gt; (&lt;tt&gt;opmode&lt;/tt&gt;, &lt;tt&gt;subtract&lt;/tt&gt;,&lt;br&gt; &lt;tt&gt;carry_in&lt;/tt&gt;, &lt;tt&gt;carry_in_sel&lt;/tt&gt;)"/>
+          </etch>
+          <etch label="Enable Ports">
+            <checkbox name="ce_all" evaluate="true" label="&lt;tt&gt;Global Enable&lt;/tt&gt;"/>
+            <checkbox name="ce_a" evaluate="true" label="Enable port for &lt;tt&gt;A&lt;/tt&gt;"/>
+            <checkbox name="ce_b" evaluate="true" label="Enable port for &lt;tt&gt;B&lt;/tt&gt;"/>
+            <checkbox name="ce_c" evaluate="true" label="Enable port for &lt;tt&gt;C&lt;/tt&gt;"/>
+            <checkbox name="ce_m" evaluate="true" label="Enable port for multiplier"/>
+            <checkbox name="ce_p" evaluate="true" label="Enable port for &lt;tt&gt;P&lt;/tt&gt;"/>
+            <checkbox name="ce_ctrl" evaluate="true" label="Enable port for controls &lt;br&gt; (&lt;tt&gt;opmode&lt;/tt&gt;, &lt;tt&gt;subtract&lt;/tt&gt;,&lt;br&gt; &lt;tt&gt;carry_in&lt;/tt&gt;, &lt;tt&gt;carry_in_sel&lt;/tt&gt;)"/>
+          </etch>
+        </hlayout>
+      </tab>
+      <tab name="advanced" label="Advanced">
+        <etch label="Simulation Parameters">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+        </etch>
+      </tab>
+      <tab name="implementation" label="Implementation">
+        <checkbox name="synth_opt" default="on" evaluate="true" label="Use DSP48"/>
+      </tab>
+    </tabpane>
+
+    <hiddenvar name="errorlist" default="false" evaluate="false"/>
+    <hiddenvar name="statestr" default="" evaluate="false"/>
+    <hiddenvar name="explicit_period" default="" evaluate="true"/>
+    <hiddenvar name="period" default="1" evaluate="true"/>
+    <hiddenvar name="maskdoc" default="" evaluate="false"/>
+  </blockgui>
+</sysgenblock>

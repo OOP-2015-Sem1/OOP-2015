@@ -1,4 +1,5 @@
 package anoyingame.ui;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -11,34 +12,34 @@ import javax.swing.JPanel;
 public class Menu extends JFrame {
 
 	private JPanel blankPanel = new JPanel();
-	private JButton timeModeEasy = new JButton("EASY");
-	private JButton timeModeMedium = new JButton("MEDIUM");
-	private JButton timeModeHard = new JButton("HARD");
+	private JButton easyMode = new JButton("EASY");
+	private JButton mediumMode = new JButton("MEDIUM");
+	private JButton hardMode = new JButton("HARD");
 	private JLabel headerLabel;
 
 	private int difficulty;
 
 	public Menu(ImageIcon header) {
 		this.setLayout(new GridLayout(2, 1));
-		
+
 		headerLabel = new JLabel(header);
 		headerLabel.setBackground(Color.WHITE);
-		
+
 		this.setBackground(Color.WHITE);
 		this.add(headerLabel);
-		
+
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new GridLayout(5, 1));
 
 		addBlankPanel(buttonPanel);
-		
-		colorButtonToFitTheme(timeModeEasy);
-		colorButtonToFitTheme(timeModeMedium);
-		colorButtonToFitTheme(timeModeHard);
 
-		buttonPanel.add(timeModeEasy);
-		buttonPanel.add(timeModeMedium);
-		buttonPanel.add(timeModeHard);
+		colorButtonToFitTheme(easyMode);
+		colorButtonToFitTheme(mediumMode);
+		colorButtonToFitTheme(hardMode);
+
+		buttonPanel.add(easyMode);
+		buttonPanel.add(mediumMode);
+		buttonPanel.add(hardMode);
 
 		addBlankPanel(buttonPanel);
 
@@ -48,25 +49,26 @@ public class Menu extends JFrame {
 		this.setVisible(true);
 
 	}
-	public void addBlankPanel(JPanel mainPanel){
+
+	public void addBlankPanel(JPanel mainPanel) {
 		blankPanel = new JPanel();
 		blankPanel.setBackground(Color.WHITE);
 		mainPanel.add(blankPanel);
 	}
-	
-	public void colorButtonToFitTheme(JButton button){
-		button.setBackground(new Color(0,178,192));
-		button.setForeground(new Color(251,233,163));
+
+	public void colorButtonToFitTheme(JButton button) {
+		button.setBackground(new Color(0, 178, 192));
+		button.setForeground(new Color(251, 233, 163));
 		button.setFont(button.getFont().deriveFont(Font.BOLD));
 	}
-	
+
 	public JButton getButton(String level) {
 		if (level.equals("easy"))
-			return timeModeEasy;
+			return easyMode;
 		else if (level.equals("hard"))
-			return timeModeHard;
+			return hardMode;
 		else
-			return timeModeMedium;
+			return mediumMode;
 	}
 
 	public int getMode() {

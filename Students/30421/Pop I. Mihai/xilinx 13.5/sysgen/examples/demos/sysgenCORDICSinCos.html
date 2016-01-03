@@ -1,0 +1,28 @@
+<html>
+<body>
+<h3><font size=+1 color="#990000">CORDIC-based sine and cosine function</font></h3>
+<p>
+This design implements a fully parallel CORDIC  (COordinate Rotation DIgital
+Computer) algorithm in rotational mode that computes
+the sine and cosine of the input angle z between +/- pi.
+</p>
+<p>
+The CORDIC algorithm is attractive for an FPGA implementation because it
+consists primarily of shift and add operations.  
+An N-bit adder/subtractor  requiries only N/2 logic slices.  The CORDIC
+subsystem is masked, and allows customization of bit precision, 
+the number of processing elements (PEs) in the CORDIC engine and the ability to
+pieline each individual stage.  With eight PEs, the design occupies 503 LUTs (49%), 
+412 flip-flops (40%), and 272 slices (53%) of a Xilinx xc2v80-5 part. 
+The maximum clock frequency is approximately 230.04 MHz (Device speed data version: 
+PRODUCTION 1.121 2005-11-04, ISE 8.1i software, VHDL synthesized with XST).
+</p>
+<p>References:</p>
+<p>J. E. Volder, "The CORDIC Trigonometric Computing Technique", IRE Trans. On
+Electronic Computers, Vol. EC-8,  1959, pp. 330-334.</p>
+<p>J. S. Walther, "A Unified Algorithm for Elementary Functions", Spring Joint
+Computer Conference (1971) pp. 379-385.</p>
+<p>Yu Hen Hu, "CORDIC-Based VLSI Architectures for Digital Signal Processing", IEEE
+Signal Processing Magazine, pp. 17-34, July 1992.</p>
+</body>
+</html> 

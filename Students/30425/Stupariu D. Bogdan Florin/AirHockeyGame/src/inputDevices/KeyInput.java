@@ -3,7 +3,7 @@ package inputDevices;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import objects.GameObjects;
+import objects.GameObject;
 import objects.ObjectID;
 import theGame.Handler;
 import theGame.MainGame;
@@ -34,7 +34,7 @@ public class KeyInput extends KeyAdapter {
 		int key = e.getKeyCode();
 
 		for (int i = 0; i < handler.allObjects.size(); i++) {
-			GameObjects tempObject = handler.allObjects.get(i);
+			GameObject tempObject = handler.allObjects.get(i);
 			if (tempObject.getObjectID() == ObjectID.Player) {
 				keyPressedPlayer(key, tempObject);
 			}
@@ -50,12 +50,12 @@ public class KeyInput extends KeyAdapter {
 		int key = e.getKeyCode();
 
 		for (int i = 0; i < handler.allObjects.size(); i++) {
-			GameObjects tempObject = handler.allObjects.get(i);
+			GameObject tempObject = handler.allObjects.get(i);
 
-			if (tempObject.getObjectID() == ObjectID.Player) {
+			if (tempObject.getObjectID() == handler.allObjects.get(1).getObjectID()) {
 				keyReleasedPlayer(key, tempObject);
 			}
-			if (tempObject.getObjectID() == ObjectID.Player2) {
+			if (tempObject.getObjectID() == handler.allObjects.get(2).getObjectID()) {
 				if (mainGame.gameState == STATE.Multiplayer) {
 					keyReleasedPlayer2(key, tempObject);
 				}
@@ -64,7 +64,7 @@ public class KeyInput extends KeyAdapter {
 		}
 	}
 
-	private void keyPressedPlayer(int key, GameObjects tempObject) {
+	private void keyPressedPlayer(int key, GameObject tempObject) {
 		// TODO Auto-generated method stub
 		// up
 		if (key == KeyEvent.VK_W) {
@@ -118,7 +118,7 @@ public class KeyInput extends KeyAdapter {
 		}
 	}
 
-	private void keyPressedPlayer2(int key, GameObjects tempObject) {
+	private void keyPressedPlayer2(int key, GameObject tempObject) {
 		// TODO Auto-generated method stub
 		// up
 		if (key == KeyEvent.VK_UP) {
@@ -143,7 +143,7 @@ public class KeyInput extends KeyAdapter {
 		}
 	}
 
-	private void keyReleasedPlayer(int key, GameObjects tempObject) {
+	private void keyReleasedPlayer(int key, GameObject tempObject) {
 		// TODO Auto-generated method stub
 		// up
 		if (key == KeyEvent.VK_W)
@@ -166,7 +166,7 @@ public class KeyInput extends KeyAdapter {
 
 	}
 
-	private void keyReleasedPlayer2(int key, GameObjects tempObject) {
+	private void keyReleasedPlayer2(int key, GameObject tempObject) {
 		// TODO Auto-generated method stub
 		if (key == KeyEvent.VK_UP)
 			keyDown[4] = false;

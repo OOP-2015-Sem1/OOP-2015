@@ -29,7 +29,7 @@ public class Snake {
 	}
 
 	public void moveSnake(String direction) {
-		
+
 		if (direction.equals(RIGHT) && !getCurrentDirection().equals(LEFT)) {
 			currentDirection = RIGHT;
 			xCoor++;
@@ -67,11 +67,6 @@ public class Snake {
 		}
 	}
 
-//	public void updateSnake() {
-//		moveSnake(currentDirection);
-//		makeSnake(xCoor, yCoor);
-//	}
-
 	public void paint(Graphics g) {
 		for (int i = 0; i < snake.size(); i++) {
 			snake.get(i).draw(g);
@@ -91,7 +86,6 @@ public class Snake {
 	}
 
 	public String getCurrentDirection() {
-		
 		return currentDirection;
 	}
 
@@ -103,5 +97,4 @@ public class Snake {
 		this.yCoor = yCoor;
 	}
 
-	
 }

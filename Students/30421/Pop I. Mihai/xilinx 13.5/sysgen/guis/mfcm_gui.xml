@@ -1,0 +1,37 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Multipath Fading Channel Model" block_type="mfcm">
+  <icon width="180" height="154" wmark_color="white" bg_color="blue" file="mfcm_icon.m"/>
+  <libraries>
+    <library name="xrbsComm"/>
+  </libraries>
+  <subsystem_model file="mfcm_subsystem.mdl" label_ports_on_icon="true"/>
+  <blockgui label="Multipath Fading Channel Model">
+    <etch label="">
+      <editbox name="infoedit" default="Multipath Fading Channel Model." read_only="true" evaluate="false" multi_line="true"/>
+    </etch>
+    <tabpane>
+      <tab name="pathtab" label="Paths">
+        <editbox name="DELAY" default="[0]" evaluate="true" label="Path Delay Vector"/>
+        <editbox name="GAIN" default="[1]" evaluate="true" label="Path Gain Vector"/>
+      </tab>
+      <tab name="covartab" label="Covariance">
+        <editbox name="RT" default="eye(4,4)" evaluate="true" label="Transmit Array Spatial Covariance Matrices"/>
+        <editbox name="RR" default="eye(4,4)" evaluate="true" label="Receive Array Spatial Covariance Matrices"/>
+      </tab>
+      <tab name="fadetab" label="Fading">
+        <editbox name="SPEC_DATA" default="calc_path_data(zeros(4,4,1)+2,ones(4,4,1))" evaluate="true" label="Spectrum Data"/>
+        <editbox name="RATE" default="64" evaluate="true" label="Rate"/>
+      </tab>
+      <tab name="internaltab" label="Internal">
+        <editbox name="DATAPATH_WIDTH" default="18" evaluate="true" label="Datapath Width in Bits"/>
+        <editbox name="TX_BINPT" default="17" evaluate="true" label="Transmit Multiply Binary Point"/>
+        <editbox name="FADE_BINPT" default="15" evaluate="true" label="Fading Multiply Binary Point"/>
+        <editbox name="RX_BINPT" default="15" evaluate="true" label="Receive Multiply Binary Point"/>
+        <editbox name="MAT_BINPT" default="17" evaluate="true" label="Covariance Matrix Binary Point"/>
+        <editbox name="SEED" default="'461AF8228C9F8C92'" evaluate="true" label="Random Seed"/>
+      </tab>
+    </tabpane>
+  </blockgui>
+</sysgenblock>

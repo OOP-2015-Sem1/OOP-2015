@@ -1,0 +1,64 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Shift" block_type="shift">
+  <icon width="60" height="56" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="Shift_config"/>
+  <handlers enablement="shiftenablement"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsControl"/>
+    <library name="xbsTypes"/>
+    <library name="xbsMath"/>
+  </libraries>
+  <blockgui label="Xilinx Binary Shift Operator">
+    <editbox name="infoedit" default="Hardware notes: In hardware this block costs nothing if full output precision is used." read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <radiogroup name="shift_dir" default="Left" evaluate="true" label="Shift direction" ctype="Int">
+          <item value="Left" label="Left"/>
+          <item value="Right" label="Right"/>
+        </radiogroup>
+        <editbox name="shift_bits" default="2" evaluate="true" label="Number of bits" ctype="Int"/>
+        <etch label="Optional Ports">
+          <checkbox name="en" default="off" evaluate="true" label="Provide enable port" ctype="Int"/>
+        </etch>
+        <editbox name="latency" default="0" evaluate="true" label="Latency" ctype="Int"/>
+      </tab>
+      <tab name="typetab" label="Output Type">
+        <radiogroup name="precision" default="Full" evaluate="true" label="Precision" ctype="Int">
+          <item value="Full" label="Full"/>
+          <item value="User Defined" label="User defined"/>
+        </radiogroup>
+        <etch name="userprecisionetch" label="User Defined Precision">
+          <radiogroup name="arith_type" default="Signed  (2's comp)" evaluate="true" label="Output type" ctype="Int">
+            <item value="Signed  (2's comp)" label="Signed  (2's comp)"/>
+            <item value="Unsigned" label="Unsigned"/>
+          </radiogroup>
+          <editbox name="n_bits" default="16" evaluate="true" label="Number of bits" ctype="Int"/>
+          <editbox name="bin_pt" default="14" evaluate="true" label="Binary point" ctype="Int"/>
+          <radiogroup name="quantization" default="Truncate" evaluate="true" label="Quantization" ctype="Int">
+            <item value="Truncate" label="Truncate"/>
+            <item value="Round  (unbiased: +/- Inf)" label="Round  (unbiased: +/- Inf)"/>
+          </radiogroup>
+          <radiogroup name="overflow" default="Wrap" evaluate="true" label="Overflow" ctype="Int">
+            <item value="Wrap" label="Wrap"/>
+            <item value="Saturate" label="Saturate"/>
+            <item value="Flag as error" label="Flag as error"/>
+          </radiogroup>
+        </etch>
+      </tab>
+      <tab name="advancedtab" label="Advanced">
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+  </blockgui>
+</sysgenblock>

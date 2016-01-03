@@ -1,0 +1,84 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="ROM" block_type="sprom">
+  <icon width="60" height="56" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="SPROM_config"/>
+  <handlers enablement="spromenablement" action="spromaction"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsControl"/>
+    <library name="xbsMemory"/>
+    <library name="xbsFloatingPoint"/>
+  </libraries>
+  <blockgui label="Xilinx Single Port Read-Only Memory">
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <editbox name="depth" default="16" evaluate="true" label="Depth" ctype="Int"/>
+        <editbox name="initVector" default="sin(pi*(0:15)/16)" evaluate="true" label="Initial value vector" ctype="DoubleVector"/>
+        <radiogroup name="distributed_mem" default="Block RAM" evaluate="true" label="Memory Type" ctype="Int">
+          <item value="Distributed memory" label="Distributed memory"/>
+          <item value="Block RAM" label="Block RAM"/>
+        </radiogroup>
+        <etch label="Optional Ports">
+          <checkbox name="rst" default="off" evaluate="true" label="Provide reset port for output register" ctype="Bool"/>
+          <editbox name="init_reg" default="0" evaluate="true" label="Initial value for output register" ctype="Double"/>
+          <checkbox name="en" default="off" evaluate="true" label="Provide enable port" ctype="Bool"/>
+        </etch>
+        <editbox name="latency" default="1" evaluate="true" label="Latency" ctype="Int"/>
+      </tab>
+      <tab name="typetab" label="Output">
+        <etch label="Output Type">
+          <radiogroup name="gui_display_data_type" default="Fixed-point" evaluate="true" label="" ctype="Int">
+            <item value="Boolean" label="Boolean"/>
+            <item value="Fixed-point" label="Fixed-point"/>
+            <item value="Floating-point" label="Floating-point"/>
+          </radiogroup>
+          <listbox name="arith_type" default="Signed  (2's comp)" evaluate="true" label="Arithmetic type" ctype="Int">
+            <item value="Boolean"/>
+            <item value="Unsigned"/>
+            <item value="Signed  (2's comp)"/>
+            <item value="Floating-point"/>
+          </listbox>
+          <etch name="fixed_type_p" label="Fixed-point Precision">
+            <glayout cols="2">
+              <editbox name="n_bits" default="16" evaluate="true" label="Number of bits" ctype="Int"/>
+              <editbox name="bin_pt" default="14" evaluate="true" label="Binary point" ctype="Int"/>
+            </glayout>
+          </etch>
+          <etch name="preci_type_p" label="Floating-point Precision">
+            <radiogroup name="preci_type" default="Single" evaluate="true" label="" ctype="Int">
+              <item value="Single" label="Single"/>
+              <item value="Double" label="Double"/>
+              <item value="Custom" label="Custom"/>
+            </radiogroup>
+            <glayout cols="2">
+              <editbox name="exp_width" default="8" evaluate="true" label="Exponent width" ctype="Int"/>
+              <editbox name="frac_width" default="24" evaluate="true" label="Fraction width" ctype="Int"/>
+            </glayout>
+          </etch>
+        </etch>
+      </tab>
+      <tab name="simtab" label="Advanced">
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles"/>
+        </etch>
+      </tab>
+      <tab name="impltab" label="Implementation">
+        <radiogroup name="optimize" default="Area" evaluate="true" label="Optimize for" ctype="Int">
+            <item value="Area" label="Area"/>
+            <item value="Speed" label="Speed"/>
+            <item value="Power" label="Power"/>
+        </radiogroup>
+        <etch label="Core Paramters">
+          <checkbox name="use_rpm" default="on" evaluate="true" label="Use pre-defined core placement information" ctype="Int"/>
+        </etch>
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]"/>
+        </etch>
+      </tab>
+    </tabpane>
+    <workspacevar name="bool" ctype="Int"/>
+  </blockgui>
+</sysgenblock>

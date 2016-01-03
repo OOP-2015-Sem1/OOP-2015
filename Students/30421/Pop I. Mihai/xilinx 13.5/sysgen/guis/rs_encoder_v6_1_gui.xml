@@ -1,0 +1,82 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Reed-Solomon Encoder 6.1 " block_type="rs_encoder_v6_1">
+  <icon width="95" height="142" wmark_color="white" bg_color="green"/>
+  <dll name="sysgen_blockset" entry_point="rs_encoder_v6_1_config"/>
+  <handlers enablement="xlipmagiccallback" action="xlipmagicaction"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsComm"/>
+  </libraries>
+  <blockgui label="Xilinx Reed-Solomon Encoder 6.1">
+    <editbox name="infoedit" default="Reed-Solomon Encoder 6.1. The encoder transforms each block of k information symbols presented serially at the input port to a block of n symbols presented serially at the output port." read_only="true" evaluate="false" multi_line="true"/>
+    <tabpane>
+      <tab name="Basic_tab" label="Basic">
+        <listbox name="code_specification" default="Custom" evaluate="false" label="Code specification (Predefined settings for popular standards)" ctype="String">
+          <item value="Custom"/>
+          <item value="DVB"/>
+          <item value="ATSC"/>
+          <item value="CCSDS"/>
+          <item value="ITU_J_83_Annex_B"/>
+          <item value="IESS_308_126"/>
+          <item value="IESS_308_194"/>
+          <item value="IESS_308_208"/>
+          <item value="IESS_308_219"/>
+          <item value="IESS_308_225"/>
+        </listbox>
+        <editbox name="number_of_channels" default="1" top_label="true" evaluate="true" label="Number of channels (Symbols for each channel are interlaced on DATA_IN and DATA_OUT)" ctype="Int"/>
+        <etch label="Optional Ports">
+          <checkbox name="variable_number_of_check_symbols" default="off" label="Variable number of check symbols (Adds R_IN port)" ctype="Bool"/>
+          <checkbox name="variable_block_length" default="off" label="Variable block length (Adds N_IN port)" ctype="Bool"/>
+          <checkbox name="nd" default="off" label="ND" ctype="Bool"/>
+          <checkbox name="rdy" default="off" label="RDY" ctype="Bool"/>
+          <checkbox name="rfd" default="off" label="RFD" ctype="Bool"/>
+          <checkbox name="rffd" default="off" label="RFFD" ctype="Bool"/>
+          <checkbox name="rst" default="off" label="RST" ctype="Bool"/>
+          <checkbox name="en" default="off" label="EN" ctype="Bool"/>
+        </etch>
+      </tab>
+      <tab name="Custom_Specification_tab" label="Custom Specification">
+        <listbox name="symbol_width" default="8" evaluate="false" label="Symbol width (Bus width of DATA_IN and DATA_OUT)" ctype="String">
+          <item value="3"/>
+          <item value="4"/>
+          <item value="5"/>
+          <item value="6"/>
+          <item value="7"/>
+          <item value="8"/>
+          <item value="9"/>
+          <item value="10"/>
+          <item value="11"/>
+          <item value="12"/>
+        </listbox>
+        <editbox name="symbol_per_block" default="255" top_label="true" evaluate="true" label="Symbol per block (Total number of symbols in an encoded block, including check symbols)" ctype="Int"/>
+        <editbox name="data_symbols" default="239" top_label="true" evaluate="true" label="Data symbols (Number of original information symbols in block, prior to encoding)" ctype="Int"/>
+        <editbox name="field_polynomial" default="0" top_label="true" evaluate="true" label="Field polynomial (Galois Field primitive polynomial (enter in decimal))" ctype="Int"/>
+        <editbox name="generator_start" default="0" top_label="true" evaluate="true" label="Generator start (Galois Field logarithm of the first root of the Generator Polynomial)" ctype="Int"/>
+        <editbox name="scaling_factor" default="1" top_label="true" evaluate="true" label="Scaling factor (Scaling factor for Generator Polynomial root index)" ctype="Int"/>
+      </tab>
+      <tab name="Implementation_tab" label="Implementation">
+        <etch label="Core Parameters">
+          <radiogroup name="memory_style" default="Automatic" evaluate="false" label="Memory style (Force core to use this style of internal memory. 'Automatic' means let core decide)" ctype="String">
+            <item value="Automatic"/>
+            <item value="Block"/>
+            <item value="Distributed"/>
+          </radiogroup>
+          <radiogroup name="check_symbol_generator" default="Fixed_Architecture" evaluate="false" label="Check symbol generator (Fixed architecture cannot be optimized)" ctype="String">
+            <item value="Fixed_Architecture"/>
+            <item value="Optimized_For_Area"/>
+            <item value="Optimized_For_Flexibility"/>
+          </radiogroup>
+        </etch>
+        <etch label="FPGA Area Estimation">
+          <checkbox name="xl_use_area" default="off" label="Define FPGA area for resource estimation" ctype="Bool"/>
+          <editbox name="xl_area" default="[0,0,0,0,0,0,0]" top_label="true" evaluate="true" label="FPGA area [slices, FFs, BRAMs, LUTs, IOBs, emb. mults, TBUFs]" />
+        </etch>
+      </tab>
+    </tabpane>
+    <hiddenvar name="ip_name" default="Reed-Solomon Encoder" evaluate="false" ctype="String"/>
+    <hiddenvar name="ip_version" default="6.1" evaluate="false" ctype="String"/>
+  </blockgui>
+</sysgenblock>
+

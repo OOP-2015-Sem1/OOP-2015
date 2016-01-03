@@ -1,0 +1,110 @@
+<!--   *  Copyright (c) 2005, Xilinx, Inc.  All Rights Reserved.           -->
+<!--   *  Reproduction or reuse, in any form, without the explicit written -->
+<!--   *  consent of Xilinx, Inc., is strictly prohibited.                 -->
+<sysgenblock simulinkname="Constant" block_type="constant">
+  <initialization file="xlconstant_init.m"/>
+  <icon width="55" height="26" wmark_color="white" bg_color="blue"/>
+  <dll name="sysgen_blockset" entry_point="Constant_config"/>
+  <handlers enablement="constantenablement" action="constantaction"/>
+  <libraries>
+    <library name="xbsIndex"/>
+    <library name="xbsBasic"/>
+    <library name="xbsControl"/>
+    <library name="xbsMath"/>
+    <library name="xbsFloatingPoint"/>
+  </libraries>
+  <blockgui label="Xilinx Constant Block">
+    <tabpane>
+      <tab name="basictab" label="Basic">
+        <editbox name="const" default="1" evaluate="true" label="Constant value" ctype="Double"/>
+        <etch label="Output Type">
+          <radiogroup name="gui_display_data_type" default="Fixed-point" evaluate="true" label="" ctype="Int" allow_advanced="false">
+            <item value="Boolean" label="Boolean"/>
+            <item value="Fixed-point" label="Fixed-point"/>
+            <item value="Floating-point" label="Floating-point"/>
+          </radiogroup>
+          <listbox name="arith_type" default="Signed (2's comp)" evaluate="true" label="Arithmetic type" ctype="Int">
+            <item value="Boolean"/>
+            <item value="Signed (2's comp)"/>
+            <item value="Unsigned"/>
+            <item value="DSP48 Instruction"/>
+            <item value="Floating-point"/>
+          </listbox>
+          <etch name="fixed_type_p" label="Fixed-point Precision">
+            <glayout cols="2">
+              <editbox name="n_bits" default="16" evaluate="true" label="Number of bits" ctype="Int"/>
+              <editbox name="bin_pt" default="14" evaluate="true" label="Binary point" ctype="Int"/>
+            </glayout>
+          </etch>
+          <etch name="preci_type_p" label="Floating-point Precision">
+            <radiogroup name="preci_type" default="Single" evaluate="true" label="" ctype="Int">
+              <item value="Single" label="Single"/>
+              <item value="Double" label="Double"/>
+              <item value="Custom" label="Custom"/>
+            </radiogroup>
+            <glayout cols="2">
+              <editbox name="exp_width" default="8" evaluate="true" label="Exponent width" ctype="Int"/>
+              <editbox name="frac_width" default="24" evaluate="true" label="Fraction width" ctype="Int"/>
+            </glayout>
+          </etch>
+        </etch>
+        <etch name="periodetch" label="Sample Period">
+          <checkbox name="explicit_period" default="off" evaluate="true" label="Sampled constant" ctype="Int"/>
+          <editbox name="period" default="1" evaluate="true" label="Sample period" ctype="Double"/>
+        </etch>
+      </tab>
+      <tab name="dsp48tab" label="DSP48">
+        <etch name="dsp48etch" label="DSP48 Instruction">
+          <editbox name="dsp48_infoedit" default="The use of this block for DSP48 instructions is deprecated.  Please use the Opmode block." read_only="true" evaluate="false" multi_line="true"/>
+          <editbox name="equ" default="P=C" read_only="true" evaluate="false" label="DSP48 operation"/>
+          <listbox name="opselect" default="C" evaluate="true" label="Operation select" ctype="Int">
+            <item value="C + A*B"/>
+            <item value="PCIN + A*B"/>
+            <item value="P + A*B"/>
+            <item value="A * B"/>
+            <item value="C + A:B"/>
+            <item value="C - A:B"/>
+            <item value="C"/>
+            <item value="Custom"/>
+          </listbox>
+          <etch name="instructionetch" label="Custom Instruction">
+            <listbox name="inp2" default="PCIN&gt;&gt;17" evaluate="true" label="Z mux" ctype="Int">
+              <item value="0"/>
+              <item value="PCIN"/>
+              <item value="P"/>
+              <item value="C"/>
+              <item value="PCIN&gt;&gt;17"/>
+              <item value="P&gt;&gt;17"/>
+            </listbox>
+            <radiogroup name="opr" default="+" evaluate="true" label="Operand" ctype="Int">
+              <item value="+"/>
+              <item value="-"/>
+            </radiogroup>
+            <listbox name="inp1" default="P" evaluate="true" label="YX muxes" ctype="Int">
+              <item value="0"/>
+              <item value="P"/>
+              <item value="A:B"/>
+              <item value="A*B"/>
+              <item value="C"/>
+              <item value="P+C"/>
+              <item value="A:B+C"/>
+            </listbox>
+            <listbox name="carry" default="CIN" evaluate="true" label="Carry input" ctype="Int">
+              <item value="0"/>
+              <item value="1"/>
+              <item value="CIN"/>
+              <item value="~SIGN(P or PCIN)"/>
+              <item value="~SIGN(A*B or A:B)"/>
+              <item value="~SIGND(A*B or A:B)"/>
+            </listbox>
+          </etch>
+        </etch>
+      </tab>
+      <tab name="advtab" label="Advanced">
+        <etch label="Simulation">
+          <checkbox name="dbl_ovrd" default="off" evaluate="true" label="Override with doubles" ctype="Int"/>
+        </etch>
+      </tab>
+    </tabpane>
+  </blockgui>
+</sysgenblock>

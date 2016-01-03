@@ -1,0 +1,44 @@
+load mriBrainSlices;
+num_slices = 10;
+sysgenMRIDemo_data_real_frames = real(mriBrainSlices(:,:,45:55));
+sysgenMRIDemo_data_real_channel = [];
+for i=1:num_slices,
+    channel_data = sysgenMRIDemo_data_real_frames(:,:,i);
+    channel_data = channel_data';
+    channel_data = channel_data(:);
+    sysgenMRIDemo_data_real_channel = [sysgenMRIDemo_data_real_channel;channel_data];
+end;
+
+sysgenMRIDemo_data_imag_channel = [];
+sysgenMRIDemo_data_imag_frames = imag(mriBrainSlices(:,:,45:55));
+for i=1:num_slices,
+    channel_data = sysgenMRIDemo_data_imag_frames(:,:,i);
+    channel_data = channel_data';
+    channel_data = channel_data(:);
+    sysgenMRIDemo_data_imag_channel = [sysgenMRIDemo_data_imag_channel;channel_data];
+end;
+[c_image_rows, c_image_cols] = size(mriBrainSlices(:,:,1));
+h = imagesc(log2(fftshift(abs(mriBrainSlices(:,:,50)))));
+set(get(get(h,'parent'),'parent'),'name','Input K-space Data');
+c_swathe_size = 1;
+c_block_size = 64;
+c_num_fstores = 16;
+c_word_size = 8;
+clear channel_data;
+clear mriBrainSlices;
+clear sysgenMRIDemo_data_imag_frames;
+clear sysgenMRIDemo_data_real_frames;
+% load sysgenMRIDemo_data;
+% sysgenMRIDemo_data_real_channel = real(sysgenMRIDemo_data);
+% sysgenMRIDemo_data_real_channel = sysgenMRIDemo_data_real_channel';
+% sysgenMRIDemo_data_real_channel = sysgenMRIDemo_data_real_channel(:);
+% sysgenMRIDemo_data_imag_channel = imag(sysgenMRIDemo_data);
+% sysgenMRIDemo_data_imag_channel = sysgenMRIDemo_data_imag_channel';
+% sysgenMRIDemo_data_imag_channel = sysgenMRIDemo_data_imag_channel(:);
+% [c_image_rows, c_image_cols] = size(sysgenMRIDemo_data);
+% h = imagesc(abs(sysgenMRIDemo_data));
+% set(get(get(h,'parent'),'parent'),'name','Input K-space Data');
+% c_swathe_size = 1;
+% c_block_size = 64;
+% c_num_fstores = 16;
+% c_word_size = 8;

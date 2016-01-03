@@ -7,17 +7,18 @@ import java.util.List;
 public class Player implements Serializable{
 
     List<Road> roads = new LinkedList<>();
-    public String playerName;
-    public ResourceCards resources;
+    String playerName;
+    ResourceCards resources;
+    DevelopmentCards developmentCards;
     PlayerColor color;
     int armySize;
     int victoryPoints;
 
-    String settlement;
-    String city;
-    String verticalRoad;
-    String leftLeaningRoad;
-    String rightLeaningRoad;
+    String settlementPath;
+    String cityPath;
+    String verticalRoadPath;
+    String leftLeaningRoadPath;
+    String rightLeaningRoadPath;
 
     int longestRoad;
 
@@ -25,6 +26,7 @@ public class Player implements Serializable{
         this.playerName = name;
         this.color = color;
         resources = new ResourceCards();
+        developmentCards = new DevelopmentCards();
         setImagePaths();
         victoryPoints = 0;
         armySize = 0;
@@ -33,35 +35,35 @@ public class Player implements Serializable{
     private void setImagePaths() {
         switch(color){
             case RED:{
-                    settlement = "Pics\\Buildings\\RedSettlement.png";
-                    city = "Pics\\Buildings\\RedCity.png";
-                    verticalRoad = "Pics\\Buildings\\RedVerticalRoad.png";
-                    leftLeaningRoad = "Pics\\Buildings\\RedLeftLeaningRoad.png";
-                    rightLeaningRoad =  "Pics\\Buildings\\RedRightLeaningRoad.png";
+                    settlementPath = "Pics\\Buildings\\RedSettlement.png";
+                    cityPath = "Pics\\Buildings\\RedCity.png";
+                    verticalRoadPath = "Pics\\Buildings\\RedVerticalRoad.png";
+                    leftLeaningRoadPath = "Pics\\Buildings\\RedLeftLeaningRoad.png";
+                    rightLeaningRoadPath =  "Pics\\Buildings\\RedRightLeaningRoad.png";
                     break;
             }
             case BLUE:{
-                    settlement = "Pics\\Buildings\\BlueSettlement.png";
-                    city = "Pics\\Buildings\\BlueCity.png";
-                    verticalRoad = "Pics\\Buildings\\BlueVerticalRoad.png";
-                    leftLeaningRoad = "Pics\\Buildings\\BlueLeftLeaningRoad.png";
-                    rightLeaningRoad =  "Pics\\Buildings\\BlueRightLeaningRoad.png";
+                    settlementPath = "Pics\\Buildings\\BlueSettlement.png";
+                    cityPath = "Pics\\Buildings\\BlueCity.png";
+                    verticalRoadPath = "Pics\\Buildings\\BlueVerticalRoad.png";
+                    leftLeaningRoadPath = "Pics\\Buildings\\BlueLeftLeaningRoad.png";
+                    rightLeaningRoadPath =  "Pics\\Buildings\\BlueRightLeaningRoad.png";
                     break;
             }
             case ORANGE:{
-                    settlement = "Pics\\Buildings\\OrangeSettlement.png";
-                    city = "Pics\\Buildings\\OrangeCity.png";
-                    verticalRoad = "Pics\\Buildings\\OrangeVerticalRoad.png";
-                    leftLeaningRoad = "Pics\\Buildings\\OrangeLeftLeaningRoad.png";
-                    rightLeaningRoad =  "Pics\\Buildings\\OrangeRightLeaningRoad.png";
+                    settlementPath = "Pics\\Buildings\\OrangeSettlement.png";
+                    cityPath = "Pics\\Buildings\\OrangeCity.png";
+                    verticalRoadPath = "Pics\\Buildings\\OrangeVerticalRoad.png";
+                    leftLeaningRoadPath = "Pics\\Buildings\\OrangeLeftLeaningRoad.png";
+                    rightLeaningRoadPath =  "Pics\\Buildings\\OrangeRightLeaningRoad.png";
                     break;
             }
             case GREY:{
-                    settlement = "Pics\\Buildings\\GreySettlement.png";
-                    city = "Pics\\Buildings\\GreyCity.png";
-                    verticalRoad = "Pics\\Buildings\\GreyVerticalRoad.png";
-                    leftLeaningRoad = "Pics\\Buildings\\GreyLeftLeaningRoad.png";
-                    rightLeaningRoad =  "Pics\\Buildings\\GreyRightLeaningRoad.png";
+                    settlementPath = "Pics\\Buildings\\GreySettlement.png";
+                    cityPath = "Pics\\Buildings\\GreyCity.png";
+                    verticalRoadPath = "Pics\\Buildings\\GreyVerticalRoad.png";
+                    leftLeaningRoadPath = "Pics\\Buildings\\GreyLeftLeaningRoad.png";
+                    rightLeaningRoadPath =  "Pics\\Buildings\\GreyRightLeaningRoad.png";
                     break;
             }
         }
@@ -91,27 +93,35 @@ public class Player implements Serializable{
         return longestRoad;
     }
 
-    public String getRightLeaningRoad() {
-        return rightLeaningRoad;
+    public String getRightLeaningRoadPath() {
+        return rightLeaningRoadPath;
     }
 
-    public String getLeftLeaningRoad() {
-        return leftLeaningRoad;
+    public String getLeftLeaningRoadPath() {
+        return leftLeaningRoadPath;
     }
 
-    public String getVerticalRoad() {
-        return verticalRoad;
+    public String getVerticalRoadPath() {
+        return verticalRoadPath;
     }
 
-    public String getCity() {
-        return city;
+    public String getCityPath() {
+        return cityPath;
     }
 
-    public String getSettlement() {
-        return settlement;
+    public String getSettlementPath() {
+        return settlementPath;
     }
 
     public ResourceCards getResources() {
         return resources;
+    }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public DevelopmentCards getDevelopmentCards() {
+        return developmentCards;
     }
 }

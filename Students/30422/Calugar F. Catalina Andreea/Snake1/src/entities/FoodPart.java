@@ -12,7 +12,6 @@ public class FoodPart extends SnakeBodyPart {
 	public void draw(Graphics g) {
 		g.setColor(Color.RED);
 		g.fillRect(getxCoor() * getWidth(), getyCoor() * getHeight(), getWidth(), getHeight());
-
 	}
 
 }

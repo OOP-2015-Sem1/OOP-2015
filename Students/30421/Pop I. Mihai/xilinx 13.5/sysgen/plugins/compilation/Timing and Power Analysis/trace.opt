@@ -1,0 +1,27 @@
+FLOWTYPE = FPGA;
+###############################################################
+## Filename: balanced.opt
+##
+## Option File For Xilinx FPGA Implementation Flow
+## 
+## Version: 6.1.1
+
+
+#
+# Options for Post Par Trace
+#
+# Type "trce -h" for a detailed list of trce command line options
+#
+Program post_par_trce
+#-e 3;                       # Produce error report limited to 3 items per constraint
+-v 150;                      # Produce verbose report limited to 150 items per constraint
+                             # TODO: would be nice to have this configurable via Sysgen GUI
+-intstyle xflow;             # Message Reporting Style: ise, xflow, or silent
+-xml <design>.twx;           # Output XML version of the timing report
+-o <design>.twr;             # Output trace report file
+#-tsi <design>.tsi;          # Produce Timing Specification Interaction report
+#-fastpaths;                 # Report minimum paths in verbose mode
+#-nodatasheet;               # Do not create the datasheet section of the report
+<inputdir><design>.ncd;      # Input placed and routed ncd
+<inputdir><design>.pcf;      # Physical constraints file
+END Program post_par_trce
