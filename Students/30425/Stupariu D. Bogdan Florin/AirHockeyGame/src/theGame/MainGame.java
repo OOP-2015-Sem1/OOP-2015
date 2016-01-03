@@ -13,7 +13,6 @@ import inputDevices.KeyInput;
 import objects.Ball;
 import objects.ObjectID;
 import objects.Player;
-import objects.Player2;
 
 public class MainGame extends Canvas implements Runnable {
 
@@ -51,7 +50,7 @@ public class MainGame extends Canvas implements Runnable {
 
 		handler.addObject(new Ball(MainGame.WIDTH / 2 - 50, MainGame.HEIGHT / 2 - 50, ObjectID.Ball));
 		handler.addObject(new Player(50, MainGame.HEIGHT / 2 - 70, ObjectID.Player));
-		handler.addObject(new Player2(MainGame.WIDTH - 170, MainGame.HEIGHT / 2 - 70, ObjectID.Player2));
+		handler.addObject(new Player(MainGame.WIDTH - 170, MainGame.HEIGHT / 2 - 70, ObjectID.Player2));
 
 	}
 
