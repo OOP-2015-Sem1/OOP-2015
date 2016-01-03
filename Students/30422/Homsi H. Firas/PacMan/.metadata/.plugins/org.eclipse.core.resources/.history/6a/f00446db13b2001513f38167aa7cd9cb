@@ -1,0 +1,85 @@
+package Player;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+
+import Enemy;
+import Game;
+import Texture;
+
+public class Player extends Rectangle {
+	
+	private static final long serialVersionUID = 1L;
+	
+	public boolean up, down, left, right;
+	private int speed = 4;
+	public static Level level;
+	
+	public static boolean weWin = false;
+	public static boolean weLost = false;
+	
+	public Player(int x, int y){
+		setBounds(x, y, 32, 32); //32 = WIDTH, HEIGHT
+	}
+	
+	public void tick(){
+		if(right && canMove(x+speed, y)) x +=speed;
+		if(left && canMove(x-speed, y)) x -= speed;
+		if(up && canMove(x, y-speed)) y -= speed;
+		if(down && canMove(x, y+speed)) y += speed;
+		
+		Level level = Game.level;
+		
+		for(int i = 0; i < level.apples.size(); i++){
+			
+			if(this.intersects(level.apples.get(i))){
+				level.apples.remove(i);
+				break;
+			}
+		}
+		
+		//Game ends, we win !
+		if(Game.level.apples.size() == 0){
+			Game.STATE = Game.PAUSE_SCREEN;
+			weWin = true;
+			weLost = false;
+			}
+		else{
+			weWin = false;
+			weLost = true;
+		}
+		
+		for(int i = 0; i < Game.level.enemies.size(); i++){
+			Enemy en = Game.level.enemies.get(i);
+			if(en.intersects(this)){
+				//Menu system
+				Game.STATE = Game.PAUSE_SCREEN;			
+				return;
+			}
+		}
+	}
+	
+	private boolean canMove(int nextx, int nexty){
+		Rectangle bounds = new Rectangle(nextx, nexty, width, height);
+		Level level = Game.level;
+		
+		for(int x = 0; x < level.tiles.length; x++){
+			for(int y = 0; y < level.tiles[0].length; y++){
+				if(level.tiles[x][y] != null){
+					if(bounds.intersects(level.tiles[x][y])){
+						return false;
+					}
+				}
+			}
+		}
+		
+		return true;
+	}
+	
+	public void render(Graphics g){
+		//g.setColor(Color.yellow);
+	//	SpriteSheet sheet = Game.spritesheet;
+		//g.fillRect(x, y,width, height);
+		g.drawImage(Texture.player, x, y, width, height, null);
+	}
+	
+}
