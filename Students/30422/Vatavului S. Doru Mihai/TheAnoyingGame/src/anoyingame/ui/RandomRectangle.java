@@ -28,17 +28,16 @@ public class RandomRectangle extends JPanel {
 				Color.GREEN, Color.ORANGE,Color.MAGENTA
 			};
 	private String[] textArray = new String[]{
-			"\n\n\n              RED", 
-			"\n\n\n              BLUE",
+			"\n\n\n                 RED", 
+			"\n\n\n                BLUE",
 			"\n\n\n              YELLOW",
-			"\n\n\n              GREEN",
+			"\n\n\n               GREEN",
 			"\n\n\n              ORANGE",
-			"\n\n\n              PINK"
+			"\n\n\n                PINK"
 	};
 	
 
 	public RandomRectangle(){
-		
 		
 		this.setLayout(new GridLayout(3,3));
 		text = new JTextArea();
@@ -53,8 +52,7 @@ public class RandomRectangle extends JPanel {
 				emptyWhitePanel = new JPanel();
 				emptyWhitePanel.setBackground(Color.WHITE);
 				this.add(emptyWhitePanel);
-			}
-				
+			}	
 		}
 	}
 	
@@ -90,11 +88,7 @@ public class RandomRectangle extends JPanel {
 		return result;
 	}
 	
-	public void resetRectangle(){
-		
-		new RandomRectangle();
-		
-	}
+
 	
 	public String getRectangleColor(){
 		System.out.println("back color: " + backColorRand);

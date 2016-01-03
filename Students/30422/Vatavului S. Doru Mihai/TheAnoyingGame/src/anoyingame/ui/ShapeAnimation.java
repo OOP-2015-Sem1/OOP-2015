@@ -5,19 +5,19 @@ import java.util.Random;
 
 import javax.swing.JPanel;
 
-public class Animation extends JPanel{
+public class ShapeAnimation extends JPanel{
 	
-	private Random rand1 = new Random();
-	private Random rand2 = new Random();
-	private int shape = rand1.nextInt(6) + 1;
-	private int color = rand2.nextInt(6) + 1;
+	private Random shapeRandom = new Random();
+	private Random colorRandom = new Random();
+	private int shape = shapeRandom.nextInt(6) + 1;
+	private int color = colorRandom.nextInt(6) + 1;
 	
 	public void setRandomShape(){
-		shape = rand1.nextInt(6) + 1;
+		shape = shapeRandom.nextInt(6) + 1;
 	}
 	
 	public void setRandomColor(){
-		color = rand2.nextInt(6) + 1;
+		color = colorRandom.nextInt(6) + 1;
 	}
 	public int getShape(){
 		return shape;

@@ -12,14 +12,15 @@ import javax.swing.JPanel;
 
 
 
-public class ShapeAnswerPanel extends JPanel {
+public class AnswerPanel extends JPanel {
 	
 	private JButton [] answerButtons;
 	private int [] userAnswer;
 	private int noOfShape = 0;
 	private boolean timeForNewAnimation = false;
 	private int length;
-	public ShapeAnswerPanel(int length){
+	
+	public AnswerPanel(int length){
 		setLayout(new GridLayout(2, 3));
 		userAnswer = new int[length];
 		answerButtons = new JButton[6];
@@ -32,7 +33,6 @@ public class ShapeAnswerPanel extends JPanel {
 			answerButtons[i].addActionListener(new AnswerListener());
 			answerButtons[i].setBackground(new Color(255,202,0));
 			this.add(answerButtons[i]);
-			
 			}
 		}
 	public void setLength(int value){
@@ -49,20 +49,19 @@ public class ShapeAnswerPanel extends JPanel {
 						noOfShape++;
 					}
 				}
-			if(noOfShape == length-1)
-			{
-				timeForNewAnimation = true;
+				if(noOfShape == length-1)
+				{
+					timeForNewAnimation = true;
 				
-			}
-			if(noOfShape == length){
-				noOfShape = 0;
-				timeForNewAnimation = false;
-			}
+				}
+				if(noOfShape == length){
+					noOfShape = 0;
+					timeForNewAnimation = false;
+				}
 			}
 		}
 	}
 	
-
 	public boolean itsTimeForNewAnimation(){
 		return timeForNewAnimation;
 	}

@@ -1,9 +1,9 @@
 package anoyingame.core;
-public class GameRunner {
+public class Runner {
 
 	public static void main(String[] args) {
 		
-		new BigController();
+		new Controller();
 	}
 
 }

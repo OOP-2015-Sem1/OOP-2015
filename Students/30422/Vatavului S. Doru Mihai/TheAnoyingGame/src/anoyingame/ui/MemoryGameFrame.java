@@ -1,7 +1,5 @@
 package anoyingame.ui;
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,13 +9,13 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
-public class ShapeGameFrame extends JFrame{
+public class MemoryGameFrame extends JFrame{
 	
-	private Animation shapeAnimation = new Animation(); 
+	private ShapeAnimation shapeAnimation = new ShapeAnimation(); 
 	private Timer timer = null;
 	private JLabel timerLabel = new JLabel();
 	private int count;
-	private ShapeAnswerPanel answerPanel;
+	private AnswerPanel answerPanel;
 	private int [] correctAnswer;
 	private int noOfShape;
 	private JButton [] answerButtons;
@@ -25,7 +23,7 @@ public class ShapeGameFrame extends JFrame{
 	private int score = 0;
 	private int animationNumber = 0;
 	private JLabel scoreLabel = new JLabel("Score: "+ score);
-	public ShapeGameFrame(int length){
+	public MemoryGameFrame(int length){
 		this.length = length;
 		super.setTitle("Shape Game");
 		this.setLayout(new BorderLayout());
@@ -33,7 +31,7 @@ public class ShapeGameFrame extends JFrame{
 		this.add(timerLabel,BorderLayout.PAGE_START);
 		this.add(scoreLabel,BorderLayout.LINE_END);
 		this.add(shapeAnimation,BorderLayout.CENTER);
-		answerPanel = new ShapeAnswerPanel(length);
+		answerPanel = new AnswerPanel(length);
 		this.add(answerPanel,BorderLayout.PAGE_END);
 		this.setSize(400, 500);
 		this.setVisible(true);
