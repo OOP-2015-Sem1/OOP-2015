@@ -12,8 +12,8 @@ import javax.swing.JPanel;
 public class GameChooser extends JFrame {
 
 	private JPanel blankPanel = new JPanel();
-	private JButton colorGameButton = new JButton("The Anoying Color Game");
-	private JButton memoryGameButton = new JButton("The Even More Anoying Memory Game");
+	private JButton colorGameButton = new JButton("The Annoying Color Game");
+	private JButton memoryGameButton = new JButton("The Even More Annoying Memory Game");
 	private JLabel imageLabel;
 	private ImageIcon gameLogo;
 
