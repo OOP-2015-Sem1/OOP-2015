@@ -4,8 +4,10 @@ import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -33,11 +35,14 @@ public abstract class CardFlipping extends Activity {
     int index1 = -1;
     int index2 = -1;
 
-
     public ArrayList<Card> cards = new ArrayList<Card>();
 
     List<String> backDrawables = new ArrayList<>();
 
+
+    abstract int getNumberOfCards();
+
+    private boolean timerStarted = false;
 
     public void setCards(ImageView[] frontImages, ImageView[] backImages, String imageName) {
 
@@ -59,6 +64,24 @@ public abstract class CardFlipping extends Activity {
             card.setFrontImage(frontImages[i]);
             card.setBackImage(backImages[i]);
             cards.add(card);
+        }
+
+    }
+
+    public void setImages() {
+
+        Resources res = getResources();
+        int numberOfCards = getNumberOfCards();
+        frontImages = new ImageView[numberOfCards];
+        backImages = new ImageView[numberOfCards];
+
+        for (int i = 0; i < numberOfCards; i++) {
+            int idFrontImage = res.getIdentifier("imgBack" + (i + 1), "id", getApplicationContext().getPackageName());
+            int idBackImage = res.getIdentifier("img" + (i + 1), "id", getApplicationContext().getPackageName());
+
+            frontImages[i] = (ImageView) findViewById(idFrontImage);
+            backImages[i] = (ImageView) findViewById(idBackImage);
+
         }
 
     }
@@ -94,7 +117,7 @@ public abstract class CardFlipping extends Activity {
 
     }
 
-    public void checkCards(int index1, int index2) {
+    public void checkCards(final int index1, final int index2) {
         if (cards.get(index1).getBackImage().getDrawable().getConstantState().equals(cards.get(index2).getBackImage().getDrawable().getConstantState())) {
 
             cards.get(index1).setMatched(true);
@@ -103,12 +126,24 @@ public abstract class CardFlipping extends Activity {
             cards.get(index2).setSelected(false);
 
         } else {
-            doTurn(cards.get(index1));
-            doTurn(cards.get(index2));
+            timerStarted = true;
+            new CountDownTimer(2000, 2000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                }
+
+                @Override
+                public void onFinish() {
+                    doTurn(cards.get(index1));
+                    doTurn(cards.get(index2));
+                    timerStarted = false;
+                }
+            }.start();
         }
+
         if (this.isGameWon()) {
 
-            Toast toast = Toast.makeText(getApplicationContext(), "YOU WON! "+"NR OF TRIES: " + nrOfTries + " LOGOS: " +cards.size(), Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(getApplicationContext(), "YOU WON! " + "NR OF TRIES: " + nrOfTries + " LOGOS: " + cards.size(), Toast.LENGTH_LONG);
             toast.show();
         }
     }
@@ -122,43 +157,52 @@ public abstract class CardFlipping extends Activity {
         return true;
     }
 
+
     public void setFrontImagesClickListeners() {
         for (int i = 0; i < cards.size(); i++) {
+
             frontImages[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    for (int i = 0; i < frontImages.length; i++)
-                        if (v.getId() == frontImages[i].getId()) {
-                            nrOfTries = nrOfTries + 1;
-                            if (!cards.get(i).isMatched() && !cards.get(i).isSelected())
-                                doTurn(cards.get(i));
+                    if (!timerStarted) {
 
-                        }
-                    count = 0;
-                    for (int i = 0; i < cards.size(); i++) {
-                        if (cards.get(i).isSelected()) {
-                            count++;
-                        }
-                    }
+                        for (int i = 0; i < frontImages.length; i++)
+                            if (v.getId() == frontImages[i].getId()) {
+                                nrOfTries = nrOfTries + 1;
+                                if (!cards.get(i).isMatched() && !cards.get(i).isSelected())
+                                    doTurn(cards.get(i));
 
-                    if (count == 2) {
+                            }
+
+                        count = 0;
                         for (int i = 0; i < cards.size(); i++) {
                             if (cards.get(i).isSelected()) {
-                                if (index1 == -1) {
-                                    index1 = i;
-                                } else {
-                                    index2 = i;
-                                }
+                                count++;
                             }
                         }
-                        checkCards(index1, index2);
-                        index1 = -1;
-                        index2 = -1;
 
+                        if (count == 2) {
+                            for (int i = 0; i < cards.size(); i++) {
+                                if (cards.get(i).isSelected()) {
+                                    if (index1 == -1) {
+                                        index1 = i;
+                                    } else {
+                                        index2 = i;
+                                    }
+                                }
+                            }
+                            checkCards(index1, index2);
+                            index1 = -1;
+                            index2 = -1;
+
+                        }
                     }
                 }
+
             });
 
         }
     }
+
+
 }
