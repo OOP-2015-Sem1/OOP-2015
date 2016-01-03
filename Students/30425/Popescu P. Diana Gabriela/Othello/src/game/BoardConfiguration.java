@@ -1,14 +1,8 @@
 package game;
 
+import methods.constants.auxiliary.Constants;
+
 public class BoardConfiguration {
-
-	public static final int ROWS = 8;
-	public static final int COLS = 8;
-
-	public static final int GREEN = 0;
-	public static final int WHITE = 1;
-	public static final int BLACK = 2;
-	public static final int GAME_OVER=5;
 
 	private int[][] board;
 
@@ -20,11 +14,11 @@ public class BoardConfiguration {
 		this.board[i][j] = value;
 	}
 
-	public BoardConfiguration() {
-		board = new int[ROWS+1][COLS+1];
-		board[3][3] = WHITE;
-		board[4][4] = WHITE;
-		board[3][4] = BLACK;
-		board[4][3] = BLACK;
+	public BoardConfiguration(int rows, int cols) {
+		board = new int[rows + 1][cols + 1];
+		board[rows / 2 - 1][cols / 2 - 1] = Constants.WHITE;
+		board[rows / 2][cols / 2] = Constants.WHITE;
+		board[rows / 2 - 1][cols / 2] = Constants.BLACK;
+		board[rows / 2][cols / 2 - 1] = Constants.BLACK;
 	}
 }
