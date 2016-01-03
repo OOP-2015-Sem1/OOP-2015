@@ -8,6 +8,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
+import db.manager.Authentification;
 import main.Application;
 
 /**
@@ -26,6 +27,14 @@ public class LogIn_admin extends JPanel {
 		Application.mainFrame.changePanel(MainFrame.homePanel);
 	}
 
+	private void lognButtonActionPerformed(ActionEvent e) {
+		Authentification authentification = new Authentification();
+		char[] tempPassword = passwordField1.getPassword();
+		String tempStringPassword = new String(tempPassword);
+		//System.out.println(userTextField.getText() + " " + tempStringPassword); // Testing
+		authentification.attemptAdminLogin(textField3.getText(), tempStringPassword);
+	}
+
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
 		// Generated using JFormDesigner Evaluation license - Gergo Szentannai
@@ -33,7 +42,7 @@ public class LogIn_admin extends JPanel {
 		adminPassword = new JTextField();
 		textField3 = new JTextField();
 		passwordField1 = new JPasswordField();
-		button1 = new JButton();
+		lognButton = new JButton();
 		button2 = new JButton();
 
 		//======== this ========
@@ -54,8 +63,9 @@ public class LogIn_admin extends JPanel {
 		adminPassword.setText("Admin Password");
 		adminPassword.setEditable(false);
 
-		//---- button1 ----
-		button1.setText("Log in");
+		//---- lognButton ----
+		lognButton.setText("Log in");
+		lognButton.addActionListener(e -> lognButtonActionPerformed(e));
 
 		//---- button2 ----
 		button2.setText("Cancel");
@@ -68,7 +78,7 @@ public class LogIn_admin extends JPanel {
 				.addGroup(layout.createSequentialGroup()
 					.addGap(68, 68, 68)
 					.addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-						.addComponent(button1)
+						.addComponent(lognButton)
 						.addGroup(layout.createSequentialGroup()
 							.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
 								.addComponent(adminPassword)
@@ -94,7 +104,7 @@ public class LogIn_admin extends JPanel {
 						.addComponent(passwordField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18, 18, 18)
 					.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-						.addComponent(button1)
+						.addComponent(lognButton)
 						.addComponent(button2))
 					.addContainerGap(85, Short.MAX_VALUE))
 		);
@@ -107,7 +117,7 @@ public class LogIn_admin extends JPanel {
 	private JTextField adminPassword;
 	private JTextField textField3;
 	private JPasswordField passwordField1;
-	private JButton button1;
+	private JButton lognButton;
 	private JButton button2;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 }

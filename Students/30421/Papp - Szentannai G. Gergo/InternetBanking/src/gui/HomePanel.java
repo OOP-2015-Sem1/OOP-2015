@@ -75,7 +75,7 @@ public class HomePanel extends JPanel {
 		button2.addActionListener(e -> login_admin(e));
 
 		//---- button3 ----
-		button3.setText("Settings");
+		button3.setText("Settings [not available yet]");
 		button3.addActionListener(e -> settingsActionPerformed(e));
 
 		//---- textPane1 ----
@@ -89,7 +89,7 @@ public class HomePanel extends JPanel {
 		layout.setHorizontalGroup(
 			layout.createParallelGroup()
 				.addGroup(layout.createSequentialGroup()
-					.addGap(212, 212, 212)
+					.addGap(168, 168, 168)
 					.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
 						.addComponent(textPane1)
 						.addGroup(layout.createSequentialGroup()
@@ -98,8 +98,8 @@ public class HomePanel extends JPanel {
 							.addComponent(button2)
 							.addGap(44, 44, 44)
 							.addComponent(button3))
-						.addComponent(textPane2, GroupLayout.PREFERRED_SIZE, 351, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(217, Short.MAX_VALUE))
+						.addComponent(textPane2, GroupLayout.PREFERRED_SIZE, 411, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(201, Short.MAX_VALUE))
 		);
 		layout.setVerticalGroup(
 			layout.createParallelGroup()

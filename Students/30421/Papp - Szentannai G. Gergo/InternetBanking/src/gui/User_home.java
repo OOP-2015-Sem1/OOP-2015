@@ -34,7 +34,7 @@ public class User_home extends JPanel {
 		// JFormDesigner - Component initialization - DO NOT MODIFY
 		// //GEN-BEGIN:initComponents
 		// Generated using JFormDesigner Evaluation license - Gergo Szentannai
-		textArea1 = new JTextArea();
+		welcomeText = new JTextArea();
 		viewAccountsButton = new JButton();
 		viewuserDetailsButton = new JButton();
 		scrollPane1 = new JScrollPane();
@@ -52,8 +52,8 @@ public class User_home extends JPanel {
 				java.awt.Color.red), getBorder())); addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
 
 
-		//---- textArea1 ----
-		textArea1.setText("Welcome, ");
+		//---- welcomeText ----
+		welcomeText.setText("Welcome, ");
 
 		//---- viewAccountsButton ----
 		viewAccountsButton.setText("View accounts");
@@ -79,21 +79,25 @@ public class User_home extends JPanel {
 			layout.createParallelGroup()
 				.addGroup(layout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-						.addComponent(textArea1, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
-						.addComponent(viewuserDetailsButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(viewAccountsButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(logoutButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(transferMoneyButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addGap(18, 18, 18)
-					.addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
+					.addGroup(layout.createParallelGroup()
+						.addGroup(layout.createSequentialGroup()
+							.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+								.addComponent(viewuserDetailsButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(viewAccountsButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(logoutButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(transferMoneyButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addGap(18, 18, 18)
+							.addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE))
+						.addGroup(layout.createSequentialGroup()
+							.addComponent(welcomeText, GroupLayout.PREFERRED_SIZE, 264, GroupLayout.PREFERRED_SIZE)
+							.addGap(0, 496, Short.MAX_VALUE)))
 					.addContainerGap())
 		);
 		layout.setVerticalGroup(
 			layout.createParallelGroup()
 				.addGroup(layout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(textArea1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addComponent(welcomeText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(39, 39, 39)
 					.addGroup(layout.createParallelGroup()
 						.addGroup(layout.createSequentialGroup()
@@ -113,7 +117,7 @@ public class User_home extends JPanel {
 	// JFormDesigner - Variables declaration - DO NOT MODIFY
 	// //GEN-BEGIN:variables
 	// Generated using JFormDesigner Evaluation license - Gergo Szentannai
-	private JTextArea textArea1;
+	public static JTextArea welcomeText;
 	private JButton viewAccountsButton;
 	private JButton viewuserDetailsButton;
 	private JScrollPane scrollPane1;

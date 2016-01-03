@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {space :p:68:p, par t {comp button1:::p::p, seq {par l:::p {comp adminPassword:::::x, comp adminID:::::x}, space s:::p, par l:::p {comp textField3::::93:x, comp passwordField1::::93:x}}}, space :p:31:p, comp button2:::p::p, space ::41:x}}"
-			"$verticalGroup": "par l {seq l {space :p:116:p, par b {comp textField3::b:p::p, comp adminID::b:p::p}, space s:::p, par b {comp adminPassword::b:p::p, comp passwordField1::b:p::p}, space s:::p, par b {comp button1::b:p::p, comp button2::b:p::p}, space ::85:x}}"
+			"$horizontalGroup": "par l {seq l {space :p:68:p, par t {comp lognButton:::p::p, seq {par l:::p {comp adminPassword:::::x, comp adminID:::::x}, space s:::p, par l:::p {comp textField3::::93:x, comp passwordField1::::93:x}}}, space :p:31:p, comp button2:::p::p, space ::41:x}}"
+			"$verticalGroup": "par l {seq l {space :p:116:p, par b {comp textField3::b:p::p, comp adminID::b:p::p}, space s:::p, par b {comp adminPassword::b:p::p, comp passwordField1::b:p::p}, space s:::p, par b {comp lognButton::b:p::p, comp button2::b:p::p}, space ::85:x}}"
 		} ) {
 			name: "this"
 			add( new FormComponent( "javax.swing.JTextField" ) {
@@ -25,8 +25,9 @@ new FormModel {
 				name: "passwordField1"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "button1"
+				name: "lognButton"
 				"text": "Log in"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "lognButtonActionPerformed", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button2"

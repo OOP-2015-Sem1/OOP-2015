@@ -8,7 +8,7 @@ public class MainFrame extends JFrame {
 	private JFrame MainFrame;
 
 	// Available panels:
-	protected static JPanel homePanel, login_user, login_admin, user_home, admin_home, settings;
+	public static JPanel homePanel, login_user, login_admin, user_home, admin_home, settings;
 
 	public MainFrame() {
 		initPanels();

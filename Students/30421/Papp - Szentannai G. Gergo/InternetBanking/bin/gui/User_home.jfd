@@ -4,13 +4,16 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq {space :::p, par l:::p {comp textArea1::l:p:84:p, comp viewuserDetailsButton::l:::x, comp viewAccountsButton::l:::x, comp logoutButton:::::x, comp transferMoneyButton:::::x}, space s:::p, comp scrollPane1::::629:x, space :::p}}"
-			"$verticalGroup": "par l {seq l {space :::p, comp textArea1:::p::p, space :p:39:p, par l {seq {comp viewAccountsButton:::p::p, space s:::p, comp viewuserDetailsButton:::p::p, space s:::p, comp transferMoneyButton:::p::p, space ::269:x, comp logoutButton:::p::p}, comp scrollPane1::::397:x}, space :::p}}"
+			"$horizontalGroup": "par l {seq {space :::p, par l {seq {par l:::p {comp viewuserDetailsButton::l:::x, comp viewAccountsButton::l:::x, comp logoutButton:::::x, comp transferMoneyButton:::::x}, space s:::p, comp scrollPane1::::629:x}, seq {comp welcomeText:::p:264:p, space :0:496:x}}, space :::p}}"
+			"$verticalGroup": "par l {seq l {space :::p, comp welcomeText:::p::p, space :p:39:p, par l {seq {comp viewAccountsButton:::p::p, space s:::p, comp viewuserDetailsButton:::p::p, space s:::p, comp transferMoneyButton:::p::p, space ::269:x, comp logoutButton:::p::p}, comp scrollPane1::::397:x}, space :::p}}"
 		} ) {
 			name: "this"
 			add( new FormComponent( "javax.swing.JTextArea" ) {
-				name: "textArea1"
+				name: "welcomeText"
 				"text": "Welcome, "
+				auxiliary() {
+					"JavaCodeGenerator.variableModifiers": 1
+				}
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "viewAccountsButton"

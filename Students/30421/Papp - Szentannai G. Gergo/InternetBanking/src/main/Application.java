@@ -11,7 +11,7 @@ public class Application {
 
 	public Application() {
 
-		// I could have put tis inside the Main class too...
+		// I could have put this inside the Main class too...
 
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {

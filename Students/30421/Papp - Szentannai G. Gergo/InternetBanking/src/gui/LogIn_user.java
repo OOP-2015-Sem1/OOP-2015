@@ -20,6 +20,7 @@ public class LogIn_user extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 	public LogIn_user() {
 		initComponents();
 	}
@@ -30,7 +31,10 @@ public class LogIn_user extends JPanel {
 
 	private void authentificateActionPerformed(ActionEvent e) {
 		Authentification authentification = new Authentification();
-		authentification.attemptUserLogin(userTextField.getText(), passwordField1.getPassword().toString());
+		char[] tempPassword = passwordField1.getPassword();
+		String tempStringPassword = new String(tempPassword);
+		//System.out.println(userTextField.getText() + " " + tempStringPassword); // Testing
+		authentification.attemptUserLogin(userTextField.getText(), tempStringPassword);
 	}
 
 	private void button1ActionPerformed(ActionEvent e) {
@@ -38,7 +42,8 @@ public class LogIn_user extends JPanel {
 	}
 
 	private void initComponents() {
-		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+		// JFormDesigner - Component initialization - DO NOT MODIFY
+		// //GEN-BEGIN:initComponents
 		// Generated using JFormDesigner Evaluation license - Gergo Szentannai
 		button2 = new JButton();
 		passwordField1 = new JPasswordField();
@@ -127,10 +132,11 @@ public class LogIn_user extends JPanel {
 					.addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(181, Short.MAX_VALUE))
 		);
-		// JFormDesigner - End of component initialization  //GEN-END:initComponents
+		// //GEN-END:initComponents
 	}
 
-	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+	// JFormDesigner - Variables declaration - DO NOT MODIFY
+	// //GEN-BEGIN:variables
 	// Generated using JFormDesigner Evaluation license - Gergo Szentannai
 	private JButton button2;
 	private JPasswordField passwordField1;
@@ -140,5 +146,5 @@ public class LogIn_user extends JPanel {
 	private JScrollPane scrollPane1;
 	private JTextPane textPane3;
 	private JButton button1;
-	// JFormDesigner - End of variables declaration  //GEN-END:variables
+	// JFormDesigner - End of variables declaration //GEN-END:variables
 }
