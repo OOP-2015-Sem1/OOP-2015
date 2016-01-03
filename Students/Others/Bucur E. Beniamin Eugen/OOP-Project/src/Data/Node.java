@@ -1,10 +1,16 @@
 package Data;
 
+import javafx.scene.layout.VBox;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Node implements Serializable{
-    Player owner = null;
-    BuildingType building = null;
+    List<Tile> neighbouringTiles = new ArrayList<>(3);
+    List<Road> neigbouringRoads = new ArrayList<>(3);
+    Player owner;
+    BuildingType building;
     int nodeHeight;
     int nodeWidth;
     int nodeX;
@@ -47,5 +53,25 @@ public class Node implements Serializable{
 
     public int getNodeY() {
         return nodeY;
+    }
+
+    public List<Tile> getNeighbouringTiles() {
+        return neighbouringTiles;
+    }
+
+    public void addNeighbouringTiles(Tile neighbouringTiles) {
+        this.neighbouringTiles.add(neighbouringTiles);
+    }
+
+    public List<Road> getNeighbouringRoads() {
+        return neigbouringRoads;
+    }
+
+    public void addNeighbouringRoad(Road road){
+        neigbouringRoads.add(road);
+    }
+
+    public void upgradeToCity(){
+        building = BuildingType.CITY;
     }
 }

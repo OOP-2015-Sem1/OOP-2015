@@ -1,9 +1,8 @@
 package Gui.GameSceneComponents;
 
-import Data.BoardProperties;
-import Data.Game;
-import Data.Node;
-import Data.Tile;
+import Data.*;
+import Gui.PopUps.MessageBox;
+import Logic.GameEngine;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -15,15 +14,10 @@ public class GameBoard extends Pane {
 
     Game game;
 
-    List<ImageView> tiles = new LinkedList<>();
-    List<ImageView> tokens = new LinkedList<>();
-    List<ImageView> nodes = new LinkedList<>();
-
-    final int[] nodeClicked = new int[]{0};
-    int nodeClickedCached;
-
-    final int[] tileClicked = new int[]{0};
-    int tileClickedCached;
+    public List<ImageView> tiles = new LinkedList<>();
+    public List<ImageView> tokens = new LinkedList<>();
+    public List<ImageView> nodes = new LinkedList<>();
+    public ImageView robber;
 
     public GameBoard(Game game) {
         this.game = game;
@@ -33,10 +27,24 @@ public class GameBoard extends Pane {
         placeRoads();
         placeTiles();
         placePorts();
-        placeNodesAndSetListeners();
+        placeNodes();
         placeNumberTokens();
         placeRobber();
-        addTileListeners();
+        placeExistingBuildings();
+    }
+
+    private void placeExistingBuildings() {
+        for (Node node : game.getBoard().nodes)
+            if (node.getOwner() != null)
+                if (node.getBuilding() == BuildingType.SETTLEMENT)
+                    refreshNode(nodes.get(game.getBoard().nodes.indexOf(node)), node.getOwner().getSettlementPath());
+                else
+                    refreshNode(nodes.get(game.getBoard().nodes.indexOf(node)), node.getOwner().getCityPath());
+        for (Road road : game.getBoard().getRoads()) {
+            ImageView newRoad = new ImageView(road.getPathToImage());
+            newRoad.relocate(road.getX(), road.getY());
+            this.getChildren().add(newRoad);
+        }
     }
 
     private void setBackground() {
@@ -59,17 +67,6 @@ public class GameBoard extends Pane {
             tiles.get(i).setFitWidth(game.getBoard().getTile(i).getTileWidth());
             tiles.get(i).relocate(game.getBoard().getTile(i).getTileX(), game.getBoard().getTile(i).getTileY());
             this.getChildren().add(tiles.get(i));
-        }
-    }
-
-    private void addTileListeners() {
-        for (int i = 0; i < 19; i++) {
-            final int j = i;
-            tiles.get(i).setOnMouseClicked(e -> tileClicked[0] = j);
-        }
-        for (int i = 0; i < 18; i++) {
-            final int j = i;
-            tokens.get(i).setOnMouseClicked(e -> tileClicked[0] = j);
         }
     }
 
@@ -152,57 +149,30 @@ public class GameBoard extends Pane {
     }
 
     private void placeRobber() {
-        ImageView robber = new ImageView("Pics\\Tokens\\Robber.png");
+        robber = new ImageView("Pics\\Tokens\\Robber.png");
         robber.setFitHeight(BoardProperties.TOKEN_HEIGHT);
         robber.setFitWidth(BoardProperties.TOKEN_WIDTH);
         int i = 0;
         while (!game.getBoard().getTile(i).isHasRobber())
             i++;
         robber.relocate(BoardProperties.TOKEN_X[i], BoardProperties.TOKEN_Y[i]);
-        final int j = i;
-        robber.setOnMouseClicked(e -> tileClicked[0] = j);
+        game.getBoard().setRobberTile(i);
         this.getChildren().add(robber);
     }
 
-    private void placeNodesAndSetListeners() {
+    private void placeNodes() {
         int i = 0;
         for (Data.Node node : game.getBoard().nodes) {
             nodes.add(new ImageView("Pics\\Node.png"));
             nodes.get(i).setFitHeight(node.getNodeHeight());
             nodes.get(i).setFitWidth(node.getNodeWidth());
             nodes.get(i).relocate(node.getNodeX(), node.getNodeY());
-            final int j = i;
-            nodes.get(i).setOnMouseClicked(e -> tileClicked[0] = j);
             this.getChildren().add(nodes.get(i));
             i++;
         }
     }
 
-    public Node getNodeClicked() {
-        nodeClickedCached = nodeClicked[0];
-        while (nodeClicked[0] == nodeClickedCached) {
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        return game.getBoard().nodes.get(nodeClicked[0]);
-    }
-
-    public Tile getTileClicked() {
-        tileClickedCached = tileClicked[0];
-        while (tileClicked[0] == tileClickedCached) {
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        return game.getBoard().getTile(tileClicked[0]);
-    }
-
-    public void refreshNode(int index, String path) {
-        nodes.get(index).setImage(new Image(path));
+    public void refreshNode(ImageView node, String path) {
+        node.setImage(new Image(path));
     }
 }

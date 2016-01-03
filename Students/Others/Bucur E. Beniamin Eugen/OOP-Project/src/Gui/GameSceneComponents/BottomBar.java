@@ -13,6 +13,7 @@ public class BottomBar extends BorderPane{
         game.setRollDice(rollDice);
 
         EndTurn endTurn = new EndTurn(game);
+        game.setEndTurn(endTurn);
 
         this.setLeft(stats);
         this.setCenter(rollDice);

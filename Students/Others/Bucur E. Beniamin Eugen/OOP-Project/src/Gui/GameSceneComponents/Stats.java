@@ -71,16 +71,16 @@ public class Stats extends VBox implements Serializable {
     }
 
     public void update(String instructionText) {
-        brickCount.setText(String.format("Brick: %d", game.getActivePlayer().resources.getCountForResource(ResourceType.BRICK)));
-        lumberCount.setText(String.format("Lumber: %d", game.getActivePlayer().resources.getCountForResource(ResourceType.LUMBER)));
-        woolCount.setText(String.format("Wool: %d", game.getActivePlayer().resources.getCountForResource(ResourceType.WOOL)));
-        grainCount.setText(String.format("Grain: %d", game.getActivePlayer().resources.getCountForResource(ResourceType.GRAIN)));
-        oreCount.setText(String.format("Ore: %d", game.getActivePlayer().resources.getCountForResource(ResourceType.ORE)));
+        brickCount.setText(String.format("Brick: %d", game.getActivePlayer().getResources().getCountForResource(ResourceType.BRICK)));
+        lumberCount.setText(String.format("Lumber: %d", game.getActivePlayer().getResources().getCountForResource(ResourceType.LUMBER)));
+        woolCount.setText(String.format("Wool: %d", game.getActivePlayer().getResources().getCountForResource(ResourceType.WOOL)));
+        grainCount.setText(String.format("Grain: %d", game.getActivePlayer().getResources().getCountForResource(ResourceType.GRAIN)));
+        oreCount.setText(String.format("Ore: %d", game.getActivePlayer().getResources().getCountForResource(ResourceType.ORE)));
 
         victoryPoints.setText(String.format("Victory Points: %d", game.getActivePlayer().getVictoryPoints()));
         armySize.setText(String.format("Army size: %d", game.getActivePlayer().getArmySize()));
         longestRoadLength.setText(String.format("Length of longest road: %d", game.getActivePlayer().getLongestRoad()));
-        activePlayer.setText("Active Player: " + game.getActivePlayer().playerName);
+        activePlayer.setText("Active Player: " + game.getActivePlayer().getPlayerName());
 
         instructions.setText("Instructions: " + instructionText);
     }
