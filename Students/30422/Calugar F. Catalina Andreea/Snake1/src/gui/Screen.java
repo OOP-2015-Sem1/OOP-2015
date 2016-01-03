@@ -17,11 +17,12 @@ public class Screen extends JPanel implements Runnable {
 	private int xCoorCurrent = 10;
 	private int yCoorCurrent = 10;
 	private int ticks = 0;
-	public static int speed = 1000000;
+	public static int speed = 1000000; // default as EASY
 
 	private DrawGameGraphics gamePanel = new DrawGameGraphics();
 	private Food food = new Food();
 	private Snake snake = new Snake();
+	private PaintSnakeBoard paintBoard;
 
 	public Screen() {
 		start();
@@ -61,8 +62,7 @@ public class Screen extends JPanel implements Runnable {
 		ticks++;
 
 		if (ticks > speed) {
-			// snake.updateSnake();
-			
+
 			snake.moveSnake(snake.getCurrentDirection());
 			snake.makeSnake(snake.getxCoor(), snake.getyCoor());
 			ticks = 0;
@@ -74,8 +74,7 @@ public class Screen extends JPanel implements Runnable {
 	}
 
 	public void paint(Graphics g) {
-
-		PaintBoard paintBoard = new PaintBoard();
+		paintBoard = new PaintSnakeBoard();
 		paintBoard.paint(g);
 		snake.paint(g);
 		food.paint(g);
@@ -112,7 +111,4 @@ public class Screen extends JPanel implements Runnable {
 		}
 	}
 
-	public void setScr(int score) {
-
-	}
 }

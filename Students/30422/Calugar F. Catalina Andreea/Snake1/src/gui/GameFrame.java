@@ -21,7 +21,7 @@ import funct.KeyController;
 
 public class GameFrame {
 
-	JFrame jframe = new JFrame();;
+	public JFrame jframe = new JFrame();;
 	private JPanel snakePanel;
 	private JPanel buttonPanel;
 
@@ -32,53 +32,54 @@ public class GameFrame {
 	public JPanel beautyPanel2;
 	public JPanel beautyPanel3;
 
-	private JMenuBar menubar;
+	private JMenuBar menuBar;
 	private JMenu file;
 	private JMenuItem exit;
-	private JMenuItem newG;
-	
-	private Screen screen;
-	private ScoreButton scoreBut = new ScoreButton();
+	private JMenuItem newGame;
 
-	
+	private Screen screen;
+
+	public static JButton showScoreButton;
+
 	EventEasyBut easyDificulty = new EventEasyBut();
 	EventMedBut medDificulty = new EventMedBut();
 	EventHardBut hardDificulty = new EventHardBut();
-	EventsMenu ex = new EventsMenu();
-	EvMenu enG = new EvMenu();
+	EventsMenu evExitGame = new EventsMenu();
+	EvMenu evNewGame = new EvMenu();
 
 	public GameFrame() {
 
 		Constants.canWeGoThroughWalls = GoThroughWalls.queryForGoingThroughWalls();
 		BOARD_SIZE = BoardSizeDialogBox.queryForBoardSize();
 
-		menubar = new JMenuBar();
-		jframe.setJMenuBar(menubar);
+		menuBar = new JMenuBar();
+		jframe.setJMenuBar(menuBar);
 
 		file = new JMenu("File");
-		menubar.add(file);
+		menuBar.add(file);
 
-		newG = new JMenuItem("New GAME");
-		file.add(newG);
+		newGame = new JMenuItem("New GAME");
+		file.add(newGame);
 
 		exit = new JMenuItem("Exit");
 		file.add(exit);
 
-		exit.addActionListener(ex);
-		newG.addActionListener(enG);
+		exit.addActionListener(evExitGame);
+		newGame.addActionListener(evNewGame);
 
 		jframe.setFocusable(true);
 		jframe.addKeyListener(new KeyController());
+
+		initializeFrameItems();
 
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jframe.setVisible(true);
 		jframe.setTitle("SNAKE");
 		jframe.setResizable(false);
 
-		init();
 	}
 
-	public void init() {
+	public void initializeFrameItems() {
 		jframe.setLayout(new BorderLayout());
 
 		snakePanel = new JPanel();
@@ -105,7 +106,11 @@ public class GameFrame {
 		buttonMed.addActionListener(medDificulty);
 		buttonHard.addActionListener(hardDificulty);
 
-		buttonPanel.add(scoreBut);
+		showScoreButton = new JButton("Score: 0");
+		showScoreButton.setEnabled(false);
+		showScoreButton.setBackground(Color.WHITE);
+
+		buttonPanel.add(showScoreButton);
 		buttonPanel.add(buttonEasy);
 		buttonPanel.add(buttonMed);
 		buttonPanel.add(buttonHard);
@@ -113,17 +118,17 @@ public class GameFrame {
 		beautyPanel1 = new JPanel();
 		beautyPanel2 = new JPanel();
 		beautyPanel3 = new JPanel();
-		beautyPanel1.setPreferredSize(new Dimension(10, Constants.DIMENSION));
-		beautyPanel2.setPreferredSize(new Dimension(10, Constants.DIMENSION));
-		beautyPanel3.setPreferredSize(new Dimension(Constants.DIMENSION, 10));
+		beautyPanel1.setPreferredSize(new Dimension(20, Constants.DIMENSION));
+		beautyPanel2.setPreferredSize(new Dimension(20, Constants.DIMENSION));
+		beautyPanel3.setPreferredSize(new Dimension(Constants.DIMENSION, 20));
 		beautyPanel1.setBackground(Color.GREEN);
 		beautyPanel2.setBackground(Color.GREEN);
 		beautyPanel3.setBackground(Color.GREEN);
 
+		jframe.add(snakePanel, BorderLayout.CENTER);
 		jframe.add(beautyPanel1, BorderLayout.EAST);
 		jframe.add(beautyPanel2, BorderLayout.WEST);
 		jframe.add(beautyPanel3, BorderLayout.SOUTH);
-		jframe.add(snakePanel, BorderLayout.CENTER);
 		jframe.add(buttonPanel, BorderLayout.NORTH);
 		jframe.pack();
 
@@ -150,7 +155,7 @@ public class GameFrame {
 	public class EventEasyBut implements ActionListener {
 		public void actionPerformed(ActionEvent eDificulty1) {
 
-			Screen.speed = 10000;
+			Screen.speed = 1000000;
 			jframe.requestFocus();
 		}
 	}

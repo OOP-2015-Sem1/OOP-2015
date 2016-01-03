@@ -5,7 +5,7 @@ import java.awt.Graphics;
 
 import entities.Constants;
 
-public class PaintBoard {
+public class PaintSnakeBoard {
 
 	public void drawPanel(Graphics g) {
 		g.clearRect(0, 0, Constants.DIMENSION, Constants.DIMENSION);
@@ -16,7 +16,6 @@ public class PaintBoard {
 
 	public void paint(Graphics g) {
 		drawPanel(g);
-		
 		for (int i = 0; i < Constants.DIMENSION / Constants.BOARD_SIZE; i++) {
 			g.drawLine(i * Constants.DIMENSION / Constants.BOARD_SIZE, 0,
 					i * Constants.DIMENSION / Constants.BOARD_SIZE, Constants.DIMENSION);
