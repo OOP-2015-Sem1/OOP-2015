@@ -22,17 +22,17 @@ public class ButtonsPanel extends JPanel {
 	public ButtonsPanel() {
 
 		newGameButton = new JButton("NEW GAME");
-		countingButton = new JButton("Steps");
+		countingButton = new JButton("CLICKS");
 		musicButton = new JButton("MUSIC");
 
 		musicButton.setBorder(Constants.CONTROL_BUTTONS_LINE_BORDER);
 		newGameButton.setBorder(Constants.CONTROL_BUTTONS_LINE_BORDER);
 		countingButton.setBorder(Constants.CONTROL_BUTTONS_LINE_BORDER);
-		
+
 		add(newGameButton);
 		add(countingButton);
 		add(musicButton);
-		
+
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 	}
@@ -54,6 +54,7 @@ public class ButtonsPanel extends JPanel {
 
 		newGameButton.addActionListener(actionListener);
 		musicButton.addActionListener(actionListener);
+
 	}
 
 }
