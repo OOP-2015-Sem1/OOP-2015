@@ -9,7 +9,7 @@ import ui.TetrisFrame;
 
 public class TetrominoController implements GameObserver{
 	
-	private TetrisFrame tetrisFrame;
+	public TetrisFrame tetrisFrame;
 
 	public void runTetrisGame() {
 		// TODO Auto-generated method stub
@@ -69,7 +69,6 @@ public class TetrominoController implements GameObserver{
 		
 	}
 
-	@Override
 	public void notifyLoss() {
 		// TODO Auto-generated method stub
 		JOptionPane.showMessageDialog(null, "You lost!");//when board is filled with pieces
