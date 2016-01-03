@@ -1,7 +1,5 @@
 package guessWhoGame;
 
-
-
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -184,11 +182,9 @@ public class Game {
 
 	private void playerTurn(int playerChr, int indexIntr, int computerChr, String chosenCharacter) throws Exception {
 
-		// System.out.println("jucator " + "calc pers " + computerChr);
 		computer = false;
 		player = true;
 		checkingProp(indexIntr, computerChr, valButoaneCalc, computer);
-		System.out.println(eliminatedCompChr);
 		score(eliminatedCompChr);
 		GUI.disablingButtons(valButoaneCalc, computer, player);
 		computerTurn(playerChr, indexIntr, computerChr, chosenCharacter);
@@ -196,7 +192,6 @@ public class Game {
 
 	private void computerTurn(int playerChr, int indexIntr, int computerChr, String chosenCharacter) throws Exception {
 
-		// System.out.println("calc");
 		computer = true;
 		player = false;
 		int indexIntrCalc = c.askQuestions();
