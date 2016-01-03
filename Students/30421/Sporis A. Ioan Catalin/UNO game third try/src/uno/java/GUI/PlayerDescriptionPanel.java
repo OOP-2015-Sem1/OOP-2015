@@ -17,26 +17,26 @@ public class PlayerDescriptionPanel extends JPanel implements Designer {
 	public JLabel playerName = new JLabel();
 	private Dimension dimension;
 	private Rectangle avatarBounds = new Rectangle(0, 0, 107, 107);
-	private Rectangle playerNameBounds = new Rectangle (40,102,40,40);
-	private Font playerNameFont = new Font("Times New Roman",Font.BOLD,14);
+	private Rectangle playerNameBounds = new Rectangle(40, 102, 40, 40);
+	private Font playerNameFont = new Font("Times New Roman", Font.BOLD, 14);
 
-	public PlayerDescriptionPanel(){
+	public PlayerDescriptionPanel() {
 		this.setBackground(Color.BLUE);
-		this.setSize(400,400);
+		this.setSize(400, 400);
 	}
+
 	public PlayerDescriptionPanel(Dimension dimension) {
 		this.dimension = dimension;
 		this.setSize(dimension);
-		//this.setBackground(Color.BLUE);
-		
+
 		this.setLayout(null);
 	}
 
 	public PlayerDescriptionPanel(String imagePath, String playerName, Dimension dimension) {
 		this(dimension);
-		this.image = new ImageIcon(imagePath);
+		this.image = new ImageIcon("D:\\Java assignments\\UNO game third try\\Resorces\\" + imagePath);
 		this.avatar = new JLabel(image);
-		this.playerName = new JLabel(playerName,JLabel.CENTER);
+		this.playerName = new JLabel(playerName, JLabel.CENTER);
 		this.arrangeItems();
 	}
 
@@ -48,9 +48,9 @@ public class PlayerDescriptionPanel extends JPanel implements Designer {
 
 	@Override
 	public void arrangeItems() {
-		componentSetBounds(avatar,avatarBounds);
-		this.add(avatar,BorderLayout.CENTER);
-		componentSetBounds(this.playerName,this.playerNameBounds);
+		componentSetBounds(avatar, avatarBounds);
+		this.add(avatar, BorderLayout.CENTER);
+		componentSetBounds(this.playerName, this.playerNameBounds);
 		this.playerName.setFont(this.playerNameFont);
 		this.add(this.playerName);
 	}

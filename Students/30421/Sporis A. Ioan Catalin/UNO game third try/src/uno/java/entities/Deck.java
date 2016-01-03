@@ -49,20 +49,18 @@ public class Deck implements CardDealer {
 			cards[i].setColor(color);
 			cards[i].setValue(k);
 			cards[i].setSpecial(false);
-			if(color.equals(Color.BLUE)){
+			if (color.equals(Color.BLUE)) {
 				colorLabel = Constants.BLUE;
-			}
-			else if(color.equals(Color.GREEN)){
+			} else if (color.equals(Color.GREEN)) {
 				colorLabel = Constants.GREEN;
-			}
-			else if(color.equals(Color.RED)){
+			} else if (color.equals(Color.RED)) {
 				colorLabel = Constants.RED;
-			}
-			else if (color.equals(Color.YELLOW)){
+			} else if (color.equals(Color.YELLOW)) {
 				colorLabel = Constants.YELLOW;
 			}
-			cards[i].loadCardImage(Integer.toString(k)+colorLabel+".png");
-			
+			cards[i].loadCardImage(
+					"D:\\Java assignments\\UNO game third try\\Resorces\\" + Integer.toString(k) + colorLabel + ".png");
+
 			cardList.add(cards[i]);
 			k++;
 			if (k == 10) {
@@ -89,42 +87,41 @@ public class Deck implements CardDealer {
 			sCard[i].setWild(wild);
 			sCard[i].setColor(color);
 			String colorLabel = " ";
-			
-			if(color.equals(Color.BLUE)){
+
+			if (color.equals(Color.BLUE)) {
 				colorLabel = Constants.BLUE;
-			}
-			else if(color.equals(Color.GREEN)){
+			} else if (color.equals(Color.GREEN)) {
 				colorLabel = Constants.GREEN;
-			}
-			else if(color.equals(Color.RED)){
+			} else if (color.equals(Color.RED)) {
 				colorLabel = Constants.RED;
-			}
-			else if (color.equals(Color.YELLOW)){
+			} else if (color.equals(Color.YELLOW)) {
 				colorLabel = Constants.YELLOW;
 			}
-			if(wild == true && draw == 0){
-				//s = Constants.WILD+".png";
-				sCard[i].loadCardImage(Constants.WILD+".png");
+			if (wild == true && draw == 0) {
+
+				sCard[i].loadCardImage(
+						"D:\\Java assignments\\UNO game third try\\Resorces\\" + Constants.WILD + ".png");
 			}
-			
-			else if(skip == true){
-				//s = Constants.SKIP+colorLabel+".png";
-				sCard[i].loadCardImage(Constants.SKIP+colorLabel+".png");
-			}
-			else if(reverse == true){
-				// s = Constants.REVERSE+colorLabel+".png";
-				sCard[i].loadCardImage(Constants.REVERSE+colorLabel+".png");
-			}
-			else if(draw == 2){
-				//s = Constants.DRAW2+colorLabel+".png";
-				sCard[i].loadCardImage(Constants.DRAW2+colorLabel+".png");
-			}
-			else if(draw == 4){
-				//s = Constants.WILDRAW+colorLabel+".png";
-				sCard[i].loadCardImage(Constants.WILDRAW +".png");
+
+			else if (skip == true) {
+
+				sCard[i].loadCardImage(
+						"D:\\Java assignments\\UNO game third try\\Resorces\\" + Constants.SKIP + colorLabel + ".png");
+			} else if (reverse == true) {
+
+				sCard[i].loadCardImage("D:\\Java assignments\\UNO game third try\\Resorces\\" + Constants.REVERSE
+						+ colorLabel + ".png");
+			} else if (draw == 2) {
+
+				sCard[i].loadCardImage(
+						"D:\\Java assignments\\UNO game third try\\Resorces\\" + Constants.DRAW2 + colorLabel + ".png");
+			} else if (draw == 4) {
+
+				sCard[i].loadCardImage(
+						"D:\\Java assignments\\UNO game third try\\Resorces\\" + Constants.WILDRAW + ".png");
 			}
 			specialCardList.add(sCard[i]);
-			
+
 		}
 
 		return specialCardList;
@@ -134,9 +131,9 @@ public class Deck implements CardDealer {
 		Card[] cards = new Card[Card.NO_OF_CARDS];
 		int i = 0;
 		for (Card c : this.deck) {
-			if(i<Card.NO_OF_CARDS){
-			cards[i] = this.deck.get(i);
-			i++;
+			if (i < Card.NO_OF_CARDS) {
+				cards[i] = this.deck.get(i);
+				i++;
 			}
 		}
 		for (i = Card.NO_OF_CARDS - 1; i >= 0; i--) {
@@ -147,17 +144,18 @@ public class Deck implements CardDealer {
 
 		}
 		this.deck.removeAll(deck);
-		
-		for(i=0;i<Card.NO_OF_CARDS;i++){
+
+		for (i = 0; i < Card.NO_OF_CARDS; i++) {
 			this.deck.add(cards[i]);
-		}		
+		}
 	}
 
 	private int random(int min, int max) {
 		int range = (max - min) + 1;
 		return (int) (Math.random() * range + min);
 	}
-	public Card popFromDeck(){
+
+	public Card popFromDeck() {
 		int index = this.nr_Of_Cards_In_Deck - 1;
 		Card card = this.deck.get(index);
 		this.deck.remove(index);
