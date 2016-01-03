@@ -46,7 +46,7 @@ public class MessageDialogs {
 		return betMoney;
 	}
 
-	public static void optionPane() {
+	public static void optionPane(int player, int dealer) {
 		Object[] options = { "Leave", "Continue" };
 		int n = JOptionPane.showOptionDialog(null,
 				"You have " + BlackJackController.getMoney() + "$ left! Would you like to leave the table or continue?",
@@ -55,8 +55,6 @@ public class MessageDialogs {
 			System.exit(0);
 		} else if (n == 1) {
 			new MainGame();
-			BlackJackController.playerWins=0;
-			BlackJackController.dealerWins=0;
 			BlackJackController.setMoney(queryForMoney());
 		}
 	}

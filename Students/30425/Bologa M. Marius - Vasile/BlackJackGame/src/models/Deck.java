@@ -5,9 +5,9 @@ import controllers.MessageDialogs;
 public class Deck {
 
 	private Card[] deck;
-	private int numberOfDecks=MessageDialogs.queryForNumberOfDecks();;
+	private int numberOfDecks = MessageDialogs.queryForNumberOfDecks();;
 	private int cardsUsed;
-	private int numberOfCards=52*numberOfDecks;
+	private int numberOfCards = 52 * numberOfDecks;
 
 	public Deck() {
 		deck = new Card[numberOfCards];
