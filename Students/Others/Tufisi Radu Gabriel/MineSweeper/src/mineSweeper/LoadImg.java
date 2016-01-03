@@ -10,7 +10,7 @@ public class LoadImg {
 
 	public static BufferedImage loadImage(String path) {
 		try {
-			return ImageIO.read(LoadImg.class.getClassLoader().getResourceAsStream(path));
+			return ImageIO.read(LoadImg.class.getResourceAsStream(path));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -3,6 +3,7 @@ package mineSweeper;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.GradientPaint;
 
@@ -13,9 +14,11 @@ import javax.swing.event.MouseInputListener;
 public class Frame extends JFrame implements MouseInputListener {
 	private Screen screen;
 	private World world;
-	private static int width = 400;
-	private static int height = 400;
+	private static   int width = 400;
+	private static  int  height = 400;
 	private Font font;
+	private int insetLeft;
+	private int insetTop;//Nu mergeau bine clickurile pe patratele
 
 	public Frame() {
 
@@ -23,13 +26,16 @@ public class Frame extends JFrame implements MouseInputListener {
 		screen = new Screen();
 		world= new World();
 		add(screen);
-		setResizable(false);
+		setResizable(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		addMouseListener(this);
-		setSize(width, height);
+		setSize(width+insetLeft+getInsets().right, height+getInsets().bottom+getInsets().top);
 		setVisible(true);
 		setLocationRelativeTo(null);
 		font=new Font("SansSerif",0,12);
+		pack();
+		insetLeft=getInsets().left;
+		insetTop=getInsets().top;
 
 	}
 
@@ -77,7 +83,10 @@ public class Frame extends JFrame implements MouseInputListener {
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		world.clicked(e.getX(),e.getY());
+		System.out.println(e.getButton());
+		System.out.println(e.getX()+ ";" +e.getY());
+		if(e.getButton()==1)world.clickedLeft(e.getX()-insetLeft,e.getY()-insetTop);
+		if(e.getButton()==3)world.clickedRight(e.getX()-insetLeft,e.getY()-insetTop);
 		screen.repaint();
 
 	}
