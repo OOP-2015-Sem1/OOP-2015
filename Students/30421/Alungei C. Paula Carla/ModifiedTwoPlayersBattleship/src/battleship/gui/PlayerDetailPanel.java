@@ -1,5 +1,6 @@
 package battleship.gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -23,7 +24,7 @@ public class PlayerDetailPanel extends JPanel {
 		size.setSize(500, 400);
 		setPreferredSize(size);
 		setBorder(BorderFactory.createTitledBorder(title));
-
+		setBackground( new Color(0,0,255));
 		setLayout(new GridBagLayout());
 		GridBagConstraints gridC = new GridBagConstraints();
 
