@@ -25,8 +25,11 @@ import sprites.Baddie;
 import sprites.ClearPowerUp;
 import sprites.Hero;
 import sprites.LifePowerUp;
+import static graphicalUserInterface.Commons.BOARD_HEIGHT;
+import static graphicalUserInterface.Commons.BOARD_WIDTH;
+import static graphicalUserInterface.Commons.DELAY;
 
-public class Board extends JPanel implements ActionListener, Commons {
+public class Board extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 8804900687433935933L;
 	private Timer timer;
@@ -168,12 +171,12 @@ public class Board extends JPanel implements ActionListener, Commons {
 		} else {
 
 			drawGameOver(g);
-			showExitScreen(g);
+			drawExitScreen(g);
 		}
 		Toolkit.getDefaultToolkit().sync();
 	}
 
-	private void showExitScreen(Graphics g) {
+	private void drawExitScreen(Graphics g) {
 
 		g.setColor(new Color(0, 32, 48));
 		g.fillRect(190, BOARD_WIDTH / 2 - 30, BOARD_HEIGHT - 100, 50);
@@ -219,6 +222,8 @@ public class Board extends JPanel implements ActionListener, Commons {
 			if (baddies.get(i).isVisible()) {
 				g.drawImage(baddies.get(i).getImage(), baddies.get(i).getX(), baddies.get(i).getY(), this);
 
+			} else {
+				baddies.remove(i);
 			}
 
 		}
@@ -235,7 +240,7 @@ public class Board extends JPanel implements ActionListener, Commons {
 
 		g.setColor(Color.white);
 		g.setFont(small);
-		g.drawString(msg + "  You've lasted :" + seconds + " seconds", (BOARD_WIDTH - fm.stringWidth(msg)) / 2 - 95,
+		g.drawString(msg + "  You survived for : " + seconds + " seconds", (BOARD_WIDTH - fm.stringWidth(msg)) / 2 - 100,
 				BOARD_HEIGHT / 2);
 	}
 
@@ -315,7 +320,7 @@ public class Board extends JPanel implements ActionListener, Commons {
 			for (Baddie baddie : baddies) {
 
 				baddie.setVisible(false);
-				
+
 			}
 			gameRunning = false;
 		}
