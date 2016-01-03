@@ -23,7 +23,14 @@ public class MainActivity extends AppCompatActivity {
         Button listButton = (Button) findViewById(R.id.list_button);
         Button exitButton = (Button) findViewById(R.id.exit_button);
 
-        createButton.setEnabled(false);
+        createButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CreateActivity.class);
+                startActivity(intent);
+            }
+        });
+
         listButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

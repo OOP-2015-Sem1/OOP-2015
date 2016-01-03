@@ -4,12 +4,12 @@ import com.example.alexh.zoosome.models.animals.Animal;
 import com.example.alexh.zoosome.models.animals.Beetle;
 import com.example.alexh.zoosome.models.animals.Dragonfly;
 import com.example.alexh.zoosome.models.animals.Mantis;
-import com.example.alexh.zoosome.models.animals.Scorpion;
+import com.example.alexh.zoosome.models.animals.Spider;
 import com.example.alexh.zoosome.services.factories.Constants;
 import com.example.alexh.zoosome.services.factories.NameGenerator;
 
 public class InsectFactory extends SpeciesFactory {
-    private static final String[] NAME_ENDING = {"beetle", "scorpion", "mantis", "dragonfly"};
+    private static final String[] NAME_ENDING = {"beetle", "spider", "mantis", "dragonfly"};
     private static final int[] NO_LEGS = {6, 8, 6, 6};
     private static final double[] MAINTENANCE_COST_BASE = {0.05, 0.5, 0.5, 0.2};
     private static final double[] MAINTENANCE_COST_VAR = {0.02, 0.7, 0.6, 0.1};
@@ -24,8 +24,8 @@ public class InsectFactory extends SpeciesFactory {
     public Animal getAnimal(String type) throws Exception {
         if (Constants.Animals.Insects.BEETLE.equals(type)) {
             return new Beetle();
-        } else if (Constants.Animals.Insects.SCORPION.equals(type)) {
-            return new Scorpion();
+        } else if (Constants.Animals.Insects.SPIDER.equals(type)) {
+            return new Spider();
         } else if (Constants.Animals.Insects.MANTIS.equals(type)) {
             return new Mantis();
         } else if (Constants.Animals.Insects.DRAGONFLY.equals(type)) {
@@ -53,7 +53,7 @@ public class InsectFactory extends SpeciesFactory {
                     ? EXTRA_DANGEROS_BASE[index] + EXTRA_DANGEROS_VAR[index] * Math.random() : 0.0D;
 
             return new Beetle(name, noLegs, maintenanceCost, dangerPerc + extraDanger, flyer, dangerous);
-        } else if (Constants.Animals.Insects.SCORPION.equals(type)) {
+        } else if (Constants.Animals.Insects.SPIDER.equals(type)) {
             final int index = 1;
 
             name += NAME_ENDING[index];
@@ -66,7 +66,7 @@ public class InsectFactory extends SpeciesFactory {
             final double extraDanger = (dangerous)
                     ? EXTRA_DANGEROS_BASE[index] + EXTRA_DANGEROS_VAR[index] * Math.random() : 0.0D;
 
-            return new Scorpion(name, noLegs, maintenanceCost, dangerPerc + extraDanger, flyer, dangerous);
+            return new Spider(name, noLegs, maintenanceCost, dangerPerc + extraDanger, flyer, dangerous);
         } else if (Constants.Animals.Insects.MANTIS.equals(type)) {
             final int index = 2;
 
