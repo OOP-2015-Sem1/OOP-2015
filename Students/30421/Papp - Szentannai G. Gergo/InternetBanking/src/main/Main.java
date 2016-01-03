@@ -1,7 +1,8 @@
 package main;
 
 /**
- * Initializes the program and starts the Frame.
+ * Initializes the program and the class Application() which calls the
+ * MainFrame.
  * 
  * @author gergo_000
  *
