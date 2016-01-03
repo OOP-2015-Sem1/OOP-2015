@@ -13,13 +13,17 @@ public class DatabaseConnect {
 	static final String USER = "sqlJavaUser";
 	static final String PASSWORD = "1234";
 
-	private Connection connection;
-	private Statement statement;
+	private static Connection connection;
+	private static Statement statement;
 
+	public void executeSqlStatement(String statement){
+		// TODO: create SQL statement and execute it
+	}
+	
 	public DatabaseConnect() {
 
-		connection = null;
-		statement = null;
+		setConnection(null);
+		setStatement(null);
 
 		try {
 			// Register JDBC driver:
@@ -27,7 +31,7 @@ public class DatabaseConnect {
 
 			// Open connection:
 			System.out.println("Connecting to database...");
-			connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+			setConnection(DriverManager.getConnection(DB_URL, USER, PASSWORD));
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -42,11 +46,11 @@ public class DatabaseConnect {
 	private void testConnection() {
 		try {
 			System.out.println("Creating statement...");
-			statement = connection.createStatement();
+			setStatement(getConnection().createStatement());
 			String sql;
 			sql = "SELECT user_id, user_name, user_password FROM users_table";
 
-			ResultSet rs = statement.executeQuery(sql);
+			ResultSet rs = getStatement().executeQuery(sql);
 
 			while (rs.next()) {
 				String user_id = rs.getString("user_id");
@@ -59,11 +63,28 @@ public class DatabaseConnect {
 
 			}
 			rs.close();
-			statement.close();
-			connection.close();
+			getStatement().close();
+			getConnection().close();
 
 		} catch (SQLException se) {
 			se.printStackTrace();
 		}
 	}
+
+	public static Connection getConnection() {
+		return connection;
+	}
+
+	public static void setConnection(Connection connection) {
+		DatabaseConnect.connection = connection;
+	}
+
+	public static Statement getStatement() {
+		return statement;
+	}
+
+	public static void setStatement(Statement statement) {
+		DatabaseConnect.statement = statement;
+	}
+	
 }

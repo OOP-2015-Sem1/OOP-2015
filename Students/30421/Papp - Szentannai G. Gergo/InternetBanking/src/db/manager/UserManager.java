@@ -1,28 +1,24 @@
 package db.manager;
 
 public class UserManager {
-	public void getUser(int id) {
-
+	public void getUser(String user_id) {
+		
 	};
-
-	public void getUser(String name) {
-
-	}
 
 	public void getAllUsers() {
-
+		
 	};
 
-	public void newUser(int id, String name) {
-
+	public void newUser(String user_id, String user_name, String user_password) {
+		
 	};
 
-	public void deleteUser(int id) {
-
+	public void deleteUser(String user_id) {
+		
 	};
 
-	public void updateUser(int id) {
-
+	public void updateUserName(String user_id, String newUser_name) {
+		
 	};
 
 }

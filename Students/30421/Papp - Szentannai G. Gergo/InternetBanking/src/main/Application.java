@@ -13,6 +13,7 @@ import gui.MainFrame;
 public class Application {
 
 	public static MainFrame mainFrame;
+	public static DatabaseConnect databaseConnect;
 
 	public Application() {
 
@@ -27,8 +28,8 @@ public class Application {
 		// Connect to database:
 		// Reconnection/changing connection will be possible using the Settings
 		// panel (not yet finished)
-		@SuppressWarnings("unused")
-		DatabaseConnect databaseConnect = new DatabaseConnect();
+
+		Application.databaseConnect = new DatabaseConnect();
 	}
 
 }
