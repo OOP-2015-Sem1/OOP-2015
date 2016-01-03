@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <!-- Show the front card first -->
+    <objectAnimator
+        android:valueFrom="0.0"
+        android:valueTo="1.0"
+        android:propertyName="alpha"
+        android:duration="1" />
+
+    <!-- Rotate. -->
+    <objectAnimator
+        android:valueFrom="0"
+        android:valueTo="180"
+        android:propertyName="rotationY"
+        android:interpolator="@android:interpolator/accelerate_decelerate"
+        android:duration="500" />
+
+    <!-- Half-way through the rotation, hide the front card -->
+    <objectAnimator
+        android:valueFrom="1.0"
+        android:valueTo="0.0"
+        android:propertyName="alpha"
+        android:startOffset="250"
+        android:duration="1" />
+
+</set>
