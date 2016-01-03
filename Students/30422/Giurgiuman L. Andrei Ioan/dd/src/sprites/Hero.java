@@ -1,9 +1,11 @@
 package sprites;
 
 import java.awt.event.KeyEvent;
-import graphicalUserInterface.Commons;
+import static graphicalUserInterface.Commons.BOARD_HEIGHT;
+import static graphicalUserInterface.Commons.BOARD_WIDTH;
 
-public class Hero extends Sprite implements Commons {
+
+public class Hero extends Sprite  {
 
 	private int dx;
 	private int dy;
