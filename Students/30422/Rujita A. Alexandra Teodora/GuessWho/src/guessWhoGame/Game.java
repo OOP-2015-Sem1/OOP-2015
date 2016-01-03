@@ -175,13 +175,7 @@ public class Game {
 		if (!compChrCreated)
 			computerChr = c.chooseChr();
 		playerChr = Integer.valueOf(chosenCharacter);
-		System.out.println("player "+remainingPlayerChr+" comp "+eliminatedCompChr);
-//		if (eliminatedCompChr == 1)
-//			newGame(0);
-//		else if (remainingPlayerChr == 1)
-//			newGame(1);
-	//	else 
-			if (computerChr != 0)
+		if (computerChr != 0)
 			playerTurn(playerChr, indexIntr, computerChr, chosenCharacter);
 	}
 
@@ -190,7 +184,7 @@ public class Game {
 		computer = false;
 		player = true;
 		checkingProp(indexIntr, computerChr, valButoaneCalc, computer);
-		score(24-eliminatedCompChr);
+		score(24 - eliminatedCompChr);
 		GUI.disablingButtons(valButoaneCalc, computer, player);
 		computerTurn(playerChr, indexIntr, computerChr, chosenCharacter);
 	}
