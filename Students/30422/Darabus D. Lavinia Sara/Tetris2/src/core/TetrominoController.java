@@ -7,8 +7,8 @@ import javax.swing.JOptionPane;
 
 import ui.TetrisFrame;
 
-public class TetrominoController implements GameObserver{
-	
+public class TetrominoController implements GameObserver {
+
 	public TetrisFrame tetrisFrame;
 
 	public void runTetrisGame() {
@@ -16,8 +16,8 @@ public class TetrominoController implements GameObserver{
 		tetrisFrame = new TetrisFrame();
 		tetrisFrame.addKeyListener(new TetrisKeyListener());
 	}
-	
-	private class TetrisKeyListener implements KeyListener{
+
+	private class TetrisKeyListener implements KeyListener {
 
 		public static final String ROTATE = "ROTATE";
 		public static final String LEFT = "LEFT";
@@ -27,10 +27,10 @@ public class TetrominoController implements GameObserver{
 		@Override
 		public void keyPressed(KeyEvent e) {
 			// TODO Auto-generated method stub
-			
+
 			int keyCode = e.getKeyCode();
-			
-			switch(keyCode){
+
+			switch (keyCode) {
 			case KeyEvent.VK_UP:
 				tetrisFrame.moveTetromino(ROTATE);
 				break;
@@ -48,8 +48,8 @@ public class TetrominoController implements GameObserver{
 				break;
 			}
 		}
-		
-		private void resetGame(){
+
+		private void resetGame() {
 			tetrisFrame.setVisible(false);
 			tetrisFrame.dispose();
 			runTetrisGame();
@@ -58,27 +58,29 @@ public class TetrominoController implements GameObserver{
 		@Override
 		public void keyReleased(KeyEvent arg0) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void keyTyped(KeyEvent arg0) {
 			// TODO Auto-generated method stub
-			
+
 		}
-		
+
 	}
 
 	public void notifyLoss() {
 		// TODO Auto-generated method stub
-		JOptionPane.showMessageDialog(null, "You lost!");//when board is filled with pieces
+		JOptionPane.showMessageDialog(null, "You lost!");// when board is filled
+															// with pieces
 		System.exit(0);
 	}
 
 	@Override
 	public void notifyWin() {
 		// TODO Auto-generated method stub
-		JOptionPane.showMessageDialog(null, "You won!");//after clearing 15 lines
+		JOptionPane.showMessageDialog(null, "You won!");// after clearing 15
+														// lines
 		System.exit(0);
 	}
 
