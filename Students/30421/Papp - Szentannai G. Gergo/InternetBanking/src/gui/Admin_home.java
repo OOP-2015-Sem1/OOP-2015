@@ -35,14 +35,12 @@ public class Admin_home extends JPanel {
 		// Generated using JFormDesigner Evaluation license - Gergo Szentannai
 		tabbedPane1 = new JTabbedPane();
 		panel1 = new JPanel();
-		menuBar1 = new JMenuBar();
-		menu2 = new JMenu();
-		menu3 = new JMenu();
-		menu4 = new JMenu();
+		button1 = new JButton();
+		button2 = new JButton();
+		button3 = new JButton();
 		panel2 = new JPanel();
-		menuBar2 = new JMenuBar();
-		menu5 = new JMenu();
-		menu6 = new JMenu();
+		button4 = new JButton();
+		button5 = new JButton();
 		panel3 = new JPanel();
 		logoutButton = new JButton();
 
@@ -65,27 +63,14 @@ public class Admin_home extends JPanel {
 			//======== panel1 ========
 			{
 
-				//======== menuBar1 ========
-				{
+				//---- button1 ----
+				button1.setText("Add user");
 
-					//======== menu2 ========
-					{
-						menu2.setText("Add user");
-					}
-					menuBar1.add(menu2);
+				//---- button2 ----
+				button2.setText("Modify user");
 
-					//======== menu3 ========
-					{
-						menu3.setText("Modify user");
-					}
-					menuBar1.add(menu3);
-
-					//======== menu4 ========
-					{
-						menu4.setText("Delete user");
-					}
-					menuBar1.add(menu4);
-				}
+				//---- button3 ----
+				button3.setText("Delete user");
 
 				GroupLayout panel1Layout = new GroupLayout(panel1);
 				panel1.setLayout(panel1Layout);
@@ -93,15 +78,22 @@ public class Admin_home extends JPanel {
 					panel1Layout.createParallelGroup()
 						.addGroup(panel1Layout.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(menuBar1, GroupLayout.DEFAULT_SIZE, 735, Short.MAX_VALUE)
-							.addContainerGap())
+							.addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+								.addComponent(button2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(button1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(button3, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
+							.addContainerGap(656, Short.MAX_VALUE))
 				);
 				panel1Layout.setVerticalGroup(
 					panel1Layout.createParallelGroup()
 						.addGroup(panel1Layout.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(menuBar1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(398, Short.MAX_VALUE))
+							.addComponent(button1)
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addComponent(button2)
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addComponent(button3)
+							.addContainerGap(338, Short.MAX_VALUE))
 				);
 			}
 			tabbedPane1.addTab("Users", panel1);
@@ -109,21 +101,11 @@ public class Admin_home extends JPanel {
 			//======== panel2 ========
 			{
 
-				//======== menuBar2 ========
-				{
+				//---- button4 ----
+				button4.setText("Add account");
 
-					//======== menu5 ========
-					{
-						menu5.setText("Add account");
-					}
-					menuBar2.add(menu5);
-
-					//======== menu6 ========
-					{
-						menu6.setText("Delete account");
-					}
-					menuBar2.add(menu6);
-				}
+				//---- button5 ----
+				button5.setText("Delete account");
 
 				GroupLayout panel2Layout = new GroupLayout(panel2);
 				panel2.setLayout(panel2Layout);
@@ -131,15 +113,19 @@ public class Admin_home extends JPanel {
 					panel2Layout.createParallelGroup()
 						.addGroup(panel2Layout.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(menuBar2, GroupLayout.DEFAULT_SIZE, 735, Short.MAX_VALUE)
-							.addContainerGap())
+							.addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+								.addComponent(button5, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(button4, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE))
+							.addContainerGap(640, Short.MAX_VALUE))
 				);
 				panel2Layout.setVerticalGroup(
 					panel2Layout.createParallelGroup()
 						.addGroup(panel2Layout.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(menuBar2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(398, Short.MAX_VALUE))
+							.addComponent(button4)
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addComponent(button5)
+							.addContainerGap(367, Short.MAX_VALUE))
 				);
 			}
 			tabbedPane1.addTab("Accounts", panel2);
@@ -194,14 +180,12 @@ public class Admin_home extends JPanel {
 	// Generated using JFormDesigner Evaluation license - Gergo Szentannai
 	private JTabbedPane tabbedPane1;
 	private JPanel panel1;
-	private JMenuBar menuBar1;
-	private JMenu menu2;
-	private JMenu menu3;
-	private JMenu menu4;
+	private JButton button1;
+	private JButton button2;
+	private JButton button3;
 	private JPanel panel2;
-	private JMenuBar menuBar2;
-	private JMenu menu5;
-	private JMenu menu6;
+	private JButton button4;
+	private JButton button5;
 	private JPanel panel3;
 	private JButton logoutButton;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
