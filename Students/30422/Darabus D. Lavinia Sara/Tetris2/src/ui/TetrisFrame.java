@@ -22,8 +22,7 @@ public class TetrisFrame extends JFrame{
 	private JLabel scoreLabel;
 	
 	
-	
-	private int score = 0;
+
 	
 	public TetrisFrame(){
 	
@@ -33,7 +32,7 @@ public class TetrisFrame extends JFrame{
 		setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
 		
 		gamePanel = new GamePanel();
-		scoreLabel = new JLabel("score: " + score);
+		scoreLabel = new JLabel("score: " + gamePanel.getScore());
 		
 		updateBoard();
 		add(gamePanel, BorderLayout.CENTER);
@@ -47,15 +46,18 @@ public class TetrisFrame extends JFrame{
 	}
 	
 	public void moveTetromino(String direction) {
-		GamePanel.shape.move(direction);
+		gamePanel.shape.move(direction);
 		updateBoard();
 		requestFocus();
 	}
 
 	private void updateBoard() {
 		// TODO Auto-generated method stub
+		scoreLabel.setText("score: " + gamePanel.getScore());
 		gamePanel.updateBoard();
 	}
+	
+	
 
 	
 	

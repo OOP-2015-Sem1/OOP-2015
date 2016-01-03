@@ -3,8 +3,10 @@ package shapes;
 import java.awt.Color;
 import java.util.Random;
 
+import core.GameObserver;
 import core.TetrominoController;
 import ui.GamePanel;
+import ui.TetrisFrame;
 
 public class Shape {
 
@@ -38,12 +40,14 @@ public class Shape {
 	private Color randomPieceColor;
 	private int randomPieceNumber;
 	private static int count;
-	public boolean[][] rotatedPiece = new boolean[this.getMatrixRows()][this.getMatrixCols()];
 	public boolean[][] standardPiece;
-	public boolean[][] fallingPiece = new boolean[this.getPieceRow()][this.getPieceCol()];
+	public boolean[][] verticalPiece = new boolean[4][2];
+	public boolean[][] horizontalPiece = new boolean[2][4];
 	private int matrixRows, matrixCols;
 	private int rotated;
 	private boolean legal;
+	private boolean fallingIsTerminated;
+	private GameObserver gameObserver;
 	
 	public Shape(){
 		this.setMatrixRows(2);
@@ -52,11 +56,12 @@ public class Shape {
 		this.generateNewFallingPiece();
 		this.generatePieceColor();
 		this.setPieceRow(0);
-		this.setPieceCol(7);
+		this.setPieceCol(5);
 		this.setRotated(0);
 		this.setPrevMatrixRows(2);
 		this.setPrevMatrixCols(4);
 		this.setLegal(true);
+		this.setFallingIsTerminated(false);
 	}
 
 	public int getMatrixCols() {
@@ -151,7 +156,9 @@ public class Shape {
 		this.setPrevPieceRow(this.getPieceRow());
 		this.setPrevPieceCol(this.getPieceCol());
 		if(direction.equals("DOWN")){
+			this.decideIfGameEnds();
 			this.setPieceRow(this.getPieceRow() + 1);
+			
 			}
 		else if(direction.equals("RIGHT")){
 			this.setPieceCol(this.getPieceCol() + 1);
@@ -166,32 +173,40 @@ public class Shape {
 	
 	public void rotatePiece(String direction){
 		if(direction.equals("ROTATE")){
+			
 			this.setPrevPieceRow(this.getPieceRow());
 			this.setPrevPieceCol(this.getPieceCol());
 			int aux = this.getMatrixCols();
 			this.setMatrixCols(this.getMatrixRows());
 			this.setMatrixRows(aux);
-			if((this.getMatrixRows() == 2) && (this.getMatrixCols() == 4) && ((this.getRotated() == 0) ||
+		
+			this.standardPiece = new boolean[this.getMatrixRows()][this.getMatrixCols()];
+			if((this.getMatrixRows() == 4) && (this.getMatrixCols() == 2) && ((this.getRotated() == 0) ||
 					(this.getRotated() == 2))){                           //vertical rotations
 				count = 3;
 				if(this.getRotated() == 2){
 					for(int i = 0; i < this.getMatrixRows(); i++){
-						count = 3;
+						
 						for(int j = 0; j < this.getMatrixCols(); j++){
-							this.rotatedPiece[i][j] = this.rotatedPiece[j][count];
-							count--;
+							this.verticalPiece[i][j] = this.horizontalPiece[j][count];
+							this.standardPiece[i][j] = this.verticalPiece[i][j];
+							 
+							
 						}
+						count--;
 					}
 					
 				
 				}
 				else{
 					for(int i = 0; i < this.getMatrixRows(); i++){
-						count = 3;
+						
 						for(int j = 0; j < this.getMatrixCols(); j++){
-							this.rotatedPiece[i][j] = TETROMINOES[this.getRandomPieceNumber()][j][count];
-							count--;
+							this.verticalPiece[i][j] = TETROMINOES[this.getRandomPieceNumber()][j][count];
+							this.standardPiece[i][j] = this.verticalPiece[i][j];
+							
 						}
+						count--;
 					}
 				}
 				this.setRotated(this.getRotated() + 1);
@@ -199,15 +214,17 @@ public class Shape {
 				this.setPrevMatrixRows(2);
 				this.setPrevMatrixCols(4);
 			}
-			else if((this.getMatrixRows() == 4) && (this.getMatrixCols() == 2) && ((this.getRotated() == 1) ||
+			else if((this.getMatrixRows() == 2) && (this.getMatrixCols() == 4) && ((this.getRotated() == 1) ||
 					(this.getRotated() == 3))){                //horizontal rotations
 				count = 0;
 				for(int i = 0; i < this.getMatrixRows(); i++){
 					count = 0;
 					for(int j = 0; j < this.getMatrixCols(); j++){
-						this.rotatedPiece[i][j] = this.rotatedPiece[count][Math.abs(i - 1)];
+						this.horizontalPiece[i][j] = this.verticalPiece[count][Math.abs(i - 1)];
+						this.standardPiece[i][j] = this.horizontalPiece[i][j];
 						count++;
 					}
+					
 				}
 				if(this.getRotated() == 1){
 					this.setRotated(this.getRotated() + 1);
@@ -255,6 +272,20 @@ public class Shape {
 
 	public void setLegal(boolean legal) {
 		this.legal = legal;
+	}
+	
+	public boolean isFallingIsTerminated() {
+		return fallingIsTerminated;
+	}
+
+	public void setFallingIsTerminated(boolean fallingIsTerminated) {
+		this.fallingIsTerminated = fallingIsTerminated;
+	}
+	
+	public void decideIfGameEnds(){
+		if((this.getPieceRow() == 0)&&(this.isFallingIsTerminated())){
+			gameObserver.notifyLoss();
+		}
 	}
 
 }
