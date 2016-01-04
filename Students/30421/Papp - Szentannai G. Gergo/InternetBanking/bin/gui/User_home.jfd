@@ -18,15 +18,18 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "viewAccountsButton"
 				"text": "View accounts"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "viewAccountsButtonActionPerformed", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "viewuserDetailsButton"
 				"text": "View user details"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "viewuserDetailsButtonActionPerformed", true ) )
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
 				add( new FormComponent( "javax.swing.JTextPane" ) {
 					name: "textPane1"
+					"text": "Select the left-hand-side buttons to display information!"
 				} )
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {

@@ -20,8 +20,10 @@ public class LogIn_user extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	public static String user_id;
 
 	public LogIn_user() {
+		user_id = null;
 		initComponents();
 	}
 
@@ -35,6 +37,7 @@ public class LogIn_user extends JPanel {
 		String tempStringPassword = new String(tempPassword);
 		//System.out.println(userTextField.getText() + " " + tempStringPassword); // Testing
 		authentification.attemptUserLogin(userTextField.getText(), tempStringPassword);
+		user_id = new String(userTextField.getText());
 	}
 
 	private void button1ActionPerformed(ActionEvent e) {

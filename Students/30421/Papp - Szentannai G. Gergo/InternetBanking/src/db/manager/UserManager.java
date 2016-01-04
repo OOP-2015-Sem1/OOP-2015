@@ -1,8 +1,14 @@
 package db.manager;
 
+import main.Application;
+
 public class UserManager {
-	public void getUser(String user_id) {
-		
+	public String getUser(String user_id) {
+		String outSql = new String();
+		String sqlStatement = new String(
+				"SELECT user_id, user_name FROM users_table WHERE  user_id = '" + user_id + "'");
+		outSql = Application.databaseConnect.executeSqlStatementForStrings(sqlStatement);
+		return outSql;
 	};
 
 	public void getAllUsers() {

@@ -3,7 +3,6 @@ package db.manager;
 import java.sql.*;
 
 public class DatabaseConnect {
-	// TODO: connect to MySQL database (it is already implemented)
 
 	// JDBC driver name and database URL:
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -13,13 +12,11 @@ public class DatabaseConnect {
 	static final String USER = "sqlJavaUser";
 	static final String PASSWORD = "1234";
 
-	private static Connection connection;
-	private static Statement statement;
+	// Global variables used for connection and the queries:
+	private static Connection connection = null;
+	private static Statement statement = null;
+	private static ResultSet rs = null;
 
-	public void executeSqlStatement(String statement){
-		// TODO: create SQL statement and execute it
-	}
-	
 	public DatabaseConnect() {
 
 		setConnection(null);
@@ -41,6 +38,56 @@ public class DatabaseConnect {
 
 		// TEST:
 		testConnection();
+		// executeSqlStatement("SELECT user_id, user_name, user_password FROM
+		// users_table");
+	}
+
+	/**
+	 * It is only implemented for accessing String type columns.
+	 * 
+	 * @param statement
+	 * @return
+	 */
+	public String executeSqlStatementForStrings(String statement) {
+		String outString = new String("");
+		try {
+			System.out.println("Creating statement...");
+			setStatement(getConnection().createStatement());
+
+			setRs(getStatement().executeQuery(statement));
+			ResultSetMetaData resultSetMetaData = getRs().getMetaData();
+			int columCount = resultSetMetaData.getColumnCount();
+
+			while (getRs().next()) {
+				for (int columnIndex = 1; columnIndex <= columCount; columnIndex++) {
+					outString = outString + getRs().getString(columnIndex) + "; ";
+				}
+				outString = outString + "\n";
+
+			}
+			System.out.println(outString);
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
+		return (outString);
+	}
+
+	public ResultSet executeSqlStatement(String statement) {
+
+		try {
+			System.out.println("Creating statement...");
+			setStatement(getConnection().createStatement());
+			System.out.println("Executing query...");
+			System.out.println("STATEMENT: "+statement);
+			setRs(getStatement().executeQuery(statement));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return getRs();
+
 	}
 
 	private void testConnection() {
@@ -50,26 +97,38 @@ public class DatabaseConnect {
 			String sql;
 			sql = "SELECT user_id, user_name, user_password FROM users_table";
 
-			ResultSet rs = getStatement().executeQuery(sql);
+			setRs(getStatement().executeQuery(sql));
 
-			while (rs.next()) {
-				String user_id = rs.getString("user_id");
-				String user_name = rs.getString("user_name");
-				String user_password = rs.getString("user_password");
+			while (getRs().next()) {
+				String user_id = getRs().getString("user_id");
+				String user_name = getRs().getString("user_name");
+				String user_password = getRs().getString("user_password");
 
 				System.out.print("user_id: " + user_id);
 				System.out.print(", user_name: " + user_name);
 				System.out.println(", user_password: " + user_password);
 
 			}
-			rs.close();
-			getStatement().close();
-			getConnection().close();
 
 		} catch (SQLException se) {
 			se.printStackTrace();
 		}
 	}
+
+	public void closeDatabase() {
+
+		try {
+			getStatement().close();
+			getConnection().close();
+			getRs().close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	// Getters and setters:
 
 	public static Connection getConnection() {
 		return connection;
@@ -86,5 +145,13 @@ public class DatabaseConnect {
 	public static void setStatement(Statement statement) {
 		DatabaseConnect.statement = statement;
 	}
-	
+
+	public static ResultSet getRs() {
+		return rs;
+	}
+
+	public static void setRs(ResultSet rs) {
+		DatabaseConnect.rs = rs;
+	}
+
 }
