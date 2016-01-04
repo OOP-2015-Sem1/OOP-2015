@@ -4,9 +4,8 @@ public class BombDistribution {
 	static int bombsGiven = 0;
 	static int bombsToGive = 99;
 	static int freeSpacesLeft = 480;
-	static int flaggedBombs = 99;
+	static int flaggedBombs = 100;
 	static int[] bombVector = new int[99];
-	static int firstPickCoordinates;
 
 	public static void bombVectorSetup() {
 		for (int i = 0; i < 99; i++) {
@@ -21,29 +20,25 @@ public class BombDistribution {
 		double randomNumber = Math.random();
 
 		int randomBomb = (int) (480 * randomNumber);
-		for (int i = 0; i < bombsGiven; i++) {
-			if (bombVector[i] == randomBomb || randomBomb == firstPickCoordinates) {
+		for (int i = 0; i < 99; i++) {
+			if (bombVector[i] == randomBomb || Graphics.field[i % 30][i / 30].canHaveBomb == false) {
 				randomBomb = myRandom();
 			}
 		}
 		return randomBomb;
 	}
 
-	public static void bombInitialization(int x, int y) {
-		bombVectorSetup();
-		firstPickCoordinates = (y * 30) + x;
-		int X, Y;
+	public static void bombInitialization() {
 		int i, j;
+		
+		bombVectorSetup();
 
 		for (i = 0; i < 99; i++) {
-			X = bombVector[i] % 30;
-			Y = bombVector[i] / 30;
-			System.out.println(X + "    " + Y);
-			Main.field[X][Y].hasBomb = true;
+			Graphics.field[bombVector[i] % 30][bombVector[i] / 30].hasBomb = true;
 		}
 		for (j = 0; j < GamePlay.fieldDepth; j++) {
 			for (i = 0; i < GamePlay.fieldLenght; i++) {
-				Main.field[i][j].findNumberOfBombs(i, j);
+				Graphics.field[i][j].findNumberOfBombs();
 			}
 		}
 	}

@@ -17,30 +17,30 @@ public class Auxiliary {
 	}
 
 	public static void blockTiles(int i, int j) {
-		Main.field[i][j].block(i, j);
+		Graphics.field[i][j].block(i, j);
 		if (i < (GamePlay.fieldLenght - 1)) {
-			Main.field[i + 1][j].block(i + 1, j);
+			Graphics.field[i + 1][j].block(i + 1, j);
 		}
 		if (i > 0) {
-			Main.field[i - 1][j].block(i - 1, j);
+			Graphics.field[i - 1][j].block(i - 1, j);
 		}
 		if (j < (GamePlay.fieldDepth - 1)) {
-			Main.field[i][j + 1].block(i, j + 1);
+			Graphics.field[i][j + 1].block(i, j + 1);
 		}
 		if (j > 0) {
-			Main.field[i][j - 1].block(i, j - 1);
+			Graphics.field[i][j - 1].block(i, j - 1);
 		}
 		if (i < (GamePlay.fieldLenght - 1) && j < (GamePlay.fieldDepth - 1)) {
-			Main.field[i + 1][j + 1].block(i + 1, j + 1);
+			Graphics.field[i + 1][j + 1].block(i + 1, j + 1);
 		}
 		if (i < (GamePlay.fieldLenght - 1) && j > 0) {
-			Main.field[i + 1][j - 1].block(i + 1, j - 1);
+			Graphics.field[i + 1][j - 1].block(i + 1, j - 1);
 		}
 		if (i > 0 && j < (GamePlay.fieldDepth - 1)) {
-			Main.field[i - 1][j + 1].block(i - 1, j + 1);
+			Graphics.field[i - 1][j + 1].block(i - 1, j + 1);
 		}
 		if (i > 0 && j > 0) {
-			Main.field[i - 1][j - 1].block(i - 1, j + 1);
+			Graphics.field[i - 1][j - 1].block(i - 1, j + 1);
 		}
 	}
 
@@ -64,7 +64,7 @@ public class Auxiliary {
 			}
 
 			for (i = 0; i < GamePlay.fieldLenght; i++) {
-				System.out.print(Main.field[i][j].charOutput() + "    ");
+				System.out.print(Graphics.field[i][j].charOutput() + "    ");
 
 			}
 			System.out.println();
