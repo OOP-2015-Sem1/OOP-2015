@@ -1,15 +1,12 @@
 package com.alexasapps.controller;
 
-
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.Toast;
-
-import com.alexasapps.multiplecardsflippingdemo.MainActivity;
 import com.alexasapps.multiplecardsflippingdemo.R;
 
 public class EasyCardFlipping extends CardFlipping {
+
+    private static final String SCORE_KEY_TRIES = "EasyScoreTries";
+    private static final String SCORE_KEY_TIME = "EasyScoreTime";
 
     final int nrOfCards = 12;
 
@@ -18,15 +15,15 @@ public class EasyCardFlipping extends CardFlipping {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.easy_layout);
 
-        super.setImages();
+        setImages();
         setCards(frontImages, backImages, "fruit");
         setFrontImagesClickListeners();
 
+        setScoreKeys(SCORE_KEY_TRIES, SCORE_KEY_TIME);
     }
 
     @Override
     int getNumberOfCards() {
         return nrOfCards;
     }
-
 }

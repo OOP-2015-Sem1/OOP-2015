@@ -1,14 +1,7 @@
 package com.alexasapps.model;
 
 
-import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
-
-import com.alexasapps.multiplecardsflippingdemo.R;
-
-import java.util.Random;
 
 public class Card {
 

@@ -9,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
-import com.alexasapps.controller.CardFlipping;
 import com.alexasapps.controller.EasyCardFlipping;
 import com.alexasapps.controller.HardCardFlipping;
 import com.alexasapps.controller.MediumCardFlipping;

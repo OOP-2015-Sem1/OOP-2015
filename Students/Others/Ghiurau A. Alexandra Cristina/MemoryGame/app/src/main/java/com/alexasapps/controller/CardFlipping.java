@@ -3,14 +3,12 @@ package com.alexasapps.controller;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.app.Activity;
-import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.alexasapps.model.Card;
 import com.alexasapps.multiplecardsflippingdemo.R;
@@ -22,12 +20,15 @@ import java.util.List;
 
 public abstract class CardFlipping extends Activity {
 
-    private Context context;
+    private final static int FLIP_TIMER_VALUE = 1500;
 
-    boolean isBackVisible = false;
+    private String scoreKeyTries;
+    private String scoreKeyTime;
 
-    public ImageView[] frontImages;
-    public ImageView[] backImages;
+    public boolean isBackVisible = false;
+
+    protected ImageView[] frontImages;
+    protected ImageView[] backImages;
 
     int count = 0;
     int nrOfTries = 0;
@@ -35,14 +36,20 @@ public abstract class CardFlipping extends Activity {
     int index1 = -1;
     int index2 = -1;
 
-    public ArrayList<Card> cards = new ArrayList<Card>();
+    public ArrayList<Card> cards = new ArrayList<>();
+    public List<String> backDrawables = new ArrayList<>();
 
-    List<String> backDrawables = new ArrayList<>();
-
+    private boolean timerStarted = false;
+    private long timeAtStart;
 
     abstract int getNumberOfCards();
 
-    private boolean timerStarted = false;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        timeAtStart = System.currentTimeMillis();
+    }
 
     public void setCards(ImageView[] frontImages, ImageView[] backImages, String imageName) {
 
@@ -127,7 +134,7 @@ public abstract class CardFlipping extends Activity {
 
         } else {
             timerStarted = true;
-            new CountDownTimer(2000, 2000) {
+            new CountDownTimer(FLIP_TIMER_VALUE, FLIP_TIMER_VALUE) {
                 @Override
                 public void onTick(long millisUntilFinished) {
                 }
@@ -142,15 +149,26 @@ public abstract class CardFlipping extends Activity {
         }
 
         if (this.isGameWon()) {
-
-            Toast toast = Toast.makeText(getApplicationContext(), "YOU WON! " + "NR OF TRIES: " + nrOfTries + " LOGOS: " + cards.size(), Toast.LENGTH_LONG);
-            toast.show();
+            long currentTime = System.currentTimeMillis();
+            long timeElapsed = currentTime - timeAtStart;
+            this.gameWon(timeElapsed, nrOfTries);
+            /*Toast toast = Toast.makeText(getApplicationContext(), "YOU WON! " + "NR OF TRIES: " + nrOfTries + " LOGOS: " + cards.size(), Toast.LENGTH_LONG);
+            toast.show();*/
         }
+    }
+
+    public void setScoreKeys(String scoreKeyTries, String scoreKeyTime) {
+        this.scoreKeyTries = scoreKeyTries;
+        this.scoreKeyTime = scoreKeyTime;
+    }
+
+    public void gameWon(long timeElapsed, int noOfTries) {
+        ScoreHolder.updateScores(this, scoreKeyTries, scoreKeyTime, noOfTries, timeElapsed);
     }
 
     public boolean isGameWon() {
         for (Card c : this.cards) {
-            if (c.isMatched() == false) {
+            if (!c.isMatched()) {
                 return false;
             }
         }
