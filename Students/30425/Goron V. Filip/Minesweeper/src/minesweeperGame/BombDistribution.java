@@ -21,7 +21,7 @@ public class BombDistribution {
 
 		int randomBomb = (int) (480 * randomNumber);
 		for (int i = 0; i < 99; i++) {
-			if (bombVector[i] == randomBomb || Graphics.field[i % 30][i / 30].canHaveBomb == false) {
+			if (bombVector[i] == randomBomb || !Graphics.field[i % 30][i / 30].canHaveBomb) {
 				randomBomb = myRandom();
 			}
 		}
@@ -36,8 +36,8 @@ public class BombDistribution {
 		for (i = 0; i < 99; i++) {
 			Graphics.field[bombVector[i] % 30][bombVector[i] / 30].hasBomb = true;
 		}
-		for (j = 0; j < GamePlay.fieldDepth; j++) {
-			for (i = 0; i < GamePlay.fieldLenght; i++) {
+		for (j = 0; j < GamePlay.FIELD_DEPTH; j++) {
+			for (i = 0; i < GamePlay.FIELD_LENGTH; i++) {
 				Graphics.field[i][j].findNumberOfBombs();
 			}
 		}

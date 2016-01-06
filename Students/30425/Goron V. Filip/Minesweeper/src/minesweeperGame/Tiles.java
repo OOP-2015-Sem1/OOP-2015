@@ -8,7 +8,6 @@ public class Tiles {
 	public boolean hasBomb;
 	public boolean canHaveBomb = true;
 	public boolean flagged;
-	public boolean maybe;
 	public int bombsAround;
 	public int closedAround;
 	public int flaggedAround;
@@ -35,29 +34,29 @@ public class Tiles {
 	public int findNumberOfBombs() {
 		int counter = 0;
 
-		if (tileX < (GamePlay.fieldLenght - 1) && Graphics.field[tileX + 1][tileY].hasBomb == true) {
+		if (tileX < (GamePlay.FIELD_LENGTH - 1) && Graphics.field[tileX + 1][tileY].hasBomb) {
 			counter++;
 		}
-		if (tileX > 0 && Graphics.field[tileX - 1][tileY].hasBomb == true) {
+		if (tileX > 0 && Graphics.field[tileX - 1][tileY].hasBomb) {
 			counter++;
 		}
-		if (tileY < (GamePlay.fieldDepth - 1) && Graphics.field[tileX][tileY + 1].hasBomb == true) {
+		if (tileY < (GamePlay.FIELD_DEPTH - 1) && Graphics.field[tileX][tileY + 1].hasBomb) {
 			counter++;
 		}
-		if (tileY > 0 && Graphics.field[tileX][tileY - 1].hasBomb == true) {
+		if (tileY > 0 && Graphics.field[tileX][tileY - 1].hasBomb) {
 			counter++;
 		}
-		if (tileX < (GamePlay.fieldLenght - 1) && tileY < (GamePlay.fieldDepth - 1)
-				&& Graphics.field[tileX + 1][tileY + 1].hasBomb == true) {
+		if (tileX < (GamePlay.FIELD_LENGTH - 1) && tileY < (GamePlay.FIELD_DEPTH - 1)
+				&& Graphics.field[tileX + 1][tileY + 1].hasBomb) {
 			counter++;
 		}
-		if (tileX < (GamePlay.fieldLenght - 1) && tileY > 0 && Graphics.field[tileX + 1][tileY - 1].hasBomb == true) {
+		if (tileX < (GamePlay.FIELD_LENGTH - 1) && tileY > 0 && Graphics.field[tileX + 1][tileY - 1].hasBomb) {
 			counter++;
 		}
-		if (tileX > 0 && tileY < (GamePlay.fieldDepth - 1) && Graphics.field[tileX - 1][tileY + 1].hasBomb == true) {
+		if (tileX > 0 && tileY < (GamePlay.FIELD_DEPTH - 1) && Graphics.field[tileX - 1][tileY + 1].hasBomb) {
 			counter++;
 		}
-		if (tileX > 0 && tileY > 0 && Graphics.field[tileX - 1][tileY - 1].hasBomb == true) {
+		if (tileX > 0 && tileY > 0 && Graphics.field[tileX - 1][tileY - 1].hasBomb) {
 			counter++;
 		}
 		bombsAround = counter;
@@ -67,29 +66,29 @@ public class Tiles {
 	public int findNumberOfClosed() {
 		int counter = 0;
 
-		if (tileX < (GamePlay.fieldLenght - 1) && Graphics.field[tileX + 1][tileY].opened == false) {
+		if (tileX < (GamePlay.FIELD_LENGTH - 1) && !Graphics.field[tileX + 1][tileY].opened) {
 			counter++;
 		}
-		if (tileX > 0 && Graphics.field[tileX - 1][tileY].opened == false) {
+		if (tileX > 0 && !Graphics.field[tileX - 1][tileY].opened) {
 			counter++;
 		}
-		if (tileY < (GamePlay.fieldDepth - 1) && Graphics.field[tileX][tileY + 1].opened == false) {
+		if (tileY < (GamePlay.FIELD_DEPTH - 1) && !Graphics.field[tileX][tileY + 1].opened) {
 			counter++;
 		}
-		if (tileY > 0 && Graphics.field[tileX][tileY - 1].opened == false) {
+		if (tileY > 0 && !Graphics.field[tileX][tileY - 1].opened) {
 			counter++;
 		}
-		if (tileX < (GamePlay.fieldLenght - 1) && tileY < (GamePlay.fieldDepth - 1)
-				&& Graphics.field[tileX + 1][tileY + 1].opened == false) {
+		if (tileX < (GamePlay.FIELD_LENGTH - 1) && tileY < (GamePlay.FIELD_DEPTH - 1)
+				&& !Graphics.field[tileX + 1][tileY + 1].opened) {
 			counter++;
 		}
-		if (tileX < (GamePlay.fieldLenght - 1) && tileY > 0 && Graphics.field[tileX + 1][tileY - 1].opened == false) {
+		if (tileX < (GamePlay.FIELD_LENGTH - 1) && tileY > 0 && !Graphics.field[tileX + 1][tileY - 1].opened) {
 			counter++;
 		}
-		if (tileX > 0 && tileY < (GamePlay.fieldDepth - 1) && Graphics.field[tileX - 1][tileY + 1].opened == false) {
+		if (tileX > 0 && tileY < (GamePlay.FIELD_DEPTH - 1) && !Graphics.field[tileX - 1][tileY + 1].opened) {
 			counter++;
 		}
-		if (tileX > 0 && tileY > 0 && Graphics.field[tileX - 1][tileY - 1].opened == false) {
+		if (tileX > 0 && tileY > 0 && !Graphics.field[tileX - 1][tileY - 1].opened) {
 			counter++;
 		}
 		closedAround = counter;
@@ -99,29 +98,29 @@ public class Tiles {
 	public int findNumberOfFlagged() {
 		int counter = 0;
 
-		if (tileX < (GamePlay.fieldLenght - 1) && Graphics.field[tileX + 1][tileY].flagged == true) {
+		if (tileX < (GamePlay.FIELD_LENGTH - 1) && Graphics.field[tileX + 1][tileY].flagged) {
 			counter++;
 		}
-		if (tileX > 0 && Graphics.field[tileX - 1][tileY].flagged == true) {
+		if (tileX > 0 && Graphics.field[tileX - 1][tileY].flagged) {
 			counter++;
 		}
-		if (tileY < (GamePlay.fieldDepth - 1) && Graphics.field[tileX][tileY + 1].flagged == true) {
+		if (tileY < (GamePlay.FIELD_DEPTH - 1) && Graphics.field[tileX][tileY + 1].flagged) {
 			counter++;
 		}
-		if (tileY > 0 && Graphics.field[tileX][tileY - 1].flagged == true) {
+		if (tileY > 0 && Graphics.field[tileX][tileY - 1].flagged) {
 			counter++;
 		}
-		if (tileX < (GamePlay.fieldLenght - 1) && tileY < (GamePlay.fieldDepth - 1)
-				&& Graphics.field[tileX + 1][tileY + 1].flagged == true) {
+		if (tileX < (GamePlay.FIELD_LENGTH - 1) && tileY < (GamePlay.FIELD_DEPTH - 1)
+				&& Graphics.field[tileX + 1][tileY + 1].flagged) {
 			counter++;
 		}
-		if (tileX < (GamePlay.fieldLenght - 1) && tileY > 0 && Graphics.field[tileX + 1][tileY - 1].flagged == true) {
+		if (tileX < (GamePlay.FIELD_LENGTH - 1) && tileY > 0 && Graphics.field[tileX + 1][tileY - 1].flagged) {
 			counter++;
 		}
-		if (tileX > 0 && tileY < (GamePlay.fieldDepth - 1) && Graphics.field[tileX - 1][tileY + 1].flagged == true) {
+		if (tileX > 0 && tileY < (GamePlay.FIELD_DEPTH - 1) && Graphics.field[tileX - 1][tileY + 1].flagged) {
 			counter++;
 		}
-		if (tileX > 0 && tileY > 0 && Graphics.field[tileX - 1][tileY - 1].flagged == true) {
+		if (tileX > 0 && tileY > 0 && Graphics.field[tileX - 1][tileY - 1].flagged) {
 			counter++;
 		}
 		bombsAround = counter;
@@ -130,8 +129,8 @@ public class Tiles {
 
 	public char charOutput() {
 		char out = 0;
-		if (opened == false) {
-			if (flagged == true) {
+		if (!opened) {
+			if (flagged) {
 				out = 'F';
 
 			} else {
@@ -139,8 +138,8 @@ public class Tiles {
 			}
 		}
 
-		if (opened == true) {
-			if (hasBomb == true) {
+		if (opened) {
+			if (hasBomb) {
 				out = 'X';
 
 			} else {
@@ -158,16 +157,16 @@ public class Tiles {
 
 	public String output() {
 		String out = null;
-		if (opened == false) {
-			if (flagged == true) {
+		if (!opened) {
+			if (flagged) {
 				out = "F";
 			} else {
 				out = " ";
 			}
 		}
 
-		if (opened == true) {
-			if (hasBomb == true) {
+		if (opened) {
+			if (hasBomb) {
 				out = "X";
 				GamePlay.endGame(false);
 			} else {
@@ -184,8 +183,8 @@ public class Tiles {
 
 	public void open() {
 
-		if (flagged == false && opened == false) {
-			if (hasBomb == true) {
+		if (!flagged && !opened) {
+			if (hasBomb) {
 				Graphics.tileButton[tileX][tileY].setBackground(Color.RED);
 				GamePlay.endGame(false);
 			}
@@ -202,26 +201,26 @@ public class Tiles {
 	}
 
 	public void openAround(int i, int j) {
-		if (Graphics.field[i][j].hasBomb == false) {
-			if (i < (GamePlay.fieldLenght - 1)) {
+		if (!Graphics.field[i][j].hasBomb) {
+			if (i < (GamePlay.FIELD_LENGTH - 1)) {
 				Graphics.field[i + 1][j].open();
 			}
 			if (i > 0) {
 				Graphics.field[i - 1][j].open();
 			}
-			if (j < (GamePlay.fieldDepth - 1)) {
+			if (j < (GamePlay.FIELD_DEPTH - 1)) {
 				Graphics.field[i][j + 1].open();
 			}
 			if (j > 0) {
 				Graphics.field[i][j - 1].open();
 			}
-			if (i < (GamePlay.fieldLenght - 1) && j < (GamePlay.fieldDepth - 1)) {
+			if (i < (GamePlay.FIELD_LENGTH - 1) && j < (GamePlay.FIELD_DEPTH - 1)) {
 				Graphics.field[i + 1][j + 1].open();
 			}
-			if (i < (GamePlay.fieldLenght - 1) && j > 0) {
+			if (i < (GamePlay.FIELD_LENGTH - 1) && j > 0) {
 				Graphics.field[i + 1][j - 1].open();
 			}
-			if (i > 0 && j < (GamePlay.fieldDepth - 1)) {
+			if (i > 0 && j < (GamePlay.FIELD_DEPTH - 1)) {
 				Graphics.field[i - 1][j + 1].open();
 			}
 			if (i > 0 && j > 0) {
@@ -232,61 +231,72 @@ public class Tiles {
 
 	public void flag() {
 
-		if (opened == false) {
+		if (!opened) {
 			flagged = !flagged;
+			if (flagged) {
+				Graphics.tileButton[tileX][tileY].setBackground(Color.YELLOW);
+				BombDistribution.flaggedBombs--;
+				Graphics.refreshBombCounter(BombDistribution.flaggedBombs);
+
+			} else {
+				Graphics.tileButton[tileX][tileY].setBackground(null);
+				BombDistribution.flaggedBombs++;
+				Graphics.refreshBombCounter(BombDistribution.flaggedBombs);
+
+			}
 			Graphics.tileButton[tileX][tileY].setText(output());
 			Graphics.tileButton[tileX][tileY].setBackground(Color.YELLOW);
 		}
 	}
 
 	public void helpFlagAround(int i, int j) {
-		if (i < (GamePlay.fieldLenght - 1) && Graphics.field[i + 1][j].flagged == false) {
+		if (i < (GamePlay.FIELD_LENGTH - 1) && !Graphics.field[i + 1][j].flagged) {
 			Graphics.field[i + 1][j].flag();
 		}
-		if (i > 0 && Graphics.field[i - 1][j].flagged == false) {
+		if (i > 0 && !Graphics.field[i - 1][j].flagged) {
 			Graphics.field[i - 1][j].flag();
 		}
-		if (j < (GamePlay.fieldDepth - 1) && Graphics.field[i][j + 1].flagged == false) {
+		if (j < (GamePlay.FIELD_DEPTH - 1) && !Graphics.field[i][j + 1].flagged) {
 			Graphics.field[i][j + 1].flag();
 		}
-		if (j > 0 && Graphics.field[i][j - 1].flagged == false) {
+		if (j > 0 && !Graphics.field[i][j - 1].flagged) {
 			Graphics.field[i][j - 1].flag();
 		}
-		if (i < (GamePlay.fieldLenght - 1) && j < (GamePlay.fieldDepth - 1)
-				&& Graphics.field[i + 1][j + 1].flagged == false) {
+		if (i < (GamePlay.FIELD_LENGTH - 1) && j < (GamePlay.FIELD_DEPTH - 1)
+				&& !Graphics.field[i + 1][j + 1].flagged) {
 			Graphics.field[i + 1][j + 1].flag();
 		}
-		if (i < (GamePlay.fieldLenght - 1) && j > 0 && Graphics.field[i + 1][j - 1].flagged == false) {
+		if (i < (GamePlay.FIELD_LENGTH - 1) && j > 0 && !Graphics.field[i + 1][j - 1].flagged) {
 			Graphics.field[i + 1][j - 1].flag();
 		}
-		if (i > 0 && j < (GamePlay.fieldDepth - 1) && Graphics.field[i - 1][j + 1].flagged == false) {
+		if (i > 0 && j < (GamePlay.FIELD_DEPTH - 1) && !Graphics.field[i - 1][j + 1].flagged) {
 			Graphics.field[i - 1][j + 1].flag();
 		}
-		if (i > 0 && j > 0 && Graphics.field[i - 1][j - 1].flagged == false) {
+		if (i > 0 && j > 0 && !Graphics.field[i - 1][j - 1].flagged) {
 			Graphics.field[i - 1][j - 1].flag();
 		}
 	}
 
 	public void flagAround(int i, int j) {
-		if (i < (GamePlay.fieldLenght - 1)) {
+		if (i < (GamePlay.FIELD_LENGTH - 1)) {
 			Graphics.field[i + 1][j].flag();
 		}
 		if (i > 0) {
 			Graphics.field[i - 1][j].flag();
 		}
-		if (j < (GamePlay.fieldDepth - 1)) {
+		if (j < (GamePlay.FIELD_DEPTH - 1)) {
 			Graphics.field[i][j + 1].flag();
 		}
 		if (j > 0) {
 			Graphics.field[i][j - 1].flag();
 		}
-		if (i < (GamePlay.fieldLenght - 1) && j < (GamePlay.fieldDepth - 1)) {
+		if (i < (GamePlay.FIELD_LENGTH - 1) && j < (GamePlay.FIELD_DEPTH - 1)) {
 			Graphics.field[i + 1][j + 1].flag();
 		}
-		if (i < (GamePlay.fieldLenght - 1) && j > 0) {
+		if (i < (GamePlay.FIELD_LENGTH - 1) && j > 0) {
 			Graphics.field[i + 1][j - 1].flag();
 		}
-		if (i > 0 && j < (GamePlay.fieldDepth - 1)) {
+		if (i > 0 && j < (GamePlay.FIELD_DEPTH - 1)) {
 			Graphics.field[i - 1][j + 1].flag();
 		}
 		if (i > 0 && j > 0) {

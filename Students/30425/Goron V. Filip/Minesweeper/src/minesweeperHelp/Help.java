@@ -4,7 +4,7 @@ import minesweeperGame.GamePlay;
 import minesweeperGame.Graphics;
 
 public class Help {
-	public static boolean[][] tileHelped = new boolean[GamePlay.fieldLenght][GamePlay.fieldDepth];
+	public static boolean[][] tileHelped = new boolean[GamePlay.FIELD_LENGTH][GamePlay.FIELD_DEPTH];
 
 	public Help() {
 		int i, j;
@@ -14,7 +14,6 @@ public class Help {
 				tileHelped[i][j] = false;
 			}
 		}
-
 	}
 
 	public static void nextHelp() {
@@ -22,12 +21,7 @@ public class Help {
 
 		for (j = 0; j < 16; j++) {
 			for (i = 0; i < 30; i++) {
-				if (Graphics.field[i][j].opened == true && tileHelped[i][j] == false) {
-
-					Graphics.field[i][j].findNumberOfFlagged();
-					Graphics.field[i][j].findNumberOfClosed();
-
-					System.out.println(Graphics.field[i][j].findNumberOfBombs() + " " + Graphics.field[i][j].flaggedAround);
+				if (Graphics.field[i][j].opened  && !tileHelped[i][j] ) {
 
 					if (Graphics.field[i][j].findNumberOfBombs() == Graphics.field[i][j].findNumberOfClosed()) {
 						Graphics.field[i][j].helpFlagAround(i, j);
@@ -40,10 +34,8 @@ public class Help {
 						tileHelped[i][j] = true;
 						break;
 					}
-
 				}
 			}
 		}
 	}
-
 }
