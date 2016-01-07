@@ -4,6 +4,7 @@
 
 package gui;
 
+import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
@@ -44,6 +45,10 @@ public class LogIn_user extends JPanel {
 		// TODO add your code here
 	}
 
+	private void passwordField1KeyPressed(KeyEvent e) {
+		// TODO add your code here
+	}
+
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY
 		// //GEN-BEGIN:initComponents
@@ -71,11 +76,23 @@ public class LogIn_user extends JPanel {
 		button2.setText("Authentificate");
 		button2.addActionListener(e -> authentificateActionPerformed(e));
 
+		//---- passwordField1 ----
+		passwordField1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				passwordField1KeyPressed(e);
+			}
+		});
+
 		//---- textPane1 ----
 		textPane1.setText("UserID");
+		textPane1.setEditable(false);
+		textPane1.setBackground(new Color(240, 240, 240));
 
 		//---- textPane2 ----
 		textPane2.setText("Password");
+		textPane2.setEditable(false);
+		textPane2.setBackground(new Color(240, 240, 240));
 
 		//======== scrollPane1 ========
 		{

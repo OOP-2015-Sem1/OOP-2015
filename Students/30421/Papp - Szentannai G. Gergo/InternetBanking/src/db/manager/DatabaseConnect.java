@@ -57,7 +57,7 @@ public class DatabaseConnect {
 			setRs(getStatement().executeQuery(statement));
 			ResultSetMetaData resultSetMetaData = getRs().getMetaData();
 			int columCount = resultSetMetaData.getColumnCount();
-
+			
 			while (getRs().next()) {
 				for (int columnIndex = 1; columnIndex <= columCount; columnIndex++) {
 					outString = outString + getRs().getString(columnIndex) + "; ";
@@ -73,6 +73,11 @@ public class DatabaseConnect {
 		return (outString);
 	}
 
+	/**
+	 * This method works on all column types but returns only the ResultSet not the String.
+	 * @param statement
+	 * @return
+	 */
 	public ResultSet executeSqlStatement(String statement) {
 
 		try {

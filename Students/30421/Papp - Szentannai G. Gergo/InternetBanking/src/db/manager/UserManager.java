@@ -3,7 +3,7 @@ package db.manager;
 import main.Application;
 
 public class UserManager {
-	public String getUser(String user_id) {
+	public String getUserDetails(String user_id) {
 		String outSql = new String();
 		String sqlStatement = new String(
 				"SELECT user_id, user_name FROM users_table WHERE  user_id = '" + user_id + "'");

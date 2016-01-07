@@ -56,8 +56,23 @@ public class User_home extends JPanel {
 		String outSQL = new String("Your user details are the following:\n [user ID] [User Name]\n\n");
 		String userID = new String(LogIn_user.user_id);
 		UserManager userManager = new UserManager();
-		outSQL = outSQL + userManager.getUser(userID);
+		outSQL = outSQL + userManager.getUserDetails(userID);
 		textPane1.setText(outSQL);
+	}
+
+	private void changePasswordButtonActionPerformed(ActionEvent e) {
+		String userID = new String(LogIn_user.user_id);
+		String newPassword = new String();
+		String sqlString = new String("UPDATE `internet_banking`.`users_table` SET `user_password`='" + newPassword
+				+ "' WHERE `user_id`='" + userID + "';");
+		try {
+			DatabaseConnect.getStatement().executeUpdate(sqlString);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
 	}
 
 	private void initComponents() {
@@ -71,6 +86,7 @@ public class User_home extends JPanel {
 		textPane1 = new JTextPane();
 		logoutButton = new JButton();
 		transferMoneyButton = new JButton();
+		changePasswordButton = new JButton();
 
 		// ======== this ========
 
@@ -112,6 +128,10 @@ public class User_home extends JPanel {
 		// ---- transferMoneyButton ----
 		transferMoneyButton.setText("Transfer money");
 
+		// ---- changePasswordButton ----
+		changePasswordButton.setText("Change password");
+		changePasswordButton.addActionListener(e -> changePasswordButtonActionPerformed(e));
+
 		GroupLayout layout = new GroupLayout(this);
 		setLayout(layout);
 		layout.setHorizontalGroup(layout.createParallelGroup()
@@ -125,12 +145,14 @@ public class User_home extends JPanel {
 												GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(logoutButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(transferMoneyButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-								Short.MAX_VALUE)).addGap(18, 18, 18)
-						.addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)).addGroup(
+								Short.MAX_VALUE)
+						.addComponent(changePasswordButton, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
+						.addGap(26, 26, 26).addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE))
+						.addGroup(
 								layout.createSequentialGroup()
 										.addComponent(welcomeText, GroupLayout.PREFERRED_SIZE, 264,
 												GroupLayout.PREFERRED_SIZE)
-										.addGap(0, 496, Short.MAX_VALUE)))
+										.addGap(0, 474, Short.MAX_VALUE)))
 						.addContainerGap()));
 		layout.setVerticalGroup(
 				layout.createParallelGroup()
@@ -144,10 +166,12 @@ public class User_home extends JPanel {
 										.addGroup(layout.createSequentialGroup().addComponent(viewAccountsButton)
 												.addGap(18, 18, 18).addComponent(viewuserDetailsButton)
 												.addGap(18, 18, 18).addComponent(transferMoneyButton)
-												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 269,
+												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 154,
 														Short.MAX_VALUE)
+												.addComponent(changePasswordButton)
+												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 												.addComponent(logoutButton))
-										.addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE))
+										.addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE))
 										.addContainerGap()));
 		// //GEN-END:initComponents
 	}
@@ -162,5 +186,6 @@ public class User_home extends JPanel {
 	private JTextPane textPane1;
 	private JButton logoutButton;
 	private JButton transferMoneyButton;
+	private JButton changePasswordButton;
 	// JFormDesigner - End of variables declaration //GEN-END:variables
 }

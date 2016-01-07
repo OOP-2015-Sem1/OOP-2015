@@ -1,5 +1,7 @@
 package gui;
 
+import java.awt.Dimension;
+
 import javax.swing.*;
 
 /**
@@ -21,8 +23,10 @@ public class MainFrame extends JFrame {
 	public static JPanel homePanel, login_user, login_admin, user_home, admin_home, settings;
 
 	public MainFrame() {
+		
 		initPanels();
 		initComponents();
+		setResizable(false);
 	}
 
 	/**
@@ -41,6 +45,7 @@ public class MainFrame extends JFrame {
 	private void initComponents() {
 
 		MainFrame = new JFrame();
+		
 
 		MainFrame.setVisible(true);
 		MainFrame.setSize(800, 500);
