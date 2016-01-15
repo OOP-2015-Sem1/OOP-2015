@@ -19,7 +19,7 @@ public class Ship<T extends Compartment> {
 	}
 
 	public void removeCompartment(T compartment) {
-		compartments.add(compartment);
+		compartments.remove(compartment);
 	}
 
 	public String getName() {

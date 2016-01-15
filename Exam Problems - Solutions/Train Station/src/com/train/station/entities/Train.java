@@ -19,7 +19,7 @@ public class Train<T extends Wagon> {
 	}
 
 	public void removeWagon(T wagon) {
-		wagons.add(wagon);
+		wagons.remove(wagon);
 	}
 
 	public String getName() {
