@@ -1,0 +1,88 @@
+package Bay;
+
+import java.util.Comparator;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
+import Compartiment.Cargo;
+import Compartiment.Compartiment;
+import Compartiment.Person;
+
+public class ShipBay {
+
+	static SortedSet<Ship> ShipsbyName ;
+	static SortedSet<Ship> ShipsbyProfit = new TreeSet<Ship>(new myShipByProfitComparator());
+	public static boolean isCariable = true;
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		ShipsbyName = new TreeSet<Ship>(new myShipByNameComparator());
+		
+		Person person1 = new Person(isCariable, "Patric", 10);
+		Person person2 = new Person(isCariable, "Firas", 9);
+		Person person3 = new Person(isCariable, "COAIE", 9);
+		
+
+		Cargo cargo1 = new Cargo(isCariable, "China", 10);
+
+		Compartiment compartiment1 = new Compartiment("Clasa1", 1);
+		Compartiment compartiment2 = new Compartiment("Clasa2", 2);
+		Compartiment compartiment3 = new Compartiment("Clasa3", 3);
+
+		compartiment1.addCargo(cargo1);
+		
+		compartiment2.addPerson(person2);
+		compartiment2.addPerson(person1);
+		compartiment3.addPerson(person3);
+		
+
+		
+
+		Ship shipCargo = new Ship("AERSK", 2);
+		Ship shipPerson = new Ship("Concordia", 1);
+		
+
+		shipPerson.addPersonCompartiments(compartiment2);
+	    shipPerson.addPersonCompartiments(compartiment3);
+		
+	    shipCargo.addCargoCompartiments(compartiment1);
+		
+	    
+	  
+		ShipsbyName.add(shipPerson);
+	    ShipsbyName.add(shipCargo);
+		
+		
+		
+		
+		System.out.println("Ship name is "+ShipsbyName.first().getShipName()+" having "+ ShipsbyName.first().getShipNrOFCompartiments()+" compartiments "+ ShipsbyName.first().getShipProfit());
+		
+		
+
+	}
+
+}
+
+class myShipByNameComparator implements Comparator<Ship> {
+
+	@Override
+	public int compare(Ship ship1, Ship ship2) {
+
+		return ship1.getShipName().compareTo(ship2.getShipName());
+	}
+
+}
+
+class myShipByProfitComparator implements Comparator<Ship> {
+
+	@Override
+	public int compare(Ship ship1, Ship ship2) {
+
+		if (ship1.getShipProfit() < ship2.getShipProfit())
+			return 1;
+		else
+			return -1;
+	}
+
+}

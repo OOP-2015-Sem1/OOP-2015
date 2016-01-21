@@ -1,0 +1,66 @@
+import java.util.*;
+
+public class Compartment {
+
+	SortedSet<String> CompsName = new TreeSet<>();
+	SortedSet<Integer> randomComps = new TreeSet<>();
+	SortedSet<Passenger> personSet = new TreeSet<>();
+	SortedSet<CargoItem> cargoSet = new TreeSet<>();
+
+	public SortedSet<Passenger> passengerCompartiment = new TreeSet<>(new myPassengerComparator());
+	public SortedSet<CargoItem> CargoCompartiment = new TreeSet<>(new myCargoComparator());
+
+	public final int ticketPrice = 100;
+	public static int totalProfit;
+	
+	
+	public void addPerson(Passenger passenger) {
+
+		passengerCompartiment.add(pessenger);
+		this.ComparimentProfit = this.ComparimentProfit + ticketPrice;
+
+	}
+	
+	public void addCargo(CargoItem cargoItem) {
+
+		CargoCompartiment.add(cargoItem);
+		this.ComparimentProfit = this.ComparimentProfit + cargoItem.getProfit();
+	}
+	
+
+	public void createCompsName() {
+
+		CompsName.add(UUID.randomUUID().toString());
+	}
+
+	public void createNrOfComps() {
+		randomComps.add(Math.abs(new Random().nextInt(100)));
+	}
+
+	public void getNrOfComps() {
+		System.out.println(randomComps);
+	}
+
+	public int getSum() {
+
+	}
+}
+
+class myCargoComparator implements Comparator<CargoItem> {
+
+	@Override
+	public int compare(CargoItem o1, CargoItem o2) {
+		
+		return o1.getCargoName().compareTo(o2.getCargoName());
+	}
+}
+
+class myPassengerComparator implements Comparator<Passenger> {
+
+	@Override
+	public int compare(Passenger p1, Passenger p2) {
+		
+		return p1.getPassengerName().compareTo(p2.getPassengerName());
+	}
+}
+

@@ -1,0 +1,51 @@
+import java.util.*;
+
+public class Airport {
+	
+	static SortedSet<Plane> PlanesByName ;
+	static SortedSet<Plane> PlanesByProfit = new TreeSet<>(new planeSortedByProfit());
+	public static boolean isCariable = true;
+	
+	public static void main(String[] args){
+		
+		PlanesByName = new TreeSet<>(new planeSortedByName());
+		
+		Passenger passenger1 = new Passenger("Bot", 7, true);
+		Passenger passenger2 = new Passenger("Scooby", 1, true);
+		Passenger passenger3 = new Passenger("Jerry", 12, true);
+		
+		CargoItem cargo1 = new CargoItem("cargo1", 12, true);
+		
+		
+		
+		Compartment compartment1 = new Compartment("Comp1");
+		Compartment compartment2 = new Compartment("Comp2");
+		Compartment compartment3 = new Compartment("Comp3");
+		
+		
+		
+	}
+
+	
+	
+}
+
+class planeSortedByName implements Comparator<Plane>{
+
+	@Override
+	public int compare(Plane p1, Plane p2) {
+		return p1.getPlaneName().compareTo(p2.getPlaneName());
+	}
+}
+
+class planeSortedByProfit implements Comparator<Plane>{
+
+	@Override
+	public int compare(Plane p1, Plane p2) {
+		if(p1.getPlaneProfit() < p2.getPlaneProfit())
+			return 1;
+		else 
+			return -1;
+	}
+}
+

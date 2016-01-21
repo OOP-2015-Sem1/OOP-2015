@@ -1,0 +1,71 @@
+package Bay;
+
+import java.util.Comparator;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
+import Compartiment.Compartiment;
+
+public class Ship {
+
+	public SortedSet<Compartiment> PersonShipCompartiments = new TreeSet<Compartiment>(new myComparator());
+	public SortedSet<Compartiment> CargoShipCompartiments = new TreeSet<Compartiment>(new myComparator());
+	private int NrOfCompartiments=0;
+	private int shipType;
+	private int TICKET_PRICE=100;
+	private static int ShipProfit=0;
+	private static String shipName;
+
+	public Ship(String shipName,int PersonOrCargo) {
+
+		this.shipName = shipName;
+		this.shipType=PersonOrCargo;
+	}
+
+	public void addPersonCompartiments(Compartiment compartiment) {
+
+		
+		PersonShipCompartiments.add(compartiment);
+		this.NrOfCompartiments += 1;
+	    this.ShipProfit =this.ShipProfit +100;
+		
+		
+	}
+	public void addCargoCompartiments(Compartiment compartiment) {
+
+		
+		CargoShipCompartiments.add(compartiment);
+		this.NrOfCompartiments += 1;
+		this.ShipProfit += 1;
+		
+		
+			
+	}
+
+	public static String getShipName() {
+		return shipName;
+	}
+
+	public int getShipNrOFCompartiments() {
+		return NrOfCompartiments;
+	}
+
+	public int getShipProfit() {
+		return ShipProfit;
+	}
+	public int getShipType(){
+		return shipType;
+	}
+
+}
+
+class myComparator implements Comparator<Compartiment> {
+
+	@Override
+	public int compare(Compartiment comp1, Compartiment comp2) {
+		
+		return comp1.getName().compareTo(comp2.getName());
+	}
+
+	
+	}

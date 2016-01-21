@@ -1,0 +1,40 @@
+import java.util.*;
+public class Plane {
+	
+	private String NAME;
+	private int NrOfComps;
+	private int PROFIT;
+	
+
+	Set<Compartment> Compartment = new LinkedHashSet<>();
+	Set<String> PlaneName = new LinkedHashSet<>();
+	
+	public SortedSet<Compartment> passengerComps = new TreeSet<>(new myComparator());
+	public SortedSet<Compartment> cargoItemComps = new TreeSet<>(new myComparator());
+	
+	
+//	Compartments.add(Math.abs(new Random().nextInt(100)));
+	
+	public Plane(String name, int nrOfComps, int profit){
+		
+		this.NAME = name;
+		this.NrOfComps = nrOfComps;
+		this.PROFIT = profit;
+	}
+	
+	public String getPlaneName(){
+		
+		return this.NAME;
+	}
+	
+	public int getPlaneProfit(){
+		
+		return this.PROFIT;
+	}
+	
+	public int getNrOfComps(int NrOfComps){
+		
+		return this.NrOfComps;
+	}
+	
+}
