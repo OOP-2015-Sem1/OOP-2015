@@ -1,16 +1,12 @@
 package com.alexasapps.controller;
 
-
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ImageView;
-import android.widget.Toast;
-
-import com.alexasapps.multiplecardsflippingdemo.MainActivity;
 import com.alexasapps.multiplecardsflippingdemo.R;
 
 public class MediumCardFlipping extends CardFlipping{
+
+    private static final String SCORE_KEY_TRIES = "MediumScoreTries";
+    private static final String SCORE_KEY_TIME = "MediumScoreTime";
 
     final int nrOfCards = 20;
 
@@ -19,10 +15,11 @@ public class MediumCardFlipping extends CardFlipping{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.medium_layout);
 
-        super.setImages();
+        setImages();
         setCards(frontImages, backImages, "cartoon");
         setFrontImagesClickListeners();
 
+        setScoreKeys(SCORE_KEY_TRIES, SCORE_KEY_TIME);
     }
 
     @Override

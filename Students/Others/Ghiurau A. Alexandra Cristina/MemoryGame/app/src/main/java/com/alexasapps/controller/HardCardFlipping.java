@@ -1,15 +1,13 @@
 package com.alexasapps.controller;
 
 
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ImageView;
-import android.widget.Toast;
-
 import com.alexasapps.multiplecardsflippingdemo.R;
 
 public class HardCardFlipping extends CardFlipping {
+
+    private static final String SCORE_KEY_TRIES = "HardScoreTries";
+    private static final String SCORE_KEY_TIME = "HardScoreTime";
 
     final int nrOfCards = 30;
 
@@ -18,10 +16,11 @@ public class HardCardFlipping extends CardFlipping {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hard_layout);
 
-        super.setImages();
+        setImages();
         setCards(frontImages, backImages, "peng");
         setFrontImagesClickListeners();
 
+        setScoreKeys(SCORE_KEY_TRIES, SCORE_KEY_TIME);
     }
 
     @Override
