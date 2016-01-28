@@ -8,13 +8,18 @@ import javax.swing.JPanel;
 public class Renderer extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-
+	public Game game;
+	
+	 public Renderer(Game game) {
+		// TODO Auto-generated constructor stub
+		this.game = game;
+	}
 	@Override
 	protected void paintComponent(Graphics g) {
 
 		super.paintComponent(g);
-
-		Game.game.render((Graphics2D) g);
+		
+		this.game.render((Graphics2D) g);
 	}
 
 	@Override

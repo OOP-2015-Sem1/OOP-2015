@@ -7,12 +7,14 @@ import bricks.game.Game;
 
 public class Paddle {
 
-	public int x, y, width = 120, height = 18;
+	 int x, y, width = 120, height = 18;
+	
+	public Game game;
 
 	public Paddle(Game game) {
 		this.x = (game.width / 2) - 60;
 		this.y = game.height - 40;
-
+		this.game = game;
 	}
 
 	public void render(Graphics g) {
@@ -30,10 +32,10 @@ public class Paddle {
 				x = 0;
 			}
 		} else {
-			if (x + width + speed < Game.game.width) {
+			if (x + width + speed < game.width) {
 				x += speed;
 			} else {
-				x = Game.game.width - width;
+				x = game.width - width;
 			}
 
 		}

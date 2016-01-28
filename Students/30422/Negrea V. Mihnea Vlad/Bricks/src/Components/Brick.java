@@ -6,11 +6,9 @@ import java.awt.Graphics2D;
 
 public class Brick {
 
-	public static Brick brick;
-
 	int x, y, width = 60, height = 23;
 
-	public boolean DeadOrAlive;
+	boolean DeadOrAlive;
 
 	public Brick(int x, int y) {
 		this.x = x;

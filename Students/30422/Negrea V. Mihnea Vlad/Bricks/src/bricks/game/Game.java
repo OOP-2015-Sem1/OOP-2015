@@ -13,11 +13,12 @@ import javax.swing.JFrame;
 import javax.swing.Timer;
 
 import Components.Paddle;
-import Components.ball;
+import Components.Ball;
 
 public class Game implements ActionListener, KeyListener {
 
-	public static Game game;
+	//public static Game game;
+	//public Game game;
 
 	public Renderer renderer;
 
@@ -25,19 +26,20 @@ public class Game implements ActionListener, KeyListener {
 
 	public Paddle paddle;
 
-	public Mario mario;
 
 	public boolean left, right;
 
-	public ball ball;
+	public Ball ball;
 
 	public int gameStatus = 0;
+	
+	Mario mario = new Mario();
 
 	public Game() {
 		Timer timer = new Timer(20, this);
 		JFrame frame = new JFrame("Mario Breakout");
 
-		renderer = new Renderer();
+		renderer = new Renderer(this);
 
 		frame.setSize(width + 16, height + 39);
 		frame.setVisible(true);
@@ -46,6 +48,8 @@ public class Game implements ActionListener, KeyListener {
 		frame.setLocationRelativeTo(null);
 		frame.addKeyListener(this);
 
+
+
 		start();
 		timer.start();
 	}
@@ -53,13 +57,11 @@ public class Game implements ActionListener, KeyListener {
 	public void start() {
 		paddle = new Paddle(this);
 
-		ball = new ball(width / 2, height / 2);
+		ball = new Ball(width / 2, height / 2);
 
 	}
 
-	public static void main(String[] args) {
-		game = new Game();
-	}
+
 
 	public void update() {
 
@@ -74,6 +76,7 @@ public class Game implements ActionListener, KeyListener {
 	}
 
 	public void render(Graphics2D g) {
+		
 
 		if (gameStatus == 0) {
 			g.setColor(new Color(20, 169, 20));
@@ -99,21 +102,21 @@ public class Game implements ActionListener, KeyListener {
 
 			g.setColor(Color.WHITE);
 			g.setFont(new Font("Arial", 1, 22));
-			g.drawString("Score: " + Mario.getScore(), 10, 23);
-			g.drawString("Lives: " + ball.lives, 710, 23);
+			g.drawString("Score: " + mario.getScore(), 10, 23);
+			g.drawString("Lives: " + ball.getLives(), 710, 23);
 
 			paddle.render(g);
 
 			ball.render(g);
 
-			Mario.createMario(g, ball);
+			mario.createMario(g, ball);
 		}
-		if (Mario.getScore() == 21300 || ball.lives == 0) {
+		if (mario.getScore() == 21300 || ball.getLives() == 0) {
 			gameStatus = 3;
 		}
 
 		if (gameStatus == 3) {
-			if (Mario.getScore() == 21300) {
+			if (mario.getScore() == 21300) {
 
 				g.setColor(new Color(20, 169, 20));
 				g.fillRect(0, 0, width, height);
@@ -126,7 +129,7 @@ public class Game implements ActionListener, KeyListener {
 				g.drawString("Press SPACE to play again", 135, 320);
 
 			}
-			if (ball.lives == 0) {
+			if (ball.getLives() == 0) {
 				g.setColor(new Color(20, 169, 20));
 				g.fillRect(0, 0, width, height);
 				g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -134,7 +137,7 @@ public class Game implements ActionListener, KeyListener {
 				g.setColor(new Color(102, 0, 0));
 				g.setFont(new Font("Arial", 1, 72));
 				g.drawString("YOU LOST", 210, 180);
-				g.drawString("Your score: " + Mario.getScore(), 160, 260);
+				g.drawString("Your score: " + mario.getScore(), 160, 260);
 				g.setFont(new Font("Arial", 1, 42));
 				g.drawString("Press SPACE to play again", 135, 320);
 
@@ -176,8 +179,8 @@ public class Game implements ActionListener, KeyListener {
 				gameStatus = 2;
 			} else if (gameStatus == 3) {
 				gameStatus = 2;
-				ball.lives = 3;
-				Mario.setScore(0);
+				ball.setLives(3);
+				mario.setScore(0);
 			}
 		}
 
