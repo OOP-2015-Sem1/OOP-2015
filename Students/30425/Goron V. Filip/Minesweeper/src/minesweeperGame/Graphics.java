@@ -5,45 +5,48 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-import minesweeperGame.Graphics;
+import minesweeperHelp.Help;
 
 @SuppressWarnings("serial")
 public class Graphics extends JFrame implements MouseListener {
-	static JButton[][] tileButton = new JButton[GamePlay.fieldLenght][GamePlay.fieldDepth];
-	static JButton help;
-	static JLabel bombCounter;
-	static JFrame gameWindow;
-	static JPanel buttonField;
-	static JPanel topBar;
+	public static Tiles[][] field = new Tiles[GamePlay.FIELD_LENGTH][GamePlay.FIELD_DEPTH];
+	public static JButton[][] tileButton = new JButton[GamePlay.FIELD_LENGTH][GamePlay.FIELD_DEPTH];
+	public static JButton help;
+	public static JLabel bombCounter;
+	public static JFrame gameWindow;
+	public static JPanel buttonField;
+	public static JPanel topBar;
 
 	Graphics() {
 
 		gameWindow = new JFrame("Minesweeper");
 		buttonField = new JPanel();
-		help = new JButton();
+		help = new JButton("Help");
 		bombCounter = new JLabel("99");
 		topBar = new JPanel();
 
-		int i, j;
-
-		for (j = 0; j < GamePlay.fieldDepth; j++) {
-			for (i = 0; i < GamePlay.fieldLenght; i++) {
-				tileButton[i][j] = new JButton(Main.field[i][j].output());
+		for (int j = 0; j < GamePlay.FIELD_DEPTH; j++) {
+			for (int i = 0; i < GamePlay.FIELD_LENGTH; i++) {
+				Graphics.field[i][j] = new Tiles(i, j);
+				tileButton[i][j] = new JButton(Graphics.field[i][j].output());
 				tileButton[i][j].setFont(new Font("Arial", Font.BOLD, 14));
-				buttonField.add(tileButton[i][j]);
 				tileButton[i][j].addMouseListener(this);
+				tileButton[i][j].setMargin(new Insets(0, 0, 0, 0));
+				buttonField.add(tileButton[i][j]);
 			}
 		}
+
+		help.addMouseListener(this);
 
 		topBar.setLayout(new GridLayout());
 		topBar.add(help);
 		topBar.add(bombCounter);
 
-		buttonField.setLayout(new GridLayout(GamePlay.fieldDepth, GamePlay.fieldLenght));
+		buttonField.setLayout(new GridLayout(GamePlay.FIELD_DEPTH, GamePlay.FIELD_LENGTH));
 		buttonField.setVisible(true);
 
 		gameWindow.setLayout(new BorderLayout());
-		gameWindow.setSize(1280, 640);
+		gameWindow.setSize(800, 440);
 		gameWindow.setVisible(true);
 
 		gameWindow.add(buttonField, BorderLayout.CENTER);
@@ -55,27 +58,22 @@ public class Graphics extends JFrame implements MouseListener {
 	public static void refreshBombCounter(int bombs) {
 		bombCounter.setText(Integer.toString(bombs));
 	}
-	
-	public static void instructionsPopUp(){
-		JOptionPane.showMessageDialog(null, "Click to open, CTRL+Click to flag, and SHIFT+Click to open multiple", "Instructions",JOptionPane.PLAIN_MESSAGE);
+
+	public static void instructionsPopUp() {
+		JOptionPane.showMessageDialog(null, "Click to open, RightClick to flag, and BOTH to open multiple",
+				"Instructions", JOptionPane.PLAIN_MESSAGE);
 	}
 
 	public static void endGamePopUp(boolean won) {
-		if (won == true) {
+		if (won) {
 			JOptionPane.showMessageDialog(null, "You Won! :)", "Game Over", JOptionPane.WARNING_MESSAGE);
 		} else {
 			JOptionPane.showMessageDialog(null, "You Lost :(", "Game Over", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
-	static int coordinates;
-
-	public static int getCoordinates() {
-		return coordinates;
-	}
-
 	@Override
-	public void mouseClicked(MouseEvent e) {
+	public void mouseClicked(MouseEvent Click) {
 
 	}
 
@@ -90,39 +88,51 @@ public class Graphics extends JFrame implements MouseListener {
 	}
 
 	@Override
-	public void mousePressed(MouseEvent arg0) {
+	public void mousePressed(MouseEvent Click) {
 
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent Click) {
 
-		for (int j = 0; j < GamePlay.fieldDepth; j++) {
-			for (int i = 0; i < GamePlay.fieldLenght; i++) {
+		if (Click.getSource() == help) {
+			Help.nextHelp();
+		}
+
+		for (int j = 0; j < GamePlay.FIELD_DEPTH; j++) {
+			for (int i = 0; i < GamePlay.FIELD_LENGTH; i++) {
 				if (Click.getSource() == tileButton[i][j]) {
 
-					if (Click.isControlDown() == true) {
-						Main.field[i][j].flag(i, j);
-						if (Main.field[i][j].flagged == true) {
-							Graphics.tileButton[i][j].setBackground(Color.YELLOW);
-							BombDistribution.flaggedBombs--;
-							refreshBombCounter(BombDistribution.flaggedBombs);
-						} else if (Main.field[i][j].opened == false) {
-							Graphics.tileButton[i][j].setBackground(null);
-							BombDistribution.flaggedBombs++;
-							refreshBombCounter(BombDistribution.flaggedBombs);
-						}
+					if (Click.getButton() == 3) {
+
+						field[i][j].flag();
+
+						
 						break;
-					} else if (Click.isShiftDown() == true) {
-						Main.field[i][j].openAround(i, j);
+
+					} else if (Click.isShiftDown()) {
+						field[i][j].openAround(i, j);
+
 					} else {
-						Main.field[i][j].open(i, j);
+						field[i][j].open();
 
 					}
-					coordinates = j * 15 + i;
+					Auxiliary.checkForWin();
+				}
+			}
+		}
+
+		if (SwingUtilities.isLeftMouseButton(Click) && SwingUtilities.isRightMouseButton(Click)) {
+
+			for (int j = 0; j < GamePlay.FIELD_DEPTH; j++) {
+				for (int i = 0; i < GamePlay.FIELD_LENGTH; i++) {
+					if (Click.getSource() == tileButton[i][j]) {
+						field[i][j].openAround(i, j);
+					}
 					Auxiliary.checkForWin();
 				}
 			}
 		}
 	}
+
 }
