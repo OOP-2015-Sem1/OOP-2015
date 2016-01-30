@@ -7,22 +7,23 @@ import java.io.File;
 import bricks.game.Game;
 import bricks.game.Sound;
 
-public class ball {
+public class Ball {
 
-	public int x;
-	public int y;
+	 int x;
+	 int y;
 	int size = 14;
 	int speed = 8;
-	public int lives = 3;
+	 int lives = 3;
 
-	public int vx;
-	public int vy;
+	int vx;
 
-	public static File paddleHit = new File("paddle.wav");
-	public static File life = new File("life.wav");
-	public static File gameover = new File("gameover.wav");
+	int vy;
 
-	public ball(int x, int y) {
+	File paddleHit = new File("paddle.wav");
+	File life = new File("life.wav");
+	File gameover = new File("gameover.wav");
+
+	public Ball(int x, int y) {
 		this.x = x;
 		this.y = y;
 
@@ -51,23 +52,9 @@ public class ball {
 
 		if (CheckCollision(paddle) == 1) {
 			Sound.PlaySound(paddleHit);
-			if (vx <= 0 && x + size / 2 >= paddle.x + 60 && x + size / 2 <= paddle.x + 75) { // this
-																								// instructions
-																								// set
-																								// the
-																								// angle
-																								// of
-																								// the
-																								// ball
-																								// on
-																								// different
-																								// hitted
-																								// paddle
-																								// areas
-				vy = -speed; // and when the ball is coming i.e. the right side
-								// and you hit it with the right side of the
-								// paddle
-				vx = speed - 3; // the ball goes to the right side agains
+			if (vx <= 0 && x + size / 2 >= paddle.x + 60 && x + size / 2 <= paddle.x + 75) {
+				vy = -speed;
+				vx = speed - 3;
 			} else if (vx <= 0 && x + size / 2 > paddle.x + 75 && x + size / 2 <= paddle.x + 90) {
 				vy = -speed;
 				vx = speed - 1;
@@ -190,5 +177,30 @@ public class ball {
 	public void setSize(int size) {
 		this.size = size;
 	}
+	
+	 public int getLives() {
+		return lives;
+	}
+
+	public void setLives(int lives) {
+		this.lives = lives;
+	}
+
+	public int getVx() {
+		return vx;
+	}
+
+	public void setVx(int vx) {
+		this.vx = vx;
+	}
+
+	public int getVy() {
+		return vy;
+	}
+
+	public void setVy(int vy) {
+		this.vy = vy;
+	}
+
 
 }
