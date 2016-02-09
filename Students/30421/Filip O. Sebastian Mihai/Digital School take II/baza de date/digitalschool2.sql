@@ -36,7 +36,7 @@ CREATE TABLE `biologie` (
 
 LOCK TABLES `biologie` WRITE;
 /*!40000 ALTER TABLE `biologie` DISABLE KEYS */;
-INSERT INTO `biologie` VALUES (1,'1');
+INSERT INTO `biologie` VALUES (1,'1'),(2,'2'),(3,'5'),(4,'1 2'),(5,'3'),(6,'4'),(7,'54'),(8,'65'),(9,'10'),(10,'1'),(11,'3'),(12,'4');
 /*!40000 ALTER TABLE `biologie` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +61,7 @@ CREATE TABLE `chimie` (
 
 LOCK TABLES `chimie` WRITE;
 /*!40000 ALTER TABLE `chimie` DISABLE KEYS */;
-INSERT INTO `chimie` VALUES (1,'1');
+INSERT INTO `chimie` VALUES (1,'1'),(2,'2'),(3,'5'),(4,'1 2'),(5,'3'),(6,'4'),(7,'54'),(8,'65'),(9,'10'),(10,'1'),(11,'3'),(12,'4');
 /*!40000 ALTER TABLE `chimie` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,7 +110,7 @@ CREATE TABLE `educatiefizica` (
 
 LOCK TABLES `educatiefizica` WRITE;
 /*!40000 ALTER TABLE `educatiefizica` DISABLE KEYS */;
-INSERT INTO `educatiefizica` VALUES (1,'1');
+INSERT INTO `educatiefizica` VALUES (1,'1'),(2,'2'),(3,'5'),(4,'1 2'),(5,'3'),(6,'4'),(7,'54'),(8,'65'),(9,'10'),(10,'1'),(11,'3'),(12,'4');
 /*!40000 ALTER TABLE `educatiefizica` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,7 +135,7 @@ CREATE TABLE `fizica` (
 
 LOCK TABLES `fizica` WRITE;
 /*!40000 ALTER TABLE `fizica` DISABLE KEYS */;
-INSERT INTO `fizica` VALUES (1,'1');
+INSERT INTO `fizica` VALUES (1,'1'),(2,'2'),(3,'5'),(4,'1 2'),(5,'3'),(6,'4'),(7,'54'),(8,'65'),(9,'10'),(10,'1'),(11,'3'),(12,'4');
 /*!40000 ALTER TABLE `fizica` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -160,7 +160,7 @@ CREATE TABLE `geografie` (
 
 LOCK TABLES `geografie` WRITE;
 /*!40000 ALTER TABLE `geografie` DISABLE KEYS */;
-INSERT INTO `geografie` VALUES (1,'1');
+INSERT INTO `geografie` VALUES (1,'1'),(2,'2'),(3,'5'),(4,'1 2'),(5,'3'),(6,'4'),(7,'54'),(8,'65'),(9,'10'),(10,'1'),(11,'3'),(12,'4');
 /*!40000 ALTER TABLE `geografie` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,7 +185,7 @@ CREATE TABLE `istorie` (
 
 LOCK TABLES `istorie` WRITE;
 /*!40000 ALTER TABLE `istorie` DISABLE KEYS */;
-INSERT INTO `istorie` VALUES (1,'1');
+INSERT INTO `istorie` VALUES (1,'1'),(2,'2'),(3,'5'),(4,'1 2'),(5,'3'),(6,'4'),(7,'54'),(8,'65'),(9,'10'),(10,'1'),(11,'3'),(12,'4');
 /*!40000 ALTER TABLE `istorie` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -210,7 +210,7 @@ CREATE TABLE `matematica` (
 
 LOCK TABLES `matematica` WRITE;
 /*!40000 ALTER TABLE `matematica` DISABLE KEYS */;
-INSERT INTO `matematica` VALUES (1,'1');
+INSERT INTO `matematica` VALUES (1,'1'),(2,'2'),(3,'5'),(4,'1 2'),(5,'3'),(6,'4'),(7,'54'),(8,'65'),(9,'10'),(10,'1'),(11,'3'),(12,'4');
 /*!40000 ALTER TABLE `matematica` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -255,7 +255,7 @@ CREATE TABLE `psihologie` (
 
 LOCK TABLES `psihologie` WRITE;
 /*!40000 ALTER TABLE `psihologie` DISABLE KEYS */;
-INSERT INTO `psihologie` VALUES (1,'1');
+INSERT INTO `psihologie` VALUES (1,'1'),(2,'2'),(3,'5'),(4,'1 2'),(5,'3'),(6,'4'),(7,'54'),(8,'65'),(9,'10'),(10,'1'),(11,'3'),(12,'4');
 /*!40000 ALTER TABLE `psihologie` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -280,7 +280,7 @@ CREATE TABLE `romana` (
 
 LOCK TABLES `romana` WRITE;
 /*!40000 ALTER TABLE `romana` DISABLE KEYS */;
-INSERT INTO `romana` VALUES (1,'1');
+INSERT INTO `romana` VALUES (1,'1'),(2,'2'),(3,'5'),(4,'1 2'),(5,'3'),(6,'4'),(7,'54'),(8,'65'),(9,'10'),(10,'1'),(11,'3'),(12,'4');
 /*!40000 ALTER TABLE `romana` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -309,7 +309,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (1,'hector',1,'student','pas1'),(2,'maximilian',2,'student','pas'),(3,'vasile',3,'student','pas'),(4,'ion',4,'student','pas'),(5,'andrei',5,'student','pas'),(6,'maria',6,'student','pas'),(7,'pop',7,'student','pas'),(8,'ana',8,'student','pas'),(9,'cal',9,'student','pas'),(10,'marinela',10,'student','pas'),(11,'florinel',11,'student','pas'),(12,'saveta',12,'student','pas');
+INSERT INTO `student` VALUES (1,'hector',1,'student','pas1'),(2,'maximilian',2,'student','pas'),(3,'vasile',3,'student','pas'),(4,'ion',4,'student','pas'),(5,'andrei',5,'student','pas'),(6,'maria',6,'student','pas'),(7,'pop',7,'student','pas'),(8,'ana',8,'student','pas'),(9,'cal',9,'student','pas'),(10,'marinela',10,'student','pas'),(11,'florinel',11,'student','pas'),(12,'saveta',12,'student','pas'),(13,'ionel',1,'student','pas');
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -420,4 +420,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-02-09 14:44:49
+-- Dump completed on 2016-02-09 17:46:42

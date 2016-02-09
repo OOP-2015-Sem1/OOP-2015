@@ -72,8 +72,10 @@ public class TeacherLogIn {
 				       String user = field.getText();   // Collecting the input
 				       char[] pass = passwordfield.getPassword(); // Collecting the input
 				       String pwd = String.copyValueOf(pass);  // converting from array to string
-				       if(validate_login(user,pwd))
-				          JOptionPane.showMessageDialog(null, "Correct Login Credentials");        
+				       if(validate_login(user,pwd)){
+				    	   loginPanel.dispose();
+					       JOptionPane.showMessageDialog(null, "Correct Login Credentials");  
+				       }      
 				       else
 				          JOptionPane.showMessageDialog(null, "Incorrect Login Credentials");
 				   }        
@@ -91,8 +93,11 @@ public class TeacherLogIn {
 		       pst.setString(1, username); 
 		       pst.setString(2, password);
 		       ResultSet rs = pst.executeQuery();                        
-		       if(rs.next())            
-		           return true;    
+		       if(rs.next()){
+		    	   new TeacherPage(username);
+		    	   System.out.println(username);
+		           return true; 
+		       }   
 		       else
 		           return false;           
 		}

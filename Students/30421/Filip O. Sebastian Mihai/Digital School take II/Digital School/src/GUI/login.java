@@ -24,7 +24,7 @@ public class login {
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
 			new StudentLogIn();
-			loginFrame.setVisible(false);
+			loginFrame.dispose();
 		}
 		
 	});
@@ -41,7 +41,7 @@ public class login {
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
 			new TeacherLogIn();
-			loginFrame.setVisible(false);
+			loginFrame.dispose();
 		}
 		
 	});

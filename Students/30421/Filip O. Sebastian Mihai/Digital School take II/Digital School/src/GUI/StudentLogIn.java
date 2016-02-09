@@ -77,8 +77,8 @@ public class StudentLogIn {
 					String pwd = String.copyValueOf(pass); // converting from
 															// array to string
 					if (validate_login(user, pwd)) {
-						loginPanel.setVisible(false);
 						JOptionPane.showMessageDialog(null, "Correct Login Credentials");
+						loginPanel.dispose();
 					} else
 						JOptionPane.showMessageDialog(null, "Incorrect Login Credentials");
 				}
@@ -100,7 +100,6 @@ public class StudentLogIn {
 			if (rs.next()) {
 				new StudentPage(username);
 				return true;
-
 			} else
 				return false;
 		} catch (Exception e) {
