@@ -17,10 +17,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 
+import Brain.main;
+
 public class StudentPage {
 	JFrame studFrame;
 	JTextArea textarea;
-
+	Connection myConn= main.getConnection();
 	public StudentPage(String s) {
 		studFrame = new JFrame();
 		studFrame.setSize(1000, 1000);
@@ -29,33 +31,13 @@ public class StudentPage {
 		textarea.setSize(800, 800);
 		// 1. get a connection to db
 		try {
-			Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/DigitalSchool", "root", "");
+			//Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/DigitalSchool", "root", "");
 			// 2/ create statement
 			Statement myStmt = myConn.createStatement();
 			// 3. execute sql query
-			ResultSet myRs = myStmt.executeQuery("SELECT" 
-			        +"`matematica`.`notematematica` AS `notematematica`,"
-			        +"`biologie`.`notebiologie` AS `notebiologie`,"
-			        +"`chimie`.`notechimie` AS `notechimie`,"
-			        +"`educatiefizica`.`noteeducatiefizica` AS `noteeducatiefizica`,"
-			        +"`fizica`.`notefizica` AS `notefizica`,"
-			        +"`geografie`.`notegeografie` AS `notegeografie`,"
-			        +"`istorie`.`noteistorie` AS `noteistorie`,"
-			        +"`psihologie`.`notepsihologie` AS `notepsihologie`,"
-			        +"`romana`.`noteromana` AS `noteromana`"
-			    +"FROM"
-			        +"(((((((((`student`"
-			        +"JOIN `matematica` ON ((`student`.`idstudent` = `matematica`.`idstudent`)))"
-			        +"JOIN `biologie` ON ((`student`.`idstudent` = `biologie`.`studentidbiologie`)))"
-			        +"JOIN `chimie` ON ((`student`.`idstudent` = `chimie`.`studentidchimie`)))"
-			        +"JOIN `educatiefizica` ON ((`student`.`idstudent` = `educatiefizica`.`studentideducatiefizica`)))"
-			        +"JOIN `fizica` ON ((`student`.`idstudent` = `fizica`.`studentidfizica`)))"
-			        +"JOIN `geografie` ON ((`student`.`idstudent` = `geografie`.`studentidgeografie`)))"
-			        +"JOIN `istorie` ON ((`student`.`idstudent` = `istorie`.`studentidistorie`)))"
-			        +"JOIN `psihologie` ON ((`student`.`idstudent` = `psihologie`.`studentidpsihologie`)))"
-			        +"JOIN `romana` ON ((`student`.`idstudent` = `romana`.`studentid`)))"
-			    +"WHERE"
-			        +"(`student`.`studentname` = '"+s+"')");
+			ResultSet myRs = myStmt.executeQuery("select subject.subjectname, grades.Grade, grades.Absence from "
+					+ "grades join subject on (grades.subjectId = subject.idsubject) join student on (student.idstudent = grades.studentIdGrades)"
+					+ "where student.studentname = '"+s+"'");
 			
 			
 			
@@ -84,7 +66,7 @@ public class StudentPage {
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
 					studFrame.dispose();
-					new login();
+					new TypeOfLogIn();
 				}
 				
 			});

@@ -1,15 +1,14 @@
 package Brain;
 
-import GUI.StudentLogIn;
-import GUI.TeacherLogIn;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import GUI.login;
+
+import GUI.LogIn;
+import GUI.TypeOfLogIn;
 
 public class main {
+
+	
 	public static void main(String[] args) {
 		/*
 		// TODO Auto-generated method stub
@@ -30,6 +29,23 @@ public class main {
 			exc.printStackTrace();
 		}
 		*/
-		new login();
+		Connection myConn= getConnection();
+		new TypeOfLogIn();
 	}
+	public static Connection getConnection()
+    {
+        Connection myConn=null;
+        try
+        {
+        Class.forName("com.mysql.jdbc.Driver");
+
+		myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/DigitalSchool", "root", "");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return myConn;        
+    }
 }
