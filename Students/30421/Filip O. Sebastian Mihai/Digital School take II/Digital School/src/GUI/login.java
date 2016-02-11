@@ -25,10 +25,10 @@ public class LogIn {
 	JButton buton;
 
 	Connection myConn = main.getConnection();
-	String string = new String();
+	String typeOfUser2 = new String();
 
-	public LogIn(String s) {
-		string = s;
+	public LogIn(String typeOfUser) {
+		typeOfUser2 = typeOfUser;
 		loginPanel = new JFrame();
 		loginPanel.setSize(1000, 1000);
 		loginPanel.setBackground(Color.white);
@@ -100,17 +100,17 @@ public class LogIn {
 			// DriverManager.getConnection("jdbc:mysql://localhost:3306/DigitalSchool",
 			// "root", "");
 			PreparedStatement pst= myConn.prepareStatement("Select * from student where studentname=? and studentpassword=?");;
-			if (string == "student")
+			if (typeOfUser2 == "student")
 				pst = myConn.prepareStatement("Select * from student where studentname=? and studentpassword=?");
-			if (string == "teacher")
+			if (typeOfUser2 == "teacher")
 				pst = myConn.prepareStatement("Select * from teacher where teachername=? and teacherpassword=?");
 			pst.setString(1, username);
 			pst.setString(2, password);
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
-				if (string == "student")
+				if (typeOfUser2 == "student")
 					new StudentPage(username);
-				if (string == "teacher")
+				if (typeOfUser2 == "teacher")
 					new TeacherPage(username);
 				return true;
 			} else
