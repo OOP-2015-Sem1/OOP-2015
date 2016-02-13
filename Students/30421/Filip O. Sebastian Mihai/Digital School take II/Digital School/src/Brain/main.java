@@ -29,7 +29,6 @@ public class main {
 			exc.printStackTrace();
 		}
 		*/
-		Connection myConn= getConnection();
 		new TypeOfLogIn();
 	}
 	public static Connection getConnection()

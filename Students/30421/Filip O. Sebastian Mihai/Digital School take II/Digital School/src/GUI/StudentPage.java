@@ -23,7 +23,7 @@ public class StudentPage {
 	JFrame studFrame;
 	JTextArea textarea;
 	Connection myConn= main.getConnection();
-	public StudentPage(String s) {
+	public StudentPage(String studentName) {
 		studFrame = new JFrame();
 		studFrame.setSize(1000, 1000);
 		studFrame.setLayout(null);
@@ -37,7 +37,7 @@ public class StudentPage {
 			// 3. execute sql query
 			ResultSet myRs = myStmt.executeQuery("select subject.subjectname, grades.Grade, grades.Absence from "
 					+ "grades join subject on (grades.subjectId = subject.idsubject) join student on (student.idstudent = grades.studentIdGrades)"
-					+ "where student.studentname = '"+s+"'");
+					+ "where student.studentname = '"+studentName+"'");
 			
 			
 			
