@@ -20,41 +20,39 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import Brain.main;
+import Brain.Main;
 
 public class TeacherPage {
 	JFrame teacherFrame;
-	JButton buton[] = new JButton[13];
-	JPanel panel;
+	JButton classroomButton[] = new JButton[13];
+	JPanel panelForClassroom;
 
-	JPanel panel1 = new JPanel();
+	JPanel panelForGrades = new JPanel();
 	int rowx = 0, columny = 0;
 	String getTextFromTableCopy;
-	Connection myConn = main.getConnection();
-
+	Connection myConn = Main.getConnection();
+	String initialGrades; 
+	String initialAbsences; 
+	String teacherSubject;
+	String studentSubject;
+	String StudentID;
 	public TeacherPage(String teacherName) {
 		int[] classArray = new int[100];
 
 		teacherFrame = new JFrame();
+		teacherFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		teacherFrame.setSize(1000, 1000);
 		teacherFrame.setLayout(new BorderLayout(2, 1));
 
-		panel = new JPanel();
-		panel.setSize(1000, 1000);
-		panel.setLayout(new GridLayout(12, 1));
-		panel.setVisible(true);
-		panel1.setSize(500, 1000);
-		// panel1.setBackground(Color.black);
-		int n = 0;
+		panelForClassroom = new JPanel();
+		panelForClassroom.setSize(1000, 1000);
+		panelForClassroom.setLayout(new GridLayout(12, 1));
+		panelForClassroom.setVisible(true);
+		panelForGrades.setSize(500, 1000);
 		try {
-			// Connection myConn =
-			// DriverManager.getConnection("jdbc:mysql://localhost:3306/DigitalSchool",
-			// "root", "");
-			// 2/ create statement
 			Statement myStmt = myConn.createStatement();
-			// 3. execute sql query
 			ResultSet myRs = myStmt.executeQuery(
-					"select classgrade from classroom join teacherclassroom on (teacherclassroom.classid = classroom.idclassroom) join teacher on (teacher.idteacher = teacherclassroom.teacherid)"
+					"select teacher.subjectid, classgrade from classroom join teacherclassroom on (teacherclassroom.classid = classroom.idclassroom) join teacher on (teacher.idteacher = teacherclassroom.teacherid)"
 							+ "where teachername = '" + teacherName + "'");
 
 			ResultSetMetaData rsmt = myRs.getMetaData();
@@ -68,13 +66,14 @@ public class TeacherPage {
 			int i = 0;
 			// 4. process result set
 			while (myRs.next()) {
-				buton[i] = new JButton("clasa a " + myRs.getString("classgrade") + "-a");
+				teacherSubject = myRs.getString("teacher.subjectid");
+				classroomButton[i] = new JButton("clasa a " + myRs.getString("classgrade") + "-a");
 				classArray[i] = Integer.valueOf(myRs.getString("classgrade"));
-				buton[i].setSize(buton[i].getPreferredSize());
-				buton[i].setVisible(true);
-				panel.add(buton[i]);
+				classroomButton[i].setSize(classroomButton[i].getPreferredSize());
+				classroomButton[i].setVisible(true);
+				panelForClassroom.add(classroomButton[i]);
 				int j = i;
-				buton[i].addActionListener(new ActionListener() {
+				classroomButton[i].addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
@@ -89,7 +88,9 @@ public class TeacherPage {
 									.executeQuery("select student.studentname, grades.Grade, grades.Absence from "
 											+ "grades join subject on (grades.subjectId = subject.idsubject) join student on (student.idstudent = grades.studentIdGrades)"
 											+ "where" + "(`student`.`classid` = '" + classArray[j] + "')"
-											+ "group by student.studentname");
+													+ "and grades.subjectId = '"+teacherSubject+"'"
+															+ "order by student.studentname");
+											//+ "group by student.studentname");
 							ResultSetMetaData rsmt = myRs.getMetaData();
 							int columnNumber = rsmt.getColumnCount();
 							Vector column = new Vector(columnNumber);
@@ -98,7 +99,7 @@ public class TeacherPage {
 							}
 							Vector data = new Vector();
 							Vector row = new Vector();
-							String grade = null,absence = null;
+							String grade = null, absence = null;
 							// 4. process result set
 							while (myRs.next()) {
 								row = new Vector(columnNumber);
@@ -109,12 +110,12 @@ public class TeacherPage {
 								}
 								data.add(row);
 							}
-							JButton save = new JButton("SAVE");
+							JButton saveButtonGrades = new JButton("Save Grades");
 							String gradeCopy = grade;
 							String absenceCopy = absence;
-							JButton back = new JButton("back");
-							back.setSize(back.getPreferredSize());
-							back.addActionListener(new ActionListener() {
+							JButton backButton = new JButton("back");
+							backButton.setSize(backButton.getPreferredSize());
+							backButton.addActionListener(new ActionListener() {
 
 								@Override
 								public void actionPerformed(ActionEvent e) {
@@ -139,6 +140,24 @@ public class TeacherPage {
 										System.out.println(table.getModel().getValueAt(rowx, columny));
 										getTextFromTable = (String) table.getModel().getValueAt(rowx, columny);
 										getTextFromTableCopy = getTextFromTable;
+										try {
+											ResultSet myRs = myStmt
+													.executeQuery("select studentIdGrades, grades.subjectId,grades.Grade, grades.Absence from "
+															+ "grades join subject on (grades.subjectId = subject.idsubject) join student on (student.idstudent = grades.studentIdGrades)"
+															+ "where" + "(`student`.`classid` = '" + classArray[j] + "')"
+															+ "and student.studentname = '"+(String) table.getModel().getValueAt(rowx, 0)+"'"
+															+"and grades.subjectId='"+teacherSubject+"'");
+															//+ "group by student.studentname");
+											while (myRs.next()){
+												initialGrades = myRs.getString("grades.Grade");
+												initialAbsences = myRs.getString("grades.Absence");
+												studentSubject = myRs.getString("grades.subjectId");
+												StudentID = myRs.getString("studentIdGrades");
+											}
+										} catch (SQLException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
 									}
 								}
 
@@ -166,27 +185,22 @@ public class TeacherPage {
 
 								}
 							});
-							panel1.setLayout(new BorderLayout());
-							panel1.add(jsp, BorderLayout.CENTER);
-							panel1.add(back, BorderLayout.SOUTH);
-							save.addActionListener(new ActionListener() {
+							panelForGrades.setLayout(new BorderLayout());
+							panelForGrades.add(jsp, BorderLayout.CENTER);
+							panelForGrades.add(backButton, BorderLayout.SOUTH);
+							saveButtonGrades.addActionListener(new ActionListener() {
 								@Override
 								public void actionPerformed(ActionEvent e) {
-									// TODO Auto-generated method stub
-									// System.out.println(table.getModel().getValueAt(rowx,
-									// columny ));
-									System.out.println(getTextFromTableCopy);
 									String updateStringGrade = "Update grades join student on (student.idstudent = grades.studentIdGrades) SET "
-											+ "grades.Grade='"+getTextFromTableCopy+"' " + "WHERE grades.Grade = '" + gradeCopy
-											+ "' and student.classid = '" + classArray[j] + "'"
-													+ "and student.studentname = '"+(String) table.getModel().getValueAt(rowx, columny-1)+"'";
-									String updateStringAbsence = "Update grades join student on (student.idstudent = grades.studentIdGrades) SET "
-											+ "grades.Absence='"+getTextFromTableCopy+"' " + "WHERE grades.Absence = '" + absenceCopy
-											+ "' and student.classid = '" + classArray[j] + "'"
-													+ "and student.studentname = '"+(String) table.getModel().getValueAt(rowx, columny-2)+"'";
+											+ "grades.Grade='" + getTextFromTableCopy + "' " + "WHERE grades.Grade = '"
+											+ initialGrades
+											+ "' and grades.subjectId='"+teacherSubject+"'"
+											+" and student.classid = '" + classArray[j] + "'"
+											+ "and student.studentname = '"+(String) table.getModel().getValueAt(rowx, 0) + "'";
+									
+									System.out.println(getTextFromTableCopy+" ; "+initialGrades+" ; "+teacherSubject+" ; "+StudentID);
 									try {
 										int updateCount = myStmt.executeUpdate(updateStringGrade);
-										int updateCount1 = myStmt.executeUpdate(updateStringAbsence);
 									} catch (SQLException e1) {
 										// TODO Auto-generated catch block
 										e1.printStackTrace();
@@ -194,8 +208,28 @@ public class TeacherPage {
 								}
 
 							});
-							panel1.add(save, BorderLayout.NORTH);
-							teacherFrame.setContentPane(panel1);
+							JButton saveButtonAbsences = new JButton("Save Absences");
+							saveButtonAbsences.addActionListener(new ActionListener() {
+								@Override
+									
+								public void actionPerformed(ActionEvent e) {
+									String updateStringAbsence = "Update grades join student on (student.idstudent = grades.studentIdGrades) SET "
+											+ "grades.Absence='" + getTextFromTableCopy + "' " + "WHERE grades.Absence = '"
+											+ initialAbsences + "' and student.classid = '" + classArray[j] + "'"
+											+ "and student.studentname = '"
+											+ (String) table.getModel().getValueAt(rowx, 0) + "'"
+													+ "and grades.subjectId='"+teacherSubject+"'";
+									try {
+										int updateCountSecond = myStmt.executeUpdate(updateStringAbsence);
+									} catch (SQLException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+								}
+							});
+							panelForGrades.add(saveButtonAbsences, BorderLayout.EAST);
+							panelForGrades.add(saveButtonGrades, BorderLayout.WEST);
+							teacherFrame.setContentPane(panelForGrades);
 						} catch (Exception e1) {
 							e1.printStackTrace();
 						}
@@ -207,8 +241,8 @@ public class TeacherPage {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		teacherFrame.add(panel);
-		teacherFrame.add(panel1);
+		teacherFrame.add(panelForClassroom);
+		teacherFrame.add(panelForGrades);
 		teacherFrame.setVisible(true);
 	}
 }
