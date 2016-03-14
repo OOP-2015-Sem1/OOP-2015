@@ -17,18 +17,19 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 
-import Brain.main;
+import Brain.Main;
 
 public class StudentPage {
 	JFrame studFrame;
-	JTextArea textarea;
-	Connection myConn= main.getConnection();
+	JTextArea textArea;
+	Connection myConn= Main.getConnection();
 	public StudentPage(String studentName) {
 		studFrame = new JFrame();
+		studFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		studFrame.setSize(1000, 1000);
 		studFrame.setLayout(null);
-		textarea = new JTextArea();
-		textarea.setSize(800, 800);
+		textArea = new JTextArea();
+		textArea.setSize(800, 800);
 		// 1. get a connection to db
 		try {
 			//Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/DigitalSchool", "root", "");
@@ -82,7 +83,7 @@ public class StudentPage {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		studFrame.add(textarea);
+		studFrame.add(textArea);
 
 		studFrame.setVisible(true);
 	}

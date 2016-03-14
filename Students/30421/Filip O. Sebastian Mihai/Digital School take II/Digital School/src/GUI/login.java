@@ -15,16 +15,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import Brain.main;
+import Brain.Main;
 
 public class LogIn {
 	public JFrame loginPanel;
-	JTextField field;
+	JTextField fieldForEnteringData;
 	JPasswordField passwordfield;
-	JLabel label;
-	JButton buton;
+	JLabel labelForData;
+	JButton logInButton;
 
-	Connection myConn = main.getConnection();
+	Connection myConn = Main.getConnection();
 	String typeOfUser2 = new String();
 
 	public LogIn(String typeOfUser) {
@@ -34,24 +34,24 @@ public class LogIn {
 		loginPanel.setBackground(Color.white);
 		loginPanel.setLayout(null);
 
-		label = new JLabel("Enter Name");
-		label.setLocation(280, 300);
-		label.setSize(label.getPreferredSize());
-		loginPanel.add(label);
+		labelForData = new JLabel("Enter Name");
+		labelForData.setLocation(280, 300);
+		labelForData.setSize(labelForData.getPreferredSize());
+		loginPanel.add(labelForData);
 
-		field = new JTextField();
-		field.setColumns(25);
-		field.setSize(field.getPreferredSize());
-		field.setToolTipText("Enter Name");
-		field.setLocation(400, 300);
-		loginPanel.add(field);
-		field.setVisible(true);
+		fieldForEnteringData = new JTextField();
+		fieldForEnteringData.setColumns(25);
+		fieldForEnteringData.setSize(fieldForEnteringData.getPreferredSize());
+		fieldForEnteringData.setToolTipText("Enter Name");
+		fieldForEnteringData.setLocation(400, 300);
+		loginPanel.add(fieldForEnteringData);
+		fieldForEnteringData.setVisible(true);
 
-		label = new JLabel("Enter Password");
-		label.setLocation(280, 400);
-		label.setSize(label.getPreferredSize());
-		label.setVisible(true);
-		loginPanel.add(label);
+		labelForData = new JLabel("Enter Password");
+		labelForData.setLocation(280, 400);
+		labelForData.setSize(labelForData.getPreferredSize());
+		labelForData.setVisible(true);
+		loginPanel.add(labelForData);
 
 		passwordfield = new JPasswordField();
 		passwordfield.setColumns(25);
@@ -61,22 +61,22 @@ public class LogIn {
 		loginPanel.add(passwordfield);
 		passwordfield.setVisible(true);
 
-		buton = new JButton("Log In");
-		buton.setSize(buton.getPreferredSize());
-		buton.setLocation(500, 450);
-		buton.addActionListener(new ActionListener() {
+		logInButton = new JButton("Log In");
+		logInButton.setSize(logInButton.getPreferredSize());
+		logInButton.setLocation(500, 450);
+		logInButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if (field.getText().length() == 0) // Checking for empty field
+				if (fieldForEnteringData.getText().length() == 0) // Checking for empty field
 					JOptionPane.showMessageDialog(null, "Empty fields detected ! Please fill up all fields");
 				else if (passwordfield.getPassword().length == 0) // Checking
 																	// for empty
 																	// field
 					JOptionPane.showMessageDialog(null, "Empty fields detected ! Please fill up all fields");
 				else {
-					String user = field.getText(); // Collecting the input
+					String user = fieldForEnteringData.getText(); // Collecting the input
 					char[] pass = passwordfield.getPassword(); // Collecting the
 																// input
 					String pwd = String.copyValueOf(pass); // converting from
@@ -89,7 +89,7 @@ public class LogIn {
 				}
 			}
 		});
-		loginPanel.add(buton);
+		loginPanel.add(logInButton);
 		loginPanel.setVisible(true);
 	}
 

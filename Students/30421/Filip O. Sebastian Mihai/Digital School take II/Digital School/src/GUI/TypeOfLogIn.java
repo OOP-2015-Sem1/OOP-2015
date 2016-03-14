@@ -11,18 +11,18 @@ import javax.swing.JFrame;
 
 public class TypeOfLogIn {
 	JFrame loginFrame;
-	JButton buton1;
-	JButton buton2;
+	JButton butonForStudent;
+	JButton butonForTeacher;
 
 	public TypeOfLogIn(){
 		
 	loginFrame= new JFrame();
 	loginFrame.setLayout(null);
 	loginFrame.setSize(1000, 1000);
-	buton1 = new JButton("Log in as a student");
-	buton1.setSize(buton1.getPreferredSize());
-	buton1.setLocation(450, 400);
-	buton1.addActionListener(new ActionListener(){
+	butonForStudent = new JButton("Log in as a student");
+	butonForStudent.setSize(butonForStudent.getPreferredSize());
+	butonForStudent.setLocation(450, 400);
+	butonForStudent.addActionListener(new ActionListener(){
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -32,14 +32,14 @@ public class TypeOfLogIn {
 		}
 		
 	});
-	buton1.setVisible(true);
-	loginFrame.add(buton1);
+	butonForStudent.setVisible(true);
+	loginFrame.add(butonForStudent);
 	
 	
-	buton2 = new JButton("Log in as a teacher");
-	buton2.setSize(buton2.getPreferredSize());
-	buton2.setLocation(450, 500);
-	buton2.addActionListener(new ActionListener(){
+	butonForTeacher = new JButton("Log in as a teacher");
+	butonForTeacher.setSize(butonForTeacher.getPreferredSize());
+	butonForTeacher.setLocation(450, 500);
+	butonForTeacher.addActionListener(new ActionListener(){
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -49,8 +49,8 @@ public class TypeOfLogIn {
 		}
 		
 	});
-	buton2.setVisible(true);
-	loginFrame.add(buton2);
+	butonForTeacher.setVisible(true);
+	loginFrame.add(butonForTeacher);
 	loginFrame.setVisible(true);
 	}
 }
