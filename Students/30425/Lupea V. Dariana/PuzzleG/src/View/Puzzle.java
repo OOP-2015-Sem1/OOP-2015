@@ -13,19 +13,23 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class Puzzle extends JFrame implements ActionListener {
+
+	private static final long serialVersionUID = -2190508731945033595L;
 
 	JPanel mainPanel;
 	JPanel[][] puzzlePanel;
 	List<PuzzlePiece> puzzlePieces;
 	private boolean isGameFinished = false;
 	private String imagePath;
-	public int score;
+	private int score;
+	private String name;
 
 	public Puzzle(String imagePath) {
+
 		super("Puzzle");
 		this.imagePath = imagePath;
 		score = 250;
@@ -35,8 +39,18 @@ public class Puzzle extends JFrame implements ActionListener {
 		GameButtons gameButtons = new GameButtons();
 		add(gameButtons, BorderLayout.NORTH);
 
+		gameButtons.getNewButton().addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				setVisible(false);
+				new Puzzle("Images/deer");
+			}
+		});
+
 		puzzlePanel = new JPanel[3][3];
 		puzzlePieces = new ArrayList<PuzzlePiece>();
+
 		initializePuzzlePieces();
 
 		add(mainPanel, BorderLayout.CENTER);
@@ -48,6 +62,8 @@ public class Puzzle extends JFrame implements ActionListener {
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
+		name = JOptionPane.showInputDialog(this, "Welcome! What's your name?");
+
 	}
 
 	/* Put each puzzle piece at its right place by initializing them */
@@ -66,8 +82,7 @@ public class Puzzle extends JFrame implements ActionListener {
 			}
 		}
 		imgNr++;
-		String imagePath = "Images/imgEmpty.jpeg";// last piece will be black(
-													// empty)
+		String imagePath = "Images/imgEmpty.jpeg";// last piece will be black empty
 		initializePuzzlePiece(imagePath, imgNr, 2, 2, true);
 
 	}
@@ -91,7 +106,7 @@ public class Puzzle extends JFrame implements ActionListener {
 	/*
 	 * Shuffle puzzle pieces in order to obtain a game target piece -> the
 	 * current puzzle piece destination piece -> where the target piece is to be
-	 * moved
+	 * moved; it is chosen randomly
 	 */
 	private void shufflePieces() {
 		Random random = new Random();
@@ -103,19 +118,19 @@ public class Puzzle extends JFrame implements ActionListener {
 			PuzzlePiece targetPiece = puzzlePieces.get(i);
 			PuzzlePiece destinationPiece = getSpecificPieceAfterAddress(positionX, positionY);
 
-			if (destinationPiece == null) {// move not allowed
+			if (destinationPiece == null) {
 				continue;
 			}
 			reverseImages(targetPiece, destinationPiece);
 		}
 	}
 
-	//
 	public void actionPerformed(ActionEvent event) {
 
 		if (isGameFinished) {
 			return;
 		}
+
 		JButton pushedButton = (JButton) event.getSource();
 		score = score - 2;
 		String action = pushedButton.getText();
@@ -126,8 +141,8 @@ public class Puzzle extends JFrame implements ActionListener {
 		}
 
 		/*
-		 * virtual = current position; clicked = position where we want to make
-		 * the move
+		 * virtual = current position; 
+		 * clicked = position where to make the move
 		 */
 		int virtualX = Integer.parseInt(splitActionCommand[0]);
 		int virtualY = Integer.parseInt(splitActionCommand[1]);
@@ -137,77 +152,57 @@ public class Puzzle extends JFrame implements ActionListener {
 			return;
 		}
 
-		if (clickedPiece.isEmptySlot()) {// search for the empty piece
+		if (clickedPiece.isEmptySlot()) {
 			return;
 		}
 		int i = clickedPiece.getPositionX();
 		int j = clickedPiece.getPositionY();
 
-		// the puzzle matrix of positions looks like this
+		// the puzzle matrix of positions looks like below
 		/*
-		 * i-1,j-1 i-1,j i+1, j+1
-		 * i,j-1 i,j i, j+1
-		 *  i+1,j-1 i+1,j i+1,j+1
+		 * i-1,j-1    i-1,j      i+1, j+1              0_0   0_1   0_2  
+		 * i,j-1       i,j        i, j+1               1_0   1_1   1_2
+		 * i+1,j-1    i+1,j       i+1,j+1              2_0   2_1   2_2
 		 */
 
-		/*
+		/* 
 		 * Moves are allowed only up, down, left, right, so only those cases are
 		 * tested below. A move can be made only by interchanging a normal
 		 * puzzle piece with the empty puzzle piece.
 		 */
 
+		int pi = 0;
+		int pj = 0;
+
 		// i-1, j
 		if (i - 1 >= 0) {
-			PuzzlePiece pp = getSpecificPieceAfterAddress((i - 1), j);
-
-			if (pp != null) {
-
-				if (pp.isEmptySlot()) {
-					reverseImages(clickedPiece, pp);
-				}
-			}
+			pi = i - 1;
+			pj = j;
+			interchange(pi, pj, clickedPiece);
 		}
-
 		// i,j-1
 		if (j - 1 >= 0) {
-			PuzzlePiece pp = getSpecificPieceAfterAddress(i, (j - 1));
-
-			if (pp != null) {
-
-				if (pp.isEmptySlot()) {
-					reverseImages(clickedPiece, pp);
-				}
-			}
+			pi = i;
+			pj = j - 1;
+			interchange(pi, pj, clickedPiece);
 		}
 		// i,j+1
 		if (j + 1 <= 3) {
-			PuzzlePiece pp = getSpecificPieceAfterAddress(i, (j + 1));
-
-			if (pp != null) {
-
-				if (pp.isEmptySlot()) {
-					reverseImages(clickedPiece, pp);
-				}
-			}
-
+			pi = i;
+			pj = j + 1;
+			interchange(pi, pj, clickedPiece);
 		}
-
 		// i+1,j
 		if (i + 1 <= 3) {
-			PuzzlePiece pp = getSpecificPieceAfterAddress((i + 1), (j));
-
-			if (pp != null) {
-
-				if (pp.isEmptySlot()) {
-					reverseImages(clickedPiece, pp);
-				}
-			}
+			pi = i + 1;
+			pj = j;
+			interchange(pi, pj, clickedPiece);
 		}
 
 		if (isPuzzleFinished()) {
 			JOptionPane.showMessageDialog(this, "Puzzle is finished. Your score is: " + score, "Congratulations! ",
 					JOptionPane.INFORMATION_MESSAGE);
-			System.out.println("Puzzle is finished.Congratulations!\nYour score is:" + score);
+			System.out.println(name + ", you finished the puzzle. Congratulations!\nYour score is:" + score);
 
 			for (int poz = 0; poz < puzzlePieces.size(); poz++) {
 				for (int p = 0; p < puzzlePieces.size(); p++) {
@@ -220,14 +215,24 @@ public class Puzzle extends JFrame implements ActionListener {
 
 		else if (score > 0) {
 			System.out.println("Puzzle is NOT finished.");
-
 		} else {
-			System.out.println("Sorry! You did not manage to solve the puzzle. Try again!");
-			JOptionPane.showMessageDialog(this, "Puzzle is NOT finished. Please, try again!", "Sorry! ",
+			JOptionPane.showMessageDialog(this, name + ", the puzzle is NOT finished. Please, try again!", "Sorry! ",
 					JOptionPane.INFORMATION_MESSAGE);
-
+			System.out.println("Sorry, " + name + "! You did not manage to solve the puzzle. Try again!");
 			new Puzzle("Images/bear");
 
+		}
+	}
+
+	private void interchange(int puzzleI, int puzzleJ, PuzzlePiece clickedPiece) {
+
+		PuzzlePiece pp = getSpecificPieceAfterAddress(puzzleI, puzzleJ);
+
+		if (pp != null) {
+
+			if (pp.isEmptySlot()) {
+				reverseImages(clickedPiece, pp);
+			}
 		}
 	}
 
@@ -249,8 +254,8 @@ public class Puzzle extends JFrame implements ActionListener {
 	}
 
 	/*
-	 * target piece = piece to move; destination piece = where I want to move
-	 * the piece
+	 * target piece = piece to move; 
+	 * destination piece = where to move the piece
 	 */
 	private void reverseImages(PuzzlePiece targetPiece, PuzzlePiece destinationPiece) {
 
@@ -262,9 +267,8 @@ public class Puzzle extends JFrame implements ActionListener {
 		// target piece is put in the field of destination piece
 		targetPiece.setPuzzlePieceIcon(destinationPiece.getPuzzlePieceIcon());
 		targetPiece.setPieceOrder(destinationPiece.getPieceOrder());
-		targetPiece.getPuzzlePieceButton().setIcon(destinationPiece.getPuzzlePieceIcon());//
-		targetPiece.setPuzzlePieceButtonText();// set text according to
-												// positions X & Y
+		targetPiece.getPuzzlePieceButton().setIcon(destinationPiece.getPuzzlePieceIcon());
+		targetPiece.setPuzzlePieceButtonText();
 		targetPiece.setEmptySlot(destinationPiece.isEmptySlot());
 
 		// use the auxiliary piece created above
@@ -275,7 +279,7 @@ public class Puzzle extends JFrame implements ActionListener {
 		destinationPiece.setEmptySlot(auxIsEmptySlot);
 	}
 
-	/* Check if the piece is at the right position */
+	/* Find a piece using its coordinates */
 	private PuzzlePiece getSpecificPieceAfterAddress(int positionX, int positionY) {
 		PuzzlePiece foundPuzzlePiece = null;
 

@@ -41,8 +41,8 @@ public class PuzzlePiece {
 		this.puzzlePieceButton.setText(this.positionX + "_" + this.positionY);
 	}
 
-	public void setPuzzlePieceButton(JButton puzzlePieaceButton) {
-		this.puzzlePieceButton = puzzlePieaceButton;
+	public void setPuzzlePieceButton(JButton puzzlePieceButton) {
+		this.puzzlePieceButton = puzzlePieceButton;
 	}
 
 	public boolean isEmptySlot() {
