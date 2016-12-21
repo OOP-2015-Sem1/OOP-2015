@@ -4,6 +4,7 @@
 
 package gui;
 
+import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
@@ -20,8 +21,10 @@ public class LogIn_user extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	public static String user_id;
 
 	public LogIn_user() {
+		user_id = null;
 		initComponents();
 	}
 
@@ -35,9 +38,14 @@ public class LogIn_user extends JPanel {
 		String tempStringPassword = new String(tempPassword);
 		//System.out.println(userTextField.getText() + " " + tempStringPassword); // Testing
 		authentification.attemptUserLogin(userTextField.getText(), tempStringPassword);
+		user_id = new String(userTextField.getText());
 	}
 
 	private void button1ActionPerformed(ActionEvent e) {
+		// TODO add your code here
+	}
+
+	private void passwordField1KeyPressed(KeyEvent e) {
 		// TODO add your code here
 	}
 
@@ -68,11 +76,23 @@ public class LogIn_user extends JPanel {
 		button2.setText("Authentificate");
 		button2.addActionListener(e -> authentificateActionPerformed(e));
 
+		//---- passwordField1 ----
+		passwordField1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				passwordField1KeyPressed(e);
+			}
+		});
+
 		//---- textPane1 ----
 		textPane1.setText("UserID");
+		textPane1.setEditable(false);
+		textPane1.setBackground(new Color(240, 240, 240));
 
 		//---- textPane2 ----
 		textPane2.setText("Password");
+		textPane2.setEditable(false);
+		textPane2.setBackground(new Color(240, 240, 240));
 
 		//======== scrollPane1 ========
 		{

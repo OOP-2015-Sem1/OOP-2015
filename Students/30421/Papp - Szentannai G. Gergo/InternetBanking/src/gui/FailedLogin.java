@@ -5,6 +5,7 @@
 package gui;
 
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.border.*;
@@ -19,6 +20,10 @@ public class FailedLogin extends JFrame {
 	private static final long serialVersionUID = 1L;
 	public FailedLogin() {
 		initComponents();
+	}
+
+	private void okButtonActionPerformed(ActionEvent e) {
+		this.dispose();
 	}
 
 	private void initComponents() {
@@ -58,15 +63,22 @@ public class FailedLogin extends JFrame {
 
 				//---- textField1 ----
 				textField1.setText("Unable to log in! Please check the following possible problems:");
+				textField1.setEditable(false);
 
 				//---- textField2 ----
 				textField2.setText("User ID/admin ID incorrect");
+				textField2.setEditable(false);
+				textField2.setBorder(null);
 
 				//---- textField3 ----
 				textField3.setText("Password incorrect");
+				textField3.setEditable(false);
+				textField3.setBorder(null);
 
 				//---- textField4 ----
 				textField4.setText("Unsuccessful connection to server");
+				textField4.setEditable(false);
+				textField4.setBorder(null);
 
 				//======== buttonBar ========
 				{
@@ -77,6 +89,7 @@ public class FailedLogin extends JFrame {
 
 					//---- okButton ----
 					okButton.setText("OK");
+					okButton.addActionListener(e -> okButtonActionPerformed(e));
 					buttonBar.add(okButton, new GridBagConstraints(0, 0, 2, 1, 0.0, 0.0,
 						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 						new Insets(0, 0, 0, 0), 0, 0));
@@ -115,7 +128,7 @@ public class FailedLogin extends JFrame {
 							.addComponent(textField4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addGap(18, 18, 18)
 							.addComponent(buttonBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addContainerGap(26, Short.MAX_VALUE))
 				);
 			}
 
@@ -127,12 +140,12 @@ public class FailedLogin extends JFrame {
 			);
 			dialogPaneLayout.setVerticalGroup(
 				dialogPaneLayout.createParallelGroup()
-					.addComponent(contentPanel, GroupLayout.PREFERRED_SIZE, 192, GroupLayout.PREFERRED_SIZE)
+					.addComponent(contentPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 			);
 		}
 		contentPane.add(dialogPane, BorderLayout.CENTER);
 		pack();
-		setLocationRelativeTo(getOwner());
+		setLocationRelativeTo(null);
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
 	}
 

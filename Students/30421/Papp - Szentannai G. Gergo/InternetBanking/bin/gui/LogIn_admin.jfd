@@ -4,19 +4,21 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {space :p:68:p, par t {comp lognButton:::p::p, seq {par l:::p {comp adminPassword:::::x, comp adminID:::::x}, space s:::p, par l:::p {comp textField3::::93:x, comp passwordField1::::93:x}}}, space :p:31:p, comp button2:::p::p, space ::41:x}}"
-			"$verticalGroup": "par l {seq l {space :p:116:p, par b {comp textField3::b:p::p, comp adminID::b:p::p}, space s:::p, par b {comp adminPassword::b:p::p, comp passwordField1::b:p::p}, space s:::p, par b {comp lognButton::b:p::p, comp button2::b:p::p}, space ::85:x}}"
+			"$horizontalGroup": "par l {seq {space :p:213:p, par t:::p {seq t {space ::118:p, comp lognButton:::p::p, space s:::p, comp button2:::p::p}, seq l {par l {comp adminID:::p:90:p, comp adminPassword:::p:103:p}, space s:::p, par l:::p {comp passwordField1:::::x, comp textField3:::p:141:p}}}, space ::305:x}, seq {space :p:31:p, comp textField1::::739:x, space :::p}}"
+			"$verticalGroup": "par l {seq l {space :p:31:p, comp textField1:::p::p, space :p:119:p, par b {comp adminID::b:p::p, comp textField3::b:p::p}, space s:::p, par b {comp passwordField1::b:p:20:p, comp adminPassword::b:p::p}, space :p:21:p, par b {comp button2::b:p::p, comp lognButton::b:p::p}, space ::208:x}}"
 		} ) {
 			name: "this"
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "adminID"
 				"text": "Admin ID"
 				"editable": false
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "adminPassword"
 				"text": "Admin Password"
 				"editable": false
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "textField3"
@@ -34,9 +36,16 @@ new FormModel {
 				"text": "Cancel"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "cancelActionPerformed", true ) )
 			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "textField1"
+				"font": new java.awt.Font( "Tahoma", 0, 18 )
+				"text": "Admins only!"
+				"border": sfield com.jgoodies.forms.factories.Borders DIALOG_BORDER
+				"editable": false
+			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 400, 300 )
+			"size": new java.awt.Dimension( 780, 480 )
 		} )
 	}
 }

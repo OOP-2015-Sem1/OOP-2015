@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq {space :::p, par l {seq {par l:::p {comp viewuserDetailsButton::l:::x, comp viewAccountsButton::l:::x, comp logoutButton:::::x, comp transferMoneyButton:::::x}, space s:::p, comp scrollPane1::::629:x}, seq {comp welcomeText:::p:264:p, space :0:496:x}}, space :::p}}"
-			"$verticalGroup": "par l {seq l {space :::p, comp welcomeText:::p::p, space :p:39:p, par l {seq {comp viewAccountsButton:::p::p, space s:::p, comp viewuserDetailsButton:::p::p, space s:::p, comp transferMoneyButton:::p::p, space ::269:x, comp logoutButton:::p::p}, comp scrollPane1::::397:x}, space :::p}}"
+			"$horizontalGroup": "par l {seq {space :::p, par l {seq {par l:::p {comp viewuserDetailsButton::l:::x, comp viewAccountsButton::l:::x, comp logoutButton:::::x, comp transferMoneyButton:::::x, comp changePasswordButton::::0:x}, space :p:26:p, comp scrollPane1::::521:x}, seq {comp welcomeText:::p:264:p, space :0:474:x}}, space :::p}}"
+			"$verticalGroup": "par l {seq l {space :::p, comp welcomeText:::p::p, space :p:39:p, par l {seq {comp viewAccountsButton:::p::p, space s:::p, comp viewuserDetailsButton:::p::p, space s:::p, comp transferMoneyButton:::p::p, space ::154:x, comp changePasswordButton:::p::p, space :::p, comp logoutButton:::p::p}, comp scrollPane1::::377:x}, space :::p}}"
 		} ) {
 			name: "this"
 			add( new FormComponent( "javax.swing.JTextArea" ) {
@@ -18,15 +18,18 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "viewAccountsButton"
 				"text": "View accounts"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "viewAccountsButtonActionPerformed", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "viewuserDetailsButton"
 				"text": "View user details"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "viewuserDetailsButtonActionPerformed", true ) )
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
 				add( new FormComponent( "javax.swing.JTextPane" ) {
 					name: "textPane1"
+					"text": "Select the left-hand-side buttons to display information!"
 				} )
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
@@ -37,6 +40,11 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "transferMoneyButton"
 				"text": "Transfer money"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "changePasswordButton"
+				"text": "Change password"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "changePasswordButtonActionPerformed", true ) )
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )

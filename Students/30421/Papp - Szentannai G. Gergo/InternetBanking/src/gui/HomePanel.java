@@ -43,6 +43,7 @@ public class HomePanel extends JPanel {
 		// TODO: add settings panel, then enable the statement above
 	}
 
+
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY
 		// //GEN-BEGIN:initComponents
@@ -80,9 +81,15 @@ public class HomePanel extends JPanel {
 
 		//---- textPane1 ----
 		textPane1.setText("Welcome to the Internet banking application of the bank of free Money!");
+		textPane1.setEditable(false);
+		textPane1.setBorder(null);
+		textPane1.setBackground(new Color(240, 240, 240));
 
 		//---- textPane2 ----
 		textPane2.setText("Please log in or configure your server settings! The user details are provided by the administrators of the bank.");
+		textPane2.setEditable(false);
+		textPane2.setBorder(null);
+		textPane2.setBackground(new Color(240, 240, 240));
 
 		GroupLayout layout = new GroupLayout(this);
 		setLayout(layout);
@@ -91,15 +98,15 @@ public class HomePanel extends JPanel {
 				.addGroup(layout.createSequentialGroup()
 					.addGap(168, 168, 168)
 					.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-						.addComponent(textPane1)
 						.addGroup(layout.createSequentialGroup()
 							.addComponent(button1)
 							.addGap(54, 54, 54)
 							.addComponent(button2)
 							.addGap(44, 44, 44)
 							.addComponent(button3))
-						.addComponent(textPane2, GroupLayout.PREFERRED_SIZE, 411, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(201, Short.MAX_VALUE))
+						.addComponent(textPane1, GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
+						.addComponent(textPane2, GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE))
+					.addContainerGap(190, Short.MAX_VALUE))
 		);
 		layout.setVerticalGroup(
 			layout.createParallelGroup()

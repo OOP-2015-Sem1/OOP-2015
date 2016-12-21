@@ -15,6 +15,7 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JPasswordField" ) {
 				name: "passwordField1"
+				addEvent( new FormEvent( "java.awt.event.KeyListener", "keyPressed", "passwordField1KeyPressed", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "userTextField"
@@ -22,10 +23,14 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JTextPane" ) {
 				name: "textPane1"
 				"text": "UserID"
+				"editable": false
+				"background": new java.awt.Color( 240, 240, 240, 255 )
 			} )
 			add( new FormComponent( "javax.swing.JTextPane" ) {
 				name: "textPane2"
 				"text": "Password"
+				"editable": false
+				"background": new java.awt.Color( 240, 240, 240, 255 )
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
