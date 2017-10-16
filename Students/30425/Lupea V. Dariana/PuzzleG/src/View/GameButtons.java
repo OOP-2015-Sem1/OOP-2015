@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 
 public class GameButtons extends JPanel implements ActionListener {
 
+	private static final long serialVersionUID = 3832597063314668825L;
+
 	private JButton newButton;
 	private JButton exitButton;
 	private JButton solButton;
@@ -40,11 +42,14 @@ public class GameButtons extends JPanel implements ActionListener {
 
 	}
 
+	public JButton getNewButton() {
+		return this.newButton;
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == newButton) {
-			new Puzzle("Images/deer");
-		} else if (e.getSource() == exitButton) {
+
+		if (e.getSource() == exitButton) {
 			System.exit(0);
 		} else if (e.getSource() == solButton) {
 			GameButtons bear = new GameButtons();
@@ -52,7 +57,6 @@ public class GameButtons extends JPanel implements ActionListener {
 		} else if (e.getSource() == solButton2) {
 			GameButtons deer = new GameButtons();
 			deer.DisplayImage("Images/deer/image.jpg");
-
 		}
 
 	}
@@ -71,7 +75,7 @@ public class GameButtons extends JPanel implements ActionListener {
 		frame.setVisible(true);
 		frame.setSize(500, 1200);
 		frame.setLocationRelativeTo(null);
-		// frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
 	}
 
